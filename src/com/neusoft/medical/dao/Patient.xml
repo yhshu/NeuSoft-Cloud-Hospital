@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.neusoft.medical.dao.PatientDao">
 
-    <select id="findAll"></select>
+    <select id="findAll" resultType="Patient">
+        select *
+        from hospital.Patient;
+    </select>
 
-    <select id="findById" parameterType="java.lang.Integer" resultType="Patient"></select>
+    <select id="findById" parameterType="java.lang.String" resultType="Patient">
+        select *
+        from hospital.Patient
+        where patient_id = #{patient_id}
+    </select>
 
-    <insert id="add" parameterType="Patient"></insert>
+    <insert id="add" parameterType="Patient">
+        insert into Patient(patient_id, patient_name)
+        values (uuid(), #{patientName})
+    </insert>
 
     <update id="update"></update>
 

@@ -3,10 +3,15 @@ package com.neusoft.medical.dao;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.Patient;
+import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.InputStream;
 import java.util.List;
 
 public class PatientDaoTest {
@@ -15,7 +20,15 @@ public class PatientDaoTest {
 
     @Before
     public void setUp() throws Exception {
+        InputStream inputStream = Resources.getResourceAsStream("SqlMapConfig.xml");
+        SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(inputStream, "mysql");
+        session = factory.openSession();
+        patientDao = session.getMapper(PatientDao.class);
+    }
 
+    @After
+    public void tearDown() {
+        session.close();
     }
 
     @Test
@@ -32,5 +45,4 @@ public class PatientDaoTest {
             System.out.println(patient);
         }
     }
-
 }

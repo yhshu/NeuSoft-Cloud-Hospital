@@ -1,14 +1,12 @@
 package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.Patient;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * 患者信息 数据访问对象
  */
-@Component
 public interface PatientDao {
     /**
      * 查找所有患者
