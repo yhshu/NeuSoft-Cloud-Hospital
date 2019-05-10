@@ -37,10 +37,11 @@ public class PatientDaoTest {
         List<Patient> patientList = patientDao.findAll();
         PageInfo<Patient> patientPageInfo = new PageInfo<>(patientList);
         patientList = patientPageInfo.getList();
-        System.out.println(patientPageInfo.getPageSize());
-        System.out.println(patientPageInfo.getPageNum());
-        System.out.println(patientPageInfo.getPages());
+        System.out.println("单页结果数：" + patientPageInfo.getPageSize());
+        System.out.println("当前页码：" + patientPageInfo.getPageNum());
+        System.out.println("总页数：" + patientPageInfo.getPages());
 
+        System.out.println("患者信息：");
         for (Patient patient : patientList) {
             System.out.println(patient);
         }

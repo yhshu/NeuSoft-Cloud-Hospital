@@ -5,17 +5,18 @@
 
     <select id="findAll" resultType="Patient">
         select *
-        from hospital.Patient;
+        from hospital.Patient
+        order by patientId;
     </select>
 
     <select id="findById" parameterType="java.lang.String" resultType="Patient">
         select *
         from hospital.Patient
-        where patient_id = #{patient_id}
+        where patientId = #{patient_id}
     </select>
 
     <insert id="add" parameterType="Patient">
-        insert into Patient(patient_id, patient_name)
+        insert into Patient(patientId, patientName)
         values (uuid(), #{patientName})
     </insert>
 
