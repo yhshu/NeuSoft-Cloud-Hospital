@@ -1,8 +1,7 @@
 package com.neusoft.medical.bean;
 
-import org.springframework.stereotype.Component;
+import java.io.Serializable;
 
-@Component
-public class Patient {
+public class Patient implements Serializable {
 
 }

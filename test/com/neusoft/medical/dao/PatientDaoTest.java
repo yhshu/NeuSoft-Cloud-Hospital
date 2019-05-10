@@ -3,12 +3,20 @@ package com.neusoft.medical.dao;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.Patient;
+import org.apache.ibatis.session.SqlSession;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
 
 public class PatientDaoTest {
     private PatientDao patientDao;
+    private SqlSession session;
+
+    @Before
+    public void setUp() throws Exception {
+
+    }
 
     @Test
     public void findAll() {
