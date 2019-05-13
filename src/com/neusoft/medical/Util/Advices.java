@@ -1,4 +1,4 @@
-package com.neusoft.medical;
+package com.neusoft.medical.Util;
 
 import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
