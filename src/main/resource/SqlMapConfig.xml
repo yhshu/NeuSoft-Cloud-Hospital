@@ -18,7 +18,6 @@
         <package name="com.neusoft.medical.bean"/>
     </typeAliases>
 
-
     <!-- 配置 MyBatis 运行环境 -->
     <environments default="mysql">
         <environment id="mysql">

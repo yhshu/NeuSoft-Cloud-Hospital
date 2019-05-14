@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!-- 对 package 包中的所有类进行扫描，以完成 Bean 创建和自动依赖注入的功能 -->
+    <context:component-scan base-package="com.neusoft"/>
+    <mvc:annotation-driven/>
+
+    <!-- 静态资源访问 -->
+    <!--如果 webapp 新建了文件夹，访问里面的静态资源，需要在此处配置 -->
+    <mvc:resources location="/static/images/" mapping="/images/**"/>
+    <mvc:resources location="/static/css/" mapping="/css/**"/>
+    <mvc:resources location="/static/styles/" mapping="/styles/**"/>
+    <mvc:resources location="/static/js/" mapping="/js/**"/>
+
+    <!-- 配置视图解析器，把控制器的逻辑视图映射为真正的视图 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- 配置 DBCP 数据库连接池 -->
+    <!-- 数据库配置 -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:database.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 数据库连接池 -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+        <property name="initialSize" value="1"/>
+        <property name="maxActive" value="100"/>
+        <property name="maxIdle" value="5"/>
+        <property name="maxWait" value="80000"/>
+    </bean>
+
+    <!-- 配置会话工厂 SqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 数据源 -->
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="SqlMapConfig.xml"/>
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <property name="typeAliasesPackage" value="com.neusoft.medical.bean"/>
+    </bean>
+
+    <!-- 在 Spring 容器中配置 mapper 的扫描器，产生的动态代理对象在spring的容器中自动注册，bean 的 id 就是mapper类名（首字母小写）-->
+    <!--    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+    <!--        &lt;!&ndash; 指定扫描包的路径，就是mapper接口的路径，多个包中间以 半角逗号隔开   &ndash;&gt;-->
+    <!--        <property name="basePackage" value="com.neusoft.ssm.dao"/>-->
+    <!--        &lt;!&ndash; 配置sqlSessionFactoryBeanName &ndash;&gt;-->
+    <!--        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>-->
+    <!--    </bean>-->
+
+    <!-- 配置事务管理器 -->
+    <!--    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+    <!--        <property name="dataSource" ref="dataSource" />-->
+    <!--    </bean>-->
+
+    <!-- 拦截器 -->
+    <!--    <mvc:interceptors>-->
+    <!--        &lt;!&ndash; 国际化操作拦截器，如果采用基于（请求/Session/Cookie）则必需配置 &ndash;&gt;-->
+    <!--        <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />-->
+    <!--    </mvc:interceptors>-->
+</beans>

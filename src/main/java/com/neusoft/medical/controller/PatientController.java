@@ -1,4 +1,4 @@
-package com.neusoft.medical.service;
+package com.neusoft.medical.controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -10,12 +10,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class PatientController {
     private Logger log = Logger.getLogger(PatientController.class);
 
-    @RequestMapping(value = "/add", method = {RequestMethod.GET}, params = {"name"})
-    public void add() {
+    @RequestMapping(value = "/add", method = {RequestMethod.POST})
+    public String addCall() {
+        return "patient/add";
     }
 
-    @RequestMapping(value = "/find")
-    public void find() {
+    @RequestMapping(value = "/addOperate", method = {RequestMethod.POST}, params = {"name"})
+    public String addOperate() {
+        return "patient/list";
+    }
+
+    @RequestMapping(value = "/find", method = {RequestMethod.GET}, params = {"id"})
+    public String find() {
+        return "patient/list";
     }
 
     @RequestMapping("/update")

@@ -5,10 +5,10 @@
   Time: 下午3:32
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>云医院</title>
+    <title>欢迎使用</title>
 </head>
 <body>
 
