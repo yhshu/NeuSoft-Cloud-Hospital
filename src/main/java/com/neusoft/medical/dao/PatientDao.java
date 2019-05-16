@@ -43,4 +43,11 @@ public interface PatientDao {
      * @param id 患者ID
      */
     void deleteById(int id);
+
+    /**
+     * 多项删除
+     *
+     * @param ids 患者ID数组
+     */
+    void multiDelete(Integer[] ids);
 }

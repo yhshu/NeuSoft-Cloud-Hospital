@@ -23,4 +23,14 @@
     <update id="update"></update>
 
     <delete id="deleteById"></delete>
+
+    <delete id="multiDelete" parameterType="Integer">
+        delete from hospital.Patient
+        <where>
+            patientId in
+            <foreach collection="ids" item="patientId" open="(" close=")" separator=",">
+                #{patientId}
+            </foreach>
+        </where>
+    </delete>
 </mapper>

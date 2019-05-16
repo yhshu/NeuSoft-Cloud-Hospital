@@ -41,7 +41,7 @@
     <!-- mybatis.cfg.xml 里注册 UserMapper.xml 文件-->
     <mappers>
         <!-- 告知映射文件方式1：逐个配置 -->
-        <mapper resource="com/neusoft/medical/dao/Patient.xml"/>
+        <mapper resource="mapper/Patient.xml"/>
         <!-- <mapper class="com.neusoft.medical.dao.PatientDao"/>-->
 
         <!-- 告知映射文件方式2：自动扫描包内的 Mapper 接口与配置文件 -->
