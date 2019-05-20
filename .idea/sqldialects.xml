@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
+    <file url="file://D:/微云同步助手/994438335/微云同步/实训-东软睿道/code/hospital/department.sql" dialect="MySQL" />
+    <file url="file://D:/微云同步助手/994438335/微云同步/实训-东软睿道/code/hospital/doctor.sql" dialect="MySQL" />
+    <file url="file://D:/微云同步助手/994438335/微云同步/实训-东软睿道/code/hospital/hospital.sql" dialect="MySQL" />
     <file url="PROJECT" dialect="MySQL" />
   </component>
 </project>
