@@ -84,3 +84,10 @@ NeuSoft hospital information system
 - 答辩 PPT
 - 项目源代码
 - 数据库设计
+
+
+
+:-) 
+
+
+
