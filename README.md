@@ -1,6 +1,8 @@
-## 东软云医院 
+## 东软HIS医院管理系统 
 
-NeuSoft-CloudHospital
+NeuSoft hospital information system
+
+东软睿道 - Java 互联网架构 - 实训项目
 
 ### 环境与工具
 
@@ -24,10 +26,21 @@ NeuSoft-CloudHospital
 - log4j 日志记录
 - JUnit4 单元测试
 - Redis
+- Apache Shiro 用于身份验证的开源安全框架
 
 #### 前端
 
-- BootStrap
+- BootStrap (css & js)
+- Vue.js
+
+#### 部署
+
+- 建议部署于 Linux，使用 Docker 分配资源
+
+
+#### 开发工具
+
+- 建议 WebStorm 与 Intellij IDEA
 
 ### JavaDoc
 
@@ -47,3 +60,27 @@ NeuSoft-CloudHospital
 ### 文档
 
 见`doc`目录下的文档。
+
+### 项目过程
+
+#### 评分标准
+
+1. 尽量实现需求
+2. 用户体验，可用性高
+3. 软件测试完善，保证出错率很低
+4. 使用新技术，折合为工作量
+
+满分的标准不会超过使产品达到可售卖的水平。
+
+#### 建议的项目流程
+1. Axure 快速原型制作
+2. 数据库设计：Navicat 或 Jetbrains DataGrip，数据库表中属性必须添加注释，注释中指定好各参数值；设计过程中不必指定外键，每个表有单独的 `int(11)` 类型的自增主键 `id`，约束尽量使用程序实现
+3. 使用 Maven 搭建项目，使用 Git 团队协作
+4. 单元测试：代码量可达到源代码的三分之一，主要是黑盒测试
+5. 部署
+
+#### 成果物
+
+- 答辩 PPT
+- 项目源代码
+- 数据库设计
