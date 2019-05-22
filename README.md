@@ -44,6 +44,6 @@ NeuSoft-CloudHospital
 - 在使用 `git` 的 `revert` 功能前，请确认您的确需要执行这步操作，它可能导致您的协作者的代码丢失。
 - 推荐使用 Intellij IDEA 的版本控制工具，请不要将项目工程文件(例如 `NeuSoft-Cloud-Hospital.imi`)和代码编译生成的文件(例如`out`目录)上传到 Git 仓库中，除非是完全适用于您的协作者的文件。
 
-### 其他
+### 文档
 
-见`东软HIS医院管理系统-开发.md`。
+见`doc`目录下的文档。
