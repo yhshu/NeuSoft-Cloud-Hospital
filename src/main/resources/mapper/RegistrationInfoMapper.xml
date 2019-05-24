@@ -334,7 +334,7 @@
     update registration_info
     set id = #{record.id,jdbcType=INTEGER},
       medical_record_no = #{record.medicalRecordNo,jdbcType=CHAR},
-      patient_name = #{record.patientName,jdbcType=VARCHAR},
+      name = #{record.patientName,jdbcType=VARCHAR},
       gender = #{record.gender,jdbcType=CHAR},
       age = #{record.age,jdbcType=INTEGER},
       birthday = #{record.birthday,jdbcType=TIMESTAMP},
@@ -691,7 +691,7 @@
     update registration_info
     set id = #{record.id,jdbcType=INTEGER},
       medical_record_no = #{record.medicalRecordNo,jdbcType=CHAR},
-      patient_name = #{record.patientName,jdbcType=VARCHAR},
+      name = #{record.patientName,jdbcType=VARCHAR},
       gender = #{record.gender,jdbcType=CHAR},
       age = #{record.age,jdbcType=INTEGER},
       birthday = #{record.birthday,jdbcType=TIMESTAMP},
