@@ -73,6 +73,7 @@ NeuSoft hospital information system
 满分的标准不会超过使产品达到可售卖的水平。
 
 #### 建议的项目流程
+
 1. Axure 快速原型制作
 2. 数据库设计：Navicat 或 Jetbrains DataGrip，数据库表中属性必须添加注释，注释中指定好各参数值；设计过程中不必指定外键，每个表有单独的 `int(11)` 类型的自增主键 `id`，约束尽量使用程序实现
 3. 使用 Maven 搭建项目，使用 Git 团队协作
