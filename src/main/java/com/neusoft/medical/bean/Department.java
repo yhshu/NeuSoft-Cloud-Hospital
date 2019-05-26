@@ -5,12 +5,18 @@ public class Department {
 
     private String name;
 
-    private String category;
+    private Integer type;
 
-    public Department(Integer id, String name, String category) {
+    private Integer category;
+
+    private Integer subType;
+
+    public Department(Integer id, String name, Integer type, Integer category, Integer subType) {
         this.id = id;
         this.name = name;
+        this.type = type;
         this.category = category;
+        this.subType = subType;
     }
 
     public Department() {
@@ -33,11 +39,27 @@ public class Department {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getCategory() {
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public Integer getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
-        this.category = category == null ? null : category.trim();
+    public void setCategory(Integer category) {
+        this.category = category;
+    }
+
+    public Integer getSubType() {
+        return subType;
+    }
+
+    public void setSubType(Integer subType) {
+        this.subType = subType;
     }
 }

@@ -234,6 +234,66 @@ public class DepartmentExample {
             return (Criteria) this;
         }
 
+        public Criteria andTypeIsNull() {
+            addCriterion("type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIsNotNull() {
+            addCriterion("type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeEqualTo(Integer value) {
+            addCriterion("type =", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotEqualTo(Integer value) {
+            addCriterion("type <>", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeGreaterThan(Integer value) {
+            addCriterion("type >", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("type >=", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeLessThan(Integer value) {
+            addCriterion("type <", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("type <=", value, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeIn(List<Integer> values) {
+            addCriterion("type in", values, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotIn(List<Integer> values) {
+            addCriterion("type not in", values, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeBetween(Integer value1, Integer value2) {
+            addCriterion("type between", value1, value2, "type");
+            return (Criteria) this;
+        }
+
+        public Criteria andTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("type not between", value1, value2, "type");
+            return (Criteria) this;
+        }
+
         public Criteria andCategoryIsNull() {
             addCriterion("category is null");
             return (Criteria) this;
@@ -244,63 +304,113 @@ public class DepartmentExample {
             return (Criteria) this;
         }
 
-        public Criteria andCategoryEqualTo(String value) {
+        public Criteria andCategoryEqualTo(Integer value) {
             addCriterion("category =", value, "category");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryNotEqualTo(String value) {
+        public Criteria andCategoryNotEqualTo(Integer value) {
             addCriterion("category <>", value, "category");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryGreaterThan(String value) {
+        public Criteria andCategoryGreaterThan(Integer value) {
             addCriterion("category >", value, "category");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryGreaterThanOrEqualTo(String value) {
+        public Criteria andCategoryGreaterThanOrEqualTo(Integer value) {
             addCriterion("category >=", value, "category");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryLessThan(String value) {
+        public Criteria andCategoryLessThan(Integer value) {
             addCriterion("category <", value, "category");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryLessThanOrEqualTo(String value) {
+        public Criteria andCategoryLessThanOrEqualTo(Integer value) {
             addCriterion("category <=", value, "category");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryLike(String value) {
-            addCriterion("category like", value, "category");
-            return (Criteria) this;
-        }
-
-        public Criteria andCategoryNotLike(String value) {
-            addCriterion("category not like", value, "category");
-            return (Criteria) this;
-        }
-
-        public Criteria andCategoryIn(List<String> values) {
+        public Criteria andCategoryIn(List<Integer> values) {
             addCriterion("category in", values, "category");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryNotIn(List<String> values) {
+        public Criteria andCategoryNotIn(List<Integer> values) {
             addCriterion("category not in", values, "category");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryBetween(String value1, String value2) {
+        public Criteria andCategoryBetween(Integer value1, Integer value2) {
             addCriterion("category between", value1, value2, "category");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryNotBetween(String value1, String value2) {
+        public Criteria andCategoryNotBetween(Integer value1, Integer value2) {
             addCriterion("category not between", value1, value2, "category");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubTypeIsNull() {
+            addCriterion("sub_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubTypeIsNotNull() {
+            addCriterion("sub_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubTypeEqualTo(Integer value) {
+            addCriterion("sub_type =", value, "subType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubTypeNotEqualTo(Integer value) {
+            addCriterion("sub_type <>", value, "subType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubTypeGreaterThan(Integer value) {
+            addCriterion("sub_type >", value, "subType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("sub_type >=", value, "subType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubTypeLessThan(Integer value) {
+            addCriterion("sub_type <", value, "subType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("sub_type <=", value, "subType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubTypeIn(List<Integer> values) {
+            addCriterion("sub_type in", values, "subType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubTypeNotIn(List<Integer> values) {
+            addCriterion("sub_type not in", values, "subType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubTypeBetween(Integer value1, Integer value2) {
+            addCriterion("sub_type between", value1, value2, "subType");
+            return (Criteria) this;
+        }
+
+        public Criteria andSubTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("sub_type not between", value1, value2, "subType");
             return (Criteria) this;
         }
     }

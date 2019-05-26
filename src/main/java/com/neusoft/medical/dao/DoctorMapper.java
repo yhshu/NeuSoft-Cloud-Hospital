@@ -13,9 +13,11 @@ public interface DoctorMapper {
 
     @Insert({
         "insert into doctor (id, name, ",
-        "level)",
+        "department, type, ",
+        "title, scheduling)",
         "values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, ",
-        "#{level,jdbcType=CHAR})"
+        "#{department,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, ",
+        "#{title,jdbcType=INTEGER}, #{scheduling,jdbcType=INTEGER})"
     })
     int insert(Doctor record);
 

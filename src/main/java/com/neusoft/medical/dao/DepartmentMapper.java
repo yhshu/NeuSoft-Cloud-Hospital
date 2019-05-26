@@ -13,9 +13,11 @@ public interface DepartmentMapper {
 
     @Insert({
         "insert into department (id, name, ",
-        "category)",
+        "type, category, ",
+        "sub_type)",
         "values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, ",
-        "#{category,jdbcType=VARCHAR})"
+        "#{type,jdbcType=INTEGER}, #{category,jdbcType=INTEGER}, ",
+        "#{subType,jdbcType=INTEGER})"
     })
     int insert(Department record);
 

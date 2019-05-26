@@ -5,12 +5,21 @@ public class Doctor {
 
     private String name;
 
-    private String level;
+    private Integer department;
 
-    public Doctor(Integer id, String name, String level) {
+    private Integer type;
+
+    private Integer title;
+
+    private Integer scheduling;
+
+    public Doctor(Integer id, String name, Integer department, Integer type, Integer title, Integer scheduling) {
         this.id = id;
         this.name = name;
-        this.level = level;
+        this.department = department;
+        this.type = type;
+        this.title = title;
+        this.scheduling = scheduling;
     }
 
     public Doctor() {
@@ -33,11 +42,35 @@ public class Doctor {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getLevel() {
-        return level;
+    public Integer getDepartment() {
+        return department;
     }
 
-    public void setLevel(String level) {
-        this.level = level == null ? null : level.trim();
+    public void setDepartment(Integer department) {
+        this.department = department;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public Integer getTitle() {
+        return title;
+    }
+
+    public void setTitle(Integer title) {
+        this.title = title;
+    }
+
+    public Integer getScheduling() {
+        return scheduling;
+    }
+
+    public void setScheduling(Integer scheduling) {
+        this.scheduling = scheduling;
     }
 }

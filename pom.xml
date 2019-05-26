@@ -316,6 +316,7 @@
                         <verbose>true</verbose>
                         <overwrite>true</overwrite>
                     </configuration>
+<!--                    这个的意思是自动生成，maven在build的过程中自动生成mbg-->
                     <executions>
                         <execution>
                             <id>Generate MyBatis Artifacts</id>
