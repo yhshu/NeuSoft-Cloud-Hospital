@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration
         PUBLIC "-//MyBatis.org//DTD Config 3.0//EN"
-        "http://MyBatis.org/dtd/MyBatis-3-config.dtd">
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
     <!-- 引入外部配置文件 -->
