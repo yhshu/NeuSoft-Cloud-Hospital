@@ -14,6 +14,4 @@ public class RegistrationInfoController {
 
     @Autowired
     DepartmentService departmentService;
-
-
 }
