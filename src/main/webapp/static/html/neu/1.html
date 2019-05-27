@@ -1,0 +1,256 @@
+
+<!DOCTYPE html>
+<html lang="en" data-textdirection="ltr" class="loading">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Robust admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, robust admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="PIXINVENT">
+    <title>Basic Tables - Robust Free Bootstrap Admin Template</title>
+    <link rel="apple-touch-icon" sizes="60x60" href="../../app-assets/images/ico/apple-icon-60.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../../app-assets/images/ico/apple-icon-76.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="../../app-assets/images/ico/apple-icon-120.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="../../app-assets/images/ico/apple-icon-152.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../../app-assets/images/ico/favicon.ico">
+    <link rel="shortcut icon" type="image/png" href="../../app-assets/images/ico/favicon-32.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <!-- BEGIN VENDOR CSS-->
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/bootstrap.css">
+    <!-- font icons-->
+    <link rel="stylesheet" type="text/css" href="../../app-assets/fonts/icomoon.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/fonts/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/vendors/css/extensions/pace.css">
+    <!-- END VENDOR CSS-->
+    <!-- BEGIN ROBUST CSS-->
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/bootstrap-extended.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/app.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/colors.css">
+    <!-- END ROBUST CSS-->
+    <!-- BEGIN Page Level CSS-->
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="../../app-assets/css/core/menu/menu-types/vertical-overlay-menu.css">
+    <!-- END Page Level CSS-->
+    <!-- BEGIN Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="../../assets/css/style.css">
+    <!-- END Custom CSS-->
+  </head>
+  <body data-open="click" data-menu="vertical-menu" data-col="2-columns" class="vertical-layout vertical-menu 2-columns  fixed-navbar">
+
+<!-- 省市区地域查询展示 -->
+
+<p class="container">
+
+        <p class="row">
+      
+        <p class="col-sm-4">
+      
+         <h4>快捷搜索</h4>
+      
+         <!-- <form> -->
+      
+         <p class="form-group">
+      
+          <label for="input-search" class="sr-only">快捷搜索:</label>
+      
+          <input type="input" class="form-control" id="input-search" placeholder="请输入要查询的省市区名称信息..." value="">
+      
+         </p>
+      
+         **_ <!-- 该部分为复选框，用于丰富搜索体验，本文忽略
+      
+      <p class="checkbox">
+      
+          <label>
+      
+          <input type="checkbox" class="checkbox" id="chk-ignore-case" value="false"/>
+      
+           忽略大小写
+      
+          </label>
+      
+         </p>
+      
+         <p class="checkbox">
+      
+          <label>
+      
+          <input type="checkbox" class="checkbox" id="chk-exact-match" value="false">
+      
+           准确匹配
+      
+          </label>
+      
+         </p>
+      
+         <p class="checkbox">
+      
+          <label>
+      
+          <input type="checkbox" class="checkbox" id="chk-reveal-results" value="false">
+      
+           显示结果
+      
+          </label>
+      
+         </p> -->_**
+      
+         <button type="button" class="btn btn-success" id="btn-search">搜索</button>
+      
+         <button type="button" class="btn btn-default" id="btn-clear-search">清除</button>
+      
+         <!-- </form> -->
+      
+        </p>
+      
+        <p class="col-sm-4">
+      
+         <h4>省市区名称层级树</h4>
+      
+         <p id="treeview-searchable" class=""></p>
+      
+        </p>
+      
+        <p class="col-sm-4">
+      
+         <h4>查询结果展示</h4>
+      
+         <p id="search-output"></p>
+      
+        </p>
+      
+        </p>
+      
+        </p>
+
+        <script type="text/javascript">
+            document.write("Hello World!")
+            $(function () {
+
+var defaultData;
+
+ $.ajax({
+
+  type: "post",
+
+  url: "项目请求路径方法.json",
+
+  dataType: "json",
+
+  success: function (result) { 
+
+  defaultData=result;
+
+   var initSearchableTree = function() {
+
+   return $('#treeview-searchable').treeview({
+
+    data: defaultData,
+
+    nodeIcon: 'glyphicon glyphicon-globe',
+
+    emptyIcon: '', //没有子节点的节点图标
+
+    //collapsed: true,
+
+   });
+
+   };
+
+   var $searchableTree = initSearchableTree();
+
+   $('#treeview-searchable').treeview('collapseAll', { 
+
+   silent : false//设置初始化节点关闭
+
+  });
+
+   var findSearchableNodes = function() {
+
+   return $searchableTree.treeview('search', [ $.trim($('#input-search').val()), { ignoreCase: false, exactMatch: false } ]);
+
+   };
+
+   var searchableNodes = findSearchableNodes();
+
+   // Select/unselect/toggle nodes
+
+   $('#input-search').on('keyup', function (e) {
+
+   var str = $('#input-search').val(); 
+
+   if($.trim(str).length>0){
+
+    searchableNodes = findSearchableNodes();
+
+   } else {
+
+   $('#treeview-searchable').treeview('collapseAll', { 
+
+    silent : false //设置初始化节点关闭
+
+   });
+
+   }
+
+   //$('.select-node').prop('disabled', !(searchableNodes.length >= 1));
+
+   });
+
+  var search = function(e) {
+    var pattern = $.trim($('#input-search').val());
+    var options = {
+    ignoreCase: $('#chk-ignore-case').is(':checked'),
+    exactMatch: $('#chk-exact-match').is(':checked'),
+    revealResults: $('#chk-reveal-results').is(':checked')
+    };
+
+    var results = $searchableTree.treeview('search', [ pattern, options ]);
+    var output = '<p>' + results.length + ' 匹配的搜索结果</p>';
+    $.each(results, function (index, result) {
+    output += '<p>- <span style="color:red;">' + result.text + '</span></p>';
+    });
+    $('#search-output').html(output);
+   }
+
+   $('#btn-search').on('click', search);
+
+   $('#input-search').on('keyup', search);
+
+   $('#btn-clear-search').on('click', function (e) {
+
+    $searchableTree.treeview('clearSearch');
+
+    $('#input-search').val('');
+
+    $('#search-output').html('');
+
+    $('#treeview-searchable').treeview('collapseAll', {
+
+    silent : false//设置初始化节点关闭
+
+   });
+
+   });
+
+   
+
+  },
+
+  error: function () {
+
+   alert("省市区地域信息加载失败！")
+
+  }
+
+ });
+
+});
+        </script>
+
+</body>
+</html>
+
