@@ -20,6 +20,9 @@ public class LoginController {
         return "index";
     }
 
+    /**
+     * 帐号登录验证
+     */
     @RequestMapping("/login")
     public void login() {
         log.info("Login successful.");
