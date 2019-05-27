@@ -3,4 +3,4 @@
 .DS_Store
 */.DS_Store
 CloudHospital.iml
-db.properties
+*/db.properties

@@ -33,6 +33,10 @@ NeuSoft hospital information system
 - BootStrap (css & js)
 - Vue.js
 
+#### 数据库配置
+
+注意，在 `src/main/resources` 目录中需要添加 `db.properties` 进行数据库配置。
+
 #### 部署
 
 - 建议部署于 Linux，使用 Docker 分配资源
