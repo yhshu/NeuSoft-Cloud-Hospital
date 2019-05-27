@@ -86,4 +86,9 @@ NeuSoft hospital information system
 - 项目源代码
 - 数据库设计
 
+### 参考项目
+
+- [安逸医院](
+https://mingmliang.github.io/his-demo/#/home)
+
 :-) 
