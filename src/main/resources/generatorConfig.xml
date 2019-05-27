@@ -115,9 +115,19 @@ database types (e.g. MySql's unsigned bigint type should be mapped to java.lang.
 
         -->
         <!--            <columnOverride column="" javaType=""    jdbcType="" typeHandler=""  delimitedColumnName="" />-->
-        <table tableName="registration_info" schema="hospital"></table>
+        <table tableName="registration" schema="hospital"></table>
         <table tableName="doctor" schema="hospital"></table>
         <table tableName="department" schema="hospital"></table>
+        <table tableName="account" schema="hospital"></table>
+        <table tableName="charge_form" schema="hospital"></table>
+        <table tableName="charge_item" schema="hospital"></table>
+        <table tableName="examination" schema="hospital"></table>
+        <table tableName="medical_records" schema="hospital"></table>
+        <table tableName="medicine" schema="hospital"></table>
+        <table tableName="pathography" schema="hospital"></table>
+        <table tableName="patient" schema="hospital"></table>
+        <table tableName="prescription" schema="hospital"></table>
+        <table tableName="staff" schema="hospital"></table>
 
     </context>
 </generatorConfiguration>

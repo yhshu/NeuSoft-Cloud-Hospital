@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neusoft.medical.dao.ExaminationMapper" >
+  <resultMap id="BaseResultMap" type="com.neusoft.medical.bean.Examination" >
+    <constructor >
+      <arg column="examination_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="registration_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="registration_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="charge_item_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="result" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="reserve1" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="reserve2" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="reserve3" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="doctor_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="department_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    examination_id, registration_name, registration_id, charge_item_id, result, reserve1, 
+    reserve2, reserve3, doctor_id, department_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neusoft.medical.bean.ExaminationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from examination
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.ExaminationExample" >
+    delete from examination
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="com.neusoft.medical.bean.Examination" >
+    insert into examination
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="examinationId != null" >
+        examination_id,
+      </if>
+      <if test="registrationName != null" >
+        registration_name,
+      </if>
+      <if test="registrationId != null" >
+        registration_id,
+      </if>
+      <if test="chargeItemId != null" >
+        charge_item_id,
+      </if>
+      <if test="result != null" >
+        result,
+      </if>
+      <if test="reserve1 != null" >
+        reserve1,
+      </if>
+      <if test="reserve2 != null" >
+        reserve2,
+      </if>
+      <if test="reserve3 != null" >
+        reserve3,
+      </if>
+      <if test="doctorId != null" >
+        doctor_id,
+      </if>
+      <if test="departmentId != null" >
+        department_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="examinationId != null" >
+        #{examinationId,jdbcType=INTEGER},
+      </if>
+      <if test="registrationName != null" >
+        #{registrationName,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationId != null" >
+        #{registrationId,jdbcType=INTEGER},
+      </if>
+      <if test="chargeItemId != null" >
+        #{chargeItemId,jdbcType=INTEGER},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve1 != null" >
+        #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null" >
+        #{reserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve3 != null" >
+        #{reserve3,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorId != null" >
+        #{doctorId,jdbcType=INTEGER},
+      </if>
+      <if test="departmentId != null" >
+        #{departmentId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.neusoft.medical.bean.ExaminationExample" resultType="java.lang.Integer" >
+    select count(*) from examination
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update examination
+    <set >
+      <if test="record.examinationId != null" >
+        examination_id = #{record.examinationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.registrationName != null" >
+        registration_name = #{record.registrationName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registrationId != null" >
+        registration_id = #{record.registrationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.chargeItemId != null" >
+        charge_item_id = #{record.chargeItemId,jdbcType=INTEGER},
+      </if>
+      <if test="record.result != null" >
+        result = #{record.result,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserve1 != null" >
+        reserve1 = #{record.reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserve2 != null" >
+        reserve2 = #{record.reserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserve3 != null" >
+        reserve3 = #{record.reserve3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorId != null" >
+        doctor_id = #{record.doctorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.departmentId != null" >
+        department_id = #{record.departmentId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update examination
+    set examination_id = #{record.examinationId,jdbcType=INTEGER},
+      registration_name = #{record.registrationName,jdbcType=VARCHAR},
+      registration_id = #{record.registrationId,jdbcType=INTEGER},
+      charge_item_id = #{record.chargeItemId,jdbcType=INTEGER},
+      result = #{record.result,jdbcType=VARCHAR},
+      reserve1 = #{record.reserve1,jdbcType=VARCHAR},
+      reserve2 = #{record.reserve2,jdbcType=VARCHAR},
+      reserve3 = #{record.reserve3,jdbcType=VARCHAR},
+      doctor_id = #{record.doctorId,jdbcType=INTEGER},
+      department_id = #{record.departmentId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

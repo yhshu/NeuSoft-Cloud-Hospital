@@ -12,12 +12,14 @@ public interface DepartmentMapper {
     int deleteByExample(DepartmentExample example);
 
     @Insert({
-        "insert into department (id, name, ",
+        "insert into department (department_id, department_name, ",
         "type, category, ",
-        "sub_type)",
-        "values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, ",
+        "sub_type, reserve1, ",
+        "reserve2, reserve3)",
+        "values (#{departmentId,jdbcType=INTEGER}, #{departmentName,jdbcType=VARCHAR}, ",
         "#{type,jdbcType=INTEGER}, #{category,jdbcType=INTEGER}, ",
-        "#{subType,jdbcType=INTEGER})"
+        "#{subType,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
+        "#{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR})"
     })
     int insert(Department record);
 

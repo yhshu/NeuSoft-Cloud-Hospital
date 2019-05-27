@@ -12,12 +12,16 @@ public interface DoctorMapper {
     int deleteByExample(DoctorExample example);
 
     @Insert({
-        "insert into doctor (id, name, ",
+        "insert into doctor (doctor_id, doctor_name, ",
         "department, type, ",
-        "title, scheduling)",
-        "values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, ",
+        "title, scheduling, ",
+        "reserve1, reserve2, ",
+        "reserve3, account_id)",
+        "values (#{doctorId,jdbcType=INTEGER}, #{doctorName,jdbcType=VARCHAR}, ",
         "#{department,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, ",
-        "#{title,jdbcType=INTEGER}, #{scheduling,jdbcType=INTEGER})"
+        "#{title,jdbcType=INTEGER}, #{scheduling,jdbcType=INTEGER}, ",
+        "#{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, ",
+        "#{reserve3,jdbcType=VARCHAR}, #{accountId,jdbcType=INTEGER})"
     })
     int insert(Doctor record);
 

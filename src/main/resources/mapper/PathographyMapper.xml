@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neusoft.medical.dao.PathographyMapper" >
+  <resultMap id="BaseResultMap" type="com.neusoft.medical.bean.Pathography" >
+    <constructor >
+      <arg column="pathography_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="patient_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="physical_examination" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pathography" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="found_time" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="note" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="reserve1" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="reserve2" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="reserve3" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pathography_id, patient_id, physical_examination, pathography, found_time, note, 
+    reserve1, reserve2, reserve3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neusoft.medical.bean.PathographyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from pathography
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.PathographyExample" >
+    delete from pathography
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="com.neusoft.medical.bean.Pathography" >
+    insert into pathography
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pathographyId != null" >
+        pathography_id,
+      </if>
+      <if test="patientId != null" >
+        patient_id,
+      </if>
+      <if test="physicalExamination != null" >
+        physical_examination,
+      </if>
+      <if test="pathography != null" >
+        pathography,
+      </if>
+      <if test="foundTime != null" >
+        found_time,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="reserve1 != null" >
+        reserve1,
+      </if>
+      <if test="reserve2 != null" >
+        reserve2,
+      </if>
+      <if test="reserve3 != null" >
+        reserve3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pathographyId != null" >
+        #{pathographyId,jdbcType=INTEGER},
+      </if>
+      <if test="patientId != null" >
+        #{patientId,jdbcType=INTEGER},
+      </if>
+      <if test="physicalExamination != null" >
+        #{physicalExamination,jdbcType=VARCHAR},
+      </if>
+      <if test="pathography != null" >
+        #{pathography,jdbcType=VARCHAR},
+      </if>
+      <if test="foundTime != null" >
+        #{foundTime,jdbcType=DATE},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve1 != null" >
+        #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null" >
+        #{reserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve3 != null" >
+        #{reserve3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.neusoft.medical.bean.PathographyExample" resultType="java.lang.Integer" >
+    select count(*) from pathography
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update pathography
+    <set >
+      <if test="record.pathographyId != null" >
+        pathography_id = #{record.pathographyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.patientId != null" >
+        patient_id = #{record.patientId,jdbcType=INTEGER},
+      </if>
+      <if test="record.physicalExamination != null" >
+        physical_examination = #{record.physicalExamination,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pathography != null" >
+        pathography = #{record.pathography,jdbcType=VARCHAR},
+      </if>
+      <if test="record.foundTime != null" >
+        found_time = #{record.foundTime,jdbcType=DATE},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserve1 != null" >
+        reserve1 = #{record.reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserve2 != null" >
+        reserve2 = #{record.reserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserve3 != null" >
+        reserve3 = #{record.reserve3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update pathography
+    set pathography_id = #{record.pathographyId,jdbcType=INTEGER},
+      patient_id = #{record.patientId,jdbcType=INTEGER},
+      physical_examination = #{record.physicalExamination,jdbcType=VARCHAR},
+      pathography = #{record.pathography,jdbcType=VARCHAR},
+      found_time = #{record.foundTime,jdbcType=DATE},
+      note = #{record.note,jdbcType=VARCHAR},
+      reserve1 = #{record.reserve1,jdbcType=VARCHAR},
+      reserve2 = #{record.reserve2,jdbcType=VARCHAR},
+      reserve3 = #{record.reserve3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,15 +1,13 @@
 package com.neusoft.medical.bean;
 
-public class Department {
-    private Integer departmentId;
+public class Staff {
+    private Integer staffId;
 
     private String departmentName;
 
+    private Integer departmentId;
+
     private Integer type;
-
-    private Integer category;
-
-    private Integer subType;
 
     private String reserve1;
 
@@ -17,27 +15,29 @@ public class Department {
 
     private String reserve3;
 
-    public Department(Integer departmentId, String departmentName, Integer type, Integer category, Integer subType, String reserve1, String reserve2, String reserve3) {
-        this.departmentId = departmentId;
+    private Integer accountId;
+
+    public Staff(Integer staffId, String departmentName, Integer departmentId, Integer type, String reserve1, String reserve2, String reserve3, Integer accountId) {
+        this.staffId = staffId;
         this.departmentName = departmentName;
+        this.departmentId = departmentId;
         this.type = type;
-        this.category = category;
-        this.subType = subType;
         this.reserve1 = reserve1;
         this.reserve2 = reserve2;
         this.reserve3 = reserve3;
+        this.accountId = accountId;
     }
 
-    public Department() {
+    public Staff() {
         super();
     }
 
-    public Integer getDepartmentId() {
-        return departmentId;
+    public Integer getStaffId() {
+        return staffId;
     }
 
-    public void setDepartmentId(Integer departmentId) {
-        this.departmentId = departmentId;
+    public void setStaffId(Integer staffId) {
+        this.staffId = staffId;
     }
 
     public String getDepartmentName() {
@@ -48,28 +48,20 @@ public class Department {
         this.departmentName = departmentName == null ? null : departmentName.trim();
     }
 
+    public Integer getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
+    }
+
     public Integer getType() {
         return type;
     }
 
     public void setType(Integer type) {
         this.type = type;
-    }
-
-    public Integer getCategory() {
-        return category;
-    }
-
-    public void setCategory(Integer category) {
-        this.category = category;
-    }
-
-    public Integer getSubType() {
-        return subType;
-    }
-
-    public void setSubType(Integer subType) {
-        this.subType = subType;
     }
 
     public String getReserve1() {
@@ -94,5 +86,13 @@ public class Department {
 
     public void setReserve3(String reserve3) {
         this.reserve3 = reserve3 == null ? null : reserve3.trim();
+    }
+
+    public Integer getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
     }
 }

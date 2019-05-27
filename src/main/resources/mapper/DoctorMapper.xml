@@ -3,12 +3,16 @@
 <mapper namespace="com.neusoft.medical.dao.DoctorMapper">
   <resultMap id="BaseResultMap" type="com.neusoft.medical.bean.Doctor">
     <constructor>
-      <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="doctor_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="doctor_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="department" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="title" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="scheduling" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="reserve3" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="account_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -70,7 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, department, type, title, scheduling
+    doctor_id, doctor_name, department, type, title, scheduling, reserve1, reserve2, 
+    reserve3, account_id
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.DoctorExample" resultMap="BaseResultMap">
     select
@@ -95,11 +100,11 @@
   <insert id="insertSelective" parameterType="com.neusoft.medical.bean.Doctor">
     insert into doctor
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
+      <if test="doctorId != null">
+        doctor_id,
       </if>
-      <if test="name != null">
-        name,
+      <if test="doctorName != null">
+        doctor_name,
       </if>
       <if test="department != null">
         department,
@@ -113,13 +118,25 @@
       <if test="scheduling != null">
         scheduling,
       </if>
+      <if test="reserve1 != null">
+        reserve1,
+      </if>
+      <if test="reserve2 != null">
+        reserve2,
+      </if>
+      <if test="reserve3 != null">
+        reserve3,
+      </if>
+      <if test="accountId != null">
+        account_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
+      <if test="doctorId != null">
+        #{doctorId,jdbcType=INTEGER},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="doctorName != null">
+        #{doctorName,jdbcType=VARCHAR},
       </if>
       <if test="department != null">
         #{department,jdbcType=INTEGER},
@@ -133,6 +150,18 @@
       <if test="scheduling != null">
         #{scheduling,jdbcType=INTEGER},
       </if>
+      <if test="reserve1 != null">
+        #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null">
+        #{reserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve3 != null">
+        #{reserve3,jdbcType=VARCHAR},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.neusoft.medical.bean.DoctorExample" resultType="java.lang.Integer">
@@ -144,11 +173,11 @@
   <update id="updateByExampleSelective" parameterType="map">
     update doctor
     <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+      <if test="record.doctorId != null">
+        doctor_id = #{record.doctorId,jdbcType=INTEGER},
       </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.doctorName != null">
+        doctor_name = #{record.doctorName,jdbcType=VARCHAR},
       </if>
       <if test="record.department != null">
         department = #{record.department,jdbcType=INTEGER},
@@ -162,6 +191,18 @@
       <if test="record.scheduling != null">
         scheduling = #{record.scheduling,jdbcType=INTEGER},
       </if>
+      <if test="record.reserve1 != null">
+        reserve1 = #{record.reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserve2 != null">
+        reserve2 = #{record.reserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserve3 != null">
+        reserve3 = #{record.reserve3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountId != null">
+        account_id = #{record.accountId,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -169,24 +210,32 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update doctor
-    set id = #{record.id,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=VARCHAR},
+    set doctor_id = #{record.doctorId,jdbcType=INTEGER},
+      doctor_name = #{record.doctorName,jdbcType=VARCHAR},
       department = #{record.department,jdbcType=INTEGER},
       type = #{record.type,jdbcType=INTEGER},
       title = #{record.title,jdbcType=INTEGER},
-      scheduling = #{record.scheduling,jdbcType=INTEGER}
+      scheduling = #{record.scheduling,jdbcType=INTEGER},
+      reserve1 = #{record.reserve1,jdbcType=VARCHAR},
+      reserve2 = #{record.reserve2,jdbcType=VARCHAR},
+      reserve3 = #{record.reserve3,jdbcType=VARCHAR},
+      account_id = #{record.accountId,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <resultMap id="BaseResultMap" type="com.neusoft.medical.bean.Doctor">
     <constructor>
-      <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="doctor_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="doctor_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="department" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="title" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="scheduling" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="reserve3" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="account_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -248,7 +297,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, department, type, title, scheduling
+    doctor_id, doctor_name, department, type, title, scheduling, reserve1, reserve2, 
+    reserve3, account_id
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.DoctorExample" resultMap="BaseResultMap">
     select
@@ -273,11 +323,11 @@
   <insert id="insertSelective" parameterType="com.neusoft.medical.bean.Doctor">
     insert into doctor
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
+      <if test="doctorId != null">
+        doctor_id,
       </if>
-      <if test="name != null">
-        name,
+      <if test="doctorName != null">
+        doctor_name,
       </if>
       <if test="department != null">
         department,
@@ -291,13 +341,25 @@
       <if test="scheduling != null">
         scheduling,
       </if>
+      <if test="reserve1 != null">
+        reserve1,
+      </if>
+      <if test="reserve2 != null">
+        reserve2,
+      </if>
+      <if test="reserve3 != null">
+        reserve3,
+      </if>
+      <if test="accountId != null">
+        account_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
+      <if test="doctorId != null">
+        #{doctorId,jdbcType=INTEGER},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="doctorName != null">
+        #{doctorName,jdbcType=VARCHAR},
       </if>
       <if test="department != null">
         #{department,jdbcType=INTEGER},
@@ -311,6 +373,18 @@
       <if test="scheduling != null">
         #{scheduling,jdbcType=INTEGER},
       </if>
+      <if test="reserve1 != null">
+        #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null">
+        #{reserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve3 != null">
+        #{reserve3,jdbcType=VARCHAR},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.neusoft.medical.bean.DoctorExample" resultType="java.lang.Integer">
@@ -322,11 +396,11 @@
   <update id="updateByExampleSelective" parameterType="map">
     update doctor
     <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+      <if test="record.doctorId != null">
+        doctor_id = #{record.doctorId,jdbcType=INTEGER},
       </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.doctorName != null">
+        doctor_name = #{record.doctorName,jdbcType=VARCHAR},
       </if>
       <if test="record.department != null">
         department = #{record.department,jdbcType=INTEGER},
@@ -340,6 +414,18 @@
       <if test="record.scheduling != null">
         scheduling = #{record.scheduling,jdbcType=INTEGER},
       </if>
+      <if test="record.reserve1 != null">
+        reserve1 = #{record.reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserve2 != null">
+        reserve2 = #{record.reserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserve3 != null">
+        reserve3 = #{record.reserve3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountId != null">
+        account_id = #{record.accountId,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -347,21 +433,32 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update doctor
-    set id = #{record.id,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=VARCHAR},
+    set doctor_id = #{record.doctorId,jdbcType=INTEGER},
+      doctor_name = #{record.doctorName,jdbcType=VARCHAR},
       department = #{record.department,jdbcType=INTEGER},
       type = #{record.type,jdbcType=INTEGER},
       title = #{record.title,jdbcType=INTEGER},
-      scheduling = #{record.scheduling,jdbcType=INTEGER}
+      scheduling = #{record.scheduling,jdbcType=INTEGER},
+      reserve1 = #{record.reserve1,jdbcType=VARCHAR},
+      reserve2 = #{record.reserve2,jdbcType=VARCHAR},
+      reserve3 = #{record.reserve3,jdbcType=VARCHAR},
+      account_id = #{record.accountId,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <resultMap id="BaseResultMap" type="com.neusoft.medical.bean.Doctor">
     <constructor>
-      <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="level" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="doctor_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="doctor_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="department" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="title" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="scheduling" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="reserve3" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="account_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -423,7 +520,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, level
+    doctor_id, doctor_name, department, type, title, scheduling, reserve1, reserve2, 
+    reserve3, account_id
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.DoctorExample" resultMap="BaseResultMap">
     select
@@ -448,25 +546,67 @@
   <insert id="insertSelective" parameterType="com.neusoft.medical.bean.Doctor">
     insert into doctor
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
+      <if test="doctorId != null">
+        doctor_id,
       </if>
-      <if test="name != null">
-        name,
+      <if test="doctorName != null">
+        doctor_name,
       </if>
-      <if test="level != null">
-        level,
+      <if test="department != null">
+        department,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="scheduling != null">
+        scheduling,
+      </if>
+      <if test="reserve1 != null">
+        reserve1,
+      </if>
+      <if test="reserve2 != null">
+        reserve2,
+      </if>
+      <if test="reserve3 != null">
+        reserve3,
+      </if>
+      <if test="accountId != null">
+        account_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
+      <if test="doctorId != null">
+        #{doctorId,jdbcType=INTEGER},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="doctorName != null">
+        #{doctorName,jdbcType=VARCHAR},
       </if>
-      <if test="level != null">
-        #{level,jdbcType=CHAR},
+      <if test="department != null">
+        #{department,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=INTEGER},
+      </if>
+      <if test="scheduling != null">
+        #{scheduling,jdbcType=INTEGER},
+      </if>
+      <if test="reserve1 != null">
+        #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null">
+        #{reserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve3 != null">
+        #{reserve3,jdbcType=VARCHAR},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -479,14 +619,35 @@
   <update id="updateByExampleSelective" parameterType="map">
     update doctor
     <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+      <if test="record.doctorId != null">
+        doctor_id = #{record.doctorId,jdbcType=INTEGER},
       </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.doctorName != null">
+        doctor_name = #{record.doctorName,jdbcType=VARCHAR},
       </if>
-      <if test="record.level != null">
-        level = #{record.level,jdbcType=CHAR},
+      <if test="record.department != null">
+        department = #{record.department,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=INTEGER},
+      </if>
+      <if test="record.scheduling != null">
+        scheduling = #{record.scheduling,jdbcType=INTEGER},
+      </if>
+      <if test="record.reserve1 != null">
+        reserve1 = #{record.reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserve2 != null">
+        reserve2 = #{record.reserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserve3 != null">
+        reserve3 = #{record.reserve3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountId != null">
+        account_id = #{record.accountId,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -495,18 +656,32 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update doctor
-    set id = #{record.id,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=VARCHAR},
-      level = #{record.level,jdbcType=CHAR}
+    set doctor_id = #{record.doctorId,jdbcType=INTEGER},
+      doctor_name = #{record.doctorName,jdbcType=VARCHAR},
+      department = #{record.department,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=INTEGER},
+      scheduling = #{record.scheduling,jdbcType=INTEGER},
+      reserve1 = #{record.reserve1,jdbcType=VARCHAR},
+      reserve2 = #{record.reserve2,jdbcType=VARCHAR},
+      reserve3 = #{record.reserve3,jdbcType=VARCHAR},
+      account_id = #{record.accountId,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <resultMap id="BaseResultMap" type="com.neusoft.medical.bean.Doctor">
     <constructor>
-      <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="level" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="doctor_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="doctor_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="department" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="title" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="scheduling" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="reserve3" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="account_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -568,7 +743,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, level
+    doctor_id, doctor_name, department, type, title, scheduling, reserve1, reserve2, 
+    reserve3, account_id
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.DoctorExample" resultMap="BaseResultMap">
     select
@@ -593,25 +769,67 @@
   <insert id="insertSelective" parameterType="com.neusoft.medical.bean.Doctor">
     insert into doctor
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
+      <if test="doctorId != null">
+        doctor_id,
       </if>
-      <if test="name != null">
-        name,
+      <if test="doctorName != null">
+        doctor_name,
       </if>
-      <if test="level != null">
-        level,
+      <if test="department != null">
+        department,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="scheduling != null">
+        scheduling,
+      </if>
+      <if test="reserve1 != null">
+        reserve1,
+      </if>
+      <if test="reserve2 != null">
+        reserve2,
+      </if>
+      <if test="reserve3 != null">
+        reserve3,
+      </if>
+      <if test="accountId != null">
+        account_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
+      <if test="doctorId != null">
+        #{doctorId,jdbcType=INTEGER},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="doctorName != null">
+        #{doctorName,jdbcType=VARCHAR},
       </if>
-      <if test="level != null">
-        #{level,jdbcType=CHAR},
+      <if test="department != null">
+        #{department,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=INTEGER},
+      </if>
+      <if test="scheduling != null">
+        #{scheduling,jdbcType=INTEGER},
+      </if>
+      <if test="reserve1 != null">
+        #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null">
+        #{reserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve3 != null">
+        #{reserve3,jdbcType=VARCHAR},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -624,14 +842,35 @@
   <update id="updateByExampleSelective" parameterType="map">
     update doctor
     <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+      <if test="record.doctorId != null">
+        doctor_id = #{record.doctorId,jdbcType=INTEGER},
       </if>
-      <if test="record.name != null">
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.doctorName != null">
+        doctor_name = #{record.doctorName,jdbcType=VARCHAR},
       </if>
-      <if test="record.level != null">
-        level = #{record.level,jdbcType=CHAR},
+      <if test="record.department != null">
+        department = #{record.department,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=INTEGER},
+      </if>
+      <if test="record.scheduling != null">
+        scheduling = #{record.scheduling,jdbcType=INTEGER},
+      </if>
+      <if test="record.reserve1 != null">
+        reserve1 = #{record.reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserve2 != null">
+        reserve2 = #{record.reserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserve3 != null">
+        reserve3 = #{record.reserve3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountId != null">
+        account_id = #{record.accountId,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -640,9 +879,16 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update doctor
-    set id = #{record.id,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=VARCHAR},
-      level = #{record.level,jdbcType=CHAR}
+    set doctor_id = #{record.doctorId,jdbcType=INTEGER},
+      doctor_name = #{record.doctorName,jdbcType=VARCHAR},
+      department = #{record.department,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=INTEGER},
+      scheduling = #{record.scheduling,jdbcType=INTEGER},
+      reserve1 = #{record.reserve1,jdbcType=VARCHAR},
+      reserve2 = #{record.reserve2,jdbcType=VARCHAR},
+      reserve3 = #{record.reserve3,jdbcType=VARCHAR},
+      account_id = #{record.accountId,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
