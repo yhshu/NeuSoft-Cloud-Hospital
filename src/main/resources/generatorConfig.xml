@@ -12,8 +12,8 @@
     <context id="default" targetRuntime="MyBatis3">
         <!-- optional，旨在创建class时，对注释进行控制 -->
         <commentGenerator>
-            <property name="suppressAllComments" value="true"/>
-            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="false"/>
+            <property name="suppressDate" value="false"/>
         </commentGenerator>
         <!--jdbc的数据库连接 -->
         <jdbcConnection driverClass="${driver}" connectionURL="${url}" userId="${username}" password="${password}">
@@ -115,19 +115,27 @@ database types (e.g. MySql's unsigned bigint type should be mapped to java.lang.
 
         -->
         <!--            <columnOverride column="" javaType=""    jdbcType="" typeHandler=""  delimitedColumnName="" />-->
-        <table tableName="registration" schema="hospital"></table>
-        <table tableName="doctor" schema="hospital"></table>
-        <table tableName="department" schema="hospital"></table>
-        <table tableName="account" schema="hospital"></table>
-        <table tableName="charge_form" schema="hospital"></table>
-        <table tableName="charge_item" schema="hospital"></table>
-        <table tableName="examination" schema="hospital"></table>
-        <table tableName="medical_records" schema="hospital"></table>
-        <table tableName="medicine" schema="hospital"></table>
-        <table tableName="pathography" schema="hospital"></table>
-        <table tableName="patient" schema="hospital"></table>
-        <table tableName="prescription" schema="hospital"></table>
-        <table tableName="staff" schema="hospital"></table>
+        <table tableName="account" catalog="hospital"></table>
+        <table tableName="charge_form" catalog="hospital"></table>
+        <table tableName="charge_item" catalog="hospital"></table>
+        <table tableName="constant_item" catalog="hospital"></table>
+        <table tableName="constant_type" catalog="hospital"></table>
+        <table tableName="department" catalog="hospital"></table>
+        <table tableName="disease" catalog="hospital"></table>
+        <table tableName="disease_category" catalog="hospital"></table>
+        <table tableName="doctor" catalog="hospital"></table>
+        <table tableName="examination" catalog="hospital"></table>
+        <table tableName="expense_class" catalog="hospital"></table>
+        <table tableName="medical_records" catalog="hospital"></table>
+        <table tableName="medicine" catalog="hospital"></table>
+        <table tableName="pathography" catalog="hospital"></table>
+        <table tableName="patient" catalog="hospital"></table>
+        <table tableName="prescription" catalog="hospital"></table>
+        <table tableName="registration" catalog="hospital"></table>
+        <table tableName="scheduling_info" catalog="hospital"></table>
+        <table tableName="scheduling_rule" catalog="hospital"></table>
+        <table tableName="staff" catalog="hospital"></table>
+        <table tableName="user_rights" catalog="hospital"></table>
 
     </context>
 </generatorConfiguration>
