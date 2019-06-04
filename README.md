@@ -1,4 +1,4 @@
-## 东软HIS医院管理系统 
+## 东软HIS医院管理系统 服务器端
 
 NeuSoft hospital information system
 
@@ -6,7 +6,8 @@ NeuSoft hospital information system
 
 ### 环境与工具
 
-#### 后端
+本后端项目所使用的环境与工具如下：
+
 - Maven 包管理工具
 - JDK 1.8
 - SSM
@@ -28,14 +29,11 @@ NeuSoft hospital information system
 - Redis
 - Apache Shiro 用于身份验证的开源安全框架
 
-#### 前端
-
-- BootStrap (css & js)
-- Vue.js
+前端项目请参见 `NeuSoft-Cloud-Hospital-FE` .
 
 #### 数据库配置
 
-注意，在 `src/main/resources` 目录中需要添加 `db.properties` 进行数据库配置。
+注意，在 `src/main/resources` 目录中需要添加 `db.properties` 进行数据库配置，在本仓库中不包含该文件。
 
 #### 部署
 
