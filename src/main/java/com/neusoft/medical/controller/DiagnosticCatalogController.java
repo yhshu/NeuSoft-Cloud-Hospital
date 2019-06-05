@@ -15,12 +15,12 @@ public class DiagnosticCatalogController {
     private Logger log = Logger.getLogger(DiagnosticCatalogController.class);
     private DiagnosticCatalogService diagnosticCatalogService;
 
-    @RequestMapping("/list_disease_category")
+    @RequestMapping(value = "/list_disease_category", consumes = "application/json")
     public String findAllDiseaseCategory() {
     }
 
     @RequestMapping("/list_disease")
-    public String findAllDisease() {
+    public String selectDiseaseByPage() {
 
     }
 

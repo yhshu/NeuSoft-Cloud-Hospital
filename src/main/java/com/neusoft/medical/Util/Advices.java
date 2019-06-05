@@ -3,7 +3,7 @@ package com.neusoft.medical.Util;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
-import org.springframew. ork.stereotype.Component;
+import org.springframework.stereotype.Component;
 
 @Component
 @Aspect

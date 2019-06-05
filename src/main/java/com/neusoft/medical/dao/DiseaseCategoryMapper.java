@@ -126,4 +126,12 @@ public interface DiseaseCategoryMapper {
         "where disease_id = #{diseaseId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(DiseaseCategory record);
+
+    /**
+     * This method was generated manually by Shu Yiheng.
+     * This method is used for testing and works with PageHelper.
+     *
+     * @return A list of DiseaseCategory
+     */
+    public List<DiseaseCategory> selectByPageAndSelections();
 }
