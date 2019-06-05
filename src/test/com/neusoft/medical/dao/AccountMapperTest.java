@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.InputStream;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 @Transactional
@@ -24,19 +25,19 @@ public class AccountMapperTest {
     private AccountMapper accountMapper;
     private SqlSession session;
 
-@Before
-public void setUp() throws  Exception{
-    InputStream inputStream = Resources.getResourceAsStream("SqlMapConfig.xml");
-    SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(inputStream, "mysql");
-    session = factory.openSession();
-    accountMapper = session.getMapper(AccountMapper.class);
-}
+    @Before
+    public void setUp() throws Exception {
+        InputStream inputStream = Resources.getResourceAsStream("SqlMapConfig.xml");
+        SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(inputStream, "mysql");
+        session = factory.openSession();
+        accountMapper = session.getMapper(AccountMapper.class);
+    }
 
-@After
-public void tearDown() throws  Exception{
-    session.commit();
-    session.close();
-}
+    @After
+    public void tearDown() throws Exception {
+        session.commit();
+        session.close();
+    }
 
     @Test
     public void countByExample() {
@@ -54,10 +55,10 @@ public void tearDown() throws  Exception{
 
     @Test
     public void insert() {
-        Account account = new Account(1,"小米","123456",1,"","","");
+        Account account = new Account(1, "小米", "123456", 1, "", "", "");
         accountMapper.insert(account);
-        Assert.assertEquals(accountMapper.selectByPrimaryKey(account.getAccountId()).getAccountId().intValue(),1);
-        Assert.assertEquals(accountMapper.selectByPrimaryKey(account.getAccountId()).getUserName(),"小米");
+        Assert.assertEquals(accountMapper.selectByPrimaryKey(account.getAccountId()).getAccountId().intValue(), 1);
+        Assert.assertEquals(accountMapper.selectByPrimaryKey(account.getAccountId()).getUserName(), "小米");
     }
 
     @Test

@@ -1,10 +1,15 @@
 package com.neusoft.medical.controller;
 
+import com.github.pagehelper.PageInfo;
+import com.neusoft.medical.bean.Disease;
 import com.neusoft.medical.service.DiagnosticCatalogService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Map;
 import java.util.logging.Logger;
 
 /**
@@ -13,17 +18,21 @@ import java.util.logging.Logger;
 @Controller
 @RequestMapping("/diagnostic_catalog")
 public class DiagnosticCatalogController {
-    private Logger log = Logger.getLogger(DiagnosticCatalogController.class);
+    private Logger log = Logger.getLogger(String.valueOf(DiagnosticCatalogController.class));
 
     private DiagnosticCatalogService diagnosticCatalogService;
 
-    @RequestMapping(value = "/list_disease_category", consumes = "application/json")
-    public String findAllDiseaseCategory() {
+    @ResponseBody
+    @RequestMapping(value = "/list_disease_category", consumes = "application/json", produces = "application/json")
+    public Map findAllDiseaseCategory() {
+        // todo
+        return null;
     }
 
-    @RequestMapping(value = "/list_disease", consumes = "application/json")
-    public String selectDiseaseByPage() {
-
+    @ResponseBody
+    @RequestMapping(value = "/list_disease", consumes = "application/json", produces = "application/json")
+    public PageInfo<Disease> selectDiseaseByPage(@RequestBody Map map) {
+        return diagnosticCatalogService.selectDiseaseByPage((int) map.get("currentPage"), (int) map.get("pageSize"));
     }
 
 }
