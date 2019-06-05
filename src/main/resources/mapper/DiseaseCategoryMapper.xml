@@ -255,11 +255,4 @@
     </set>
     where disease_id = #{diseaseId,jdbcType=INTEGER}
   </update>
-
-    <select id="selectByPageAndSelections" resultMap="BaseResultMap">
-        select *
-        from disease_category
-        order by
-    </select>
-
 </mapper>

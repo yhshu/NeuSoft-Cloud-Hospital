@@ -2,13 +2,9 @@ package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.Disease;
 import com.neusoft.medical.bean.DiseaseExample;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 public interface DiseaseMapper {
     /**
@@ -126,4 +122,13 @@ public interface DiseaseMapper {
         "where disease_id = #{diseaseId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(Disease record);
+
+
+    /**
+     * This method was generated manually by Shu Yiheng.
+     * This method is used for testing and works with PageHelper.
+     *
+     * @return A list of DiseaseCategory
+     */
+    List<Disease> selectByPageAndSelections();
 }
