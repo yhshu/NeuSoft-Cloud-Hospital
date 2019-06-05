@@ -48,16 +48,18 @@ public void tearDown() throws  Exception{
     }
 
     @Test
-    public void deleteByPrimaryKey() {
-
+    public void deleteByPrimaryKey() {//以主键删除
+        Account account = new Account(2,"罗茜","123456",1,null,null,null);
+        accountMapper.deleteByPrimaryKey(2);
+        Assert.assertEquals(accountMapper.deleteByPrimaryKey(account.getAccountId()),2);
     }
 
     @Test
-    public void insert() {
-        Account account = new Account(1,"小米","123456",1,"","","");
+    public void insert() {//添加
+        Account account = new Account(4,"卢本伟","123456",1,null,null,null);
         accountMapper.insert(account);
         Assert.assertEquals(accountMapper.selectByPrimaryKey(account.getAccountId()).getAccountId().intValue(),1);
-        Assert.assertEquals(accountMapper.selectByPrimaryKey(account.getAccountId()).getUserName(),"小米");
+        Assert.assertEquals(accountMapper.selectByPrimaryKey(account.getAccountId()).getUserName(),"卢本伟");
     }
 
     @Test
@@ -69,8 +71,10 @@ public void tearDown() throws  Exception{
     }
 
     @Test
-    public void selectByPrimaryKey() {
-
+    public void selectByPrimaryKey() {//以主键ID查找
+        Account account = new Account(1,"蔡徐坤","123456",1,null,null,null);
+        accountMapper.selectByPrimaryKey(1);
+        Assert.assertEquals(accountMapper.selectByPrimaryKey(account.getAccountId()),1);
     }
 
     @Test
@@ -86,7 +90,21 @@ public void tearDown() throws  Exception{
     }
 
     @Test
-    public void updateByPrimaryKey() {
+    public void updateByPrimaryKey() {//更新数据
+        Account account = new Account(3,"许言","123456",1,null,null,null);
+        accountMapper.insert(account);
+        Assert.assertEquals(accountMapper.selectByPrimaryKey(account.getAccountId()).getAccountId().intValue(),3);
+        Assert.assertEquals(accountMapper.selectByPrimaryKey(account.getAccountId()).getUserName(),"许言");
+
+        account.setAccountId(3);
+        account.setUserName("孙笑川");
+        account.setUserPassword("123456");
+        account.setReserve1(null);
+        account.setReserve2(null);
+        account.setReserve3(null);
+        accountMapper.updateByPrimaryKey(account);
+        Assert.assertEquals(accountMapper.selectByPrimaryKey(account.getAccountId()).getAccountId().intValue(),3);
+        Assert.assertEquals(accountMapper.selectByPrimaryKey(account.getAccountId()).getUserName(),"孙笑川");
 
     }
 }

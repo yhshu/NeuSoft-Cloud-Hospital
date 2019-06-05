@@ -1,7 +1,6 @@
 package com.neusoft.medical.controller;
 
 import com.neusoft.medical.service.DiagnosticCatalogService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -13,17 +12,17 @@ import java.util.logging.Logger;
 @Controller
 @RequestMapping("/diagnostic_catalog")
 public class DiagnosticCatalogController {
-    private Logger log = Logger.getLogger(DiagnosticCatalogController.class);
-
+    private Logger log = Logger.getLogger(String.valueOf(DiagnosticCatalogController.class));
     private DiagnosticCatalogService diagnosticCatalogService;
 
-    @RequestMapping(value = "/list_disease_category", consumes = "application/json")
+    @RequestMapping("/list_disease_category")
     public String findAllDiseaseCategory() {
+        return null;
     }
 
-    @RequestMapping(value = "/list_disease", consumes = "application/json")
-    public String selectDiseaseByPage() {
-
+    @RequestMapping("/list_disease")
+    public String findAllDisease() {
+        return null;
     }
 
 }
