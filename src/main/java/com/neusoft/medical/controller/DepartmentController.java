@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 @Controller
 @RequestMapping("/department")
 public class DepartmentController {
-    private Logger log = Logger.getLogger(DepartmentController.class);
+    private Logger log = Logger.getLogger(String.valueOf(DepartmentController.class));
 
     @RequestMapping("/add")
     public String add() {
