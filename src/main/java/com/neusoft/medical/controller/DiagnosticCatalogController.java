@@ -9,7 +9,11 @@ import java.util.logging.Logger;
  * 诊断目录控制器
  */
 @Controller
-@RequestMapping("DiagnosticCatelog")
+@RequestMapping("diagnostic_catalog")
 public class DiagnosticCatalogController {
     private Logger log = Logger.getLogger(DiagnosticCatalogController.class);
+
+    // @RequestMapping("/list")
+
+
 }
