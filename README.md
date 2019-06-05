@@ -1,4 +1,4 @@
-## 东软HIS医院管理系统 
+## 东软HIS医院管理系统 服务器端
 
 NeuSoft hospital information system
 
@@ -6,7 +6,8 @@ NeuSoft hospital information system
 
 ### 环境与工具
 
-#### 后端
+本后端项目所使用的环境与工具如下：
+
 - Maven 包管理工具
 - JDK 1.8
 - SSM
@@ -28,14 +29,43 @@ NeuSoft hospital information system
 - Redis
 - Apache Shiro 用于身份验证的开源安全框架
 
-#### 前端
-
-- BootStrap (css & js)
-- Vue.js
+前端项目请参见 `NeuSoft-Cloud-Hospital-FE` .
 
 #### 数据库配置
 
-注意，在 `src/main/resources` 目录中需要添加 `db.properties` 进行数据库配置。
+注意，在 `src/main/resources` 目录中需要添加 `db.properties` 进行数据库配置，在本仓库中不包含该文件。
+
+以下是一个 `db.properties` 文件的样例：
+
+```
+# This file is only used during the testing phase and should not be included in the officially publicly released software.
+# 驱动位置
+driverLocation=
+# 驱动
+driver=com.mysql.cj.jdbc.Driver
+
+# 数据库 URL
+url=jdbc:mysql://cdb-7fud9x6s.bj.tencentcdb.com:10111
+
+# 数据库用户名密码
+username=root
+password=password
+
+# 初始连接数
+initialSize=0
+# 最大活跃连接
+maxActive=20
+# 最大空闲连接
+maxIdle=20
+# 最小空闲连接
+minIdle=1
+# 最大等待连接
+maxWait=60000
+```
+
+#### MyBatis 生成 Bean 与 SQL
+
+在 Intellij IDEA 中新建 Maven 项目，Command Line 一栏中填写 `mybatis-generator:generate -e`.
 
 #### 部署
 
