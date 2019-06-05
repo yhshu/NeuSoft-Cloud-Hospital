@@ -41,7 +41,7 @@ public class Advices {
      * @param resObj 连接点
      * @return 返回值
      */
-    @AfterReturning(value = "execution(com.neusoft.medical.*(..))", returning = "resObj")
+    @AfterReturning(value = "execution(* com.neusoft.medical.*(..))", returning = "resObj")
     public Object afterReturn(Object resObj) {
         log.info("Return value: " + resObj);
         return resObj;
@@ -52,7 +52,7 @@ public class Advices {
      *
      * @param e 异常
      */
-    @AfterThrowing(value = "execution(com.neusoft.medical.*(..))", throwing = "e")
+    @AfterThrowing(value = "execution(* com.neusoft.medical.*(..))", throwing = "e")
     public void afterThrowing(Exception e) {
         log.info("Exception occurs: " + e.getMessage());
     }
