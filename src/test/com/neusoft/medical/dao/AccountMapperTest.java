@@ -15,8 +15,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.InputStream;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext.xml","classpath:generatorConfig.xml","classpath:SqlMapConfig.xml"})
+@RunWith(SpringJUnit4ClassRunner.class)//测试类不变的东西
+@ContextConfiguration(locations = {"classpath:applicationContext.xml","classpath:generatorConfig.xml","classpath:SqlMapConfig.xml"})//配置文件
 public class AccountMapperTest {
     private AccountMapper accountMapper;
     private SqlSession session;
@@ -41,7 +41,7 @@ public class AccountMapperTest {
 
     @Test
     public void deleteByExample() {
-        int account = accountMapper.deleteByPrimaryKey(31);
+        int account = accountMapper.deleteByPrimaryKey(31);//选择要删除的主键
     }
 
     @Test
@@ -51,9 +51,9 @@ public class AccountMapperTest {
 
     @Test
     public void insert() {
-        Account account = new Account(null, "username", "password", 1, null, null, null);
+        Account account = new Account(null, "username", "password", 1, null, null, null);//新增数据
         accountMapper.insert(account);
-        System.out.println(account.getAccountId()+"+"+account.getUserName());
+        System.out.println("新增了数据："+account.getAccountId()+"+"+account.getUserName());
     }
 
     @Test
@@ -66,8 +66,8 @@ public class AccountMapperTest {
 
     @Test
     public void selectByPrimaryKey() {
-        Account account = accountMapper.selectByPrimaryKey(10);
-        System.out.println(account.getAccountId()+"+"+account.getUserName());
+        Account account = accountMapper.selectByPrimaryKey(10);//选择要查找的主键
+        System.out.println("查找的数据："+account.getAccountId()+"+"+account.getUserName());
     }
 
     @Test
@@ -84,13 +84,14 @@ public class AccountMapperTest {
 
     @Test
     public void updateByPrimaryKey() {
-        Account account = accountMapper.selectByPrimaryKey(15);
-        account.setUserName("HUAWEI");
-        account.setValid(1);
+        Account account = accountMapper.selectByPrimaryKey(15);//选择要更新数据的主键
+        System.out.println("更新前的数据"+account.getAccountId()+account.getUserName());
+        account.setUserName("HUAWEI");//更新名字
+        account.setValid(1);//更新valid
         account.setReserve1(null);
         account.setReserve2(null);
         account.setReserve3(null);
         accountMapper.updateByPrimaryKey(account);
-        System.out.println(account.getAccountId()+"+"+account.getUserName());
+        System.out.println("更新后的数据："+account.getAccountId()+"+"+account.getUserName());
     }
 }
