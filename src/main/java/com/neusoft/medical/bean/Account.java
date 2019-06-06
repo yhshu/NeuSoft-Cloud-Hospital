@@ -1,6 +1,5 @@
 package com.neusoft.medical.bean;
 
-import com.neusoft.medical.base.SqlSessionBase;
 import com.neusoft.medical.dao.AccountMapper;
 
 public class Account {
