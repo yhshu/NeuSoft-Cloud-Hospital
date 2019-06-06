@@ -15,13 +15,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import java.io.InputStream;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath*:generatorConfig.xml"})
-/*@Transactional
-@Rollback*/
+@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+
+@Transactional
+@Rollback
 public class AccountMapperTest {
     private AccountMapper accountMapper;
     private SqlSession session;
@@ -56,11 +56,12 @@ public class AccountMapperTest {
 
     @Test
     public void insert() {
-        Account account = new Account(4,"username", "userPassword", 1, null, null, null);
+        Account account = new Account(null, "徐树皓", "xsh-smile", 1, null, null, null);
         int accountId = accountMapper.insert(account);
         Assert.assertEquals(accountMapper.selectByPrimaryKey(accountId).getAccountId().intValue(), accountId);
+        Assert.assertEquals(accountMapper.selectByPrimaryKey(1).getUserName(), account.getUserName());
         Assert.assertEquals(accountMapper.selectByPrimaryKey(accountId).getUserName(), account.getUserName());
-}
+    }
 
     @Test
     public void insertSelective() {
