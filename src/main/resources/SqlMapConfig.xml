@@ -41,7 +41,27 @@
     <!-- mybatis.cfg.xml 里注册 UserMapper.xml 文件-->
     <mappers>
         <!-- 告知映射文件方式1：逐个配置 -->
-        <mapper resource="mapper/Patient.xml"/>
+        <mapper resource="mapper/AccountMapper.xml"></mapper>
+        <mapper resource="mapper/ChargeFormMapper.xml"></mapper>
+        <mapper resource="mapper/ChargeItemMapper.xml"></mapper>
+        <mapper resource="mapper/ConstantItemMapper.xml"></mapper>
+        <mapper resource="mapper/ConstantTypeMapper.xml"></mapper>
+        <mapper resource="mapper/DepartmentMapper.xml"></mapper>
+        <mapper resource="mapper/DiseaseCategoryMapper.xml"></mapper>
+        <mapper resource="mapper/DiseaseMapper.xml"></mapper>
+        <mapper resource="mapper/DoctorMapper.xml"></mapper>
+        <mapper resource="mapper/ExaminationMapper.xml"></mapper>
+        <mapper resource="mapper/ExpenseClassMapper.xml"></mapper>
+        <mapper resource="mapper/MedicalRecordsMapper.xml"></mapper>
+        <mapper resource="mapper/MedicineMapper.xml"></mapper>
+        <mapper resource="mapper/PathographyMapper.xml"></mapper>
+        <mapper resource="mapper/PatientMapper.xml"></mapper>
+        <mapper resource="mapper/PrescriptionMapper.xml"></mapper>
+        <mapper resource="mapper/RegistrationMapper.xml"></mapper>
+        <mapper resource="mapper/SchedulingInfoMapper.xml"></mapper>
+        <mapper resource="mapper/SchedulingRuleMapper.xml"></mapper>
+        <mapper resource="mapper/StaffMapper.xml"></mapper>
+        <mapper resource="mapper/UserRightsMapper.xml"></mapper>
         <!-- <mapper class="com.neusoft.medical.dao.PatientDao"/>-->
 
         <!-- 告知映射文件方式2：自动扫描包内的 Mapper 接口与配置文件 -->

@@ -23,7 +23,8 @@ public class DiagnosticCatalogService {
      * @return 疾病种类列表
      */
     public List<DiseaseCategory> findAllDiseaseCategory() {
-
+        // todo
+        return null;
     }
 
     /**
