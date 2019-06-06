@@ -12,17 +12,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.io.InputStream;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
-
-@Transactional
-@Rollback
-public class AccountMapperTest {
+//@TransactionConfiguration(transactionManager="transactionManager", defaultRollback=true)
+@Rollback(true)
+public class AccountMapperTest extends AbstractTransactionalJUnit4SpringContextTests {
     private AccountMapper accountMapper;
     private SqlSession session;
 
@@ -56,10 +54,11 @@ public class AccountMapperTest {
 
     @Test
     public void insert() {
-        Account account = new Account(null, "徐树皓", "xsh-smile", 1, null, null, null);
+        Account account = new Account(null, "啦啦", "LL-smile", 1, null, null, null);
         int accountId = accountMapper.insert(account);
+        /*System.out.println(accountId);
+        System.out.println(account.getUserName());*/
         Assert.assertEquals(accountMapper.selectByPrimaryKey(accountId).getAccountId().intValue(), accountId);
-        Assert.assertEquals(accountMapper.selectByPrimaryKey(1).getUserName(), account.getUserName());
         Assert.assertEquals(accountMapper.selectByPrimaryKey(accountId).getUserName(), account.getUserName());
     }
 
@@ -73,7 +72,8 @@ public class AccountMapperTest {
 
     @Test
     public void selectByPrimaryKey() {
-
+        Account account = accountMapper.selectByPrimaryKey(1);
+        System.out.println(account);
     }
 
     @Test
@@ -90,6 +90,16 @@ public class AccountMapperTest {
 
     @Test
     public void updateByPrimaryKey() {
+        Account account = new Account(16, "x-man", "wcw", 1, null, null, null);
+        account = accountMapper.selectByPrimaryKey(account.getAccountId());
+        /*Assert.assertEquals(accountMapper.selectByPrimaryKey(accountId).getAccountId().intValue(), accountId);
+        Assert.assertEquals(accountMapper.selectByPrimaryKey(accountId).getUserName(), account.getUserName());*/
 
+        account.setUserName("小米");
+        account.setUserPassword("xx-smile");
+        account.setValid(1);
+        accountMapper.updateByPrimaryKey(account);
+        /*Assert.assertEquals(accountMapper.selectByPrimaryKey(account.getAccountId()).getAccountId().intValue(),2);
+        Assert.assertEquals(accountMapper.selectByPrimaryKey(account.getAccountId()).getUserName(),"HUAWEI");*/
     }
 }
