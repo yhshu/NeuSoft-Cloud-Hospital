@@ -6,21 +6,17 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.io.InputStream;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
-
-
+@ContextConfiguration(locations = {"classpath:applicationContext.xml","classpath:generatorConfig.xml","classpath:SqlMapConfig.xml"})
 public class AccountMapperTest {
     private AccountMapper accountMapper;
     private SqlSession session;
@@ -45,7 +41,7 @@ public class AccountMapperTest {
 
     @Test
     public void deleteByExample() {
-        int account = accountMapper.deleteByPrimaryKey(15);
+        int account = accountMapper.deleteByPrimaryKey(31);
     }
 
     @Test
@@ -54,11 +50,10 @@ public class AccountMapperTest {
     }
 
     @Test
-    @Transactional
     public void insert() {
         Account account = new Account(null, "username", "password", 1, null, null, null);
         accountMapper.insert(account);
-        System.out.println(account.getAccountId()+account.getUserName());
+        System.out.println(account.getAccountId()+"+"+account.getUserName());
     }
 
     @Test
@@ -72,7 +67,7 @@ public class AccountMapperTest {
     @Test
     public void selectByPrimaryKey() {
         Account account = accountMapper.selectByPrimaryKey(10);
-        System.out.println(account.getAccountId()+account.getUserName());
+        System.out.println(account.getAccountId()+"+"+account.getUserName());
     }
 
     @Test
@@ -96,6 +91,6 @@ public class AccountMapperTest {
         account.setReserve2(null);
         account.setReserve3(null);
         accountMapper.updateByPrimaryKey(account);
-        System.out.println(account.getAccountId()+account.getUserName());
+        System.out.println(account.getAccountId()+"+"+account.getUserName());
     }
 }
