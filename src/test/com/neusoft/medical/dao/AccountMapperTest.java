@@ -56,9 +56,10 @@ public class AccountMapperTest {
 
     @Test
     public void insert() {
-        Account account = new Account(null, "username", "userPassword", 1, null, null, null);
+        Account account = new Account(null, "徐树皓", "xsh-smile", 1, null, null, null);
         int accountId = accountMapper.insert(account);
         Assert.assertEquals(accountMapper.selectByPrimaryKey(accountId).getAccountId().intValue(), accountId);
+        Assert.assertEquals(accountMapper.selectByPrimaryKey(1).getUserName(), account.getUserName());
         Assert.assertEquals(accountMapper.selectByPrimaryKey(accountId).getUserName(), account.getUserName());
     }
 
