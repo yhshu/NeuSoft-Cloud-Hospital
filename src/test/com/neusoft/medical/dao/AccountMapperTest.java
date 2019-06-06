@@ -45,7 +45,7 @@ public class AccountMapperTest {
 
     @Test
     public void deleteByExample() {
-
+        int account = accountMapper.deleteByPrimaryKey(15);
     }
 
     @Test
@@ -58,6 +58,7 @@ public class AccountMapperTest {
     public void insert() {
         Account account = new Account(null, "username", "password", 1, null, null, null);
         accountMapper.insert(account);
+        System.out.println(account.getAccountId()+account.getUserName());
     }
 
     @Test
@@ -70,7 +71,8 @@ public class AccountMapperTest {
 
     @Test
     public void selectByPrimaryKey() {
-
+        Account account = accountMapper.selectByPrimaryKey(10);
+        System.out.println(account.getAccountId()+account.getUserName());
     }
 
     @Test
@@ -87,6 +89,13 @@ public class AccountMapperTest {
 
     @Test
     public void updateByPrimaryKey() {
-
+        Account account = accountMapper.selectByPrimaryKey(15);
+        account.setUserName("HUAWEI");
+        account.setValid(1);
+        account.setReserve1(null);
+        account.setReserve2(null);
+        account.setReserve3(null);
+        accountMapper.updateByPrimaryKey(account);
+        System.out.println(account.getAccountId()+account.getUserName());
     }
 }
