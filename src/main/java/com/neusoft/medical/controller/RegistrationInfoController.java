@@ -5,10 +5,12 @@ import com.neusoft.medical.service.DoctorService;
 import com.neusoft.medical.service.RegistrationInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 /**
  * 挂号信息控制器
  */
+@CrossOrigin(maxAge = 3600)
 @Controller
 public class RegistrationInfoController {
     @Autowired

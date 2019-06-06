@@ -12,15 +12,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.io.InputStream;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
-//@TransactionConfiguration(transactionManager="transactionManager", defaultRollback=true)
-@Rollback(true)
-public class AccountMapperTest extends AbstractTransactionalJUnit4SpringContextTests {
+
+
+public class AccountMapperTest {
     private AccountMapper accountMapper;
     private SqlSession session;
 
@@ -49,17 +50,14 @@ public class AccountMapperTest extends AbstractTransactionalJUnit4SpringContextT
 
     @Test
     public void deleteByPrimaryKey() {
-        accountMapper.deleteByPrimaryKey(20);
+
     }
 
     @Test
+    @Transactional
     public void insert() {
-        Account account = new Account(null, "测试2", "test2", 1, null, null, null);
+        Account account = new Account(null, "username", "password", 1, null, null, null);
         accountMapper.insert(account);
-        System.out.println(account.getAccountId()+account.getUserName());
-        /*int accountId = account.getAccountId();
-        Assert.assertEquals(accountMapper.selectByPrimaryKey(accountId).getAccountId().intValue(), accountId);
-        Assert.assertEquals(accountMapper.selectByPrimaryKey(accountId).getUserName(), account.getUserName());*/
     }
 
     @Test
@@ -72,8 +70,7 @@ public class AccountMapperTest extends AbstractTransactionalJUnit4SpringContextT
 
     @Test
     public void selectByPrimaryKey() {
-        Account account = accountMapper.selectByPrimaryKey(1);
-        System.out.println(account.getUserName());
+
     }
 
     @Test
@@ -90,13 +87,6 @@ public class AccountMapperTest extends AbstractTransactionalJUnit4SpringContextT
 
     @Test
     public void updateByPrimaryKey() {
-        Account account = accountMapper.selectByPrimaryKey(16);
-        account.setUserName("小米");
-        account.setUserPassword("xx-smile");
-        account.setValid(1);
-        accountMapper.updateByPrimaryKey(account);
-        System.out.println(account.getUserName());
-        /*Assert.assertEquals(accountMapper.selectByPrimaryKey(account.getAccountId()).getAccountId().intValue(),2);
-        Assert.assertEquals(accountMapper.selectByPrimaryKey(account.getAccountId()).getUserName(),"HUAWEI");*/
+
     }
 }
