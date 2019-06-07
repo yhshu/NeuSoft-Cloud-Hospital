@@ -7,17 +7,20 @@ import com.neusoft.medical.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
-    @Autowired
+    @Resource
     private DepartmentMapper departmentMapper;
 
     @Override
     public List<Department> findAllDepartment() {
         DepartmentExample departmentExample = new DepartmentExample();
-        return departmentMapper.selectByExample(departmentExample);
+        List<Department> departmentList = departmentMapper.selectByExample(departmentExample);
+        // todo 替换科室分类和科室类别中的数字
+        return departmentList;
     }
 
     @Override
