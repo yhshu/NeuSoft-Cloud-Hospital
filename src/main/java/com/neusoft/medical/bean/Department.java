@@ -316,4 +316,19 @@ public class Department {
     public void setReserve3(String reserve3) {
         this.reserve3 = reserve3 == null ? null : reserve3.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Department{" +
+                "departmentId=" + departmentId +
+                ", departmentCode='" + departmentCode + '\'' +
+                ", departmentName='" + departmentName + '\'' +
+                ", category=" + category +
+                ", type=" + type +
+                ", valid=" + valid +
+                ", reserve1='" + reserve1 + '\'' +
+                ", reserve2='" + reserve2 + '\'' +
+                ", reserve3='" + reserve3 + '\'' +
+                '}';
+    }
 }

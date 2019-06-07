@@ -2,13 +2,10 @@ package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.Department;
 import com.neusoft.medical.bean.DepartmentExample;
+
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+
+import org.apache.ibatis.annotations.*;
 
 public interface DepartmentMapper {
     /**
@@ -34,8 +31,8 @@ public interface DepartmentMapper {
      * @mbggenerated Wed Jun 05 11:50:09 CST 2019
      */
     @Delete({
-        "delete from hospital.department",
-        "where department_id = #{departmentId,jdbcType=INTEGER}"
+            "delete from hospital.department",
+            "where department_id = #{departmentId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer departmentId);
 
@@ -45,15 +42,16 @@ public interface DepartmentMapper {
      *
      * @mbggenerated Wed Jun 05 11:50:09 CST 2019
      */
+    @Options(useGeneratedKeys = true, keyProperty = "departmentId", keyColumn = "department_id")
     @Insert({
-        "insert into hospital.department (department_id, department_code, ",
-        "department_name, category, ",
-        "type, valid, reserve1, ",
-        "reserve2, reserve3)",
-        "values (#{departmentId,jdbcType=INTEGER}, #{departmentCode,jdbcType=VARCHAR}, ",
-        "#{departmentName,jdbcType=VARCHAR}, #{category,jdbcType=INTEGER}, ",
-        "#{type,jdbcType=INTEGER}, #{valid,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
-        "#{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR})"
+            "insert into hospital.department (department_id, department_code, ",
+            "department_name, category, ",
+            "type, valid, reserve1, ",
+            "reserve2, reserve3)",
+            "values (#{departmentId,jdbcType=INTEGER}, #{departmentCode,jdbcType=VARCHAR}, ",
+            "#{departmentName,jdbcType=VARCHAR}, #{category,jdbcType=INTEGER}, ",
+            "#{type,jdbcType=INTEGER}, #{valid,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
+            "#{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR})"
     })
     int insert(Department record);
 
@@ -80,11 +78,11 @@ public interface DepartmentMapper {
      * @mbggenerated Wed Jun 05 11:50:09 CST 2019
      */
     @Select({
-        "select",
-        "department_id, department_code, department_name, category, type, valid, reserve1, ",
-        "reserve2, reserve3",
-        "from hospital.department",
-        "where department_id = #{departmentId,jdbcType=INTEGER}"
+            "select",
+            "department_id, department_code, department_name, category, type, valid, reserve1, ",
+            "reserve2, reserve3",
+            "from hospital.department",
+            "where department_id = #{departmentId,jdbcType=INTEGER}"
     })
     @ResultMap("BaseResultMap")
     Department selectByPrimaryKey(Integer departmentId);
@@ -120,16 +118,16 @@ public interface DepartmentMapper {
      * @mbggenerated Wed Jun 05 11:50:09 CST 2019
      */
     @Update({
-        "update hospital.department",
-        "set department_code = #{departmentCode,jdbcType=VARCHAR},",
-          "department_name = #{departmentName,jdbcType=VARCHAR},",
-          "category = #{category,jdbcType=INTEGER},",
-          "type = #{type,jdbcType=INTEGER},",
-          "valid = #{valid,jdbcType=INTEGER},",
-          "reserve1 = #{reserve1,jdbcType=VARCHAR},",
-          "reserve2 = #{reserve2,jdbcType=VARCHAR},",
-          "reserve3 = #{reserve3,jdbcType=VARCHAR}",
-        "where department_id = #{departmentId,jdbcType=INTEGER}"
+            "update hospital.department",
+            "set department_code = #{departmentCode,jdbcType=VARCHAR},",
+            "department_name = #{departmentName,jdbcType=VARCHAR},",
+            "category = #{category,jdbcType=INTEGER},",
+            "type = #{type,jdbcType=INTEGER},",
+            "valid = #{valid,jdbcType=INTEGER},",
+            "reserve1 = #{reserve1,jdbcType=VARCHAR},",
+            "reserve2 = #{reserve2,jdbcType=VARCHAR},",
+            "reserve3 = #{reserve3,jdbcType=VARCHAR}",
+            "where department_id = #{departmentId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(Department record);
 }

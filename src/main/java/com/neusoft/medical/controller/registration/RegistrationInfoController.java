@@ -1,4 +1,4 @@
-package com.neusoft.medical.controller;
+package com.neusoft.medical.controller.registration;
 
 import com.neusoft.medical.service.DepartmentService;
 import com.neusoft.medical.service.DoctorService;

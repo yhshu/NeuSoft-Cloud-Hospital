@@ -4,19 +4,19 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.Disease;
 import com.neusoft.medical.bean.DiseaseCategory;
+import com.neusoft.medical.bean.DiseaseExample;
 import com.neusoft.medical.dao.DiseaseCategoryMapper;
 import com.neusoft.medical.dao.DiseaseMapper;
 import com.neusoft.medical.service.DiagnosticCatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 public class DiagnosticCatalogServiceImpl implements DiagnosticCatalogService {
-//    @Resource
-//    private DiseaseCategoryMapper diseaseCategoryMapper;
+    @Autowired
+    private DiseaseCategoryMapper diseaseCategoryMapper;
 
     @Autowired
     private DiseaseMapper diseaseMapper;
@@ -27,6 +27,7 @@ public class DiagnosticCatalogServiceImpl implements DiagnosticCatalogService {
      * @return 疾病种类列表
      */
     public List<DiseaseCategory> findAllDiseaseCategory() {
+        // todo
         return null;
     }
 
@@ -39,9 +40,8 @@ public class DiagnosticCatalogServiceImpl implements DiagnosticCatalogService {
      */
     public PageInfo<Disease> selectDiseaseByPage(int currentPage, int pageSize) {
         PageHelper.startPage(currentPage, pageSize);
-        List<Disease> diseaseList = diseaseMapper.selectByPageAndSelections();
-        PageInfo<Disease> diseasePageInfo = new PageInfo<>(diseaseList);
-        return diseasePageInfo;
+        DiseaseExample diseaseExample = new DiseaseExample();
+        List<Disease> diseaseList = diseaseMapper.selectByExample(diseaseExample);
+        return new PageInfo<>(diseaseList);
     }
-
 }
