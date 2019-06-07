@@ -34,7 +34,8 @@ public class DiagnosticCatalogController {
     /**
      * 请求指定页的疾病信息
      *
-     * @param map 请求参数，包括当前页码、页面大小
+     * @param currentPage 当前页码
+     * @param pageSize    页面大小
      * @return 指定大小和页码的疾病信息
      */
     @CrossOrigin(maxAge = 3600)

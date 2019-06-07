@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @Controller
 public class RegistrationInfoController {
     @Autowired
-    RegistrationInfoService registrationInfoService;
+    private RegistrationInfoService registrationInfoService;
 
     @Autowired
-    DoctorService doctorService;
+    private DoctorService doctorService;
 
     @Autowired
-    DepartmentService departmentService;
+    private DepartmentService departmentService;
 }

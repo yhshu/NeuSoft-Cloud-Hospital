@@ -16,6 +16,7 @@
       <arg column="valid" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
+
   <sql id="Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated
@@ -50,6 +51,7 @@
       </foreach>
     </where>
   </sql>
+
   <sql id="Update_By_Example_Where_Clause" >
     <!--
       WARNING - @mbggenerated
@@ -84,6 +86,7 @@
       </foreach>
     </where>
   </sql>
+
   <sql id="Base_Column_List" >
     <!--
       WARNING - @mbggenerated
@@ -92,6 +95,7 @@
     -->
     disease_id, disease_code, disease_name, sequence_no, disease_type, valid
   </sql>
+
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.neusoft.medical.bean.DiseaseCategoryExample" >
     <!--
       WARNING - @mbggenerated
@@ -111,6 +115,7 @@
       order by ${orderByClause}
     </if>
   </select>
+
   <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.DiseaseCategoryExample" >
     <!--
       WARNING - @mbggenerated
@@ -122,6 +127,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+
   <insert id="insertSelective" parameterType="com.neusoft.medical.bean.DiseaseCategory" >
     <!--
       WARNING - @mbggenerated
@@ -170,6 +176,7 @@
       </if>
     </trim>
   </insert>
+
   <select id="countByExample" parameterType="com.neusoft.medical.bean.DiseaseCategoryExample" resultType="java.lang.Integer" >
     <!--
       WARNING - @mbggenerated
@@ -181,6 +188,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+
   <update id="updateByExampleSelective" parameterType="map" >
     <!--
       WARNING - @mbggenerated
@@ -212,6 +220,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+
   <update id="updateByExample" parameterType="map" >
     <!--
       WARNING - @mbggenerated
@@ -229,6 +238,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.DiseaseCategory" >
     <!--
       WARNING - @mbggenerated
