@@ -3,36 +3,19 @@ package com.neusoft.medical.dao;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.Disease;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import java.io.InputStream;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class DiseaseMapperTest {
+    @Autowired
     private DiseaseMapper diseaseMapper;
-    private SqlSession session;
-
-    @Before
-    public void setUp() throws Exception {
-        InputStream inputStream = Resources.getResourceAsStream("SqlMapConfig.xml");
-        SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(inputStream, "mysql");
-        session = factory.openSession();
-        diseaseMapper = session.getMapper(DiseaseMapper.class);
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        session.commit();
-        session.close();
-    }
 
     @Test
     public void countByExample() {
@@ -85,5 +68,6 @@ public class DiseaseMapperTest {
         PageHelper.startPage(currentPage, pageSize);
         List<Disease> diseaseList = diseaseMapper.selectByPageAndSelections();
         PageInfo<Disease> diseasePageInfo = new PageInfo<>(diseaseList);
+        System.out.println(diseasePageInfo);
     }
 }

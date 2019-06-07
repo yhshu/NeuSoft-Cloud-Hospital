@@ -7,6 +7,7 @@ import com.neusoft.medical.bean.DiseaseCategory;
 import com.neusoft.medical.dao.DiseaseCategoryMapper;
 import com.neusoft.medical.dao.DiseaseMapper;
 import com.neusoft.medical.service.DiagnosticCatalogService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -17,7 +18,7 @@ public class DiagnosticCatalogServiceImpl implements DiagnosticCatalogService {
 //    @Resource
 //    private DiseaseCategoryMapper diseaseCategoryMapper;
 
-    @Resource
+    @Autowired
     private DiseaseMapper diseaseMapper;
 
     /**
@@ -37,7 +38,7 @@ public class DiagnosticCatalogServiceImpl implements DiagnosticCatalogService {
      * @return 指定页的疾病信息
      */
     public PageInfo<Disease> selectDiseaseByPage(int currentPage, int pageSize) {
-//        PageHelper.startPage(currentPage, pageSize);
+        PageHelper.startPage(currentPage, pageSize);
         List<Disease> diseaseList = diseaseMapper.selectByPageAndSelections();
         PageInfo<Disease> diseasePageInfo = new PageInfo<>(diseaseList);
         return diseasePageInfo;

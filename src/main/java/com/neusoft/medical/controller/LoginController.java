@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 /**
  * 帐户登录控制器
  */
-@CrossOrigin(maxAge = 3600)
 @Controller
 public class LoginController {
     private Logger log = Logger.getLogger(LoginController.class);

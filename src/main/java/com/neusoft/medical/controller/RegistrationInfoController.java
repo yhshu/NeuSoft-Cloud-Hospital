@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 /**
  * 挂号信息控制器
  */
-@CrossOrigin(maxAge = 3600)
 @Controller
 public class RegistrationInfoController {
     @Autowired

@@ -268,7 +268,7 @@
         where disease_id = #{diseaseId,jdbcType=INTEGER}
     </update>
 
-    <select id="selectByPageAndSelections" resultMap="BaseResultMap">
+    <select id="selectByPageAndSelections" resultMap="BaseResultMap" >
         select *
         from hospital.disease
         order by disease.disease_code
