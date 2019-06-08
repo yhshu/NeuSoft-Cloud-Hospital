@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.Disease;
 import com.neusoft.medical.bean.DiseaseCategory;
+import com.neusoft.medical.bean.DiseaseCategoryExample;
 import com.neusoft.medical.bean.DiseaseExample;
 import com.neusoft.medical.dao.DiseaseCategoryMapper;
 import com.neusoft.medical.dao.DiseaseMapper;
@@ -11,14 +12,15 @@ import com.neusoft.medical.service.DiagnosticCatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 public class DiagnosticCatalogServiceImpl implements DiagnosticCatalogService {
-    @Autowired
+    @Resource
     private DiseaseCategoryMapper diseaseCategoryMapper;
 
-    @Autowired
+    @Resource
     private DiseaseMapper diseaseMapper;
 
     /**
@@ -27,8 +29,8 @@ public class DiagnosticCatalogServiceImpl implements DiagnosticCatalogService {
      * @return 疾病种类列表
      */
     public List<DiseaseCategory> findAllDiseaseCategory() {
-        // todo
-        return null;
+        DiseaseCategoryExample diseaseCategoryExample = new DiseaseCategoryExample();
+        return diseaseCategoryMapper.selectByExample(diseaseCategoryExample);
     }
 
     /**

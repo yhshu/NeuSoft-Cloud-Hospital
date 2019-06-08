@@ -2,11 +2,13 @@ package com.neusoft.medical.controller.basicInfo;
 
 import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.Disease;
+import com.neusoft.medical.bean.DiseaseCategory;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.DiagnosticCatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -22,9 +24,10 @@ public class DiagnosticCatalogController {
     private DiagnosticCatalogService diagnosticCatalogService;
 
     @GetMapping(value = "/list_disease_category")
-    public Map findAllDiseaseCategory() {
-        // todo
-        return null;
+    public ResultDTO<List<DiseaseCategory>> findAllDiseaseCategory() {
+        System.out.println("findAllDiseaseCategory: " + "查询疾病分类目录");
+        List<DiseaseCategory> diseaseCategoryList = diagnosticCatalogService.findAllDiseaseCategory();
+        return new ResultDTO<>(diseaseCategoryList);
     }
 
     /**
@@ -40,10 +43,7 @@ public class DiagnosticCatalogController {
         System.out.println("currentPage: " + currentPage + ", pageSize: " + pageSize);
 
         PageInfo<Disease> diseasePageInfo = diagnosticCatalogService.selectDiseaseByPage(currentPage, pageSize);
-
-        ResultDTO<PageInfo<Disease>> resultDTO = new ResultDTO<>(diseasePageInfo);
-
-        return resultDTO;
+        return new ResultDTO<>(diseasePageInfo);
     }
 
 }

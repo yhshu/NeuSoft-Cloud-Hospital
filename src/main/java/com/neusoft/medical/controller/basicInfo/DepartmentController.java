@@ -1,6 +1,5 @@
 package com.neusoft.medical.controller.basicInfo;
 
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import com.neusoft.medical.Util.database.ConstantConverter;
 import com.neusoft.medical.bean.Department;
 import com.neusoft.medical.dto.ResultDTO;
@@ -33,19 +32,19 @@ public class DepartmentController {
      */
     @GetMapping(value = "/list")
     public ResultDTO<List<Department>> findAllDepartment() {
-        System.out.println("DepartmentController: " + "查询部门列表");
+        System.out.println("DepartmentController: " + "查询科室列表");
         List<Department> departmentList = departmentService.findAllDepartment();
         return new ResultDTO<>(departmentList);
     }
 
     /**
-     * 新增部门
+     * 新增科室
      *
      * @return 操作结果
      */
     @PostMapping(value = "/add")
     public ResultDTO<Department> addDepartment(@RequestBody Department record) {
-        System.out.println("DepartmentController: " + "新增部门");
+        System.out.println("DepartmentController: " + "新增科室");
         Department added = departmentService.addDepartment(record);
         return new ResultDTO<>(added);
     }
