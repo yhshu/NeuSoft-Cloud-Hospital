@@ -40,9 +40,13 @@ public class DiagnosticCatalogServiceImpl implements DiagnosticCatalogService {
      * @param pageSize    每页大小
      * @return 指定页的疾病信息
      */
-    public PageInfo<Disease> selectDiseaseByPage(int currentPage, int pageSize) {
+    public PageInfo<Disease> selectDiseaseByPage(int currentPage, int pageSize, int diseaseCategoryId) {
         PageHelper.startPage(currentPage, pageSize);
+
         DiseaseExample diseaseExample = new DiseaseExample();
+        DiseaseExample.Criteria criteria=  diseaseExample.createCriteria();
+        criteria.andDiseaseCategoryEqualTo(diseaseCategoryId);
+
         List<Disease> diseaseList = diseaseMapper.selectByExample(diseaseExample);
         return new PageInfo<>(diseaseList);
     }

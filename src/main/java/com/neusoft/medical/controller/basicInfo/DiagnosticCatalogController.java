@@ -38,11 +38,11 @@ public class DiagnosticCatalogController {
      * @return 指定大小和页码的疾病信息
      */
     @GetMapping(value = "/list_disease")
-    public ResultDTO<PageInfo<Disease>> selectDiseaseByPage(@RequestParam(value = "current_page") int currentPage, @RequestParam(value = "page_size") int pageSize) {
+    public ResultDTO<PageInfo<Disease>> selectDiseaseByPage(@RequestParam(value = "current_page") int currentPage, @RequestParam(value = "page_size") int pageSize, @RequestParam(value = "disease_category") int diseaseCategoryId) {
         System.out.println("DiagnosticCatalogController: " + "分页查询疾病信息");
-        System.out.println("currentPage: " + currentPage + ", pageSize: " + pageSize);
+        System.out.println("currentPage: " + currentPage + ", pageSize: " + pageSize + " , diseaseCategoryId: " + diseaseCategoryId);
 
-        PageInfo<Disease> diseasePageInfo = diagnosticCatalogService.selectDiseaseByPage(currentPage, pageSize);
+        PageInfo<Disease> diseasePageInfo = diagnosticCatalogService.selectDiseaseByPage(currentPage, pageSize, diseaseCategoryId);
         return new ResultDTO<>(diseasePageInfo);
     }
 

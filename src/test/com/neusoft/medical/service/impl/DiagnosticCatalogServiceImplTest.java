@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Random;
+
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
@@ -25,6 +27,8 @@ public class DiagnosticCatalogServiceImplTest {
     public void selectDiseaseByPage() {
         int currentPage = 1;
         int pageSize = 20;
-        System.out.println("diagnosticCatalogService: " + diagnosticCatalogService.selectDiseaseByPage(currentPage, pageSize));
+        Random random = new Random();
+        int diseaseCategoryId = random.nextInt();
+        System.out.println("diagnosticCatalogService: " + diagnosticCatalogService.selectDiseaseByPage(currentPage, pageSize, diseaseCategoryId));
     }
 }
