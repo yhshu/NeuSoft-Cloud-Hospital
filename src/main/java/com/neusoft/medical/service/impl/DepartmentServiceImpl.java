@@ -6,7 +6,6 @@ import com.neusoft.medical.bean.DepartmentExample;
 import com.neusoft.medical.dao.ConstantTypeMapper;
 import com.neusoft.medical.dao.DepartmentMapper;
 import com.neusoft.medical.service.DepartmentService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,21 +19,14 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Resource
     private ConstantTypeMapper constantTypeMapper;
 
-    @Autowired
+    @Resource
     private ConstantConverter constantConverter;
 
 
     @Override
     public List<Department> findAllDepartment() {
         DepartmentExample departmentExample = new DepartmentExample();
-        List<Department> departmentList = departmentMapper.selectByExample(departmentExample);
-        // todo 替换科室分类中的常量
-//        try {
-//            constantConverter.listCodeToName((List) departmentList, "DeptCategory", "category");  // 替换科室分类中的常量
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-        return departmentList;
+        return departmentMapper.selectByExample(departmentExample);
     }
 
     @Override
@@ -45,14 +37,16 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public boolean deleteDepartmentByPrimaryKey(int departmentId) {
+    public int deleteDepartmentByPrimaryKey(int[] departmentIdList) {
+        int effectRow = 0;
         try {
-            departmentMapper.deleteByPrimaryKey(departmentId);
+            for (int departmentId : departmentIdList) {
+                effectRow += departmentMapper.deleteByPrimaryKey(departmentId);
+            }
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
         }
-        return true;
+        return effectRow;
     }
 
     @Override

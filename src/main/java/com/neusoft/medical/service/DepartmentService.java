@@ -24,9 +24,9 @@ public interface DepartmentService {
      * 按主键删除科室信息
      *
      * @param key 主键
-     * @return 删除成功 true，失败 false
+     * @return 删除的记录数量
      */
-    boolean deleteDepartmentByPrimaryKey(int departmentId);
+    int deleteDepartmentByPrimaryKey(int[] departmentIdList);
 
     /**
      * 按主键修改科室信息
