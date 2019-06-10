@@ -1,5 +1,6 @@
 package com.neusoft.medical.controller.basicInfo;
 
+import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.Util.database.ConstantConverter;
 import com.neusoft.medical.bean.Department;
 import com.neusoft.medical.dto.ResultDTO;
@@ -8,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Logger;
 
 /**
@@ -30,7 +30,8 @@ public class DepartmentController {
      *
      * @return 科室信息列表
      */
-    @GetMapping(value = "/list")
+    @Deprecated
+    @GetMapping(value = "/list_all_department")
     public ResultDTO<List<Department>> findAllDepartment() {
         System.out.println("DepartmentController: " + "查询科室列表");
         List<Department> departmentList = departmentService.findAllDepartment();
@@ -42,12 +43,12 @@ public class DepartmentController {
      *
      * @return 分页、分类的科室信息列表
      */
-//    @GetMapping(value = "/list")
-//    public ResultDTO<List<Department>> selectDepartment(@RequestParam(value = "current_page") int currentPage
-////            , @RequestParam(value =)
-//                                                        ) {
-//        return null;
-//    }
+    @GetMapping(value = "/list")
+    public ResultDTO<PageInfo<Department>> selectDepartment(@RequestParam(value = "current_page") Integer currentPage, @RequestParam(value = "page_size") Integer pageSize, @RequestParam(value = "department_category", required = false) List<Integer> departmentCategory) {
+        System.out.println("DepartmentController: " + "查询科室列表");
+        PageInfo<Department> departmentList = departmentService.selectDepartment(currentPage, pageSize, departmentCategory);
+        return new ResultDTO<>(departmentList);
+    }
 
     /**
      * 新增科室
@@ -67,7 +68,7 @@ public class DepartmentController {
      * @return 操作结果
      */
     @DeleteMapping(value = "/delete")
-    public ResultDTO<Integer> deleteDepartmentByPrimaryKey(@RequestParam(value = "department_id_list") int[] departmentId) {
+    public ResultDTO<Integer> deleteDepartmentByPrimaryKey(@RequestParam(value = "department_id_list") List<Integer> departmentId) {
         System.out.println("DepartmentController: " + "按主键删除科室信息");
         int res = departmentService.deleteDepartmentByPrimaryKey(departmentId);
         return new ResultDTO<>(res);

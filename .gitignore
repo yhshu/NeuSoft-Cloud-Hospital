@@ -2,5 +2,5 @@
 /target/
 .DS_Store
 */.DS_Store
-CloudHospital.iml
+*.iml
 */db.properties

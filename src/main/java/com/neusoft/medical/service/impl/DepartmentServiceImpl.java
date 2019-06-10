@@ -1,9 +1,9 @@
 package com.neusoft.medical.service.impl;
 
-import com.neusoft.medical.Util.database.ConstantConverter;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.Department;
 import com.neusoft.medical.bean.DepartmentExample;
-import com.neusoft.medical.dao.ConstantTypeMapper;
 import com.neusoft.medical.dao.DepartmentMapper;
 import com.neusoft.medical.service.DepartmentService;
 import org.springframework.stereotype.Service;
@@ -16,17 +16,25 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Resource
     private DepartmentMapper departmentMapper;
 
-    @Resource
-    private ConstantTypeMapper constantTypeMapper;
-
-    @Resource
-    private ConstantConverter constantConverter;
-
-
     @Override
     public List<Department> findAllDepartment() {
         DepartmentExample departmentExample = new DepartmentExample();
         return departmentMapper.selectByExample(departmentExample);
+    }
+
+    @Override
+    public PageInfo<Department> selectDepartment(Integer currentPage, Integer pageSize, List<Integer> departmentCategory) {
+        PageHelper.startPage(currentPage, pageSize);
+
+        DepartmentExample departmentExample = new DepartmentExample();
+        DepartmentExample.Criteria criteria = departmentExample.createCriteria();
+        if (departmentCategory != null) { // 查找指定科室类别的科室信息
+            criteria.andCategoryIn(departmentCategory);
+        }
+
+        List<Department> departmentList = departmentMapper.selectByExample(departmentExample);
+
+        return new PageInfo<>(departmentList);
     }
 
     @Override
@@ -37,15 +45,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public int deleteDepartmentByPrimaryKey(int[] departmentIdList) {
-        int effectRow = 0;
-        try {
-            for (int departmentId : departmentIdList) {
-                effectRow += departmentMapper.deleteByPrimaryKey(departmentId);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public int deleteDepartmentByPrimaryKey(List<Integer> departmentIdList) {
+        DepartmentExample departmentExample = new DepartmentExample();
+        DepartmentExample.Criteria criteria = departmentExample.createCriteria();
+        criteria.andDepartmentIdIn(departmentIdList);
+        int effectRow = departmentMapper.deleteByExample(departmentExample);
+        System.out.println("deleteDepartmentByPrimaryKey 删除记录 " + effectRow + " 项");
         return effectRow;
     }
 
