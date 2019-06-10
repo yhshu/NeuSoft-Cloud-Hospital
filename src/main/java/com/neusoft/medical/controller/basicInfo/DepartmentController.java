@@ -26,26 +26,13 @@ public class DepartmentController {
     private ConstantConverter constantConverter;
 
     /**
-     * 查询科室信息
-     *
-     * @return 科室信息列表
-     */
-    @Deprecated
-    @GetMapping(value = "/list_all_department")
-    public ResultDTO<List<Department>> findAllDepartment() {
-        System.out.println("DepartmentController: " + "查询科室列表");
-        List<Department> departmentList = departmentService.findAllDepartment();
-        return new ResultDTO<>(departmentList);
-    }
-
-    /**
      * 按分类和分页查询科室信息
      *
      * @return 分页、分类的科室信息列表
      */
     @GetMapping(value = "/list")
     public ResultDTO<PageInfo<Department>> selectDepartment(@RequestParam(value = "current_page") Integer currentPage, @RequestParam(value = "page_size") Integer pageSize, @RequestParam(value = "department_category", required = false) List<Integer> departmentCategory) {
-        System.out.println("DepartmentController: " + "查询科室列表");
+        System.out.println("selectDepartment: " + "查询科室列表");
         PageInfo<Department> departmentList = departmentService.selectDepartment(currentPage, pageSize, departmentCategory);
         return new ResultDTO<>(departmentList);
     }
@@ -56,9 +43,9 @@ public class DepartmentController {
      * @return 操作结果
      */
     @PostMapping(value = "/add")
-    public ResultDTO<Department> addDepartment(@RequestBody Department record) {
+    public ResultDTO<Department> addDepartment(@RequestParam(value = "category") Integer category, @RequestParam(value = "departmentCode") String departmentCode, @RequestParam(value = "departmentName") String departmentName) {
         System.out.println("DepartmentController: " + "新增科室");
-        Department added = departmentService.addDepartment(record);
+        Department added = departmentService.addDepartment(new Department(null, departmentCode, departmentName, category, null, 1, null, null, null));
         return new ResultDTO<>(added);
     }
 
@@ -96,5 +83,18 @@ public class DepartmentController {
     public ResultDTO<List> departmentConstMap(@RequestParam(value = "constant_type_code") String constantTypeCode) {
         System.out.println("departmentConstMap: " + "获取科室信息常量表");
         return new ResultDTO<>(constantConverter.getConstantIdToNameList(constantTypeCode));
+    }
+
+    /**
+     * 查询科室信息
+     *
+     * @return 科室信息列表
+     */
+    @Deprecated // 该方法废弃，请使用 selectDepartment 方法
+    @GetMapping(value = "/list_all_department")
+    public ResultDTO<List<Department>> findAllDepartment() {
+        System.out.println("DepartmentController: " + "查询科室列表");
+        List<Department> departmentList = departmentService.findAllDepartment();
+        return new ResultDTO<>(departmentList);
     }
 }
