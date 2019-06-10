@@ -19,6 +19,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public List<Department> findAllDepartment() {
         DepartmentExample departmentExample = new DepartmentExample();
+        DepartmentExample.Criteria criteria = departmentExample.createCriteria();
+        criteria.andValidEqualTo(1);
         return departmentMapper.selectByExample(departmentExample);
     }
 
@@ -28,6 +30,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
         DepartmentExample departmentExample = new DepartmentExample();
         DepartmentExample.Criteria criteria = departmentExample.createCriteria();
+        criteria.andValidEqualTo(1);
         if (departmentCategory != null) { // 查找指定科室类别的科室信息
             criteria.andCategoryIn(departmentCategory);
         }
@@ -46,16 +49,23 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public int deleteDepartmentByPrimaryKey(List<Integer> departmentIdList) {
+        Department record = new Department();
+        record.setValid(0);
+
         DepartmentExample departmentExample = new DepartmentExample();
         DepartmentExample.Criteria criteria = departmentExample.createCriteria();
         criteria.andDepartmentIdIn(departmentIdList);
-        int effectRow = departmentMapper.deleteByExample(departmentExample);
+        criteria.andValidEqualTo(1);  // 仅查找有效的记录
+
+        int effectRow = departmentMapper.updateByExampleSelective(record, departmentExample);
         System.out.println("deleteDepartmentByPrimaryKey 删除记录 " + effectRow + " 项");
         return effectRow;
     }
 
     @Override
     public Department updateDepartmentByPrimaryKey(Department record) {
+        if (record.getValid() == 0)
+            return record;
         int effectRow = departmentMapper.updateByPrimaryKey(record);
         System.out.println("updateDepartmentByPrimaryKey 修改记录 " + effectRow + " 项");
         return departmentMapper.selectByPrimaryKey(record.getDepartmentId());
