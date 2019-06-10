@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class LoginController {
     private Logger log = Logger.getLogger(LoginController.class);
-
     /**
      * 访问首页
      *
@@ -23,7 +22,6 @@ public class LoginController {
     public String index(Model model) {
         return "index";
     }
-
     /**
      * 帐号登录验证
      */
