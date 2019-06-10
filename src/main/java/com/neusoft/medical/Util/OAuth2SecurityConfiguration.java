@@ -13,12 +13,12 @@ public class OAuth2SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Bean
     CorsFilter corsFilter() {
-        CorsFilter filter = new CorsFilter();
-        return filter;
+        return new CorsFilter();
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.addFilterBefore(corsFilter(), SessionManagementFilter.class);
+//        http.addFilterBefore(corsFilter(), SessionManagementFilter.class);
+        http.csrf().disable();
     }
 }

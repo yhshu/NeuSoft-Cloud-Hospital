@@ -1,12 +1,11 @@
 package com.neusoft.medical.service.impl;
 
-import com.neusoft.medical.Util.database.ConstantConverter;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.Department;
 import com.neusoft.medical.bean.DepartmentExample;
-import com.neusoft.medical.dao.ConstantTypeMapper;
 import com.neusoft.medical.dao.DepartmentMapper;
 import com.neusoft.medical.service.DepartmentService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -17,24 +16,25 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Resource
     private DepartmentMapper departmentMapper;
 
-    @Resource
-    private ConstantTypeMapper constantTypeMapper;
-
-    @Autowired
-    private ConstantConverter constantConverter;
-
-
     @Override
     public List<Department> findAllDepartment() {
         DepartmentExample departmentExample = new DepartmentExample();
+        return departmentMapper.selectByExample(departmentExample);
+    }
+
+    @Override
+    public PageInfo<Department> selectDepartment(Integer currentPage, Integer pageSize, List<Integer> departmentCategory) {
+        PageHelper.startPage(currentPage, pageSize);
+
+        DepartmentExample departmentExample = new DepartmentExample();
+        DepartmentExample.Criteria criteria = departmentExample.createCriteria();
+        if (departmentCategory != null) { // 查找指定科室类别的科室信息
+            criteria.andCategoryIn(departmentCategory);
+        }
+
         List<Department> departmentList = departmentMapper.selectByExample(departmentExample);
-        // todo 替换科室分类中的常量
-//        try {
-//            constantConverter.listCodeToName((List) departmentList, "DeptCategory", "category");  // 替换科室分类中的常量
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-        return departmentList;
+
+        return new PageInfo<>(departmentList);
     }
 
     @Override
@@ -45,14 +45,13 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public boolean deleteDepartmentByPrimaryKey(int departmentId) {
-        try {
-            departmentMapper.deleteByPrimaryKey(departmentId);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
+    public int deleteDepartmentByPrimaryKey(List<Integer> departmentIdList) {
+        DepartmentExample departmentExample = new DepartmentExample();
+        DepartmentExample.Criteria criteria = departmentExample.createCriteria();
+        criteria.andDepartmentIdIn(departmentIdList);
+        int effectRow = departmentMapper.deleteByExample(departmentExample);
+        System.out.println("deleteDepartmentByPrimaryKey 删除记录 " + effectRow + " 项");
+        return effectRow;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.neusoft.medical.service;
 
+import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.Department;
 
 import java.util.List;
@@ -13,6 +14,16 @@ public interface DepartmentService {
     List<Department> findAllDepartment();
 
     /**
+     * 分页、分类查找科室信息
+     *
+     * @param currentPage        当前页，不可为空
+     * @param pageSize           页面大小，不可为空
+     * @param departmentCategory 科室类别，可为空，默认为所有科室类别
+     * @return 指定范围的科室信息
+     */
+    PageInfo<Department> selectDepartment(Integer currentPage, Integer pageSize, List<Integer> departmentCategory);
+
+    /**
      * 新增一个科室
      *
      * @param record 新增的科室信息
@@ -23,10 +34,10 @@ public interface DepartmentService {
     /**
      * 按主键删除科室信息
      *
-     * @param key 主键
-     * @return 删除成功 true，失败 false
+     * @param departmentIdList 主键列表
+     * @return 删除的记录数
      */
-    boolean deleteDepartmentByPrimaryKey(int departmentId);
+    int deleteDepartmentByPrimaryKey(List<Integer> departmentIdList);
 
     /**
      * 按主键修改科室信息
