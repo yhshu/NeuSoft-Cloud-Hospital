@@ -8,6 +8,7 @@ import com.neusoft.medical.service.DepartmentService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -55,9 +56,10 @@ public class DepartmentController {
      * @return 操作结果
      */
     @DeleteMapping(value = "/delete")
-    public ResultDTO<Integer> deleteDepartmentByPrimaryKey(@RequestParam(value = "department_id_list") List<Integer> departmentId) {
+    public ResultDTO<Integer> deleteDepartmentByPrimaryKey(@RequestParam(value = "department_id_list[]") Integer[] departmentId){
         System.out.println("DepartmentController: " + "按主键删除科室信息");
-        int res = departmentService.deleteDepartmentByPrimaryKey(departmentId);
+        List<Integer> departmentList = Arrays.asList(departmentId);
+        int res = departmentService.deleteDepartmentByPrimaryKey(departmentList);
         return new ResultDTO<>(res);
     }
 
