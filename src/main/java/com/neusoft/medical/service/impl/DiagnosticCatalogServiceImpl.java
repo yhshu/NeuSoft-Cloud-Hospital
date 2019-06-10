@@ -49,4 +49,6 @@ public class DiagnosticCatalogServiceImpl implements DiagnosticCatalogService {
         List<Disease> diseaseList = diseaseMapper.selectByExample(diseaseExample);
         return new PageInfo<>(diseaseList);
     }
+
+
 }
