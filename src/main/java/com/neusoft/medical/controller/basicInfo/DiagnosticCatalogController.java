@@ -5,11 +5,13 @@ import com.neusoft.medical.bean.Disease;
 import com.neusoft.medical.bean.DiseaseCategory;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.DiagnosticCatalogService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Logger;
 
 /**
@@ -20,9 +22,15 @@ import java.util.logging.Logger;
 public class DiagnosticCatalogController {
     private Logger log = Logger.getLogger(String.valueOf(DiagnosticCatalogController.class));
 
-    @Autowired
+    @Resource
     private DiagnosticCatalogService diagnosticCatalogService;
 
+    /**
+     * 请求所有疾病种类信息
+     * 不分页显示
+     *
+     * @return 所有疾病种类信息
+     */
     @GetMapping(value = "/list_disease_category")
     public ResultDTO<List<DiseaseCategory>> findAllDiseaseCategory() {
         System.out.println("findAllDiseaseCategory: " + "查询疾病分类目录");
@@ -45,5 +53,4 @@ public class DiagnosticCatalogController {
         PageInfo<Disease> diseasePageInfo = diagnosticCatalogService.selectDiseaseByPage(currentPage, pageSize, diseaseCategoryId);
         return new ResultDTO<>(diseasePageInfo);
     }
-
 }

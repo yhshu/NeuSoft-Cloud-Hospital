@@ -9,7 +9,6 @@ import com.neusoft.medical.dao.ConstantTypeMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -42,6 +41,10 @@ public class ConstantConverter {
         List<ConstantItem> constantItemList = getConstantItemList(constantTypeCode);
         return constantItemList.stream().collect(
                 Collectors.toMap(ConstantItem::getConstantItemId, ConstantItem::getConstantName));
+    }
+
+    public List<ConstantItem> getConstantIdToNameList(String constantTypeCode) {
+        return getConstantItemList(constantTypeCode);
     }
 
     public Map<Object, Object> getConstantNameToIdMap(String constantTypeCode) {

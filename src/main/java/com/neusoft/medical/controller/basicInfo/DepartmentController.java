@@ -4,9 +4,9 @@ import com.neusoft.medical.Util.database.ConstantConverter;
 import com.neusoft.medical.bean.Department;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.DepartmentService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -19,10 +19,10 @@ import java.util.logging.Logger;
 public class DepartmentController {
     private Logger log = Logger.getLogger(String.valueOf(DepartmentController.class));
 
-    @Autowired
+    @Resource
     private DepartmentService departmentService;
 
-    @Autowired
+    @Resource
     private ConstantConverter constantConverter;
 
     /**
@@ -36,6 +36,18 @@ public class DepartmentController {
         List<Department> departmentList = departmentService.findAllDepartment();
         return new ResultDTO<>(departmentList);
     }
+
+    /**
+     * 按分类和分页查询科室信息
+     *
+     * @return 分页、分类的科室信息列表
+     */
+//    @GetMapping(value = "/list")
+//    public ResultDTO<List<Department>> selectDepartment(@RequestParam(value = "current_page") int currentPage
+////            , @RequestParam(value =)
+//                                                        ) {
+//        return null;
+//    }
 
     /**
      * 新增科室
@@ -55,9 +67,9 @@ public class DepartmentController {
      * @return 操作结果
      */
     @DeleteMapping(value = "/delete")
-    public ResultDTO<Boolean> deleteDepartmentByPrimaryKey(@RequestParam(value = "department_id") int departmentId) {
+    public ResultDTO<Integer> deleteDepartmentByPrimaryKey(@RequestParam(value = "department_id_list") int[] departmentId) {
         System.out.println("DepartmentController: " + "按主键删除科室信息");
-        Boolean res = departmentService.deleteDepartmentByPrimaryKey(departmentId);
+        int res = departmentService.deleteDepartmentByPrimaryKey(departmentId);
         return new ResultDTO<>(res);
     }
 
@@ -80,8 +92,8 @@ public class DepartmentController {
      * @return 科室信息常量表
      */
     @GetMapping(value = "/const")
-    public ResultDTO<Map> departmentConstMap(@RequestParam(value = "constant_type_code") String constantTypeCode) {
+    public ResultDTO<List> departmentConstMap(@RequestParam(value = "constant_type_code") String constantTypeCode) {
         System.out.println("departmentConstMap: " + "获取科室信息常量表");
-        return new ResultDTO<>(constantConverter.getConstantIdToNameMap(constantTypeCode));
+        return new ResultDTO<>(constantConverter.getConstantIdToNameList(constantTypeCode));
     }
 }
