@@ -17,7 +17,7 @@ public class PatientServiceImpl implements PatientService {
     public Patient selectPatientByIdentifyCardNo(String identifyCardNo) {
         PatientExample patientExample = new PatientExample();
         PatientExample.Criteria criteria = patientExample.createCriteria();
-        // todo criteria.andIdentifyCardNoEqualTo(identifyCardNo);
+        criteria.andIdentifyCardNoEqualTo(identifyCardNo);
         List<Patient> patientList = patientMapper.selectByExample(patientExample);
         if (patientList.size() == 0) return null; // 尚未记录该患者信息
         if (patientList.size() > 1) {

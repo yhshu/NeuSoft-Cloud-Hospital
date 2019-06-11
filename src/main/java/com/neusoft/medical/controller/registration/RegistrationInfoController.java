@@ -43,6 +43,7 @@ public class RegistrationInfoController {
     @RequestMapping("/auto_registration_id")
     public ResultDTO<Integer> registrationId() {
 // todo
+        System.out.println("RegistrationInfoController 生成病历号");
         return null;
     }
 
@@ -54,9 +55,9 @@ public class RegistrationInfoController {
      */
     @RequestMapping("/department_list")
     public ResultDTO<List<Department>> departmentList() {
-// todo
-        return null;
-
+        System.out.println("RegistrationInfoController 获取挂号科室列表");
+        List<Department> departmentList = departmentService.findAllDepartment();
+        return new ResultDTO<>(departmentList);
     }
 
     /**
@@ -67,6 +68,8 @@ public class RegistrationInfoController {
     @RequestMapping("/doctor_list")
     public ResultDTO<List<Doctor>> doctorList() {
 // todo
+        System.out.println("RegistrationInfoController 获取挂号医生列表");
+
         return null;
 
     }
