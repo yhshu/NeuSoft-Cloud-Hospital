@@ -43,12 +43,23 @@ public class DiagnosticCatalogServiceImpl implements DiagnosticCatalogService {
         PageHelper.startPage(currentPage, pageSize);
 
         DiseaseExample diseaseExample = new DiseaseExample();
-        DiseaseExample.Criteria criteria=  diseaseExample.createCriteria();
+        DiseaseExample.Criteria criteria = diseaseExample.createCriteria();
         criteria.andDiseaseCategoryEqualTo(diseaseCategoryId);
 
         List<Disease> diseaseList = diseaseMapper.selectByExample(diseaseExample);
         return new PageInfo<>(diseaseList);
     }
 
-
+    /**
+     * 新增的疾病信息
+     *
+     * @param record 提交的疾病信息
+     * @return 新增的疾病信息
+     */
+    @Override
+    public Disease addDisease(Disease record) {
+        int effectRow = diseaseMapper.insert(record);
+        System.out.println("addDisease 新增记录 " + effectRow + " 项");
+        return diseaseMapper.selectByPrimaryKey(record.getDiseaseId());
+    }
 }

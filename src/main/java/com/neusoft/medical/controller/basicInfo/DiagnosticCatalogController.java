@@ -5,10 +5,7 @@ import com.neusoft.medical.bean.Disease;
 import com.neusoft.medical.bean.DiseaseCategory;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.DiagnosticCatalogService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -61,9 +58,12 @@ public class DiagnosticCatalogController {
      * @param diseaseName     　疾病名称
      * @param diseaseCode     　疾病拼音码
      * @param diseaseCategory 　疾病种类
-     * @return
+     * @return 新增的疾病信息
      */
-    public ResultDTO<Disease> addDisease(@RequestParam(value = "diseaseIcd") String diseaseIcd, @RequestParam(value = "diseaseName") String diseaseName, @RequestParam(value = "dis400easeCode") String diseaseCode, @RequestParam(value = "diseaseCategory") String diseaseCategory) {
-        return null;
+    @PostMapping(value = "/add")
+    public ResultDTO<Disease> addDisease(@RequestParam(value = "diseaseIcd") String diseaseIcd, @RequestParam(value = "diseaseName") String diseaseName, @RequestParam(value = "dis400easeCode") String diseaseCode, @RequestParam(value = "diseaseCategory") Integer diseaseCategory) {
+        System.out.println("addDisease: " + "新增疾病");
+        Disease added = diagnosticCatalogService.addDisease(new Disease(null, diseaseCode, diseaseName, diseaseIcd, diseaseCategory, null));
+        return new ResultDTO<>(added);
     }
 }

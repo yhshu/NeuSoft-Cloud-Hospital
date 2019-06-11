@@ -45,7 +45,7 @@ public class DepartmentController {
      */
     @PostMapping(value = "/add")
     public ResultDTO<Department> addDepartment(@RequestParam(value = "category") Integer category, @RequestParam(value = "departmentCode") String departmentCode, @RequestParam(value = "departmentName") String departmentName) {
-        System.out.println("DepartmentController: " + "新增科室");
+        System.out.println("addDepartment: " + "新增科室");
         Department added = departmentService.addDepartment(new Department(null, departmentCode, departmentName, category, null, 1, null, null, null));
         return new ResultDTO<>(added);
     }
@@ -66,15 +66,16 @@ public class DepartmentController {
     /**
      * 按主键更新科室信息
      *
-     * @param category       　科室类别
-     * @param departmentCode 　科室编码
-     * @param departmentName 　科室名称
+     * @param departmentId   科室编号，主键
+     * @param category       科室类别
+     * @param departmentCode 科室编码
+     * @param departmentName 科室名称
      * @return 更新后的科室信息
      */
     @PutMapping(value = "/update")
-    public ResultDTO<Department> updateDepartmentByPrimaryKey(@RequestParam(value = "category") Integer category, @RequestParam(value = "departmentCode") String departmentCode, @RequestParam(value = "departmentName") String departmentName) {
+    public ResultDTO<Department> updateDepartmentByPrimaryKey(@RequestParam(value = "departmentId") Integer departmentId, @RequestParam(value = "category") Integer category, @RequestParam(value = "departmentCode") String departmentCode, @RequestParam(value = "departmentName") String departmentName) {
         System.out.println("DepartmentController: " + "按主键修改科室信息");
-        Department updated = departmentService.updateDepartmentByPrimaryKey(new Department(null, departmentCode, departmentName, category, null, 1, null, null, null));
+        Department updated = departmentService.updateDepartmentByPrimaryKey(new Department(departmentId, departmentCode, departmentName, category, null, 1, null, null, null));
         return new ResultDTO<>(updated);
     }
 

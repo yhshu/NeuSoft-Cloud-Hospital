@@ -11,4 +11,6 @@ public interface DiagnosticCatalogService {
     List<DiseaseCategory> findAllDiseaseCategory();
 
     PageInfo<Disease> selectDiseaseByPage(int currentPage, int pageSize, int diseaseCategoryId);
+
+    Disease addDisease(Disease record);
 }
