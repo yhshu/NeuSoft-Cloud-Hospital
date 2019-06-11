@@ -862,63 +862,63 @@ public class SchedulingInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andRemianNumsIsNull() {
-            addCriterion("remian_nums is null");
+        public Criteria andremainNumsIsNull() {
+            addCriterion("remain_nums is null");
             return (Criteria) this;
         }
 
-        public Criteria andRemianNumsIsNotNull() {
-            addCriterion("remian_nums is not null");
+        public Criteria andremainNumsIsNotNull() {
+            addCriterion("remain_nums is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRemianNumsEqualTo(Integer value) {
-            addCriterion("remian_nums =", value, "remianNums");
+        public Criteria andremainNumsEqualTo(Integer value) {
+            addCriterion("remain_nums =", value, "remainNums");
             return (Criteria) this;
         }
 
-        public Criteria andRemianNumsNotEqualTo(Integer value) {
-            addCriterion("remian_nums <>", value, "remianNums");
+        public Criteria andremainNumsNotEqualTo(Integer value) {
+            addCriterion("remain_nums <>", value, "remainNums");
             return (Criteria) this;
         }
 
-        public Criteria andRemianNumsGreaterThan(Integer value) {
-            addCriterion("remian_nums >", value, "remianNums");
+        public Criteria andremainNumsGreaterThan(Integer value) {
+            addCriterion("remain_nums >", value, "remainNums");
             return (Criteria) this;
         }
 
-        public Criteria andRemianNumsGreaterThanOrEqualTo(Integer value) {
-            addCriterion("remian_nums >=", value, "remianNums");
+        public Criteria andremainNumsGreaterThanOrEqualTo(Integer value) {
+            addCriterion("remain_nums >=", value, "remainNums");
             return (Criteria) this;
         }
 
-        public Criteria andRemianNumsLessThan(Integer value) {
-            addCriterion("remian_nums <", value, "remianNums");
+        public Criteria andremainNumsLessThan(Integer value) {
+            addCriterion("remain_nums <", value, "remainNums");
             return (Criteria) this;
         }
 
-        public Criteria andRemianNumsLessThanOrEqualTo(Integer value) {
-            addCriterion("remian_nums <=", value, "remianNums");
+        public Criteria andremainNumsLessThanOrEqualTo(Integer value) {
+            addCriterion("remain_nums <=", value, "remainNums");
             return (Criteria) this;
         }
 
-        public Criteria andRemianNumsIn(List<Integer> values) {
-            addCriterion("remian_nums in", values, "remianNums");
+        public Criteria andremainNumsIn(List<Integer> values) {
+            addCriterion("remain_nums in", values, "remainNums");
             return (Criteria) this;
         }
 
-        public Criteria andRemianNumsNotIn(List<Integer> values) {
-            addCriterion("remian_nums not in", values, "remianNums");
+        public Criteria andremainNumsNotIn(List<Integer> values) {
+            addCriterion("remain_nums not in", values, "remainNums");
             return (Criteria) this;
         }
 
-        public Criteria andRemianNumsBetween(Integer value1, Integer value2) {
-            addCriterion("remian_nums between", value1, value2, "remianNums");
+        public Criteria andremainNumsBetween(Integer value1, Integer value2) {
+            addCriterion("remain_nums between", value1, value2, "remainNums");
             return (Criteria) this;
         }
 
-        public Criteria andRemianNumsNotBetween(Integer value1, Integer value2) {
-            addCriterion("remian_nums not between", value1, value2, "remianNums");
+        public Criteria andremainNumsNotBetween(Integer value1, Integer value2) {
+            addCriterion("remain_nums not between", value1, value2, "remainNums");
             return (Criteria) this;
         }
     }
