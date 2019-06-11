@@ -86,7 +86,7 @@ public interface MedicalRecordsMapper {
         "from hospital.medical_records",
         "where medical_records_id = #{medicalRecordsId,jdbcType=INTEGER}"
     })
-    @ResultMap("com.neusoft.medical.dao1.MedicalRecordsMapper.BaseResultMap")
+    @ResultMap("com.neusoft.medical.dao.MedicalRecordsMapper.BaseResultMap")
     MedicalRecords selectByPrimaryKey(Integer medicalRecordsId);
 
     /**

@@ -84,7 +84,7 @@ public interface PathographyMapper {
         "from hospital.pathography",
         "where pathography_id = #{pathographyId,jdbcType=INTEGER}"
     })
-    @ResultMap("com.neusoft.medical.dao1.PathographyMapper.BaseResultMap")
+    @ResultMap("com.neusoft.medical.dao.PathographyMapper.BaseResultMap")
     Pathography selectByPrimaryKey(Integer pathographyId);
 
     /**

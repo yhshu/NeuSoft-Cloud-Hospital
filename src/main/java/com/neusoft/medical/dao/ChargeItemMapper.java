@@ -91,7 +91,7 @@ public interface ChargeItemMapper {
         "from hospital.charge_item",
         "where charge_item_id = #{chargeItemId,jdbcType=INTEGER}"
     })
-    @ResultMap("com.neusoft.medical.dao1.ChargeItemMapper.BaseResultMap")
+    @ResultMap("com.neusoft.medical.dao.ChargeItemMapper.BaseResultMap")
     ChargeItem selectByPrimaryKey(Integer chargeItemId);
 
     /**

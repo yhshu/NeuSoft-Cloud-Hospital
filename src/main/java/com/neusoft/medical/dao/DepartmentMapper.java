@@ -82,7 +82,7 @@ public interface DepartmentMapper {
         "from hospital.department",
         "where department_id = #{departmentId,jdbcType=INTEGER}"
     })
-    @ResultMap("com.neusoft.medical.dao1.DepartmentMapper.BaseResultMap")
+    @ResultMap("com.neusoft.medical.dao.DepartmentMapper.BaseResultMap")
     Department selectByPrimaryKey(Integer departmentId);
 
     /**

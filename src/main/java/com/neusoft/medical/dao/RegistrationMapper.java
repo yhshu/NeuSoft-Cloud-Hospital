@@ -100,7 +100,7 @@ public interface RegistrationMapper {
         "from hospital.registration",
         "where registration_id = #{registrationId,jdbcType=INTEGER}"
     })
-    @ResultMap("com.neusoft.medical.dao1.RegistrationMapper.BaseResultMap")
+    @ResultMap("com.neusoft.medical.dao.RegistrationMapper.BaseResultMap")
     Registration selectByPrimaryKey(Integer registrationId);
 
     /**

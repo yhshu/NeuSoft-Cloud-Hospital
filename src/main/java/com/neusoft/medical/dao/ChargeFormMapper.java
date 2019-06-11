@@ -89,7 +89,7 @@ public interface ChargeFormMapper {
         "from hospital.charge_form",
         "where charge_form_id = #{chargeFormId,jdbcType=INTEGER}"
     })
-    @ResultMap("com.neusoft.medical.dao1.ChargeFormMapper.BaseResultMap")
+    @ResultMap("com.neusoft.medical.dao.ChargeFormMapper.BaseResultMap")
     ChargeForm selectByPrimaryKey(Integer chargeFormId);
 
     /**

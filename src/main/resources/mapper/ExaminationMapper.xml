@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.neusoft.medical.dao1.ExaminationMapper">
+<mapper namespace="com.neusoft.medical.dao.ExaminationMapper">
   <resultMap id="BaseResultMap" type="com.neusoft.medical.bean.Examination">
     <!--
       WARNING - @mbg.generated

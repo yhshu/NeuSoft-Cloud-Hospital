@@ -77,7 +77,7 @@ public interface ConstantTypeMapper {
         "from hospital.constant_type",
         "where constant_type_id = #{constantTypeId,jdbcType=INTEGER}"
     })
-    @ResultMap("com.neusoft.medical.dao1.ConstantTypeMapper.BaseResultMap")
+    @ResultMap("com.neusoft.medical.dao.ConstantTypeMapper.BaseResultMap")
     ConstantType selectByPrimaryKey(Integer constantTypeId);
 
     /**

@@ -84,7 +84,7 @@ public interface SchedulingInfoMapper {
         "from hospital.scheduling_info",
         "where scheduling_info_id = #{schedulingInfoId,jdbcType=INTEGER}"
     })
-    @ResultMap("com.neusoft.medical.dao1.SchedulingInfoMapper.BaseResultMap")
+    @ResultMap("com.neusoft.medical.dao.SchedulingInfoMapper.BaseResultMap")
     SchedulingInfo selectByPrimaryKey(Integer schedulingInfoId);
 
     /**

@@ -82,7 +82,7 @@ public interface StaffMapper {
         "from hospital.staff",
         "where staff_id = #{staffId,jdbcType=INTEGER}"
     })
-    @ResultMap("com.neusoft.medical.dao1.StaffMapper.BaseResultMap")
+    @ResultMap("com.neusoft.medical.dao.StaffMapper.BaseResultMap")
     Staff selectByPrimaryKey(Integer staffId);
 
     /**

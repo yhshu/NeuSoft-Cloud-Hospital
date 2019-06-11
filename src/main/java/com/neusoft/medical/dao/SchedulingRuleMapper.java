@@ -86,7 +86,7 @@ public interface SchedulingRuleMapper {
         "from hospital.scheduling_rule",
         "where scheduling_rule_id = #{schedulingRuleId,jdbcType=INTEGER}"
     })
-    @ResultMap("com.neusoft.medical.dao1.SchedulingRuleMapper.BaseResultMap")
+    @ResultMap("com.neusoft.medical.dao.SchedulingRuleMapper.BaseResultMap")
     SchedulingRule selectByPrimaryKey(Integer schedulingRuleId);
 
     /**

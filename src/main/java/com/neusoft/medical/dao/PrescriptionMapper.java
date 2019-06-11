@@ -84,7 +84,7 @@ public interface PrescriptionMapper {
         "from hospital.prescription",
         "where presciption_id = #{presciptionId,jdbcType=INTEGER}"
     })
-    @ResultMap("com.neusoft.medical.dao1.PrescriptionMapper.BaseResultMap")
+    @ResultMap("com.neusoft.medical.dao.PrescriptionMapper.BaseResultMap")
     Prescription selectByPrimaryKey(Integer presciptionId);
 
     /**

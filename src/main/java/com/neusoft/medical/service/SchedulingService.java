@@ -9,5 +9,11 @@ import java.util.List;
  */
 public interface SchedulingService {
 
-    List<Doctor> findCurrentAvailableDoctor();
+    /**
+     * 找到指定科室的当前被排班的医生列表
+     *
+     * @param departmentId 科室编号
+     * @return 可用医生列表
+     */
+    List<Doctor> findCurrentAvailableDoctor(int departmentId);
 }

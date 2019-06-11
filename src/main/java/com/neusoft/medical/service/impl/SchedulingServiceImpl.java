@@ -11,11 +11,11 @@ public class SchedulingServiceImpl implements SchedulingService {
 
 
     @Override
-    public List<Doctor> findCurrentAvailableDoctor() {
+    public List<Doctor> findCurrentAvailableDoctor(int departmentId) {
         DoctorExample doctorExample = new DoctorExample();
         DoctorExample.Criteria criteria = doctorExample.createCriteria();
         criteria.andValidEqualTo(1);
-
+//        criteria.and
         return null;
     }
 }

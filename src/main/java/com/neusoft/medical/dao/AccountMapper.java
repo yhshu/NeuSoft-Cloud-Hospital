@@ -81,7 +81,7 @@ public interface AccountMapper {
         "from hospital.account",
         "where account_id = #{accountId,jdbcType=INTEGER}"
     })
-    @ResultMap("com.neusoft.medical.dao1.AccountMapper.BaseResultMap")
+    @ResultMap("com.neusoft.medical.dao.AccountMapper.BaseResultMap")
     Account selectByPrimaryKey(Integer accountId);
 
     /**
