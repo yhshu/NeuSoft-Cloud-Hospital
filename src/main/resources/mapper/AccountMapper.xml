@@ -15,7 +15,7 @@
       <arg column="reserve1" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="reserve2" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="reserve3" jdbcType="VARCHAR" javaType="java.lang.String" />
-    </constructor>x
+    </constructor>
   </resultMap>
   <sql id="Example_Where_Clause" >
     <!--
