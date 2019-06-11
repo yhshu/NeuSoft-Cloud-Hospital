@@ -24,9 +24,6 @@ public class RegistrationInfoController {
     private RegistrationInfoService registrationInfoService;
 
     @Resource
-    private DoctorService doctorService;
-
-    @Resource
     private DepartmentService departmentService;
 
     @Resource
@@ -40,7 +37,7 @@ public class RegistrationInfoController {
      *
      * @return 可挂号的科室列表
      */
-    @GetMapping("/department_list")
+    @GetMapping("/list_department")
     public ResultDTO<List<Department>> departmentList() {
         System.out.println("RegistrationInfoController 获取挂号科室列表");
         List<Department> departmentList = departmentService.findAllDepartment();
@@ -52,7 +49,7 @@ public class RegistrationInfoController {
      *
      * @return 可挂号的医生列表
      */
-    @GetMapping("/doctor_list")
+    @GetMapping("/list_doctor")
     public ResultDTO<List<Doctor>> doctorList(@RequestParam("departmentId") Integer departmentId) {
         System.out.println("RegistrationInfoController 获取挂号医生列表");
         List<Doctor> doctorList = schedulingService.findCurrentAvailableDoctor(departmentId);
@@ -79,7 +76,7 @@ public class RegistrationInfoController {
     /**
      * 提交挂号信息
      */
-    @PostMapping("/register")
+    @PostMapping("/add_registration")
     public ResultDTO<Boolean> register(
             @RequestParam(value = "registrationId") Integer registrationId,
             @RequestParam(value = "patientName") String patientName,
@@ -102,7 +99,8 @@ public class RegistrationInfoController {
         System.out.println("提交挂号信息");
         registrationInfoService.addRegistration(
                 new Registration(registrationId, patientName, null, gender, age, birthday, registrationCategory, medicalCategory, identityCardNo, registrationStatus, visitDate, registrationDate, departmentId, doctorId, registrationSource, settleAccountsCategory, isVisited, 1, familyAddress, collectorId, null, null, null, null));
-// todo
+// todo 尚未测试
         return null;
     }
+
 }
