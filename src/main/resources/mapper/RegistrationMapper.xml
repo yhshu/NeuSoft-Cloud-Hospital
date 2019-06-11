@@ -16,7 +16,7 @@
       <arg column="birthday" javaType="java.util.Date" jdbcType="DATE" />
       <arg column="registration_category" javaType="java.lang.String" jdbcType="CHAR" />
       <arg column="medical_category" javaType="java.lang.String" jdbcType="CHAR" />
-      <arg column="identity_card_no" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="identity_card_no" javaType="java.lang.String" jdbcType="CHAR" />
       <arg column="registration_status" javaType="java.lang.String" jdbcType="CHAR" />
       <arg column="visit_date" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="registration_date" javaType="java.util.Date" jdbcType="TIMESTAMP" />

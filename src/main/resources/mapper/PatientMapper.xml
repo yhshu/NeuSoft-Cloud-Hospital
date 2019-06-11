@@ -12,7 +12,7 @@
       <arg column="patient_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="birth_date" javaType="java.util.Date" jdbcType="DATE" />
       <arg column="allergies" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="identify_card_no" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="identify_card_no" javaType="java.lang.String" jdbcType="CHAR" />
       <arg column="social_security_card_no" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="family_address" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="gender" javaType="java.lang.String" jdbcType="CHAR" />

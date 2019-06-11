@@ -82,7 +82,7 @@ public class Registration {
      *
      * @mbg.generated Mon Jun 10 18:44:57 CST 2019
      */
-    private Long identityCardNo;
+    private String identityCardNo;
 
     /**
      *
@@ -225,7 +225,7 @@ public class Registration {
      *
      * @mbg.generated Mon Jun 10 18:44:57 CST 2019
      */
-    public Registration(Integer registrationId, String patientName, Integer patientId, String gender, Integer age, Date birthday, String registrationCategory, String medicalCategory, Long identityCardNo, String registrationStatus, Date visitDate, Date registrationDate, Integer departmentId, Integer doctorId, String registrationSource, String settleAccountsCategory, String isVisited, Integer valid, String familyAddress, Integer collectorId, Integer totalCharge, String reserve1, String reserve2, String reserve3) {
+    public Registration(Integer registrationId, String patientName, Integer patientId, String gender, Integer age, Date birthday, String registrationCategory, String medicalCategory, String identityCardNo, String registrationStatus, Date visitDate, Date registrationDate, Integer departmentId, Integer doctorId, String registrationSource, String settleAccountsCategory, String isVisited, Integer valid, String familyAddress, Integer collectorId, Integer totalCharge, String reserve1, String reserve2, String reserve3) {
         this.registrationId = registrationId;
         this.patientName = patientName;
         this.patientId = patientId;
@@ -462,7 +462,7 @@ public class Registration {
      *
      * @mbg.generated Mon Jun 10 18:44:57 CST 2019
      */
-    public Long getIdentityCardNo() {
+    public String getIdentityCardNo() {
         return identityCardNo;
     }
 
@@ -474,7 +474,7 @@ public class Registration {
      *
      * @mbg.generated Mon Jun 10 18:44:57 CST 2019
      */
-    public void setIdentityCardNo(Long identityCardNo) {
+    public void setIdentityCardNo(String identityCardNo) {
         this.identityCardNo = identityCardNo;
     }
 
