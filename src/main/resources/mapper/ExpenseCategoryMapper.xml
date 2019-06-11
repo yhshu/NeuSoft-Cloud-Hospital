@@ -214,4 +214,217 @@
     </set>
     where expense_category_id = #{expenseCategoryId,jdbcType=INTEGER}
   </update>
+  <resultMap id="BaseResultMap" type="com.neusoft.medical.bean.ExpenseCategory">
+    <constructor>
+      <idArg column="expense_category_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="expense_code" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="expense_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="reserve3" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    expense_category_id, expense_code, expense_name, valid, reserve1, reserve2, reserve3
+  </sql>
+  <select id="selectByExample" parameterType="com.neusoft.medical.bean.ExpenseCategoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hospital.expense_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.ExpenseCategoryExample">
+    delete from hospital.expense_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="com.neusoft.medical.bean.ExpenseCategory">
+    insert into hospital.expense_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="expenseCategoryId != null">
+        expense_category_id,
+      </if>
+      <if test="expenseCode != null">
+        expense_code,
+      </if>
+      <if test="expenseName != null">
+        expense_name,
+      </if>
+      <if test="valid != null">
+        valid,
+      </if>
+      <if test="reserve1 != null">
+        reserve1,
+      </if>
+      <if test="reserve2 != null">
+        reserve2,
+      </if>
+      <if test="reserve3 != null">
+        reserve3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="expenseCategoryId != null">
+        #{expenseCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="expenseCode != null">
+        #{expenseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="expenseName != null">
+        #{expenseName,jdbcType=VARCHAR},
+      </if>
+      <if test="valid != null">
+        #{valid,jdbcType=INTEGER},
+      </if>
+      <if test="reserve1 != null">
+        #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null">
+        #{reserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve3 != null">
+        #{reserve3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.neusoft.medical.bean.ExpenseCategoryExample" resultType="java.lang.Long">
+    select count(*) from hospital.expense_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update hospital.expense_category
+    <set>
+      <if test="record.expenseCategoryId != null">
+        expense_category_id = #{record.expenseCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="record.expenseCode != null">
+        expense_code = #{record.expenseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expenseName != null">
+        expense_name = #{record.expenseName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.valid != null">
+        valid = #{record.valid,jdbcType=INTEGER},
+      </if>
+      <if test="record.reserve1 != null">
+        reserve1 = #{record.reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserve2 != null">
+        reserve2 = #{record.reserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserve3 != null">
+        reserve3 = #{record.reserve3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update hospital.expense_category
+    set expense_category_id = #{record.expenseCategoryId,jdbcType=INTEGER},
+      expense_code = #{record.expenseCode,jdbcType=VARCHAR},
+      expense_name = #{record.expenseName,jdbcType=VARCHAR},
+      valid = #{record.valid,jdbcType=INTEGER},
+      reserve1 = #{record.reserve1,jdbcType=VARCHAR},
+      reserve2 = #{record.reserve2,jdbcType=VARCHAR},
+      reserve3 = #{record.reserve3,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.ExpenseCategory">
+    update hospital.expense_category
+    <set>
+      <if test="expenseCode != null">
+        expense_code = #{expenseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="expenseName != null">
+        expense_name = #{expenseName,jdbcType=VARCHAR},
+      </if>
+      <if test="valid != null">
+        valid = #{valid,jdbcType=INTEGER},
+      </if>
+      <if test="reserve1 != null">
+        reserve1 = #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null">
+        reserve2 = #{reserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve3 != null">
+        reserve3 = #{reserve3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where expense_category_id = #{expenseCategoryId,jdbcType=INTEGER}
+  </update>
 </mapper>

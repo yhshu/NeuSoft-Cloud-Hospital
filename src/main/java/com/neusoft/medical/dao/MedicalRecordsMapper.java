@@ -25,15 +25,15 @@ public interface MedicalRecordsMapper {
         "insert into hospital.medical_records (medical_records_id, registration_id, ",
         "main_info, current_disease, ",
         "current_treatment, preliminary_western, ",
-        "preliminary_chinese, valid, ",
-        "reserve1, reserve2, ",
-        "reserve3)",
+        "preliminary_chinese, case_no, ",
+        "valid, reserve1, ",
+        "reserve2, reserve3)",
         "values (#{medicalRecordsId,jdbcType=INTEGER}, #{registrationId,jdbcType=INTEGER}, ",
         "#{mainInfo,jdbcType=VARCHAR}, #{currentDisease,jdbcType=VARCHAR}, ",
         "#{currentTreatment,jdbcType=VARCHAR}, #{preliminaryWestern,jdbcType=VARCHAR}, ",
-        "#{preliminaryChinese,jdbcType=VARCHAR}, #{valid,jdbcType=INTEGER}, ",
-        "#{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, ",
-        "#{reserve3,jdbcType=VARCHAR})"
+        "#{preliminaryChinese,jdbcType=VARCHAR}, #{caseNo,jdbcType=VARCHAR}, ",
+        "#{valid,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
+        "#{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR})"
     })
     int insert(MedicalRecords record);
 
@@ -44,7 +44,8 @@ public interface MedicalRecordsMapper {
     @Select({
         "select",
         "medical_records_id, registration_id, main_info, current_disease, current_treatment, ",
-        "preliminary_western, preliminary_chinese, valid, reserve1, reserve2, reserve3",
+        "preliminary_western, preliminary_chinese, case_no, valid, reserve1, reserve2, ",
+        "reserve3",
         "from hospital.medical_records",
         "where medical_records_id = #{medicalRecordsId,jdbcType=INTEGER}"
     })
@@ -65,6 +66,7 @@ public interface MedicalRecordsMapper {
           "current_treatment = #{currentTreatment,jdbcType=VARCHAR},",
           "preliminary_western = #{preliminaryWestern,jdbcType=VARCHAR},",
           "preliminary_chinese = #{preliminaryChinese,jdbcType=VARCHAR},",
+          "case_no = #{caseNo,jdbcType=VARCHAR},",
           "valid = #{valid,jdbcType=INTEGER},",
           "reserve1 = #{reserve1,jdbcType=VARCHAR},",
           "reserve2 = #{reserve2,jdbcType=VARCHAR},",
