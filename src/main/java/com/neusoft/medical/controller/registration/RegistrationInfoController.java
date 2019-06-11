@@ -1,13 +1,8 @@
 package com.neusoft.medical.controller.registration;
 
-import com.neusoft.medical.bean.Department;
-import com.neusoft.medical.bean.Doctor;
-import com.neusoft.medical.bean.Patient;
+import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dto.ResultDTO;
-import com.neusoft.medical.service.DepartmentService;
-import com.neusoft.medical.service.DoctorService;
-import com.neusoft.medical.service.PatientService;
-import com.neusoft.medical.service.RegistrationInfoService;
+import com.neusoft.medical.service.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,6 +30,9 @@ public class RegistrationInfoController {
 
     @Resource
     private PatientService patientService;
+
+    @Resource
+    private SchedulingService schedulingService;
 
     /**
      * 获取挂号科室列表
@@ -99,10 +97,11 @@ public class RegistrationInfoController {
             @RequestParam(value = "settleAccountsCategory") String settleAccountsCategory,
             @RequestParam(value = "isVisited") String isVisited,
             @RequestParam(value = "familyAddress") String familyAddress,
-            @RequestParam(value = "collectorId") String collectorId) {
+            @RequestParam(value = "collectorId") Integer collectorId) {
         System.out.println("提交挂号信息");
+        registrationInfoService.addRegistration(
+                new Registration(registrationId, patientName, null, gender, age, birthday, registrationCategory, medicalCategory, identityCardNo, registrationStatus, visitDate, registrationDate, departmentId, doctorId, registrationSource, settleAccountsCategory, isVisited, 1, familyAddress, collectorId, null, null, null, null));
 // todo
-
         return null;
     }
 }

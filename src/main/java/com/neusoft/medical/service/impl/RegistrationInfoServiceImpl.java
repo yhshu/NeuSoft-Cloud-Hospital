@@ -1,9 +1,21 @@
 package com.neusoft.medical.service.impl;
 
+import com.neusoft.medical.bean.Registration;
+import com.neusoft.medical.dao.RegistrationMapper;
 import com.neusoft.medical.service.RegistrationInfoService;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 @Service
 public class RegistrationInfoServiceImpl implements RegistrationInfoService {
-    // todo
+    @Resource
+    private RegistrationMapper registrationMapper;
+
+    @Override
+    public Registration addRegistration(Registration record) {
+        int effectRow = registrationMapper.insert(record);
+        System.out.println("RegistrationInfoServiceImpl register " + effectRow + " 项");
+        return registrationMapper.selectByPrimaryKey(record.getRegistrationId());
+    }
 }
