@@ -5,12 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 帐户登录控制器
  */
-@CrossOrigin(maxAge = 3600)
-@Controller
+@RestController
 public class LoginController {
     private Logger log = Logger.getLogger(LoginController.class);
 
