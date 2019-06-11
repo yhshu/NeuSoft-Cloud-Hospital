@@ -27,7 +27,7 @@ public class DiagnosticCatalogController {
 
     /**
      * 请求所有疾病种类信息
-     * 不分页显示
+     * 按需求不分页显示
      *
      * @return 所有疾病种类信息
      */
@@ -52,5 +52,18 @@ public class DiagnosticCatalogController {
 
         PageInfo<Disease> diseasePageInfo = diagnosticCatalogService.selectDiseaseByPage(currentPage, pageSize, diseaseCategoryId);
         return new ResultDTO<>(diseasePageInfo);
+    }
+
+    /**
+     * 添加疾病信息
+     *
+     * @param diseaseIcd      　疾病编码
+     * @param diseaseName     　疾病名称
+     * @param diseaseCode     　疾病拼音码
+     * @param diseaseCategory 　疾病种类
+     * @return
+     */
+    public ResultDTO<Disease> addDisease(@RequestParam(value = "diseaseIcd") String diseaseIcd, @RequestParam(value = "diseaseName") String diseaseName, @RequestParam(value = "dis400easeCode") String diseaseCode, @RequestParam(value = "diseaseCategory") String diseaseCategory) {
+        return null;
     }
 }

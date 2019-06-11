@@ -12,6 +12,10 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 @MapperScan(basePackages = "com.neusoft.medical.dao")
 public class CloudHospitalApplication {
+
+    /**
+     * 允许传输特定字符
+     */
     @Bean
     public ConfigurableServletWebServerFactory webServerFactory() {
         TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory();
