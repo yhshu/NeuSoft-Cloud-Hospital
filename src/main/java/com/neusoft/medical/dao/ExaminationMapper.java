@@ -16,13 +16,13 @@ public interface ExaminationMapper {
     int deleteByExample(ExaminationExample example);
 
     @Delete({
-        "delete from hospital..examination",
+        "delete from hospital.examination",
         "where examination_id = #{examinationId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer examinationId);
 
     @Insert({
-        "insert into hospital..examination (examination_id, registration_name, ",
+        "insert into hospital.examination (examination_id, registration_name, ",
         "registration_id, charge_item_id, ",
         "result, doctor_id, ",
         "department_id, reserve1, ",
@@ -45,7 +45,7 @@ public interface ExaminationMapper {
         "select",
         "examination_id, registration_name, registration_id, charge_item_id, result, ",
         "doctor_id, department_id, reserve1, reserve2, reserve3, valid",
-        "from hospital..examination",
+        "from hospital.examination",
         "where examination_id = #{examinationId,jdbcType=INTEGER}"
     })
     @ResultMap("com.neusoft.medical.dao.ExaminationMapper.BaseResultMap")
@@ -58,7 +58,7 @@ public interface ExaminationMapper {
     int updateByPrimaryKeySelective(Examination record);
 
     @Update({
-        "update hospital..examination",
+        "update hospital.examination",
         "set registration_name = #{registrationName,jdbcType=VARCHAR},",
           "registration_id = #{registrationId,jdbcType=INTEGER},",
           "charge_item_id = #{chargeItemId,jdbcType=INTEGER},",

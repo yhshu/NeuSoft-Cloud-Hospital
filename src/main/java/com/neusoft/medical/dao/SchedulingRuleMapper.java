@@ -16,13 +16,13 @@ public interface SchedulingRuleMapper {
     int deleteByExample(SchedulingRuleExample example);
 
     @Delete({
-        "delete from hospital..scheduling_rule",
+        "delete from hospital.scheduling_rule",
         "where scheduling_rule_id = #{schedulingRuleId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer schedulingRuleId);
 
     @Insert({
-        "insert into hospital..scheduling_rule (scheduling_rule_id, week_day, ",
+        "insert into hospital.scheduling_rule (scheduling_rule_id, week_day, ",
         "department_id, department_name, ",
         "doctor_id, doctor_name, ",
         "type, valid, period, ",
@@ -45,7 +45,7 @@ public interface SchedulingRuleMapper {
         "select",
         "scheduling_rule_id, week_day, department_id, department_name, doctor_id, doctor_name, ",
         "type, valid, period, limitation, operator_id, operator_name, operating_date",
-        "from hospital..scheduling_rule",
+        "from hospital.scheduling_rule",
         "where scheduling_rule_id = #{schedulingRuleId,jdbcType=INTEGER}"
     })
     @ResultMap("com.neusoft.medical.dao.SchedulingRuleMapper.BaseResultMap")
@@ -58,7 +58,7 @@ public interface SchedulingRuleMapper {
     int updateByPrimaryKeySelective(SchedulingRule record);
 
     @Update({
-        "update hospital..scheduling_rule",
+        "update hospital.scheduling_rule",
         "set week_day = #{weekDay,jdbcType=VARCHAR},",
           "department_id = #{departmentId,jdbcType=INTEGER},",
           "department_name = #{departmentName,jdbcType=VARCHAR},",

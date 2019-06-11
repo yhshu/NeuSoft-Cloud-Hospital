@@ -16,13 +16,13 @@ public interface DoctorMapper {
     int deleteByExample(DoctorExample example);
 
     @Delete({
-        "delete from hospital..doctor",
+        "delete from hospital.doctor",
         "where doctor_id = #{doctorId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer doctorId);
 
     @Insert({
-        "insert into hospital..doctor (doctor_id, doctor_name, ",
+        "insert into hospital.doctor (doctor_id, doctor_name, ",
         "department, type, ",
         "job_title, account_id, ",
         "valid, doctor_scheduling, ",
@@ -45,7 +45,7 @@ public interface DoctorMapper {
         "select",
         "doctor_id, doctor_name, department, type, job_title, account_id, valid, doctor_scheduling, ",
         "reserve1, reserve2, reserve3",
-        "from hospital..doctor",
+        "from hospital.doctor",
         "where doctor_id = #{doctorId,jdbcType=INTEGER}"
     })
     @ResultMap("com.neusoft.medical.dao.DoctorMapper.BaseResultMap")
@@ -58,7 +58,7 @@ public interface DoctorMapper {
     int updateByPrimaryKeySelective(Doctor record);
 
     @Update({
-        "update hospital..doctor",
+        "update hospital.doctor",
         "set doctor_name = #{doctorName,jdbcType=VARCHAR},",
           "department = #{department,jdbcType=INTEGER},",
           "type = #{type,jdbcType=INTEGER},",

@@ -16,13 +16,13 @@ public interface DiseaseMapper {
     int deleteByExample(DiseaseExample example);
 
     @Delete({
-        "delete from hospital..disease",
+        "delete from hospital.disease",
         "where disease_id = #{diseaseId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer diseaseId);
 
     @Insert({
-        "insert into hospital..disease (disease_id, disease_code, ",
+        "insert into hospital.disease (disease_id, disease_code, ",
         "disease_name, disease_ICD, ",
         "disease_category, valid)",
         "values (#{diseaseId,jdbcType=INTEGER}, #{diseaseCode,jdbcType=VARCHAR}, ",
@@ -38,7 +38,7 @@ public interface DiseaseMapper {
     @Select({
         "select",
         "disease_id, disease_code, disease_name, disease_ICD, disease_category, valid",
-        "from hospital..disease",
+        "from hospital.disease",
         "where disease_id = #{diseaseId,jdbcType=INTEGER}"
     })
     @ResultMap("com.neusoft.medical.dao.DiseaseMapper.BaseResultMap")
@@ -51,7 +51,7 @@ public interface DiseaseMapper {
     int updateByPrimaryKeySelective(Disease record);
 
     @Update({
-        "update hospital..disease",
+        "update hospital.disease",
         "set disease_code = #{diseaseCode,jdbcType=VARCHAR},",
           "disease_name = #{diseaseName,jdbcType=VARCHAR},",
           "disease_ICD = #{diseaseIcd,jdbcType=VARCHAR},",

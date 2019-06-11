@@ -84,7 +84,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hospital..examination
+    from hospital.examination
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -93,13 +93,13 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.ExaminationExample">
-    delete from hospital..examination
+    delete from hospital.examination
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insertSelective" parameterType="com.neusoft.medical.bean.Examination">
-    insert into hospital..examination
+    insert into hospital.examination
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="examinationId != null">
         examination_id,
@@ -172,13 +172,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.neusoft.medical.bean.ExaminationExample" resultType="java.lang.Long">
-    select count(*) from hospital..examination
+    select count(*) from hospital.examination
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update hospital..examination
+    update hospital.examination
     <set>
       <if test="record.examinationId != null">
         examination_id = #{record.examinationId,jdbcType=INTEGER},
@@ -219,7 +219,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update hospital..examination
+    update hospital.examination
     set examination_id = #{record.examinationId,jdbcType=INTEGER},
       registration_name = #{record.registrationName,jdbcType=VARCHAR},
       registration_id = #{record.registrationId,jdbcType=INTEGER},
@@ -236,7 +236,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.Examination">
-    update hospital..examination
+    update hospital.examination
     <set>
       <if test="registrationName != null">
         registration_name = #{registrationName,jdbcType=VARCHAR},

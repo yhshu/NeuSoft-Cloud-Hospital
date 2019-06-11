@@ -91,7 +91,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hospital..charge_item
+    from hospital.charge_item
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -100,13 +100,13 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.ChargeItemExample">
-    delete from hospital..charge_item
+    delete from hospital.charge_item
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insertSelective" parameterType="com.neusoft.medical.bean.ChargeItem">
-    insert into hospital..charge_item
+    insert into hospital.charge_item
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="chargeItemId != null">
         charge_item_id,
@@ -215,13 +215,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.neusoft.medical.bean.ChargeItemExample" resultType="java.lang.Long">
-    select count(*) from hospital..charge_item
+    select count(*) from hospital.charge_item
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update hospital..charge_item
+    update hospital.charge_item
     <set>
       <if test="record.chargeItemId != null">
         charge_item_id = #{record.chargeItemId,jdbcType=INTEGER},
@@ -280,7 +280,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update hospital..charge_item
+    update hospital.charge_item
     set charge_item_id = #{record.chargeItemId,jdbcType=INTEGER},
       charge_item_code = #{record.chargeItemCode,jdbcType=VARCHAR},
       name_zh = #{record.nameZh,jdbcType=VARCHAR},
@@ -303,7 +303,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.ChargeItem">
-    update hospital..charge_item
+    update hospital.charge_item
     <set>
       <if test="chargeItemCode != null">
         charge_item_code = #{chargeItemCode,jdbcType=VARCHAR},

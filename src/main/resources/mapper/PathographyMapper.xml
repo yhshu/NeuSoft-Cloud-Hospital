@@ -83,7 +83,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hospital..pathography
+    from hospital.pathography
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -92,13 +92,13 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.PathographyExample">
-    delete from hospital..pathography
+    delete from hospital.pathography
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insertSelective" parameterType="com.neusoft.medical.bean.Pathography">
-    insert into hospital..pathography
+    insert into hospital.pathography
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="pathographyId != null">
         pathography_id,
@@ -165,13 +165,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.neusoft.medical.bean.PathographyExample" resultType="java.lang.Long">
-    select count(*) from hospital..pathography
+    select count(*) from hospital.pathography
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update hospital..pathography
+    update hospital.pathography
     <set>
       <if test="record.pathographyId != null">
         pathography_id = #{record.pathographyId,jdbcType=INTEGER},
@@ -209,7 +209,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update hospital..pathography
+    update hospital.pathography
     set pathography_id = #{record.pathographyId,jdbcType=INTEGER},
       patient_id = #{record.patientId,jdbcType=INTEGER},
       physical_examination = #{record.physicalExamination,jdbcType=VARCHAR},
@@ -225,7 +225,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.Pathography">
-    update hospital..pathography
+    update hospital.pathography
     <set>
       <if test="patientId != null">
         patient_id = #{patientId,jdbcType=INTEGER},

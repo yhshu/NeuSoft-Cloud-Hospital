@@ -86,7 +86,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hospital..scheduling_rule
+    from hospital.scheduling_rule
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -95,13 +95,13 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.SchedulingRuleExample">
-    delete from hospital..scheduling_rule
+    delete from hospital.scheduling_rule
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insertSelective" parameterType="com.neusoft.medical.bean.SchedulingRule">
-    insert into hospital..scheduling_rule
+    insert into hospital.scheduling_rule
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="schedulingRuleId != null">
         scheduling_rule_id,
@@ -186,13 +186,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.neusoft.medical.bean.SchedulingRuleExample" resultType="java.lang.Long">
-    select count(*) from hospital..scheduling_rule
+    select count(*) from hospital.scheduling_rule
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update hospital..scheduling_rule
+    update hospital.scheduling_rule
     <set>
       <if test="record.schedulingRuleId != null">
         scheduling_rule_id = #{record.schedulingRuleId,jdbcType=INTEGER},
@@ -239,7 +239,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update hospital..scheduling_rule
+    update hospital.scheduling_rule
     set scheduling_rule_id = #{record.schedulingRuleId,jdbcType=INTEGER},
       week_day = #{record.weekDay,jdbcType=VARCHAR},
       department_id = #{record.departmentId,jdbcType=INTEGER},
@@ -258,7 +258,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.SchedulingRule">
-    update hospital..scheduling_rule
+    update hospital.scheduling_rule
     <set>
       <if test="weekDay != null">
         week_day = #{weekDay,jdbcType=VARCHAR},

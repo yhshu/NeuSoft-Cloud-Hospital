@@ -16,13 +16,13 @@ public interface RegistrationMapper {
     int deleteByExample(RegistrationExample example);
 
     @Delete({
-        "delete from hospital..registration",
+        "delete from hospital.registration",
         "where registration_id = #{registrationId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer registrationId);
 
     @Insert({
-        "insert into hospital..registration (registration_id, patient_name, ",
+        "insert into hospital.registration (registration_id, patient_name, ",
         "patient_id, gender, ",
         "age, birthday, registration_category, ",
         "medical_category, identity_card_no, ",
@@ -59,7 +59,7 @@ public interface RegistrationMapper {
         "medical_category, identity_card_no, registration_status, visit_date, registration_date, ",
         "department_id, doctor_id, registration_source, settle_accounts_category, is_visited, ",
         "valid, family_address, collector_id, total_charge, reserve1, reserve2, reserve3",
-        "from hospital..registration",
+        "from hospital.registration",
         "where registration_id = #{registrationId,jdbcType=INTEGER}"
     })
     @ResultMap("com.neusoft.medical.dao.RegistrationMapper.BaseResultMap")
@@ -72,7 +72,7 @@ public interface RegistrationMapper {
     int updateByPrimaryKeySelective(Registration record);
 
     @Update({
-        "update hospital..registration",
+        "update hospital.registration",
         "set patient_name = #{patientName,jdbcType=VARCHAR},",
           "patient_id = #{patientId,jdbcType=INTEGER},",
           "gender = #{gender,jdbcType=CHAR},",

@@ -85,7 +85,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hospital..patient
+    from hospital.patient
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -94,13 +94,13 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.PatientExample">
-    delete from hospital..patient
+    delete from hospital.patient
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insertSelective" parameterType="com.neusoft.medical.bean.Patient">
-    insert into hospital..patient
+    insert into hospital.patient
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="patientId != null">
         patient_id,
@@ -179,13 +179,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.neusoft.medical.bean.PatientExample" resultType="java.lang.Long">
-    select count(*) from hospital..patient
+    select count(*) from hospital.patient
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update hospital..patient
+    update hospital.patient
     <set>
       <if test="record.patientId != null">
         patient_id = #{record.patientId,jdbcType=INTEGER},
@@ -229,7 +229,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update hospital..patient
+    update hospital.patient
     set patient_id = #{record.patientId,jdbcType=INTEGER},
       patient_name = #{record.patientName,jdbcType=VARCHAR},
       birth_date = #{record.birthDate,jdbcType=DATE},
@@ -247,7 +247,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.Patient">
-    update hospital..patient
+    update hospital.patient
     <set>
       <if test="patientName != null">
         patient_name = #{patientName,jdbcType=VARCHAR},

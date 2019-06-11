@@ -84,7 +84,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hospital..medical_records
+    from hospital.medical_records
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -93,13 +93,13 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.MedicalRecordsExample">
-    delete from hospital..medical_records
+    delete from hospital.medical_records
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insertSelective" parameterType="com.neusoft.medical.bean.MedicalRecords">
-    insert into hospital..medical_records
+    insert into hospital.medical_records
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="medicalRecordsId != null">
         medical_records_id,
@@ -172,13 +172,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.neusoft.medical.bean.MedicalRecordsExample" resultType="java.lang.Long">
-    select count(*) from hospital..medical_records
+    select count(*) from hospital.medical_records
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update hospital..medical_records
+    update hospital.medical_records
     <set>
       <if test="record.medicalRecordsId != null">
         medical_records_id = #{record.medicalRecordsId,jdbcType=INTEGER},
@@ -219,7 +219,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update hospital..medical_records
+    update hospital.medical_records
     set medical_records_id = #{record.medicalRecordsId,jdbcType=INTEGER},
       registration_id = #{record.registrationId,jdbcType=INTEGER},
       main_info = #{record.mainInfo,jdbcType=VARCHAR},
@@ -236,7 +236,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.MedicalRecords">
-    update hospital..medical_records
+    update hospital.medical_records
     <set>
       <if test="registrationId != null">
         registration_id = #{registrationId,jdbcType=INTEGER},

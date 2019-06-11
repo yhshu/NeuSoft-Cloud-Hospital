@@ -16,13 +16,13 @@ public interface ChargeFormMapper {
     int deleteByExample(ChargeFormExample example);
 
     @Delete({
-        "delete from hospital..charge_form",
+        "delete from hospital.charge_form",
         "where charge_form_id = #{chargeFormId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer chargeFormId);
 
     @Insert({
-        "insert into hospital..charge_form (charge_form_id, registration_id, ",
+        "insert into hospital.charge_form (charge_form_id, registration_id, ",
         "charge_item_id, item_count, ",
         "uncharged_nums, made_time, ",
         "valid, department_id, ",
@@ -48,7 +48,7 @@ public interface ChargeFormMapper {
         "charge_form_id, registration_id, charge_item_id, item_count, uncharged_nums, ",
         "made_time, valid, department_id, doctor_id, collector_id, not_given_nums, reserve1, ",
         "reserve2, reserve3",
-        "from hospital..charge_form",
+        "from hospital.charge_form",
         "where charge_form_id = #{chargeFormId,jdbcType=INTEGER}"
     })
     @ResultMap("com.neusoft.medical.dao.ChargeFormMapper.BaseResultMap")
@@ -61,7 +61,7 @@ public interface ChargeFormMapper {
     int updateByPrimaryKeySelective(ChargeForm record);
 
     @Update({
-        "update hospital..charge_form",
+        "update hospital.charge_form",
         "set registration_id = #{registrationId,jdbcType=INTEGER},",
           "charge_item_id = #{chargeItemId,jdbcType=INTEGER},",
           "item_count = #{itemCount,jdbcType=INTEGER},",

@@ -82,7 +82,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hospital..prescription
+    from hospital.prescription
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -91,13 +91,13 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.PrescriptionExample">
-    delete from hospital..prescription
+    delete from hospital.prescription
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insertSelective" parameterType="com.neusoft.medical.bean.Prescription">
-    insert into hospital..prescription
+    insert into hospital.prescription
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="presciptionId != null">
         presciption_id,
@@ -158,13 +158,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.neusoft.medical.bean.PrescriptionExample" resultType="java.lang.Long">
-    select count(*) from hospital..prescription
+    select count(*) from hospital.prescription
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update hospital..prescription
+    update hospital.prescription
     <set>
       <if test="record.presciptionId != null">
         presciption_id = #{record.presciptionId,jdbcType=INTEGER},
@@ -199,7 +199,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update hospital..prescription
+    update hospital.prescription
     set presciption_id = #{record.presciptionId,jdbcType=INTEGER},
       registration_id = #{record.registrationId,jdbcType=INTEGER},
       registration_name = #{record.registrationName,jdbcType=VARCHAR},
@@ -214,7 +214,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.Prescription">
-    update hospital..prescription
+    update hospital.prescription
     <set>
       <if test="registrationId != null">
         registration_id = #{registrationId,jdbcType=INTEGER},

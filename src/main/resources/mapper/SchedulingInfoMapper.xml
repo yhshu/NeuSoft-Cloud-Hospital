@@ -84,7 +84,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hospital..scheduling_info
+    from hospital.scheduling_info
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -93,13 +93,13 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.SchedulingInfoExample">
-    delete from hospital..scheduling_info
+    delete from hospital.scheduling_info
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insertSelective" parameterType="com.neusoft.medical.bean.SchedulingInfo">
-    insert into hospital..scheduling_info
+    insert into hospital.scheduling_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="schedulingInfoId != null">
         scheduling_info_id,
@@ -172,13 +172,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.neusoft.medical.bean.SchedulingInfoExample" resultType="java.lang.Long">
-    select count(*) from hospital..scheduling_info
+    select count(*) from hospital.scheduling_info
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update hospital..scheduling_info
+    update hospital.scheduling_info
     <set>
       <if test="record.schedulingInfoId != null">
         scheduling_info_id = #{record.schedulingInfoId,jdbcType=INTEGER},
@@ -219,7 +219,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update hospital..scheduling_info
+    update hospital.scheduling_info
     set scheduling_info_id = #{record.schedulingInfoId,jdbcType=INTEGER},
       scheduling_time = #{record.schedulingTime,jdbcType=DATE},
       department_id = #{record.departmentId,jdbcType=INTEGER},
@@ -236,7 +236,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.SchedulingInfo">
-    update hospital..scheduling_info
+    update hospital.scheduling_info
     <set>
       <if test="schedulingTime != null">
         scheduling_time = #{schedulingTime,jdbcType=DATE},

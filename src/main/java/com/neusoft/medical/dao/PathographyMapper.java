@@ -16,13 +16,13 @@ public interface PathographyMapper {
     int deleteByExample(PathographyExample example);
 
     @Delete({
-        "delete from hospital..pathography",
+        "delete from hospital.pathography",
         "where pathography_id = #{pathographyId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer pathographyId);
 
     @Insert({
-        "insert into hospital..pathography (pathography_id, patient_id, ",
+        "insert into hospital.pathography (pathography_id, patient_id, ",
         "physical_examination, pathography, ",
         "found_time, note, valid, ",
         "reserve1, reserve2, ",
@@ -43,7 +43,7 @@ public interface PathographyMapper {
         "select",
         "pathography_id, patient_id, physical_examination, pathography, found_time, note, ",
         "valid, reserve1, reserve2, reserve3",
-        "from hospital..pathography",
+        "from hospital.pathography",
         "where pathography_id = #{pathographyId,jdbcType=INTEGER}"
     })
     @ResultMap("com.neusoft.medical.dao.PathographyMapper.BaseResultMap")
@@ -56,7 +56,7 @@ public interface PathographyMapper {
     int updateByPrimaryKeySelective(Pathography record);
 
     @Update({
-        "update hospital..pathography",
+        "update hospital.pathography",
         "set patient_id = #{patientId,jdbcType=INTEGER},",
           "physical_examination = #{physicalExamination,jdbcType=VARCHAR},",
           "pathography = #{pathography,jdbcType=VARCHAR},",
