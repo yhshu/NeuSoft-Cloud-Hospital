@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * 挂号信息控制器
  */
-@Controller
+@RestController
 @RequestMapping("/registration")
 public class RegistrationInfoController {
     @Resource
@@ -65,14 +65,16 @@ public class RegistrationInfoController {
     /**
      * 获取患者个人信息
      *
-     * @param identifyCardNO 患者身份证号
+     * @param identityCardNo 患者身份证号
      * @return 如果找到，返回信息；如果未找到，被封装的患者信息为 null
      */
     @GetMapping("/patient_info")
-    public ResultDTO<Patient> patient(@RequestParam(value = "identifyCardNo") String identifyCardNo) {
-        System.out.println("获取患者信息 身份证号：" + identifyCardNo);
-        Patient patient = patientService.selectPatientByIdentifyCardNo(identifyCardNo);
-        return new ResultDTO<>(patient);
+    public ResultDTO<Patient> patient(@RequestParam(value = "identityCardNo") String identityCardNo) {
+        System.out.println("获取患者信息 身份证号：" + identityCardNo);
+        Patient patient = patientService.selectPatientByIdentifyCardNo(identityCardNo);
+        if (patient != null)
+            return new ResultDTO<>(patient);
+        return new ResultDTO<>(20000, "not found", null);
     }
 
     /**

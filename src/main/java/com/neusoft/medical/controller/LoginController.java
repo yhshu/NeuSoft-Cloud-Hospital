@@ -5,13 +5,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 帐户登录控制器
  */
-@Controller
+@RestController
 public class LoginController {
     private Logger log = Logger.getLogger(LoginController.class);
+
     /**
      * 访问首页
      *
@@ -22,6 +24,7 @@ public class LoginController {
     public String index(Model model) {
         return "index";
     }
+
     /**
      * 帐号登录验证
      */
