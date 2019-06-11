@@ -116,6 +116,7 @@ database types (e.g. MySql's unsigned bigint type should be mapped to java.lang.
         -->
         <!--            <columnOverride column="" javaType=""    jdbcType="" typeHandler=""  delimitedColumnName="" />-->
         <table tableName="account" catalog="hospital"></table>
+        <table tableName="auth" catalog="hospital"></table>
         <table tableName="charge_form" catalog="hospital"></table>
         <table tableName="charge_item" catalog="hospital"></table>
         <table tableName="constant_item" catalog="hospital"></table>
@@ -125,7 +126,7 @@ database types (e.g. MySql's unsigned bigint type should be mapped to java.lang.
         <table tableName="disease_category" catalog="hospital"></table>
         <table tableName="doctor" catalog="hospital"></table>
         <table tableName="examination" catalog="hospital"></table>
-        <table tableName="expense_class" catalog="hospital"></table>
+        <table tableName="expense_category" catalog="hospital"></table>
         <table tableName="medical_records" catalog="hospital"></table>
         <table tableName="medicine" catalog="hospital"></table>
         <table tableName="pathography" catalog="hospital"></table>
@@ -135,7 +136,7 @@ database types (e.g. MySql's unsigned bigint type should be mapped to java.lang.
         <table tableName="scheduling_info" catalog="hospital"></table>
         <table tableName="scheduling_rule" catalog="hospital"></table>
         <table tableName="staff" catalog="hospital"></table>
-        <table tableName="user_rights" catalog="hospital"></table>
+        <table tableName="user_auth" catalog="hospital"></table>
 
     </context>
 </generatorConfiguration>
