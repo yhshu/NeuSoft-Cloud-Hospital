@@ -36,13 +36,12 @@ public class RegistrationInfoController {
     @Resource
     private PatientService patientService;
 
-
     /**
      * 获取挂号科室列表
      *
      * @return 可挂号的科室列表
      */
-    @RequestMapping("/department_list")
+    @GetMapping("/department_list")
     public ResultDTO<List<Department>> departmentList() {
         System.out.println("RegistrationInfoController 获取挂号科室列表");
         List<Department> departmentList = departmentService.findAllDepartment();
@@ -54,7 +53,7 @@ public class RegistrationInfoController {
      *
      * @return 可挂号的医生列表
      */
-    @RequestMapping("/doctor_list")
+    @GetMapping("/doctor_list")
     public ResultDTO<List<Doctor>> doctorList() {
 // todo
         System.out.println("RegistrationInfoController 获取挂号医生列表");
@@ -70,9 +69,9 @@ public class RegistrationInfoController {
      * @return 如果找到，返回信息；如果未找到，被封装的患者信息为 null
      */
     @GetMapping("/patient_info")
-    public ResultDTO<Patient> patient(@RequestParam(value = "identify_card_no") String identifyCardNO) {
-        System.out.println("获取患者信息 身份证号：" + identifyCardNO);
-        Patient patient = patientService.selectPatientByIdentifyCardNo(identifyCardNO);
+    public ResultDTO<Patient> patient(@RequestParam(value = "identifyCardNo") String identifyCardNo) {
+        System.out.println("获取患者信息 身份证号：" + identifyCardNo);
+        Patient patient = patientService.selectPatientByIdentifyCardNo(identifyCardNo);
         return new ResultDTO<>(patient);
     }
 
