@@ -1,7 +1,7 @@
 package com.neusoft.medical.dao;
 
-import com.neusoft.medical.bean1.Pathography;
-import com.neusoft.medical.bean1.PathographyExample;
+import com.neusoft.medical.bean.Pathography;
+import com.neusoft.medical.bean.PathographyExample;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

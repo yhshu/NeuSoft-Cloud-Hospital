@@ -1,5 +1,6 @@
 package com.neusoft.medical.bean;
 
+
 public class Account {
     /**
      *
