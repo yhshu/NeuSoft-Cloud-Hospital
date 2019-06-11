@@ -8,13 +8,14 @@ import com.neusoft.medical.service.DepartmentService;
 import com.neusoft.medical.service.DoctorService;
 import com.neusoft.medical.service.PatientService;
 import com.neusoft.medical.service.RegistrationInfoService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.annotation.RequestScope;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -80,10 +81,39 @@ public class RegistrationInfoController {
      * @param identifyCardNO 患者身份证号
      * @return 如果找到，返回信息；如果未找到，被封装的患者信息为 null
      */
-    @RequestMapping("/patient_info")
+    @GetMapping("/patient_info")
     public ResultDTO<Patient> patient(@RequestParam(value = "identify_card_no") String identifyCardNO) {
         System.out.println("获取患者信息 身份证号：" + identifyCardNO);
         Patient patient = patientService.selectPatientByIdentifyCardNo(identifyCardNO);
         return new ResultDTO<>(patient);
+    }
+
+    /**
+     * 提交挂号信息
+     */
+    @PostMapping("/register")
+    public ResultDTO<Boolean> register(
+            @RequestParam(value = "registrationId") Integer registrationId,
+            @RequestParam(value = "patientName") String patientName,
+            @RequestParam(value = "gender") String gender,
+            @RequestParam(value = "age") Integer age,
+            @RequestParam(value = "birthday") Date birthday,
+            @RequestParam(value = "registrationCategory") String registrationCategory,
+            @RequestParam(value = "medicalCategory") String medicalCategory,
+            @RequestParam(value = "identityCardNo") String identityCardNo,
+            @RequestParam(value = "registrationStatus") String registrationStatus,
+            @RequestParam(value = "visitDate") Date visitDate,
+            @RequestParam(value = "registrationDate") Date registrationDate,
+            @RequestParam(value = "departmentId") Integer departmentId,
+            @RequestParam(value = "doctorId") Integer doctorId,
+            @RequestParam(value = "registrationSource") String registrationSource,
+            @RequestParam(value = "settleAccountsCategory") String settleAccountsCategory,
+            @RequestParam(value = "isVisited") String isVisited,
+            @RequestParam(value = "familyAddress") String familyAddress,
+            @RequestParam(value = "collectorId") String collectorId) {
+        System.out.println("提交挂号信息");
+// todo
+
+        return null;
     }
 }

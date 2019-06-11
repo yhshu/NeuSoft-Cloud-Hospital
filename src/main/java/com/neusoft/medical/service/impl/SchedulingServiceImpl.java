@@ -1,5 +1,6 @@
 package com.neusoft.medical.service.impl;
 
+import com.neusoft.medical.bean.DepartmentExample;
 import com.neusoft.medical.bean.Doctor;
 import com.neusoft.medical.bean.DoctorExample;
 import com.neusoft.medical.service.SchedulingService;
@@ -11,7 +12,10 @@ public class SchedulingServiceImpl implements SchedulingService {
 
     @Override
     public List<Doctor> findCurrentAvailableDoctor() {
-//        DoctorExample doctorExample
+        DoctorExample doctorExample = new DoctorExample();
+        DoctorExample.Criteria criteria = doctorExample.createCriteria();
+        criteria.andValidEqualTo(1);
+
         return null;
     }
 }
