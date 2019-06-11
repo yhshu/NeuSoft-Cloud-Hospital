@@ -66,7 +66,7 @@ public class AccountMapperTest {
 
     @Test
     public void selectByPrimaryKey() {
-        Account account = accountMapper.selectByPrimaryKey(10);//选择要查找的主键
+        Account account = accountMapper.selectByPrimaryKey(2);//选择要查找的主键
         System.out.println("查找的数据："+account.getAccountId()+"+"+account.getUserName());
     }
 
