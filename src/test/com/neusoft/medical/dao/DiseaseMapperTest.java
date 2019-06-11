@@ -60,14 +60,4 @@ public class DiseaseMapperTest {
     @Test
     public void updateByPrimaryKey() {
     }
-
-    @Test
-    public void selectByPageAndSelections() {
-        int currentPage = 1;
-        int pageSize = 20;
-        PageHelper.startPage(currentPage, pageSize);
-        List<Disease> diseaseList = diseaseMapper.selectByPageAndSelections();
-        PageInfo<Disease> diseasePageInfo = new PageInfo<>(diseaseList);
-        System.out.println(diseasePageInfo);
-    }
 }

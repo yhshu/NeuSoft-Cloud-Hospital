@@ -36,18 +36,6 @@ public class RegistrationInfoController {
     @Resource
     private PatientService patientService;
 
-    /**
-     * 自动生成病历号
-     *
-     * @return 唯一的病历号
-     */
-    @RequestMapping("/auto_registration_id")
-    public ResultDTO<Integer> registrationId() {
-// todo
-        System.out.println("RegistrationInfoController 生成病历号");
-        return null;
-    }
-
 
     /**
      * 获取挂号科室列表
