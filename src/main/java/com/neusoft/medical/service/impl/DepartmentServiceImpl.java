@@ -64,7 +64,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Department updateDepartmentByPrimaryKey(Department record) {
-        if (record.getValid() == 0)
+        if (record.getValid() == 0)  // 记录无效，不更新
             return record;
         int effectRow = departmentMapper.updateByPrimaryKey(record);
         System.out.println("updateDepartmentByPrimaryKey 修改记录 " + effectRow + " 项");
