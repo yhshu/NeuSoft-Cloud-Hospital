@@ -46,12 +46,12 @@ public interface SchedulingInfoMapper {
         "department_id, department_name, ",
         "doctor_id, doctor_name, ",
         "type, valid, period, ",
-        "limitation, remian_nums)",
+        "limitation, remain_nums)",
         "values (#{schedulingInfoId,jdbcType=INTEGER}, #{schedulingTime,jdbcType=DATE}, ",
         "#{departmentId,jdbcType=INTEGER}, #{departmentName,jdbcType=VARCHAR}, ",
         "#{doctorId,jdbcType=INTEGER}, #{doctorName,jdbcType=VARCHAR}, ",
         "#{type,jdbcType=VARCHAR}, #{valid,jdbcType=INTEGER}, #{period,jdbcType=VARCHAR}, ",
-        "#{limitation,jdbcType=INTEGER}, #{remianNums,jdbcType=INTEGER})"
+        "#{limitation,jdbcType=INTEGER}, #{remainNums,jdbcType=INTEGER})"
     })
     int insert(SchedulingInfo record);
 
@@ -80,7 +80,7 @@ public interface SchedulingInfoMapper {
     @Select({
         "select",
         "scheduling_info_id, scheduling_time, department_id, department_name, doctor_id, ",
-        "doctor_name, type, valid, period, limitation, remian_nums",
+        "doctor_name, type, valid, period, limitation, remain_nums",
         "from hospital.scheduling_info",
         "where scheduling_info_id = #{schedulingInfoId,jdbcType=INTEGER}"
     })
@@ -128,7 +128,7 @@ public interface SchedulingInfoMapper {
           "valid = #{valid,jdbcType=INTEGER},",
           "period = #{period,jdbcType=VARCHAR},",
           "limitation = #{limitation,jdbcType=INTEGER},",
-          "remian_nums = #{remianNums,jdbcType=INTEGER}",
+          "remain_nums = #{remainNums,jdbcType=INTEGER}",
         "where scheduling_info_id = #{schedulingInfoId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(SchedulingInfo record);
