@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.annotation.RequestScope;
 
 import javax.annotation.Resource;
+import javax.print.Doc;
 import java.util.Date;
 import java.util.List;
 
@@ -52,12 +53,12 @@ public class RegistrationInfoController {
      * @return 可挂号的医生列表
      */
     @GetMapping("/doctor_list")
-    public ResultDTO<List<Doctor>> doctorList() {
-// todo
+    public ResultDTO<List<Doctor>> doctorList(@RequestParam("departmentId") Integer departmentId) {
         System.out.println("RegistrationInfoController 获取挂号医生列表");
-
-        return null;
-
+        List<Doctor> doctorList = schedulingService.findCurrentAvailableDoctor(departmentId);
+        if (doctorList.size() != 0)
+            return new ResultDTO<>(doctorList);
+        return new ResultDTO<>(20000, "not found", null);
     }
 
     /**
