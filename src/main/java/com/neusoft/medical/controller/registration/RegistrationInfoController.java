@@ -77,7 +77,7 @@ public class RegistrationInfoController {
 
     /**
      * 提交挂号信息
-     *
+     * <p>
      * 1. 添加挂号信息
      * 2. 添加患者信息
      *
@@ -120,6 +120,13 @@ public class RegistrationInfoController {
         return null;
     }
 
+    /**
+     * 分页获取挂号信息
+     *
+     * @param currentPage 当前页码
+     * @param pageSize    页面大小
+     * @return 分页的挂号信息
+     */
     @GetMapping("list_registration")
     public ResultDTO<PageInfo<Registration>> listRegistration(
             @RequestParam(value = "currentPage") Integer currentPage, @RequestParam(value = "pageSize") Integer pageSize
