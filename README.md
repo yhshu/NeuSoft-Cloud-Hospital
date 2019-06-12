@@ -33,7 +33,9 @@ NeuSoft hospital information system
 
 #### 数据库配置
 
-注意，在 `src/main/resources` 目录中需要添加 `db.properties` 进行数据库配置，在本仓库中不包含该文件。
+数据库配置主要由 SpringBoot 完成，在 `src/main/resources` 目录的 `application.properties` 配置文件中。
+
+因为使用了 MyBatis Generator，还需要在 `src/main/resources` 目录中需要添加 `db.properties` 进行数据库配置，**本仓库未包含该文件**。
 
 以下是一个 `db.properties` 文件的样例：
 
@@ -52,7 +54,7 @@ username=root
 password=password
 
 # 初始连接数
-initialSize=0
+initialSize=1
 # 最大活跃连接
 maxActive=20
 # 最大空闲连接
@@ -63,7 +65,7 @@ minIdle=1
 maxWait=60000
 ```
 
-#### MyBatis 生成 Bean 与 SQL
+#### MyBatis 生成 Bean 与 Dao
 
 在 Intellij IDEA 中新建 Maven 项目，Command Line 一栏中填写 `mybatis-generator:generate -e`.
 
@@ -124,9 +126,5 @@ maxWait=60000
 
 - [安逸医院](
 https://mingmliang.github.io/his-demo/#/home)
-
-
-
-
 
 :-) 

@@ -78,6 +78,9 @@ public class RegistrationInfoController {
     /**
      * 提交挂号信息
      *
+     * 1. 添加挂号信息
+     * 2. 添加患者信息
+     *
      * @param patientName            患者姓名
      * @param gender                 患者性别
      * @param age                    患者年龄

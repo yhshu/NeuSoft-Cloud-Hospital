@@ -48,7 +48,8 @@ public class SchedulingServiceImpl implements SchedulingService {
         DoctorExample doctorExample = new DoctorExample();
         DoctorExample.Criteria doctorExampleCriteria = doctorExample.createCriteria();
         doctorExampleCriteria.andValidEqualTo(1);
-        doctorExampleCriteria.andDoctorIdIn(doctorIdList);
+        if (!doctorIdList.isEmpty())
+            doctorExampleCriteria.andDoctorIdIn(doctorIdList);
         return doctorMapper.selectByExample(doctorExample);
     }
 }
