@@ -10,5 +10,5 @@ public interface PatientService {
      * @param identifyCardNo 患者身份证号
      * @return 如果找到，返回患者信息；如果未找到，返回null
      */
-    Patient selectPatientByIdentifyCardNo(String identifyCardNo);
+    Patient selectPatientByIdentityCardNo(String identifyCardNo);
 }
