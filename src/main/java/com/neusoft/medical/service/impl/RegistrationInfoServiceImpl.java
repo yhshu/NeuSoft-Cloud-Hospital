@@ -1,5 +1,6 @@
 package com.neusoft.medical.service.impl;
 
+import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.Registration;
 import com.neusoft.medical.dao.RegistrationMapper;
 import com.neusoft.medical.service.RegistrationInfoService;
@@ -15,7 +16,13 @@ public class RegistrationInfoServiceImpl implements RegistrationInfoService {
     @Override
     public Registration addRegistration(Registration record) {
         int effectRow = registrationMapper.insert(record);
-        System.out.println("RegistrationInfoServiceImpl register " + effectRow + " 项");
+        System.out.println("RegistrationInfoServiceImpl addRegistration " + effectRow + " 项");
         return registrationMapper.selectByPrimaryKey(record.getRegistrationId());
+    }
+
+    @Override
+    public PageInfo<Registration> listRegistration(int currentPage, int pageSize) {
+        // todo
+        return null;
     }
 }

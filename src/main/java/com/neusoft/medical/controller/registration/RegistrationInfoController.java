@@ -1,9 +1,11 @@
 package com.neusoft.medical.controller.registration;
 
+import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.*;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -93,7 +95,7 @@ public class RegistrationInfoController {
      * @return 挂号信息
      */
     @PostMapping("/add_registration")
-    public ResultDTO<Boolean> register(
+    public ResultDTO<Boolean> addRegistration(
             @RequestParam(value = "patientName") String patientName,
             @RequestParam(value = "gender") String gender,
             @RequestParam(value = "age") Integer age,
@@ -115,5 +117,12 @@ public class RegistrationInfoController {
         return null;
     }
 
-//    @GetMapping("list_registration")
+    @GetMapping("list_registration")
+    public ResultDTO<PageInfo<Registration>> listRegistration(
+            @RequestParam(value = "currentPage") Integer currentPage, @RequestParam(value = "pageSize") Integer pageSize
+    ) {
+        System.out.println("RegistrationInfoController listRegistration: 获取挂号列表");
+        PageInfo<Registration> registrationList = registrationInfoService.listRegistration(currentPage, pageSize);
+        return new ResultDTO<>(registrationList);
+    }
 }
