@@ -24,13 +24,13 @@ public interface PatientMapper {
     @Insert({
         "insert into hospital.patient (patient_id, patient_name, ",
         "birth_date, allergies, ",
-        "identify_card_no, social_security_card_no, ",
+        "identity_card_no, social_security_card_no, ",
         "family_address, gender, ",
         "valid, reserve1, ",
         "reserve2, reserve3)",
         "values (#{patientId,jdbcType=INTEGER}, #{patientName,jdbcType=VARCHAR}, ",
         "#{birthDate,jdbcType=DATE}, #{allergies,jdbcType=VARCHAR}, ",
-        "#{identifyCardNo,jdbcType=CHAR}, #{socialSecurityCardNo,jdbcType=VARCHAR}, ",
+        "#{identityCardNo,jdbcType=CHAR}, #{socialSecurityCardNo,jdbcType=VARCHAR}, ",
         "#{familyAddress,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, ",
         "#{valid,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
         "#{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR})"
@@ -43,7 +43,7 @@ public interface PatientMapper {
 
     @Select({
         "select",
-        "patient_id, patient_name, birth_date, allergies, identify_card_no, social_security_card_no, ",
+        "patient_id, patient_name, birth_date, allergies, identity_card_no, social_security_card_no, ",
         "family_address, gender, valid, reserve1, reserve2, reserve3",
         "from hospital.patient",
         "where patient_id = #{patientId,jdbcType=INTEGER}"
@@ -62,7 +62,7 @@ public interface PatientMapper {
         "set patient_name = #{patientName,jdbcType=VARCHAR},",
           "birth_date = #{birthDate,jdbcType=DATE},",
           "allergies = #{allergies,jdbcType=VARCHAR},",
-          "identify_card_no = #{identifyCardNo,jdbcType=CHAR},",
+          "identity_card_no = #{identityCardNo,jdbcType=CHAR},",
           "social_security_card_no = #{socialSecurityCardNo,jdbcType=VARCHAR},",
           "family_address = #{familyAddress,jdbcType=VARCHAR},",
           "gender = #{gender,jdbcType=CHAR},",

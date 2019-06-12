@@ -392,73 +392,73 @@ public class PatientExample {
             return (Criteria) this;
         }
 
-        public Criteria andIdentifyCardNoIsNull() {
-            addCriterion("identify_card_no is null");
+        public Criteria andIdentityCardNoIsNull() {
+            addCriterion("identity_card_no is null");
             return (Criteria) this;
         }
 
-        public Criteria andIdentifyCardNoIsNotNull() {
-            addCriterion("identify_card_no is not null");
+        public Criteria andIdentityCardNoIsNotNull() {
+            addCriterion("identity_card_no is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIdentifyCardNoEqualTo(String value) {
-            addCriterion("identify_card_no =", value, "identifyCardNo");
+        public Criteria andIdentityCardNoEqualTo(String value) {
+            addCriterion("identity_card_no =", value, "identityCardNo");
             return (Criteria) this;
         }
 
-        public Criteria andIdentifyCardNoNotEqualTo(String value) {
-            addCriterion("identify_card_no <>", value, "identifyCardNo");
+        public Criteria andIdentityCardNoNotEqualTo(String value) {
+            addCriterion("identity_card_no <>", value, "identityCardNo");
             return (Criteria) this;
         }
 
-        public Criteria andIdentifyCardNoGreaterThan(String value) {
-            addCriterion("identify_card_no >", value, "identifyCardNo");
+        public Criteria andIdentityCardNoGreaterThan(String value) {
+            addCriterion("identity_card_no >", value, "identityCardNo");
             return (Criteria) this;
         }
 
-        public Criteria andIdentifyCardNoGreaterThanOrEqualTo(String value) {
-            addCriterion("identify_card_no >=", value, "identifyCardNo");
+        public Criteria andIdentityCardNoGreaterThanOrEqualTo(String value) {
+            addCriterion("identity_card_no >=", value, "identityCardNo");
             return (Criteria) this;
         }
 
-        public Criteria andIdentifyCardNoLessThan(String value) {
-            addCriterion("identify_card_no <", value, "identifyCardNo");
+        public Criteria andIdentityCardNoLessThan(String value) {
+            addCriterion("identity_card_no <", value, "identityCardNo");
             return (Criteria) this;
         }
 
-        public Criteria andIdentifyCardNoLessThanOrEqualTo(String value) {
-            addCriterion("identify_card_no <=", value, "identifyCardNo");
+        public Criteria andIdentityCardNoLessThanOrEqualTo(String value) {
+            addCriterion("identity_card_no <=", value, "identityCardNo");
             return (Criteria) this;
         }
 
-        public Criteria andIdentifyCardNoLike(String value) {
-            addCriterion("identify_card_no like", value, "identifyCardNo");
+        public Criteria andIdentityCardNoLike(String value) {
+            addCriterion("identity_card_no like", value, "identityCardNo");
             return (Criteria) this;
         }
 
-        public Criteria andIdentifyCardNoNotLike(String value) {
-            addCriterion("identify_card_no not like", value, "identifyCardNo");
+        public Criteria andIdentityCardNoNotLike(String value) {
+            addCriterion("identity_card_no not like", value, "identityCardNo");
             return (Criteria) this;
         }
 
-        public Criteria andIdentifyCardNoIn(List<String> values) {
-            addCriterion("identify_card_no in", values, "identifyCardNo");
+        public Criteria andIdentityCardNoIn(List<String> values) {
+            addCriterion("identity_card_no in", values, "identityCardNo");
             return (Criteria) this;
         }
 
-        public Criteria andIdentifyCardNoNotIn(List<String> values) {
-            addCriterion("identify_card_no not in", values, "identifyCardNo");
+        public Criteria andIdentityCardNoNotIn(List<String> values) {
+            addCriterion("identity_card_no not in", values, "identityCardNo");
             return (Criteria) this;
         }
 
-        public Criteria andIdentifyCardNoBetween(String value1, String value2) {
-            addCriterion("identify_card_no between", value1, value2, "identifyCardNo");
+        public Criteria andIdentityCardNoBetween(String value1, String value2) {
+            addCriterion("identity_card_no between", value1, value2, "identityCardNo");
             return (Criteria) this;
         }
 
-        public Criteria andIdentifyCardNoNotBetween(String value1, String value2) {
-            addCriterion("identify_card_no not between", value1, value2, "identifyCardNo");
+        public Criteria andIdentityCardNoNotBetween(String value1, String value2) {
+            addCriterion("identity_card_no not between", value1, value2, "identityCardNo");
             return (Criteria) this;
         }
 

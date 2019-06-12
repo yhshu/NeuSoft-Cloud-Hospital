@@ -11,7 +11,7 @@ public class Patient {
 
     private String allergies;
 
-    private String identifyCardNo;
+    private String identityCardNo;
 
     private String socialSecurityCardNo;
 
@@ -27,12 +27,12 @@ public class Patient {
 
     private String reserve3;
 
-    public Patient(Integer patientId, String patientName, Date birthDate, String allergies, String identifyCardNo, String socialSecurityCardNo, String familyAddress, String gender, Integer valid, String reserve1, String reserve2, String reserve3) {
+    public Patient(Integer patientId, String patientName, Date birthDate, String allergies, String identityCardNo, String socialSecurityCardNo, String familyAddress, String gender, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.patientId = patientId;
         this.patientName = patientName;
         this.birthDate = birthDate;
         this.allergies = allergies;
-        this.identifyCardNo = identifyCardNo;
+        this.identityCardNo = identityCardNo;
         this.socialSecurityCardNo = socialSecurityCardNo;
         this.familyAddress = familyAddress;
         this.gender = gender;
@@ -78,12 +78,12 @@ public class Patient {
         this.allergies = allergies == null ? null : allergies.trim();
     }
 
-    public String getIdentifyCardNo() {
-        return identifyCardNo;
+    public String getIdentityCardNo() {
+        return identityCardNo;
     }
 
-    public void setIdentifyCardNo(String identifyCardNo) {
-        this.identifyCardNo = identifyCardNo == null ? null : identifyCardNo.trim();
+    public void setIdentityCardNo(String identityCardNo) {
+        this.identityCardNo = identityCardNo == null ? null : identityCardNo.trim();
     }
 
     public String getSocialSecurityCardNo() {

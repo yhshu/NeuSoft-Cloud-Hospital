@@ -7,7 +7,7 @@
       <arg column="patient_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="birth_date" javaType="java.util.Date" jdbcType="DATE" />
       <arg column="allergies" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="identify_card_no" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="identity_card_no" javaType="java.lang.String" jdbcType="CHAR" />
       <arg column="social_security_card_no" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="family_address" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="gender" javaType="java.lang.String" jdbcType="CHAR" />
@@ -76,7 +76,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    patient_id, patient_name, birth_date, allergies, identify_card_no, social_security_card_no, 
+    patient_id, patient_name, birth_date, allergies, identity_card_no, social_security_card_no, 
     family_address, gender, valid, reserve1, reserve2, reserve3
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.PatientExample" resultMap="BaseResultMap">
@@ -114,8 +114,8 @@
       <if test="allergies != null">
         allergies,
       </if>
-      <if test="identifyCardNo != null">
-        identify_card_no,
+      <if test="identityCardNo != null">
+        identity_card_no,
       </if>
       <if test="socialSecurityCardNo != null">
         social_security_card_no,
@@ -152,8 +152,8 @@
       <if test="allergies != null">
         #{allergies,jdbcType=VARCHAR},
       </if>
-      <if test="identifyCardNo != null">
-        #{identifyCardNo,jdbcType=CHAR},
+      <if test="identityCardNo != null">
+        #{identityCardNo,jdbcType=CHAR},
       </if>
       <if test="socialSecurityCardNo != null">
         #{socialSecurityCardNo,jdbcType=VARCHAR},
@@ -199,8 +199,8 @@
       <if test="record.allergies != null">
         allergies = #{record.allergies,jdbcType=VARCHAR},
       </if>
-      <if test="record.identifyCardNo != null">
-        identify_card_no = #{record.identifyCardNo,jdbcType=CHAR},
+      <if test="record.identityCardNo != null">
+        identity_card_no = #{record.identityCardNo,jdbcType=CHAR},
       </if>
       <if test="record.socialSecurityCardNo != null">
         social_security_card_no = #{record.socialSecurityCardNo,jdbcType=VARCHAR},
@@ -234,7 +234,7 @@
       patient_name = #{record.patientName,jdbcType=VARCHAR},
       birth_date = #{record.birthDate,jdbcType=DATE},
       allergies = #{record.allergies,jdbcType=VARCHAR},
-      identify_card_no = #{record.identifyCardNo,jdbcType=CHAR},
+      identity_card_no = #{record.identityCardNo,jdbcType=CHAR},
       social_security_card_no = #{record.socialSecurityCardNo,jdbcType=VARCHAR},
       family_address = #{record.familyAddress,jdbcType=VARCHAR},
       gender = #{record.gender,jdbcType=CHAR},
@@ -258,8 +258,8 @@
       <if test="allergies != null">
         allergies = #{allergies,jdbcType=VARCHAR},
       </if>
-      <if test="identifyCardNo != null">
-        identify_card_no = #{identifyCardNo,jdbcType=CHAR},
+      <if test="identityCardNo != null">
+        identity_card_no = #{identityCardNo,jdbcType=CHAR},
       </if>
       <if test="socialSecurityCardNo != null">
         social_security_card_no = #{socialSecurityCardNo,jdbcType=VARCHAR},

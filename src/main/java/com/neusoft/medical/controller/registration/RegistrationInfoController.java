@@ -120,17 +120,14 @@ public class RegistrationInfoController {
 
         Date birthdayConverted = dateConverter.convert(birthday);
         Date registrationDateConverted = dateConverter.convert(registrationDate);
-        Registration registration;
         try {
-            registration = registrationInfoService.addRegistration(
+            registrationInfoService.addRegistration(
                     new Registration(null, patientName, null, gender, age, birthdayConverted, registrationCategory, medicalCategory, identityCardNo, null, null, registrationDateConverted, departmentId, doctorId, registrationSource, settleAccountsCategory, null, 1, familyAddress, collectorId, null, null, null, null));
             System.out.println("已提交挂号信息");
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultDTO<>(Boolean.FALSE);
         }
-        if (registration == null)
-            return new ResultDTO<>(Boolean.FALSE);
         return new ResultDTO<>(Boolean.TRUE);
     }
 

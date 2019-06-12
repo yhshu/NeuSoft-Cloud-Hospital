@@ -7,6 +7,9 @@ public interface RegistrationInfoService {
 
     /**
      * 提交挂号信息
+     * 1. 新增挂号
+     * 2. 新增患者信息
+     * 3. 新增病历记录
      *
      * @param record 挂号记录
      * @return 提交的挂号记录

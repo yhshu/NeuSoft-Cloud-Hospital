@@ -15,8 +15,6 @@ public class MedicalRecords {
 
     private String preliminaryChinese;
 
-    private String caseNo;
-
     private Integer valid;
 
     private String reserve1;
@@ -25,7 +23,7 @@ public class MedicalRecords {
 
     private String reserve3;
 
-    public MedicalRecords(Integer medicalRecordsId, Integer registrationId, String mainInfo, String currentDisease, String currentTreatment, String preliminaryWestern, String preliminaryChinese, String caseNo, Integer valid, String reserve1, String reserve2, String reserve3) {
+    public MedicalRecords(Integer medicalRecordsId, Integer registrationId, String mainInfo, String currentDisease, String currentTreatment, String preliminaryWestern, String preliminaryChinese, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.medicalRecordsId = medicalRecordsId;
         this.registrationId = registrationId;
         this.mainInfo = mainInfo;
@@ -33,7 +31,6 @@ public class MedicalRecords {
         this.currentTreatment = currentTreatment;
         this.preliminaryWestern = preliminaryWestern;
         this.preliminaryChinese = preliminaryChinese;
-        this.caseNo = caseNo;
         this.valid = valid;
         this.reserve1 = reserve1;
         this.reserve2 = reserve2;
@@ -98,14 +95,6 @@ public class MedicalRecords {
 
     public void setPreliminaryChinese(String preliminaryChinese) {
         this.preliminaryChinese = preliminaryChinese == null ? null : preliminaryChinese.trim();
-    }
-
-    public String getCaseNo() {
-        return caseNo;
-    }
-
-    public void setCaseNo(String caseNo) {
-        this.caseNo = caseNo == null ? null : caseNo.trim();
     }
 
     public Integer getValid() {
