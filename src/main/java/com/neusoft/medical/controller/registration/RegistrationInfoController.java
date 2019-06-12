@@ -5,15 +5,9 @@ import com.neusoft.medical.Util.DateConverter;
 import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.*;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.annotation.RequestScope;
 
 import javax.annotation.Resource;
-import javax.print.Doc;
 import java.util.Date;
 import java.util.List;
 
@@ -73,7 +67,7 @@ public class RegistrationInfoController {
     @GetMapping("/patient_info")
     public ResultDTO<Patient> patient(@RequestParam(value = "identityCardNo") String identityCardNo) {
         System.out.println("获取患者信息 身份证号：" + identityCardNo);
-        Patient patient = patientService.selectPatientByIdentifyCardNo(identityCardNo);
+        Patient patient = patientService.selectPatientByIdentityCardNo(identityCardNo);
         if (patient != null)
             return new ResultDTO<>(patient);
         return new ResultDTO<>(ResultDTO.CODE_SUCCESS, "not found", null);

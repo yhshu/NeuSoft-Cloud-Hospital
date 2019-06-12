@@ -14,7 +14,7 @@ public interface RegistrationInfoService {
      * @param record 挂号记录
      * @return 提交的挂号记录
      */
-    Registration addRegistration(Registration record);
+    Registration addRegistration(Registration record) throws Exception;
 
 
     /**
