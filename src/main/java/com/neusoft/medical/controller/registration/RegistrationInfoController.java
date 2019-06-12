@@ -1,6 +1,7 @@
 package com.neusoft.medical.controller.registration;
 
 import com.github.pagehelper.PageInfo;
+import com.neusoft.medical.Util.DateConverter;
 import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.*;
@@ -33,6 +34,9 @@ public class RegistrationInfoController {
 
     @Resource
     private SchedulingService schedulingService;
+
+    @Resource
+    private DateConverter dateConverter;
 
     /**
      * 获取挂号科室列表
@@ -102,11 +106,11 @@ public class RegistrationInfoController {
             @RequestParam(value = "patientName") String patientName,
             @RequestParam(value = "gender") String gender,
             @RequestParam(value = "age") Integer age,
-            @RequestParam(value = "birthday") Date birthday,
+            @RequestParam(value = "birthday") String birthday,
             @RequestParam(value = "registrationCategory") String registrationCategory,
             @RequestParam(value = "medicalCategory") String medicalCategory,
             @RequestParam(value = "identityCardNo") String identityCardNo,
-            @RequestParam(value = "registrationDate") Date registrationDate,
+            @RequestParam(value = "registrationDate") String registrationDate,
             @RequestParam(value = "departmentId") Integer departmentId,
             @RequestParam(value = "doctorId") Integer doctorId,
             @RequestParam(value = "registrationSource") String registrationSource,
@@ -114,8 +118,13 @@ public class RegistrationInfoController {
             @RequestParam(value = "familyAddress") String familyAddress,
             @RequestParam(value = "collectorId") Integer collectorId) {
         System.out.println("提交挂号信息");
+        System.out.println("出生日期: " + birthday);
+        System.out.println("挂号日期: " + registrationDate);
+        Date birthdayConverted = dateConverter.convert(birthday);
+        Date registrationDateConverted = dateConverter.convert(registrationDate);
         registrationInfoService.addRegistration(
-                new Registration(null, patientName, null, gender, age, birthday, registrationCategory, medicalCategory, identityCardNo, null, null, registrationDate, departmentId, doctorId, registrationSource, settleAccountsCategory, null, 1, familyAddress, collectorId, null, null, null, null));
+                new Registration(null, patientName, null, gender, age, birthdayConverted, registrationCategory, medicalCategory, identityCardNo, null, null, registrationDateConverted, departmentId, doctorId, registrationSource, settleAccountsCategory, null, 1, familyAddress, collectorId, null, null, null, null))
+        ;
 // todo 尚未测试
         return null;
     }
@@ -129,8 +138,7 @@ public class RegistrationInfoController {
      */
     @GetMapping("list_registration")
     public ResultDTO<PageInfo<Registration>> listRegistration(
-            @RequestParam(value = "currentPage") Integer currentPage, @RequestParam(value = "pageSize") Integer pageSize
-    ) {
+            @RequestParam(value = "currentPage") Integer currentPage, @RequestParam(value = "pageSize") Integer pageSize) {
         System.out.println("RegistrationInfoController listRegistration: 获取挂号列表");
         PageInfo<Registration> registrationList = registrationInfoService.listRegistration(currentPage, pageSize);
         return new ResultDTO<>(registrationList);
