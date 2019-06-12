@@ -61,7 +61,7 @@ public class RegistrationInfoController {
         List<Doctor> doctorList = schedulingService.findCurrentAvailableDoctor(departmentId);
         if (doctorList.size() != 0)
             return new ResultDTO<>(doctorList);
-        return new ResultDTO<>(20000, "not found", null);
+        return new ResultDTO<>(ResultDTO.CODE_SUCCESS, "not found", null);
     }
 
     /**
@@ -76,7 +76,7 @@ public class RegistrationInfoController {
         Patient patient = patientService.selectPatientByIdentifyCardNo(identityCardNo);
         if (patient != null)
             return new ResultDTO<>(patient);
-        return new ResultDTO<>(20000, "not found", null);
+        return new ResultDTO<>(ResultDTO.CODE_SUCCESS, "not found", null);
     }
 
     /**
@@ -99,7 +99,7 @@ public class RegistrationInfoController {
      * @param settleAccountsCategory 结算类别
      * @param familyAddress          家庭住址
      * @param collectorId            收费员编号
-     * @return 挂号信息
+     * @return 挂号成功 true，挂号失败 false
      */
     @PostMapping("/add_registration")
     public ResultDTO<Boolean> addRegistration(
@@ -117,16 +117,19 @@ public class RegistrationInfoController {
             @RequestParam(value = "settleAccountsCategory") String settleAccountsCategory,
             @RequestParam(value = "familyAddress") String familyAddress,
             @RequestParam(value = "collectorId") Integer collectorId) {
-        System.out.println("提交挂号信息");
-        System.out.println("出生日期: " + birthday);
-        System.out.println("挂号日期: " + registrationDate);
+
         Date birthdayConverted = dateConverter.convert(birthday);
         Date registrationDateConverted = dateConverter.convert(registrationDate);
-        registrationInfoService.addRegistration(
-                new Registration(null, patientName, null, gender, age, birthdayConverted, registrationCategory, medicalCategory, identityCardNo, null, null, registrationDateConverted, departmentId, doctorId, registrationSource, settleAccountsCategory, null, 1, familyAddress, collectorId, null, null, null, null))
-        ;
-// todo 尚未测试
-        return null;
+
+        try {
+            Registration registration = registrationInfoService.addRegistration(
+                    new Registration(null, patientName, null, gender, age, birthdayConverted, registrationCategory, medicalCategory, identityCardNo, null, null, registrationDateConverted, departmentId, doctorId, registrationSource, settleAccountsCategory, null, 1, familyAddress, collectorId, null, null, null, null));
+            System.out.println("提交挂号信息: " + registration.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultDTO<>(Boolean.FALSE);
+        }
+        return new ResultDTO<>(Boolean.TRUE);
     }
 
     /**

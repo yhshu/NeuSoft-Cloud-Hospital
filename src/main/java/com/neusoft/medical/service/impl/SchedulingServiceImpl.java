@@ -45,12 +45,13 @@ public class SchedulingServiceImpl implements SchedulingService {
             doctorIdList.add(schedulingInfo.getDepartmentId());
         }
         // 然后获取医生信息列表
+        if (doctorIdList.isEmpty())  // 可用的医生为空，直接返回空列表
+            return new CopyOnWriteArrayList<>();
         DoctorExample doctorExample = new DoctorExample();
         DoctorExample.Criteria doctorExampleCriteria = doctorExample.createCriteria();
         doctorExampleCriteria.andValidEqualTo(1);            // 有效的医生信息
         doctorExampleCriteria.andDoctorSchedulingEqualTo(1); // 参与排班的医生
-        if (!doctorIdList.isEmpty())
-            doctorExampleCriteria.andDoctorIdIn(doctorIdList);
+        doctorExampleCriteria.andDoctorIdIn(doctorIdList);
         return doctorMapper.selectByExample(doctorExample);
     }
 }
