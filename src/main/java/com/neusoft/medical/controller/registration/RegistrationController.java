@@ -16,7 +16,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/registration")
-public class RegistrationInfoController {
+public class RegistrationController {
     @Resource
     private RegistrationInfoService registrationInfoService;
 
@@ -31,6 +31,9 @@ public class RegistrationInfoController {
 
     @Resource
     private DateConverter dateConverter;
+
+    @Resource
+    private ChargeFormService chargeFormService;
 
     /**
      * 获取挂号科室列表
@@ -153,5 +156,12 @@ public class RegistrationInfoController {
         System.out.println("RegistrationInfoController 按主键获取挂号信息");
         Registration registration = registrationInfoService.selectRegistrationByPrimaryKey(registrationId);
         return new ResultDTO<>(registration);
+    }
+
+    @GetMapping("/charge_form")
+    public ResultDTO<PageInfo<ChargeForm>> selectChargeForm(@RequestParam(value = "currentPage") Integer currentPage, @RequestParam(value = "pageSize") Integer pageSize, @RequestParam(value = "registrationId") Integer registrationId) {
+        System.out.println("RegistrationController 按挂号编号获取收费账单");
+        PageInfo<ChargeForm> chargeFormPageInfo = chargeFormService.selectChargeFormByRegistrationId(currentPage, pageSize, registrationId);
+        return new ResultDTO<>(chargeFormPageInfo);
     }
 }
