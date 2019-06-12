@@ -78,7 +78,6 @@ public class RegistrationController {
 
     /**
      * 提交挂号信息
-     * <p>
      * 1. 添加挂号信息
      * 2. 添加患者信息
      *
@@ -158,10 +157,39 @@ public class RegistrationController {
         return new ResultDTO<>(registration);
     }
 
+    /**
+     * 按挂号编号获取收费账单
+     *
+     * @param currentPage    当前页码
+     * @param pageSize       每页大小
+     * @param registrationId 挂号编号
+     * @return 分页的收费账单
+     */
     @GetMapping("/charge_form")
-    public ResultDTO<PageInfo<ChargeForm>> selectChargeForm(@RequestParam(value = "currentPage") Integer currentPage, @RequestParam(value = "pageSize") Integer pageSize, @RequestParam(value = "registrationId") Integer registrationId) {
+    public ResultDTO<PageInfo<ChargeForm>> selectChargeForm(
+            @RequestParam(value = "currentPage") Integer currentPage,
+            @RequestParam(value = "pageSize") Integer pageSize,
+            @RequestParam(value = "registrationId") Integer registrationId) {
         System.out.println("RegistrationController 按挂号编号获取收费账单");
         PageInfo<ChargeForm> chargeFormPageInfo = chargeFormService.selectChargeFormByRegistrationId(currentPage, pageSize, registrationId);
         return new ResultDTO<>(chargeFormPageInfo);
+    }
+
+
+    /**
+     * 将收费项目添加到患者的收费账单
+     *
+     * @param nameZh 收费项目中文名
+     * @param nums
+     * @param departmentId
+     * @return 添加成功 true，添加失败 false
+     */
+    public ResultDTO<Boolean> addChargeItemToChargeForm(
+            @RequestParam(value = "nameZh") String nameZh,
+            @RequestParam(value = "nums") Integer nums,
+            @RequestParam(value = "departmentId") Integer departmentId
+    ) {
+        System.out.println("将收费项目添加到收费账单");
+        return new ResultDTO<>(Boolean.TRUE);
     }
 }

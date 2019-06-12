@@ -462,63 +462,63 @@ public class ChargeItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andExpClassIdIsNull() {
-            addCriterion("exp_class_id is null");
+        public Criteria andExpenseCategoryIdIsNull() {
+            addCriterion("expense_category_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andExpClassIdIsNotNull() {
-            addCriterion("exp_class_id is not null");
+        public Criteria andExpenseCategoryIdIsNotNull() {
+            addCriterion("expense_category_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andExpClassIdEqualTo(Integer value) {
-            addCriterion("exp_class_id =", value, "expClassId");
+        public Criteria andExpenseCategoryIdEqualTo(Integer value) {
+            addCriterion("expense_category_id =", value, "expenseCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andExpClassIdNotEqualTo(Integer value) {
-            addCriterion("exp_class_id <>", value, "expClassId");
+        public Criteria andExpenseCategoryIdNotEqualTo(Integer value) {
+            addCriterion("expense_category_id <>", value, "expenseCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andExpClassIdGreaterThan(Integer value) {
-            addCriterion("exp_class_id >", value, "expClassId");
+        public Criteria andExpenseCategoryIdGreaterThan(Integer value) {
+            addCriterion("expense_category_id >", value, "expenseCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andExpClassIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("exp_class_id >=", value, "expClassId");
+        public Criteria andExpenseCategoryIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("expense_category_id >=", value, "expenseCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andExpClassIdLessThan(Integer value) {
-            addCriterion("exp_class_id <", value, "expClassId");
+        public Criteria andExpenseCategoryIdLessThan(Integer value) {
+            addCriterion("expense_category_id <", value, "expenseCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andExpClassIdLessThanOrEqualTo(Integer value) {
-            addCriterion("exp_class_id <=", value, "expClassId");
+        public Criteria andExpenseCategoryIdLessThanOrEqualTo(Integer value) {
+            addCriterion("expense_category_id <=", value, "expenseCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andExpClassIdIn(List<Integer> values) {
-            addCriterion("exp_class_id in", values, "expClassId");
+        public Criteria andExpenseCategoryIdIn(List<Integer> values) {
+            addCriterion("expense_category_id in", values, "expenseCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andExpClassIdNotIn(List<Integer> values) {
-            addCriterion("exp_class_id not in", values, "expClassId");
+        public Criteria andExpenseCategoryIdNotIn(List<Integer> values) {
+            addCriterion("expense_category_id not in", values, "expenseCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andExpClassIdBetween(Integer value1, Integer value2) {
-            addCriterion("exp_class_id between", value1, value2, "expClassId");
+        public Criteria andExpenseCategoryIdBetween(Integer value1, Integer value2) {
+            addCriterion("expense_category_id between", value1, value2, "expenseCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andExpClassIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("exp_class_id not between", value1, value2, "expClassId");
+        public Criteria andExpenseCategoryIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("expense_category_id not between", value1, value2, "expenseCategoryId");
             return (Criteria) this;
         }
 
@@ -652,63 +652,63 @@ public class ChargeItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andRecodeTypeIsNull() {
-            addCriterion("recode_type is null");
+        public Criteria andChargeTypeIsNull() {
+            addCriterion("charge_type is null");
             return (Criteria) this;
         }
 
-        public Criteria andRecodeTypeIsNotNull() {
-            addCriterion("recode_type is not null");
+        public Criteria andChargeTypeIsNotNull() {
+            addCriterion("charge_type is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRecodeTypeEqualTo(Integer value) {
-            addCriterion("recode_type =", value, "recodeType");
+        public Criteria andChargeTypeEqualTo(Integer value) {
+            addCriterion("charge_type =", value, "chargeType");
             return (Criteria) this;
         }
 
-        public Criteria andRecodeTypeNotEqualTo(Integer value) {
-            addCriterion("recode_type <>", value, "recodeType");
+        public Criteria andChargeTypeNotEqualTo(Integer value) {
+            addCriterion("charge_type <>", value, "chargeType");
             return (Criteria) this;
         }
 
-        public Criteria andRecodeTypeGreaterThan(Integer value) {
-            addCriterion("recode_type >", value, "recodeType");
+        public Criteria andChargeTypeGreaterThan(Integer value) {
+            addCriterion("charge_type >", value, "chargeType");
             return (Criteria) this;
         }
 
-        public Criteria andRecodeTypeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("recode_type >=", value, "recodeType");
+        public Criteria andChargeTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("charge_type >=", value, "chargeType");
             return (Criteria) this;
         }
 
-        public Criteria andRecodeTypeLessThan(Integer value) {
-            addCriterion("recode_type <", value, "recodeType");
+        public Criteria andChargeTypeLessThan(Integer value) {
+            addCriterion("charge_type <", value, "chargeType");
             return (Criteria) this;
         }
 
-        public Criteria andRecodeTypeLessThanOrEqualTo(Integer value) {
-            addCriterion("recode_type <=", value, "recodeType");
+        public Criteria andChargeTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("charge_type <=", value, "chargeType");
             return (Criteria) this;
         }
 
-        public Criteria andRecodeTypeIn(List<Integer> values) {
-            addCriterion("recode_type in", values, "recodeType");
+        public Criteria andChargeTypeIn(List<Integer> values) {
+            addCriterion("charge_type in", values, "chargeType");
             return (Criteria) this;
         }
 
-        public Criteria andRecodeTypeNotIn(List<Integer> values) {
-            addCriterion("recode_type not in", values, "recodeType");
+        public Criteria andChargeTypeNotIn(List<Integer> values) {
+            addCriterion("charge_type not in", values, "chargeType");
             return (Criteria) this;
         }
 
-        public Criteria andRecodeTypeBetween(Integer value1, Integer value2) {
-            addCriterion("recode_type between", value1, value2, "recodeType");
+        public Criteria andChargeTypeBetween(Integer value1, Integer value2) {
+            addCriterion("charge_type between", value1, value2, "chargeType");
             return (Criteria) this;
         }
 
-        public Criteria andRecodeTypeNotBetween(Integer value1, Integer value2) {
-            addCriterion("recode_type not between", value1, value2, "recodeType");
+        public Criteria andChargeTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("charge_type not between", value1, value2, "chargeType");
             return (Criteria) this;
         }
 

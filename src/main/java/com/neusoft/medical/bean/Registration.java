@@ -273,34 +273,4 @@ public class Registration {
     public void setReserve3(String reserve3) {
         this.reserve3 = reserve3 == null ? null : reserve3.trim();
     }
-
-    @Override
-    public String toString() {
-        return "Registration{" +
-                "registrationId=" + registrationId +
-                ", patientName='" + patientName + '\'' +
-                ", patientId=" + patientId +
-                ", gender='" + gender + '\'' +
-                ", age=" + age +
-                ", birthday=" + birthday +
-                ", registrationCategory='" + registrationCategory + '\'' +
-                ", medicalCategory='" + medicalCategory + '\'' +
-                ", identityCardNo='" + identityCardNo + '\'' +
-                ", registrationStatus='" + registrationStatus + '\'' +
-                ", visitDate=" + visitDate +
-                ", registrationDate=" + registrationDate +
-                ", departmentId=" + departmentId +
-                ", doctorId=" + doctorId +
-                ", registrationSource='" + registrationSource + '\'' +
-                ", settleAccountsCategory='" + settleAccountsCategory + '\'' +
-                ", isVisited='" + isVisited + '\'' +
-                ", valid=" + valid +
-                ", familyAddress='" + familyAddress + '\'' +
-                ", collectorId=" + collectorId +
-                ", totalCharge=" + totalCharge +
-                ", reserve1='" + reserve1 + '\'' +
-                ", reserve2='" + reserve2 + '\'' +
-                ", reserve3='" + reserve3 + '\'' +
-                '}';
-    }
 }
