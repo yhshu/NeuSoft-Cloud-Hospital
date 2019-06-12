@@ -4,14 +4,14 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.*;
-import com.neusoft.medical.service.RegistrationInfoService;
+import com.neusoft.medical.service.RegistrationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class RegistrationInfoServiceImpl implements RegistrationInfoService {
+public class RegistrationServiceImpl implements RegistrationService {
     @Resource
     private RegistrationMapper registrationMapper;
 

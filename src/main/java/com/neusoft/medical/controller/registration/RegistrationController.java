@@ -2,9 +2,15 @@ package com.neusoft.medical.controller.registration;
 
 import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.Util.DateConverter;
-import com.neusoft.medical.bean.*;
+import com.neusoft.medical.bean.Department;
+import com.neusoft.medical.bean.Doctor;
+import com.neusoft.medical.bean.Patient;
+import com.neusoft.medical.bean.Registration;
 import com.neusoft.medical.dto.ResultDTO;
-import com.neusoft.medical.service.*;
+import com.neusoft.medical.service.DepartmentService;
+import com.neusoft.medical.service.PatientService;
+import com.neusoft.medical.service.RegistrationService;
+import com.neusoft.medical.service.SchedulingService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -18,7 +24,7 @@ import java.util.List;
 @RequestMapping("/registration")
 public class RegistrationController {
     @Resource
-    private RegistrationInfoService registrationInfoService;
+    private RegistrationService registrationService;
 
     @Resource
     private DepartmentService departmentService;
@@ -31,12 +37,6 @@ public class RegistrationController {
 
     @Resource
     private DateConverter dateConverter;
-
-    @Resource
-    private ChargeFormService chargeFormService;
-
-    @Resource
-    private ChargeItemService chargeItemService;
 
     /**
      * 获取挂号科室列表
@@ -120,7 +120,7 @@ public class RegistrationController {
         Date birthdayConverted = dateConverter.convert(birthday);
         Date registrationDateConverted = dateConverter.convert(registrationDate);
         try {
-            registrationInfoService.addRegistration(
+            registrationService.addRegistration(
                     new Registration(null, patientName, null, gender, age, birthdayConverted, registrationCategory, medicalCategory, identityCardNo, null, null, registrationDateConverted, departmentId, doctorId, registrationSource, settleAccountsCategory, null, 1, familyAddress, collectorId, null, null, null, null));
             System.out.println("已提交挂号信息");
         } catch (Exception e) {
@@ -143,7 +143,7 @@ public class RegistrationController {
             @RequestParam(value = "pageSize") Integer pageSize) {
 
         System.out.println("RegistrationInfoController listRegistration: 获取挂号列表");
-        PageInfo<Registration> registrationList = registrationInfoService.listRegistration(currentPage, pageSize);
+        PageInfo<Registration> registrationList = registrationService.listRegistration(currentPage, pageSize);
         return new ResultDTO<>(registrationList);
     }
 
@@ -156,37 +156,7 @@ public class RegistrationController {
     @GetMapping("/select_registration")
     public ResultDTO<Registration> selectRegistrationByPrimaryKey(@RequestParam(value = "registrationId") Integer registrationId) {
         System.out.println("RegistrationInfoController 按主键获取挂号信息");
-        Registration registration = registrationInfoService.selectRegistrationByPrimaryKey(registrationId);
+        Registration registration = registrationService.selectRegistrationByPrimaryKey(registrationId);
         return new ResultDTO<>(registration);
     }
-
-    /**
-     * 按挂号编号获取收费账单
-     *
-     * @param currentPage    当前页码
-     * @param pageSize       每页大小
-     * @param registrationId 挂号编号
-     * @return 分页的收费账单
-     */
-    @GetMapping("/charge_form")
-    public ResultDTO<PageInfo<ChargeForm>> selectChargeForm(
-            @RequestParam(value = "currentPage") Integer currentPage,
-            @RequestParam(value = "pageSize") Integer pageSize,
-            @RequestParam(value = "registrationId") Integer registrationId) {
-        System.out.println("RegistrationController 按挂号编号获取收费账单");
-        PageInfo<ChargeForm> chargeFormPageInfo = chargeFormService.selectChargeFormByRegistrationId(currentPage, pageSize, registrationId);
-        return new ResultDTO<>(chargeFormPageInfo);
-    }
-
-    @GetMapping("/list_charge_item")
-    public ResultDTO<List<ChargeItem>> selectChageItemByDepartmentId(
-            @RequestParam(value = "departmentId") Integer departmentId
-    ) {
-        System.out.println("RegistrationController 按科室编号获取该科室的可收费项目");
-        List<ChargeItem> chargeItemList = chargeItemService.selectChargeItemByDepartmentId(departmentId);
-        return new ResultDTO<>(chargeItemList);
-    }
-
-//    @GetMapping("/add_charge_item_to_form")
-//    public List<>
 }
