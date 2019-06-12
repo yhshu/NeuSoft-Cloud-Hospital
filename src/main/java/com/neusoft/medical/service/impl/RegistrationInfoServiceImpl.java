@@ -74,4 +74,13 @@ public class RegistrationInfoServiceImpl implements RegistrationInfoService {
         }
         return new PageInfo<>(registrationList);
     }
+
+    @Override
+    public Registration selectRegistrationByPrimaryKey(Integer registrationId) {
+        System.out.println("RegistrationInfoServiceImpl selectRegistrationByPrimaryKey");
+        Registration registration = registrationMapper.selectByPrimaryKey(registrationId);
+        if (registration.getValid() == 0)
+            return null;
+        return registration;
+    }
 }

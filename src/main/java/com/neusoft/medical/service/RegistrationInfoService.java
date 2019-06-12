@@ -25,4 +25,12 @@ public interface RegistrationInfoService {
      * @return 分页的挂号信息
      */
     PageInfo<Registration> listRegistration(int currentPage, int pageSize);
+
+    /**
+     * 获取挂号欧信息
+     *
+     * @param registrationId 挂号编号
+     * @return 挂号信息
+     */
+    Registration selectRegistrationByPrimaryKey(Integer registrationId);
 }

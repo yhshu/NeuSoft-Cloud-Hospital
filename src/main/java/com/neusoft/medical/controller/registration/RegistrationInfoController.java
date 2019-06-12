@@ -132,11 +132,26 @@ public class RegistrationInfoController {
      * @param pageSize    页面大小
      * @return 分页的挂号信息
      */
-    @GetMapping("list_registration")
+    @GetMapping("/list_registration")
     public ResultDTO<PageInfo<Registration>> listRegistration(
-            @RequestParam(value = "currentPage") Integer currentPage, @RequestParam(value = "pageSize") Integer pageSize) {
+            @RequestParam(value = "currentPage") Integer currentPage,
+            @RequestParam(value = "pageSize") Integer pageSize) {
+
         System.out.println("RegistrationInfoController listRegistration: 获取挂号列表");
         PageInfo<Registration> registrationList = registrationInfoService.listRegistration(currentPage, pageSize);
         return new ResultDTO<>(registrationList);
+    }
+
+    /**
+     * 按挂号编号获取挂号信息
+     *
+     * @param registrationId 挂号编号
+     * @return 挂号信息
+     */
+    @GetMapping("/select_registration")
+    public ResultDTO<Registration> selectRegistrationByPrimaryKey(@RequestParam(value = "registrationId") Integer registrationId) {
+        System.out.println("RegistrationInfoController 按主键获取挂号信息");
+        Registration registration = registrationInfoService.selectRegistrationByPrimaryKey(registrationId);
+        return new ResultDTO<>(registration);
     }
 }
