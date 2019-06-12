@@ -28,5 +28,4 @@ public class ChargeFormServiceImpl implements ChargeFormService {
 
         return new PageInfo<>(chargeFormList);
     }
-
 }

@@ -35,6 +35,9 @@ public class RegistrationController {
     @Resource
     private ChargeFormService chargeFormService;
 
+    @Resource
+    private ChargeItemService chargeItemService;
+
     /**
      * 获取挂号科室列表
      *
@@ -175,21 +178,15 @@ public class RegistrationController {
         return new ResultDTO<>(chargeFormPageInfo);
     }
 
-
-    /**
-     * 将收费项目添加到患者的收费账单
-     *
-     * @param nameZh 收费项目中文名
-     * @param nums
-     * @param departmentId
-     * @return 添加成功 true，添加失败 false
-     */
-    public ResultDTO<Boolean> addChargeItemToChargeForm(
-            @RequestParam(value = "nameZh") String nameZh,
-            @RequestParam(value = "nums") Integer nums,
+    @GetMapping("/list_charge_item")
+    public ResultDTO<List<ChargeItem>> selectChageItemByDepartmentId(
             @RequestParam(value = "departmentId") Integer departmentId
     ) {
-        System.out.println("将收费项目添加到收费账单");
-        return new ResultDTO<>(Boolean.TRUE);
+        System.out.println("RegistrationController 按科室编号获取该科室的可收费项目");
+        List<ChargeItem> chargeItemList = chargeItemService.selectChargeItemByDepartmentId(departmentId);
+        return new ResultDTO<>(chargeItemList);
     }
+
+//    @GetMapping("/add_charge_item_to_form")
+//    public List<>
 }
