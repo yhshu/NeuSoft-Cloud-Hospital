@@ -28,7 +28,7 @@ public class RegistrationInfoServiceImpl implements RegistrationInfoService {
     public Registration addRegistration(Registration record) {
         System.out.println("RegistrationInfoServiceImpl addRegistration: " + record.toString());
         int effectRow = registrationMapper.insert(record);
-        System.out.println("RegistrationInfoServiceImpl addRegistration " + effectRow + " 项");
+        System.out.println("RegistrationInfoServiceImpl 新增挂号 " + effectRow + " 项");
         return registrationMapper.selectByPrimaryKey(record.getRegistrationId());
     }
 
@@ -39,8 +39,10 @@ public class RegistrationInfoServiceImpl implements RegistrationInfoService {
 
         List<Registration> registrationList = registrationMapper.selectByExample(registrationExample);
         for (Registration registration : registrationList) {
-            registration.setReserve1(departmentMapper.selectByPrimaryKey(registration.getDepartmentId()).getDepartmentName()); // 保留位1：科室名称
-            registration.setReserve2(doctorMapper.selectByPrimaryKey(registration.getDoctorId()).getDoctorName()); // 保留位2：医生姓名
+            // 保留位1：科室名称
+            // 保留位2：医生姓名
+            registration.setReserve1(departmentMapper.selectByPrimaryKey(registration.getDepartmentId()).getDepartmentName());
+            registration.setReserve2(doctorMapper.selectByPrimaryKey(registration.getDoctorId()).getDoctorName());
         }
         return new PageInfo<>(registrationList);
     }
