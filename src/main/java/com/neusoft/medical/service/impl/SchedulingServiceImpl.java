@@ -47,7 +47,8 @@ public class SchedulingServiceImpl implements SchedulingService {
         // 然后获取医生信息列表
         DoctorExample doctorExample = new DoctorExample();
         DoctorExample.Criteria doctorExampleCriteria = doctorExample.createCriteria();
-        doctorExampleCriteria.andValidEqualTo(1);
+        doctorExampleCriteria.andValidEqualTo(1);            // 有效的医生信息
+        doctorExampleCriteria.andDoctorSchedulingEqualTo(1); // 参与排班的医生
         if (!doctorIdList.isEmpty())
             doctorExampleCriteria.andDoctorIdIn(doctorIdList);
         return doctorMapper.selectByExample(doctorExample);
