@@ -75,10 +75,25 @@ public class RegistrationInfoController {
 
     /**
      * 提交挂号信息
+     *
+     * @param patientName            患者姓名
+     * @param gender                 患者性别
+     * @param age                    患者年龄
+     * @param birthday               患者生日
+     * @param registrationCategory   挂号类型
+     * @param medicalCategory        医疗类别
+     * @param identityCardNo         患者身份证号
+     * @param registrationDate       挂号日期
+     * @param departmentId           挂号科室编号
+     * @param doctorId               看诊医生编号
+     * @param registrationSource     挂号来源
+     * @param settleAccountsCategory 结算类别
+     * @param familyAddress          家庭住址
+     * @param collectorId            收费员编号
+     * @return 挂号信息
      */
     @PostMapping("/add_registration")
     public ResultDTO<Boolean> register(
-            @RequestParam(value = "registrationId") Integer registrationId,
             @RequestParam(value = "patientName") String patientName,
             @RequestParam(value = "gender") String gender,
             @RequestParam(value = "age") Integer age,
@@ -86,21 +101,19 @@ public class RegistrationInfoController {
             @RequestParam(value = "registrationCategory") String registrationCategory,
             @RequestParam(value = "medicalCategory") String medicalCategory,
             @RequestParam(value = "identityCardNo") String identityCardNo,
-            @RequestParam(value = "registrationStatus") String registrationStatus,
-            @RequestParam(value = "visitDate") Date visitDate,
             @RequestParam(value = "registrationDate") Date registrationDate,
             @RequestParam(value = "departmentId") Integer departmentId,
             @RequestParam(value = "doctorId") Integer doctorId,
             @RequestParam(value = "registrationSource") String registrationSource,
             @RequestParam(value = "settleAccountsCategory") String settleAccountsCategory,
-            @RequestParam(value = "isVisited") String isVisited,
             @RequestParam(value = "familyAddress") String familyAddress,
             @RequestParam(value = "collectorId") Integer collectorId) {
         System.out.println("提交挂号信息");
         registrationInfoService.addRegistration(
-                new Registration(registrationId, patientName, null, gender, age, birthday, registrationCategory, medicalCategory, identityCardNo, registrationStatus, visitDate, registrationDate, departmentId, doctorId, registrationSource, settleAccountsCategory, isVisited, 1, familyAddress, collectorId, null, null, null, null));
+                new Registration(null, patientName, null, gender, age, birthday, registrationCategory, medicalCategory, identityCardNo, null, null, registrationDate, departmentId, doctorId, registrationSource, settleAccountsCategory, null, 1, familyAddress, collectorId, null, null, null, null));
 // todo 尚未测试
         return null;
     }
 
+//    @GetMapping("list_registration")
 }
