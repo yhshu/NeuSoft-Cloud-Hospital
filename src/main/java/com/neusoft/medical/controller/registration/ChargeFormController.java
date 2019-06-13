@@ -104,7 +104,7 @@ public class ChargeFormController {
      * 按收费项目编号列表 删除多个收费项目
      *
      * @param chargeItemIdList 收费项目编号
-     * @return
+     * @return 成功返回 true，失败返回 false
      */
     @DeleteMapping("/delete_charge_item_in_form")
     public ResultDTO<Boolean> deleteChargeItemInForm(@RequestParam("chargeItemIdList[]") Integer[] chargeItemIdList) {

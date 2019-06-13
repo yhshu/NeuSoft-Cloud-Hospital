@@ -42,10 +42,11 @@ public class ChargeFormServiceImpl implements ChargeFormService {
         for (ChargeForm chargeForm : chargeFormList) {
             // 保留位1：收费项目规格
             // 保留位2：收费项目单价
-            // 保留收费项目单位
+            // 保留位3：收费项目名称
 
             chargeForm.setReserve1(chargeItemMapper.selectByPrimaryKey(chargeForm.getChargeItemId()).getSpecification());
             chargeForm.setReserve2(chargeItemMapper.selectByPrimaryKey(chargeForm.getChargeItemId()).getPrice().toString());
+            chargeForm.setReserve2(chargeItemMapper.selectByPrimaryKey(chargeForm.getChargeItemId()).getNameZh());
         }
 
         return new PageInfo<>(chargeFormList);
