@@ -1,6 +1,6 @@
 package com.neusoft.medical.service;
 
-import com.neusoft.medical.bean.Patient;
+import com.neusoft.medical.bean.Registration;
 
 import java.util.List;
 
@@ -10,23 +10,20 @@ import java.util.List;
  */
 public interface OutpatientMedicalRecordService {
     /**
-     * 根据挂号编号获取患者信息
+     * 获取医生的待诊患者列表
      *
-     * @param registrationId      挂号编号
-     * @param patientScope 患者搜索范围：所有患者 0，本医生患者 1，本科室患者 2
-     * @param doctorId            医生编号
-     * @return 患者信息
+     * @param registrationScope 查询的挂号范围
+     * @param doctorId          医生编号
+     * @return 待诊患者列表
      */
-    Patient selectPatientByRegistrationId(int registrationId, int patientScope, int doctorId);
+    List<Registration> waitingRegistrationList(int registrationScope, int doctorId);
 
     /**
-     * 根据患者姓名搜索患者信息
-     * 支持子串搜索
+     * 获取医生的已诊患者列表
      *
-     * @param patientName         患者姓名
-     * @param patientScope 患者搜索范围：所有患者 0，本医生患者 1，本科室患者 2
-     * @param doctorId            医生编号
-     * @return 患者信息
+     * @param registrationScope 查询的挂号范围
+     * @param doctorId          医生编号
+     * @return 已诊患者列表
      */
-    List<Patient> selectPatientByPatientName(String patientName, int patientScope, int doctorId);
+    List<Registration> visitedRegistrationList(int registrationScope, int doctorId);
 }

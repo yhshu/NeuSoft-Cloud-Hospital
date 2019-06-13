@@ -1,22 +1,19 @@
 package com.neusoft.medical.service.impl;
 
 import com.neusoft.medical.bean.Doctor;
-import com.neusoft.medical.bean.Patient;
-import com.neusoft.medical.bean.PatientExample;
 import com.neusoft.medical.bean.Registration;
+import com.neusoft.medical.bean.RegistrationExample;
 import com.neusoft.medical.dao.DoctorMapper;
-import com.neusoft.medical.dao.PatientMapper;
 import com.neusoft.medical.dao.RegistrationMapper;
 import com.neusoft.medical.service.OutpatientMedicalRecordService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
 public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalRecordService {
-    @Resource
-    private PatientMapper patientMapper;
 
     @Resource
     private RegistrationMapper registrationMapper;
@@ -24,44 +21,51 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
     @Resource
     private DoctorMapper doctorMapper;
 
-    public final int PATIENT_SCOPE_ALL = 0;
-    public final int PATIENT_SCOPE_DOCTOR = 1;
-    public final int PATIENT_SCOPE_DEPART = 2;
+    public final int REGIST_SCOPE_ALL = 0;
+    public final int REGIST_SCOPE_DOCTOR = 1;
+    public final int REGIST_SCOPE_DEPRAT = 2;
 
     @Override
-    public Patient selectPatientByRegistrationId(int registrationId, int patientScope, int doctorId) {
+    public List<Registration> waitingRegistrationList(int registrationScope, int doctorId) {
+        RegistrationExample registrationExample = new RegistrationExample();
         try {
-            Registration registration = registrationMapper.selectByPrimaryKey(registrationId);
-            if (registration.getValid() == 0)
-                return null;
-            if (patientScope == PATIENT_SCOPE_DOCTOR && registration.getDoctorId() != doctorId)
-                return null;
-            if (patientScope == PATIENT_SCOPE_DEPART) {
-                Doctor doctor = doctorMapper.selectByPrimaryKey(doctorId);
-                if (!registration.getDepartmentId().equals(doctor.getDepartment()))
-                    return null;
+            RegistrationExample.Criteria criteria = registrationExample.createCriteria();
+            criteria.andValidEqualTo(1);
+            criteria.andIsVisitedEqualTo("0");
+            if (registrationScope == REGIST_SCOPE_DOCTOR) {
+                criteria.andDoctorIdEqualTo(doctorId);
             }
-            int patientId = registration.getPatientId();
-
-            Patient patient = patientMapper.selectByPrimaryKey(patientId);
-            if (patient.getValid() == 0)
-                return null;
-            return patient;
+            if (registrationScope == REGIST_SCOPE_DEPRAT) {
+                Doctor doctor = doctorMapper.selectByPrimaryKey(doctorId);
+                int departmentId = doctor.getDepartment();
+                criteria.andDepartmentIdEqualTo(departmentId);
+            }
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return new CopyOnWriteArrayList<>();
         }
+        return registrationMapper.selectByExample(registrationExample);
     }
 
     @Override
-    public List<Patient> selectPatientByPatientName(String patientName, int patientScope, int doctorId) {
-        PatientExample patientExample = new PatientExample();
-        PatientExample.Criteria criteria = patientExample.createCriteria();
-        criteria.andValidEqualTo(1); // 有效的患者信息
-        criteria.andPatientNameLike(patientName); // 包含姓名
-        // todo
-
-        return patientMapper.selectByExample(patientExample);
+    public List<Registration> visitedRegistrationList(int registrationScope, int doctorId) {
+        RegistrationExample registrationExample = new RegistrationExample();
+        try {
+            RegistrationExample.Criteria criteria = registrationExample.createCriteria();
+            criteria.andValidEqualTo(1);
+            criteria.andIsVisitedEqualTo("1");
+            if (registrationScope == REGIST_SCOPE_DOCTOR) {
+                criteria.andDoctorIdEqualTo(doctorId);
+            }
+            if (registrationScope == REGIST_SCOPE_DEPRAT) {
+                Doctor doctor = doctorMapper.selectByPrimaryKey(doctorId);
+                int departmentId = doctor.getDepartment();
+                criteria.andDepartmentIdEqualTo(departmentId);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new CopyOnWriteArrayList<>();
+        }
+        return registrationMapper.selectByExample(registrationExample);
     }
-
 }
