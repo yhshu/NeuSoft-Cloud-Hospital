@@ -9,7 +9,7 @@ public class Medicine {
 
     private String nameZh;
 
-    private String medicineFormat;
+    private String medicineSpecification;
 
     private String medicineUnit;
 
@@ -37,11 +37,11 @@ public class Medicine {
 
     private String reserve3;
 
-    public Medicine(Integer medicineId, String medicineCode, String nameZh, String medicineFormat, String medicineUnit, String medicineManufacturer, Integer medicineDosageId, Integer medicineTypeId, Long medicinePrice, String namePinyin, Date creationTime, Integer nums, String nameEn, Integer valid, String reserve1, String reserve2, String reserve3) {
+    public Medicine(Integer medicineId, String medicineCode, String nameZh, String medicineSpecification, String medicineUnit, String medicineManufacturer, Integer medicineDosageId, Integer medicineTypeId, Long medicinePrice, String namePinyin, Date creationTime, Integer nums, String nameEn, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.medicineId = medicineId;
         this.medicineCode = medicineCode;
         this.nameZh = nameZh;
-        this.medicineFormat = medicineFormat;
+        this.medicineSpecification = medicineSpecification;
         this.medicineUnit = medicineUnit;
         this.medicineManufacturer = medicineManufacturer;
         this.medicineDosageId = medicineDosageId;
@@ -85,12 +85,12 @@ public class Medicine {
         this.nameZh = nameZh == null ? null : nameZh.trim();
     }
 
-    public String getMedicineFormat() {
-        return medicineFormat;
+    public String getMedicineSpecification() {
+        return medicineSpecification;
     }
 
-    public void setMedicineFormat(String medicineFormat) {
-        this.medicineFormat = medicineFormat == null ? null : medicineFormat.trim();
+    public void setMedicineSpecification(String medicineSpecification) {
+        this.medicineSpecification = medicineSpecification == null ? null : medicineSpecification.trim();
     }
 
     public String getMedicineUnit() {
