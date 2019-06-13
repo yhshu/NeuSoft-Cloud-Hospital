@@ -81,4 +81,22 @@ public class ChargeFormServiceImpl implements ChargeFormService {
         }
         return true;
     }
+
+    @Override
+    public boolean payBill(List<Integer> chargeFormIdList) {
+        try {
+            ChargeFormExample chargeFormExample = new ChargeFormExample();
+            ChargeFormExample.Criteria criteria = chargeFormExample.createCriteria();
+            criteria.andValidEqualTo(1);
+            criteria.andChargeFormIdIn(chargeFormIdList);
+
+            ChargeForm record = new ChargeForm();
+            record.setUnchargedNums(0);
+            chargeFormMapper.updateByExampleSelective(record, chargeFormExample);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }

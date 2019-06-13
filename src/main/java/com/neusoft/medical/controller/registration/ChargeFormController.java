@@ -107,10 +107,29 @@ public class ChargeFormController {
      * @return 成功返回 true，失败返回 false
      */
     @DeleteMapping("/delete_charge_item_in_form")
-    public ResultDTO<Boolean> deleteChargeItemInForm(@RequestParam("chargeItemIdList[]") Integer[] chargeItemIdList) {
+    public ResultDTO<Boolean> deleteChargeItemInForm(
+            @RequestParam(value = "chargeItemIdList[]") Integer[] chargeItemIdList) {
         System.out.println("ChargeFormController 按科室编号列表删除收费项目");
         try {
             chargeFormService.deleteChargeItemInForm(Arrays.asList(chargeItemIdList));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultDTO<>(Boolean.FALSE);
+        }
+        return new ResultDTO<>(Boolean.TRUE);
+    }
+
+    /**
+     * 患者支付收费项目
+     *
+     * @param chargeFormIdList 被支付的收费项目编号
+     * @return 支付成功 true，支付失败 false
+     */
+    @GetMapping("/pay_bill")
+    public ResultDTO<Boolean> payBill(
+            @RequestParam(value = "chargeItemIdList[]") Integer[] chargeFormIdList) {
+        try {
+            chargeFormService.payBill(Arrays.asList(chargeFormIdList));
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultDTO<>(Boolean.FALSE);

@@ -38,4 +38,12 @@ public interface ChargeFormService {
      * @return 删除成功 true；删除失败 false
      */
     boolean deleteChargeItemInForm(List<Integer> chargeItemIdList);
+
+    /**
+     * 患者支付收费项目
+     *
+     * @param chargeFormIdList 被支付的收费项目编号
+     * @return 支付成功 true，支付失败 false
+     */
+    boolean payBill(List<Integer> chargeFormIdList);
 }
