@@ -3,7 +3,7 @@ package com.neusoft.medical.service;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.Registration;
 
-public interface RegistrationInfoService {
+public interface RegistrationService {
 
     /**
      * 提交挂号信息

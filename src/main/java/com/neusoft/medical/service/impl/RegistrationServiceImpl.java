@@ -4,14 +4,14 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.*;
-import com.neusoft.medical.service.RegistrationInfoService;
+import com.neusoft.medical.service.RegistrationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class RegistrationInfoServiceImpl implements RegistrationInfoService {
+public class RegistrationServiceImpl implements RegistrationService {
     @Resource
     private RegistrationMapper registrationMapper;
 
@@ -77,10 +77,14 @@ public class RegistrationInfoServiceImpl implements RegistrationInfoService {
 
     @Override
     public Registration selectRegistrationByPrimaryKey(Integer registrationId) {
-        System.out.println("RegistrationInfoServiceImpl selectRegistrationByPrimaryKey");
+        System.out.println("RegistrationInfoServiceImpl 按主键获取挂号信息");
         Registration registration = registrationMapper.selectByPrimaryKey(registrationId);
         if (registration.getValid() == 0)
             return null;
+        // 保留位1：科室名称
+        // 保留位2：医生姓名
+        registration.setReserve1(departmentMapper.selectByPrimaryKey(registration.getDepartmentId()).getDepartmentName());
+        registration.setReserve2(doctorMapper.selectByPrimaryKey(registration.getDoctorId()).getDoctorName());
         return registration;
     }
 }

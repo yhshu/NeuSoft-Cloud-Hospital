@@ -6,7 +6,7 @@
       <idArg column="medicine_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="medicine_code" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="name_zh" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="medicine_format" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="medicine_specification" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="medicine_unit" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="medicine_manufacturer" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="medicine_dosage_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
@@ -81,7 +81,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    medicine_id, medicine_code, name_zh, medicine_format, medicine_unit, medicine_manufacturer, 
+    medicine_id, medicine_code, name_zh, medicine_specification, medicine_unit, medicine_manufacturer, 
     medicine_dosage_id, medicine_type_id, medicine_price, name_pinyin, creation_time, 
     nums, name_en, valid, reserve1, reserve2, reserve3
   </sql>
@@ -117,8 +117,8 @@
       <if test="nameZh != null">
         name_zh,
       </if>
-      <if test="medicineFormat != null">
-        medicine_format,
+      <if test="medicineSpecification != null">
+        medicine_specification,
       </if>
       <if test="medicineUnit != null">
         medicine_unit,
@@ -170,8 +170,8 @@
       <if test="nameZh != null">
         #{nameZh,jdbcType=VARCHAR},
       </if>
-      <if test="medicineFormat != null">
-        #{medicineFormat,jdbcType=VARCHAR},
+      <if test="medicineSpecification != null">
+        #{medicineSpecification,jdbcType=VARCHAR},
       </if>
       <if test="medicineUnit != null">
         #{medicineUnit,jdbcType=VARCHAR},
@@ -232,8 +232,8 @@
       <if test="record.nameZh != null">
         name_zh = #{record.nameZh,jdbcType=VARCHAR},
       </if>
-      <if test="record.medicineFormat != null">
-        medicine_format = #{record.medicineFormat,jdbcType=VARCHAR},
+      <if test="record.medicineSpecification != null">
+        medicine_specification = #{record.medicineSpecification,jdbcType=VARCHAR},
       </if>
       <if test="record.medicineUnit != null">
         medicine_unit = #{record.medicineUnit,jdbcType=VARCHAR},
@@ -284,7 +284,7 @@
     set medicine_id = #{record.medicineId,jdbcType=INTEGER},
       medicine_code = #{record.medicineCode,jdbcType=VARCHAR},
       name_zh = #{record.nameZh,jdbcType=VARCHAR},
-      medicine_format = #{record.medicineFormat,jdbcType=VARCHAR},
+      medicine_specification = #{record.medicineSpecification,jdbcType=VARCHAR},
       medicine_unit = #{record.medicineUnit,jdbcType=VARCHAR},
       medicine_manufacturer = #{record.medicineManufacturer,jdbcType=VARCHAR},
       medicine_dosage_id = #{record.medicineDosageId,jdbcType=INTEGER},
@@ -311,8 +311,8 @@
       <if test="nameZh != null">
         name_zh = #{nameZh,jdbcType=VARCHAR},
       </if>
-      <if test="medicineFormat != null">
-        medicine_format = #{medicineFormat,jdbcType=VARCHAR},
+      <if test="medicineSpecification != null">
+        medicine_specification = #{medicineSpecification,jdbcType=VARCHAR},
       </if>
       <if test="medicineUnit != null">
         medicine_unit = #{medicineUnit,jdbcType=VARCHAR},

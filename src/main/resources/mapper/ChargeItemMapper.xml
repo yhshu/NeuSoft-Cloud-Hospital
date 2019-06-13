@@ -6,12 +6,12 @@
       <idArg column="charge_item_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="charge_item_code" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="name_zh" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="charge_item_format" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="specification" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="price" javaType="java.lang.Long" jdbcType="DECIMAL" />
-      <arg column="exp_class_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="expense_category_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="department_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="name_pinyin" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="recode_type" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="charge_type" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="creation_time" javaType="java.util.Date" jdbcType="DATE" />
       <arg column="charge_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="nums" javaType="java.lang.Integer" jdbcType="INTEGER" />
@@ -81,8 +81,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    charge_item_id, charge_item_code, name_zh, charge_item_format, price, exp_class_id, 
-    department_id, name_pinyin, recode_type, creation_time, charge_time, nums, name_en, 
+    charge_item_id, charge_item_code, name_zh, specification, price, expense_category_id, 
+    department_id, name_pinyin, charge_type, creation_time, charge_time, nums, name_en, 
     valid, reserve1, reserve2, reserve3
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.ChargeItemExample" resultMap="BaseResultMap">
@@ -117,14 +117,14 @@
       <if test="nameZh != null">
         name_zh,
       </if>
-      <if test="chargeItemFormat != null">
-        charge_item_format,
+      <if test="specification != null">
+        specification,
       </if>
       <if test="price != null">
         price,
       </if>
-      <if test="expClassId != null">
-        exp_class_id,
+      <if test="expenseCategoryId != null">
+        expense_category_id,
       </if>
       <if test="departmentId != null">
         department_id,
@@ -132,8 +132,8 @@
       <if test="namePinyin != null">
         name_pinyin,
       </if>
-      <if test="recodeType != null">
-        recode_type,
+      <if test="chargeType != null">
+        charge_type,
       </if>
       <if test="creationTime != null">
         creation_time,
@@ -170,14 +170,14 @@
       <if test="nameZh != null">
         #{nameZh,jdbcType=VARCHAR},
       </if>
-      <if test="chargeItemFormat != null">
-        #{chargeItemFormat,jdbcType=VARCHAR},
+      <if test="specification != null">
+        #{specification,jdbcType=VARCHAR},
       </if>
       <if test="price != null">
         #{price,jdbcType=DECIMAL},
       </if>
-      <if test="expClassId != null">
-        #{expClassId,jdbcType=INTEGER},
+      <if test="expenseCategoryId != null">
+        #{expenseCategoryId,jdbcType=INTEGER},
       </if>
       <if test="departmentId != null">
         #{departmentId,jdbcType=INTEGER},
@@ -185,8 +185,8 @@
       <if test="namePinyin != null">
         #{namePinyin,jdbcType=VARCHAR},
       </if>
-      <if test="recodeType != null">
-        #{recodeType,jdbcType=INTEGER},
+      <if test="chargeType != null">
+        #{chargeType,jdbcType=INTEGER},
       </if>
       <if test="creationTime != null">
         #{creationTime,jdbcType=DATE},
@@ -232,14 +232,14 @@
       <if test="record.nameZh != null">
         name_zh = #{record.nameZh,jdbcType=VARCHAR},
       </if>
-      <if test="record.chargeItemFormat != null">
-        charge_item_format = #{record.chargeItemFormat,jdbcType=VARCHAR},
+      <if test="record.specification != null">
+        specification = #{record.specification,jdbcType=VARCHAR},
       </if>
       <if test="record.price != null">
         price = #{record.price,jdbcType=DECIMAL},
       </if>
-      <if test="record.expClassId != null">
-        exp_class_id = #{record.expClassId,jdbcType=INTEGER},
+      <if test="record.expenseCategoryId != null">
+        expense_category_id = #{record.expenseCategoryId,jdbcType=INTEGER},
       </if>
       <if test="record.departmentId != null">
         department_id = #{record.departmentId,jdbcType=INTEGER},
@@ -247,8 +247,8 @@
       <if test="record.namePinyin != null">
         name_pinyin = #{record.namePinyin,jdbcType=VARCHAR},
       </if>
-      <if test="record.recodeType != null">
-        recode_type = #{record.recodeType,jdbcType=INTEGER},
+      <if test="record.chargeType != null">
+        charge_type = #{record.chargeType,jdbcType=INTEGER},
       </if>
       <if test="record.creationTime != null">
         creation_time = #{record.creationTime,jdbcType=DATE},
@@ -284,12 +284,12 @@
     set charge_item_id = #{record.chargeItemId,jdbcType=INTEGER},
       charge_item_code = #{record.chargeItemCode,jdbcType=VARCHAR},
       name_zh = #{record.nameZh,jdbcType=VARCHAR},
-      charge_item_format = #{record.chargeItemFormat,jdbcType=VARCHAR},
+      specification = #{record.specification,jdbcType=VARCHAR},
       price = #{record.price,jdbcType=DECIMAL},
-      exp_class_id = #{record.expClassId,jdbcType=INTEGER},
+      expense_category_id = #{record.expenseCategoryId,jdbcType=INTEGER},
       department_id = #{record.departmentId,jdbcType=INTEGER},
       name_pinyin = #{record.namePinyin,jdbcType=VARCHAR},
-      recode_type = #{record.recodeType,jdbcType=INTEGER},
+      charge_type = #{record.chargeType,jdbcType=INTEGER},
       creation_time = #{record.creationTime,jdbcType=DATE},
       charge_time = #{record.chargeTime,jdbcType=TIMESTAMP},
       nums = #{record.nums,jdbcType=INTEGER},
@@ -311,14 +311,14 @@
       <if test="nameZh != null">
         name_zh = #{nameZh,jdbcType=VARCHAR},
       </if>
-      <if test="chargeItemFormat != null">
-        charge_item_format = #{chargeItemFormat,jdbcType=VARCHAR},
+      <if test="specification != null">
+        specification = #{specification,jdbcType=VARCHAR},
       </if>
       <if test="price != null">
         price = #{price,jdbcType=DECIMAL},
       </if>
-      <if test="expClassId != null">
-        exp_class_id = #{expClassId,jdbcType=INTEGER},
+      <if test="expenseCategoryId != null">
+        expense_category_id = #{expenseCategoryId,jdbcType=INTEGER},
       </if>
       <if test="departmentId != null">
         department_id = #{departmentId,jdbcType=INTEGER},
@@ -326,8 +326,8 @@
       <if test="namePinyin != null">
         name_pinyin = #{namePinyin,jdbcType=VARCHAR},
       </if>
-      <if test="recodeType != null">
-        recode_type = #{recodeType,jdbcType=INTEGER},
+      <if test="chargeType != null">
+        charge_type = #{chargeType,jdbcType=INTEGER},
       </if>
       <if test="creationTime != null">
         creation_time = #{creationTime,jdbcType=DATE},

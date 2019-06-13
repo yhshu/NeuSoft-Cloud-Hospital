@@ -9,17 +9,17 @@ public class ChargeItem {
 
     private String nameZh;
 
-    private String chargeItemFormat;
+    private String specification;
 
     private Long price;
 
-    private Integer expClassId;
+    private Integer expenseCategoryId;
 
     private Integer departmentId;
 
     private String namePinyin;
 
-    private Integer recodeType;
+    private Integer chargeType;
 
     private Date creationTime;
 
@@ -37,16 +37,16 @@ public class ChargeItem {
 
     private String reserve3;
 
-    public ChargeItem(Integer chargeItemId, String chargeItemCode, String nameZh, String chargeItemFormat, Long price, Integer expClassId, Integer departmentId, String namePinyin, Integer recodeType, Date creationTime, Date chargeTime, Integer nums, String nameEn, Integer valid, String reserve1, String reserve2, String reserve3) {
+    public ChargeItem(Integer chargeItemId, String chargeItemCode, String nameZh, String specification, Long price, Integer expenseCategoryId, Integer departmentId, String namePinyin, Integer chargeType, Date creationTime, Date chargeTime, Integer nums, String nameEn, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.chargeItemId = chargeItemId;
         this.chargeItemCode = chargeItemCode;
         this.nameZh = nameZh;
-        this.chargeItemFormat = chargeItemFormat;
+        this.specification = specification;
         this.price = price;
-        this.expClassId = expClassId;
+        this.expenseCategoryId = expenseCategoryId;
         this.departmentId = departmentId;
         this.namePinyin = namePinyin;
-        this.recodeType = recodeType;
+        this.chargeType = chargeType;
         this.creationTime = creationTime;
         this.chargeTime = chargeTime;
         this.nums = nums;
@@ -85,12 +85,12 @@ public class ChargeItem {
         this.nameZh = nameZh == null ? null : nameZh.trim();
     }
 
-    public String getChargeItemFormat() {
-        return chargeItemFormat;
+    public String getSpecification() {
+        return specification;
     }
 
-    public void setChargeItemFormat(String chargeItemFormat) {
-        this.chargeItemFormat = chargeItemFormat == null ? null : chargeItemFormat.trim();
+    public void setSpecification(String specification) {
+        this.specification = specification == null ? null : specification.trim();
     }
 
     public Long getPrice() {
@@ -101,12 +101,12 @@ public class ChargeItem {
         this.price = price;
     }
 
-    public Integer getExpClassId() {
-        return expClassId;
+    public Integer getExpenseCategoryId() {
+        return expenseCategoryId;
     }
 
-    public void setExpClassId(Integer expClassId) {
-        this.expClassId = expClassId;
+    public void setExpenseCategoryId(Integer expenseCategoryId) {
+        this.expenseCategoryId = expenseCategoryId;
     }
 
     public Integer getDepartmentId() {
@@ -125,12 +125,12 @@ public class ChargeItem {
         this.namePinyin = namePinyin == null ? null : namePinyin.trim();
     }
 
-    public Integer getRecodeType() {
-        return recodeType;
+    public Integer getChargeType() {
+        return chargeType;
     }
 
-    public void setRecodeType(Integer recodeType) {
-        this.recodeType = recodeType;
+    public void setChargeType(Integer chargeType) {
+        this.chargeType = chargeType;
     }
 
     public Date getCreationTime() {

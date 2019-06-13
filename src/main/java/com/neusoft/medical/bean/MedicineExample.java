@@ -332,73 +332,73 @@ public class MedicineExample {
             return (Criteria) this;
         }
 
-        public Criteria andMedicineFormatIsNull() {
-            addCriterion("medicine_format is null");
+        public Criteria andMedicineSpecificationIsNull() {
+            addCriterion("medicine_specification is null");
             return (Criteria) this;
         }
 
-        public Criteria andMedicineFormatIsNotNull() {
-            addCriterion("medicine_format is not null");
+        public Criteria andMedicineSpecificationIsNotNull() {
+            addCriterion("medicine_specification is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMedicineFormatEqualTo(String value) {
-            addCriterion("medicine_format =", value, "medicineFormat");
+        public Criteria andMedicineSpecificationEqualTo(String value) {
+            addCriterion("medicine_specification =", value, "medicineSpecification");
             return (Criteria) this;
         }
 
-        public Criteria andMedicineFormatNotEqualTo(String value) {
-            addCriterion("medicine_format <>", value, "medicineFormat");
+        public Criteria andMedicineSpecificationNotEqualTo(String value) {
+            addCriterion("medicine_specification <>", value, "medicineSpecification");
             return (Criteria) this;
         }
 
-        public Criteria andMedicineFormatGreaterThan(String value) {
-            addCriterion("medicine_format >", value, "medicineFormat");
+        public Criteria andMedicineSpecificationGreaterThan(String value) {
+            addCriterion("medicine_specification >", value, "medicineSpecification");
             return (Criteria) this;
         }
 
-        public Criteria andMedicineFormatGreaterThanOrEqualTo(String value) {
-            addCriterion("medicine_format >=", value, "medicineFormat");
+        public Criteria andMedicineSpecificationGreaterThanOrEqualTo(String value) {
+            addCriterion("medicine_specification >=", value, "medicineSpecification");
             return (Criteria) this;
         }
 
-        public Criteria andMedicineFormatLessThan(String value) {
-            addCriterion("medicine_format <", value, "medicineFormat");
+        public Criteria andMedicineSpecificationLessThan(String value) {
+            addCriterion("medicine_specification <", value, "medicineSpecification");
             return (Criteria) this;
         }
 
-        public Criteria andMedicineFormatLessThanOrEqualTo(String value) {
-            addCriterion("medicine_format <=", value, "medicineFormat");
+        public Criteria andMedicineSpecificationLessThanOrEqualTo(String value) {
+            addCriterion("medicine_specification <=", value, "medicineSpecification");
             return (Criteria) this;
         }
 
-        public Criteria andMedicineFormatLike(String value) {
-            addCriterion("medicine_format like", value, "medicineFormat");
+        public Criteria andMedicineSpecificationLike(String value) {
+            addCriterion("medicine_specification like", value, "medicineSpecification");
             return (Criteria) this;
         }
 
-        public Criteria andMedicineFormatNotLike(String value) {
-            addCriterion("medicine_format not like", value, "medicineFormat");
+        public Criteria andMedicineSpecificationNotLike(String value) {
+            addCriterion("medicine_specification not like", value, "medicineSpecification");
             return (Criteria) this;
         }
 
-        public Criteria andMedicineFormatIn(List<String> values) {
-            addCriterion("medicine_format in", values, "medicineFormat");
+        public Criteria andMedicineSpecificationIn(List<String> values) {
+            addCriterion("medicine_specification in", values, "medicineSpecification");
             return (Criteria) this;
         }
 
-        public Criteria andMedicineFormatNotIn(List<String> values) {
-            addCriterion("medicine_format not in", values, "medicineFormat");
+        public Criteria andMedicineSpecificationNotIn(List<String> values) {
+            addCriterion("medicine_specification not in", values, "medicineSpecification");
             return (Criteria) this;
         }
 
-        public Criteria andMedicineFormatBetween(String value1, String value2) {
-            addCriterion("medicine_format between", value1, value2, "medicineFormat");
+        public Criteria andMedicineSpecificationBetween(String value1, String value2) {
+            addCriterion("medicine_specification between", value1, value2, "medicineSpecification");
             return (Criteria) this;
         }
 
-        public Criteria andMedicineFormatNotBetween(String value1, String value2) {
-            addCriterion("medicine_format not between", value1, value2, "medicineFormat");
+        public Criteria andMedicineSpecificationNotBetween(String value1, String value2) {
+            addCriterion("medicine_specification not between", value1, value2, "medicineSpecification");
             return (Criteria) this;
         }
 
