@@ -25,8 +25,15 @@ public class ChargeFormServiceImpl implements ChargeFormService {
     @Resource
     private RegistrationService registrationService;
 
+    /**
+     * 收费项目类别 常量
+     */
+    public final int CATEGORY_UNCHARGED = 0;
+    public final int CATEGORY_CHARGED = 1;
+    public final int CATEGORY_ALL = 2;
+
     @Override
-    public PageInfo<ChargeForm> selectChargeFormByRegistrationId(Integer currentPage, Integer pageSize, Integer registrationId, Date startDate, Date endDate) {
+    public PageInfo<ChargeForm> selectChargeFormByRegistrationId(Integer currentPage, Integer pageSize, Integer registrationId, Date startDate, Date endDate, Integer chargeFormCategory) {
         PageHelper.startPage(currentPage, pageSize);
 
         ChargeFormExample chargeFormExample = new ChargeFormExample();
@@ -37,6 +44,12 @@ public class ChargeFormServiceImpl implements ChargeFormService {
             criteria.andMadeTimeGreaterThan(startDate);
         if (endDate != null) // 结束时间
             criteria.andMadeTimeLessThan(endDate);
+
+        if (chargeFormCategory == CATEGORY_UNCHARGED)
+            criteria.andUnchargedNumsNotEqualTo(0);
+        else if (chargeFormCategory == CATEGORY_CHARGED)
+            criteria.andUnchargedNumsEqualTo(0);
+
         List<ChargeForm> chargeFormList = chargeFormMapper.selectByExample(chargeFormExample);
 
         for (ChargeForm chargeForm : chargeFormList) {

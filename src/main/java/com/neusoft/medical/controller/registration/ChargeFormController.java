@@ -33,9 +33,12 @@ public class ChargeFormController {
     /**
      * 按挂号编号获取收费账单
      *
-     * @param currentPage    当前页码
-     * @param pageSize       每页大小
-     * @param registrationId 挂号编号
+     * @param currentPage        当前页码
+     * @param pageSize           每页大小
+     * @param registrationId     挂号编号
+     * @param startDate          开始日期（可选）
+     * @param endDate            结束日期（可选）
+     * @param chargeFormCategory 收费项目类别（0: 未完成支付； 1: 已完成支付; 2: 所有收费项目）
      * @return 分页的收费账单
      */
     @GetMapping("/list")
@@ -44,7 +47,8 @@ public class ChargeFormController {
             @RequestParam(value = "pageSize") Integer pageSize,
             @RequestParam(value = "registrationId") Integer registrationId,
             @RequestParam(value = "startDate", required = false) String startDate,
-            @RequestParam(value = "endDate", required = false) String endDate
+            @RequestParam(value = "endDate", required = false) String endDate,
+            @RequestParam(value = "chargeFormCategory") Integer chargeFormCategory
     ) {
         System.out.println("ChargeFormController 按挂号编号获取收费账单");
 
@@ -54,7 +58,7 @@ public class ChargeFormController {
             startDateConverted = dateConverter.convert(startDate);
         if (endDate != null)
             endDateConverted = dateConverter.convert(endDate);
-        PageInfo<ChargeForm> chargeFormPageInfo = chargeFormService.selectChargeFormByRegistrationId(currentPage, pageSize, registrationId, startDateConverted, endDateConverted);
+        PageInfo<ChargeForm> chargeFormPageInfo = chargeFormService.selectChargeFormByRegistrationId(currentPage, pageSize, registrationId, startDateConverted, endDateConverted, chargeFormCategory);
 
         return new ResultDTO<>(chargeFormPageInfo);
     }

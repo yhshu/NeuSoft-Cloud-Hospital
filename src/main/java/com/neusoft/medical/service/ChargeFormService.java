@@ -11,14 +11,15 @@ public interface ChargeFormService {
     /**
      * 按挂号编号获取收费项目
      *
-     * @param registrationId 挂号编号
      * @param currentPage    当前页码
      * @param pageSize       页面大小
+     * @param registrationId 挂号编号
      * @param startDate      开始日期（可选）
      * @param endDate        结束日期（可选）
+     * @param chargeFormCategory
      * @return 分页的收费项目列表
      */
-    PageInfo<ChargeForm> selectChargeFormByRegistrationId(Integer currentPage, Integer pageSize, Integer registrationId, Date startDate, Date endDate);
+    PageInfo<ChargeForm> selectChargeFormByRegistrationId(Integer currentPage, Integer pageSize, Integer registrationId, Date startDate, Date endDate, Integer chargeFormCategory);
 
     /**
      * 添加收费项目到收费账单中
