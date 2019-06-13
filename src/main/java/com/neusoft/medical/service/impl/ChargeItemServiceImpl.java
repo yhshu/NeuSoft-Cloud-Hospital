@@ -21,7 +21,12 @@ public class ChargeItemServiceImpl implements ChargeItemService {
             ChargeItemExample.Criteria criteria = chargeItemExample.createCriteria();
             criteria.andValidEqualTo(1);
             criteria.andDepartmentIdEqualTo(departmentId);
-            return chargeItemMapper.selectByExample(chargeItemExample);
+            List<ChargeItem> chargeItemList = chargeItemMapper.selectByExample(chargeItemExample);
+
+            if (!chargeItemList.isEmpty())
+                return chargeItemList;
+            else
+                System.out.println("ChargeItemServiceImpl 未找到科室 " + departmentId + " 可用的收费项目");
         } catch (Exception e) {
             e.printStackTrace();
         }

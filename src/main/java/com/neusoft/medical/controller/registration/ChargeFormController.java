@@ -69,7 +69,7 @@ public class ChargeFormController {
     public ResultDTO<List<ChargeItem>> selectChargeItemByDepartmentId(
             @RequestParam(value = "departmentId") Integer departmentId
     ) {
-        System.out.println("ChargeFormController 按科室编号获取该科室的收费项目");
+        System.out.println("ChargeFormController 按科室编号获取该科室的收费项目，科室编号：" + departmentId);
         List<ChargeItem> chargeItemList = chargeItemService.selectChargeItemByDepartmentId(departmentId);
         return new ResultDTO<>(chargeItemList);
     }
@@ -90,7 +90,7 @@ public class ChargeFormController {
             @RequestParam("itemCount") Integer itemCount,
             @RequestParam("collectorId") Integer collectorId
     ) {
-        System.out.println("ChargeFormController 按科室编号获取该科室的收费项目");
+        System.out.println("ChargeFormController 添加收费项目到收费账单中");
         try {
             chargeFormService.addChargeItemToForm(chargeItemId, registrationId, itemCount, collectorId);
         } catch (Exception e) {
