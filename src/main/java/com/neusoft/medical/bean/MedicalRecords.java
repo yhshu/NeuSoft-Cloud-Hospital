@@ -23,13 +23,15 @@ public class MedicalRecords {
 
     private Integer valid;
 
+    private Integer saveState;
+
     private String reserve1;
 
     private String reserve2;
 
     private String reserve3;
 
-    public MedicalRecords(Integer medicalRecordsId, Integer registrationId, String mainInfo, String currentDisease, String pastDisease, String physicalExam, String auxiliaryExam, String preliminaryWestern, String preliminaryChinese, String opinion, Integer valid, String reserve1, String reserve2, String reserve3) {
+    public MedicalRecords(Integer medicalRecordsId, Integer registrationId, String mainInfo, String currentDisease, String pastDisease, String physicalExam, String auxiliaryExam, String preliminaryWestern, String preliminaryChinese, String opinion, Integer valid, Integer saveState, String reserve1, String reserve2, String reserve3) {
         this.medicalRecordsId = medicalRecordsId;
         this.registrationId = registrationId;
         this.mainInfo = mainInfo;
@@ -41,6 +43,7 @@ public class MedicalRecords {
         this.preliminaryChinese = preliminaryChinese;
         this.opinion = opinion;
         this.valid = valid;
+        this.saveState = saveState;
         this.reserve1 = reserve1;
         this.reserve2 = reserve2;
         this.reserve3 = reserve3;
@@ -136,6 +139,14 @@ public class MedicalRecords {
 
     public void setValid(Integer valid) {
         this.valid = valid;
+    }
+
+    public Integer getSaveState() {
+        return saveState;
+    }
+
+    public void setSaveState(Integer saveState) {
+        this.saveState = saveState;
     }
 
     public String getReserve1() {

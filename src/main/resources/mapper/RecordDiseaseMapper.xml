@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.medical.dao.RecordDiseaseMapper">
+  <resultMap id="BaseResultMap" type="com.neusoft.medical.bean.RecordDisease">
+    <constructor>
+      <idArg column="record_disease_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="medical_records_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="disease_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="disease_ICD" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="disease_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="main_disease" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="suspect" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="incidence_date" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="reserve3" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    record_disease_id, medical_records_id, disease_id, disease_ICD, disease_name, main_disease, 
+    suspect, incidence_date, valid, reserve1, reserve2, reserve3
+  </sql>
+  <select id="selectByExample" parameterType="com.neusoft.medical.bean.RecordDiseaseExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hospital.record_disease
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.RecordDiseaseExample">
+    delete from hospital.record_disease
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="com.neusoft.medical.bean.RecordDisease">
+    insert into hospital.record_disease
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="recordDiseaseId != null">
+        record_disease_id,
+      </if>
+      <if test="medicalRecordsId != null">
+        medical_records_id,
+      </if>
+      <if test="diseaseId != null">
+        disease_id,
+      </if>
+      <if test="diseaseIcd != null">
+        disease_ICD,
+      </if>
+      <if test="diseaseName != null">
+        disease_name,
+      </if>
+      <if test="mainDisease != null">
+        main_disease,
+      </if>
+      <if test="suspect != null">
+        suspect,
+      </if>
+      <if test="incidenceDate != null">
+        incidence_date,
+      </if>
+      <if test="valid != null">
+        valid,
+      </if>
+      <if test="reserve1 != null">
+        reserve1,
+      </if>
+      <if test="reserve2 != null">
+        reserve2,
+      </if>
+      <if test="reserve3 != null">
+        reserve3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="recordDiseaseId != null">
+        #{recordDiseaseId,jdbcType=INTEGER},
+      </if>
+      <if test="medicalRecordsId != null">
+        #{medicalRecordsId,jdbcType=INTEGER},
+      </if>
+      <if test="diseaseId != null">
+        #{diseaseId,jdbcType=INTEGER},
+      </if>
+      <if test="diseaseIcd != null">
+        #{diseaseIcd,jdbcType=VARCHAR},
+      </if>
+      <if test="diseaseName != null">
+        #{diseaseName,jdbcType=VARCHAR},
+      </if>
+      <if test="mainDisease != null">
+        #{mainDisease,jdbcType=INTEGER},
+      </if>
+      <if test="suspect != null">
+        #{suspect,jdbcType=INTEGER},
+      </if>
+      <if test="incidenceDate != null">
+        #{incidenceDate,jdbcType=DATE},
+      </if>
+      <if test="valid != null">
+        #{valid,jdbcType=INTEGER},
+      </if>
+      <if test="reserve1 != null">
+        #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null">
+        #{reserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve3 != null">
+        #{reserve3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.neusoft.medical.bean.RecordDiseaseExample" resultType="java.lang.Long">
+    select count(*) from hospital.record_disease
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update hospital.record_disease
+    <set>
+      <if test="record.recordDiseaseId != null">
+        record_disease_id = #{record.recordDiseaseId,jdbcType=INTEGER},
+      </if>
+      <if test="record.medicalRecordsId != null">
+        medical_records_id = #{record.medicalRecordsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.diseaseId != null">
+        disease_id = #{record.diseaseId,jdbcType=INTEGER},
+      </if>
+      <if test="record.diseaseIcd != null">
+        disease_ICD = #{record.diseaseIcd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.diseaseName != null">
+        disease_name = #{record.diseaseName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mainDisease != null">
+        main_disease = #{record.mainDisease,jdbcType=INTEGER},
+      </if>
+      <if test="record.suspect != null">
+        suspect = #{record.suspect,jdbcType=INTEGER},
+      </if>
+      <if test="record.incidenceDate != null">
+        incidence_date = #{record.incidenceDate,jdbcType=DATE},
+      </if>
+      <if test="record.valid != null">
+        valid = #{record.valid,jdbcType=INTEGER},
+      </if>
+      <if test="record.reserve1 != null">
+        reserve1 = #{record.reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserve2 != null">
+        reserve2 = #{record.reserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserve3 != null">
+        reserve3 = #{record.reserve3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update hospital.record_disease
+    set record_disease_id = #{record.recordDiseaseId,jdbcType=INTEGER},
+      medical_records_id = #{record.medicalRecordsId,jdbcType=INTEGER},
+      disease_id = #{record.diseaseId,jdbcType=INTEGER},
+      disease_ICD = #{record.diseaseIcd,jdbcType=VARCHAR},
+      disease_name = #{record.diseaseName,jdbcType=VARCHAR},
+      main_disease = #{record.mainDisease,jdbcType=INTEGER},
+      suspect = #{record.suspect,jdbcType=INTEGER},
+      incidence_date = #{record.incidenceDate,jdbcType=DATE},
+      valid = #{record.valid,jdbcType=INTEGER},
+      reserve1 = #{record.reserve1,jdbcType=VARCHAR},
+      reserve2 = #{record.reserve2,jdbcType=VARCHAR},
+      reserve3 = #{record.reserve3,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.RecordDisease">
+    update hospital.record_disease
+    <set>
+      <if test="medicalRecordsId != null">
+        medical_records_id = #{medicalRecordsId,jdbcType=INTEGER},
+      </if>
+      <if test="diseaseId != null">
+        disease_id = #{diseaseId,jdbcType=INTEGER},
+      </if>
+      <if test="diseaseIcd != null">
+        disease_ICD = #{diseaseIcd,jdbcType=VARCHAR},
+      </if>
+      <if test="diseaseName != null">
+        disease_name = #{diseaseName,jdbcType=VARCHAR},
+      </if>
+      <if test="mainDisease != null">
+        main_disease = #{mainDisease,jdbcType=INTEGER},
+      </if>
+      <if test="suspect != null">
+        suspect = #{suspect,jdbcType=INTEGER},
+      </if>
+      <if test="incidenceDate != null">
+        incidence_date = #{incidenceDate,jdbcType=DATE},
+      </if>
+      <if test="valid != null">
+        valid = #{valid,jdbcType=INTEGER},
+      </if>
+      <if test="reserve1 != null">
+        reserve1 = #{reserve1,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve2 != null">
+        reserve2 = #{reserve2,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve3 != null">
+        reserve3 = #{reserve3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where record_disease_id = #{recordDiseaseId,jdbcType=INTEGER}
+  </update>
+</mapper>

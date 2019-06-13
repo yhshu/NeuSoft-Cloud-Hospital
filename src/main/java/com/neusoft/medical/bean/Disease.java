@@ -3,21 +3,21 @@ package com.neusoft.medical.bean;
 public class Disease {
     private Integer diseaseId;
 
-    private String diseaseCode;
+    private String diseaseIcd;
 
     private String diseaseName;
 
-    private String diseaseIcd;
+    private String diseaseCode;
 
     private Integer diseaseCategory;
 
     private Integer valid;
 
-    public Disease(Integer diseaseId, String diseaseCode, String diseaseName, String diseaseIcd, Integer diseaseCategory, Integer valid) {
+    public Disease(Integer diseaseId, String diseaseIcd, String diseaseName, String diseaseCode, Integer diseaseCategory, Integer valid) {
         this.diseaseId = diseaseId;
-        this.diseaseCode = diseaseCode;
-        this.diseaseName = diseaseName;
         this.diseaseIcd = diseaseIcd;
+        this.diseaseName = diseaseName;
+        this.diseaseCode = diseaseCode;
         this.diseaseCategory = diseaseCategory;
         this.valid = valid;
     }
@@ -34,12 +34,12 @@ public class Disease {
         this.diseaseId = diseaseId;
     }
 
-    public String getDiseaseCode() {
-        return diseaseCode;
+    public String getDiseaseIcd() {
+        return diseaseIcd;
     }
 
-    public void setDiseaseCode(String diseaseCode) {
-        this.diseaseCode = diseaseCode == null ? null : diseaseCode.trim();
+    public void setDiseaseIcd(String diseaseIcd) {
+        this.diseaseIcd = diseaseIcd == null ? null : diseaseIcd.trim();
     }
 
     public String getDiseaseName() {
@@ -50,12 +50,12 @@ public class Disease {
         this.diseaseName = diseaseName == null ? null : diseaseName.trim();
     }
 
-    public String getDiseaseIcd() {
-        return diseaseIcd;
+    public String getDiseaseCode() {
+        return diseaseCode;
     }
 
-    public void setDiseaseIcd(String diseaseIcd) {
-        this.diseaseIcd = diseaseIcd == null ? null : diseaseIcd.trim();
+    public void setDiseaseCode(String diseaseCode) {
+        this.diseaseCode = diseaseCode == null ? null : diseaseCode.trim();
     }
 
     public Integer getDiseaseCategory() {

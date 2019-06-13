@@ -26,4 +26,14 @@ public interface OutpatientMedicalRecordService {
      * @return 已诊患者列表
      */
     List<Registration> visitedRegistrationList(int registrationScope, int doctorId);
+
+    /**
+     * 保存门诊病历信息
+     * 保存状态是暂存或正式提交
+     * 在正式提交后之后，医生才可以进行检查、检验、处置、开立处方等操作
+     *
+     * @param medicalRecordJson 病历记录 json 字符串
+     * @return 保存成功 true；保存失败 false
+     */
+    boolean saveMedicalRecord(String medicalRecordJson);
 }

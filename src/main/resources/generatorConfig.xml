@@ -129,9 +129,9 @@ database types (e.g. MySql's unsigned bigint type should be mapped to java.lang.
         <table tableName="expense_category" catalog="hospital"></table>
         <table tableName="medical_records" catalog="hospital"></table>
         <table tableName="medicine" catalog="hospital"></table>
-        <table tableName="pathography" catalog="hospital"></table>
         <table tableName="patient" catalog="hospital"></table>
         <table tableName="prescription" catalog="hospital"></table>
+        <table tableName="record_disease" catalog="hospital"></table>
         <table tableName="registration" catalog="hospital"></table>
         <table tableName="scheduling_info" catalog="hospital"></table>
         <table tableName="scheduling_rule" catalog="hospital"></table>

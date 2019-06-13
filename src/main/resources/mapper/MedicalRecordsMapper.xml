@@ -14,6 +14,7 @@
       <arg column="preliminary_chinese" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="opinion" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="save_state" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="reserve3" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -79,8 +80,8 @@
   </sql>
   <sql id="Base_Column_List">
     medical_records_id, registration_id, main_info, current_disease, past_disease, physical_exam, 
-    auxiliary_exam, preliminary_western, preliminary_chinese, opinion, valid, reserve1, 
-    reserve2, reserve3
+    auxiliary_exam, preliminary_western, preliminary_chinese, opinion, valid, save_state, 
+    reserve1, reserve2, reserve3
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.MedicalRecordsExample" resultMap="BaseResultMap">
     select
@@ -138,6 +139,9 @@
       <if test="valid != null">
         valid,
       </if>
+      <if test="saveState != null">
+        save_state,
+      </if>
       <if test="reserve1 != null">
         reserve1,
       </if>
@@ -181,6 +185,9 @@
       </if>
       <if test="valid != null">
         #{valid,jdbcType=INTEGER},
+      </if>
+      <if test="saveState != null">
+        #{saveState,jdbcType=INTEGER},
       </if>
       <if test="reserve1 != null">
         #{reserve1,jdbcType=VARCHAR},
@@ -235,6 +242,9 @@
       <if test="record.valid != null">
         valid = #{record.valid,jdbcType=INTEGER},
       </if>
+      <if test="record.saveState != null">
+        save_state = #{record.saveState,jdbcType=INTEGER},
+      </if>
       <if test="record.reserve1 != null">
         reserve1 = #{record.reserve1,jdbcType=VARCHAR},
       </if>
@@ -262,6 +272,7 @@
       preliminary_chinese = #{record.preliminaryChinese,jdbcType=VARCHAR},
       opinion = #{record.opinion,jdbcType=VARCHAR},
       valid = #{record.valid,jdbcType=INTEGER},
+      save_state = #{record.saveState,jdbcType=INTEGER},
       reserve1 = #{record.reserve1,jdbcType=VARCHAR},
       reserve2 = #{record.reserve2,jdbcType=VARCHAR},
       reserve3 = #{record.reserve3,jdbcType=VARCHAR}
@@ -301,6 +312,9 @@
       </if>
       <if test="valid != null">
         valid = #{valid,jdbcType=INTEGER},
+      </if>
+      <if test="saveState != null">
+        save_state = #{saveState,jdbcType=INTEGER},
       </if>
       <if test="reserve1 != null">
         reserve1 = #{reserve1,jdbcType=VARCHAR},
