@@ -4,14 +4,14 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.Account;
 import com.neusoft.medical.bean.AccountExample;
-import com.neusoft.medical.bean.Department;
-import com.neusoft.medical.bean.DepartmentExample;
 import com.neusoft.medical.dao.AccountMapper;
 import com.neusoft.medical.service.AccountService;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
+@Service
 public class AccountServiceImpl implements AccountService {
     @Resource
     private AccountMapper accountMapper;

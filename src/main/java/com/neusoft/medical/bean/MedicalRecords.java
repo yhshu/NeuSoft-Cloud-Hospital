@@ -9,11 +9,17 @@ public class MedicalRecords {
 
     private String currentDisease;
 
-    private String currentTreatment;
+    private String pastDisease;
+
+    private String physicalExam;
+
+    private String auxiliaryExam;
 
     private String preliminaryWestern;
 
     private String preliminaryChinese;
+
+    private String opinion;
 
     private Integer valid;
 
@@ -23,14 +29,17 @@ public class MedicalRecords {
 
     private String reserve3;
 
-    public MedicalRecords(Integer medicalRecordsId, Integer registrationId, String mainInfo, String currentDisease, String currentTreatment, String preliminaryWestern, String preliminaryChinese, Integer valid, String reserve1, String reserve2, String reserve3) {
+    public MedicalRecords(Integer medicalRecordsId, Integer registrationId, String mainInfo, String currentDisease, String pastDisease, String physicalExam, String auxiliaryExam, String preliminaryWestern, String preliminaryChinese, String opinion, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.medicalRecordsId = medicalRecordsId;
         this.registrationId = registrationId;
         this.mainInfo = mainInfo;
         this.currentDisease = currentDisease;
-        this.currentTreatment = currentTreatment;
+        this.pastDisease = pastDisease;
+        this.physicalExam = physicalExam;
+        this.auxiliaryExam = auxiliaryExam;
         this.preliminaryWestern = preliminaryWestern;
         this.preliminaryChinese = preliminaryChinese;
+        this.opinion = opinion;
         this.valid = valid;
         this.reserve1 = reserve1;
         this.reserve2 = reserve2;
@@ -73,12 +82,28 @@ public class MedicalRecords {
         this.currentDisease = currentDisease == null ? null : currentDisease.trim();
     }
 
-    public String getCurrentTreatment() {
-        return currentTreatment;
+    public String getPastDisease() {
+        return pastDisease;
     }
 
-    public void setCurrentTreatment(String currentTreatment) {
-        this.currentTreatment = currentTreatment == null ? null : currentTreatment.trim();
+    public void setPastDisease(String pastDisease) {
+        this.pastDisease = pastDisease == null ? null : pastDisease.trim();
+    }
+
+    public String getPhysicalExam() {
+        return physicalExam;
+    }
+
+    public void setPhysicalExam(String physicalExam) {
+        this.physicalExam = physicalExam == null ? null : physicalExam.trim();
+    }
+
+    public String getAuxiliaryExam() {
+        return auxiliaryExam;
+    }
+
+    public void setAuxiliaryExam(String auxiliaryExam) {
+        this.auxiliaryExam = auxiliaryExam == null ? null : auxiliaryExam.trim();
     }
 
     public String getPreliminaryWestern() {
@@ -95,6 +120,14 @@ public class MedicalRecords {
 
     public void setPreliminaryChinese(String preliminaryChinese) {
         this.preliminaryChinese = preliminaryChinese == null ? null : preliminaryChinese.trim();
+    }
+
+    public String getOpinion() {
+        return opinion;
+    }
+
+    public void setOpinion(String opinion) {
+        this.opinion = opinion == null ? null : opinion.trim();
     }
 
     public Integer getValid() {
