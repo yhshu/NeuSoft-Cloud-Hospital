@@ -46,7 +46,7 @@ public class ChargeFormServiceImpl implements ChargeFormService {
 
             chargeForm.setReserve1(chargeItemMapper.selectByPrimaryKey(chargeForm.getChargeItemId()).getSpecification());
             chargeForm.setReserve2(chargeItemMapper.selectByPrimaryKey(chargeForm.getChargeItemId()).getPrice().toString());
-            chargeForm.setReserve2(chargeItemMapper.selectByPrimaryKey(chargeForm.getChargeItemId()).getNameZh());
+            chargeForm.setReserve3(chargeItemMapper.selectByPrimaryKey(chargeForm.getChargeItemId()).getNameZh());
         }
 
         return new PageInfo<>(chargeFormList);
