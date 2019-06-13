@@ -18,19 +18,20 @@ public interface RecordDiseaseMapper {
     int deleteByPrimaryKey(Integer recordDiseaseId);
 
     @Insert({
-        "insert into hospital.record_disease (record_disease_id, medical_records_id, ",
-        "disease_id, disease_ICD, ",
-        "disease_name, main_disease, ",
-        "suspect, incidence_date, ",
-        "valid, reserve1, ",
-        "reserve2, reserve3)",
-        "values (#{recordDiseaseId,jdbcType=INTEGER}, #{medicalRecordsId,jdbcType=INTEGER}, ",
-        "#{diseaseId,jdbcType=INTEGER}, #{diseaseIcd,jdbcType=VARCHAR}, ",
-        "#{diseaseName,jdbcType=VARCHAR}, #{mainDisease,jdbcType=INTEGER}, ",
-        "#{suspect,jdbcType=INTEGER}, #{incidenceDate,jdbcType=DATE}, ",
-        "#{valid,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
-        "#{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR})"
+        "insert into hospital.record_disease (medical_records_id, disease_id, ",
+        "disease_ICD, disease_name, ",
+        "main_disease, suspect, ",
+        "incidence_date, valid, ",
+        "reserve1, reserve2, ",
+        "reserve3)",
+        "values (#{medicalRecordsId,jdbcType=INTEGER}, #{diseaseId,jdbcType=INTEGER}, ",
+        "#{diseaseIcd,jdbcType=VARCHAR}, #{diseaseName,jdbcType=VARCHAR}, ",
+        "#{mainDisease,jdbcType=INTEGER}, #{suspect,jdbcType=INTEGER}, ",
+        "#{incidenceDate,jdbcType=DATE}, #{valid,jdbcType=INTEGER}, ",
+        "#{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, ",
+        "#{reserve3,jdbcType=VARCHAR})"
     })
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="recordDiseaseId", before=false, resultType=Integer.class)
     int insert(RecordDisease record);
 
     int insertSelective(RecordDisease record);

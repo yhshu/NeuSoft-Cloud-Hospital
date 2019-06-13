@@ -10,8 +10,6 @@
       <arg column="past_disease" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="physical_exam" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="auxiliary_exam" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="preliminary_western" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="preliminary_chinese" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="opinion" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="save_state" javaType="java.lang.Integer" jdbcType="INTEGER" />
@@ -80,8 +78,7 @@
   </sql>
   <sql id="Base_Column_List">
     medical_records_id, registration_id, main_info, current_disease, past_disease, physical_exam, 
-    auxiliary_exam, preliminary_western, preliminary_chinese, opinion, valid, save_state, 
-    reserve1, reserve2, reserve3
+    auxiliary_exam, opinion, valid, save_state, reserve1, reserve2, reserve3
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.MedicalRecordsExample" resultMap="BaseResultMap">
     select
@@ -104,11 +101,11 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="com.neusoft.medical.bean.MedicalRecords">
+    <selectKey keyProperty="medicalRecordsId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into hospital.medical_records
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="medicalRecordsId != null">
-        medical_records_id,
-      </if>
       <if test="registrationId != null">
         registration_id,
       </if>
@@ -126,12 +123,6 @@
       </if>
       <if test="auxiliaryExam != null">
         auxiliary_exam,
-      </if>
-      <if test="preliminaryWestern != null">
-        preliminary_western,
-      </if>
-      <if test="preliminaryChinese != null">
-        preliminary_chinese,
       </if>
       <if test="opinion != null">
         opinion,
@@ -153,9 +144,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="medicalRecordsId != null">
-        #{medicalRecordsId,jdbcType=INTEGER},
-      </if>
       <if test="registrationId != null">
         #{registrationId,jdbcType=INTEGER},
       </if>
@@ -173,12 +161,6 @@
       </if>
       <if test="auxiliaryExam != null">
         #{auxiliaryExam,jdbcType=VARCHAR},
-      </if>
-      <if test="preliminaryWestern != null">
-        #{preliminaryWestern,jdbcType=VARCHAR},
-      </if>
-      <if test="preliminaryChinese != null">
-        #{preliminaryChinese,jdbcType=VARCHAR},
       </if>
       <if test="opinion != null">
         #{opinion,jdbcType=VARCHAR},
@@ -230,12 +212,6 @@
       <if test="record.auxiliaryExam != null">
         auxiliary_exam = #{record.auxiliaryExam,jdbcType=VARCHAR},
       </if>
-      <if test="record.preliminaryWestern != null">
-        preliminary_western = #{record.preliminaryWestern,jdbcType=VARCHAR},
-      </if>
-      <if test="record.preliminaryChinese != null">
-        preliminary_chinese = #{record.preliminaryChinese,jdbcType=VARCHAR},
-      </if>
       <if test="record.opinion != null">
         opinion = #{record.opinion,jdbcType=VARCHAR},
       </if>
@@ -268,8 +244,6 @@
       past_disease = #{record.pastDisease,jdbcType=VARCHAR},
       physical_exam = #{record.physicalExam,jdbcType=VARCHAR},
       auxiliary_exam = #{record.auxiliaryExam,jdbcType=VARCHAR},
-      preliminary_western = #{record.preliminaryWestern,jdbcType=VARCHAR},
-      preliminary_chinese = #{record.preliminaryChinese,jdbcType=VARCHAR},
       opinion = #{record.opinion,jdbcType=VARCHAR},
       valid = #{record.valid,jdbcType=INTEGER},
       save_state = #{record.saveState,jdbcType=INTEGER},
@@ -300,12 +274,6 @@
       </if>
       <if test="auxiliaryExam != null">
         auxiliary_exam = #{auxiliaryExam,jdbcType=VARCHAR},
-      </if>
-      <if test="preliminaryWestern != null">
-        preliminary_western = #{preliminaryWestern,jdbcType=VARCHAR},
-      </if>
-      <if test="preliminaryChinese != null">
-        preliminary_chinese = #{preliminaryChinese,jdbcType=VARCHAR},
       </if>
       <if test="opinion != null">
         opinion = #{opinion,jdbcType=VARCHAR},

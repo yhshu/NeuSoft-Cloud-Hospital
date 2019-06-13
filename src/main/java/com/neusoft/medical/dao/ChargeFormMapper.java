@@ -2,13 +2,9 @@ package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.ChargeForm;
 import com.neusoft.medical.bean.ChargeFormExample;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 public interface ChargeFormMapper {
     long countByExample(ChargeFormExample example);
@@ -22,21 +18,22 @@ public interface ChargeFormMapper {
     int deleteByPrimaryKey(Integer chargeFormId);
 
     @Insert({
-        "insert into hospital.charge_form (charge_form_id, registration_id, ",
-        "charge_item_id, item_count, ",
-        "uncharged_nums, made_time, ",
-        "valid, department_id, ",
-        "doctor_id, collector_id, ",
-        "not_given_nums, reserve1, ",
-        "reserve2, reserve3)",
-        "values (#{chargeFormId,jdbcType=INTEGER}, #{registrationId,jdbcType=INTEGER}, ",
-        "#{chargeItemId,jdbcType=INTEGER}, #{itemCount,jdbcType=INTEGER}, ",
-        "#{unchargedNums,jdbcType=INTEGER}, #{madeTime,jdbcType=TIMESTAMP}, ",
-        "#{valid,jdbcType=INTEGER}, #{departmentId,jdbcType=INTEGER}, ",
-        "#{doctorId,jdbcType=INTEGER}, #{collectorId,jdbcType=INTEGER}, ",
-        "#{notGivenNums,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
-        "#{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR})"
+        "insert into hospital.charge_form (registration_id, charge_item_id, ",
+        "item_count, uncharged_nums, ",
+        "made_time, valid, ",
+        "department_id, doctor_id, ",
+        "collector_id, not_given_nums, ",
+        "reserve1, reserve2, ",
+        "reserve3)",
+        "values (#{registrationId,jdbcType=INTEGER}, #{chargeItemId,jdbcType=INTEGER}, ",
+        "#{itemCount,jdbcType=INTEGER}, #{unchargedNums,jdbcType=INTEGER}, ",
+        "#{madeTime,jdbcType=TIMESTAMP}, #{valid,jdbcType=INTEGER}, ",
+        "#{departmentId,jdbcType=INTEGER}, #{doctorId,jdbcType=INTEGER}, ",
+        "#{collectorId,jdbcType=INTEGER}, #{notGivenNums,jdbcType=INTEGER}, ",
+        "#{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, ",
+        "#{reserve3,jdbcType=VARCHAR})"
     })
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="chargeFormId", before=false, resultType=Integer.class)
     int insert(ChargeForm record);
 
     int insertSelective(ChargeForm record);

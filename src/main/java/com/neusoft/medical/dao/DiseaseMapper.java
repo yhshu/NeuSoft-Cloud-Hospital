@@ -18,13 +18,14 @@ public interface DiseaseMapper {
     int deleteByPrimaryKey(Integer diseaseId);
 
     @Insert({
-        "insert into hospital.disease (disease_id, disease_ICD, ",
-        "disease_name, disease_code, ",
-        "disease_category, valid)",
-        "values (#{diseaseId,jdbcType=INTEGER}, #{diseaseIcd,jdbcType=VARCHAR}, ",
-        "#{diseaseName,jdbcType=VARCHAR}, #{diseaseCode,jdbcType=VARCHAR}, ",
-        "#{diseaseCategory,jdbcType=INTEGER}, #{valid,jdbcType=INTEGER})"
+        "insert into hospital.disease (disease_ICD, disease_name, ",
+        "disease_code, disease_category, ",
+        "valid)",
+        "values (#{diseaseIcd,jdbcType=VARCHAR}, #{diseaseName,jdbcType=VARCHAR}, ",
+        "#{diseaseCode,jdbcType=VARCHAR}, #{diseaseCategory,jdbcType=INTEGER}, ",
+        "#{valid,jdbcType=INTEGER})"
     })
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="diseaseId", before=false, resultType=Integer.class)
     int insert(Disease record);
 
     int insertSelective(Disease record);

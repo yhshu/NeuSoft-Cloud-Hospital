@@ -2,13 +2,9 @@ package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.SchedulingInfo;
 import com.neusoft.medical.bean.SchedulingInfoExample;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 public interface SchedulingInfoMapper {
     long countByExample(SchedulingInfoExample example);
@@ -22,17 +18,18 @@ public interface SchedulingInfoMapper {
     int deleteByPrimaryKey(Integer schedulingInfoId);
 
     @Insert({
-        "insert into hospital.scheduling_info (scheduling_info_id, scheduling_time, ",
-        "department_id, department_name, ",
-        "doctor_id, doctor_name, ",
-        "type, valid, period, ",
-        "limitation, remain_nums)",
-        "values (#{schedulingInfoId,jdbcType=INTEGER}, #{schedulingTime,jdbcType=DATE}, ",
-        "#{departmentId,jdbcType=INTEGER}, #{departmentName,jdbcType=VARCHAR}, ",
-        "#{doctorId,jdbcType=INTEGER}, #{doctorName,jdbcType=VARCHAR}, ",
-        "#{type,jdbcType=VARCHAR}, #{valid,jdbcType=INTEGER}, #{period,jdbcType=VARCHAR}, ",
-        "#{limitation,jdbcType=INTEGER}, #{remainNums,jdbcType=INTEGER})"
+        "insert into hospital.scheduling_info (scheduling_time, department_id, ",
+        "department_name, doctor_id, ",
+        "doctor_name, type, ",
+        "valid, period, limitation, ",
+        "remain_nums)",
+        "values (#{schedulingTime,jdbcType=DATE}, #{departmentId,jdbcType=INTEGER}, ",
+        "#{departmentName,jdbcType=VARCHAR}, #{doctorId,jdbcType=INTEGER}, ",
+        "#{doctorName,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, ",
+        "#{valid,jdbcType=INTEGER}, #{period,jdbcType=VARCHAR}, #{limitation,jdbcType=INTEGER}, ",
+        "#{remainNums,jdbcType=INTEGER})"
     })
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="schedulingInfoId", before=false, resultType=Integer.class)
     int insert(SchedulingInfo record);
 
     int insertSelective(SchedulingInfo record);

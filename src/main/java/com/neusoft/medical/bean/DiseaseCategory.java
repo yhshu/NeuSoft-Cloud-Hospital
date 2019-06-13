@@ -1,7 +1,7 @@
 package com.neusoft.medical.bean;
 
 public class DiseaseCategory {
-    private Integer diseaseId;
+    private Integer diseaseCategoryId;
 
     private String diseaseCode;
 
@@ -13,8 +13,8 @@ public class DiseaseCategory {
 
     private Integer valid;
 
-    public DiseaseCategory(Integer diseaseId, String diseaseCode, String diseaseName, Integer sequenceNo, Integer diseaseType, Integer valid) {
-        this.diseaseId = diseaseId;
+    public DiseaseCategory(Integer diseaseCategoryId, String diseaseCode, String diseaseName, Integer sequenceNo, Integer diseaseType, Integer valid) {
+        this.diseaseCategoryId = diseaseCategoryId;
         this.diseaseCode = diseaseCode;
         this.diseaseName = diseaseName;
         this.sequenceNo = sequenceNo;
@@ -26,12 +26,12 @@ public class DiseaseCategory {
         super();
     }
 
-    public Integer getDiseaseId() {
-        return diseaseId;
+    public Integer getDiseaseCategoryId() {
+        return diseaseCategoryId;
     }
 
-    public void setDiseaseId(Integer diseaseId) {
-        this.diseaseId = diseaseId;
+    public void setDiseaseCategoryId(Integer diseaseCategoryId) {
+        this.diseaseCategoryId = diseaseCategoryId;
     }
 
     public String getDiseaseCode() {

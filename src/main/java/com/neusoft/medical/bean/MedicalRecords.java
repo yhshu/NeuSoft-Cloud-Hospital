@@ -15,10 +15,6 @@ public class MedicalRecords {
 
     private String auxiliaryExam;
 
-    private String preliminaryWestern;
-
-    private String preliminaryChinese;
-
     private String opinion;
 
     private Integer valid;
@@ -31,7 +27,7 @@ public class MedicalRecords {
 
     private String reserve3;
 
-    public MedicalRecords(Integer medicalRecordsId, Integer registrationId, String mainInfo, String currentDisease, String pastDisease, String physicalExam, String auxiliaryExam, String preliminaryWestern, String preliminaryChinese, String opinion, Integer valid, Integer saveState, String reserve1, String reserve2, String reserve3) {
+    public MedicalRecords(Integer medicalRecordsId, Integer registrationId, String mainInfo, String currentDisease, String pastDisease, String physicalExam, String auxiliaryExam, String opinion, Integer valid, Integer saveState, String reserve1, String reserve2, String reserve3) {
         this.medicalRecordsId = medicalRecordsId;
         this.registrationId = registrationId;
         this.mainInfo = mainInfo;
@@ -39,8 +35,6 @@ public class MedicalRecords {
         this.pastDisease = pastDisease;
         this.physicalExam = physicalExam;
         this.auxiliaryExam = auxiliaryExam;
-        this.preliminaryWestern = preliminaryWestern;
-        this.preliminaryChinese = preliminaryChinese;
         this.opinion = opinion;
         this.valid = valid;
         this.saveState = saveState;
@@ -107,22 +101,6 @@ public class MedicalRecords {
 
     public void setAuxiliaryExam(String auxiliaryExam) {
         this.auxiliaryExam = auxiliaryExam == null ? null : auxiliaryExam.trim();
-    }
-
-    public String getPreliminaryWestern() {
-        return preliminaryWestern;
-    }
-
-    public void setPreliminaryWestern(String preliminaryWestern) {
-        this.preliminaryWestern = preliminaryWestern == null ? null : preliminaryWestern.trim();
-    }
-
-    public String getPreliminaryChinese() {
-        return preliminaryChinese;
-    }
-
-    public void setPreliminaryChinese(String preliminaryChinese) {
-        this.preliminaryChinese = preliminaryChinese == null ? null : preliminaryChinese.trim();
     }
 
     public String getOpinion() {

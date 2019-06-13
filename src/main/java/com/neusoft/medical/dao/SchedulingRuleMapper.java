@@ -2,13 +2,9 @@ package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.SchedulingRule;
 import com.neusoft.medical.bean.SchedulingRuleExample;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 public interface SchedulingRuleMapper {
     long countByExample(SchedulingRuleExample example);
@@ -22,19 +18,20 @@ public interface SchedulingRuleMapper {
     int deleteByPrimaryKey(Integer schedulingRuleId);
 
     @Insert({
-        "insert into hospital.scheduling_rule (scheduling_rule_id, week_day, ",
-        "department_id, department_name, ",
-        "doctor_id, doctor_name, ",
-        "type, valid, period, ",
-        "limitation, operator_id, ",
-        "operator_name, operating_date)",
-        "values (#{schedulingRuleId,jdbcType=INTEGER}, #{weekDay,jdbcType=VARCHAR}, ",
-        "#{departmentId,jdbcType=INTEGER}, #{departmentName,jdbcType=VARCHAR}, ",
-        "#{doctorId,jdbcType=INTEGER}, #{doctorName,jdbcType=VARCHAR}, ",
-        "#{type,jdbcType=VARCHAR}, #{valid,jdbcType=INTEGER}, #{period,jdbcType=VARCHAR}, ",
-        "#{limitation,jdbcType=INTEGER}, #{operatorId,jdbcType=INTEGER}, ",
-        "#{operatorName,jdbcType=VARCHAR}, #{operatingDate,jdbcType=DATE})"
+        "insert into hospital.scheduling_rule (week_day, department_id, ",
+        "department_name, doctor_id, ",
+        "doctor_name, type, ",
+        "valid, period, limitation, ",
+        "operator_id, operator_name, ",
+        "operating_date)",
+        "values (#{weekDay,jdbcType=VARCHAR}, #{departmentId,jdbcType=INTEGER}, ",
+        "#{departmentName,jdbcType=VARCHAR}, #{doctorId,jdbcType=INTEGER}, ",
+        "#{doctorName,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, ",
+        "#{valid,jdbcType=INTEGER}, #{period,jdbcType=VARCHAR}, #{limitation,jdbcType=INTEGER}, ",
+        "#{operatorId,jdbcType=INTEGER}, #{operatorName,jdbcType=VARCHAR}, ",
+        "#{operatingDate,jdbcType=DATE})"
     })
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="schedulingRuleId", before=false, resultType=Integer.class)
     int insert(SchedulingRule record);
 
     int insertSelective(SchedulingRule record);

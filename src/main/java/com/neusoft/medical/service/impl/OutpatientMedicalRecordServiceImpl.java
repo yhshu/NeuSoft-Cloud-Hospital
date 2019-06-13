@@ -3,9 +3,7 @@ package com.neusoft.medical.service.impl;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.neusoft.medical.Util.DateConverter;
-import com.neusoft.medical.bean.Doctor;
-import com.neusoft.medical.bean.Registration;
-import com.neusoft.medical.bean.RegistrationExample;
+import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.DoctorMapper;
 import com.neusoft.medical.dao.MedicalRecordsMapper;
 import com.neusoft.medical.dao.RecordDiseaseMapper;
@@ -91,7 +89,7 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
 
         try {
             JsonObject medicalRecordJsonObject = new JsonParser().parse(medicalRecordJson).getAsJsonObject();
-            String registrationId = medicalRecordJsonObject.getAsJsonObject("registrationId").getAsString();
+            int registrationId = medicalRecordJsonObject.getAsJsonObject("registrationId").getAsInt();
             String mainInfo = medicalRecordJsonObject.getAsJsonObject("mainInfo").getAsString();
             String currentDisease = medicalRecordJsonObject.getAsJsonObject("currentDisease").getAsString();
             String pastDisease = medicalRecordJsonObject.getAsJsonObject("pastDisease").getAsString();
@@ -108,7 +106,23 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
             String incidenceDate = diseaseJsonObject.getAsJsonObject("incidenceDate").getAsString();
             Date incidenceDateConverted = dateConverter.convert(incidenceDate);
 
-            // todo
+            // 如果病历记录已存在，则更新病历记录；如果病历记录尚不存在，则新增病历记录
+            // 首先根据挂号编号，判断是否存在病历记录
+            MedicalRecordsExample medicalRecordsExample = new MedicalRecordsExample();
+            MedicalRecordsExample.Criteria criteria = medicalRecordsExample.createCriteria();
+            criteria.andValidEqualTo(1);
+            criteria.andRegistrationIdEqualTo(registrationId);
+            List<MedicalRecords> medicalRecordsList = medicalRecordsMapper.selectByExample(medicalRecordsExample);
+            if (medicalRecordsList.isEmpty()) {
+                // 新增病历记录
+                medicalRecordsMapper.insert(new MedicalRecords(null, registrationId, mainInfo, currentDisease, pastDisease, physicalExam, auxiliaryExam, opinion, 1, saveState, null, null, null));
+            } else {
+                if (medicalRecordsList.size() > 1)
+                    throw new Exception("The same registration contains duplicate medical records.");
+                // 更新病历记录
+                // todo
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             return false;

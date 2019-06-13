@@ -2,13 +2,9 @@ package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.Medicine;
 import com.neusoft.medical.bean.MedicineExample;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 public interface MedicineMapper {
     long countByExample(MedicineExample example);
@@ -22,23 +18,24 @@ public interface MedicineMapper {
     int deleteByPrimaryKey(Integer medicineId);
 
     @Insert({
-        "insert into hospital.medicine (medicine_id, medicine_code, ",
-        "name_zh, medicine_specification, ",
-        "medicine_unit, medicine_manufacturer, ",
-        "medicine_dosage_id, medicine_type_id, ",
-        "medicine_price, name_pinyin, ",
-        "creation_time, nums, ",
-        "name_en, valid, reserve1, ",
-        "reserve2, reserve3)",
-        "values (#{medicineId,jdbcType=INTEGER}, #{medicineCode,jdbcType=VARCHAR}, ",
-        "#{nameZh,jdbcType=VARCHAR}, #{medicineSpecification,jdbcType=VARCHAR}, ",
-        "#{medicineUnit,jdbcType=VARCHAR}, #{medicineManufacturer,jdbcType=VARCHAR}, ",
-        "#{medicineDosageId,jdbcType=INTEGER}, #{medicineTypeId,jdbcType=INTEGER}, ",
-        "#{medicinePrice,jdbcType=DECIMAL}, #{namePinyin,jdbcType=VARCHAR}, ",
-        "#{creationTime,jdbcType=DATE}, #{nums,jdbcType=INTEGER}, ",
-        "#{nameEn,jdbcType=VARCHAR}, #{valid,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
-        "#{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR})"
+        "insert into hospital.medicine (medicine_code, name_zh, ",
+        "medicine_specification, medicine_unit, ",
+        "medicine_manufacturer, medicine_dosage_id, ",
+        "medicine_type_id, medicine_price, ",
+        "name_pinyin, creation_time, ",
+        "nums, name_en, valid, ",
+        "reserve1, reserve2, ",
+        "reserve3)",
+        "values (#{medicineCode,jdbcType=VARCHAR}, #{nameZh,jdbcType=VARCHAR}, ",
+        "#{medicineSpecification,jdbcType=VARCHAR}, #{medicineUnit,jdbcType=VARCHAR}, ",
+        "#{medicineManufacturer,jdbcType=VARCHAR}, #{medicineDosageId,jdbcType=INTEGER}, ",
+        "#{medicineTypeId,jdbcType=INTEGER}, #{medicinePrice,jdbcType=DECIMAL}, ",
+        "#{namePinyin,jdbcType=VARCHAR}, #{creationTime,jdbcType=DATE}, ",
+        "#{nums,jdbcType=INTEGER}, #{nameEn,jdbcType=VARCHAR}, #{valid,jdbcType=INTEGER}, ",
+        "#{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, ",
+        "#{reserve3,jdbcType=VARCHAR})"
     })
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="medicineId", before=false, resultType=Integer.class)
     int insert(Medicine record);
 
     int insertSelective(Medicine record);

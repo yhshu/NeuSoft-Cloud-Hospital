@@ -2,13 +2,9 @@ package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.Registration;
 import com.neusoft.medical.bean.RegistrationExample;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 public interface RegistrationMapper {
     long countByExample(RegistrationExample example);
@@ -22,31 +18,30 @@ public interface RegistrationMapper {
     int deleteByPrimaryKey(Integer registrationId);
 
     @Insert({
-        "insert into hospital.registration (registration_id, patient_name, ",
-        "patient_id, gender, ",
-        "age, birthday, registration_category, ",
-        "medical_category, identity_card_no, ",
-        "registration_status, visit_date, ",
-        "registration_date, department_id, ",
-        "doctor_id, registration_source, ",
-        "settle_accounts_category, is_visited, ",
-        "valid, family_address, ",
+        "insert into hospital.registration (patient_name, patient_id, ",
+        "gender, age, birthday, ",
+        "registration_category, medical_category, ",
+        "identity_card_no, registration_status, ",
+        "visit_date, registration_date, ",
+        "department_id, doctor_id, ",
+        "registration_source, settle_accounts_category, ",
+        "is_visited, valid, family_address, ",
         "collector_id, total_charge, ",
         "reserve1, reserve2, ",
         "reserve3)",
-        "values (#{registrationId,jdbcType=INTEGER}, #{patientName,jdbcType=VARCHAR}, ",
-        "#{patientId,jdbcType=INTEGER}, #{gender,jdbcType=CHAR}, ",
-        "#{age,jdbcType=INTEGER}, #{birthday,jdbcType=DATE}, #{registrationCategory,jdbcType=CHAR}, ",
-        "#{medicalCategory,jdbcType=CHAR}, #{identityCardNo,jdbcType=CHAR}, ",
-        "#{registrationStatus,jdbcType=CHAR}, #{visitDate,jdbcType=TIMESTAMP}, ",
-        "#{registrationDate,jdbcType=TIMESTAMP}, #{departmentId,jdbcType=INTEGER}, ",
-        "#{doctorId,jdbcType=INTEGER}, #{registrationSource,jdbcType=CHAR}, ",
-        "#{settleAccountsCategory,jdbcType=CHAR}, #{isVisited,jdbcType=CHAR}, ",
-        "#{valid,jdbcType=INTEGER}, #{familyAddress,jdbcType=VARCHAR}, ",
+        "values (#{patientName,jdbcType=VARCHAR}, #{patientId,jdbcType=INTEGER}, ",
+        "#{gender,jdbcType=CHAR}, #{age,jdbcType=INTEGER}, #{birthday,jdbcType=DATE}, ",
+        "#{registrationCategory,jdbcType=CHAR}, #{medicalCategory,jdbcType=CHAR}, ",
+        "#{identityCardNo,jdbcType=CHAR}, #{registrationStatus,jdbcType=CHAR}, ",
+        "#{visitDate,jdbcType=TIMESTAMP}, #{registrationDate,jdbcType=TIMESTAMP}, ",
+        "#{departmentId,jdbcType=INTEGER}, #{doctorId,jdbcType=INTEGER}, ",
+        "#{registrationSource,jdbcType=CHAR}, #{settleAccountsCategory,jdbcType=CHAR}, ",
+        "#{isVisited,jdbcType=CHAR}, #{valid,jdbcType=INTEGER}, #{familyAddress,jdbcType=VARCHAR}, ",
         "#{collectorId,jdbcType=INTEGER}, #{totalCharge,jdbcType=INTEGER}, ",
         "#{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, ",
         "#{reserve3,jdbcType=VARCHAR})"
     })
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="registrationId", before=false, resultType=Integer.class)
     int insert(Registration record);
 
     int insertSelective(Registration record);

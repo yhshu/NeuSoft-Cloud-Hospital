@@ -2,13 +2,9 @@ package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.Doctor;
 import com.neusoft.medical.bean.DoctorExample;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 public interface DoctorMapper {
     long countByExample(DoctorExample example);
@@ -22,19 +18,18 @@ public interface DoctorMapper {
     int deleteByPrimaryKey(Integer doctorId);
 
     @Insert({
-        "insert into hospital.doctor (doctor_id, doctor_name, ",
-        "department, type, ",
-        "job_title, account_id, ",
-        "valid, doctor_scheduling, ",
-        "reserve1, reserve2, ",
-        "reserve3)",
-        "values (#{doctorId,jdbcType=INTEGER}, #{doctorName,jdbcType=VARCHAR}, ",
-        "#{department,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, ",
-        "#{jobTitle,jdbcType=VARCHAR}, #{accountId,jdbcType=INTEGER}, ",
-        "#{valid,jdbcType=INTEGER}, #{doctorScheduling,jdbcType=INTEGER}, ",
-        "#{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, ",
-        "#{reserve3,jdbcType=VARCHAR})"
+        "insert into hospital.doctor (doctor_name, department, ",
+        "type, job_title, ",
+        "account_id, valid, ",
+        "doctor_scheduling, reserve1, ",
+        "reserve2, reserve3)",
+        "values (#{doctorName,jdbcType=VARCHAR}, #{department,jdbcType=INTEGER}, ",
+        "#{type,jdbcType=INTEGER}, #{jobTitle,jdbcType=VARCHAR}, ",
+        "#{accountId,jdbcType=INTEGER}, #{valid,jdbcType=INTEGER}, ",
+        "#{doctorScheduling,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
+        "#{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR})"
     })
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="doctorId", before=false, resultType=Integer.class)
     int insert(Doctor record);
 
     int insertSelective(Doctor record);

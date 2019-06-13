@@ -104,63 +104,63 @@ public class DiseaseCategoryExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andDiseaseIdIsNull() {
-            addCriterion("disease_id is null");
+        public Criteria andDiseaseCategoryIdIsNull() {
+            addCriterion("disease_category_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseIdIsNotNull() {
-            addCriterion("disease_id is not null");
+        public Criteria andDiseaseCategoryIdIsNotNull() {
+            addCriterion("disease_category_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseIdEqualTo(Integer value) {
-            addCriterion("disease_id =", value, "diseaseId");
+        public Criteria andDiseaseCategoryIdEqualTo(Integer value) {
+            addCriterion("disease_category_id =", value, "diseaseCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseIdNotEqualTo(Integer value) {
-            addCriterion("disease_id <>", value, "diseaseId");
+        public Criteria andDiseaseCategoryIdNotEqualTo(Integer value) {
+            addCriterion("disease_category_id <>", value, "diseaseCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseIdGreaterThan(Integer value) {
-            addCriterion("disease_id >", value, "diseaseId");
+        public Criteria andDiseaseCategoryIdGreaterThan(Integer value) {
+            addCriterion("disease_category_id >", value, "diseaseCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("disease_id >=", value, "diseaseId");
+        public Criteria andDiseaseCategoryIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("disease_category_id >=", value, "diseaseCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseIdLessThan(Integer value) {
-            addCriterion("disease_id <", value, "diseaseId");
+        public Criteria andDiseaseCategoryIdLessThan(Integer value) {
+            addCriterion("disease_category_id <", value, "diseaseCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseIdLessThanOrEqualTo(Integer value) {
-            addCriterion("disease_id <=", value, "diseaseId");
+        public Criteria andDiseaseCategoryIdLessThanOrEqualTo(Integer value) {
+            addCriterion("disease_category_id <=", value, "diseaseCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseIdIn(List<Integer> values) {
-            addCriterion("disease_id in", values, "diseaseId");
+        public Criteria andDiseaseCategoryIdIn(List<Integer> values) {
+            addCriterion("disease_category_id in", values, "diseaseCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseIdNotIn(List<Integer> values) {
-            addCriterion("disease_id not in", values, "diseaseId");
+        public Criteria andDiseaseCategoryIdNotIn(List<Integer> values) {
+            addCriterion("disease_category_id not in", values, "diseaseCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseIdBetween(Integer value1, Integer value2) {
-            addCriterion("disease_id between", value1, value2, "diseaseId");
+        public Criteria andDiseaseCategoryIdBetween(Integer value1, Integer value2) {
+            addCriterion("disease_category_id between", value1, value2, "diseaseCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("disease_id not between", value1, value2, "diseaseId");
+        public Criteria andDiseaseCategoryIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("disease_category_id not between", value1, value2, "diseaseCategoryId");
             return (Criteria) this;
         }
 

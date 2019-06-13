@@ -1,7 +1,7 @@
 package com.neusoft.medical.bean;
 
 public class Prescription {
-    private Integer presciptionId;
+    private Integer prescriptionId;
 
     private Integer registrationId;
 
@@ -19,8 +19,8 @@ public class Prescription {
 
     private String reserve3;
 
-    public Prescription(Integer presciptionId, Integer registrationId, String registrationName, Integer doctorId, String content, Integer valid, String reserve1, String reserve2, String reserve3) {
-        this.presciptionId = presciptionId;
+    public Prescription(Integer prescriptionId, Integer registrationId, String registrationName, Integer doctorId, String content, Integer valid, String reserve1, String reserve2, String reserve3) {
+        this.prescriptionId = prescriptionId;
         this.registrationId = registrationId;
         this.registrationName = registrationName;
         this.doctorId = doctorId;
@@ -35,12 +35,12 @@ public class Prescription {
         super();
     }
 
-    public Integer getPresciptionId() {
-        return presciptionId;
+    public Integer getPrescriptionId() {
+        return prescriptionId;
     }
 
-    public void setPresciptionId(Integer presciptionId) {
-        this.presciptionId = presciptionId;
+    public void setPrescriptionId(Integer prescriptionId) {
+        this.prescriptionId = prescriptionId;
     }
 
     public Integer getRegistrationId() {

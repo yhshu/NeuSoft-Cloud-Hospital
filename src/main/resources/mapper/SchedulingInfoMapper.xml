@@ -99,11 +99,11 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="com.neusoft.medical.bean.SchedulingInfo">
+    <selectKey keyProperty="schedulingInfoId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into hospital.scheduling_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="schedulingInfoId != null">
-        scheduling_info_id,
-      </if>
       <if test="schedulingTime != null">
         scheduling_time,
       </if>
@@ -136,9 +136,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="schedulingInfoId != null">
-        #{schedulingInfoId,jdbcType=INTEGER},
-      </if>
       <if test="schedulingTime != null">
         #{schedulingTime,jdbcType=DATE},
       </if>

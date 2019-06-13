@@ -91,11 +91,11 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="com.neusoft.medical.bean.Auth">
+    <selectKey keyProperty="authId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into hospital.auth
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="authId != null">
-        auth_id,
-      </if>
       <if test="authName != null">
         auth_name,
       </if>
@@ -107,9 +107,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="authId != null">
-        #{authId,jdbcType=INTEGER},
-      </if>
       <if test="authName != null">
         #{authName,jdbcType=VARCHAR},
       </if>

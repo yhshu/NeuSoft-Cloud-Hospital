@@ -18,23 +18,20 @@ public interface MedicalRecordsMapper {
     int deleteByPrimaryKey(Integer medicalRecordsId);
 
     @Insert({
-        "insert into hospital.medical_records (medical_records_id, registration_id, ",
-        "main_info, current_disease, ",
-        "past_disease, physical_exam, ",
-        "auxiliary_exam, preliminary_western, ",
-        "preliminary_chinese, opinion, ",
-        "valid, save_state, ",
-        "reserve1, reserve2, ",
-        "reserve3)",
-        "values (#{medicalRecordsId,jdbcType=INTEGER}, #{registrationId,jdbcType=INTEGER}, ",
-        "#{mainInfo,jdbcType=VARCHAR}, #{currentDisease,jdbcType=VARCHAR}, ",
-        "#{pastDisease,jdbcType=VARCHAR}, #{physicalExam,jdbcType=VARCHAR}, ",
-        "#{auxiliaryExam,jdbcType=VARCHAR}, #{preliminaryWestern,jdbcType=VARCHAR}, ",
-        "#{preliminaryChinese,jdbcType=VARCHAR}, #{opinion,jdbcType=VARCHAR}, ",
-        "#{valid,jdbcType=INTEGER}, #{saveState,jdbcType=INTEGER}, ",
-        "#{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, ",
-        "#{reserve3,jdbcType=VARCHAR})"
+        "insert into hospital.medical_records (registration_id, main_info, ",
+        "current_disease, past_disease, ",
+        "physical_exam, auxiliary_exam, ",
+        "opinion, valid, ",
+        "save_state, reserve1, ",
+        "reserve2, reserve3)",
+        "values (#{registrationId,jdbcType=INTEGER}, #{mainInfo,jdbcType=VARCHAR}, ",
+        "#{currentDisease,jdbcType=VARCHAR}, #{pastDisease,jdbcType=VARCHAR}, ",
+        "#{physicalExam,jdbcType=VARCHAR}, #{auxiliaryExam,jdbcType=VARCHAR}, ",
+        "#{opinion,jdbcType=VARCHAR}, #{valid,jdbcType=INTEGER}, ",
+        "#{saveState,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
+        "#{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR})"
     })
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="medicalRecordsId", before=false, resultType=Integer.class)
     int insert(MedicalRecords record);
 
     int insertSelective(MedicalRecords record);
@@ -44,8 +41,8 @@ public interface MedicalRecordsMapper {
     @Select({
         "select",
         "medical_records_id, registration_id, main_info, current_disease, past_disease, ",
-        "physical_exam, auxiliary_exam, preliminary_western, preliminary_chinese, opinion, ",
-        "valid, save_state, reserve1, reserve2, reserve3",
+        "physical_exam, auxiliary_exam, opinion, valid, save_state, reserve1, reserve2, ",
+        "reserve3",
         "from hospital.medical_records",
         "where medical_records_id = #{medicalRecordsId,jdbcType=INTEGER}"
     })
@@ -66,8 +63,6 @@ public interface MedicalRecordsMapper {
           "past_disease = #{pastDisease,jdbcType=VARCHAR},",
           "physical_exam = #{physicalExam,jdbcType=VARCHAR},",
           "auxiliary_exam = #{auxiliaryExam,jdbcType=VARCHAR},",
-          "preliminary_western = #{preliminaryWestern,jdbcType=VARCHAR},",
-          "preliminary_chinese = #{preliminaryChinese,jdbcType=VARCHAR},",
           "opinion = #{opinion,jdbcType=VARCHAR},",
           "valid = #{valid,jdbcType=INTEGER},",
           "save_state = #{saveState,jdbcType=INTEGER},",

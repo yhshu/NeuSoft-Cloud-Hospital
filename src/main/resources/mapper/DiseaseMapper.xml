@@ -93,11 +93,11 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="com.neusoft.medical.bean.Disease">
+    <selectKey keyProperty="diseaseId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into hospital.disease
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="diseaseId != null">
-        disease_id,
-      </if>
       <if test="diseaseIcd != null">
         disease_ICD,
       </if>
@@ -115,9 +115,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="diseaseId != null">
-        #{diseaseId,jdbcType=INTEGER},
-      </if>
       <if test="diseaseIcd != null">
         #{diseaseIcd,jdbcType=VARCHAR},
       </if>

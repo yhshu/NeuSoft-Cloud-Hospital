@@ -101,11 +101,11 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="com.neusoft.medical.bean.SchedulingRule">
+    <selectKey keyProperty="schedulingRuleId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into hospital.scheduling_rule
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="schedulingRuleId != null">
-        scheduling_rule_id,
-      </if>
       <if test="weekDay != null">
         week_day,
       </if>
@@ -144,9 +144,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="schedulingRuleId != null">
-        #{schedulingRuleId,jdbcType=INTEGER},
-      </if>
       <if test="weekDay != null">
         #{weekDay,jdbcType=VARCHAR},
       </if>

@@ -103,11 +103,11 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="com.neusoft.medical.bean.ChargeForm">
+    <selectKey keyProperty="chargeFormId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into hospital.charge_form
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="chargeFormId != null">
-        charge_form_id,
-      </if>
       <if test="registrationId != null">
         registration_id,
       </if>
@@ -149,9 +149,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="chargeFormId != null">
-        #{chargeFormId,jdbcType=INTEGER},
-      </if>
       <if test="registrationId != null">
         #{registrationId,jdbcType=INTEGER},
       </if>

@@ -115,28 +115,72 @@ database types (e.g. MySql's unsigned bigint type should be mapped to java.lang.
 
         -->
         <!--            <columnOverride column="" javaType=""    jdbcType="" typeHandler=""  delimitedColumnName="" />-->
-        <table tableName="account" catalog="hospital"></table>
-        <table tableName="auth" catalog="hospital"></table>
-        <table tableName="charge_form" catalog="hospital"></table>
-        <table tableName="charge_item" catalog="hospital"></table>
-        <table tableName="constant_item" catalog="hospital"></table>
-        <table tableName="constant_type" catalog="hospital"></table>
-        <table tableName="department" catalog="hospital"></table>
-        <table tableName="disease" catalog="hospital"></table>
-        <table tableName="disease_category" catalog="hospital"></table>
-        <table tableName="doctor" catalog="hospital"></table>
-        <table tableName="examination" catalog="hospital"></table>
-        <table tableName="expense_category" catalog="hospital"></table>
-        <table tableName="medical_records" catalog="hospital"></table>
-        <table tableName="medicine" catalog="hospital"></table>
-        <table tableName="patient" catalog="hospital"></table>
-        <table tableName="prescription" catalog="hospital"></table>
-        <table tableName="record_disease" catalog="hospital"></table>
-        <table tableName="registration" catalog="hospital"></table>
-        <table tableName="scheduling_info" catalog="hospital"></table>
-        <table tableName="scheduling_rule" catalog="hospital"></table>
-        <table tableName="staff" catalog="hospital"></table>
-        <table tableName="user_auth" catalog="hospital"></table>
+        <table tableName="account" catalog="hospital">
+            <generatedKey column="account_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="auth" catalog="hospital">
+            <generatedKey column="auth_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="charge_form" catalog="hospital">
+            <generatedKey column="charge_form_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="charge_item" catalog="hospital">
+            <generatedKey column="charge_item_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="constant_item" catalog="hospital">
+            <generatedKey column="constant_item_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="constant_type" catalog="hospital">
+            <generatedKey column="constant_type_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="department" catalog="hospital">
+            <generatedKey column="department_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="disease" catalog="hospital">
+            <generatedKey column="disease_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="disease_category" catalog="hospital">
+            <generatedKey column="disease_category_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="doctor" catalog="hospital">
+            <generatedKey column="doctor_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="examination" catalog="hospital">
+            <generatedKey column="examination_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="expense_category" catalog="hospital">
+            <generatedKey column="expense_category_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="medical_records" catalog="hospital">
+            <generatedKey column="medical_records_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="medicine" catalog="hospital">
+            <generatedKey column="medicine_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="patient" catalog="hospital">
+            <generatedKey column="patient_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="prescription" catalog="hospital">
+            <generatedKey column="prescription_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="record_disease" catalog="hospital">
+            <generatedKey column="record_disease_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="registration" catalog="hospital">
+            <generatedKey column="registration_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="scheduling_info" catalog="hospital">
+            <generatedKey column="scheduling_info_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="scheduling_rule" catalog="hospital">
+            <generatedKey column="scheduling_rule_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="staff" catalog="hospital">
+            <generatedKey column="staff_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="user_auth" catalog="hospital">
+            <generatedKey column="user_auth_id" sqlStatement="Mysql" identity="true"/>
+        </table>
 
     </context>
 </generatorConfiguration>
