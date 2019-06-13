@@ -22,13 +22,17 @@ public class ChargeFormServiceImpl implements ChargeFormService {
     private RegistrationService registrationService;
 
     @Override
-    public PageInfo<ChargeForm> selectChargeFormByRegistrationId(Integer currentPage, Integer pageSize, Integer registrationId) {
+    public PageInfo<ChargeForm> selectChargeFormByRegistrationId(Integer currentPage, Integer pageSize, Integer registrationId, Date startDate, Date endDate) {
         PageHelper.startPage(currentPage, pageSize);
 
         ChargeFormExample chargeFormExample = new ChargeFormExample();
         ChargeFormExample.Criteria criteria = chargeFormExample.createCriteria();
-        criteria.andValidEqualTo(1);
-        criteria.andRegistrationIdEqualTo(registrationId);
+        criteria.andValidEqualTo(1); // 有效记录
+        criteria.andRegistrationIdEqualTo(registrationId); // 挂号编号
+        if (startDate != null) // 起始时间
+            criteria.andMadeTimeGreaterThan(startDate);
+        if (endDate != null) // 结束时间
+            criteria.andMadeTimeLessThan(endDate);
         List<ChargeForm> chargeFormList = chargeFormMapper.selectByExample(chargeFormExample);
 
         return new PageInfo<>(chargeFormList);

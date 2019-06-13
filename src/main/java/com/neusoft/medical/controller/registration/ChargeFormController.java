@@ -2,6 +2,7 @@ package com.neusoft.medical.controller.registration;
 
 
 import com.github.pagehelper.PageInfo;
+import com.neusoft.medical.Util.DateConverter;
 import com.neusoft.medical.bean.ChargeForm;
 import com.neusoft.medical.bean.ChargeItem;
 import com.neusoft.medical.dto.ResultDTO;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,6 +27,9 @@ public class ChargeFormController {
     @Resource
     private ChargeItemService chargeItemService;
 
+    @Resource
+    private DateConverter dateConverter;
+
     /**
      * 按挂号编号获取收费账单
      *
@@ -37,9 +42,20 @@ public class ChargeFormController {
     public ResultDTO<PageInfo<ChargeForm>> selectChargeForm(
             @RequestParam(value = "currentPage") Integer currentPage,
             @RequestParam(value = "pageSize") Integer pageSize,
-            @RequestParam(value = "registrationId") Integer registrationId) {
+            @RequestParam(value = "registrationId") Integer registrationId,
+            @RequestParam(value = "startDate", required = false) String startDate,
+            @RequestParam(value = "endDate", required = false) String endDate
+    ) {
         System.out.println("ChargeFormController 按挂号编号获取收费账单");
-        PageInfo<ChargeForm> chargeFormPageInfo = chargeFormService.selectChargeFormByRegistrationId(currentPage, pageSize, registrationId);
+
+        Date startDateConverted = null;
+        Date endDateConverted = null;
+        if (startDate != null)
+            startDateConverted = dateConverter.convert(startDate);
+        if (endDate != null)
+            endDateConverted = dateConverter.convert(endDate);
+        PageInfo<ChargeForm> chargeFormPageInfo = chargeFormService.selectChargeFormByRegistrationId(currentPage, pageSize, registrationId, startDateConverted, endDateConverted);
+
         return new ResultDTO<>(chargeFormPageInfo);
     }
 
@@ -84,7 +100,12 @@ public class ChargeFormController {
         return new ResultDTO<>(Boolean.TRUE);
     }
 
-
+    /**
+     * 按收费项目编号列表 删除多个收费项目
+     *
+     * @param chargeItemIdList 收费项目编号
+     * @return
+     */
     @DeleteMapping("/delete_charge_item_in_form")
     public ResultDTO<Boolean> deleteChargeItemInForm(@RequestParam("chargeItemIdList[]") Integer[] chargeItemIdList) {
         System.out.println("ChargeFormController 按科室编号列表删除收费项目");

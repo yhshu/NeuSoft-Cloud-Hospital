@@ -3,6 +3,7 @@ package com.neusoft.medical.service;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.ChargeForm;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ChargeFormService {
@@ -11,9 +12,13 @@ public interface ChargeFormService {
      * 按挂号编号获取收费项目
      *
      * @param registrationId 挂号编号
+     * @param currentPage    当前页码
+     * @param pageSize       页面大小
+     * @param startDate      开始日期（可选）
+     * @param endDate        结束日期（可选）
      * @return 分页的收费项目列表
      */
-    PageInfo<ChargeForm> selectChargeFormByRegistrationId(Integer currentPage, Integer pageSize, Integer registrationId);
+    PageInfo<ChargeForm> selectChargeFormByRegistrationId(Integer currentPage, Integer pageSize, Integer registrationId, Date startDate, Date endDate);
 
     /**
      * 添加收费项目到收费账单中
@@ -30,7 +35,7 @@ public interface ChargeFormService {
      * 按收费项目编号列表 删除多个收费项目
      *
      * @param chargeItemIdList 收费项目编号
-     * @return
+     * @return 删除成功 true；删除失败 false
      */
     boolean deleteChargeItemInForm(List<Integer> chargeItemIdList);
 }
