@@ -59,6 +59,7 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
         PatientExample.Criteria criteria = patientExample.createCriteria();
         criteria.andValidEqualTo(1); // 有效的患者信息
         criteria.andPatientNameLike(patientName); // 包含姓名
+        // todo
 
         return patientMapper.selectByExample(patientExample);
     }

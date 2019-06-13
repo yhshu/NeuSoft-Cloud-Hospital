@@ -55,7 +55,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         }
 
         // 新增病历记录
-        medicalRecordsMapper.insert(new MedicalRecords(null, record.getRegistrationId(), null, null, null, null, null, 1, null, null, null));
+        medicalRecordsMapper.insert(new MedicalRecords(null, record.getRegistrationId(), null, null, null, null, null, null, null, null, 1, null, null, null));
 
         return registrationMapper.selectByPrimaryKey(record.getRegistrationId());
     }

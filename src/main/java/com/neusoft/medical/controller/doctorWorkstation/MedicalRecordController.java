@@ -3,6 +3,7 @@ package com.neusoft.medical.controller.doctorWorkstation;
 import com.neusoft.medical.bean.Patient;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.OutpatientMedicalRecordService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +24,7 @@ public class MedicalRecordController {
      * @param doctorId       医生编号
      * @return 患者信息
      */
-    @RequestMapping("/select_patient_by_registration")
+    @GetMapping("/select_patient_by_registration")
     public ResultDTO<Patient> selectPatient(
             @RequestParam(value = "registrationId") Integer registrationId,
             @RequestParam(value = "patientScope") Integer patientScope,
