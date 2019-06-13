@@ -332,73 +332,73 @@ public class ChargeItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andChargeItemFormatIsNull() {
-            addCriterion("charge_item_format is null");
+        public Criteria andSpecificationIsNull() {
+            addCriterion("specification is null");
             return (Criteria) this;
         }
 
-        public Criteria andChargeItemFormatIsNotNull() {
-            addCriterion("charge_item_format is not null");
+        public Criteria andSpecificationIsNotNull() {
+            addCriterion("specification is not null");
             return (Criteria) this;
         }
 
-        public Criteria andChargeItemFormatEqualTo(String value) {
-            addCriterion("charge_item_format =", value, "chargeItemFormat");
+        public Criteria andSpecificationEqualTo(String value) {
+            addCriterion("specification =", value, "specification");
             return (Criteria) this;
         }
 
-        public Criteria andChargeItemFormatNotEqualTo(String value) {
-            addCriterion("charge_item_format <>", value, "chargeItemFormat");
+        public Criteria andSpecificationNotEqualTo(String value) {
+            addCriterion("specification <>", value, "specification");
             return (Criteria) this;
         }
 
-        public Criteria andChargeItemFormatGreaterThan(String value) {
-            addCriterion("charge_item_format >", value, "chargeItemFormat");
+        public Criteria andSpecificationGreaterThan(String value) {
+            addCriterion("specification >", value, "specification");
             return (Criteria) this;
         }
 
-        public Criteria andChargeItemFormatGreaterThanOrEqualTo(String value) {
-            addCriterion("charge_item_format >=", value, "chargeItemFormat");
+        public Criteria andSpecificationGreaterThanOrEqualTo(String value) {
+            addCriterion("specification >=", value, "specification");
             return (Criteria) this;
         }
 
-        public Criteria andChargeItemFormatLessThan(String value) {
-            addCriterion("charge_item_format <", value, "chargeItemFormat");
+        public Criteria andSpecificationLessThan(String value) {
+            addCriterion("specification <", value, "specification");
             return (Criteria) this;
         }
 
-        public Criteria andChargeItemFormatLessThanOrEqualTo(String value) {
-            addCriterion("charge_item_format <=", value, "chargeItemFormat");
+        public Criteria andSpecificationLessThanOrEqualTo(String value) {
+            addCriterion("specification <=", value, "specification");
             return (Criteria) this;
         }
 
-        public Criteria andChargeItemFormatLike(String value) {
-            addCriterion("charge_item_format like", value, "chargeItemFormat");
+        public Criteria andSpecificationLike(String value) {
+            addCriterion("specification like", value, "specification");
             return (Criteria) this;
         }
 
-        public Criteria andChargeItemFormatNotLike(String value) {
-            addCriterion("charge_item_format not like", value, "chargeItemFormat");
+        public Criteria andSpecificationNotLike(String value) {
+            addCriterion("specification not like", value, "specification");
             return (Criteria) this;
         }
 
-        public Criteria andChargeItemFormatIn(List<String> values) {
-            addCriterion("charge_item_format in", values, "chargeItemFormat");
+        public Criteria andSpecificationIn(List<String> values) {
+            addCriterion("specification in", values, "specification");
             return (Criteria) this;
         }
 
-        public Criteria andChargeItemFormatNotIn(List<String> values) {
-            addCriterion("charge_item_format not in", values, "chargeItemFormat");
+        public Criteria andSpecificationNotIn(List<String> values) {
+            addCriterion("specification not in", values, "specification");
             return (Criteria) this;
         }
 
-        public Criteria andChargeItemFormatBetween(String value1, String value2) {
-            addCriterion("charge_item_format between", value1, value2, "chargeItemFormat");
+        public Criteria andSpecificationBetween(String value1, String value2) {
+            addCriterion("specification between", value1, value2, "specification");
             return (Criteria) this;
         }
 
-        public Criteria andChargeItemFormatNotBetween(String value1, String value2) {
-            addCriterion("charge_item_format not between", value1, value2, "chargeItemFormat");
+        public Criteria andSpecificationNotBetween(String value1, String value2) {
+            addCriterion("specification not between", value1, value2, "specification");
             return (Criteria) this;
         }
 

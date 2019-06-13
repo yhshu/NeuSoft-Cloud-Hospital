@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.ChargeForm;
 import com.neusoft.medical.bean.ChargeFormExample;
 import com.neusoft.medical.dao.ChargeFormMapper;
+import com.neusoft.medical.dao.ChargeItemMapper;
 import com.neusoft.medical.service.ChargeFormService;
 import com.neusoft.medical.service.RegistrationService;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,9 @@ import java.util.List;
 public class ChargeFormServiceImpl implements ChargeFormService {
     @Resource
     private ChargeFormMapper chargeFormMapper;
+
+    @Resource
+    private ChargeItemMapper chargeItemMapper;
 
     @Resource
     private RegistrationService registrationService;
@@ -34,6 +38,15 @@ public class ChargeFormServiceImpl implements ChargeFormService {
         if (endDate != null) // 结束时间
             criteria.andMadeTimeLessThan(endDate);
         List<ChargeForm> chargeFormList = chargeFormMapper.selectByExample(chargeFormExample);
+
+        for (ChargeForm chargeForm : chargeFormList) {
+            // 保留位1：收费项目规格
+            // 保留位2：收费项目单价
+            // 保留收费项目单位
+
+            chargeForm.setReserve1(chargeItemMapper.selectByPrimaryKey(chargeForm.getChargeItemId()).getSpecification());
+            chargeForm.setReserve2(chargeItemMapper.selectByPrimaryKey(chargeForm.getChargeItemId()).getPrice().toString());
+        }
 
         return new PageInfo<>(chargeFormList);
     }

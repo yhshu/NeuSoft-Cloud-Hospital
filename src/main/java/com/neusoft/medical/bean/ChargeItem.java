@@ -9,7 +9,7 @@ public class ChargeItem {
 
     private String nameZh;
 
-    private String chargeItemFormat;
+    private String specification;
 
     private Long price;
 
@@ -37,11 +37,11 @@ public class ChargeItem {
 
     private String reserve3;
 
-    public ChargeItem(Integer chargeItemId, String chargeItemCode, String nameZh, String chargeItemFormat, Long price, Integer expenseCategoryId, Integer departmentId, String namePinyin, Integer chargeType, Date creationTime, Date chargeTime, Integer nums, String nameEn, Integer valid, String reserve1, String reserve2, String reserve3) {
+    public ChargeItem(Integer chargeItemId, String chargeItemCode, String nameZh, String specification, Long price, Integer expenseCategoryId, Integer departmentId, String namePinyin, Integer chargeType, Date creationTime, Date chargeTime, Integer nums, String nameEn, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.chargeItemId = chargeItemId;
         this.chargeItemCode = chargeItemCode;
         this.nameZh = nameZh;
-        this.chargeItemFormat = chargeItemFormat;
+        this.specification = specification;
         this.price = price;
         this.expenseCategoryId = expenseCategoryId;
         this.departmentId = departmentId;
@@ -85,12 +85,12 @@ public class ChargeItem {
         this.nameZh = nameZh == null ? null : nameZh.trim();
     }
 
-    public String getChargeItemFormat() {
-        return chargeItemFormat;
+    public String getSpecification() {
+        return specification;
     }
 
-    public void setChargeItemFormat(String chargeItemFormat) {
-        this.chargeItemFormat = chargeItemFormat == null ? null : chargeItemFormat.trim();
+    public void setSpecification(String specification) {
+        this.specification = specification == null ? null : specification.trim();
     }
 
     public Long getPrice() {

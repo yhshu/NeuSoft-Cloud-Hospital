@@ -23,7 +23,7 @@ public interface ChargeItemMapper {
 
     @Insert({
         "insert into hospital.charge_item (charge_item_id, charge_item_code, ",
-        "name_zh, charge_item_format, ",
+        "name_zh, specification, ",
         "price, expense_category_id, ",
         "department_id, name_pinyin, ",
         "charge_type, creation_time, ",
@@ -31,7 +31,7 @@ public interface ChargeItemMapper {
         "name_en, valid, reserve1, ",
         "reserve2, reserve3)",
         "values (#{chargeItemId,jdbcType=INTEGER}, #{chargeItemCode,jdbcType=VARCHAR}, ",
-        "#{nameZh,jdbcType=VARCHAR}, #{chargeItemFormat,jdbcType=VARCHAR}, ",
+        "#{nameZh,jdbcType=VARCHAR}, #{specification,jdbcType=VARCHAR}, ",
         "#{price,jdbcType=DECIMAL}, #{expenseCategoryId,jdbcType=INTEGER}, ",
         "#{departmentId,jdbcType=INTEGER}, #{namePinyin,jdbcType=VARCHAR}, ",
         "#{chargeType,jdbcType=INTEGER}, #{creationTime,jdbcType=DATE}, ",
@@ -47,7 +47,7 @@ public interface ChargeItemMapper {
 
     @Select({
         "select",
-        "charge_item_id, charge_item_code, name_zh, charge_item_format, price, expense_category_id, ",
+        "charge_item_id, charge_item_code, name_zh, specification, price, expense_category_id, ",
         "department_id, name_pinyin, charge_type, creation_time, charge_time, nums, name_en, ",
         "valid, reserve1, reserve2, reserve3",
         "from hospital.charge_item",
@@ -66,7 +66,7 @@ public interface ChargeItemMapper {
         "update hospital.charge_item",
         "set charge_item_code = #{chargeItemCode,jdbcType=VARCHAR},",
           "name_zh = #{nameZh,jdbcType=VARCHAR},",
-          "charge_item_format = #{chargeItemFormat,jdbcType=VARCHAR},",
+          "specification = #{specification,jdbcType=VARCHAR},",
           "price = #{price,jdbcType=DECIMAL},",
           "expense_category_id = #{expenseCategoryId,jdbcType=INTEGER},",
           "department_id = #{departmentId,jdbcType=INTEGER},",

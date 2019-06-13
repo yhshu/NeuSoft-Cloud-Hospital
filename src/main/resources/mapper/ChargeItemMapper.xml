@@ -6,7 +6,7 @@
       <idArg column="charge_item_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="charge_item_code" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="name_zh" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="charge_item_format" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="specification" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="price" javaType="java.lang.Long" jdbcType="DECIMAL" />
       <arg column="expense_category_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="department_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
@@ -81,7 +81,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    charge_item_id, charge_item_code, name_zh, charge_item_format, price, expense_category_id, 
+    charge_item_id, charge_item_code, name_zh, specification, price, expense_category_id, 
     department_id, name_pinyin, charge_type, creation_time, charge_time, nums, name_en, 
     valid, reserve1, reserve2, reserve3
   </sql>
@@ -117,8 +117,8 @@
       <if test="nameZh != null">
         name_zh,
       </if>
-      <if test="chargeItemFormat != null">
-        charge_item_format,
+      <if test="specification != null">
+        specification,
       </if>
       <if test="price != null">
         price,
@@ -170,8 +170,8 @@
       <if test="nameZh != null">
         #{nameZh,jdbcType=VARCHAR},
       </if>
-      <if test="chargeItemFormat != null">
-        #{chargeItemFormat,jdbcType=VARCHAR},
+      <if test="specification != null">
+        #{specification,jdbcType=VARCHAR},
       </if>
       <if test="price != null">
         #{price,jdbcType=DECIMAL},
@@ -232,8 +232,8 @@
       <if test="record.nameZh != null">
         name_zh = #{record.nameZh,jdbcType=VARCHAR},
       </if>
-      <if test="record.chargeItemFormat != null">
-        charge_item_format = #{record.chargeItemFormat,jdbcType=VARCHAR},
+      <if test="record.specification != null">
+        specification = #{record.specification,jdbcType=VARCHAR},
       </if>
       <if test="record.price != null">
         price = #{record.price,jdbcType=DECIMAL},
@@ -284,7 +284,7 @@
     set charge_item_id = #{record.chargeItemId,jdbcType=INTEGER},
       charge_item_code = #{record.chargeItemCode,jdbcType=VARCHAR},
       name_zh = #{record.nameZh,jdbcType=VARCHAR},
-      charge_item_format = #{record.chargeItemFormat,jdbcType=VARCHAR},
+      specification = #{record.specification,jdbcType=VARCHAR},
       price = #{record.price,jdbcType=DECIMAL},
       expense_category_id = #{record.expenseCategoryId,jdbcType=INTEGER},
       department_id = #{record.departmentId,jdbcType=INTEGER},
@@ -311,8 +311,8 @@
       <if test="nameZh != null">
         name_zh = #{nameZh,jdbcType=VARCHAR},
       </if>
-      <if test="chargeItemFormat != null">
-        charge_item_format = #{chargeItemFormat,jdbcType=VARCHAR},
+      <if test="specification != null">
+        specification = #{specification,jdbcType=VARCHAR},
       </if>
       <if test="price != null">
         price = #{price,jdbcType=DECIMAL},
