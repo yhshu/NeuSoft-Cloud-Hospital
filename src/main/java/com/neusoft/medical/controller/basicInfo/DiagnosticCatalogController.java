@@ -38,12 +38,16 @@ public class DiagnosticCatalogController {
     /**
      * 请求指定页的疾病信息
      *
-     * @param currentPage 当前页码
-     * @param pageSize    页面大小spring
+     * @param currentPage       当前页码
+     * @param pageSize          页面大小
+     * @param diseaseCategoryId 疾病种类编号
      * @return 指定大小和页码的疾病信息
      */
     @GetMapping(value = "/list_disease")
-    public ResultDTO<PageInfo<Disease>> selectDiseaseByPage(@RequestParam(value = "current_page") int currentPage, @RequestParam(value = "page_size") int pageSize, @RequestParam(value = "disease_category") int diseaseCategoryId) {
+    public ResultDTO<PageInfo<Disease>> selectDiseaseByPage(
+            @RequestParam(value = "current_page") int currentPage,
+            @RequestParam(value = "page_size") int pageSize,
+            @RequestParam(value = "disease_category") int diseaseCategoryId) {
         System.out.println("DiagnosticCatalogController: " + "分页查询疾病信息");
         System.out.println("currentPage: " + currentPage + ", pageSize: " + pageSize + " , diseaseCategoryId: " + diseaseCategoryId);
 
@@ -61,7 +65,11 @@ public class DiagnosticCatalogController {
      * @return 新增的疾病信息
      */
     @PostMapping(value = "/add")
-    public ResultDTO<Disease> addDisease(@RequestParam(value = "diseaseIcd") String diseaseIcd, @RequestParam(value = "diseaseName") String diseaseName, @RequestParam(value = "dis400easeCode") String diseaseCode, @RequestParam(value = "diseaseCategory") Integer diseaseCategory) {
+    public ResultDTO<Disease> addDisease(
+            @RequestParam(value = "diseaseIcd") String diseaseIcd,
+            @RequestParam(value = "diseaseName") String diseaseName,
+            @RequestParam(value = "diseaseCode") String diseaseCode,
+            @RequestParam(value = "diseaseCategory") Integer diseaseCategory) {
         System.out.println("addDisease: " + "新增疾病");
         Disease added = diagnosticCatalogService.addDisease(new Disease(null, diseaseCode, diseaseName, diseaseIcd, diseaseCategory, null));
         return new ResultDTO<>(added);

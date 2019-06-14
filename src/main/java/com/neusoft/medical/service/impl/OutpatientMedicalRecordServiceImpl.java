@@ -31,9 +31,21 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
     @Resource
     private DiseaseMapper diseaseMapper;
 
+    /**
+     * 挂号搜索范围
+     */
     public final int REGIST_SCOPE_ALL = 0;
     public final int REGIST_SCOPE_DOCTOR = 1;
     public final int REGIST_SCOPE_DEPRAT = 2;
+
+    /**
+     * 病历保存状态
+     */
+    public final int SAVE_TEMP = 0; // 暂存
+    public final int SAVE_FORMAL = 1; // 正式提交
+    public final int SAVE_HOSPITAL_TEMPLATE = 2; // 全院模板
+    public final int SAVE_DEPART_TEMPLATE = 3; // 科室模板
+    public final int SAVE_DOCTOR_TEMPLATE = 4; // 医生个人模板
 
     @Override
     public List<Registration> waitingRegistrationList(int registrationScope, int doctorId) {
@@ -114,10 +126,12 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
             // 初步处理 json 字符串后，下面存储数据到数据库
             // 涉及 registration 表、medical_records 表和 record_disease 表
 
-            Registration registrationRecord = new Registration();
-            registrationRecord.setRegistrationId(registrationId);
-            registrationRecord.setIsVisited("1");  // 修改挂号单：已就诊
-            registrationMapper.updateByPrimaryKeySelective(registrationRecord);
+            if (saveState == SAVE_FORMAL) { // 正式提交病历记录时，修改挂号单为已就诊
+                Registration registrationRecord = new Registration();
+                registrationRecord.setRegistrationId(registrationId);
+                registrationRecord.setIsVisited("1");  // 是否已就诊
+                registrationMapper.updateByPrimaryKeySelective(registrationRecord);
+            }
 
             // 存储病历信息到 medical_records 表
             // 如果病历记录已存在，则更新病历记录；如果病历记录尚不存在，则新增病历记录
