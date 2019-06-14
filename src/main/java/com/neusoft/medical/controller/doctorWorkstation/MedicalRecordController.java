@@ -82,4 +82,23 @@ public class MedicalRecordController {
         }
         return new ResultDTO<>(Boolean.TRUE);
     }
+
+    /**
+     * 诊断结束
+     * 结束看诊之后，针对该患者不能再进行任何检查、检验的申请以及药品的开立、收费等
+     *
+     * @param registrationId 挂号编号
+     * @return 操作结果
+     */
+    @GetMapping("/end_registration")
+    public ResultDTO<Boolean> endRegistration(
+            @RequestParam(value = "registrationId") Integer registrationId) {
+        try {
+            outpatientMedicalRecordService.endRegistration(registrationId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultDTO<>(Boolean.FALSE);
+        }
+        return new ResultDTO<>(Boolean.TRUE);
+    }
 }

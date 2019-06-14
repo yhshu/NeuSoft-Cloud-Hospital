@@ -178,4 +178,14 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
         }
         return true;
     }
+
+    @Override
+    public boolean endRegistration(int registrationId) {
+        try {
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }

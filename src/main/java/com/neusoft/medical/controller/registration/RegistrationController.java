@@ -154,7 +154,8 @@ public class RegistrationController {
      * @return 挂号信息
      */
     @GetMapping("/select_registration")
-    public ResultDTO<Registration> selectRegistrationByPrimaryKey(@RequestParam(value = "registrationId") Integer registrationId) {
+    public ResultDTO<Registration> selectRegistrationByPrimaryKey(
+            @RequestParam(value = "registrationId") Integer registrationId) {
         System.out.println("RegistrationInfoController 按主键获取挂号信息");
         Registration registration = registrationService.selectRegistrationByPrimaryKey(registrationId);
         return new ResultDTO<>(registration);
