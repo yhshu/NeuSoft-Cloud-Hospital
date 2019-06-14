@@ -121,7 +121,7 @@ public class RegistrationController {
         Date registrationDateConverted = dateConverter.convert(registrationDate);
         try {
             registrationService.addRegistration(
-                    new Registration(null, patientName, null, gender, age, birthdayConverted, registrationCategory, medicalCategory, identityCardNo, null, null, registrationDateConverted, departmentId, doctorId, registrationSource, settleAccountsCategory, null, 1, familyAddress, collectorId, null, null, null, null));
+                    new Registration(null, patientName, null, gender, age, birthdayConverted, registrationCategory, medicalCategory, identityCardNo, "1", null, registrationDateConverted, departmentId, doctorId, registrationSource, settleAccountsCategory, null, familyAddress, collectorId, null, 1, null, null, null));
             System.out.println("已提交挂号信息");
         } catch (Exception e) {
             e.printStackTrace();

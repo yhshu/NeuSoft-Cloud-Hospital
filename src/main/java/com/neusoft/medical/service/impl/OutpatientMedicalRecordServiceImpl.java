@@ -204,21 +204,21 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
 
     @Override
     public List<MedicalRecords> selectMedicalRecordsTemplateList(int templateScope, int doctorId) {
-//        MedicalRecordsExample medicalRecordsExample = new MedicalRecordsExample();
-//        MedicalRecordsExample.Criteria criteria = medicalRecordsExample.createCriteria();
-//        criteria.andValidEqualTo(1);
-//        if (templateScope == OutpatientMedicalRecordService.SAVE_DOCTOR_TEMPLATE) {
-//            // 查找医生本人可见的病历模板
-//            criteria.andSaveStateEqualTo(SAVE_DOCTOR_TEMPLATE);
-//            criteria.andDoctorIdEqualTo(doctorId);
-//        } else if (templateScope == OutpatientMedicalRecordService.SAVE_DEPART_TEMPLATE) {
-//            // 查找医生所在科室的病历模板
-//            criteria.andSaveStateEqualTo(SAVE_DEPART_TEMPLATE);
-//            List<Integer> doctorIdInDepartment = new CopyOnWriteArrayList<>();
-//
-//
-//        }
-return null;
+        MedicalRecordsExample medicalRecordsExample = new MedicalRecordsExample();
+        MedicalRecordsExample.Criteria criteria = medicalRecordsExample.createCriteria();
+        criteria.andValidEqualTo(1);
+        if (templateScope == OutpatientMedicalRecordService.SAVE_DOCTOR_TEMPLATE) {
+            // 查找医生本人可见的病历模板
+            criteria.andSaveStateEqualTo(SAVE_DOCTOR_TEMPLATE);
+            criteria.andDoctorIdEqualTo(doctorId);
+        } else if (templateScope == OutpatientMedicalRecordService.SAVE_DEPART_TEMPLATE) {
+            // 查找医生所在科室的病历模板
+            criteria.andSaveStateEqualTo(SAVE_DEPART_TEMPLATE);
+            List<Integer> doctorIdInDepartment = new CopyOnWriteArrayList<>();
+
+
+        }
+        return null;
     }
 
     @Override
