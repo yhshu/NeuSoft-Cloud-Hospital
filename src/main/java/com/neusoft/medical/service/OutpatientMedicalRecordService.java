@@ -66,9 +66,10 @@ public interface OutpatientMedicalRecordService {
      * @param opinion          处理意见
      * @param saveState        保存状态
      * @param doctorId
+     * @param templateName
      * @return 操作结果
      */
-    boolean saveMedicalRecordTemplate(Integer medicalRecordsId, String mainInfo, String currentDisease, String pastDisease, String physicalExam, String auxiliaryExam, String opinion, Integer saveState, Integer doctorId);
+    boolean saveMedicalRecordTemplate(Integer medicalRecordsId, String mainInfo, String currentDisease, String pastDisease, String physicalExam, String auxiliaryExam, String opinion, Integer saveState, Integer doctorId, String templateName);
 
     /**
      * 获取病历模板列表

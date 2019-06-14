@@ -127,7 +127,7 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
             criteria.andValidEqualTo(1);
             criteria.andRegistrationIdEqualTo(registrationId);
             List<MedicalRecords> medicalRecordsList = medicalRecordsMapper.selectByExample(medicalRecordsExample); // 获得指定挂号编号的病历记录
-            MedicalRecords record = new MedicalRecords(null, registrationId, mainInfo, currentDisease, pastDisease, physicalExam, auxiliaryExam, opinion, 1, saveState, doctorId, null, null, null);
+            MedicalRecords record = new MedicalRecords(null, registrationId, mainInfo, currentDisease, pastDisease, physicalExam, auxiliaryExam, opinion, 1, saveState, doctorId, null, null, null, null);
             int medicalRecordsId = -1;
 
             if (medicalRecordsList.isEmpty()) {
@@ -185,11 +185,11 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
     }
 
     @Override
-    public boolean saveMedicalRecordTemplate(Integer medicalRecordsId, String mainInfo, String currentDisease, String pastDisease, String physicalExam, String auxiliaryExam, String opinion, Integer saveState, Integer doctorId) {
+    public boolean saveMedicalRecordTemplate(Integer medicalRecordsId, String mainInfo, String currentDisease, String pastDisease, String physicalExam, String auxiliaryExam, String opinion, Integer saveState, Integer doctorId, String templateName) {
         if (saveState == SAVE_TEMP || saveState == SAVE_FORMAL)
             return false;
         try {
-            MedicalRecords medicalRecords = new MedicalRecords(null, null, mainInfo, currentDisease, pastDisease, physicalExam, auxiliaryExam, opinion, 1, saveState, doctorId, null, null, null);
+            MedicalRecords medicalRecords = new MedicalRecords(null, null, mainInfo, currentDisease, pastDisease, physicalExam, auxiliaryExam, opinion, 1, saveState, doctorId, templateName, null, null, null);
             if (medicalRecordsId == null) { // 新增病历模板
                 medicalRecordsMapper.insert(medicalRecords);
             } else {  // 更新病历模板

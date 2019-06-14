@@ -824,6 +824,76 @@ public class MedicalRecordsExample {
             return (Criteria) this;
         }
 
+        public Criteria andTemplateNameIsNull() {
+            addCriterion("template_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTemplateNameIsNotNull() {
+            addCriterion("template_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTemplateNameEqualTo(String value) {
+            addCriterion("template_name =", value, "templateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTemplateNameNotEqualTo(String value) {
+            addCriterion("template_name <>", value, "templateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTemplateNameGreaterThan(String value) {
+            addCriterion("template_name >", value, "templateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTemplateNameGreaterThanOrEqualTo(String value) {
+            addCriterion("template_name >=", value, "templateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTemplateNameLessThan(String value) {
+            addCriterion("template_name <", value, "templateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTemplateNameLessThanOrEqualTo(String value) {
+            addCriterion("template_name <=", value, "templateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTemplateNameLike(String value) {
+            addCriterion("template_name like", value, "templateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTemplateNameNotLike(String value) {
+            addCriterion("template_name not like", value, "templateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTemplateNameIn(List<String> values) {
+            addCriterion("template_name in", values, "templateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTemplateNameNotIn(List<String> values) {
+            addCriterion("template_name not in", values, "templateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTemplateNameBetween(String value1, String value2) {
+            addCriterion("template_name between", value1, value2, "templateName");
+            return (Criteria) this;
+        }
+
+        public Criteria andTemplateNameNotBetween(String value1, String value2) {
+            addCriterion("template_name not between", value1, value2, "templateName");
+            return (Criteria) this;
+        }
+
         public Criteria andReserve1IsNull() {
             addCriterion("reserve1 is null");
             return (Criteria) this;

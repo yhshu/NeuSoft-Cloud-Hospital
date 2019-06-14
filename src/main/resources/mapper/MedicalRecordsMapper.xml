@@ -14,6 +14,7 @@
       <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="save_state" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="doctor_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="template_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="reserve3" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -79,7 +80,8 @@
   </sql>
   <sql id="Base_Column_List">
     medical_records_id, registration_id, main_info, current_disease, past_disease, physical_exam, 
-    auxiliary_exam, opinion, valid, save_state, doctor_id, reserve1, reserve2, reserve3
+    auxiliary_exam, opinion, valid, save_state, doctor_id, template_name, reserve1, reserve2, 
+    reserve3
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.MedicalRecordsExample" resultMap="BaseResultMap">
     select
@@ -137,6 +139,9 @@
       <if test="doctorId != null">
         doctor_id,
       </if>
+      <if test="templateName != null">
+        template_name,
+      </if>
       <if test="reserve1 != null">
         reserve1,
       </if>
@@ -177,6 +182,9 @@
       </if>
       <if test="doctorId != null">
         #{doctorId,jdbcType=INTEGER},
+      </if>
+      <if test="templateName != null">
+        #{templateName,jdbcType=VARCHAR},
       </if>
       <if test="reserve1 != null">
         #{reserve1,jdbcType=VARCHAR},
@@ -231,6 +239,9 @@
       <if test="record.doctorId != null">
         doctor_id = #{record.doctorId,jdbcType=INTEGER},
       </if>
+      <if test="record.templateName != null">
+        template_name = #{record.templateName,jdbcType=VARCHAR},
+      </if>
       <if test="record.reserve1 != null">
         reserve1 = #{record.reserve1,jdbcType=VARCHAR},
       </if>
@@ -258,6 +269,7 @@
       valid = #{record.valid,jdbcType=INTEGER},
       save_state = #{record.saveState,jdbcType=INTEGER},
       doctor_id = #{record.doctorId,jdbcType=INTEGER},
+      template_name = #{record.templateName,jdbcType=VARCHAR},
       reserve1 = #{record.reserve1,jdbcType=VARCHAR},
       reserve2 = #{record.reserve2,jdbcType=VARCHAR},
       reserve3 = #{record.reserve3,jdbcType=VARCHAR}
@@ -297,6 +309,9 @@
       </if>
       <if test="doctorId != null">
         doctor_id = #{doctorId,jdbcType=INTEGER},
+      </if>
+      <if test="templateName != null">
+        template_name = #{templateName,jdbcType=VARCHAR},
       </if>
       <if test="reserve1 != null">
         reserve1 = #{reserve1,jdbcType=VARCHAR},

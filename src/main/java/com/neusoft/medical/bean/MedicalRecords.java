@@ -23,13 +23,15 @@ public class MedicalRecords {
 
     private Integer doctorId;
 
+    private String templateName;
+
     private String reserve1;
 
     private String reserve2;
 
     private String reserve3;
 
-    public MedicalRecords(Integer medicalRecordsId, Integer registrationId, String mainInfo, String currentDisease, String pastDisease, String physicalExam, String auxiliaryExam, String opinion, Integer valid, Integer saveState, Integer doctorId, String reserve1, String reserve2, String reserve3) {
+    public MedicalRecords(Integer medicalRecordsId, Integer registrationId, String mainInfo, String currentDisease, String pastDisease, String physicalExam, String auxiliaryExam, String opinion, Integer valid, Integer saveState, Integer doctorId, String templateName, String reserve1, String reserve2, String reserve3) {
         this.medicalRecordsId = medicalRecordsId;
         this.registrationId = registrationId;
         this.mainInfo = mainInfo;
@@ -41,6 +43,7 @@ public class MedicalRecords {
         this.valid = valid;
         this.saveState = saveState;
         this.doctorId = doctorId;
+        this.templateName = templateName;
         this.reserve1 = reserve1;
         this.reserve2 = reserve2;
         this.reserve3 = reserve3;
@@ -136,6 +139,14 @@ public class MedicalRecords {
 
     public void setDoctorId(Integer doctorId) {
         this.doctorId = doctorId;
+    }
+
+    public String getTemplateName() {
+        return templateName;
+    }
+
+    public void setTemplateName(String templateName) {
+        this.templateName = templateName == null ? null : templateName.trim();
     }
 
     public String getReserve1() {

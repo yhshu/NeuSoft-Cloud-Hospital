@@ -108,9 +108,10 @@ public class MedicalRecordController {
             @RequestParam(value = "auxiliaryExam") String auxiliaryExam,
             @RequestParam(value = "opinion") String opinion,
             @RequestParam(value = "saveState") Integer saveState,
-            @RequestParam(value = "doctorId") Integer doctorId) {
+            @RequestParam(value = "doctorId") Integer doctorId,
+            @RequestParam(value = "templateName") String templateName) {
         try {
-            outpatientMedicalRecordService.saveMedicalRecordTemplate(medicalRecordsId, mainInfo, currentDisease, pastDisease, physicalExam, auxiliaryExam, opinion, saveState, doctorId);
+            outpatientMedicalRecordService.saveMedicalRecordTemplate(medicalRecordsId, mainInfo, currentDisease, pastDisease, physicalExam, auxiliaryExam, opinion, saveState, doctorId, templateName);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultDTO<>(Boolean.FALSE);
@@ -158,7 +159,9 @@ public class MedicalRecordController {
     }
 
     @GetMapping("/history_record")
-    public List<MedicalRecords> selectPatientHistoryMedicalRecords() {
+    public List<MedicalRecords> selectPatientHistoryMedicalRecords(
+            @RequestParam(value = "registrationId") Integer registrationId
+    ) {
 
         return null;
     }
