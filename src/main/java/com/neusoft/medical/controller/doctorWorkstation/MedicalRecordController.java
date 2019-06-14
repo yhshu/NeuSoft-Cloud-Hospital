@@ -96,6 +96,7 @@ public class MedicalRecordController {
      * @param opinion          处理意见
      * @param saveState        保存方式（全院可见 科室可见 或 医生本人可见）
      * @param doctorId         医生编号
+     * @param templateName     病历模板名称
      * @return 操作结果
      */
     @GetMapping("/save_record_template")
@@ -162,7 +163,11 @@ public class MedicalRecordController {
     public List<MedicalRecords> selectPatientHistoryMedicalRecords(
             @RequestParam(value = "registrationId") Integer registrationId
     ) {
-
-        return null;
+        try {
+            return outpatientMedicalRecordService.selectPatientHistoryMedicalRecords(registrationId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

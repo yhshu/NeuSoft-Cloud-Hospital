@@ -71,9 +71,7 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
                 criteria.andDoctorIdEqualTo(doctorId);
             }
             if (registrationScope == REGIST_SCOPE_DEPRAT) {
-                Doctor doctor = doctorMapper.selectByPrimaryKey(doctorId);
-                int departmentId = doctor.getDepartmentId();
-                criteria.andDepartmentIdEqualTo(departmentId);
+                criteria.andDepartmentIdEqualTo(doctorMapper.selectByPrimaryKey(doctorId).getDepartmentId());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -192,7 +190,7 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
             MedicalRecords medicalRecords = new MedicalRecords(null, null, mainInfo, currentDisease, pastDisease, physicalExam, auxiliaryExam, opinion, 1, saveState, doctorId, templateName, null, null, null);
             if (medicalRecordsId == null) { // 新增病历模板
                 medicalRecordsMapper.insert(medicalRecords);
-            } else {  // 更新病历模板
+            } else {                        // 更新病历模板
                 medicalRecords.setMedicalRecordsId(medicalRecordsId);
                 medicalRecordsMapper.updateByPrimaryKey(medicalRecords);
             }
@@ -209,13 +207,12 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
         try {
             MedicalRecordsExample.Criteria medicalRecordsExampleCriteria = medicalRecordsExample.createCriteria();
             medicalRecordsExampleCriteria.andValidEqualTo(1);
+            medicalRecordsExampleCriteria.andSaveStateEqualTo(templateScope);
             if (templateScope == OutpatientMedicalRecordService.SAVE_DOCTOR_TEMPLATE) {
                 // 查找医生本人可见的病历模板
-                medicalRecordsExampleCriteria.andSaveStateEqualTo(SAVE_DOCTOR_TEMPLATE);
                 medicalRecordsExampleCriteria.andDoctorIdEqualTo(doctorId);
             } else if (templateScope == OutpatientMedicalRecordService.SAVE_DEPART_TEMPLATE) {
                 // 查找医生所在科室的病历模板
-                medicalRecordsExampleCriteria.andSaveStateEqualTo(SAVE_DEPART_TEMPLATE);
                 DoctorExample doctorExample = new DoctorExample();
                 DoctorExample.Criteria doctorExampleCriteria = doctorExample.createCriteria();
                 doctorExampleCriteria.andValidEqualTo(1);
@@ -250,5 +247,11 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
             return false;
         }
         return true;
+    }
+
+    @Override
+    public List<MedicalRecords> selectPatientHistoryMedicalRecords(Integer registrationId) {
+
+        return null;
     }
 }

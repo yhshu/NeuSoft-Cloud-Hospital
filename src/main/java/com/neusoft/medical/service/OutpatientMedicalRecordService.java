@@ -65,8 +65,8 @@ public interface OutpatientMedicalRecordService {
      * @param auxiliaryExam    辅助检查
      * @param opinion          处理意见
      * @param saveState        保存状态
-     * @param doctorId
-     * @param templateName
+     * @param doctorId         医生编号
+     * @param templateName     病历模板名称
      * @return 操作结果
      */
     boolean saveMedicalRecordTemplate(Integer medicalRecordsId, String mainInfo, String currentDisease, String pastDisease, String physicalExam, String auxiliaryExam, String opinion, Integer saveState, Integer doctorId, String templateName);
@@ -88,4 +88,12 @@ public interface OutpatientMedicalRecordService {
      * @return 操作结果
      */
     boolean endRegistration(int registrationId);
+
+    /**
+     * 获取患者历史病历
+     *
+     * @param registrationId 患者的挂号编号
+     * @return 患者的历史病历记录
+     */
+    List<MedicalRecords> selectPatientHistoryMedicalRecords(Integer registrationId);
 }
