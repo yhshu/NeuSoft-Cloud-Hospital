@@ -43,7 +43,7 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
             }
             if (registrationScope == REGIST_SCOPE_DEPRAT) {
                 Doctor doctor = doctorMapper.selectByPrimaryKey(doctorId);
-                int departmentId = doctor.getDepartment();
+                int departmentId = doctor.getDepartmentId();
                 criteria.andDepartmentIdEqualTo(departmentId);
             }
         } catch (Exception e) {
@@ -72,7 +72,7 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
             }
             if (registrationScope == REGIST_SCOPE_DEPRAT) {
                 Doctor doctor = doctorMapper.selectByPrimaryKey(doctorId);
-                int departmentId = doctor.getDepartment();
+                int departmentId = doctor.getDepartmentId();
                 criteria.andDepartmentIdEqualTo(departmentId);
             }
         } catch (Exception e) {
@@ -205,20 +205,31 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
     @Override
     public List<MedicalRecords> selectMedicalRecordsTemplateList(int templateScope, int doctorId) {
         MedicalRecordsExample medicalRecordsExample = new MedicalRecordsExample();
-        MedicalRecordsExample.Criteria criteria = medicalRecordsExample.createCriteria();
-        criteria.andValidEqualTo(1);
-        if (templateScope == OutpatientMedicalRecordService.SAVE_DOCTOR_TEMPLATE) {
-            // 查找医生本人可见的病历模板
-            criteria.andSaveStateEqualTo(SAVE_DOCTOR_TEMPLATE);
-            criteria.andDoctorIdEqualTo(doctorId);
-        } else if (templateScope == OutpatientMedicalRecordService.SAVE_DEPART_TEMPLATE) {
-            // 查找医生所在科室的病历模板
-            criteria.andSaveStateEqualTo(SAVE_DEPART_TEMPLATE);
-            List<Integer> doctorIdInDepartment = new CopyOnWriteArrayList<>();
-
-
+        try {
+            MedicalRecordsExample.Criteria medicalRecordsExampleCriteria = medicalRecordsExample.createCriteria();
+            medicalRecordsExampleCriteria.andValidEqualTo(1);
+            if (templateScope == OutpatientMedicalRecordService.SAVE_DOCTOR_TEMPLATE) {
+                // 查找医生本人可见的病历模板
+                medicalRecordsExampleCriteria.andSaveStateEqualTo(SAVE_DOCTOR_TEMPLATE);
+                medicalRecordsExampleCriteria.andDoctorIdEqualTo(doctorId);
+            } else if (templateScope == OutpatientMedicalRecordService.SAVE_DEPART_TEMPLATE) {
+                // 查找医生所在科室的病历模板
+                medicalRecordsExampleCriteria.andSaveStateEqualTo(SAVE_DEPART_TEMPLATE);
+                DoctorExample doctorExample = new DoctorExample();
+                DoctorExample.Criteria doctorExampleCriteria = doctorExample.createCriteria();
+                doctorExampleCriteria.andValidEqualTo(1);
+                doctorExampleCriteria.andDepartmentIdEqualTo(doctorMapper.selectByPrimaryKey(doctorId).getDepartmentId());
+                List<Doctor> doctorListOfDepartment = doctorMapper.selectByExample(doctorExample);
+                List<Integer> doctorIdListOfDepartment = new CopyOnWriteArrayList<>();
+                for (Doctor doctor : doctorListOfDepartment) {
+                    doctorIdListOfDepartment.add(doctor.getDoctorId());
+                }
+                medicalRecordsExampleCriteria.andDoctorIdIn(doctorIdListOfDepartment);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return null;
+        return medicalRecordsMapper.selectByExample(medicalRecordsExample);
     }
 
     @Override

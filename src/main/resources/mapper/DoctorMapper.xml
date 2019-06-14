@@ -5,7 +5,7 @@
     <constructor>
       <idArg column="doctor_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="doctor_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="department" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="department_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="job_title" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="account_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
@@ -75,7 +75,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    doctor_id, doctor_name, department, type, job_title, account_id, valid, doctor_scheduling, 
+    doctor_id, doctor_name, department_id, type, job_title, account_id, valid, doctor_scheduling, 
     reserve1, reserve2, reserve3
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.DoctorExample" resultMap="BaseResultMap">
@@ -107,8 +107,8 @@
       <if test="doctorName != null">
         doctor_name,
       </if>
-      <if test="department != null">
-        department,
+      <if test="departmentId != null">
+        department_id,
       </if>
       <if test="type != null">
         type,
@@ -139,8 +139,8 @@
       <if test="doctorName != null">
         #{doctorName,jdbcType=VARCHAR},
       </if>
-      <if test="department != null">
-        #{department,jdbcType=INTEGER},
+      <if test="departmentId != null">
+        #{departmentId,jdbcType=INTEGER},
       </if>
       <if test="type != null">
         #{type,jdbcType=INTEGER},
@@ -183,8 +183,8 @@
       <if test="record.doctorName != null">
         doctor_name = #{record.doctorName,jdbcType=VARCHAR},
       </if>
-      <if test="record.department != null">
-        department = #{record.department,jdbcType=INTEGER},
+      <if test="record.departmentId != null">
+        department_id = #{record.departmentId,jdbcType=INTEGER},
       </if>
       <if test="record.type != null">
         type = #{record.type,jdbcType=INTEGER},
@@ -219,7 +219,7 @@
     update hospital.doctor
     set doctor_id = #{record.doctorId,jdbcType=INTEGER},
       doctor_name = #{record.doctorName,jdbcType=VARCHAR},
-      department = #{record.department,jdbcType=INTEGER},
+      department_id = #{record.departmentId,jdbcType=INTEGER},
       type = #{record.type,jdbcType=INTEGER},
       job_title = #{record.jobTitle,jdbcType=VARCHAR},
       account_id = #{record.accountId,jdbcType=INTEGER},
@@ -238,8 +238,8 @@
       <if test="doctorName != null">
         doctor_name = #{doctorName,jdbcType=VARCHAR},
       </if>
-      <if test="department != null">
-        department = #{department,jdbcType=INTEGER},
+      <if test="departmentId != null">
+        department_id = #{departmentId,jdbcType=INTEGER},
       </if>
       <if test="type != null">
         type = #{type,jdbcType=INTEGER},

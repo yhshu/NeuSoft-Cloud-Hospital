@@ -5,7 +5,7 @@ public class Doctor {
 
     private String doctorName;
 
-    private Integer department;
+    private Integer departmentId;
 
     private Integer type;
 
@@ -23,10 +23,10 @@ public class Doctor {
 
     private String reserve3;
 
-    public Doctor(Integer doctorId, String doctorName, Integer department, Integer type, String jobTitle, Integer accountId, Integer valid, Integer doctorScheduling, String reserve1, String reserve2, String reserve3) {
+    public Doctor(Integer doctorId, String doctorName, Integer departmentId, Integer type, String jobTitle, Integer accountId, Integer valid, Integer doctorScheduling, String reserve1, String reserve2, String reserve3) {
         this.doctorId = doctorId;
         this.doctorName = doctorName;
-        this.department = department;
+        this.departmentId = departmentId;
         this.type = type;
         this.jobTitle = jobTitle;
         this.accountId = accountId;
@@ -57,12 +57,12 @@ public class Doctor {
         this.doctorName = doctorName == null ? null : doctorName.trim();
     }
 
-    public Integer getDepartment() {
-        return department;
+    public Integer getDepartmentId() {
+        return departmentId;
     }
 
-    public void setDepartment(Integer department) {
-        this.department = department;
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
     }
 
     public Integer getType() {

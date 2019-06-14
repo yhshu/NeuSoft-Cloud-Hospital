@@ -18,12 +18,12 @@ public interface DoctorMapper {
     int deleteByPrimaryKey(Integer doctorId);
 
     @Insert({
-        "insert into hospital.doctor (doctor_name, department, ",
+        "insert into hospital.doctor (doctor_name, department_id, ",
         "type, job_title, ",
         "account_id, valid, ",
         "doctor_scheduling, reserve1, ",
         "reserve2, reserve3)",
-        "values (#{doctorName,jdbcType=VARCHAR}, #{department,jdbcType=INTEGER}, ",
+        "values (#{doctorName,jdbcType=VARCHAR}, #{departmentId,jdbcType=INTEGER}, ",
         "#{type,jdbcType=INTEGER}, #{jobTitle,jdbcType=VARCHAR}, ",
         "#{accountId,jdbcType=INTEGER}, #{valid,jdbcType=INTEGER}, ",
         "#{doctorScheduling,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
@@ -38,7 +38,7 @@ public interface DoctorMapper {
 
     @Select({
         "select",
-        "doctor_id, doctor_name, department, type, job_title, account_id, valid, doctor_scheduling, ",
+        "doctor_id, doctor_name, department_id, type, job_title, account_id, valid, doctor_scheduling, ",
         "reserve1, reserve2, reserve3",
         "from hospital.doctor",
         "where doctor_id = #{doctorId,jdbcType=INTEGER}"
@@ -55,7 +55,7 @@ public interface DoctorMapper {
     @Update({
         "update hospital.doctor",
         "set doctor_name = #{doctorName,jdbcType=VARCHAR},",
-          "department = #{department,jdbcType=INTEGER},",
+          "department_id = #{departmentId,jdbcType=INTEGER},",
           "type = #{type,jdbcType=INTEGER},",
           "job_title = #{jobTitle,jdbcType=VARCHAR},",
           "account_id = #{accountId,jdbcType=INTEGER},",
