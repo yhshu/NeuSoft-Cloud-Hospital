@@ -48,8 +48,7 @@ public class MedicalRecordController {
     }
 
     /**
-     * 保存门诊病历信息
-     * 保存状态是暂存或正式提交
+     * 保存门诊病历信息（暂存 或 正式提交）
      * 在正式提交后之后，医生才可以进行检查、检验、处置、开立处方等操作
      * <p>
      * 病历记录包含的元素有：
@@ -76,6 +75,25 @@ public class MedicalRecordController {
     public ResultDTO<Boolean> saveMedicalRecord(@RequestParam(value = "medicalRecordJson") String medicalRecordJson) {
         try {
             outpatientMedicalRecordService.saveMedicalRecord(medicalRecordJson);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultDTO<>(Boolean.FALSE);
+        }
+        return new ResultDTO<>(Boolean.TRUE);
+    }
+
+    public ResultDTO<Boolean> saveMedicalRecordAsTemplate(
+            @RequestParam(value = "mainInfo") String mainInfo,
+            @RequestParam(value = "currentDisease") String currentDisease,
+            @RequestParam(value = "pastDisease") String pastDisease,
+            @RequestParam(value = "physicalExam") String physicalExam,
+            @RequestParam(value = "auxiliaryExam") String auxiliaryExam,
+            @RequestParam(value = "opinion") String opinion,
+            @RequestParam(value = "saveState") Integer saveState
+    ) {
+        try {
+            outpatientMedicalRecordService.saveMedicalRecordAsTemplate(mainInfo, currentDisease, pastDisease, physicalExam, auxiliaryExam, opinion, saveState);
+
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultDTO<>(Boolean.FALSE);

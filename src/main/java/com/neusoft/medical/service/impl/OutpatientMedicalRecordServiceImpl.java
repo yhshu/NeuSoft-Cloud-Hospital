@@ -199,6 +199,12 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
     }
 
     @Override
+    public boolean saveMedicalRecordAsTemplate(String mainInfo, String currentDisease, String pastDisease, String physicalExam, String auxiliaryExam, String opinion, int saveState) {
+
+        return false;
+    }
+
+    @Override
     public boolean endRegistration(int registrationId) {
         try {
             Registration record = new Registration();

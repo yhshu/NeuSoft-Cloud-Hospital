@@ -45,9 +45,9 @@ public class DiagnosticCatalogController {
      */
     @GetMapping(value = "/list_disease")
     public ResultDTO<PageInfo<Disease>> selectDiseaseByPage(
-            @RequestParam(value = "current_page") int currentPage,
-            @RequestParam(value = "page_size") int pageSize,
-            @RequestParam(value = "disease_category") int diseaseCategoryId) {
+            @RequestParam(value = "currentPage") int currentPage,
+            @RequestParam(value = "pageSize") int pageSize,
+            @RequestParam(value = "diseaseCategoryId") int diseaseCategoryId) {
         System.out.println("DiagnosticCatalogController: " + "分页查询疾病信息");
         System.out.println("currentPage: " + currentPage + ", pageSize: " + pageSize + " , diseaseCategoryId: " + diseaseCategoryId);
 

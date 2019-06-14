@@ -38,6 +38,20 @@ public interface OutpatientMedicalRecordService {
     boolean saveMedicalRecord(String medicalRecordJson);
 
     /**
+     * 将门诊病历信息存为模板
+     *
+     * @param mainInfo       主诉
+     * @param currentDisease 现病史
+     * @param pastDisease    既往史
+     * @param physicalExam   体格检查
+     * @param auxiliaryExam  辅助检查
+     * @param opinion        处理意见
+     * @param saveState      保存状态
+     * @return 操作结果
+     */
+    boolean saveMedicalRecordAsTemplate(String mainInfo, String currentDisease, String pastDisease, String physicalExam, String auxiliaryExam, String opinion, int saveState);
+
+    /**
      * 诊断结束
      * 结束看诊之后，针对该患者不能再进行任何检查、检验的申请以及药品的开立、收费等
      *
