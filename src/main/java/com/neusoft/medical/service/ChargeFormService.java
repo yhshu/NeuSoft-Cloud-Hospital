@@ -7,16 +7,22 @@ import java.util.Date;
 import java.util.List;
 
 public interface ChargeFormService {
+    /**
+     * 收费项目类别 常量
+     */
+    int CATEGORY_UNCHARGED = 0;
+    int CATEGORY_CHARGED = 1;
+    int CATEGORY_ALL = 2;
 
     /**
      * 按挂号编号获取收费项目
      *
-     * @param currentPage    当前页码
-     * @param pageSize       页面大小
-     * @param registrationId 挂号编号
-     * @param startDate      开始日期（可选）
-     * @param endDate        结束日期（可选）
-     * @param chargeFormCategory
+     * @param currentPage        当前页码
+     * @param pageSize           页面大小
+     * @param registrationId     挂号编号
+     * @param startDate          开始日期（可选）
+     * @param endDate            结束日期（可选）
+     * @param chargeFormCategory 收费项目类别（0: 未完成支付； 1: 已完成支付; 2: 所有收费项目）
      * @return 分页的收费项目列表
      */
     PageInfo<ChargeForm> selectChargeFormByRegistrationId(Integer currentPage, Integer pageSize, Integer registrationId, Date startDate, Date endDate, Integer chargeFormCategory);

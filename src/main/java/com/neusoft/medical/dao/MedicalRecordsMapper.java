@@ -22,14 +22,16 @@ public interface MedicalRecordsMapper {
         "current_disease, past_disease, ",
         "physical_exam, auxiliary_exam, ",
         "opinion, valid, ",
-        "save_state, reserve1, ",
-        "reserve2, reserve3)",
+        "save_state, doctor_id, ",
+        "reserve1, reserve2, ",
+        "reserve3)",
         "values (#{registrationId,jdbcType=INTEGER}, #{mainInfo,jdbcType=VARCHAR}, ",
         "#{currentDisease,jdbcType=VARCHAR}, #{pastDisease,jdbcType=VARCHAR}, ",
         "#{physicalExam,jdbcType=VARCHAR}, #{auxiliaryExam,jdbcType=VARCHAR}, ",
         "#{opinion,jdbcType=VARCHAR}, #{valid,jdbcType=INTEGER}, ",
-        "#{saveState,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
-        "#{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR})"
+        "#{saveState,jdbcType=INTEGER}, #{doctorId,jdbcType=INTEGER}, ",
+        "#{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, ",
+        "#{reserve3,jdbcType=VARCHAR})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="medicalRecordsId", before=false, resultType=Integer.class)
     int insert(MedicalRecords record);
@@ -41,8 +43,8 @@ public interface MedicalRecordsMapper {
     @Select({
         "select",
         "medical_records_id, registration_id, main_info, current_disease, past_disease, ",
-        "physical_exam, auxiliary_exam, opinion, valid, save_state, reserve1, reserve2, ",
-        "reserve3",
+        "physical_exam, auxiliary_exam, opinion, valid, save_state, doctor_id, reserve1, ",
+        "reserve2, reserve3",
         "from hospital.medical_records",
         "where medical_records_id = #{medicalRecordsId,jdbcType=INTEGER}"
     })
@@ -66,6 +68,7 @@ public interface MedicalRecordsMapper {
           "opinion = #{opinion,jdbcType=VARCHAR},",
           "valid = #{valid,jdbcType=INTEGER},",
           "save_state = #{saveState,jdbcType=INTEGER},",
+          "doctor_id = #{doctorId,jdbcType=INTEGER},",
           "reserve1 = #{reserve1,jdbcType=VARCHAR},",
           "reserve2 = #{reserve2,jdbcType=VARCHAR},",
           "reserve3 = #{reserve3,jdbcType=VARCHAR}",

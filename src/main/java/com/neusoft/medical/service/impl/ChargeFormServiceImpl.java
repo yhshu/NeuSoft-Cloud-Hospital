@@ -25,13 +25,6 @@ public class ChargeFormServiceImpl implements ChargeFormService {
     @Resource
     private RegistrationService registrationService;
 
-    /**
-     * 收费项目类别 常量
-     */
-    public final int CATEGORY_UNCHARGED = 0;
-    public final int CATEGORY_CHARGED = 1;
-    public final int CATEGORY_ALL = 2;
-
     @Override
     public PageInfo<ChargeForm> selectChargeFormByRegistrationId(Integer currentPage, Integer pageSize, Integer registrationId, Date startDate, Date endDate, Integer chargeFormCategory) {
         PageHelper.startPage(currentPage, pageSize);

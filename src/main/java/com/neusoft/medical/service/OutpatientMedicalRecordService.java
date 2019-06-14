@@ -1,5 +1,6 @@
 package com.neusoft.medical.service;
 
+import com.neusoft.medical.bean.MedicalRecords;
 import com.neusoft.medical.bean.Registration;
 
 import java.util.List;
@@ -9,6 +10,22 @@ import java.util.List;
  * 门诊病历首页
  */
 public interface OutpatientMedicalRecordService {
+    /**
+     * 挂号搜索范围
+     */
+    int REGIST_SCOPE_ALL = 0;
+    int REGIST_SCOPE_DOCTOR = 1;
+    int REGIST_SCOPE_DEPRAT = 2;
+
+    /**
+     * 病历保存状态
+     */
+    int SAVE_TEMP = 0; // 暂存
+    int SAVE_FORMAL = 1; // 正式提交
+    int SAVE_HOSPITAL_TEMPLATE = 2; // 全院模板
+    int SAVE_DEPART_TEMPLATE = 3; // 科室模板
+    int SAVE_DOCTOR_TEMPLATE = 4; // 医生个人模板
+
     /**
      * 获取医生的待诊患者列表
      *
@@ -40,16 +57,27 @@ public interface OutpatientMedicalRecordService {
     /**
      * 将门诊病历信息存为模板
      *
-     * @param mainInfo       主诉
-     * @param currentDisease 现病史
-     * @param pastDisease    既往史
-     * @param physicalExam   体格检查
-     * @param auxiliaryExam  辅助检查
-     * @param opinion        处理意见
-     * @param saveState      保存状态
+     * @param medicalRecordsId 病历编号（可为空）
+     * @param mainInfo         主诉
+     * @param currentDisease   现病史
+     * @param pastDisease      既往史
+     * @param physicalExam     体格检查
+     * @param auxiliaryExam    辅助检查
+     * @param opinion          处理意见
+     * @param saveState        保存状态
+     * @param doctorId
      * @return 操作结果
      */
-    boolean saveMedicalRecordAsTemplate(String mainInfo, String currentDisease, String pastDisease, String physicalExam, String auxiliaryExam, String opinion, int saveState);
+    boolean saveMedicalRecordTemplate(Integer medicalRecordsId, String mainInfo, String currentDisease, String pastDisease, String physicalExam, String auxiliaryExam, String opinion, Integer saveState, Integer doctorId);
+
+    /**
+     * 获取病历模板列表
+     *
+     * @param templateScope 查找的病历模板范围
+     * @param doctorId      医生编号
+     * @return 指定范围的病历模板列表
+     */
+    List<MedicalRecords> selectMedicalRecordsTemplateList(int templateScope, int doctorId);
 
     /**
      * 诊断结束

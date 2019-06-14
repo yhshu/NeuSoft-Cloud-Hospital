@@ -1,5 +1,6 @@
 package com.neusoft.medical.controller.doctorWorkstation;
 
+import com.neusoft.medical.bean.MedicalRecords;
 import com.neusoft.medical.bean.Registration;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.OutpatientMedicalRecordService;
@@ -60,6 +61,7 @@ public class MedicalRecordController {
      * - auxiliaryExam 辅助检查
      * - opinion 处理意见
      * - saveState 保存状态（暂存0 正式提交1）
+     * - doctorId 填写病历的医生编号
      * - disease 评估/诊断（JSONArray）
      * <p>
      * 其中，disease 数组中的每个元素包含的元素有：
@@ -71,7 +73,7 @@ public class MedicalRecordController {
      * @param medicalRecordJson 病历记录 json 字符串
      * @return 保存成功 true；保存失败 false
      */
-    @RequestMapping("/save_record")
+    @GetMapping("/save_record")
     public ResultDTO<Boolean> saveMedicalRecord(@RequestParam(value = "medicalRecordJson") String medicalRecordJson) {
         try {
             outpatientMedicalRecordService.saveMedicalRecord(medicalRecordJson);
@@ -82,23 +84,58 @@ public class MedicalRecordController {
         return new ResultDTO<>(Boolean.TRUE);
     }
 
+    /**
+     * 保存门诊病历模板
+     *
+     * @param medicalRecordsId 病历编号（可为空）
+     * @param mainInfo         主诉
+     * @param currentDisease   现病史
+     * @param pastDisease      既往史
+     * @param physicalExam     体格检查
+     * @param auxiliaryExam    辅助检查
+     * @param opinion          处理意见
+     * @param saveState        保存方式（全院可见 科室可见 或 医生本人可见）
+     * @param doctorId         医生编号
+     * @return 操作结果
+     */
+    @GetMapping("/save_record_template")
     public ResultDTO<Boolean> saveMedicalRecordAsTemplate(
+            @RequestParam(value = "medicalRecordsId", required = false) Integer medicalRecordsId,
             @RequestParam(value = "mainInfo") String mainInfo,
             @RequestParam(value = "currentDisease") String currentDisease,
             @RequestParam(value = "pastDisease") String pastDisease,
             @RequestParam(value = "physicalExam") String physicalExam,
             @RequestParam(value = "auxiliaryExam") String auxiliaryExam,
             @RequestParam(value = "opinion") String opinion,
-            @RequestParam(value = "saveState") Integer saveState
-    ) {
+            @RequestParam(value = "saveState") Integer saveState,
+            @RequestParam(value = "doctorId") Integer doctorId) {
         try {
-            outpatientMedicalRecordService.saveMedicalRecordAsTemplate(mainInfo, currentDisease, pastDisease, physicalExam, auxiliaryExam, opinion, saveState);
-
+            outpatientMedicalRecordService.saveMedicalRecordTemplate(medicalRecordsId, mainInfo, currentDisease, pastDisease, physicalExam, auxiliaryExam, opinion, saveState, doctorId);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultDTO<>(Boolean.FALSE);
         }
         return new ResultDTO<>(Boolean.TRUE);
+    }
+
+    /**
+     * 获取病历模板列表
+     *
+     * @param templateScope 查找的病历模板范围
+     * @param doctorId      医生编号
+     * @return 指定范围的病历模板列表
+     */
+    @GetMapping("/select_record_template")
+    public ResultDTO<List<MedicalRecords>> selectMedicalRecordsTemplateList(
+            @RequestParam(value = "templateScope") Integer templateScope,
+            @RequestParam(value = "doctorId") Integer doctorId
+    ) {
+        try {
+            return new ResultDTO<>(outpatientMedicalRecordService.selectMedicalRecordsTemplateList(templateScope, doctorId));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultDTO<>(ResultDTO.CODE_SUCCESS, "Server exception", null);
+        }
     }
 
     /**

@@ -764,6 +764,66 @@ public class MedicalRecordsExample {
             return (Criteria) this;
         }
 
+        public Criteria andDoctorIdIsNull() {
+            addCriterion("doctor_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdIsNotNull() {
+            addCriterion("doctor_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdEqualTo(Integer value) {
+            addCriterion("doctor_id =", value, "doctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdNotEqualTo(Integer value) {
+            addCriterion("doctor_id <>", value, "doctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdGreaterThan(Integer value) {
+            addCriterion("doctor_id >", value, "doctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("doctor_id >=", value, "doctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdLessThan(Integer value) {
+            addCriterion("doctor_id <", value, "doctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdLessThanOrEqualTo(Integer value) {
+            addCriterion("doctor_id <=", value, "doctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdIn(List<Integer> values) {
+            addCriterion("doctor_id in", values, "doctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdNotIn(List<Integer> values) {
+            addCriterion("doctor_id not in", values, "doctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdBetween(Integer value1, Integer value2) {
+            addCriterion("doctor_id between", value1, value2, "doctorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("doctor_id not between", value1, value2, "doctorId");
+            return (Criteria) this;
+        }
+
         public Criteria andReserve1IsNull() {
             addCriterion("reserve1 is null");
             return (Criteria) this;
