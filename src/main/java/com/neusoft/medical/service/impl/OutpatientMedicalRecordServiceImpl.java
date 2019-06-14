@@ -95,16 +95,17 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
         // 然后将信息存入数据库中
 
         try {
+            System.out.println("saveMedicalRecord 提交病历记录：" + medicalRecordJson);
             JsonObject medicalRecordJsonObject = new JsonParser().parse(medicalRecordJson).getAsJsonObject();
-            int registrationId = medicalRecordJsonObject.getAsJsonObject("registrationId").getAsInt();
-            String mainInfo = medicalRecordJsonObject.getAsJsonObject("mainInfo").getAsString();
-            String currentDisease = medicalRecordJsonObject.getAsJsonObject("currentDisease").getAsString();
-            String pastDisease = medicalRecordJsonObject.getAsJsonObject("pastDisease").getAsString();
-            String physicalExam = medicalRecordJsonObject.getAsJsonObject("physicalExam").getAsString();
-            String auxiliaryExam = medicalRecordJsonObject.getAsJsonObject("auxiliaryExam").getAsString();
-            String opinion = medicalRecordJsonObject.getAsJsonObject("opinion").getAsString();
-            int saveState = medicalRecordJsonObject.getAsJsonObject("saveState").getAsInt();
-            int doctorId = medicalRecordJsonObject.getAsJsonObject("doctorId").getAsInt();
+            int registrationId = medicalRecordJsonObject.getAsJsonPrimitive("registrationId").getAsInt();
+            String mainInfo = medicalRecordJsonObject.getAsJsonPrimitive("mainInfo").getAsString();
+            String currentDisease = medicalRecordJsonObject.getAsJsonPrimitive("currentDisease").getAsString();
+            String pastDisease = medicalRecordJsonObject.getAsJsonPrimitive("pastDisease").getAsString();
+            String physicalExam = medicalRecordJsonObject.getAsJsonPrimitive("physicalExam").getAsString();
+            String auxiliaryExam = medicalRecordJsonObject.getAsJsonPrimitive("auxiliaryExam").getAsString();
+            String opinion = medicalRecordJsonObject.getAsJsonPrimitive("opinion").getAsString();
+            int saveState = medicalRecordJsonObject.getAsJsonPrimitive("saveState").getAsInt();
+            int doctorId = medicalRecordJsonObject.getAsJsonPrimitive("doctorId").getAsInt();
 
             JsonArray diseaseJsonArray = medicalRecordJsonObject.getAsJsonArray("disease");
 
@@ -157,10 +158,10 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
             // 遍历存储诊断信息的 JSONArray，逐条存储
             for (int i = 0; i < diseaseJsonArray.size(); i++) {
                 JsonObject diseaseJsonObject = diseaseJsonArray.get(i).getAsJsonObject();
-                int diseaseId = diseaseJsonObject.getAsJsonObject("diseaseId").getAsInt();
-                int mainDisease = diseaseJsonObject.getAsJsonObject("mainDisease").getAsInt();
-                int suspect = diseaseJsonObject.getAsJsonObject("suspect").getAsInt();
-                String incidenceDate = diseaseJsonObject.getAsJsonObject("incidenceDate").getAsString();
+                int diseaseId = diseaseJsonObject.getAsJsonPrimitive("diseaseId").getAsInt();
+                int mainDisease = diseaseJsonObject.getAsJsonPrimitive("mainDisease").getAsInt();
+                int suspect = diseaseJsonObject.getAsJsonPrimitive("suspect").getAsInt();
+                String incidenceDate = diseaseJsonObject.getAsJsonPrimitive("incidenceDate").getAsString();
                 Date incidenceDateConverted = dateConverter.convert(incidenceDate);
 
                 // 新增诊断记录
