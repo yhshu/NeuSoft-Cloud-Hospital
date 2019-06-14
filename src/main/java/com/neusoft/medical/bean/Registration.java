@@ -37,13 +37,13 @@ public class Registration {
 
     private String isVisited;
 
-    private Integer valid;
-
     private String familyAddress;
 
     private Integer collectorId;
 
     private Integer totalCharge;
+
+    private Integer valid;
 
     private String reserve1;
 
@@ -51,7 +51,7 @@ public class Registration {
 
     private String reserve3;
 
-    public Registration(Integer registrationId, String patientName, Integer patientId, String gender, Integer age, Date birthday, String registrationCategory, String medicalCategory, String identityCardNo, String registrationStatus, Date visitDate, Date registrationDate, Integer departmentId, Integer doctorId, String registrationSource, String settleAccountsCategory, String isVisited, Integer valid, String familyAddress, Integer collectorId, Integer totalCharge, String reserve1, String reserve2, String reserve3) {
+    public Registration(Integer registrationId, String patientName, Integer patientId, String gender, Integer age, Date birthday, String registrationCategory, String medicalCategory, String identityCardNo, String registrationStatus, Date visitDate, Date registrationDate, Integer departmentId, Integer doctorId, String registrationSource, String settleAccountsCategory, String isVisited, String familyAddress, Integer collectorId, Integer totalCharge, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.registrationId = registrationId;
         this.patientName = patientName;
         this.patientId = patientId;
@@ -69,10 +69,10 @@ public class Registration {
         this.registrationSource = registrationSource;
         this.settleAccountsCategory = settleAccountsCategory;
         this.isVisited = isVisited;
-        this.valid = valid;
         this.familyAddress = familyAddress;
         this.collectorId = collectorId;
         this.totalCharge = totalCharge;
+        this.valid = valid;
         this.reserve1 = reserve1;
         this.reserve2 = reserve2;
         this.reserve3 = reserve3;
@@ -218,14 +218,6 @@ public class Registration {
         this.isVisited = isVisited == null ? null : isVisited.trim();
     }
 
-    public Integer getValid() {
-        return valid;
-    }
-
-    public void setValid(Integer valid) {
-        this.valid = valid;
-    }
-
     public String getFamilyAddress() {
         return familyAddress;
     }
@@ -248,6 +240,14 @@ public class Registration {
 
     public void setTotalCharge(Integer totalCharge) {
         this.totalCharge = totalCharge;
+    }
+
+    public Integer getValid() {
+        return valid;
+    }
+
+    public void setValid(Integer valid) {
+        this.valid = valid;
     }
 
     public String getReserve1() {

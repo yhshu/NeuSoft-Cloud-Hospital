@@ -20,10 +20,10 @@
       <arg column="registration_source" javaType="java.lang.String" jdbcType="CHAR" />
       <arg column="settle_accounts_category" javaType="java.lang.String" jdbcType="CHAR" />
       <arg column="is_visited" javaType="java.lang.String" jdbcType="CHAR" />
-      <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="family_address" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="collector_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="total_charge" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="reserve3" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -91,7 +91,7 @@
     registration_id, patient_name, patient_id, gender, age, birthday, registration_category, 
     medical_category, identity_card_no, registration_status, visit_date, registration_date, 
     department_id, doctor_id, registration_source, settle_accounts_category, is_visited, 
-    valid, family_address, collector_id, total_charge, reserve1, reserve2, reserve3
+    family_address, collector_id, total_charge, valid, reserve1, reserve2, reserve3
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.RegistrationExample" resultMap="BaseResultMap">
     select
@@ -167,9 +167,6 @@
       <if test="isVisited != null">
         is_visited,
       </if>
-      <if test="valid != null">
-        valid,
-      </if>
       <if test="familyAddress != null">
         family_address,
       </if>
@@ -178,6 +175,9 @@
       </if>
       <if test="totalCharge != null">
         total_charge,
+      </if>
+      <if test="valid != null">
+        valid,
       </if>
       <if test="reserve1 != null">
         reserve1,
@@ -238,9 +238,6 @@
       <if test="isVisited != null">
         #{isVisited,jdbcType=CHAR},
       </if>
-      <if test="valid != null">
-        #{valid,jdbcType=INTEGER},
-      </if>
       <if test="familyAddress != null">
         #{familyAddress,jdbcType=VARCHAR},
       </if>
@@ -249,6 +246,9 @@
       </if>
       <if test="totalCharge != null">
         #{totalCharge,jdbcType=INTEGER},
+      </if>
+      <if test="valid != null">
+        #{valid,jdbcType=INTEGER},
       </if>
       <if test="reserve1 != null">
         #{reserve1,jdbcType=VARCHAR},
@@ -321,9 +321,6 @@
       <if test="record.isVisited != null">
         is_visited = #{record.isVisited,jdbcType=CHAR},
       </if>
-      <if test="record.valid != null">
-        valid = #{record.valid,jdbcType=INTEGER},
-      </if>
       <if test="record.familyAddress != null">
         family_address = #{record.familyAddress,jdbcType=VARCHAR},
       </if>
@@ -332,6 +329,9 @@
       </if>
       <if test="record.totalCharge != null">
         total_charge = #{record.totalCharge,jdbcType=INTEGER},
+      </if>
+      <if test="record.valid != null">
+        valid = #{record.valid,jdbcType=INTEGER},
       </if>
       <if test="record.reserve1 != null">
         reserve1 = #{record.reserve1,jdbcType=VARCHAR},
@@ -366,10 +366,10 @@
       registration_source = #{record.registrationSource,jdbcType=CHAR},
       settle_accounts_category = #{record.settleAccountsCategory,jdbcType=CHAR},
       is_visited = #{record.isVisited,jdbcType=CHAR},
-      valid = #{record.valid,jdbcType=INTEGER},
       family_address = #{record.familyAddress,jdbcType=VARCHAR},
       collector_id = #{record.collectorId,jdbcType=INTEGER},
       total_charge = #{record.totalCharge,jdbcType=INTEGER},
+      valid = #{record.valid,jdbcType=INTEGER},
       reserve1 = #{record.reserve1,jdbcType=VARCHAR},
       reserve2 = #{record.reserve2,jdbcType=VARCHAR},
       reserve3 = #{record.reserve3,jdbcType=VARCHAR}
@@ -428,9 +428,6 @@
       <if test="isVisited != null">
         is_visited = #{isVisited,jdbcType=CHAR},
       </if>
-      <if test="valid != null">
-        valid = #{valid,jdbcType=INTEGER},
-      </if>
       <if test="familyAddress != null">
         family_address = #{familyAddress,jdbcType=VARCHAR},
       </if>
@@ -439,6 +436,9 @@
       </if>
       <if test="totalCharge != null">
         total_charge = #{totalCharge,jdbcType=INTEGER},
+      </if>
+      <if test="valid != null">
+        valid = #{valid,jdbcType=INTEGER},
       </if>
       <if test="reserve1 != null">
         reserve1 = #{reserve1,jdbcType=VARCHAR},
