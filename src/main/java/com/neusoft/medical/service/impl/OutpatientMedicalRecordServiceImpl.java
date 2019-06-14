@@ -1,13 +1,11 @@
 package com.neusoft.medical.service.impl;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.neusoft.medical.Util.DateConverter;
 import com.neusoft.medical.bean.*;
-import com.neusoft.medical.dao.DoctorMapper;
-import com.neusoft.medical.dao.MedicalRecordsMapper;
-import com.neusoft.medical.dao.RecordDiseaseMapper;
-import com.neusoft.medical.dao.RegistrationMapper;
+import com.neusoft.medical.dao.*;
 import com.neusoft.medical.service.OutpatientMedicalRecordService;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +25,9 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
 
     @Resource
     private RecordDiseaseMapper recordDiseaseMapper;
+
+    @Resource
+    private DepartmentMapper departmentMapper;
 
     @Resource
     private DoctorMapper doctorMapper;
@@ -57,7 +58,14 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
             e.printStackTrace();
             return new CopyOnWriteArrayList<>();
         }
-        return registrationMapper.selectByExample(registrationExample);
+        List<Registration> waitingRegistrationList = registrationMapper.selectByExample(registrationExample);
+        for (Registration registration : waitingRegistrationList) {
+            // 保留位1：科室名称
+            // 保留位2：医生姓名
+            registration.setReserve1(departmentMapper.selectByPrimaryKey(registration.getDepartmentId()).getDepartmentName());
+            registration.setReserve2(doctorMapper.selectByPrimaryKey(registration.getDoctorId()).getDoctorName());
+        }
+        return waitingRegistrationList;
     }
 
     @Override
@@ -79,7 +87,14 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
             e.printStackTrace();
             return new CopyOnWriteArrayList<>();
         }
-        return registrationMapper.selectByExample(registrationExample);
+        List<Registration> visitedRegistrationList = registrationMapper.selectByExample(registrationExample);
+        for (Registration registration : visitedRegistrationList) {
+            // 保留位1：科室名称
+            // 保留位2：医生姓名
+            registration.setReserve1(departmentMapper.selectByPrimaryKey(registration.getDepartmentId()).getDepartmentName());
+            registration.setReserve2(doctorMapper.selectByPrimaryKey(registration.getDoctorId()).getDoctorName());
+        }
+        return visitedRegistrationList;
     }
 
     @Override
@@ -98,30 +113,45 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
             String opinion = medicalRecordJsonObject.getAsJsonObject("opinion").getAsString();
             int saveState = medicalRecordJsonObject.getAsJsonObject("saveState").getAsInt();
 
-            JsonObject diseaseJsonObject = medicalRecordJsonObject.getAsJsonObject("disease");
+            JsonArray diseaseJsonArray = medicalRecordJsonObject.getAsJsonArray("disease");
 
-            String diseaseId = diseaseJsonObject.getAsJsonObject("diseaseId").getAsString();
-            int mainDisease = diseaseJsonObject.getAsJsonObject("mainDisease").getAsInt();
-            int suspect = diseaseJsonObject.getAsJsonObject("suspect").getAsInt();
-            String incidenceDate = diseaseJsonObject.getAsJsonObject("incidenceDate").getAsString();
-            Date incidenceDateConverted = dateConverter.convert(incidenceDate);
+            // 初步处理 json 字符串后，下面存储数据到数据库
+            // 涉及 medical_records 表和 record_disease 表
 
+            // 存储病历信息到 medical_records 表
             // 如果病历记录已存在，则更新病历记录；如果病历记录尚不存在，则新增病历记录
             // 首先根据挂号编号，判断是否存在病历记录
             MedicalRecordsExample medicalRecordsExample = new MedicalRecordsExample();
             MedicalRecordsExample.Criteria criteria = medicalRecordsExample.createCriteria();
             criteria.andValidEqualTo(1);
             criteria.andRegistrationIdEqualTo(registrationId);
-            List<MedicalRecords> medicalRecordsList = medicalRecordsMapper.selectByExample(medicalRecordsExample);
+            List<MedicalRecords> medicalRecordsList = medicalRecordsMapper.selectByExample(medicalRecordsExample); // 获得指定挂号编号的病历记录
+            MedicalRecords record = new MedicalRecords(null, registrationId, mainInfo, currentDisease, pastDisease, physicalExam, auxiliaryExam, opinion, 1, saveState, null, null, null);
             if (medicalRecordsList.isEmpty()) {
                 // 新增病历记录
-                medicalRecordsMapper.insert(new MedicalRecords(null, registrationId, mainInfo, currentDisease, pastDisease, physicalExam, auxiliaryExam, opinion, 1, saveState, null, null, null));
+                medicalRecordsMapper.insert(record);
             } else {
                 if (medicalRecordsList.size() > 1)
                     throw new Exception("The same registration contains duplicate medical records.");
-                // 更新病历记录
-                // todo
+                else {
+                    // 更新病历记录
+                    medicalRecordsMapper.updateByExampleSelective(record, medicalRecordsExample);
+                }
             }
+
+            // 存储病历中的评估/诊断信息到 record_disease 表
+            // 遍历存储诊断信息的 JSONArray，逐条存储
+            for (int i = 0; i < diseaseJsonArray.size(); i++) {
+                JsonObject diseaseJsonObject = diseaseJsonArray.get(i).getAsJsonObject();
+                String diseaseId = diseaseJsonObject.getAsJsonObject("diseaseId").getAsString();
+                int mainDisease = diseaseJsonObject.getAsJsonObject("mainDisease").getAsInt();
+                int suspect = diseaseJsonObject.getAsJsonObject("suspect").getAsInt();
+                String incidenceDate = diseaseJsonObject.getAsJsonObject("incidenceDate").getAsString();
+                Date incidenceDateConverted = dateConverter.convert(incidenceDate);
+
+
+            }
+
 
         } catch (Exception e) {
             e.printStackTrace();

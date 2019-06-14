@@ -61,9 +61,9 @@ public class MedicalRecordController {
      * - auxiliaryExam 辅助检查
      * - opinion 处理意见
      * - saveState 保存状态（暂存0 正式提交1）
-     * - disease 评估/诊断（嵌套）
+     * - disease 评估/诊断（JSONArray）
      * <p>
-     * 其中，disease元素中包含的元素有：
+     * 其中，disease 数组中的每个元素包含的元素有：
      * - diseaseId 诊断目录中的编号
      * - mainDisease 主诊（是1 否0）
      * - suspect 疑似（是1 否0）
