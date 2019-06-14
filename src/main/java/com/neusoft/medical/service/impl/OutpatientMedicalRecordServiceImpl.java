@@ -112,7 +112,12 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
             JsonArray diseaseJsonArray = medicalRecordJsonObject.getAsJsonArray("disease");
 
             // 初步处理 json 字符串后，下面存储数据到数据库
-            // 涉及 medical_records 表和 record_disease 表
+            // 涉及 registration 表、medical_records 表和 record_disease 表
+
+            Registration registrationRecord = new Registration();
+            registrationRecord.setRegistrationId(registrationId);
+            registrationRecord.setIsVisited("1");  // 修改挂号单：已就诊
+            registrationMapper.updateByPrimaryKeySelective(registrationRecord);
 
             // 存储病历信息到 medical_records 表
             // 如果病历记录已存在，则更新病历记录；如果病历记录尚不存在，则新增病历记录
@@ -182,6 +187,15 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
     @Override
     public boolean endRegistration(int registrationId) {
         try {
+            Registration record = new Registration();
+            record.setRegistrationStatus("0");
+
+            RegistrationExample registrationExample = new RegistrationExample();
+            RegistrationExample.Criteria criteria = registrationExample.createCriteria();
+            criteria.andValidEqualTo(1);
+            criteria.andRegistrationIdEqualTo(registrationId);
+
+            registrationMapper.updateByExampleSelective(record, registrationExample);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
