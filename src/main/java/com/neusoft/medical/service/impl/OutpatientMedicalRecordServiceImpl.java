@@ -16,24 +16,20 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
 public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalRecordService {
-
     @Resource
     private RegistrationMapper registrationMapper;
-
     @Resource
     private MedicalRecordsMapper medicalRecordsMapper;
-
     @Resource
     private RecordDiseaseMapper recordDiseaseMapper;
-
     @Resource
     private DepartmentMapper departmentMapper;
-
     @Resource
     private DoctorMapper doctorMapper;
-
     @Resource
     private DateConverter dateConverter;
+    @Resource
+    private DiseaseMapper diseaseMapper;
 
     public final int REGIST_SCOPE_ALL = 0;
     public final int REGIST_SCOPE_DOCTOR = 1;
@@ -127,32 +123,55 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
             criteria.andRegistrationIdEqualTo(registrationId);
             List<MedicalRecords> medicalRecordsList = medicalRecordsMapper.selectByExample(medicalRecordsExample); // 获得指定挂号编号的病历记录
             MedicalRecords record = new MedicalRecords(null, registrationId, mainInfo, currentDisease, pastDisease, physicalExam, auxiliaryExam, opinion, 1, saveState, null, null, null);
+            int medicalRecordsId = -1;
+
             if (medicalRecordsList.isEmpty()) {
                 // 新增病历记录
                 medicalRecordsMapper.insert(record);
+                medicalRecordsId = record.getMedicalRecordsId(); // 确保 MyBatis 生成的 DAO 可以在 insert 后返回主键
             } else {
                 if (medicalRecordsList.size() > 1)
                     throw new Exception("The same registration contains duplicate medical records.");
                 else {
                     // 更新病历记录
                     medicalRecordsMapper.updateByExampleSelective(record, medicalRecordsExample);
+                    medicalRecordsId = medicalRecordsList.get(0).getMedicalRecordsId();
                 }
             }
 
             // 存储病历中的评估/诊断信息到 record_disease 表
+
+            RecordDisease recordDiseaseRecord = new RecordDisease();
+            // 首先使之前的诊断记录失效
+            recordDiseaseRecord.setValid(0);
+            RecordDiseaseExample recordDiseaseExample = new RecordDiseaseExample();
+            RecordDiseaseExample.Criteria recordDiseaseCriteria = recordDiseaseExample.createCriteria();
+            recordDiseaseCriteria.andValidEqualTo(1);
+            recordDiseaseCriteria.andMedicalRecordsIdEqualTo(medicalRecordsId);
+            recordDiseaseMapper.updateByExample(recordDiseaseRecord, recordDiseaseExample);
+
             // 遍历存储诊断信息的 JSONArray，逐条存储
             for (int i = 0; i < diseaseJsonArray.size(); i++) {
                 JsonObject diseaseJsonObject = diseaseJsonArray.get(i).getAsJsonObject();
-                String diseaseId = diseaseJsonObject.getAsJsonObject("diseaseId").getAsString();
+                int diseaseId = diseaseJsonObject.getAsJsonObject("diseaseId").getAsInt();
                 int mainDisease = diseaseJsonObject.getAsJsonObject("mainDisease").getAsInt();
                 int suspect = diseaseJsonObject.getAsJsonObject("suspect").getAsInt();
                 String incidenceDate = diseaseJsonObject.getAsJsonObject("incidenceDate").getAsString();
                 Date incidenceDateConverted = dateConverter.convert(incidenceDate);
 
-
+                // 新增诊断记录
+                if (-1 == medicalRecordsId)
+                    throw new Exception("The corresponding medical record could not be found when saving the diagnostic record.");
+                recordDiseaseRecord.setMedicalRecordsId(medicalRecordsId);
+                recordDiseaseRecord.setDiseaseId(diseaseId);
+                recordDiseaseRecord.setDiseaseIcd(diseaseMapper.selectByPrimaryKey(diseaseId).getDiseaseIcd());
+                recordDiseaseRecord.setDiseaseName(diseaseMapper.selectByPrimaryKey(diseaseId).getDiseaseName());
+                recordDiseaseRecord.setMainDisease(mainDisease);
+                recordDiseaseRecord.setSuspect(suspect);
+                recordDiseaseRecord.setIncidenceDate(incidenceDateConverted);
+                recordDiseaseRecord.setValid(1);
+                recordDiseaseMapper.insert(recordDiseaseRecord);
             }
-
-
         } catch (Exception e) {
             e.printStackTrace();
             return false;
