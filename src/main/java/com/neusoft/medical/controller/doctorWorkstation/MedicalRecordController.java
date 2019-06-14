@@ -21,7 +21,7 @@ public class MedicalRecordController {
     /**
      * 获取医生的待诊患者列表
      *
-     * @param registrationScope 查询的挂号范围：0 所有；1 医生本人；2 医生所在科室
+     * @param registrationScope 查询的挂号范围（所有 0；医生本人 1；医生所在科室 2）
      * @param doctorId          医生编号
      * @return 待诊患者列表
      */
@@ -36,7 +36,7 @@ public class MedicalRecordController {
     /**
      * 获取医生的已诊患者列表
      *
-     * @param registrationScope 查询的挂号范围：0 所有；1 医生本人；2 医生所在科室
+     * @param registrationScope 查询的挂号范围（所有 0；医生本人 1；医生所在科室 2）
      * @param doctorId          医生编号
      * @return 已诊患者列表
      */
@@ -121,7 +121,7 @@ public class MedicalRecordController {
     /**
      * 获取病历模板列表
      *
-     * @param templateScope 查找的病历模板范围
+     * @param templateScope 查找的病历模板范围（全院模板2 科室模板3 医生模板4）
      * @param doctorId      医生编号
      * @return 指定范围的病历模板列表
      */
@@ -155,5 +155,11 @@ public class MedicalRecordController {
             return new ResultDTO<>(Boolean.FALSE);
         }
         return new ResultDTO<>(Boolean.TRUE);
+    }
+
+    @GetMapping("/history_record")
+    public List<MedicalRecords> selectPatientHistoryMedicalRecords() {
+
+        return null;
     }
 }
