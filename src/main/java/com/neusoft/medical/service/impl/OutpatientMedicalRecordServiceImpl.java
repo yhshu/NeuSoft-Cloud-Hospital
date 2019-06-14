@@ -153,7 +153,7 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
             RecordDiseaseExample.Criteria recordDiseaseCriteria = recordDiseaseExample.createCriteria();
             recordDiseaseCriteria.andValidEqualTo(1);
             recordDiseaseCriteria.andMedicalRecordsIdEqualTo(medicalRecordsId);
-            recordDiseaseMapper.updateByExample(recordDiseaseRecord, recordDiseaseExample);
+            recordDiseaseMapper.updateByExampleSelective(recordDiseaseRecord, recordDiseaseExample);
 
             // 遍历存储诊断信息的 JSONArray，逐条存储
             for (int i = 0; i < diseaseJsonArray.size(); i++) {
