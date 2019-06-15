@@ -1,4 +1,4 @@
-package com.neusoft.medical.service;
+package com.neusoft.medical.service.doctorWorkstation;
 
 import com.neusoft.medical.bean.MedicalRecords;
 import com.neusoft.medical.bean.Registration;

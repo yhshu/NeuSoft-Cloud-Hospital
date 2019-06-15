@@ -4,7 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.Disease;
 import com.neusoft.medical.bean.DiseaseCategory;
 import com.neusoft.medical.dto.ResultDTO;
-import com.neusoft.medical.service.DiagnosticCatalogService;
+import com.neusoft.medical.service.basicInfo.DiagnosticCatalogService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

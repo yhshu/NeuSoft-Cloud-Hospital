@@ -7,10 +7,10 @@ import com.neusoft.medical.bean.Doctor;
 import com.neusoft.medical.bean.Patient;
 import com.neusoft.medical.bean.Registration;
 import com.neusoft.medical.dto.ResultDTO;
-import com.neusoft.medical.service.DepartmentService;
-import com.neusoft.medical.service.PatientService;
-import com.neusoft.medical.service.RegistrationService;
-import com.neusoft.medical.service.SchedulingService;
+import com.neusoft.medical.service.basicInfo.DepartmentService;
+import com.neusoft.medical.service.basicInfo.PatientService;
+import com.neusoft.medical.service.basicInfo.SchedulingService;
+import com.neusoft.medical.service.registration.RegistrationService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

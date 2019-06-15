@@ -8,7 +8,7 @@ import com.neusoft.medical.bean.Doctor;
 import com.neusoft.medical.bean.DoctorExample;
 import com.neusoft.medical.dao.AccountMapper;
 import com.neusoft.medical.dao.DoctorMapper;
-import com.neusoft.medical.service.AccountService;
+import com.neusoft.medical.service.basicInfo.AccountService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

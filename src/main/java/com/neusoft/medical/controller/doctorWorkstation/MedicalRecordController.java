@@ -3,7 +3,7 @@ package com.neusoft.medical.controller.doctorWorkstation;
 import com.neusoft.medical.bean.MedicalRecords;
 import com.neusoft.medical.bean.Registration;
 import com.neusoft.medical.dto.ResultDTO;
-import com.neusoft.medical.service.OutpatientMedicalRecordService;
+import com.neusoft.medical.service.doctorWorkstation.OutpatientMedicalRecordService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

@@ -3,7 +3,7 @@ package com.neusoft.medical.service.impl;
 import com.neusoft.medical.bean.Patient;
 import com.neusoft.medical.bean.PatientExample;
 import com.neusoft.medical.dao.PatientMapper;
-import com.neusoft.medical.service.PatientService;
+import com.neusoft.medical.service.basicInfo.PatientService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

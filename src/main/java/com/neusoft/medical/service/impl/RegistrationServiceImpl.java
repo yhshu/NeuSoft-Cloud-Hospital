@@ -7,7 +7,7 @@ import com.neusoft.medical.bean.PatientExample;
 import com.neusoft.medical.bean.Registration;
 import com.neusoft.medical.bean.RegistrationExample;
 import com.neusoft.medical.dao.*;
-import com.neusoft.medical.service.RegistrationService;
+import com.neusoft.medical.service.registration.RegistrationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

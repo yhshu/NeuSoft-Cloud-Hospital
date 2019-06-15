@@ -1,4 +1,4 @@
-package com.neusoft.medical.service;
+package com.neusoft.medical.service.registration;
 
 import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.Registration;

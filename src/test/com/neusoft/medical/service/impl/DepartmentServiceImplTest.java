@@ -1,13 +1,12 @@
 package com.neusoft.medical.service;
 
 import com.neusoft.medical.bean.Department;
+import com.neusoft.medical.service.basicInfo.DepartmentService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

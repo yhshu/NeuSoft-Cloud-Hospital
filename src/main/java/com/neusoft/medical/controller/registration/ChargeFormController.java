@@ -6,8 +6,8 @@ import com.neusoft.medical.Util.DateConverter;
 import com.neusoft.medical.bean.ChargeForm;
 import com.neusoft.medical.bean.ChargeItem;
 import com.neusoft.medical.dto.ResultDTO;
-import com.neusoft.medical.service.ChargeFormService;
-import com.neusoft.medical.service.ChargeItemService;
+import com.neusoft.medical.service.basicInfo.ChargeItemService;
+import com.neusoft.medical.service.registration.ChargeFormService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

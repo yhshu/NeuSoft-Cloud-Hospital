@@ -4,7 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.Account;
 import com.neusoft.medical.bean.Doctor;
 import com.neusoft.medical.dto.ResultDTO;
-import com.neusoft.medical.service.AccountService;
+import com.neusoft.medical.service.basicInfo.AccountService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

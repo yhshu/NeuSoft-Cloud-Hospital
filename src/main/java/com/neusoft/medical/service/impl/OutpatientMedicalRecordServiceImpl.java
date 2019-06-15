@@ -7,7 +7,7 @@ import com.google.gson.JsonParser;
 import com.neusoft.medical.Util.DateConverter;
 import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.*;
-import com.neusoft.medical.service.OutpatientMedicalRecordService;
+import com.neusoft.medical.service.doctorWorkstation.OutpatientMedicalRecordService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

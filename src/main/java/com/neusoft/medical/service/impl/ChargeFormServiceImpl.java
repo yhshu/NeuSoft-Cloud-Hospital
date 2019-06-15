@@ -6,8 +6,8 @@ import com.neusoft.medical.bean.ChargeForm;
 import com.neusoft.medical.bean.ChargeFormExample;
 import com.neusoft.medical.dao.ChargeFormMapper;
 import com.neusoft.medical.dao.ChargeItemMapper;
-import com.neusoft.medical.service.ChargeFormService;
-import com.neusoft.medical.service.RegistrationService;
+import com.neusoft.medical.service.registration.ChargeFormService;
+import com.neusoft.medical.service.registration.RegistrationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
