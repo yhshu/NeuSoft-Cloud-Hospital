@@ -8,6 +8,7 @@
       <arg column="is_default" javaType="java.lang.Boolean" jdbcType="BIT" />
       <arg column="sequence_no" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="registration_fee" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -69,7 +70,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    registration_category_id, registration_category_name, is_default, sequence_no, registration_fee
+    registration_category_id, registration_category_name, is_default, sequence_no, registration_fee, 
+    valid
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.RegistrationCategoryExample" resultMap="BaseResultMap">
     select
@@ -109,6 +111,9 @@
       <if test="registrationFee != null">
         registration_fee,
       </if>
+      <if test="valid != null">
+        valid,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="registrationCategoryName != null">
@@ -122,6 +127,9 @@
       </if>
       <if test="registrationFee != null">
         #{registrationFee,jdbcType=DOUBLE},
+      </if>
+      <if test="valid != null">
+        #{valid,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -149,6 +157,9 @@
       <if test="record.registrationFee != null">
         registration_fee = #{record.registrationFee,jdbcType=DOUBLE},
       </if>
+      <if test="record.valid != null">
+        valid = #{record.valid,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -160,7 +171,8 @@
       registration_category_name = #{record.registrationCategoryName,jdbcType=VARCHAR},
       is_default = #{record.isDefault,jdbcType=BIT},
       sequence_no = #{record.sequenceNo,jdbcType=INTEGER},
-      registration_fee = #{record.registrationFee,jdbcType=DOUBLE}
+      registration_fee = #{record.registrationFee,jdbcType=DOUBLE},
+      valid = #{record.valid,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -179,6 +191,9 @@
       </if>
       <if test="registrationFee != null">
         registration_fee = #{registrationFee,jdbcType=DOUBLE},
+      </if>
+      <if test="valid != null">
+        valid = #{valid,jdbcType=INTEGER},
       </if>
     </set>
     where registration_category_id = #{registrationCategoryId,jdbcType=INTEGER}

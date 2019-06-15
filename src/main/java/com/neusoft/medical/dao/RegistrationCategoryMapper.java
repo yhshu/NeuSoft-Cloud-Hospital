@@ -19,9 +19,11 @@ public interface RegistrationCategoryMapper {
 
     @Insert({
         "insert into hospital.registration_category (registration_category_name, is_default, ",
-        "sequence_no, registration_fee)",
+        "sequence_no, registration_fee, ",
+        "valid)",
         "values (#{registrationCategoryName,jdbcType=VARCHAR}, #{isDefault,jdbcType=BIT}, ",
-        "#{sequenceNo,jdbcType=INTEGER}, #{registrationFee,jdbcType=DOUBLE})"
+        "#{sequenceNo,jdbcType=INTEGER}, #{registrationFee,jdbcType=DOUBLE}, ",
+        "#{valid,jdbcType=INTEGER})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="registrationCategoryId", before=false, resultType=Integer.class)
     int insert(RegistrationCategory record);
@@ -33,7 +35,7 @@ public interface RegistrationCategoryMapper {
     @Select({
         "select",
         "registration_category_id, registration_category_name, is_default, sequence_no, ",
-        "registration_fee",
+        "registration_fee, valid",
         "from hospital.registration_category",
         "where registration_category_id = #{registrationCategoryId,jdbcType=INTEGER}"
     })
@@ -51,7 +53,8 @@ public interface RegistrationCategoryMapper {
         "set registration_category_name = #{registrationCategoryName,jdbcType=VARCHAR},",
           "is_default = #{isDefault,jdbcType=BIT},",
           "sequence_no = #{sequenceNo,jdbcType=INTEGER},",
-          "registration_fee = #{registrationFee,jdbcType=DOUBLE}",
+          "registration_fee = #{registrationFee,jdbcType=DOUBLE},",
+          "valid = #{valid,jdbcType=INTEGER}",
         "where registration_category_id = #{registrationCategoryId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(RegistrationCategory record);

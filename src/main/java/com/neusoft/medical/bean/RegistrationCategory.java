@@ -11,12 +11,15 @@ public class RegistrationCategory {
 
     private Double registrationFee;
 
-    public RegistrationCategory(Integer registrationCategoryId, String registrationCategoryName, Boolean isDefault, Integer sequenceNo, Double registrationFee) {
+    private Integer valid;
+
+    public RegistrationCategory(Integer registrationCategoryId, String registrationCategoryName, Boolean isDefault, Integer sequenceNo, Double registrationFee, Integer valid) {
         this.registrationCategoryId = registrationCategoryId;
         this.registrationCategoryName = registrationCategoryName;
         this.isDefault = isDefault;
         this.sequenceNo = sequenceNo;
         this.registrationFee = registrationFee;
+        this.valid = valid;
     }
 
     public RegistrationCategory() {
@@ -61,5 +64,13 @@ public class RegistrationCategory {
 
     public void setRegistrationFee(Double registrationFee) {
         this.registrationFee = registrationFee;
+    }
+
+    public Integer getValid() {
+        return valid;
+    }
+
+    public void setValid(Integer valid) {
+        this.valid = valid;
     }
 }
