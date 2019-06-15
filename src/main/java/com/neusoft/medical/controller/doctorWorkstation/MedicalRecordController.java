@@ -159,15 +159,23 @@ public class MedicalRecordController {
         return new ResultDTO<>(Boolean.TRUE);
     }
 
+    /**
+     * 获取患者的历史病历列表
+     *
+     * @param registrationId 患者的挂号单编号
+     * @return 患者的包括此次就诊在内的所有历史病历（包含诊断信息），json 字符串
+     */
     @GetMapping("/history_record")
-    public List<MedicalRecords> selectPatientHistoryMedicalRecords(
+    public ResultDTO<String> selectPatientHistoryMedicalRecords(
             @RequestParam(value = "registrationId") Integer registrationId
     ) {
+        String res;
         try {
-            return outpatientMedicalRecordService.selectPatientHistoryMedicalRecords(registrationId);
+            res = outpatientMedicalRecordService.selectPatientHistoryMedicalRecords(registrationId);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+        return new ResultDTO<>(res);
     }
 }

@@ -95,5 +95,5 @@ public interface OutpatientMedicalRecordService {
      * @param registrationId 患者的挂号编号
      * @return 患者的历史病历记录
      */
-    List<MedicalRecords> selectPatientHistoryMedicalRecords(Integer registrationId);
+    String selectPatientHistoryMedicalRecords(Integer registrationId);
 }

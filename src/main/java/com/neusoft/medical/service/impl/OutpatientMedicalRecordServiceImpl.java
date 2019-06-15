@@ -1,5 +1,6 @@
 package com.neusoft.medical.service.impl;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -30,6 +31,8 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
     private DateConverter dateConverter;
     @Resource
     private DiseaseMapper diseaseMapper;
+
+    private Gson gson = new Gson();
 
     @Override
     public List<Registration> waitingRegistrationList(int registrationScope, int doctorId) {
@@ -250,8 +253,53 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
     }
 
     @Override
-    public List<MedicalRecords> selectPatientHistoryMedicalRecords(Integer registrationId) {
+    public String selectPatientHistoryMedicalRecords(Integer registrationId) {
+        // 实现过程：
+        // 1. 通过挂号单编号获取相同患者的挂号单编号列表
+        // 2. 找到每项挂号对应的历史病历
+        // 3. 找到每项病历对应的诊断信息
+        // 4. 将数据转换为 json 字符串返回
 
-        return null;
+        String res = null;
+        try {
+            // 通过挂号单编号获取相同患者的挂号单编号列表
+            int patientId = registrationMapper.selectByPrimaryKey(registrationId).getPatientId(); // 获取患者编号
+            RegistrationExample registrationExample = new RegistrationExample();
+            RegistrationExample.Criteria registrationExampleCriteria = registrationExample.createCriteria();
+            registrationExampleCriteria.andValidEqualTo(1);        // 有效的挂号记录
+            registrationExampleCriteria.andPatientIdEqualTo(patientId); // 对应当前患者
+            List<Registration> registrationList = registrationMapper.selectByExample(registrationExample);
+            List<Integer> registrationIdList = new CopyOnWriteArrayList<>(); // 构建患者的挂号单编号列表
+            for (Registration registration : registrationList) {
+                registrationIdList.add(registration.getRegistrationId());
+            }
+
+            // 找到每项挂号对应的历史病历
+            MedicalRecordsExample medicalRecordsExample = new MedicalRecordsExample();
+            MedicalRecordsExample.Criteria medicalRecordsExampleCriteria = medicalRecordsExample.createCriteria();
+            medicalRecordsExampleCriteria.andValidEqualTo(1);                 // 有效的病历记录
+            medicalRecordsExampleCriteria.andRegistrationIdIn(registrationIdList); // 病历记录在患者的挂号单编号列表中
+            medicalRecordsExampleCriteria.andSaveStateEqualTo(SAVE_FORMAL);        // 正式提交的病历记录
+            List<MedicalRecords> medicalRecordsList = medicalRecordsMapper.selectByExample(medicalRecordsExample);
+            JsonArray medicalRecordsJsonArray = new JsonArray();
+            for (MedicalRecords medicalRecords : medicalRecordsList) {
+                JsonObject medicalRecordsJsonObject = gson.toJsonTree(medicalRecords).getAsJsonObject();
+                medicalRecordsJsonObject.remove("templateName");
+                medicalRecordsJsonObject.remove("valid");
+
+                // 找到每项病历对应的诊断信息
+                RecordDiseaseExample recordDiseaseExample = new RecordDiseaseExample();
+                RecordDiseaseExample.Criteria recordDiseaseExampleCriteria = recordDiseaseExample.createCriteria();
+                recordDiseaseExampleCriteria.andValidEqualTo(1);
+                recordDiseaseExampleCriteria.andMedicalRecordsIdEqualTo(medicalRecords.getMedicalRecordsId());
+                List<RecordDisease> recordDiseaseList = recordDiseaseMapper.selectByExample(recordDiseaseExample);
+                medicalRecordsJsonObject.addProperty("disease", gson.toJsonTree(recordDiseaseList).getAsString());
+                medicalRecordsJsonArray.add(medicalRecordsJsonObject);
+            }
+            res = medicalRecordsJsonArray.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
     }
 }
