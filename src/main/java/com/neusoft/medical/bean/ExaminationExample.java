@@ -164,73 +164,73 @@ public class ExaminationExample {
             return (Criteria) this;
         }
 
-        public Criteria andRegistrationNameIsNull() {
-            addCriterion("registration_name is null");
+        public Criteria andPatientNameIsNull() {
+            addCriterion("patient_name is null");
             return (Criteria) this;
         }
 
-        public Criteria andRegistrationNameIsNotNull() {
-            addCriterion("registration_name is not null");
+        public Criteria andPatientNameIsNotNull() {
+            addCriterion("patient_name is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRegistrationNameEqualTo(String value) {
-            addCriterion("registration_name =", value, "registrationName");
+        public Criteria andPatientNameEqualTo(String value) {
+            addCriterion("patient_name =", value, "patientName");
             return (Criteria) this;
         }
 
-        public Criteria andRegistrationNameNotEqualTo(String value) {
-            addCriterion("registration_name <>", value, "registrationName");
+        public Criteria andPatientNameNotEqualTo(String value) {
+            addCriterion("patient_name <>", value, "patientName");
             return (Criteria) this;
         }
 
-        public Criteria andRegistrationNameGreaterThan(String value) {
-            addCriterion("registration_name >", value, "registrationName");
+        public Criteria andPatientNameGreaterThan(String value) {
+            addCriterion("patient_name >", value, "patientName");
             return (Criteria) this;
         }
 
-        public Criteria andRegistrationNameGreaterThanOrEqualTo(String value) {
-            addCriterion("registration_name >=", value, "registrationName");
+        public Criteria andPatientNameGreaterThanOrEqualTo(String value) {
+            addCriterion("patient_name >=", value, "patientName");
             return (Criteria) this;
         }
 
-        public Criteria andRegistrationNameLessThan(String value) {
-            addCriterion("registration_name <", value, "registrationName");
+        public Criteria andPatientNameLessThan(String value) {
+            addCriterion("patient_name <", value, "patientName");
             return (Criteria) this;
         }
 
-        public Criteria andRegistrationNameLessThanOrEqualTo(String value) {
-            addCriterion("registration_name <=", value, "registrationName");
+        public Criteria andPatientNameLessThanOrEqualTo(String value) {
+            addCriterion("patient_name <=", value, "patientName");
             return (Criteria) this;
         }
 
-        public Criteria andRegistrationNameLike(String value) {
-            addCriterion("registration_name like", value, "registrationName");
+        public Criteria andPatientNameLike(String value) {
+            addCriterion("patient_name like", value, "patientName");
             return (Criteria) this;
         }
 
-        public Criteria andRegistrationNameNotLike(String value) {
-            addCriterion("registration_name not like", value, "registrationName");
+        public Criteria andPatientNameNotLike(String value) {
+            addCriterion("patient_name not like", value, "patientName");
             return (Criteria) this;
         }
 
-        public Criteria andRegistrationNameIn(List<String> values) {
-            addCriterion("registration_name in", values, "registrationName");
+        public Criteria andPatientNameIn(List<String> values) {
+            addCriterion("patient_name in", values, "patientName");
             return (Criteria) this;
         }
 
-        public Criteria andRegistrationNameNotIn(List<String> values) {
-            addCriterion("registration_name not in", values, "registrationName");
+        public Criteria andPatientNameNotIn(List<String> values) {
+            addCriterion("patient_name not in", values, "patientName");
             return (Criteria) this;
         }
 
-        public Criteria andRegistrationNameBetween(String value1, String value2) {
-            addCriterion("registration_name between", value1, value2, "registrationName");
+        public Criteria andPatientNameBetween(String value1, String value2) {
+            addCriterion("patient_name between", value1, value2, "patientName");
             return (Criteria) this;
         }
 
-        public Criteria andRegistrationNameNotBetween(String value1, String value2) {
-            addCriterion("registration_name not between", value1, value2, "registrationName");
+        public Criteria andPatientNameNotBetween(String value1, String value2) {
+            addCriterion("patient_name not between", value1, value2, "patientName");
             return (Criteria) this;
         }
 

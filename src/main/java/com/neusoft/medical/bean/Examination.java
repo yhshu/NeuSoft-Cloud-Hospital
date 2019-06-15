@@ -3,7 +3,7 @@ package com.neusoft.medical.bean;
 public class Examination {
     private Integer examinationId;
 
-    private String registrationName;
+    private String patientName;
 
     private Integer registrationId;
 
@@ -23,9 +23,9 @@ public class Examination {
 
     private Integer valid;
 
-    public Examination(Integer examinationId, String registrationName, Integer registrationId, Integer chargeItemId, String result, Integer doctorId, Integer departmentId, String reserve1, String reserve2, String reserve3, Integer valid) {
+    public Examination(Integer examinationId, String patientName, Integer registrationId, Integer chargeItemId, String result, Integer doctorId, Integer departmentId, String reserve1, String reserve2, String reserve3, Integer valid) {
         this.examinationId = examinationId;
-        this.registrationName = registrationName;
+        this.patientName = patientName;
         this.registrationId = registrationId;
         this.chargeItemId = chargeItemId;
         this.result = result;
@@ -49,12 +49,12 @@ public class Examination {
         this.examinationId = examinationId;
     }
 
-    public String getRegistrationName() {
-        return registrationName;
+    public String getPatientName() {
+        return patientName;
     }
 
-    public void setRegistrationName(String registrationName) {
-        this.registrationName = registrationName == null ? null : registrationName.trim();
+    public void setPatientName(String patientName) {
+        this.patientName = patientName == null ? null : patientName.trim();
     }
 
     public Integer getRegistrationId() {
