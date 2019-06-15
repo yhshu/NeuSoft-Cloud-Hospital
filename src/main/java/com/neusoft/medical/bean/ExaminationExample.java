@@ -164,6 +164,66 @@ public class ExaminationExample {
             return (Criteria) this;
         }
 
+        public Criteria andRegistrationIdIsNull() {
+            addCriterion("registration_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationIdIsNotNull() {
+            addCriterion("registration_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationIdEqualTo(Integer value) {
+            addCriterion("registration_id =", value, "registrationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationIdNotEqualTo(Integer value) {
+            addCriterion("registration_id <>", value, "registrationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationIdGreaterThan(Integer value) {
+            addCriterion("registration_id >", value, "registrationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("registration_id >=", value, "registrationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationIdLessThan(Integer value) {
+            addCriterion("registration_id <", value, "registrationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationIdLessThanOrEqualTo(Integer value) {
+            addCriterion("registration_id <=", value, "registrationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationIdIn(List<Integer> values) {
+            addCriterion("registration_id in", values, "registrationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationIdNotIn(List<Integer> values) {
+            addCriterion("registration_id not in", values, "registrationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationIdBetween(Integer value1, Integer value2) {
+            addCriterion("registration_id between", value1, value2, "registrationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("registration_id not between", value1, value2, "registrationId");
+            return (Criteria) this;
+        }
+
         public Criteria andPatientNameIsNull() {
             addCriterion("patient_name is null");
             return (Criteria) this;
@@ -231,66 +291,6 @@ public class ExaminationExample {
 
         public Criteria andPatientNameNotBetween(String value1, String value2) {
             addCriterion("patient_name not between", value1, value2, "patientName");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegistrationIdIsNull() {
-            addCriterion("registration_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegistrationIdIsNotNull() {
-            addCriterion("registration_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegistrationIdEqualTo(Integer value) {
-            addCriterion("registration_id =", value, "registrationId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegistrationIdNotEqualTo(Integer value) {
-            addCriterion("registration_id <>", value, "registrationId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegistrationIdGreaterThan(Integer value) {
-            addCriterion("registration_id >", value, "registrationId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegistrationIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("registration_id >=", value, "registrationId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegistrationIdLessThan(Integer value) {
-            addCriterion("registration_id <", value, "registrationId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegistrationIdLessThanOrEqualTo(Integer value) {
-            addCriterion("registration_id <=", value, "registrationId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegistrationIdIn(List<Integer> values) {
-            addCriterion("registration_id in", values, "registrationId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegistrationIdNotIn(List<Integer> values) {
-            addCriterion("registration_id not in", values, "registrationId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegistrationIdBetween(Integer value1, Integer value2) {
-            addCriterion("registration_id between", value1, value2, "registrationId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegistrationIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("registration_id not between", value1, value2, "registrationId");
             return (Criteria) this;
         }
 
@@ -544,6 +544,66 @@ public class ExaminationExample {
             return (Criteria) this;
         }
 
+        public Criteria andValidIsNull() {
+            addCriterion("valid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidIsNotNull() {
+            addCriterion("valid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidEqualTo(Integer value) {
+            addCriterion("valid =", value, "valid");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidNotEqualTo(Integer value) {
+            addCriterion("valid <>", value, "valid");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidGreaterThan(Integer value) {
+            addCriterion("valid >", value, "valid");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("valid >=", value, "valid");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidLessThan(Integer value) {
+            addCriterion("valid <", value, "valid");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidLessThanOrEqualTo(Integer value) {
+            addCriterion("valid <=", value, "valid");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidIn(List<Integer> values) {
+            addCriterion("valid in", values, "valid");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidNotIn(List<Integer> values) {
+            addCriterion("valid not in", values, "valid");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidBetween(Integer value1, Integer value2) {
+            addCriterion("valid between", value1, value2, "valid");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidNotBetween(Integer value1, Integer value2) {
+            addCriterion("valid not between", value1, value2, "valid");
+            return (Criteria) this;
+        }
+
         public Criteria andReserve1IsNull() {
             addCriterion("reserve1 is null");
             return (Criteria) this;
@@ -751,66 +811,6 @@ public class ExaminationExample {
 
         public Criteria andReserve3NotBetween(String value1, String value2) {
             addCriterion("reserve3 not between", value1, value2, "reserve3");
-            return (Criteria) this;
-        }
-
-        public Criteria andValidIsNull() {
-            addCriterion("valid is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andValidIsNotNull() {
-            addCriterion("valid is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andValidEqualTo(Integer value) {
-            addCriterion("valid =", value, "valid");
-            return (Criteria) this;
-        }
-
-        public Criteria andValidNotEqualTo(Integer value) {
-            addCriterion("valid <>", value, "valid");
-            return (Criteria) this;
-        }
-
-        public Criteria andValidGreaterThan(Integer value) {
-            addCriterion("valid >", value, "valid");
-            return (Criteria) this;
-        }
-
-        public Criteria andValidGreaterThanOrEqualTo(Integer value) {
-            addCriterion("valid >=", value, "valid");
-            return (Criteria) this;
-        }
-
-        public Criteria andValidLessThan(Integer value) {
-            addCriterion("valid <", value, "valid");
-            return (Criteria) this;
-        }
-
-        public Criteria andValidLessThanOrEqualTo(Integer value) {
-            addCriterion("valid <=", value, "valid");
-            return (Criteria) this;
-        }
-
-        public Criteria andValidIn(List<Integer> values) {
-            addCriterion("valid in", values, "valid");
-            return (Criteria) this;
-        }
-
-        public Criteria andValidNotIn(List<Integer> values) {
-            addCriterion("valid not in", values, "valid");
-            return (Criteria) this;
-        }
-
-        public Criteria andValidBetween(Integer value1, Integer value2) {
-            addCriterion("valid between", value1, value2, "valid");
-            return (Criteria) this;
-        }
-
-        public Criteria andValidNotBetween(Integer value1, Integer value2) {
-            addCriterion("valid not between", value1, value2, "valid");
             return (Criteria) this;
         }
     }

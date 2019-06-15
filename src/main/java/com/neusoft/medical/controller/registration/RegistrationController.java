@@ -88,7 +88,7 @@ public class RegistrationController {
      * @param gender                 患者性别
      * @param age                    患者年龄
      * @param birthday               患者生日
-     * @param registrationCategory   挂号类型
+     * @param registrationCategoryName   挂号类型
      * @param medicalCategory        医疗类别
      * @param identityCardNo         患者身份证号
      * @param registrationDate       挂号日期
@@ -106,7 +106,7 @@ public class RegistrationController {
             @RequestParam(value = "gender") String gender,
             @RequestParam(value = "age") Integer age,
             @RequestParam(value = "birthday") String birthday,
-            @RequestParam(value = "registrationCategory") String registrationCategory,
+            @RequestParam(value = "registrationCategory") String registrationCategoryName,
             @RequestParam(value = "medicalCategory") String medicalCategory,
             @RequestParam(value = "identityCardNo") String identityCardNo,
             @RequestParam(value = "registrationDate") String registrationDate,
@@ -121,7 +121,7 @@ public class RegistrationController {
         Date registrationDateConverted = dateConverter.convert(registrationDate);
         try {
             registrationService.addRegistration(
-                    new Registration(null, patientName, null, gender, age, birthdayConverted, registrationCategory, medicalCategory, identityCardNo, "1", null, registrationDateConverted, departmentId, doctorId, registrationSource, settleAccountsCategory, null, familyAddress, collectorId, null, 1, null, null, null));
+                    new Registration(null, patientName, null, gender, age, birthdayConverted, registrationCategoryName, medicalCategory, identityCardNo, "1", null, registrationDateConverted, departmentId, doctorId, registrationSource, settleAccountsCategory, null, familyAddress, collectorId, null, 1, null, null, null));
             System.out.println("已提交挂号信息");
         } catch (Exception e) {
             e.printStackTrace();
