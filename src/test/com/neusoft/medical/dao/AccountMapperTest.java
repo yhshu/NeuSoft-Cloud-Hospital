@@ -31,7 +31,7 @@ public class AccountMapperTest {
     @Test
     @Transactional
     public void insert() {
-        Account account = new Account(null, "username", "password", 1, null, null, null);
+        Account account = new Account(null, "username", "password", "00", 1, null, null, null);
         accountMapper.insert(account);
         System.out.println(account.getAccountId() + account.getUserName());
     }

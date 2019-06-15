@@ -3,13 +3,15 @@ package com.neusoft.medical.bean;
 public class Staff {
     private Integer staffId;
 
+    private String realName;
+
+    private Integer departmentId;
+
     private String departmentName;
 
     private Integer accountId;
 
-    private Integer departmentId;
-
-    private Integer type;
+    private String accountType;
 
     private Integer valid;
 
@@ -19,12 +21,13 @@ public class Staff {
 
     private String reserve3;
 
-    public Staff(Integer staffId, String departmentName, Integer accountId, Integer departmentId, Integer type, Integer valid, String reserve1, String reserve2, String reserve3) {
+    public Staff(Integer staffId, String realName, Integer departmentId, String departmentName, Integer accountId, String accountType, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.staffId = staffId;
+        this.realName = realName;
+        this.departmentId = departmentId;
         this.departmentName = departmentName;
         this.accountId = accountId;
-        this.departmentId = departmentId;
-        this.type = type;
+        this.accountType = accountType;
         this.valid = valid;
         this.reserve1 = reserve1;
         this.reserve2 = reserve2;
@@ -43,6 +46,22 @@ public class Staff {
         this.staffId = staffId;
     }
 
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName == null ? null : realName.trim();
+    }
+
+    public Integer getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
+    }
+
     public String getDepartmentName() {
         return departmentName;
     }
@@ -59,20 +78,12 @@ public class Staff {
         this.accountId = accountId;
     }
 
-    public Integer getDepartmentId() {
-        return departmentId;
+    public String getAccountType() {
+        return accountType;
     }
 
-    public void setDepartmentId(Integer departmentId) {
-        this.departmentId = departmentId;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
+    public void setAccountType(String accountType) {
+        this.accountType = accountType == null ? null : accountType.trim();
     }
 
     public Integer getValid() {

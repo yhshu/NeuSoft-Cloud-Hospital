@@ -19,11 +19,13 @@ public interface AccountMapper {
 
     @Insert({
         "insert into hospital.account (user_name, user_password, ",
-        "valid, reserve1, ",
-        "reserve2, reserve3)",
+        "account_type, valid, ",
+        "reserve1, reserve2, ",
+        "reserve3)",
         "values (#{userName,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, ",
-        "#{valid,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
-        "#{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR})"
+        "#{accountType,jdbcType=VARCHAR}, #{valid,jdbcType=INTEGER}, ",
+        "#{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, ",
+        "#{reserve3,jdbcType=VARCHAR})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="accountId", before=false, resultType=Integer.class)
     int insert(Account record);
@@ -34,7 +36,8 @@ public interface AccountMapper {
 
     @Select({
         "select",
-        "account_id, user_name, user_password, valid, reserve1, reserve2, reserve3",
+        "account_id, user_name, user_password, account_type, valid, reserve1, reserve2, ",
+        "reserve3",
         "from hospital.account",
         "where account_id = #{accountId,jdbcType=INTEGER}"
     })
@@ -51,6 +54,7 @@ public interface AccountMapper {
         "update hospital.account",
         "set user_name = #{userName,jdbcType=VARCHAR},",
           "user_password = #{userPassword,jdbcType=VARCHAR},",
+          "account_type = #{accountType,jdbcType=VARCHAR},",
           "valid = #{valid,jdbcType=INTEGER},",
           "reserve1 = #{reserve1,jdbcType=VARCHAR},",
           "reserve2 = #{reserve2,jdbcType=VARCHAR},",

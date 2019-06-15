@@ -19,14 +19,14 @@ public interface DoctorMapper {
 
     @Insert({
         "insert into hospital.doctor (doctor_name, department_id, ",
-        "type, job_title, ",
-        "account_id, valid, ",
-        "doctor_scheduling, reserve1, ",
+        "job_title, account_id, ",
+        "account_type, doctor_scheduling, ",
+        "valid, reserve1, ",
         "reserve2, reserve3)",
         "values (#{doctorName,jdbcType=VARCHAR}, #{departmentId,jdbcType=INTEGER}, ",
-        "#{type,jdbcType=INTEGER}, #{jobTitle,jdbcType=VARCHAR}, ",
-        "#{accountId,jdbcType=INTEGER}, #{valid,jdbcType=INTEGER}, ",
-        "#{doctorScheduling,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
+        "#{jobTitle,jdbcType=VARCHAR}, #{accountId,jdbcType=INTEGER}, ",
+        "#{accountType,jdbcType=VARCHAR}, #{doctorScheduling,jdbcType=INTEGER}, ",
+        "#{valid,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
         "#{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="doctorId", before=false, resultType=Integer.class)
@@ -38,8 +38,8 @@ public interface DoctorMapper {
 
     @Select({
         "select",
-        "doctor_id, doctor_name, department_id, type, job_title, account_id, valid, doctor_scheduling, ",
-        "reserve1, reserve2, reserve3",
+        "doctor_id, doctor_name, department_id, job_title, account_id, account_type, ",
+        "doctor_scheduling, valid, reserve1, reserve2, reserve3",
         "from hospital.doctor",
         "where doctor_id = #{doctorId,jdbcType=INTEGER}"
     })
@@ -56,11 +56,11 @@ public interface DoctorMapper {
         "update hospital.doctor",
         "set doctor_name = #{doctorName,jdbcType=VARCHAR},",
           "department_id = #{departmentId,jdbcType=INTEGER},",
-          "type = #{type,jdbcType=INTEGER},",
           "job_title = #{jobTitle,jdbcType=VARCHAR},",
           "account_id = #{accountId,jdbcType=INTEGER},",
-          "valid = #{valid,jdbcType=INTEGER},",
+          "account_type = #{accountType,jdbcType=VARCHAR},",
           "doctor_scheduling = #{doctorScheduling,jdbcType=INTEGER},",
+          "valid = #{valid,jdbcType=INTEGER},",
           "reserve1 = #{reserve1,jdbcType=VARCHAR},",
           "reserve2 = #{reserve2,jdbcType=VARCHAR},",
           "reserve3 = #{reserve3,jdbcType=VARCHAR}",

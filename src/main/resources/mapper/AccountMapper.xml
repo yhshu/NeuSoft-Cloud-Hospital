@@ -6,6 +6,7 @@
       <idArg column="account_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="user_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="user_password" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="account_type" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -71,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    account_id, user_name, user_password, valid, reserve1, reserve2, reserve3
+    account_id, user_name, user_password, account_type, valid, reserve1, reserve2, reserve3
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.AccountExample" resultMap="BaseResultMap">
     select
@@ -105,6 +106,9 @@
       <if test="userPassword != null">
         user_password,
       </if>
+      <if test="accountType != null">
+        account_type,
+      </if>
       <if test="valid != null">
         valid,
       </if>
@@ -124,6 +128,9 @@
       </if>
       <if test="userPassword != null">
         #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="accountType != null">
+        #{accountType,jdbcType=VARCHAR},
       </if>
       <if test="valid != null">
         #{valid,jdbcType=INTEGER},
@@ -157,6 +164,9 @@
       <if test="record.userPassword != null">
         user_password = #{record.userPassword,jdbcType=VARCHAR},
       </if>
+      <if test="record.accountType != null">
+        account_type = #{record.accountType,jdbcType=VARCHAR},
+      </if>
       <if test="record.valid != null">
         valid = #{record.valid,jdbcType=INTEGER},
       </if>
@@ -179,6 +189,7 @@
     set account_id = #{record.accountId,jdbcType=INTEGER},
       user_name = #{record.userName,jdbcType=VARCHAR},
       user_password = #{record.userPassword,jdbcType=VARCHAR},
+      account_type = #{record.accountType,jdbcType=VARCHAR},
       valid = #{record.valid,jdbcType=INTEGER},
       reserve1 = #{record.reserve1,jdbcType=VARCHAR},
       reserve2 = #{record.reserve2,jdbcType=VARCHAR},
@@ -195,6 +206,9 @@
       </if>
       <if test="userPassword != null">
         user_password = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="accountType != null">
+        account_type = #{accountType,jdbcType=VARCHAR},
       </if>
       <if test="valid != null">
         valid = #{valid,jdbcType=INTEGER},

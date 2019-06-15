@@ -7,15 +7,15 @@ public class Doctor {
 
     private Integer departmentId;
 
-    private Integer type;
-
     private String jobTitle;
 
     private Integer accountId;
 
-    private Integer valid;
+    private String accountType;
 
     private Integer doctorScheduling;
+
+    private Integer valid;
 
     private String reserve1;
 
@@ -23,15 +23,15 @@ public class Doctor {
 
     private String reserve3;
 
-    public Doctor(Integer doctorId, String doctorName, Integer departmentId, Integer type, String jobTitle, Integer accountId, Integer valid, Integer doctorScheduling, String reserve1, String reserve2, String reserve3) {
+    public Doctor(Integer doctorId, String doctorName, Integer departmentId, String jobTitle, Integer accountId, String accountType, Integer doctorScheduling, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.doctorId = doctorId;
         this.doctorName = doctorName;
         this.departmentId = departmentId;
-        this.type = type;
         this.jobTitle = jobTitle;
         this.accountId = accountId;
-        this.valid = valid;
+        this.accountType = accountType;
         this.doctorScheduling = doctorScheduling;
+        this.valid = valid;
         this.reserve1 = reserve1;
         this.reserve2 = reserve2;
         this.reserve3 = reserve3;
@@ -65,14 +65,6 @@ public class Doctor {
         this.departmentId = departmentId;
     }
 
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
     public String getJobTitle() {
         return jobTitle;
     }
@@ -89,12 +81,12 @@ public class Doctor {
         this.accountId = accountId;
     }
 
-    public Integer getValid() {
-        return valid;
+    public String getAccountType() {
+        return accountType;
     }
 
-    public void setValid(Integer valid) {
-        this.valid = valid;
+    public void setAccountType(String accountType) {
+        this.accountType = accountType == null ? null : accountType.trim();
     }
 
     public Integer getDoctorScheduling() {
@@ -103,6 +95,14 @@ public class Doctor {
 
     public void setDoctorScheduling(Integer doctorScheduling) {
         this.doctorScheduling = doctorScheduling;
+    }
+
+    public Integer getValid() {
+        return valid;
+    }
+
+    public void setValid(Integer valid) {
+        this.valid = valid;
     }
 
     public String getReserve1() {

@@ -4,7 +4,10 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.Account;
 import com.neusoft.medical.bean.AccountExample;
+import com.neusoft.medical.bean.Doctor;
+import com.neusoft.medical.bean.DoctorExample;
 import com.neusoft.medical.dao.AccountMapper;
+import com.neusoft.medical.dao.DoctorMapper;
 import com.neusoft.medical.service.AccountService;
 import org.springframework.stereotype.Service;
 
@@ -15,24 +18,30 @@ import java.util.List;
 public class AccountServiceImpl implements AccountService {
     @Resource
     private AccountMapper accountMapper;
+    @Resource
+    private DoctorMapper doctorMapper;
 
     @Override
-    public PageInfo<Account> selectAccount(Integer currentPage, Integer pageSize, List<Integer> accountType) {
+    public PageInfo<Account> selectAccount(Integer currentPage, Integer pageSize, List<String> accountScope) {
         PageHelper.startPage(currentPage, pageSize);
 
         AccountExample accountExample = new AccountExample();
         AccountExample.Criteria criteria = accountExample.createCriteria();
         criteria.andValidEqualTo(1);
-        List<Account> accountList = accountMapper.selectByExample(accountExample);
+        criteria.andAccountTypeIn(accountScope);
 
-        // account 的具体角色可能是 doctor 或 staff
-        if (accountType == null || accountType.isEmpty()) {  // 没有指定帐户类别
-            return new PageInfo<>(accountList);
-        }
-//        else {
-//            // todo 指定帐户类别
-//        }
-        return null;
+        return new PageInfo<>(accountMapper.selectByExample(accountExample));
+    }
 
+    @Override
+    public PageInfo<Doctor> selectDoctor(Integer currentPage, Integer pageSize, List<String> accountScope) {
+        PageHelper.startPage(currentPage, pageSize);
+
+        DoctorExample doctorExample = new DoctorExample();
+        DoctorExample.Criteria criteria = doctorExample.createCriteria();
+        criteria.andValidEqualTo(1);
+        criteria.andAccountTypeIn(accountScope);
+
+        return new PageInfo<>(doctorMapper.selectByExample(doctorExample));
     }
 }
