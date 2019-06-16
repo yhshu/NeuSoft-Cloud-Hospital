@@ -178,6 +178,9 @@ database types (e.g. MySql's unsigned bigint type should be mapped to java.lang.
         <table tableName="scheduling_rule" catalog="hospital">
             <generatedKey column="scheduling_rule_id" sqlStatement="Mysql" identity="true"/>
         </table>
+        <table tableName="settlement_category" catalog="hospital">
+            <generatedKey column="settlement_category_id" sqlStatement="Mysql" identity="true"/>
+        </table>
         <table tableName="staff" catalog="hospital">
             <generatedKey column="staff_id" sqlStatement="Mysql" identity="true"/>
         </table>
