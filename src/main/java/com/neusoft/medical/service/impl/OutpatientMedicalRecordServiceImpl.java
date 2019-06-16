@@ -255,14 +255,14 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
     @Override
     public String selectPatientHistoryMedicalRecords(Integer registrationId) {
         // 实现过程：
-        // 1. 通过挂号单编号获取相同患者的挂号单编号列表
+        // 1. 按挂号单编号获取相同患者的挂号单编号列表
         // 2. 找到每项挂号对应的历史病历
         // 3. 找到每项病历对应的诊断信息
         // 4. 将数据转换为 json 字符串返回
 
         String res = null;
         try {
-            // 通过挂号单编号获取相同患者的挂号单编号列表
+            // 按挂号单编号获取相同患者的挂号单编号列表
             int patientId = registrationMapper.selectByPrimaryKey(registrationId).getPatientId(); // 获取患者编号
             RegistrationExample registrationExample = new RegistrationExample();
             RegistrationExample.Criteria registrationExampleCriteria = registrationExample.createCriteria();
