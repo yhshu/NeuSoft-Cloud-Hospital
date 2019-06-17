@@ -4,16 +4,11 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.neusoft.medical.bean.Account;
-import com.neusoft.medical.bean.Doctor;
-import com.neusoft.medical.bean.Staff;
+import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.AccountMapper;
 import com.neusoft.medical.dao.DepartmentMapper;
 import com.neusoft.medical.dao.DoctorMapper;
 import com.neusoft.medical.dao.StaffMapper;
-import com.neusoft.medical.example.AccountExample;
-import com.neusoft.medical.example.DoctorExample;
-import com.neusoft.medical.example.StaffExample;
 import com.neusoft.medical.service.basicInfo.AccountService;
 import org.springframework.stereotype.Service;
 

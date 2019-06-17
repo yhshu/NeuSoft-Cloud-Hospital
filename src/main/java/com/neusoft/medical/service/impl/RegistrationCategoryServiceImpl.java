@@ -3,7 +3,7 @@ package com.neusoft.medical.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.RegistrationCategory;
-import com.neusoft.medical.example.RegistrationCategoryExample;
+import com.neusoft.medical.bean.RegistrationCategoryExample;
 import com.neusoft.medical.dao.RegistrationCategoryMapper;
 import com.neusoft.medical.service.basicInfo.RegistrationCategoryService;
 import org.springframework.stereotype.Service;

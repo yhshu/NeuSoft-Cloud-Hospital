@@ -1,7 +1,7 @@
 package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.UserAuth;
-import com.neusoft.medical.example.UserAuthExample;
+import com.neusoft.medical.bean.UserAuthExample;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

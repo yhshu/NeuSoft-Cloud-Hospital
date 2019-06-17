@@ -11,6 +11,8 @@ public class Prescription {
 
     private String content;
 
+    private Integer saveState;
+
     private Integer valid;
 
     private String reserve1;
@@ -19,12 +21,13 @@ public class Prescription {
 
     private String reserve3;
 
-    public Prescription(Integer prescriptionId, Integer registrationId, String registrationName, Integer doctorId, String content, Integer valid, String reserve1, String reserve2, String reserve3) {
+    public Prescription(Integer prescriptionId, Integer registrationId, String registrationName, Integer doctorId, String content, Integer saveState, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.prescriptionId = prescriptionId;
         this.registrationId = registrationId;
         this.registrationName = registrationName;
         this.doctorId = doctorId;
         this.content = content;
+        this.saveState = saveState;
         this.valid = valid;
         this.reserve1 = reserve1;
         this.reserve2 = reserve2;
@@ -73,6 +76,14 @@ public class Prescription {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    public Integer getSaveState() {
+        return saveState;
+    }
+
+    public void setSaveState(Integer saveState) {
+        this.saveState = saveState;
     }
 
     public Integer getValid() {

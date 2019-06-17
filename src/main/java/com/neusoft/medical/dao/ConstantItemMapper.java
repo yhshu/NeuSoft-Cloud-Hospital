@@ -1,7 +1,7 @@
 package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.ConstantItem;
-import com.neusoft.medical.example.ConstantItemExample;
+import com.neusoft.medical.bean.ConstantItemExample;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

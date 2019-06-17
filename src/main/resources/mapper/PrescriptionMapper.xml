@@ -8,6 +8,7 @@
       <arg column="registration_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="doctor_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="content" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="save_state" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -73,10 +74,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    prescription_id, registration_id, registration_name, doctor_id, content, valid, reserve1, 
-    reserve2, reserve3
+    prescription_id, registration_id, registration_name, doctor_id, content, save_state, 
+    valid, reserve1, reserve2, reserve3
   </sql>
-  <select id="selectByExample" parameterType="com.neusoft.medical.example.PrescriptionExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.neusoft.medical.bean.PrescriptionExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -90,7 +91,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.neusoft.medical.example.PrescriptionExample">
+  <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.PrescriptionExample">
     delete from hospital.prescription
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -113,6 +114,9 @@
       </if>
       <if test="content != null">
         content,
+      </if>
+      <if test="saveState != null">
+        save_state,
       </if>
       <if test="valid != null">
         valid,
@@ -140,6 +144,9 @@
       <if test="content != null">
         #{content,jdbcType=VARCHAR},
       </if>
+      <if test="saveState != null">
+        #{saveState,jdbcType=INTEGER},
+      </if>
       <if test="valid != null">
         #{valid,jdbcType=INTEGER},
       </if>
@@ -154,7 +161,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.neusoft.medical.example.PrescriptionExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.neusoft.medical.bean.PrescriptionExample" resultType="java.lang.Long">
     select count(*) from hospital.prescription
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -177,6 +184,9 @@
       </if>
       <if test="record.content != null">
         content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saveState != null">
+        save_state = #{record.saveState,jdbcType=INTEGER},
       </if>
       <if test="record.valid != null">
         valid = #{record.valid,jdbcType=INTEGER},
@@ -202,6 +212,7 @@
       registration_name = #{record.registrationName,jdbcType=VARCHAR},
       doctor_id = #{record.doctorId,jdbcType=INTEGER},
       content = #{record.content,jdbcType=VARCHAR},
+      save_state = #{record.saveState,jdbcType=INTEGER},
       valid = #{record.valid,jdbcType=INTEGER},
       reserve1 = #{record.reserve1,jdbcType=VARCHAR},
       reserve2 = #{record.reserve2,jdbcType=VARCHAR},
@@ -224,6 +235,9 @@
       </if>
       <if test="content != null">
         content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="saveState != null">
+        save_state = #{saveState,jdbcType=INTEGER},
       </if>
       <if test="valid != null">
         valid = #{valid,jdbcType=INTEGER},

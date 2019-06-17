@@ -80,7 +80,7 @@
     scheduling_rule_id, week_day, department_id, department_name, doctor_id, doctor_name, 
     type, valid, period, limitation, operator_id, operator_name, operating_date
   </sql>
-  <select id="selectByExample" parameterType="com.neusoft.medical.example.SchedulingRuleExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.neusoft.medical.bean.SchedulingRuleExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -94,7 +94,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.neusoft.medical.example.SchedulingRuleExample">
+  <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.SchedulingRuleExample">
     delete from hospital.scheduling_rule
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -182,7 +182,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.neusoft.medical.example.SchedulingRuleExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.neusoft.medical.bean.SchedulingRuleExample" resultType="java.lang.Long">
     select count(*) from hospital.scheduling_rule
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

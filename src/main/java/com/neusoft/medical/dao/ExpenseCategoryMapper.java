@@ -1,7 +1,7 @@
 package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.ExpenseCategory;
-import com.neusoft.medical.example.ExpenseCategoryExample;
+import com.neusoft.medical.bean.ExpenseCategoryExample;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
