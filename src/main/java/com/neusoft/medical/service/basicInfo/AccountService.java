@@ -1,12 +1,18 @@
 package com.neusoft.medical.service.basicInfo;
 
 import com.github.pagehelper.PageInfo;
-import com.neusoft.medical.bean.Account;
 import com.neusoft.medical.bean.Doctor;
 
 import java.util.List;
 
 public interface AccountService {
+
+    String TYPE_OUTPATIENT_DOCTOR = "00";   // 门诊医生
+    String TYPE_TECH_DOCTOR = "01";         // 医技医生
+    String TYPE_COLLECTOR_STAFF = "10";     // 医院收费员
+    String TYPE_PHARMACY_STAFF = "11";      // 药房操作员
+    String TYPE_FINANCIAL_STAFF = "12";     // 财务管理员
+    String TYPE_REGISTRATION_STAFF = "13";  // 挂号管理员
 
     /**
      * 分页、分类查找帐号信息
@@ -15,8 +21,19 @@ public interface AccountService {
      * @param pageSize     页面大小
      * @param accountScope 查找的帐号范围
      * @return 指定范围的帐号信息
+     * <p>
+     * 返回的用户信息列表中，每项用户信息包含以下字段：
+     * - accountId 帐户编号
+     * - userName 用户名
+     * - accountType 用户类型
+     * - realName 真实姓名
+     * - departmentId　 所属科室编号
+     * - departmentName　所属科室名称
+     * 对于医生，还包含
+     * - jobTitle 职称
+     * - doctorScheduling 是否参与排班
      */
-    PageInfo<Account> selectAccount(Integer currentPage, Integer pageSize, List<String> accountScope);
+    PageInfo<String> selectAccount(Integer currentPage, Integer pageSize, List<String> accountScope);
 
     /**
      * 分页、分类查找医生信息（门诊医生、医技医生）
@@ -27,4 +44,40 @@ public interface AccountService {
      * @return 指定范围的医生信息
      */
     PageInfo<Doctor> selectDoctor(Integer currentPage, Integer pageSize, List<String> accountScope);
+
+    /**
+     * 添加帐号
+     * todo 密码存储在数据库前进行加密
+     *
+     * @param userName     帐号用户名
+     * @param userPassword 帐号密码
+     * @param accountType  用户类型
+     *                     门诊医生 00
+     *                     医技医生 01
+     *                     医院收费员 10
+     *                     药房操作员 11
+     *                     财务管理员 12
+     *                     挂号管理员 13
+     * @return 操作结果
+     */
+    boolean addAccount(String userName, String userPassword, String accountType);
+
+    /**
+     * 更新帐号
+     *
+     * @param accountId    帐号编号
+     * @param userName     帐号用户名
+     * @param userPassword 帐号密码
+     * @param accountType  用户类型
+     * @return 操作结果
+     */
+    boolean updateAccount(int accountId, String userName, String userPassword, String accountType);
+
+    /**
+     * 删除帐号
+     *
+     * @param accountIdList 帐号编号列表
+     * @return 操作结果
+     */
+    boolean deleteAccount(List<Integer> accountIdList);
 }

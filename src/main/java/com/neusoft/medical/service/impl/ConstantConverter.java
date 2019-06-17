@@ -1,9 +1,9 @@
-package com.neusoft.medical.Util.database;
+package com.neusoft.medical.service.impl;
 
 import com.neusoft.medical.bean.ConstantItem;
-import com.neusoft.medical.bean.ConstantItemExample;
+import com.neusoft.medical.example.ConstantItemExample;
 import com.neusoft.medical.bean.ConstantType;
-import com.neusoft.medical.bean.ConstantTypeExample;
+import com.neusoft.medical.example.ConstantTypeExample;
 import com.neusoft.medical.dao.ConstantItemMapper;
 import com.neusoft.medical.dao.ConstantTypeMapper;
 import org.springframework.stereotype.Service;

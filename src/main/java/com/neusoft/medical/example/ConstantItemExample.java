@@ -1,4 +1,4 @@
-package com.neusoft.medical.bean;
+package com.neusoft.medical.example;
 
 import java.util.ArrayList;
 import java.util.List;

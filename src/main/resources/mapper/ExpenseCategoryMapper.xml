@@ -73,7 +73,7 @@
   <sql id="Base_Column_List">
     expense_category_id, expense_code, expense_name, valid, reserve1, reserve2, reserve3
   </sql>
-  <select id="selectByExample" parameterType="com.neusoft.medical.bean.ExpenseCategoryExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.neusoft.medical.example.ExpenseCategoryExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -87,7 +87,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.ExpenseCategoryExample">
+  <delete id="deleteByExample" parameterType="com.neusoft.medical.example.ExpenseCategoryExample">
     delete from hospital.expense_category
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -139,7 +139,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.neusoft.medical.bean.ExpenseCategoryExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.neusoft.medical.example.ExpenseCategoryExample" resultType="java.lang.Long">
     select count(*) from hospital.expense_category
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

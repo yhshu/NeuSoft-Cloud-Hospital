@@ -3,7 +3,7 @@ package com.neusoft.medical.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.Department;
-import com.neusoft.medical.bean.DepartmentExample;
+import com.neusoft.medical.example.DepartmentExample;
 import com.neusoft.medical.dao.DepartmentMapper;
 import com.neusoft.medical.service.basicInfo.DepartmentService;
 import org.springframework.stereotype.Service;

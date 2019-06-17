@@ -76,7 +76,7 @@
     prescription_id, registration_id, registration_name, doctor_id, content, valid, reserve1, 
     reserve2, reserve3
   </sql>
-  <select id="selectByExample" parameterType="com.neusoft.medical.bean.PrescriptionExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.neusoft.medical.example.PrescriptionExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -90,7 +90,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.PrescriptionExample">
+  <delete id="deleteByExample" parameterType="com.neusoft.medical.example.PrescriptionExample">
     delete from hospital.prescription
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -154,7 +154,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.neusoft.medical.bean.PrescriptionExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.neusoft.medical.example.PrescriptionExample" resultType="java.lang.Long">
     select count(*) from hospital.prescription
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

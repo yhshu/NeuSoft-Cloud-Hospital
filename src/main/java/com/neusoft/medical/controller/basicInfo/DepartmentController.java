@@ -1,7 +1,7 @@
 package com.neusoft.medical.controller.basicInfo;
 
 import com.github.pagehelper.PageInfo;
-import com.neusoft.medical.Util.database.ConstantConverter;
+import com.neusoft.medical.service.impl.ConstantConverter;
 import com.neusoft.medical.bean.Department;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.basicInfo.DepartmentService;

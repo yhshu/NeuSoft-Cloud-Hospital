@@ -1,16 +1,16 @@
-package com.neusoft.medical.bean;
+package com.neusoft.medical.example;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DiseaseCategoryExample {
+public class DiseaseExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public DiseaseCategoryExample() {
+    public DiseaseExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -104,133 +104,133 @@ public class DiseaseCategoryExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andDiseaseCategoryIdIsNull() {
-            addCriterion("disease_category_id is null");
+        public Criteria andDiseaseIdIsNull() {
+            addCriterion("disease_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseCategoryIdIsNotNull() {
-            addCriterion("disease_category_id is not null");
+        public Criteria andDiseaseIdIsNotNull() {
+            addCriterion("disease_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseCategoryIdEqualTo(Integer value) {
-            addCriterion("disease_category_id =", value, "diseaseCategoryId");
+        public Criteria andDiseaseIdEqualTo(Integer value) {
+            addCriterion("disease_id =", value, "diseaseId");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseCategoryIdNotEqualTo(Integer value) {
-            addCriterion("disease_category_id <>", value, "diseaseCategoryId");
+        public Criteria andDiseaseIdNotEqualTo(Integer value) {
+            addCriterion("disease_id <>", value, "diseaseId");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseCategoryIdGreaterThan(Integer value) {
-            addCriterion("disease_category_id >", value, "diseaseCategoryId");
+        public Criteria andDiseaseIdGreaterThan(Integer value) {
+            addCriterion("disease_id >", value, "diseaseId");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseCategoryIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("disease_category_id >=", value, "diseaseCategoryId");
+        public Criteria andDiseaseIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("disease_id >=", value, "diseaseId");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseCategoryIdLessThan(Integer value) {
-            addCriterion("disease_category_id <", value, "diseaseCategoryId");
+        public Criteria andDiseaseIdLessThan(Integer value) {
+            addCriterion("disease_id <", value, "diseaseId");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseCategoryIdLessThanOrEqualTo(Integer value) {
-            addCriterion("disease_category_id <=", value, "diseaseCategoryId");
+        public Criteria andDiseaseIdLessThanOrEqualTo(Integer value) {
+            addCriterion("disease_id <=", value, "diseaseId");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseCategoryIdIn(List<Integer> values) {
-            addCriterion("disease_category_id in", values, "diseaseCategoryId");
+        public Criteria andDiseaseIdIn(List<Integer> values) {
+            addCriterion("disease_id in", values, "diseaseId");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseCategoryIdNotIn(List<Integer> values) {
-            addCriterion("disease_category_id not in", values, "diseaseCategoryId");
+        public Criteria andDiseaseIdNotIn(List<Integer> values) {
+            addCriterion("disease_id not in", values, "diseaseId");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseCategoryIdBetween(Integer value1, Integer value2) {
-            addCriterion("disease_category_id between", value1, value2, "diseaseCategoryId");
+        public Criteria andDiseaseIdBetween(Integer value1, Integer value2) {
+            addCriterion("disease_id between", value1, value2, "diseaseId");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseCategoryIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("disease_category_id not between", value1, value2, "diseaseCategoryId");
+        public Criteria andDiseaseIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("disease_id not between", value1, value2, "diseaseId");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseCodeIsNull() {
-            addCriterion("disease_code is null");
+        public Criteria andDiseaseIcdIsNull() {
+            addCriterion("disease_ICD is null");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseCodeIsNotNull() {
-            addCriterion("disease_code is not null");
+        public Criteria andDiseaseIcdIsNotNull() {
+            addCriterion("disease_ICD is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseCodeEqualTo(String value) {
-            addCriterion("disease_code =", value, "diseaseCode");
+        public Criteria andDiseaseIcdEqualTo(String value) {
+            addCriterion("disease_ICD =", value, "diseaseIcd");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseCodeNotEqualTo(String value) {
-            addCriterion("disease_code <>", value, "diseaseCode");
+        public Criteria andDiseaseIcdNotEqualTo(String value) {
+            addCriterion("disease_ICD <>", value, "diseaseIcd");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseCodeGreaterThan(String value) {
-            addCriterion("disease_code >", value, "diseaseCode");
+        public Criteria andDiseaseIcdGreaterThan(String value) {
+            addCriterion("disease_ICD >", value, "diseaseIcd");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseCodeGreaterThanOrEqualTo(String value) {
-            addCriterion("disease_code >=", value, "diseaseCode");
+        public Criteria andDiseaseIcdGreaterThanOrEqualTo(String value) {
+            addCriterion("disease_ICD >=", value, "diseaseIcd");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseCodeLessThan(String value) {
-            addCriterion("disease_code <", value, "diseaseCode");
+        public Criteria andDiseaseIcdLessThan(String value) {
+            addCriterion("disease_ICD <", value, "diseaseIcd");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseCodeLessThanOrEqualTo(String value) {
-            addCriterion("disease_code <=", value, "diseaseCode");
+        public Criteria andDiseaseIcdLessThanOrEqualTo(String value) {
+            addCriterion("disease_ICD <=", value, "diseaseIcd");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseCodeLike(String value) {
-            addCriterion("disease_code like", value, "diseaseCode");
+        public Criteria andDiseaseIcdLike(String value) {
+            addCriterion("disease_ICD like", value, "diseaseIcd");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseCodeNotLike(String value) {
-            addCriterion("disease_code not like", value, "diseaseCode");
+        public Criteria andDiseaseIcdNotLike(String value) {
+            addCriterion("disease_ICD not like", value, "diseaseIcd");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseCodeIn(List<String> values) {
-            addCriterion("disease_code in", values, "diseaseCode");
+        public Criteria andDiseaseIcdIn(List<String> values) {
+            addCriterion("disease_ICD in", values, "diseaseIcd");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseCodeNotIn(List<String> values) {
-            addCriterion("disease_code not in", values, "diseaseCode");
+        public Criteria andDiseaseIcdNotIn(List<String> values) {
+            addCriterion("disease_ICD not in", values, "diseaseIcd");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseCodeBetween(String value1, String value2) {
-            addCriterion("disease_code between", value1, value2, "diseaseCode");
+        public Criteria andDiseaseIcdBetween(String value1, String value2) {
+            addCriterion("disease_ICD between", value1, value2, "diseaseIcd");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseCodeNotBetween(String value1, String value2) {
-            addCriterion("disease_code not between", value1, value2, "diseaseCode");
+        public Criteria andDiseaseIcdNotBetween(String value1, String value2) {
+            addCriterion("disease_ICD not between", value1, value2, "diseaseIcd");
             return (Criteria) this;
         }
 
@@ -304,123 +304,133 @@ public class DiseaseCategoryExample {
             return (Criteria) this;
         }
 
-        public Criteria andSequenceNoIsNull() {
-            addCriterion("sequence_no is null");
+        public Criteria andDiseaseCodeIsNull() {
+            addCriterion("disease_code is null");
             return (Criteria) this;
         }
 
-        public Criteria andSequenceNoIsNotNull() {
-            addCriterion("sequence_no is not null");
+        public Criteria andDiseaseCodeIsNotNull() {
+            addCriterion("disease_code is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSequenceNoEqualTo(Integer value) {
-            addCriterion("sequence_no =", value, "sequenceNo");
+        public Criteria andDiseaseCodeEqualTo(String value) {
+            addCriterion("disease_code =", value, "diseaseCode");
             return (Criteria) this;
         }
 
-        public Criteria andSequenceNoNotEqualTo(Integer value) {
-            addCriterion("sequence_no <>", value, "sequenceNo");
+        public Criteria andDiseaseCodeNotEqualTo(String value) {
+            addCriterion("disease_code <>", value, "diseaseCode");
             return (Criteria) this;
         }
 
-        public Criteria andSequenceNoGreaterThan(Integer value) {
-            addCriterion("sequence_no >", value, "sequenceNo");
+        public Criteria andDiseaseCodeGreaterThan(String value) {
+            addCriterion("disease_code >", value, "diseaseCode");
             return (Criteria) this;
         }
 
-        public Criteria andSequenceNoGreaterThanOrEqualTo(Integer value) {
-            addCriterion("sequence_no >=", value, "sequenceNo");
+        public Criteria andDiseaseCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("disease_code >=", value, "diseaseCode");
             return (Criteria) this;
         }
 
-        public Criteria andSequenceNoLessThan(Integer value) {
-            addCriterion("sequence_no <", value, "sequenceNo");
+        public Criteria andDiseaseCodeLessThan(String value) {
+            addCriterion("disease_code <", value, "diseaseCode");
             return (Criteria) this;
         }
 
-        public Criteria andSequenceNoLessThanOrEqualTo(Integer value) {
-            addCriterion("sequence_no <=", value, "sequenceNo");
+        public Criteria andDiseaseCodeLessThanOrEqualTo(String value) {
+            addCriterion("disease_code <=", value, "diseaseCode");
             return (Criteria) this;
         }
 
-        public Criteria andSequenceNoIn(List<Integer> values) {
-            addCriterion("sequence_no in", values, "sequenceNo");
+        public Criteria andDiseaseCodeLike(String value) {
+            addCriterion("disease_code like", value, "diseaseCode");
             return (Criteria) this;
         }
 
-        public Criteria andSequenceNoNotIn(List<Integer> values) {
-            addCriterion("sequence_no not in", values, "sequenceNo");
+        public Criteria andDiseaseCodeNotLike(String value) {
+            addCriterion("disease_code not like", value, "diseaseCode");
             return (Criteria) this;
         }
 
-        public Criteria andSequenceNoBetween(Integer value1, Integer value2) {
-            addCriterion("sequence_no between", value1, value2, "sequenceNo");
+        public Criteria andDiseaseCodeIn(List<String> values) {
+            addCriterion("disease_code in", values, "diseaseCode");
             return (Criteria) this;
         }
 
-        public Criteria andSequenceNoNotBetween(Integer value1, Integer value2) {
-            addCriterion("sequence_no not between", value1, value2, "sequenceNo");
+        public Criteria andDiseaseCodeNotIn(List<String> values) {
+            addCriterion("disease_code not in", values, "diseaseCode");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseTypeIsNull() {
-            addCriterion("disease_type is null");
+        public Criteria andDiseaseCodeBetween(String value1, String value2) {
+            addCriterion("disease_code between", value1, value2, "diseaseCode");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseTypeIsNotNull() {
-            addCriterion("disease_type is not null");
+        public Criteria andDiseaseCodeNotBetween(String value1, String value2) {
+            addCriterion("disease_code not between", value1, value2, "diseaseCode");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseTypeEqualTo(Integer value) {
-            addCriterion("disease_type =", value, "diseaseType");
+        public Criteria andDiseaseCategoryIsNull() {
+            addCriterion("disease_category is null");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseTypeNotEqualTo(Integer value) {
-            addCriterion("disease_type <>", value, "diseaseType");
+        public Criteria andDiseaseCategoryIsNotNull() {
+            addCriterion("disease_category is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseTypeGreaterThan(Integer value) {
-            addCriterion("disease_type >", value, "diseaseType");
+        public Criteria andDiseaseCategoryEqualTo(Integer value) {
+            addCriterion("disease_category =", value, "diseaseCategory");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseTypeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("disease_type >=", value, "diseaseType");
+        public Criteria andDiseaseCategoryNotEqualTo(Integer value) {
+            addCriterion("disease_category <>", value, "diseaseCategory");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseTypeLessThan(Integer value) {
-            addCriterion("disease_type <", value, "diseaseType");
+        public Criteria andDiseaseCategoryGreaterThan(Integer value) {
+            addCriterion("disease_category >", value, "diseaseCategory");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseTypeLessThanOrEqualTo(Integer value) {
-            addCriterion("disease_type <=", value, "diseaseType");
+        public Criteria andDiseaseCategoryGreaterThanOrEqualTo(Integer value) {
+            addCriterion("disease_category >=", value, "diseaseCategory");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseTypeIn(List<Integer> values) {
-            addCriterion("disease_type in", values, "diseaseType");
+        public Criteria andDiseaseCategoryLessThan(Integer value) {
+            addCriterion("disease_category <", value, "diseaseCategory");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseTypeNotIn(List<Integer> values) {
-            addCriterion("disease_type not in", values, "diseaseType");
+        public Criteria andDiseaseCategoryLessThanOrEqualTo(Integer value) {
+            addCriterion("disease_category <=", value, "diseaseCategory");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseTypeBetween(Integer value1, Integer value2) {
-            addCriterion("disease_type between", value1, value2, "diseaseType");
+        public Criteria andDiseaseCategoryIn(List<Integer> values) {
+            addCriterion("disease_category in", values, "diseaseCategory");
             return (Criteria) this;
         }
 
-        public Criteria andDiseaseTypeNotBetween(Integer value1, Integer value2) {
-            addCriterion("disease_type not between", value1, value2, "diseaseType");
+        public Criteria andDiseaseCategoryNotIn(List<Integer> values) {
+            addCriterion("disease_category not in", values, "diseaseCategory");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiseaseCategoryBetween(Integer value1, Integer value2) {
+            addCriterion("disease_category between", value1, value2, "diseaseCategory");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiseaseCategoryNotBetween(Integer value1, Integer value2) {
+            addCriterion("disease_category not between", value1, value2, "diseaseCategory");
             return (Criteria) this;
         }
 

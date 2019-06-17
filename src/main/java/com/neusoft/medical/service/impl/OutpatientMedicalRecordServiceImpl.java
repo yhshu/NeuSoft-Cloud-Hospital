@@ -5,8 +5,15 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.neusoft.medical.Util.DateConverter;
-import com.neusoft.medical.bean.*;
+import com.neusoft.medical.bean.Doctor;
+import com.neusoft.medical.bean.MedicalRecords;
+import com.neusoft.medical.bean.RecordDisease;
+import com.neusoft.medical.bean.Registration;
 import com.neusoft.medical.dao.*;
+import com.neusoft.medical.example.DoctorExample;
+import com.neusoft.medical.example.MedicalRecordsExample;
+import com.neusoft.medical.example.RecordDiseaseExample;
+import com.neusoft.medical.example.RegistrationExample;
 import com.neusoft.medical.service.doctorWorkstation.OutpatientMedicalRecordService;
 import org.springframework.stereotype.Service;
 
@@ -293,7 +300,8 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
                 recordDiseaseExampleCriteria.andValidEqualTo(1);
                 recordDiseaseExampleCriteria.andMedicalRecordsIdEqualTo(medicalRecords.getMedicalRecordsId());
                 List<RecordDisease> recordDiseaseList = recordDiseaseMapper.selectByExample(recordDiseaseExample);
-                medicalRecordsJsonObject.addProperty("disease", gson.toJsonTree(recordDiseaseList).getAsString());
+                System.out.println(gson.toJsonTree(recordDiseaseList));
+                medicalRecordsJsonObject.addProperty("disease", gson.toJsonTree(recordDiseaseList).toString());
                 medicalRecordsJsonArray.add(medicalRecordsJsonObject);
             }
             res = medicalRecordsJsonArray.toString();

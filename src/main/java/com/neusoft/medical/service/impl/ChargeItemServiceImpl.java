@@ -1,7 +1,7 @@
 package com.neusoft.medical.service.impl;
 
 import com.neusoft.medical.bean.ChargeItem;
-import com.neusoft.medical.bean.ChargeItemExample;
+import com.neusoft.medical.example.ChargeItemExample;
 import com.neusoft.medical.dao.ChargeItemMapper;
 import com.neusoft.medical.service.basicInfo.ChargeItemService;
 import org.springframework.stereotype.Service;

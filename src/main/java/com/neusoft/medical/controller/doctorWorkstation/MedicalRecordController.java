@@ -45,7 +45,6 @@ public class MedicalRecordController {
             @RequestParam(value = "registrationScope") int registrationScope,
             @RequestParam(value = "doctorId") int doctorId) {
         return new ResultDTO<>(outpatientMedicalRecordService.visitedRegistrationList(registrationScope, doctorId));
-
     }
 
     /**

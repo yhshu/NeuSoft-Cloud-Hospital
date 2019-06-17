@@ -1,7 +1,7 @@
 package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.Examination;
-import com.neusoft.medical.bean.ExaminationExample;
+import com.neusoft.medical.example.ExaminationExample;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
