@@ -2,13 +2,9 @@ package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.ConstantItem;
 import com.neusoft.medical.bean.ConstantItemExample;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 public interface ConstantItemMapper {
     long countByExample(ConstantItemExample example);
@@ -22,13 +18,12 @@ public interface ConstantItemMapper {
     int deleteByPrimaryKey(Integer constantItemId);
 
     @Insert({
-        "insert into hospital.constant_item (constant_item_id, constant_type_id, ",
-        "constant_code, constant_name, ",
-        "valid)",
-        "values (#{constantItemId,jdbcType=INTEGER}, #{constantTypeId,jdbcType=INTEGER}, ",
-        "#{constantCode,jdbcType=VARCHAR}, #{constantName,jdbcType=VARCHAR}, ",
-        "#{valid,jdbcType=INTEGER})"
+        "insert into hospital.constant_item (constant_type_id, constant_code, ",
+        "constant_name, valid)",
+        "values (#{constantTypeId,jdbcType=INTEGER}, #{constantCode,jdbcType=VARCHAR}, ",
+        "#{constantName,jdbcType=VARCHAR}, #{valid,jdbcType=INTEGER})"
     })
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="constantItemId", before=false, resultType=Integer.class)
     int insert(ConstantItem record);
 
     int insertSelective(ConstantItem record);

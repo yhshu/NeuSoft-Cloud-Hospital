@@ -4,9 +4,9 @@
   <resultMap id="BaseResultMap" type="com.neusoft.medical.bean.Disease">
     <constructor>
       <idArg column="disease_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="disease_code" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="disease_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="disease_ICD" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="disease_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="disease_code" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="disease_category" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
@@ -70,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    disease_id, disease_code, disease_name, disease_ICD, disease_category, valid
+    disease_id, disease_ICD, disease_name, disease_code, disease_category, valid
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.DiseaseExample" resultMap="BaseResultMap">
     select
@@ -93,19 +93,19 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="com.neusoft.medical.bean.Disease">
+    <selectKey keyProperty="diseaseId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into hospital.disease
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="diseaseId != null">
-        disease_id,
-      </if>
-      <if test="diseaseCode != null">
-        disease_code,
+      <if test="diseaseIcd != null">
+        disease_ICD,
       </if>
       <if test="diseaseName != null">
         disease_name,
       </if>
-      <if test="diseaseIcd != null">
-        disease_ICD,
+      <if test="diseaseCode != null">
+        disease_code,
       </if>
       <if test="diseaseCategory != null">
         disease_category,
@@ -115,17 +115,14 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="diseaseId != null">
-        #{diseaseId,jdbcType=INTEGER},
-      </if>
-      <if test="diseaseCode != null">
-        #{diseaseCode,jdbcType=VARCHAR},
+      <if test="diseaseIcd != null">
+        #{diseaseIcd,jdbcType=VARCHAR},
       </if>
       <if test="diseaseName != null">
         #{diseaseName,jdbcType=VARCHAR},
       </if>
-      <if test="diseaseIcd != null">
-        #{diseaseIcd,jdbcType=VARCHAR},
+      <if test="diseaseCode != null">
+        #{diseaseCode,jdbcType=VARCHAR},
       </if>
       <if test="diseaseCategory != null">
         #{diseaseCategory,jdbcType=INTEGER},
@@ -147,14 +144,14 @@
       <if test="record.diseaseId != null">
         disease_id = #{record.diseaseId,jdbcType=INTEGER},
       </if>
-      <if test="record.diseaseCode != null">
-        disease_code = #{record.diseaseCode,jdbcType=VARCHAR},
+      <if test="record.diseaseIcd != null">
+        disease_ICD = #{record.diseaseIcd,jdbcType=VARCHAR},
       </if>
       <if test="record.diseaseName != null">
         disease_name = #{record.diseaseName,jdbcType=VARCHAR},
       </if>
-      <if test="record.diseaseIcd != null">
-        disease_ICD = #{record.diseaseIcd,jdbcType=VARCHAR},
+      <if test="record.diseaseCode != null">
+        disease_code = #{record.diseaseCode,jdbcType=VARCHAR},
       </if>
       <if test="record.diseaseCategory != null">
         disease_category = #{record.diseaseCategory,jdbcType=INTEGER},
@@ -170,9 +167,9 @@
   <update id="updateByExample" parameterType="map">
     update hospital.disease
     set disease_id = #{record.diseaseId,jdbcType=INTEGER},
-      disease_code = #{record.diseaseCode,jdbcType=VARCHAR},
-      disease_name = #{record.diseaseName,jdbcType=VARCHAR},
       disease_ICD = #{record.diseaseIcd,jdbcType=VARCHAR},
+      disease_name = #{record.diseaseName,jdbcType=VARCHAR},
+      disease_code = #{record.diseaseCode,jdbcType=VARCHAR},
       disease_category = #{record.diseaseCategory,jdbcType=INTEGER},
       valid = #{record.valid,jdbcType=INTEGER}
     <if test="_parameter != null">
@@ -182,14 +179,14 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.Disease">
     update hospital.disease
     <set>
-      <if test="diseaseCode != null">
-        disease_code = #{diseaseCode,jdbcType=VARCHAR},
+      <if test="diseaseIcd != null">
+        disease_ICD = #{diseaseIcd,jdbcType=VARCHAR},
       </if>
       <if test="diseaseName != null">
         disease_name = #{diseaseName,jdbcType=VARCHAR},
       </if>
-      <if test="diseaseIcd != null">
-        disease_ICD = #{diseaseIcd,jdbcType=VARCHAR},
+      <if test="diseaseCode != null">
+        disease_code = #{diseaseCode,jdbcType=VARCHAR},
       </if>
       <if test="diseaseCategory != null">
         disease_category = #{diseaseCategory,jdbcType=INTEGER},

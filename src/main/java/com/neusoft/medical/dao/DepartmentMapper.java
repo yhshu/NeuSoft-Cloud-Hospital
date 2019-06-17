@@ -2,13 +2,9 @@ package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.Department;
 import com.neusoft.medical.bean.DepartmentExample;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 public interface DepartmentMapper {
     long countByExample(DepartmentExample example);
@@ -22,15 +18,16 @@ public interface DepartmentMapper {
     int deleteByPrimaryKey(Integer departmentId);
 
     @Insert({
-        "insert into hospital.department (department_id, department_code, ",
-        "department_name, category, ",
-        "type, valid, reserve1, ",
+        "insert into hospital.department (department_code, department_name, ",
+        "category, type, ",
+        "valid, reserve1, ",
         "reserve2, reserve3)",
-        "values (#{departmentId,jdbcType=INTEGER}, #{departmentCode,jdbcType=VARCHAR}, ",
-        "#{departmentName,jdbcType=VARCHAR}, #{category,jdbcType=INTEGER}, ",
-        "#{type,jdbcType=INTEGER}, #{valid,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
+        "values (#{departmentCode,jdbcType=VARCHAR}, #{departmentName,jdbcType=VARCHAR}, ",
+        "#{category,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, ",
+        "#{valid,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
         "#{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR})"
     })
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="departmentId", before=false, resultType=Integer.class)
     int insert(Department record);
 
     int insertSelective(Department record);

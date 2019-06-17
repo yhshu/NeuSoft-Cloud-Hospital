@@ -1,18 +1,16 @@
 package com.neusoft.medical.bean;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
-public class PathographyExample {
+public class SettlementCategoryExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public PathographyExample() {
+    public SettlementCategoryExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -106,419 +104,133 @@ public class PathographyExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        protected void addCriterionForJDBCDate(String condition, Date value, String property) {
-            if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value.getTime()), property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, List<Date> values, String property) {
-            if (values == null || values.size() == 0) {
-                throw new RuntimeException("Value list for " + property + " cannot be null or empty");
-            }
-            List<java.sql.Date> dateList = new ArrayList<java.sql.Date>();
-            Iterator<Date> iter = values.iterator();
-            while (iter.hasNext()) {
-                dateList.add(new java.sql.Date(iter.next().getTime()));
-            }
-            addCriterion(condition, dateList, property);
-        }
-
-        protected void addCriterionForJDBCDate(String condition, Date value1, Date value2, String property) {
-            if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
-            }
-            addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
-        }
-
-        public Criteria andPathographyIdIsNull() {
-            addCriterion("pathography_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPathographyIdIsNotNull() {
-            addCriterion("pathography_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPathographyIdEqualTo(Integer value) {
-            addCriterion("pathography_id =", value, "pathographyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPathographyIdNotEqualTo(Integer value) {
-            addCriterion("pathography_id <>", value, "pathographyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPathographyIdGreaterThan(Integer value) {
-            addCriterion("pathography_id >", value, "pathographyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPathographyIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("pathography_id >=", value, "pathographyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPathographyIdLessThan(Integer value) {
-            addCriterion("pathography_id <", value, "pathographyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPathographyIdLessThanOrEqualTo(Integer value) {
-            addCriterion("pathography_id <=", value, "pathographyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPathographyIdIn(List<Integer> values) {
-            addCriterion("pathography_id in", values, "pathographyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPathographyIdNotIn(List<Integer> values) {
-            addCriterion("pathography_id not in", values, "pathographyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPathographyIdBetween(Integer value1, Integer value2) {
-            addCriterion("pathography_id between", value1, value2, "pathographyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPathographyIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("pathography_id not between", value1, value2, "pathographyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatientIdIsNull() {
-            addCriterion("patient_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatientIdIsNotNull() {
-            addCriterion("patient_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatientIdEqualTo(Integer value) {
-            addCriterion("patient_id =", value, "patientId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatientIdNotEqualTo(Integer value) {
-            addCriterion("patient_id <>", value, "patientId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatientIdGreaterThan(Integer value) {
-            addCriterion("patient_id >", value, "patientId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatientIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("patient_id >=", value, "patientId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatientIdLessThan(Integer value) {
-            addCriterion("patient_id <", value, "patientId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatientIdLessThanOrEqualTo(Integer value) {
-            addCriterion("patient_id <=", value, "patientId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatientIdIn(List<Integer> values) {
-            addCriterion("patient_id in", values, "patientId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatientIdNotIn(List<Integer> values) {
-            addCriterion("patient_id not in", values, "patientId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatientIdBetween(Integer value1, Integer value2) {
-            addCriterion("patient_id between", value1, value2, "patientId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatientIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("patient_id not between", value1, value2, "patientId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhysicalExaminationIsNull() {
-            addCriterion("physical_examination is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhysicalExaminationIsNotNull() {
-            addCriterion("physical_examination is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhysicalExaminationEqualTo(String value) {
-            addCriterion("physical_examination =", value, "physicalExamination");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhysicalExaminationNotEqualTo(String value) {
-            addCriterion("physical_examination <>", value, "physicalExamination");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhysicalExaminationGreaterThan(String value) {
-            addCriterion("physical_examination >", value, "physicalExamination");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhysicalExaminationGreaterThanOrEqualTo(String value) {
-            addCriterion("physical_examination >=", value, "physicalExamination");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhysicalExaminationLessThan(String value) {
-            addCriterion("physical_examination <", value, "physicalExamination");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhysicalExaminationLessThanOrEqualTo(String value) {
-            addCriterion("physical_examination <=", value, "physicalExamination");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhysicalExaminationLike(String value) {
-            addCriterion("physical_examination like", value, "physicalExamination");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhysicalExaminationNotLike(String value) {
-            addCriterion("physical_examination not like", value, "physicalExamination");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhysicalExaminationIn(List<String> values) {
-            addCriterion("physical_examination in", values, "physicalExamination");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhysicalExaminationNotIn(List<String> values) {
-            addCriterion("physical_examination not in", values, "physicalExamination");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhysicalExaminationBetween(String value1, String value2) {
-            addCriterion("physical_examination between", value1, value2, "physicalExamination");
-            return (Criteria) this;
-        }
-
-        public Criteria andPhysicalExaminationNotBetween(String value1, String value2) {
-            addCriterion("physical_examination not between", value1, value2, "physicalExamination");
-            return (Criteria) this;
-        }
-
-        public Criteria andPathographyIsNull() {
-            addCriterion("pathography is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPathographyIsNotNull() {
-            addCriterion("pathography is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPathographyEqualTo(String value) {
-            addCriterion("pathography =", value, "pathography");
-            return (Criteria) this;
-        }
-
-        public Criteria andPathographyNotEqualTo(String value) {
-            addCriterion("pathography <>", value, "pathography");
-            return (Criteria) this;
-        }
-
-        public Criteria andPathographyGreaterThan(String value) {
-            addCriterion("pathography >", value, "pathography");
-            return (Criteria) this;
-        }
-
-        public Criteria andPathographyGreaterThanOrEqualTo(String value) {
-            addCriterion("pathography >=", value, "pathography");
-            return (Criteria) this;
-        }
-
-        public Criteria andPathographyLessThan(String value) {
-            addCriterion("pathography <", value, "pathography");
-            return (Criteria) this;
-        }
-
-        public Criteria andPathographyLessThanOrEqualTo(String value) {
-            addCriterion("pathography <=", value, "pathography");
-            return (Criteria) this;
-        }
-
-        public Criteria andPathographyLike(String value) {
-            addCriterion("pathography like", value, "pathography");
-            return (Criteria) this;
-        }
-
-        public Criteria andPathographyNotLike(String value) {
-            addCriterion("pathography not like", value, "pathography");
-            return (Criteria) this;
-        }
-
-        public Criteria andPathographyIn(List<String> values) {
-            addCriterion("pathography in", values, "pathography");
-            return (Criteria) this;
-        }
-
-        public Criteria andPathographyNotIn(List<String> values) {
-            addCriterion("pathography not in", values, "pathography");
-            return (Criteria) this;
-        }
-
-        public Criteria andPathographyBetween(String value1, String value2) {
-            addCriterion("pathography between", value1, value2, "pathography");
-            return (Criteria) this;
-        }
-
-        public Criteria andPathographyNotBetween(String value1, String value2) {
-            addCriterion("pathography not between", value1, value2, "pathography");
-            return (Criteria) this;
-        }
-
-        public Criteria andFoundTimeIsNull() {
-            addCriterion("found_time is null");
+        public Criteria andSettlementCategoryIdIsNull() {
+            addCriterion("settlement_category_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andFoundTimeIsNotNull() {
-            addCriterion("found_time is not null");
+        public Criteria andSettlementCategoryIdIsNotNull() {
+            addCriterion("settlement_category_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andFoundTimeEqualTo(Date value) {
-            addCriterionForJDBCDate("found_time =", value, "foundTime");
+        public Criteria andSettlementCategoryIdEqualTo(Integer value) {
+            addCriterion("settlement_category_id =", value, "settlementCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andFoundTimeNotEqualTo(Date value) {
-            addCriterionForJDBCDate("found_time <>", value, "foundTime");
+        public Criteria andSettlementCategoryIdNotEqualTo(Integer value) {
+            addCriterion("settlement_category_id <>", value, "settlementCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andFoundTimeGreaterThan(Date value) {
-            addCriterionForJDBCDate("found_time >", value, "foundTime");
+        public Criteria andSettlementCategoryIdGreaterThan(Integer value) {
+            addCriterion("settlement_category_id >", value, "settlementCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andFoundTimeGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("found_time >=", value, "foundTime");
+        public Criteria andSettlementCategoryIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("settlement_category_id >=", value, "settlementCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andFoundTimeLessThan(Date value) {
-            addCriterionForJDBCDate("found_time <", value, "foundTime");
+        public Criteria andSettlementCategoryIdLessThan(Integer value) {
+            addCriterion("settlement_category_id <", value, "settlementCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andFoundTimeLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("found_time <=", value, "foundTime");
+        public Criteria andSettlementCategoryIdLessThanOrEqualTo(Integer value) {
+            addCriterion("settlement_category_id <=", value, "settlementCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andFoundTimeIn(List<Date> values) {
-            addCriterionForJDBCDate("found_time in", values, "foundTime");
+        public Criteria andSettlementCategoryIdIn(List<Integer> values) {
+            addCriterion("settlement_category_id in", values, "settlementCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andFoundTimeNotIn(List<Date> values) {
-            addCriterionForJDBCDate("found_time not in", values, "foundTime");
+        public Criteria andSettlementCategoryIdNotIn(List<Integer> values) {
+            addCriterion("settlement_category_id not in", values, "settlementCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andFoundTimeBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("found_time between", value1, value2, "foundTime");
+        public Criteria andSettlementCategoryIdBetween(Integer value1, Integer value2) {
+            addCriterion("settlement_category_id between", value1, value2, "settlementCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andFoundTimeNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("found_time not between", value1, value2, "foundTime");
+        public Criteria andSettlementCategoryIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("settlement_category_id not between", value1, value2, "settlementCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andNoteIsNull() {
-            addCriterion("note is null");
+        public Criteria andSettlementCategoryNameIsNull() {
+            addCriterion("settlement_category_name is null");
             return (Criteria) this;
         }
 
-        public Criteria andNoteIsNotNull() {
-            addCriterion("note is not null");
+        public Criteria andSettlementCategoryNameIsNotNull() {
+            addCriterion("settlement_category_name is not null");
             return (Criteria) this;
         }
 
-        public Criteria andNoteEqualTo(String value) {
-            addCriterion("note =", value, "note");
+        public Criteria andSettlementCategoryNameEqualTo(String value) {
+            addCriterion("settlement_category_name =", value, "settlementCategoryName");
             return (Criteria) this;
         }
 
-        public Criteria andNoteNotEqualTo(String value) {
-            addCriterion("note <>", value, "note");
+        public Criteria andSettlementCategoryNameNotEqualTo(String value) {
+            addCriterion("settlement_category_name <>", value, "settlementCategoryName");
             return (Criteria) this;
         }
 
-        public Criteria andNoteGreaterThan(String value) {
-            addCriterion("note >", value, "note");
+        public Criteria andSettlementCategoryNameGreaterThan(String value) {
+            addCriterion("settlement_category_name >", value, "settlementCategoryName");
             return (Criteria) this;
         }
 
-        public Criteria andNoteGreaterThanOrEqualTo(String value) {
-            addCriterion("note >=", value, "note");
+        public Criteria andSettlementCategoryNameGreaterThanOrEqualTo(String value) {
+            addCriterion("settlement_category_name >=", value, "settlementCategoryName");
             return (Criteria) this;
         }
 
-        public Criteria andNoteLessThan(String value) {
-            addCriterion("note <", value, "note");
+        public Criteria andSettlementCategoryNameLessThan(String value) {
+            addCriterion("settlement_category_name <", value, "settlementCategoryName");
             return (Criteria) this;
         }
 
-        public Criteria andNoteLessThanOrEqualTo(String value) {
-            addCriterion("note <=", value, "note");
+        public Criteria andSettlementCategoryNameLessThanOrEqualTo(String value) {
+            addCriterion("settlement_category_name <=", value, "settlementCategoryName");
             return (Criteria) this;
         }
 
-        public Criteria andNoteLike(String value) {
-            addCriterion("note like", value, "note");
+        public Criteria andSettlementCategoryNameLike(String value) {
+            addCriterion("settlement_category_name like", value, "settlementCategoryName");
             return (Criteria) this;
         }
 
-        public Criteria andNoteNotLike(String value) {
-            addCriterion("note not like", value, "note");
+        public Criteria andSettlementCategoryNameNotLike(String value) {
+            addCriterion("settlement_category_name not like", value, "settlementCategoryName");
             return (Criteria) this;
         }
 
-        public Criteria andNoteIn(List<String> values) {
-            addCriterion("note in", values, "note");
+        public Criteria andSettlementCategoryNameIn(List<String> values) {
+            addCriterion("settlement_category_name in", values, "settlementCategoryName");
             return (Criteria) this;
         }
 
-        public Criteria andNoteNotIn(List<String> values) {
-            addCriterion("note not in", values, "note");
+        public Criteria andSettlementCategoryNameNotIn(List<String> values) {
+            addCriterion("settlement_category_name not in", values, "settlementCategoryName");
             return (Criteria) this;
         }
 
-        public Criteria andNoteBetween(String value1, String value2) {
-            addCriterion("note between", value1, value2, "note");
+        public Criteria andSettlementCategoryNameBetween(String value1, String value2) {
+            addCriterion("settlement_category_name between", value1, value2, "settlementCategoryName");
             return (Criteria) this;
         }
 
-        public Criteria andNoteNotBetween(String value1, String value2) {
-            addCriterion("note not between", value1, value2, "note");
+        public Criteria andSettlementCategoryNameNotBetween(String value1, String value2) {
+            addCriterion("settlement_category_name not between", value1, value2, "settlementCategoryName");
             return (Criteria) this;
         }
 

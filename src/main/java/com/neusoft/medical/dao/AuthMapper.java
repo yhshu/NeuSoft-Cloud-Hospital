@@ -2,13 +2,9 @@ package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.Auth;
 import com.neusoft.medical.bean.AuthExample;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 public interface AuthMapper {
     long countByExample(AuthExample example);
@@ -22,11 +18,12 @@ public interface AuthMapper {
     int deleteByPrimaryKey(Integer authId);
 
     @Insert({
-        "insert into hospital.auth (auth_id, auth_name, ",
-        "auth_description, valid)",
-        "values (#{authId,jdbcType=INTEGER}, #{authName,jdbcType=VARCHAR}, ",
-        "#{authDescription,jdbcType=VARCHAR}, #{valid,jdbcType=INTEGER})"
+        "insert into hospital.auth (auth_name, auth_description, ",
+        "valid)",
+        "values (#{authName,jdbcType=VARCHAR}, #{authDescription,jdbcType=VARCHAR}, ",
+        "#{valid,jdbcType=INTEGER})"
     })
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="authId", before=false, resultType=Integer.class)
     int insert(Auth record);
 
     int insertSelective(Auth record);

@@ -4,16 +4,16 @@
   <resultMap id="BaseResultMap" type="com.neusoft.medical.bean.Examination">
     <constructor>
       <idArg column="examination_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="registration_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="registration_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="patient_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="charge_item_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="result" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="doctor_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="department_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="reserve3" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -75,8 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    examination_id, registration_name, registration_id, charge_item_id, result, doctor_id, 
-    department_id, reserve1, reserve2, reserve3, valid
+    examination_id, registration_id, patient_name, charge_item_id, result, doctor_id, 
+    department_id, valid, reserve1, reserve2, reserve3
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.ExaminationExample" resultMap="BaseResultMap">
     select
@@ -99,16 +99,16 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="com.neusoft.medical.bean.Examination">
+    <selectKey keyProperty="examinationId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into hospital.examination
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="examinationId != null">
-        examination_id,
-      </if>
-      <if test="registrationName != null">
-        registration_name,
-      </if>
       <if test="registrationId != null">
         registration_id,
+      </if>
+      <if test="patientName != null">
+        patient_name,
       </if>
       <if test="chargeItemId != null">
         charge_item_id,
@@ -122,6 +122,9 @@
       <if test="departmentId != null">
         department_id,
       </if>
+      <if test="valid != null">
+        valid,
+      </if>
       <if test="reserve1 != null">
         reserve1,
       </if>
@@ -131,19 +134,13 @@
       <if test="reserve3 != null">
         reserve3,
       </if>
-      <if test="valid != null">
-        valid,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="examinationId != null">
-        #{examinationId,jdbcType=INTEGER},
-      </if>
-      <if test="registrationName != null">
-        #{registrationName,jdbcType=VARCHAR},
-      </if>
       <if test="registrationId != null">
         #{registrationId,jdbcType=INTEGER},
+      </if>
+      <if test="patientName != null">
+        #{patientName,jdbcType=VARCHAR},
       </if>
       <if test="chargeItemId != null">
         #{chargeItemId,jdbcType=INTEGER},
@@ -157,6 +154,9 @@
       <if test="departmentId != null">
         #{departmentId,jdbcType=INTEGER},
       </if>
+      <if test="valid != null">
+        #{valid,jdbcType=INTEGER},
+      </if>
       <if test="reserve1 != null">
         #{reserve1,jdbcType=VARCHAR},
       </if>
@@ -165,9 +165,6 @@
       </if>
       <if test="reserve3 != null">
         #{reserve3,jdbcType=VARCHAR},
-      </if>
-      <if test="valid != null">
-        #{valid,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -183,11 +180,11 @@
       <if test="record.examinationId != null">
         examination_id = #{record.examinationId,jdbcType=INTEGER},
       </if>
-      <if test="record.registrationName != null">
-        registration_name = #{record.registrationName,jdbcType=VARCHAR},
-      </if>
       <if test="record.registrationId != null">
         registration_id = #{record.registrationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.patientName != null">
+        patient_name = #{record.patientName,jdbcType=VARCHAR},
       </if>
       <if test="record.chargeItemId != null">
         charge_item_id = #{record.chargeItemId,jdbcType=INTEGER},
@@ -201,6 +198,9 @@
       <if test="record.departmentId != null">
         department_id = #{record.departmentId,jdbcType=INTEGER},
       </if>
+      <if test="record.valid != null">
+        valid = #{record.valid,jdbcType=INTEGER},
+      </if>
       <if test="record.reserve1 != null">
         reserve1 = #{record.reserve1,jdbcType=VARCHAR},
       </if>
@@ -210,9 +210,6 @@
       <if test="record.reserve3 != null">
         reserve3 = #{record.reserve3,jdbcType=VARCHAR},
       </if>
-      <if test="record.valid != null">
-        valid = #{record.valid,jdbcType=INTEGER},
-      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -221,16 +218,16 @@
   <update id="updateByExample" parameterType="map">
     update hospital.examination
     set examination_id = #{record.examinationId,jdbcType=INTEGER},
-      registration_name = #{record.registrationName,jdbcType=VARCHAR},
       registration_id = #{record.registrationId,jdbcType=INTEGER},
+      patient_name = #{record.patientName,jdbcType=VARCHAR},
       charge_item_id = #{record.chargeItemId,jdbcType=INTEGER},
       result = #{record.result,jdbcType=VARCHAR},
       doctor_id = #{record.doctorId,jdbcType=INTEGER},
       department_id = #{record.departmentId,jdbcType=INTEGER},
+      valid = #{record.valid,jdbcType=INTEGER},
       reserve1 = #{record.reserve1,jdbcType=VARCHAR},
       reserve2 = #{record.reserve2,jdbcType=VARCHAR},
-      reserve3 = #{record.reserve3,jdbcType=VARCHAR},
-      valid = #{record.valid,jdbcType=INTEGER}
+      reserve3 = #{record.reserve3,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -238,11 +235,11 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.Examination">
     update hospital.examination
     <set>
-      <if test="registrationName != null">
-        registration_name = #{registrationName,jdbcType=VARCHAR},
-      </if>
       <if test="registrationId != null">
         registration_id = #{registrationId,jdbcType=INTEGER},
+      </if>
+      <if test="patientName != null">
+        patient_name = #{patientName,jdbcType=VARCHAR},
       </if>
       <if test="chargeItemId != null">
         charge_item_id = #{chargeItemId,jdbcType=INTEGER},
@@ -256,6 +253,9 @@
       <if test="departmentId != null">
         department_id = #{departmentId,jdbcType=INTEGER},
       </if>
+      <if test="valid != null">
+        valid = #{valid,jdbcType=INTEGER},
+      </if>
       <if test="reserve1 != null">
         reserve1 = #{reserve1,jdbcType=VARCHAR},
       </if>
@@ -264,9 +264,6 @@
       </if>
       <if test="reserve3 != null">
         reserve3 = #{reserve3,jdbcType=VARCHAR},
-      </if>
-      <if test="valid != null">
-        valid = #{valid,jdbcType=INTEGER},
       </if>
     </set>
     where examination_id = #{examinationId,jdbcType=INTEGER}

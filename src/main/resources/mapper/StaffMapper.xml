@@ -4,10 +4,11 @@
   <resultMap id="BaseResultMap" type="com.neusoft.medical.bean.Staff">
     <constructor>
       <idArg column="staff_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="real_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="department_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="department_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="account_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="department_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="account_type" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -73,8 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    staff_id, department_name, account_id, department_id, type, valid, reserve1, reserve2, 
-    reserve3
+    staff_id, real_name, department_id, department_name, account_id, account_type, valid, 
+    reserve1, reserve2, reserve3
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.StaffExample" resultMap="BaseResultMap">
     select
@@ -97,10 +98,16 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="com.neusoft.medical.bean.Staff">
+    <selectKey keyProperty="staffId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into hospital.staff
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="staffId != null">
-        staff_id,
+      <if test="realName != null">
+        real_name,
+      </if>
+      <if test="departmentId != null">
+        department_id,
       </if>
       <if test="departmentName != null">
         department_name,
@@ -108,11 +115,8 @@
       <if test="accountId != null">
         account_id,
       </if>
-      <if test="departmentId != null">
-        department_id,
-      </if>
-      <if test="type != null">
-        type,
+      <if test="accountType != null">
+        account_type,
       </if>
       <if test="valid != null">
         valid,
@@ -128,8 +132,11 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="staffId != null">
-        #{staffId,jdbcType=INTEGER},
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null">
+        #{departmentId,jdbcType=INTEGER},
       </if>
       <if test="departmentName != null">
         #{departmentName,jdbcType=VARCHAR},
@@ -137,11 +144,8 @@
       <if test="accountId != null">
         #{accountId,jdbcType=INTEGER},
       </if>
-      <if test="departmentId != null">
-        #{departmentId,jdbcType=INTEGER},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=INTEGER},
+      <if test="accountType != null">
+        #{accountType,jdbcType=VARCHAR},
       </if>
       <if test="valid != null">
         #{valid,jdbcType=INTEGER},
@@ -169,17 +173,20 @@
       <if test="record.staffId != null">
         staff_id = #{record.staffId,jdbcType=INTEGER},
       </if>
+      <if test="record.realName != null">
+        real_name = #{record.realName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentId != null">
+        department_id = #{record.departmentId,jdbcType=INTEGER},
+      </if>
       <if test="record.departmentName != null">
         department_name = #{record.departmentName,jdbcType=VARCHAR},
       </if>
       <if test="record.accountId != null">
         account_id = #{record.accountId,jdbcType=INTEGER},
       </if>
-      <if test="record.departmentId != null">
-        department_id = #{record.departmentId,jdbcType=INTEGER},
-      </if>
-      <if test="record.type != null">
-        type = #{record.type,jdbcType=INTEGER},
+      <if test="record.accountType != null">
+        account_type = #{record.accountType,jdbcType=VARCHAR},
       </if>
       <if test="record.valid != null">
         valid = #{record.valid,jdbcType=INTEGER},
@@ -201,10 +208,11 @@
   <update id="updateByExample" parameterType="map">
     update hospital.staff
     set staff_id = #{record.staffId,jdbcType=INTEGER},
+      real_name = #{record.realName,jdbcType=VARCHAR},
+      department_id = #{record.departmentId,jdbcType=INTEGER},
       department_name = #{record.departmentName,jdbcType=VARCHAR},
       account_id = #{record.accountId,jdbcType=INTEGER},
-      department_id = #{record.departmentId,jdbcType=INTEGER},
-      type = #{record.type,jdbcType=INTEGER},
+      account_type = #{record.accountType,jdbcType=VARCHAR},
       valid = #{record.valid,jdbcType=INTEGER},
       reserve1 = #{record.reserve1,jdbcType=VARCHAR},
       reserve2 = #{record.reserve2,jdbcType=VARCHAR},
@@ -216,17 +224,20 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.Staff">
     update hospital.staff
     <set>
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null">
+        department_id = #{departmentId,jdbcType=INTEGER},
+      </if>
       <if test="departmentName != null">
         department_name = #{departmentName,jdbcType=VARCHAR},
       </if>
       <if test="accountId != null">
         account_id = #{accountId,jdbcType=INTEGER},
       </if>
-      <if test="departmentId != null">
-        department_id = #{departmentId,jdbcType=INTEGER},
-      </if>
-      <if test="type != null">
-        type = #{type,jdbcType=INTEGER},
+      <if test="accountType != null">
+        account_type = #{accountType,jdbcType=VARCHAR},
       </if>
       <if test="valid != null">
         valid = #{valid,jdbcType=INTEGER},

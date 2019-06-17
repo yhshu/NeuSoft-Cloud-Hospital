@@ -7,6 +7,8 @@ public class Account {
 
     private String userPassword;
 
+    private String accountType;
+
     private Integer valid;
 
     private String reserve1;
@@ -15,10 +17,11 @@ public class Account {
 
     private String reserve3;
 
-    public Account(Integer accountId, String userName, String userPassword, Integer valid, String reserve1, String reserve2, String reserve3) {
+    public Account(Integer accountId, String userName, String userPassword, String accountType, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.accountId = accountId;
         this.userName = userName;
         this.userPassword = userPassword;
+        this.accountType = accountType;
         this.valid = valid;
         this.reserve1 = reserve1;
         this.reserve2 = reserve2;
@@ -51,6 +54,14 @@ public class Account {
 
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword == null ? null : userPassword.trim();
+    }
+
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType == null ? null : accountType.trim();
     }
 
     public Integer getValid() {

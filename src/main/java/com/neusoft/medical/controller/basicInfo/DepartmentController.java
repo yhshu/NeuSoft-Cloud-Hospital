@@ -4,7 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.Util.database.ConstantConverter;
 import com.neusoft.medical.bean.Department;
 import com.neusoft.medical.dto.ResultDTO;
-import com.neusoft.medical.service.DepartmentService;
+import com.neusoft.medical.service.basicInfo.DepartmentService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

@@ -2,9 +2,12 @@ package com.neusoft.medical.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.neusoft.medical.bean.*;
+import com.neusoft.medical.bean.Patient;
+import com.neusoft.medical.bean.PatientExample;
+import com.neusoft.medical.bean.Registration;
+import com.neusoft.medical.bean.RegistrationExample;
 import com.neusoft.medical.dao.*;
-import com.neusoft.medical.service.RegistrationService;
+import com.neusoft.medical.service.registration.RegistrationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -54,9 +57,7 @@ public class RegistrationServiceImpl implements RegistrationService {
             patientMapper.updateByPrimaryKey(patient);
         }
 
-        // 新增病历记录
-        medicalRecordsMapper.insert(new MedicalRecords(null, record.getRegistrationId(), null, null, null, null, null, 1, null, null, null));
-
+        // 病历记录在患者前往医生处就诊后生成
         return registrationMapper.selectByPrimaryKey(record.getRegistrationId());
     }
 

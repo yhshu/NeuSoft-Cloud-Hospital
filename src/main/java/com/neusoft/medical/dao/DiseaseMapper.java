@@ -2,13 +2,9 @@ package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.Disease;
 import com.neusoft.medical.bean.DiseaseExample;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 public interface DiseaseMapper {
     long countByExample(DiseaseExample example);
@@ -22,13 +18,14 @@ public interface DiseaseMapper {
     int deleteByPrimaryKey(Integer diseaseId);
 
     @Insert({
-        "insert into hospital.disease (disease_id, disease_code, ",
-        "disease_name, disease_ICD, ",
-        "disease_category, valid)",
-        "values (#{diseaseId,jdbcType=INTEGER}, #{diseaseCode,jdbcType=VARCHAR}, ",
-        "#{diseaseName,jdbcType=VARCHAR}, #{diseaseIcd,jdbcType=VARCHAR}, ",
-        "#{diseaseCategory,jdbcType=INTEGER}, #{valid,jdbcType=INTEGER})"
+        "insert into hospital.disease (disease_ICD, disease_name, ",
+        "disease_code, disease_category, ",
+        "valid)",
+        "values (#{diseaseIcd,jdbcType=VARCHAR}, #{diseaseName,jdbcType=VARCHAR}, ",
+        "#{diseaseCode,jdbcType=VARCHAR}, #{diseaseCategory,jdbcType=INTEGER}, ",
+        "#{valid,jdbcType=INTEGER})"
     })
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="diseaseId", before=false, resultType=Integer.class)
     int insert(Disease record);
 
     int insertSelective(Disease record);
@@ -37,7 +34,7 @@ public interface DiseaseMapper {
 
     @Select({
         "select",
-        "disease_id, disease_code, disease_name, disease_ICD, disease_category, valid",
+        "disease_id, disease_ICD, disease_name, disease_code, disease_category, valid",
         "from hospital.disease",
         "where disease_id = #{diseaseId,jdbcType=INTEGER}"
     })
@@ -52,9 +49,9 @@ public interface DiseaseMapper {
 
     @Update({
         "update hospital.disease",
-        "set disease_code = #{diseaseCode,jdbcType=VARCHAR},",
+        "set disease_ICD = #{diseaseIcd,jdbcType=VARCHAR},",
           "disease_name = #{diseaseName,jdbcType=VARCHAR},",
-          "disease_ICD = #{diseaseIcd,jdbcType=VARCHAR},",
+          "disease_code = #{diseaseCode,jdbcType=VARCHAR},",
           "disease_category = #{diseaseCategory,jdbcType=INTEGER},",
           "valid = #{valid,jdbcType=INTEGER}",
         "where disease_id = #{diseaseId,jdbcType=INTEGER}"

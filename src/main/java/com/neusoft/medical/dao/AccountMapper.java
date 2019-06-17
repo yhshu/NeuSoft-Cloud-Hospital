@@ -2,13 +2,9 @@ package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.Account;
 import com.neusoft.medical.bean.AccountExample;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 public interface AccountMapper {
     long countByExample(AccountExample example);
@@ -22,15 +18,16 @@ public interface AccountMapper {
     int deleteByPrimaryKey(Integer accountId);
 
     @Insert({
-        "insert into hospital.account (account_id, user_name, ",
-        "user_password, valid, ",
+        "insert into hospital.account (user_name, user_password, ",
+        "account_type, valid, ",
         "reserve1, reserve2, ",
         "reserve3)",
-        "values (#{accountId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, ",
-        "#{userPassword,jdbcType=VARCHAR}, #{valid,jdbcType=INTEGER}, ",
+        "values (#{userName,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, ",
+        "#{accountType,jdbcType=VARCHAR}, #{valid,jdbcType=INTEGER}, ",
         "#{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, ",
         "#{reserve3,jdbcType=VARCHAR})"
     })
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="accountId", before=false, resultType=Integer.class)
     int insert(Account record);
 
     int insertSelective(Account record);
@@ -39,7 +36,8 @@ public interface AccountMapper {
 
     @Select({
         "select",
-        "account_id, user_name, user_password, valid, reserve1, reserve2, reserve3",
+        "account_id, user_name, user_password, account_type, valid, reserve1, reserve2, ",
+        "reserve3",
         "from hospital.account",
         "where account_id = #{accountId,jdbcType=INTEGER}"
     })
@@ -56,6 +54,7 @@ public interface AccountMapper {
         "update hospital.account",
         "set user_name = #{userName,jdbcType=VARCHAR},",
           "user_password = #{userPassword,jdbcType=VARCHAR},",
+          "account_type = #{accountType,jdbcType=VARCHAR},",
           "valid = #{valid,jdbcType=INTEGER},",
           "reserve1 = #{reserve1,jdbcType=VARCHAR},",
           "reserve2 = #{reserve2,jdbcType=VARCHAR},",

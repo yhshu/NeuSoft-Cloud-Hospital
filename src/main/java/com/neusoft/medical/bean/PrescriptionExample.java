@@ -104,63 +104,63 @@ public class PrescriptionExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andPresciptionIdIsNull() {
-            addCriterion("presciption_id is null");
+        public Criteria andPrescriptionIdIsNull() {
+            addCriterion("prescription_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andPresciptionIdIsNotNull() {
-            addCriterion("presciption_id is not null");
+        public Criteria andPrescriptionIdIsNotNull() {
+            addCriterion("prescription_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPresciptionIdEqualTo(Integer value) {
-            addCriterion("presciption_id =", value, "presciptionId");
+        public Criteria andPrescriptionIdEqualTo(Integer value) {
+            addCriterion("prescription_id =", value, "prescriptionId");
             return (Criteria) this;
         }
 
-        public Criteria andPresciptionIdNotEqualTo(Integer value) {
-            addCriterion("presciption_id <>", value, "presciptionId");
+        public Criteria andPrescriptionIdNotEqualTo(Integer value) {
+            addCriterion("prescription_id <>", value, "prescriptionId");
             return (Criteria) this;
         }
 
-        public Criteria andPresciptionIdGreaterThan(Integer value) {
-            addCriterion("presciption_id >", value, "presciptionId");
+        public Criteria andPrescriptionIdGreaterThan(Integer value) {
+            addCriterion("prescription_id >", value, "prescriptionId");
             return (Criteria) this;
         }
 
-        public Criteria andPresciptionIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("presciption_id >=", value, "presciptionId");
+        public Criteria andPrescriptionIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("prescription_id >=", value, "prescriptionId");
             return (Criteria) this;
         }
 
-        public Criteria andPresciptionIdLessThan(Integer value) {
-            addCriterion("presciption_id <", value, "presciptionId");
+        public Criteria andPrescriptionIdLessThan(Integer value) {
+            addCriterion("prescription_id <", value, "prescriptionId");
             return (Criteria) this;
         }
 
-        public Criteria andPresciptionIdLessThanOrEqualTo(Integer value) {
-            addCriterion("presciption_id <=", value, "presciptionId");
+        public Criteria andPrescriptionIdLessThanOrEqualTo(Integer value) {
+            addCriterion("prescription_id <=", value, "prescriptionId");
             return (Criteria) this;
         }
 
-        public Criteria andPresciptionIdIn(List<Integer> values) {
-            addCriterion("presciption_id in", values, "presciptionId");
+        public Criteria andPrescriptionIdIn(List<Integer> values) {
+            addCriterion("prescription_id in", values, "prescriptionId");
             return (Criteria) this;
         }
 
-        public Criteria andPresciptionIdNotIn(List<Integer> values) {
-            addCriterion("presciption_id not in", values, "presciptionId");
+        public Criteria andPrescriptionIdNotIn(List<Integer> values) {
+            addCriterion("prescription_id not in", values, "prescriptionId");
             return (Criteria) this;
         }
 
-        public Criteria andPresciptionIdBetween(Integer value1, Integer value2) {
-            addCriterion("presciption_id between", value1, value2, "presciptionId");
+        public Criteria andPrescriptionIdBetween(Integer value1, Integer value2) {
+            addCriterion("prescription_id between", value1, value2, "prescriptionId");
             return (Criteria) this;
         }
 
-        public Criteria andPresciptionIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("presciption_id not between", value1, value2, "presciptionId");
+        public Criteria andPrescriptionIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("prescription_id not between", value1, value2, "prescriptionId");
             return (Criteria) this;
         }
 

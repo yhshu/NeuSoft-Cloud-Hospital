@@ -2,13 +2,9 @@ package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.ChargeItem;
 import com.neusoft.medical.bean.ChargeItemExample;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 public interface ChargeItemMapper {
     long countByExample(ChargeItemExample example);
@@ -22,23 +18,24 @@ public interface ChargeItemMapper {
     int deleteByPrimaryKey(Integer chargeItemId);
 
     @Insert({
-        "insert into hospital.charge_item (charge_item_id, charge_item_code, ",
-        "name_zh, specification, ",
-        "price, expense_category_id, ",
-        "department_id, name_pinyin, ",
-        "charge_type, creation_time, ",
-        "charge_time, nums, ",
-        "name_en, valid, reserve1, ",
-        "reserve2, reserve3)",
-        "values (#{chargeItemId,jdbcType=INTEGER}, #{chargeItemCode,jdbcType=VARCHAR}, ",
-        "#{nameZh,jdbcType=VARCHAR}, #{specification,jdbcType=VARCHAR}, ",
-        "#{price,jdbcType=DECIMAL}, #{expenseCategoryId,jdbcType=INTEGER}, ",
-        "#{departmentId,jdbcType=INTEGER}, #{namePinyin,jdbcType=VARCHAR}, ",
-        "#{chargeType,jdbcType=INTEGER}, #{creationTime,jdbcType=DATE}, ",
-        "#{chargeTime,jdbcType=TIMESTAMP}, #{nums,jdbcType=INTEGER}, ",
-        "#{nameEn,jdbcType=VARCHAR}, #{valid,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
-        "#{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR})"
+        "insert into hospital.charge_item (charge_item_code, name_zh, ",
+        "specification, price, ",
+        "expense_category_id, department_id, ",
+        "name_pinyin, charge_type, ",
+        "creation_time, charge_time, ",
+        "nums, name_en, valid, ",
+        "reserve1, reserve2, ",
+        "reserve3)",
+        "values (#{chargeItemCode,jdbcType=VARCHAR}, #{nameZh,jdbcType=VARCHAR}, ",
+        "#{specification,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, ",
+        "#{expenseCategoryId,jdbcType=INTEGER}, #{departmentId,jdbcType=INTEGER}, ",
+        "#{namePinyin,jdbcType=VARCHAR}, #{chargeType,jdbcType=INTEGER}, ",
+        "#{creationTime,jdbcType=DATE}, #{chargeTime,jdbcType=TIMESTAMP}, ",
+        "#{nums,jdbcType=INTEGER}, #{nameEn,jdbcType=VARCHAR}, #{valid,jdbcType=INTEGER}, ",
+        "#{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, ",
+        "#{reserve3,jdbcType=VARCHAR})"
     })
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="chargeItemId", before=false, resultType=Integer.class)
     int insert(ChargeItem record);
 
     int insertSelective(ChargeItem record);

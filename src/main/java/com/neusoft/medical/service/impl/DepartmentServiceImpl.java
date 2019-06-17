@@ -5,7 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.Department;
 import com.neusoft.medical.bean.DepartmentExample;
 import com.neusoft.medical.dao.DepartmentMapper;
-import com.neusoft.medical.service.DepartmentService;
+import com.neusoft.medical.service.basicInfo.DepartmentService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

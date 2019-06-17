@@ -1,6 +1,6 @@
 package com.neusoft.medical.service.impl;
 
-import com.neusoft.medical.service.DiagnosticCatalogService;
+import com.neusoft.medical.service.basicInfo.DiagnosticCatalogService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

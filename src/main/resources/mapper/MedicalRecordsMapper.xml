@@ -7,10 +7,14 @@
       <arg column="registration_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="main_info" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="current_disease" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="current_treatment" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="preliminary_western" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="preliminary_chinese" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="past_disease" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="physical_exam" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="auxiliary_exam" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="opinion" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="save_state" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="doctor_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="template_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="reserve3" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -75,8 +79,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    medical_records_id, registration_id, main_info, current_disease, current_treatment, 
-    preliminary_western, preliminary_chinese, valid, reserve1, reserve2, reserve3
+    medical_records_id, registration_id, main_info, current_disease, past_disease, physical_exam, 
+    auxiliary_exam, opinion, valid, save_state, doctor_id, template_name, reserve1, reserve2, 
+    reserve3
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.MedicalRecordsExample" resultMap="BaseResultMap">
     select
@@ -99,11 +104,11 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="com.neusoft.medical.bean.MedicalRecords">
+    <selectKey keyProperty="medicalRecordsId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into hospital.medical_records
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="medicalRecordsId != null">
-        medical_records_id,
-      </if>
       <if test="registrationId != null">
         registration_id,
       </if>
@@ -113,17 +118,29 @@
       <if test="currentDisease != null">
         current_disease,
       </if>
-      <if test="currentTreatment != null">
-        current_treatment,
+      <if test="pastDisease != null">
+        past_disease,
       </if>
-      <if test="preliminaryWestern != null">
-        preliminary_western,
+      <if test="physicalExam != null">
+        physical_exam,
       </if>
-      <if test="preliminaryChinese != null">
-        preliminary_chinese,
+      <if test="auxiliaryExam != null">
+        auxiliary_exam,
+      </if>
+      <if test="opinion != null">
+        opinion,
       </if>
       <if test="valid != null">
         valid,
+      </if>
+      <if test="saveState != null">
+        save_state,
+      </if>
+      <if test="doctorId != null">
+        doctor_id,
+      </if>
+      <if test="templateName != null">
+        template_name,
       </if>
       <if test="reserve1 != null">
         reserve1,
@@ -136,9 +153,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="medicalRecordsId != null">
-        #{medicalRecordsId,jdbcType=INTEGER},
-      </if>
       <if test="registrationId != null">
         #{registrationId,jdbcType=INTEGER},
       </if>
@@ -148,17 +162,29 @@
       <if test="currentDisease != null">
         #{currentDisease,jdbcType=VARCHAR},
       </if>
-      <if test="currentTreatment != null">
-        #{currentTreatment,jdbcType=VARCHAR},
+      <if test="pastDisease != null">
+        #{pastDisease,jdbcType=VARCHAR},
       </if>
-      <if test="preliminaryWestern != null">
-        #{preliminaryWestern,jdbcType=VARCHAR},
+      <if test="physicalExam != null">
+        #{physicalExam,jdbcType=VARCHAR},
       </if>
-      <if test="preliminaryChinese != null">
-        #{preliminaryChinese,jdbcType=VARCHAR},
+      <if test="auxiliaryExam != null">
+        #{auxiliaryExam,jdbcType=VARCHAR},
+      </if>
+      <if test="opinion != null">
+        #{opinion,jdbcType=VARCHAR},
       </if>
       <if test="valid != null">
         #{valid,jdbcType=INTEGER},
+      </if>
+      <if test="saveState != null">
+        #{saveState,jdbcType=INTEGER},
+      </if>
+      <if test="doctorId != null">
+        #{doctorId,jdbcType=INTEGER},
+      </if>
+      <if test="templateName != null">
+        #{templateName,jdbcType=VARCHAR},
       </if>
       <if test="reserve1 != null">
         #{reserve1,jdbcType=VARCHAR},
@@ -192,17 +218,29 @@
       <if test="record.currentDisease != null">
         current_disease = #{record.currentDisease,jdbcType=VARCHAR},
       </if>
-      <if test="record.currentTreatment != null">
-        current_treatment = #{record.currentTreatment,jdbcType=VARCHAR},
+      <if test="record.pastDisease != null">
+        past_disease = #{record.pastDisease,jdbcType=VARCHAR},
       </if>
-      <if test="record.preliminaryWestern != null">
-        preliminary_western = #{record.preliminaryWestern,jdbcType=VARCHAR},
+      <if test="record.physicalExam != null">
+        physical_exam = #{record.physicalExam,jdbcType=VARCHAR},
       </if>
-      <if test="record.preliminaryChinese != null">
-        preliminary_chinese = #{record.preliminaryChinese,jdbcType=VARCHAR},
+      <if test="record.auxiliaryExam != null">
+        auxiliary_exam = #{record.auxiliaryExam,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opinion != null">
+        opinion = #{record.opinion,jdbcType=VARCHAR},
       </if>
       <if test="record.valid != null">
         valid = #{record.valid,jdbcType=INTEGER},
+      </if>
+      <if test="record.saveState != null">
+        save_state = #{record.saveState,jdbcType=INTEGER},
+      </if>
+      <if test="record.doctorId != null">
+        doctor_id = #{record.doctorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.templateName != null">
+        template_name = #{record.templateName,jdbcType=VARCHAR},
       </if>
       <if test="record.reserve1 != null">
         reserve1 = #{record.reserve1,jdbcType=VARCHAR},
@@ -224,10 +262,14 @@
       registration_id = #{record.registrationId,jdbcType=INTEGER},
       main_info = #{record.mainInfo,jdbcType=VARCHAR},
       current_disease = #{record.currentDisease,jdbcType=VARCHAR},
-      current_treatment = #{record.currentTreatment,jdbcType=VARCHAR},
-      preliminary_western = #{record.preliminaryWestern,jdbcType=VARCHAR},
-      preliminary_chinese = #{record.preliminaryChinese,jdbcType=VARCHAR},
+      past_disease = #{record.pastDisease,jdbcType=VARCHAR},
+      physical_exam = #{record.physicalExam,jdbcType=VARCHAR},
+      auxiliary_exam = #{record.auxiliaryExam,jdbcType=VARCHAR},
+      opinion = #{record.opinion,jdbcType=VARCHAR},
       valid = #{record.valid,jdbcType=INTEGER},
+      save_state = #{record.saveState,jdbcType=INTEGER},
+      doctor_id = #{record.doctorId,jdbcType=INTEGER},
+      template_name = #{record.templateName,jdbcType=VARCHAR},
       reserve1 = #{record.reserve1,jdbcType=VARCHAR},
       reserve2 = #{record.reserve2,jdbcType=VARCHAR},
       reserve3 = #{record.reserve3,jdbcType=VARCHAR}
@@ -247,17 +289,29 @@
       <if test="currentDisease != null">
         current_disease = #{currentDisease,jdbcType=VARCHAR},
       </if>
-      <if test="currentTreatment != null">
-        current_treatment = #{currentTreatment,jdbcType=VARCHAR},
+      <if test="pastDisease != null">
+        past_disease = #{pastDisease,jdbcType=VARCHAR},
       </if>
-      <if test="preliminaryWestern != null">
-        preliminary_western = #{preliminaryWestern,jdbcType=VARCHAR},
+      <if test="physicalExam != null">
+        physical_exam = #{physicalExam,jdbcType=VARCHAR},
       </if>
-      <if test="preliminaryChinese != null">
-        preliminary_chinese = #{preliminaryChinese,jdbcType=VARCHAR},
+      <if test="auxiliaryExam != null">
+        auxiliary_exam = #{auxiliaryExam,jdbcType=VARCHAR},
+      </if>
+      <if test="opinion != null">
+        opinion = #{opinion,jdbcType=VARCHAR},
       </if>
       <if test="valid != null">
         valid = #{valid,jdbcType=INTEGER},
+      </if>
+      <if test="saveState != null">
+        save_state = #{saveState,jdbcType=INTEGER},
+      </if>
+      <if test="doctorId != null">
+        doctor_id = #{doctorId,jdbcType=INTEGER},
+      </if>
+      <if test="templateName != null">
+        template_name = #{templateName,jdbcType=VARCHAR},
       </if>
       <if test="reserve1 != null">
         reserve1 = #{reserve1,jdbcType=VARCHAR},

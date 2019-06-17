@@ -3,9 +3,9 @@ package com.neusoft.medical.bean;
 public class Examination {
     private Integer examinationId;
 
-    private String registrationName;
-
     private Integer registrationId;
+
+    private String patientName;
 
     private Integer chargeItemId;
 
@@ -15,26 +15,26 @@ public class Examination {
 
     private Integer departmentId;
 
+    private Integer valid;
+
     private String reserve1;
 
     private String reserve2;
 
     private String reserve3;
 
-    private Integer valid;
-
-    public Examination(Integer examinationId, String registrationName, Integer registrationId, Integer chargeItemId, String result, Integer doctorId, Integer departmentId, String reserve1, String reserve2, String reserve3, Integer valid) {
+    public Examination(Integer examinationId, Integer registrationId, String patientName, Integer chargeItemId, String result, Integer doctorId, Integer departmentId, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.examinationId = examinationId;
-        this.registrationName = registrationName;
         this.registrationId = registrationId;
+        this.patientName = patientName;
         this.chargeItemId = chargeItemId;
         this.result = result;
         this.doctorId = doctorId;
         this.departmentId = departmentId;
+        this.valid = valid;
         this.reserve1 = reserve1;
         this.reserve2 = reserve2;
         this.reserve3 = reserve3;
-        this.valid = valid;
     }
 
     public Examination() {
@@ -49,20 +49,20 @@ public class Examination {
         this.examinationId = examinationId;
     }
 
-    public String getRegistrationName() {
-        return registrationName;
-    }
-
-    public void setRegistrationName(String registrationName) {
-        this.registrationName = registrationName == null ? null : registrationName.trim();
-    }
-
     public Integer getRegistrationId() {
         return registrationId;
     }
 
     public void setRegistrationId(Integer registrationId) {
         this.registrationId = registrationId;
+    }
+
+    public String getPatientName() {
+        return patientName;
+    }
+
+    public void setPatientName(String patientName) {
+        this.patientName = patientName == null ? null : patientName.trim();
     }
 
     public Integer getChargeItemId() {
@@ -97,6 +97,14 @@ public class Examination {
         this.departmentId = departmentId;
     }
 
+    public Integer getValid() {
+        return valid;
+    }
+
+    public void setValid(Integer valid) {
+        this.valid = valid;
+    }
+
     public String getReserve1() {
         return reserve1;
     }
@@ -119,13 +127,5 @@ public class Examination {
 
     public void setReserve3(String reserve3) {
         this.reserve3 = reserve3 == null ? null : reserve3.trim();
-    }
-
-    public Integer getValid() {
-        return valid;
-    }
-
-    public void setValid(Integer valid) {
-        this.valid = valid;
     }
 }

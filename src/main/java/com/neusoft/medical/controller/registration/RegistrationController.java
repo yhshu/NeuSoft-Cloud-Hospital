@@ -7,10 +7,10 @@ import com.neusoft.medical.bean.Doctor;
 import com.neusoft.medical.bean.Patient;
 import com.neusoft.medical.bean.Registration;
 import com.neusoft.medical.dto.ResultDTO;
-import com.neusoft.medical.service.DepartmentService;
-import com.neusoft.medical.service.PatientService;
-import com.neusoft.medical.service.RegistrationService;
-import com.neusoft.medical.service.SchedulingService;
+import com.neusoft.medical.service.basicInfo.DepartmentService;
+import com.neusoft.medical.service.basicInfo.PatientService;
+import com.neusoft.medical.service.basicInfo.SchedulingService;
+import com.neusoft.medical.service.registration.RegistrationService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -88,7 +88,7 @@ public class RegistrationController {
      * @param gender                 患者性别
      * @param age                    患者年龄
      * @param birthday               患者生日
-     * @param registrationCategory   挂号类型
+     * @param registrationCategoryName   挂号类型
      * @param medicalCategory        医疗类别
      * @param identityCardNo         患者身份证号
      * @param registrationDate       挂号日期
@@ -106,7 +106,7 @@ public class RegistrationController {
             @RequestParam(value = "gender") String gender,
             @RequestParam(value = "age") Integer age,
             @RequestParam(value = "birthday") String birthday,
-            @RequestParam(value = "registrationCategory") String registrationCategory,
+            @RequestParam(value = "registrationCategory") String registrationCategoryName,
             @RequestParam(value = "medicalCategory") String medicalCategory,
             @RequestParam(value = "identityCardNo") String identityCardNo,
             @RequestParam(value = "registrationDate") String registrationDate,
@@ -121,7 +121,7 @@ public class RegistrationController {
         Date registrationDateConverted = dateConverter.convert(registrationDate);
         try {
             registrationService.addRegistration(
-                    new Registration(null, patientName, null, gender, age, birthdayConverted, registrationCategory, medicalCategory, identityCardNo, null, null, registrationDateConverted, departmentId, doctorId, registrationSource, settleAccountsCategory, null, 1, familyAddress, collectorId, null, null, null, null));
+                    new Registration(null, patientName, null, gender, age, birthdayConverted, registrationCategoryName, medicalCategory, identityCardNo, "1", null, registrationDateConverted, departmentId, doctorId, registrationSource, settleAccountsCategory, null, familyAddress, collectorId, null, 1, null, null, null));
             System.out.println("已提交挂号信息");
         } catch (Exception e) {
             e.printStackTrace();
@@ -154,7 +154,8 @@ public class RegistrationController {
      * @return 挂号信息
      */
     @GetMapping("/select_registration")
-    public ResultDTO<Registration> selectRegistrationByPrimaryKey(@RequestParam(value = "registrationId") Integer registrationId) {
+    public ResultDTO<Registration> selectRegistrationByPrimaryKey(
+            @RequestParam(value = "registrationId") Integer registrationId) {
         System.out.println("RegistrationInfoController 按主键获取挂号信息");
         Registration registration = registrationService.selectRegistrationByPrimaryKey(registrationId);
         return new ResultDTO<>(registration);

@@ -92,11 +92,11 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="com.neusoft.medical.bean.ConstantItem">
+    <selectKey keyProperty="constantItemId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into hospital.constant_item
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="constantItemId != null">
-        constant_item_id,
-      </if>
       <if test="constantTypeId != null">
         constant_type_id,
       </if>
@@ -111,9 +111,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="constantItemId != null">
-        #{constantItemId,jdbcType=INTEGER},
-      </if>
       <if test="constantTypeId != null">
         #{constantTypeId,jdbcType=INTEGER},
       </if>

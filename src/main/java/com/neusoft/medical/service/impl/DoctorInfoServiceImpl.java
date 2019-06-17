@@ -1,17 +1,16 @@
 package com.neusoft.medical.service.impl;
 
-import com.neusoft.medical.bean.DepartmentExample;
 import com.neusoft.medical.bean.Doctor;
 import com.neusoft.medical.bean.DoctorExample;
 import com.neusoft.medical.dao.DoctorMapper;
-import com.neusoft.medical.service.DoctorService;
+import com.neusoft.medical.service.basicInfo.DoctorInfoService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class DoctorServiceImpl implements DoctorService {
+public class DoctorInfoServiceImpl implements DoctorInfoService {
     @Resource
     private DoctorMapper doctorMapper;
 

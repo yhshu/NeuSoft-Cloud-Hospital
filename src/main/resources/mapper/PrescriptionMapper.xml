@@ -3,7 +3,7 @@
 <mapper namespace="com.neusoft.medical.dao.PrescriptionMapper">
   <resultMap id="BaseResultMap" type="com.neusoft.medical.bean.Prescription">
     <constructor>
-      <idArg column="presciption_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <idArg column="prescription_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="registration_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="registration_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="doctor_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
@@ -73,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    presciption_id, registration_id, registration_name, doctor_id, content, valid, reserve1, 
+    prescription_id, registration_id, registration_name, doctor_id, content, valid, reserve1, 
     reserve2, reserve3
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.PrescriptionExample" resultMap="BaseResultMap">
@@ -97,11 +97,11 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="com.neusoft.medical.bean.Prescription">
+    <selectKey keyProperty="prescriptionId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into hospital.prescription
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="presciptionId != null">
-        presciption_id,
-      </if>
       <if test="registrationId != null">
         registration_id,
       </if>
@@ -128,9 +128,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="presciptionId != null">
-        #{presciptionId,jdbcType=INTEGER},
-      </if>
       <if test="registrationId != null">
         #{registrationId,jdbcType=INTEGER},
       </if>
@@ -166,8 +163,8 @@
   <update id="updateByExampleSelective" parameterType="map">
     update hospital.prescription
     <set>
-      <if test="record.presciptionId != null">
-        presciption_id = #{record.presciptionId,jdbcType=INTEGER},
+      <if test="record.prescriptionId != null">
+        prescription_id = #{record.prescriptionId,jdbcType=INTEGER},
       </if>
       <if test="record.registrationId != null">
         registration_id = #{record.registrationId,jdbcType=INTEGER},
@@ -200,7 +197,7 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update hospital.prescription
-    set presciption_id = #{record.presciptionId,jdbcType=INTEGER},
+    set prescription_id = #{record.prescriptionId,jdbcType=INTEGER},
       registration_id = #{record.registrationId,jdbcType=INTEGER},
       registration_name = #{record.registrationName,jdbcType=VARCHAR},
       doctor_id = #{record.doctorId,jdbcType=INTEGER},
@@ -241,6 +238,6 @@
         reserve3 = #{reserve3,jdbcType=VARCHAR},
       </if>
     </set>
-    where presciption_id = #{presciptionId,jdbcType=INTEGER}
+    where prescription_id = #{prescriptionId,jdbcType=INTEGER}
   </update>
 </mapper>

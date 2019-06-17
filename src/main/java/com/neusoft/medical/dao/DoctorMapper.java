@@ -2,13 +2,9 @@ package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.Doctor;
 import com.neusoft.medical.bean.DoctorExample;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 public interface DoctorMapper {
     long countByExample(DoctorExample example);
@@ -22,19 +18,18 @@ public interface DoctorMapper {
     int deleteByPrimaryKey(Integer doctorId);
 
     @Insert({
-        "insert into hospital.doctor (doctor_id, doctor_name, ",
-        "department, type, ",
+        "insert into hospital.doctor (doctor_name, department_id, ",
         "job_title, account_id, ",
-        "valid, doctor_scheduling, ",
-        "reserve1, reserve2, ",
-        "reserve3)",
-        "values (#{doctorId,jdbcType=INTEGER}, #{doctorName,jdbcType=VARCHAR}, ",
-        "#{department,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, ",
+        "account_type, doctor_scheduling, ",
+        "valid, reserve1, ",
+        "reserve2, reserve3)",
+        "values (#{doctorName,jdbcType=VARCHAR}, #{departmentId,jdbcType=INTEGER}, ",
         "#{jobTitle,jdbcType=VARCHAR}, #{accountId,jdbcType=INTEGER}, ",
-        "#{valid,jdbcType=INTEGER}, #{doctorScheduling,jdbcType=INTEGER}, ",
-        "#{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, ",
-        "#{reserve3,jdbcType=VARCHAR})"
+        "#{accountType,jdbcType=VARCHAR}, #{doctorScheduling,jdbcType=INTEGER}, ",
+        "#{valid,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
+        "#{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR})"
     })
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="doctorId", before=false, resultType=Integer.class)
     int insert(Doctor record);
 
     int insertSelective(Doctor record);
@@ -43,8 +38,8 @@ public interface DoctorMapper {
 
     @Select({
         "select",
-        "doctor_id, doctor_name, department, type, job_title, account_id, valid, doctor_scheduling, ",
-        "reserve1, reserve2, reserve3",
+        "doctor_id, doctor_name, department_id, job_title, account_id, account_type, ",
+        "doctor_scheduling, valid, reserve1, reserve2, reserve3",
         "from hospital.doctor",
         "where doctor_id = #{doctorId,jdbcType=INTEGER}"
     })
@@ -60,12 +55,12 @@ public interface DoctorMapper {
     @Update({
         "update hospital.doctor",
         "set doctor_name = #{doctorName,jdbcType=VARCHAR},",
-          "department = #{department,jdbcType=INTEGER},",
-          "type = #{type,jdbcType=INTEGER},",
+          "department_id = #{departmentId,jdbcType=INTEGER},",
           "job_title = #{jobTitle,jdbcType=VARCHAR},",
           "account_id = #{accountId,jdbcType=INTEGER},",
-          "valid = #{valid,jdbcType=INTEGER},",
+          "account_type = #{accountType,jdbcType=VARCHAR},",
           "doctor_scheduling = #{doctorScheduling,jdbcType=INTEGER},",
+          "valid = #{valid,jdbcType=INTEGER},",
           "reserve1 = #{reserve1,jdbcType=VARCHAR},",
           "reserve2 = #{reserve2,jdbcType=VARCHAR},",
           "reserve3 = #{reserve3,jdbcType=VARCHAR}",

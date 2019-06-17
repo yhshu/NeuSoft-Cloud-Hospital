@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.neusoft.medical.dao.PathographyMapper">
-  <resultMap id="BaseResultMap" type="com.neusoft.medical.bean.Pathography">
+<mapper namespace="com.neusoft.medical.dao.RecordDiseaseMapper">
+  <resultMap id="BaseResultMap" type="com.neusoft.medical.bean.RecordDisease">
     <constructor>
-      <idArg column="pathography_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="patient_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="physical_examination" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="pathography" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="found_time" javaType="java.util.Date" jdbcType="DATE" />
-      <arg column="note" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <idArg column="record_disease_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="medical_records_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="disease_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="disease_ICD" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="disease_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="main_disease" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="suspect" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="incidence_date" javaType="java.util.Date" jdbcType="DATE" />
       <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -74,16 +76,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    pathography_id, patient_id, physical_examination, pathography, found_time, note, 
-    valid, reserve1, reserve2, reserve3
+    record_disease_id, medical_records_id, disease_id, disease_ICD, disease_name, main_disease, 
+    suspect, incidence_date, valid, reserve1, reserve2, reserve3
   </sql>
-  <select id="selectByExample" parameterType="com.neusoft.medical.bean.PathographyExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.neusoft.medical.bean.RecordDiseaseExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hospital.pathography
+    from hospital.record_disease
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -91,32 +93,38 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.PathographyExample">
-    delete from hospital.pathography
+  <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.RecordDiseaseExample">
+    delete from hospital.record_disease
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insertSelective" parameterType="com.neusoft.medical.bean.Pathography">
-    insert into hospital.pathography
+  <insert id="insertSelective" parameterType="com.neusoft.medical.bean.RecordDisease">
+    <selectKey keyProperty="recordDiseaseId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hospital.record_disease
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="pathographyId != null">
-        pathography_id,
+      <if test="medicalRecordsId != null">
+        medical_records_id,
       </if>
-      <if test="patientId != null">
-        patient_id,
+      <if test="diseaseId != null">
+        disease_id,
       </if>
-      <if test="physicalExamination != null">
-        physical_examination,
+      <if test="diseaseIcd != null">
+        disease_ICD,
       </if>
-      <if test="pathography != null">
-        pathography,
+      <if test="diseaseName != null">
+        disease_name,
       </if>
-      <if test="foundTime != null">
-        found_time,
+      <if test="mainDisease != null">
+        main_disease,
       </if>
-      <if test="note != null">
-        note,
+      <if test="suspect != null">
+        suspect,
+      </if>
+      <if test="incidenceDate != null">
+        incidence_date,
       </if>
       <if test="valid != null">
         valid,
@@ -132,23 +140,26 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="pathographyId != null">
-        #{pathographyId,jdbcType=INTEGER},
+      <if test="medicalRecordsId != null">
+        #{medicalRecordsId,jdbcType=INTEGER},
       </if>
-      <if test="patientId != null">
-        #{patientId,jdbcType=INTEGER},
+      <if test="diseaseId != null">
+        #{diseaseId,jdbcType=INTEGER},
       </if>
-      <if test="physicalExamination != null">
-        #{physicalExamination,jdbcType=VARCHAR},
+      <if test="diseaseIcd != null">
+        #{diseaseIcd,jdbcType=VARCHAR},
       </if>
-      <if test="pathography != null">
-        #{pathography,jdbcType=VARCHAR},
+      <if test="diseaseName != null">
+        #{diseaseName,jdbcType=VARCHAR},
       </if>
-      <if test="foundTime != null">
-        #{foundTime,jdbcType=DATE},
+      <if test="mainDisease != null">
+        #{mainDisease,jdbcType=INTEGER},
       </if>
-      <if test="note != null">
-        #{note,jdbcType=VARCHAR},
+      <if test="suspect != null">
+        #{suspect,jdbcType=INTEGER},
+      </if>
+      <if test="incidenceDate != null">
+        #{incidenceDate,jdbcType=DATE},
       </if>
       <if test="valid != null">
         #{valid,jdbcType=INTEGER},
@@ -164,32 +175,38 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.neusoft.medical.bean.PathographyExample" resultType="java.lang.Long">
-    select count(*) from hospital.pathography
+  <select id="countByExample" parameterType="com.neusoft.medical.bean.RecordDiseaseExample" resultType="java.lang.Long">
+    select count(*) from hospital.record_disease
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update hospital.pathography
+    update hospital.record_disease
     <set>
-      <if test="record.pathographyId != null">
-        pathography_id = #{record.pathographyId,jdbcType=INTEGER},
+      <if test="record.recordDiseaseId != null">
+        record_disease_id = #{record.recordDiseaseId,jdbcType=INTEGER},
       </if>
-      <if test="record.patientId != null">
-        patient_id = #{record.patientId,jdbcType=INTEGER},
+      <if test="record.medicalRecordsId != null">
+        medical_records_id = #{record.medicalRecordsId,jdbcType=INTEGER},
       </if>
-      <if test="record.physicalExamination != null">
-        physical_examination = #{record.physicalExamination,jdbcType=VARCHAR},
+      <if test="record.diseaseId != null">
+        disease_id = #{record.diseaseId,jdbcType=INTEGER},
       </if>
-      <if test="record.pathography != null">
-        pathography = #{record.pathography,jdbcType=VARCHAR},
+      <if test="record.diseaseIcd != null">
+        disease_ICD = #{record.diseaseIcd,jdbcType=VARCHAR},
       </if>
-      <if test="record.foundTime != null">
-        found_time = #{record.foundTime,jdbcType=DATE},
+      <if test="record.diseaseName != null">
+        disease_name = #{record.diseaseName,jdbcType=VARCHAR},
       </if>
-      <if test="record.note != null">
-        note = #{record.note,jdbcType=VARCHAR},
+      <if test="record.mainDisease != null">
+        main_disease = #{record.mainDisease,jdbcType=INTEGER},
+      </if>
+      <if test="record.suspect != null">
+        suspect = #{record.suspect,jdbcType=INTEGER},
+      </if>
+      <if test="record.incidenceDate != null">
+        incidence_date = #{record.incidenceDate,jdbcType=DATE},
       </if>
       <if test="record.valid != null">
         valid = #{record.valid,jdbcType=INTEGER},
@@ -209,13 +226,15 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update hospital.pathography
-    set pathography_id = #{record.pathographyId,jdbcType=INTEGER},
-      patient_id = #{record.patientId,jdbcType=INTEGER},
-      physical_examination = #{record.physicalExamination,jdbcType=VARCHAR},
-      pathography = #{record.pathography,jdbcType=VARCHAR},
-      found_time = #{record.foundTime,jdbcType=DATE},
-      note = #{record.note,jdbcType=VARCHAR},
+    update hospital.record_disease
+    set record_disease_id = #{record.recordDiseaseId,jdbcType=INTEGER},
+      medical_records_id = #{record.medicalRecordsId,jdbcType=INTEGER},
+      disease_id = #{record.diseaseId,jdbcType=INTEGER},
+      disease_ICD = #{record.diseaseIcd,jdbcType=VARCHAR},
+      disease_name = #{record.diseaseName,jdbcType=VARCHAR},
+      main_disease = #{record.mainDisease,jdbcType=INTEGER},
+      suspect = #{record.suspect,jdbcType=INTEGER},
+      incidence_date = #{record.incidenceDate,jdbcType=DATE},
       valid = #{record.valid,jdbcType=INTEGER},
       reserve1 = #{record.reserve1,jdbcType=VARCHAR},
       reserve2 = #{record.reserve2,jdbcType=VARCHAR},
@@ -224,23 +243,29 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.Pathography">
-    update hospital.pathography
+  <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.RecordDisease">
+    update hospital.record_disease
     <set>
-      <if test="patientId != null">
-        patient_id = #{patientId,jdbcType=INTEGER},
+      <if test="medicalRecordsId != null">
+        medical_records_id = #{medicalRecordsId,jdbcType=INTEGER},
       </if>
-      <if test="physicalExamination != null">
-        physical_examination = #{physicalExamination,jdbcType=VARCHAR},
+      <if test="diseaseId != null">
+        disease_id = #{diseaseId,jdbcType=INTEGER},
       </if>
-      <if test="pathography != null">
-        pathography = #{pathography,jdbcType=VARCHAR},
+      <if test="diseaseIcd != null">
+        disease_ICD = #{diseaseIcd,jdbcType=VARCHAR},
       </if>
-      <if test="foundTime != null">
-        found_time = #{foundTime,jdbcType=DATE},
+      <if test="diseaseName != null">
+        disease_name = #{diseaseName,jdbcType=VARCHAR},
       </if>
-      <if test="note != null">
-        note = #{note,jdbcType=VARCHAR},
+      <if test="mainDisease != null">
+        main_disease = #{mainDisease,jdbcType=INTEGER},
+      </if>
+      <if test="suspect != null">
+        suspect = #{suspect,jdbcType=INTEGER},
+      </if>
+      <if test="incidenceDate != null">
+        incidence_date = #{incidenceDate,jdbcType=DATE},
       </if>
       <if test="valid != null">
         valid = #{valid,jdbcType=INTEGER},
@@ -255,6 +280,6 @@
         reserve3 = #{reserve3,jdbcType=VARCHAR},
       </if>
     </set>
-    where pathography_id = #{pathographyId,jdbcType=INTEGER}
+    where record_disease_id = #{recordDiseaseId,jdbcType=INTEGER}
   </update>
 </mapper>

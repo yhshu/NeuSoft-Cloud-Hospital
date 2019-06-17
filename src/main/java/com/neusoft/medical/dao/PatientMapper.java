@@ -2,13 +2,9 @@ package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.Patient;
 import com.neusoft.medical.bean.PatientExample;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 public interface PatientMapper {
     long countByExample(PatientExample example);
@@ -22,19 +18,18 @@ public interface PatientMapper {
     int deleteByPrimaryKey(Integer patientId);
 
     @Insert({
-        "insert into hospital.patient (patient_id, patient_name, ",
-        "birth_date, allergies, ",
-        "identity_card_no, social_security_card_no, ",
-        "family_address, gender, ",
-        "valid, reserve1, ",
+        "insert into hospital.patient (patient_name, birth_date, ",
+        "allergies, identity_card_no, ",
+        "social_security_card_no, family_address, ",
+        "gender, valid, reserve1, ",
         "reserve2, reserve3)",
-        "values (#{patientId,jdbcType=INTEGER}, #{patientName,jdbcType=VARCHAR}, ",
-        "#{birthDate,jdbcType=DATE}, #{allergies,jdbcType=VARCHAR}, ",
-        "#{identityCardNo,jdbcType=CHAR}, #{socialSecurityCardNo,jdbcType=VARCHAR}, ",
-        "#{familyAddress,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, ",
-        "#{valid,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
+        "values (#{patientName,jdbcType=VARCHAR}, #{birthDate,jdbcType=DATE}, ",
+        "#{allergies,jdbcType=VARCHAR}, #{identityCardNo,jdbcType=CHAR}, ",
+        "#{socialSecurityCardNo,jdbcType=VARCHAR}, #{familyAddress,jdbcType=VARCHAR}, ",
+        "#{gender,jdbcType=CHAR}, #{valid,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
         "#{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR})"
     })
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="patientId", before=false, resultType=Integer.class)
     int insert(Patient record);
 
     int insertSelective(Patient record);

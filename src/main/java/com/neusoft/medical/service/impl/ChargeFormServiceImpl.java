@@ -6,8 +6,8 @@ import com.neusoft.medical.bean.ChargeForm;
 import com.neusoft.medical.bean.ChargeFormExample;
 import com.neusoft.medical.dao.ChargeFormMapper;
 import com.neusoft.medical.dao.ChargeItemMapper;
-import com.neusoft.medical.service.ChargeFormService;
-import com.neusoft.medical.service.RegistrationService;
+import com.neusoft.medical.service.registration.ChargeFormService;
+import com.neusoft.medical.service.registration.RegistrationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -26,7 +26,7 @@ public class ChargeFormServiceImpl implements ChargeFormService {
     private RegistrationService registrationService;
 
     @Override
-    public PageInfo<ChargeForm> selectChargeFormByRegistrationId(Integer currentPage, Integer pageSize, Integer registrationId, Date startDate, Date endDate) {
+    public PageInfo<ChargeForm> selectChargeFormByRegistrationId(Integer currentPage, Integer pageSize, Integer registrationId, Date startDate, Date endDate, Integer chargeFormCategory) {
         PageHelper.startPage(currentPage, pageSize);
 
         ChargeFormExample chargeFormExample = new ChargeFormExample();
@@ -37,6 +37,12 @@ public class ChargeFormServiceImpl implements ChargeFormService {
             criteria.andMadeTimeGreaterThan(startDate);
         if (endDate != null) // 结束时间
             criteria.andMadeTimeLessThan(endDate);
+
+        if (chargeFormCategory == CATEGORY_UNCHARGED)
+            criteria.andUnchargedNumsNotEqualTo(0);
+        else if (chargeFormCategory == CATEGORY_CHARGED)
+            criteria.andUnchargedNumsEqualTo(0);
+
         List<ChargeForm> chargeFormList = chargeFormMapper.selectByExample(chargeFormExample);
 
         for (ChargeForm chargeForm : chargeFormList) {

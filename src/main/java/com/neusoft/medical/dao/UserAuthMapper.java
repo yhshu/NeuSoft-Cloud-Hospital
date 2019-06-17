@@ -2,13 +2,9 @@ package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.UserAuth;
 import com.neusoft.medical.bean.UserAuthExample;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 public interface UserAuthMapper {
     long countByExample(UserAuthExample example);
@@ -22,11 +18,12 @@ public interface UserAuthMapper {
     int deleteByPrimaryKey(Integer userAuthId);
 
     @Insert({
-        "insert into hospital.user_auth (user_auth_id, user_id, ",
-        "auth_id, valid, operation_time)",
-        "values (#{userAuthId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, ",
-        "#{authId,jdbcType=INTEGER}, #{valid,jdbcType=INTEGER}, #{operationTime,jdbcType=TIMESTAMP})"
+        "insert into hospital.user_auth (user_id, auth_id, ",
+        "valid, operation_time)",
+        "values (#{userId,jdbcType=INTEGER}, #{authId,jdbcType=INTEGER}, ",
+        "#{valid,jdbcType=INTEGER}, #{operationTime,jdbcType=TIMESTAMP})"
     })
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="userAuthId", before=false, resultType=Integer.class)
     int insert(UserAuth record);
 
     int insertSelective(UserAuth record);

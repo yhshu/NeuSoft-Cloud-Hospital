@@ -6,7 +6,7 @@ import com.neusoft.medical.bean.SchedulingInfo;
 import com.neusoft.medical.bean.SchedulingInfoExample;
 import com.neusoft.medical.dao.DoctorMapper;
 import com.neusoft.medical.dao.SchedulingInfoMapper;
-import com.neusoft.medical.service.SchedulingService;
+import com.neusoft.medical.service.basicInfo.SchedulingService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

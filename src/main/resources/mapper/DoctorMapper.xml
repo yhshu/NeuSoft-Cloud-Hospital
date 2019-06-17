@@ -5,12 +5,12 @@
     <constructor>
       <idArg column="doctor_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="doctor_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="department" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="department_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="job_title" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="account_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="account_type" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="doctor_scheduling" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="reserve3" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -75,8 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    doctor_id, doctor_name, department, type, job_title, account_id, valid, doctor_scheduling, 
-    reserve1, reserve2, reserve3
+    doctor_id, doctor_name, department_id, job_title, account_id, account_type, doctor_scheduling, 
+    valid, reserve1, reserve2, reserve3
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.DoctorExample" resultMap="BaseResultMap">
     select
@@ -99,19 +99,16 @@
     </if>
   </delete>
   <insert id="insertSelective" parameterType="com.neusoft.medical.bean.Doctor">
+    <selectKey keyProperty="doctorId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into hospital.doctor
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="doctorId != null">
-        doctor_id,
-      </if>
       <if test="doctorName != null">
         doctor_name,
       </if>
-      <if test="department != null">
-        department,
-      </if>
-      <if test="type != null">
-        type,
+      <if test="departmentId != null">
+        department_id,
       </if>
       <if test="jobTitle != null">
         job_title,
@@ -119,11 +116,14 @@
       <if test="accountId != null">
         account_id,
       </if>
-      <if test="valid != null">
-        valid,
+      <if test="accountType != null">
+        account_type,
       </if>
       <if test="doctorScheduling != null">
         doctor_scheduling,
+      </if>
+      <if test="valid != null">
+        valid,
       </if>
       <if test="reserve1 != null">
         reserve1,
@@ -136,17 +136,11 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="doctorId != null">
-        #{doctorId,jdbcType=INTEGER},
-      </if>
       <if test="doctorName != null">
         #{doctorName,jdbcType=VARCHAR},
       </if>
-      <if test="department != null">
-        #{department,jdbcType=INTEGER},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=INTEGER},
+      <if test="departmentId != null">
+        #{departmentId,jdbcType=INTEGER},
       </if>
       <if test="jobTitle != null">
         #{jobTitle,jdbcType=VARCHAR},
@@ -154,11 +148,14 @@
       <if test="accountId != null">
         #{accountId,jdbcType=INTEGER},
       </if>
-      <if test="valid != null">
-        #{valid,jdbcType=INTEGER},
+      <if test="accountType != null">
+        #{accountType,jdbcType=VARCHAR},
       </if>
       <if test="doctorScheduling != null">
         #{doctorScheduling,jdbcType=INTEGER},
+      </if>
+      <if test="valid != null">
+        #{valid,jdbcType=INTEGER},
       </if>
       <if test="reserve1 != null">
         #{reserve1,jdbcType=VARCHAR},
@@ -186,11 +183,8 @@
       <if test="record.doctorName != null">
         doctor_name = #{record.doctorName,jdbcType=VARCHAR},
       </if>
-      <if test="record.department != null">
-        department = #{record.department,jdbcType=INTEGER},
-      </if>
-      <if test="record.type != null">
-        type = #{record.type,jdbcType=INTEGER},
+      <if test="record.departmentId != null">
+        department_id = #{record.departmentId,jdbcType=INTEGER},
       </if>
       <if test="record.jobTitle != null">
         job_title = #{record.jobTitle,jdbcType=VARCHAR},
@@ -198,11 +192,14 @@
       <if test="record.accountId != null">
         account_id = #{record.accountId,jdbcType=INTEGER},
       </if>
-      <if test="record.valid != null">
-        valid = #{record.valid,jdbcType=INTEGER},
+      <if test="record.accountType != null">
+        account_type = #{record.accountType,jdbcType=VARCHAR},
       </if>
       <if test="record.doctorScheduling != null">
         doctor_scheduling = #{record.doctorScheduling,jdbcType=INTEGER},
+      </if>
+      <if test="record.valid != null">
+        valid = #{record.valid,jdbcType=INTEGER},
       </if>
       <if test="record.reserve1 != null">
         reserve1 = #{record.reserve1,jdbcType=VARCHAR},
@@ -222,12 +219,12 @@
     update hospital.doctor
     set doctor_id = #{record.doctorId,jdbcType=INTEGER},
       doctor_name = #{record.doctorName,jdbcType=VARCHAR},
-      department = #{record.department,jdbcType=INTEGER},
-      type = #{record.type,jdbcType=INTEGER},
+      department_id = #{record.departmentId,jdbcType=INTEGER},
       job_title = #{record.jobTitle,jdbcType=VARCHAR},
       account_id = #{record.accountId,jdbcType=INTEGER},
-      valid = #{record.valid,jdbcType=INTEGER},
+      account_type = #{record.accountType,jdbcType=VARCHAR},
       doctor_scheduling = #{record.doctorScheduling,jdbcType=INTEGER},
+      valid = #{record.valid,jdbcType=INTEGER},
       reserve1 = #{record.reserve1,jdbcType=VARCHAR},
       reserve2 = #{record.reserve2,jdbcType=VARCHAR},
       reserve3 = #{record.reserve3,jdbcType=VARCHAR}
@@ -241,11 +238,8 @@
       <if test="doctorName != null">
         doctor_name = #{doctorName,jdbcType=VARCHAR},
       </if>
-      <if test="department != null">
-        department = #{department,jdbcType=INTEGER},
-      </if>
-      <if test="type != null">
-        type = #{type,jdbcType=INTEGER},
+      <if test="departmentId != null">
+        department_id = #{departmentId,jdbcType=INTEGER},
       </if>
       <if test="jobTitle != null">
         job_title = #{jobTitle,jdbcType=VARCHAR},
@@ -253,11 +247,14 @@
       <if test="accountId != null">
         account_id = #{accountId,jdbcType=INTEGER},
       </if>
-      <if test="valid != null">
-        valid = #{valid,jdbcType=INTEGER},
+      <if test="accountType != null">
+        account_type = #{accountType,jdbcType=VARCHAR},
       </if>
       <if test="doctorScheduling != null">
         doctor_scheduling = #{doctorScheduling,jdbcType=INTEGER},
+      </if>
+      <if test="valid != null">
+        valid = #{valid,jdbcType=INTEGER},
       </if>
       <if test="reserve1 != null">
         reserve1 = #{reserve1,jdbcType=VARCHAR},

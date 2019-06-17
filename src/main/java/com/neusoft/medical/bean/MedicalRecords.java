@@ -9,13 +9,21 @@ public class MedicalRecords {
 
     private String currentDisease;
 
-    private String currentTreatment;
+    private String pastDisease;
 
-    private String preliminaryWestern;
+    private String physicalExam;
 
-    private String preliminaryChinese;
+    private String auxiliaryExam;
+
+    private String opinion;
 
     private Integer valid;
+
+    private Integer saveState;
+
+    private Integer doctorId;
+
+    private String templateName;
 
     private String reserve1;
 
@@ -23,15 +31,19 @@ public class MedicalRecords {
 
     private String reserve3;
 
-    public MedicalRecords(Integer medicalRecordsId, Integer registrationId, String mainInfo, String currentDisease, String currentTreatment, String preliminaryWestern, String preliminaryChinese, Integer valid, String reserve1, String reserve2, String reserve3) {
+    public MedicalRecords(Integer medicalRecordsId, Integer registrationId, String mainInfo, String currentDisease, String pastDisease, String physicalExam, String auxiliaryExam, String opinion, Integer valid, Integer saveState, Integer doctorId, String templateName, String reserve1, String reserve2, String reserve3) {
         this.medicalRecordsId = medicalRecordsId;
         this.registrationId = registrationId;
         this.mainInfo = mainInfo;
         this.currentDisease = currentDisease;
-        this.currentTreatment = currentTreatment;
-        this.preliminaryWestern = preliminaryWestern;
-        this.preliminaryChinese = preliminaryChinese;
+        this.pastDisease = pastDisease;
+        this.physicalExam = physicalExam;
+        this.auxiliaryExam = auxiliaryExam;
+        this.opinion = opinion;
         this.valid = valid;
+        this.saveState = saveState;
+        this.doctorId = doctorId;
+        this.templateName = templateName;
         this.reserve1 = reserve1;
         this.reserve2 = reserve2;
         this.reserve3 = reserve3;
@@ -73,28 +85,36 @@ public class MedicalRecords {
         this.currentDisease = currentDisease == null ? null : currentDisease.trim();
     }
 
-    public String getCurrentTreatment() {
-        return currentTreatment;
+    public String getPastDisease() {
+        return pastDisease;
     }
 
-    public void setCurrentTreatment(String currentTreatment) {
-        this.currentTreatment = currentTreatment == null ? null : currentTreatment.trim();
+    public void setPastDisease(String pastDisease) {
+        this.pastDisease = pastDisease == null ? null : pastDisease.trim();
     }
 
-    public String getPreliminaryWestern() {
-        return preliminaryWestern;
+    public String getPhysicalExam() {
+        return physicalExam;
     }
 
-    public void setPreliminaryWestern(String preliminaryWestern) {
-        this.preliminaryWestern = preliminaryWestern == null ? null : preliminaryWestern.trim();
+    public void setPhysicalExam(String physicalExam) {
+        this.physicalExam = physicalExam == null ? null : physicalExam.trim();
     }
 
-    public String getPreliminaryChinese() {
-        return preliminaryChinese;
+    public String getAuxiliaryExam() {
+        return auxiliaryExam;
     }
 
-    public void setPreliminaryChinese(String preliminaryChinese) {
-        this.preliminaryChinese = preliminaryChinese == null ? null : preliminaryChinese.trim();
+    public void setAuxiliaryExam(String auxiliaryExam) {
+        this.auxiliaryExam = auxiliaryExam == null ? null : auxiliaryExam.trim();
+    }
+
+    public String getOpinion() {
+        return opinion;
+    }
+
+    public void setOpinion(String opinion) {
+        this.opinion = opinion == null ? null : opinion.trim();
     }
 
     public Integer getValid() {
@@ -103,6 +123,30 @@ public class MedicalRecords {
 
     public void setValid(Integer valid) {
         this.valid = valid;
+    }
+
+    public Integer getSaveState() {
+        return saveState;
+    }
+
+    public void setSaveState(Integer saveState) {
+        this.saveState = saveState;
+    }
+
+    public Integer getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(Integer doctorId) {
+        this.doctorId = doctorId;
+    }
+
+    public String getTemplateName() {
+        return templateName;
+    }
+
+    public void setTemplateName(String templateName) {
+        this.templateName = templateName == null ? null : templateName.trim();
     }
 
     public String getReserve1() {

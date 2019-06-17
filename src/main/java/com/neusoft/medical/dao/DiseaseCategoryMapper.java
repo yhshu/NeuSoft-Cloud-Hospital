@@ -2,13 +2,9 @@ package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.DiseaseCategory;
 import com.neusoft.medical.bean.DiseaseCategoryExample;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 public interface DiseaseCategoryMapper {
     long countByExample(DiseaseCategoryExample example);
@@ -17,18 +13,19 @@ public interface DiseaseCategoryMapper {
 
     @Delete({
         "delete from hospital.disease_category",
-        "where disease_id = #{diseaseId,jdbcType=INTEGER}"
+        "where disease_category_id = #{diseaseCategoryId,jdbcType=INTEGER}"
     })
-    int deleteByPrimaryKey(Integer diseaseId);
+    int deleteByPrimaryKey(Integer diseaseCategoryId);
 
     @Insert({
-        "insert into hospital.disease_category (disease_id, disease_code, ",
-        "disease_name, sequence_no, ",
-        "disease_type, valid)",
-        "values (#{diseaseId,jdbcType=INTEGER}, #{diseaseCode,jdbcType=VARCHAR}, ",
-        "#{diseaseName,jdbcType=VARCHAR}, #{sequenceNo,jdbcType=INTEGER}, ",
-        "#{diseaseType,jdbcType=INTEGER}, #{valid,jdbcType=INTEGER})"
+        "insert into hospital.disease_category (disease_code, disease_name, ",
+        "sequence_no, disease_type, ",
+        "valid)",
+        "values (#{diseaseCode,jdbcType=VARCHAR}, #{diseaseName,jdbcType=VARCHAR}, ",
+        "#{sequenceNo,jdbcType=INTEGER}, #{diseaseType,jdbcType=INTEGER}, ",
+        "#{valid,jdbcType=INTEGER})"
     })
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="diseaseCategoryId", before=false, resultType=Integer.class)
     int insert(DiseaseCategory record);
 
     int insertSelective(DiseaseCategory record);
@@ -37,12 +34,13 @@ public interface DiseaseCategoryMapper {
 
     @Select({
         "select",
-        "disease_id, disease_code, disease_name, sequence_no, disease_type, valid",
+        "disease_category_id, disease_code, disease_name, sequence_no, disease_type, ",
+        "valid",
         "from hospital.disease_category",
-        "where disease_id = #{diseaseId,jdbcType=INTEGER}"
+        "where disease_category_id = #{diseaseCategoryId,jdbcType=INTEGER}"
     })
     @ResultMap("com.neusoft.medical.dao.DiseaseCategoryMapper.BaseResultMap")
-    DiseaseCategory selectByPrimaryKey(Integer diseaseId);
+    DiseaseCategory selectByPrimaryKey(Integer diseaseCategoryId);
 
     int updateByExampleSelective(@Param("record") DiseaseCategory record, @Param("example") DiseaseCategoryExample example);
 
@@ -57,7 +55,7 @@ public interface DiseaseCategoryMapper {
           "sequence_no = #{sequenceNo,jdbcType=INTEGER},",
           "disease_type = #{diseaseType,jdbcType=INTEGER},",
           "valid = #{valid,jdbcType=INTEGER}",
-        "where disease_id = #{diseaseId,jdbcType=INTEGER}"
+        "where disease_category_id = #{diseaseCategoryId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(DiseaseCategory record);
 }

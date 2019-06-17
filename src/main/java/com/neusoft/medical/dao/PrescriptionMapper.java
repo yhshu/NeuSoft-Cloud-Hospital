@@ -2,13 +2,9 @@ package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.Prescription;
 import com.neusoft.medical.bean.PrescriptionExample;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 public interface PrescriptionMapper {
     long countByExample(PrescriptionExample example);
@@ -17,22 +13,21 @@ public interface PrescriptionMapper {
 
     @Delete({
         "delete from hospital.prescription",
-        "where presciption_id = #{presciptionId,jdbcType=INTEGER}"
+        "where prescription_id = #{prescriptionId,jdbcType=INTEGER}"
     })
-    int deleteByPrimaryKey(Integer presciptionId);
+    int deleteByPrimaryKey(Integer prescriptionId);
 
     @Insert({
-        "insert into hospital.prescription (presciption_id, registration_id, ",
-        "registration_name, doctor_id, ",
-        "content, valid, ",
-        "reserve1, reserve2, ",
-        "reserve3)",
-        "values (#{presciptionId,jdbcType=INTEGER}, #{registrationId,jdbcType=INTEGER}, ",
-        "#{registrationName,jdbcType=VARCHAR}, #{doctorId,jdbcType=INTEGER}, ",
-        "#{content,jdbcType=VARCHAR}, #{valid,jdbcType=INTEGER}, ",
-        "#{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, ",
-        "#{reserve3,jdbcType=VARCHAR})"
+        "insert into hospital.prescription (registration_id, registration_name, ",
+        "doctor_id, content, ",
+        "valid, reserve1, ",
+        "reserve2, reserve3)",
+        "values (#{registrationId,jdbcType=INTEGER}, #{registrationName,jdbcType=VARCHAR}, ",
+        "#{doctorId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, ",
+        "#{valid,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
+        "#{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR})"
     })
+    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="prescriptionId", before=false, resultType=Integer.class)
     int insert(Prescription record);
 
     int insertSelective(Prescription record);
@@ -41,13 +36,13 @@ public interface PrescriptionMapper {
 
     @Select({
         "select",
-        "presciption_id, registration_id, registration_name, doctor_id, content, valid, ",
+        "prescription_id, registration_id, registration_name, doctor_id, content, valid, ",
         "reserve1, reserve2, reserve3",
         "from hospital.prescription",
-        "where presciption_id = #{presciptionId,jdbcType=INTEGER}"
+        "where prescription_id = #{prescriptionId,jdbcType=INTEGER}"
     })
     @ResultMap("com.neusoft.medical.dao.PrescriptionMapper.BaseResultMap")
-    Prescription selectByPrimaryKey(Integer presciptionId);
+    Prescription selectByPrimaryKey(Integer prescriptionId);
 
     int updateByExampleSelective(@Param("record") Prescription record, @Param("example") PrescriptionExample example);
 
@@ -65,7 +60,7 @@ public interface PrescriptionMapper {
           "reserve1 = #{reserve1,jdbcType=VARCHAR},",
           "reserve2 = #{reserve2,jdbcType=VARCHAR},",
           "reserve3 = #{reserve3,jdbcType=VARCHAR}",
-        "where presciption_id = #{presciptionId,jdbcType=INTEGER}"
+        "where prescription_id = #{prescriptionId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(Prescription record);
 }

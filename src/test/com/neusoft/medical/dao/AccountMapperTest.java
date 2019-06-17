@@ -29,10 +29,11 @@ public class AccountMapperTest {
     }
 
     @Test
+    @Transactional
     public void insert() {
-        Account account = new Account(null, "username", "password", 1, null, null, null);//新增数据
+        Account account = new Account(null, "username", "password", "00", 1, null, null, null);
         accountMapper.insert(account);
-        System.out.println("新增了数据："+account.getAccountId()+"+"+account.getUserName());
+        System.out.println(account.getAccountId() + account.getUserName());
     }
 
     @Test
@@ -45,8 +46,8 @@ public class AccountMapperTest {
 
     @Test
     public void selectByPrimaryKey() {
-        Account account = accountMapper.selectByPrimaryKey(10);//选择要查找的主键
-        System.out.println("查找的数据："+account.getAccountId()+"+"+account.getUserName());
+        Account account = accountMapper.selectByPrimaryKey(10);
+        System.out.println(account.getAccountId() + account.getUserName());
     }
 
     @Test
@@ -63,14 +64,13 @@ public class AccountMapperTest {
 
     @Test
     public void updateByPrimaryKey() {
-        Account account = accountMapper.selectByPrimaryKey(15);//选择要更新数据的主键
-        System.out.println("更新前的数据"+account.getAccountId()+account.getUserName());
-        account.setUserName("HUAWEI");//更新名字
-        account.setValid(1);//更新valid
+        Account account = accountMapper.selectByPrimaryKey(15);
+        account.setUserName("HUAWEI");
+        account.setValid(1);
         account.setReserve1(null);
         account.setReserve2(null);
         account.setReserve3(null);
         accountMapper.updateByPrimaryKey(account);
-        System.out.println("更新后的数据："+account.getAccountId()+"+"+account.getUserName());
+        System.out.println(account.getAccountId() + account.getUserName());
     }
 }

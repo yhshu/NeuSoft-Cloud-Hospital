@@ -8,7 +8,7 @@ import com.neusoft.medical.bean.DiseaseCategoryExample;
 import com.neusoft.medical.bean.DiseaseExample;
 import com.neusoft.medical.dao.DiseaseCategoryMapper;
 import com.neusoft.medical.dao.DiseaseMapper;
-import com.neusoft.medical.service.DiagnosticCatalogService;
+import com.neusoft.medical.service.basicInfo.DiagnosticCatalogService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
