@@ -1,14 +1,10 @@
 package com.neusoft.medical.controller.basicInfo;
 
 import com.github.pagehelper.PageInfo;
-import com.neusoft.medical.bean.Account;
 import com.neusoft.medical.bean.Doctor;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.basicInfo.AccountService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
@@ -37,12 +33,12 @@ public class AccountController {
      * @return 指定范围的帐号信息
      */
     @GetMapping("/select_account")
-    public ResultDTO<PageInfo<Account>> selectAccount(
+    public ResultDTO<PageInfo<String>> selectAccount(
             @RequestParam(value = "currentPage") Integer currentPage,
             @RequestParam(value = "pageSize") Integer pageSize,
             @RequestParam(value = "accountScope[]") String[] accountScope
     ) {
-        PageInfo<Account> accountPageInfo = null;
+        PageInfo<String> accountPageInfo = null;
         try {
             accountPageInfo = accountService.selectAccount(currentPage, pageSize, Arrays.asList(accountScope));
         } catch (Exception e) {
@@ -74,5 +70,20 @@ public class AccountController {
             e.printStackTrace();
         }
         return new ResultDTO<>(doctorPageInfo);
+    }
+
+    @PostMapping("/add_account")
+    public ResultDTO<Boolean> addAccount(
+            @RequestParam(value = "userName") String userName,
+            @RequestParam(value = "userPassword") String userPassword,
+            @RequestParam(value = "accountType") String accountType
+    ) {
+        try {
+            accountService.addAccount(userName, userPassword, accountType);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultDTO<>(Boolean.FALSE);
+        }
+        return new ResultDTO<>(Boolean.TRUE);
     }
 }
