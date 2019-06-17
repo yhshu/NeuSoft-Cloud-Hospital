@@ -1,18 +1,18 @@
-package com.neusoft.medical.bean;
+package com.neusoft.medical.example;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-public class SchedulingRuleExample {
+public class SchedulingInfoExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public SchedulingRuleExample() {
+    public SchedulingInfoExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -132,133 +132,123 @@ public class SchedulingRuleExample {
             addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
-        public Criteria andSchedulingRuleIdIsNull() {
-            addCriterion("scheduling_rule_id is null");
+        public Criteria andSchedulingInfoIdIsNull() {
+            addCriterion("scheduling_info_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andSchedulingRuleIdIsNotNull() {
-            addCriterion("scheduling_rule_id is not null");
+        public Criteria andSchedulingInfoIdIsNotNull() {
+            addCriterion("scheduling_info_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSchedulingRuleIdEqualTo(Integer value) {
-            addCriterion("scheduling_rule_id =", value, "schedulingRuleId");
+        public Criteria andSchedulingInfoIdEqualTo(Integer value) {
+            addCriterion("scheduling_info_id =", value, "schedulingInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andSchedulingRuleIdNotEqualTo(Integer value) {
-            addCriterion("scheduling_rule_id <>", value, "schedulingRuleId");
+        public Criteria andSchedulingInfoIdNotEqualTo(Integer value) {
+            addCriterion("scheduling_info_id <>", value, "schedulingInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andSchedulingRuleIdGreaterThan(Integer value) {
-            addCriterion("scheduling_rule_id >", value, "schedulingRuleId");
+        public Criteria andSchedulingInfoIdGreaterThan(Integer value) {
+            addCriterion("scheduling_info_id >", value, "schedulingInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andSchedulingRuleIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("scheduling_rule_id >=", value, "schedulingRuleId");
+        public Criteria andSchedulingInfoIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("scheduling_info_id >=", value, "schedulingInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andSchedulingRuleIdLessThan(Integer value) {
-            addCriterion("scheduling_rule_id <", value, "schedulingRuleId");
+        public Criteria andSchedulingInfoIdLessThan(Integer value) {
+            addCriterion("scheduling_info_id <", value, "schedulingInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andSchedulingRuleIdLessThanOrEqualTo(Integer value) {
-            addCriterion("scheduling_rule_id <=", value, "schedulingRuleId");
+        public Criteria andSchedulingInfoIdLessThanOrEqualTo(Integer value) {
+            addCriterion("scheduling_info_id <=", value, "schedulingInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andSchedulingRuleIdIn(List<Integer> values) {
-            addCriterion("scheduling_rule_id in", values, "schedulingRuleId");
+        public Criteria andSchedulingInfoIdIn(List<Integer> values) {
+            addCriterion("scheduling_info_id in", values, "schedulingInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andSchedulingRuleIdNotIn(List<Integer> values) {
-            addCriterion("scheduling_rule_id not in", values, "schedulingRuleId");
+        public Criteria andSchedulingInfoIdNotIn(List<Integer> values) {
+            addCriterion("scheduling_info_id not in", values, "schedulingInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andSchedulingRuleIdBetween(Integer value1, Integer value2) {
-            addCriterion("scheduling_rule_id between", value1, value2, "schedulingRuleId");
+        public Criteria andSchedulingInfoIdBetween(Integer value1, Integer value2) {
+            addCriterion("scheduling_info_id between", value1, value2, "schedulingInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andSchedulingRuleIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("scheduling_rule_id not between", value1, value2, "schedulingRuleId");
+        public Criteria andSchedulingInfoIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("scheduling_info_id not between", value1, value2, "schedulingInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andWeekDayIsNull() {
-            addCriterion("week_day is null");
+        public Criteria andSchedulingTimeIsNull() {
+            addCriterion("scheduling_time is null");
             return (Criteria) this;
         }
 
-        public Criteria andWeekDayIsNotNull() {
-            addCriterion("week_day is not null");
+        public Criteria andSchedulingTimeIsNotNull() {
+            addCriterion("scheduling_time is not null");
             return (Criteria) this;
         }
 
-        public Criteria andWeekDayEqualTo(String value) {
-            addCriterion("week_day =", value, "weekDay");
+        public Criteria andSchedulingTimeEqualTo(Date value) {
+            addCriterionForJDBCDate("scheduling_time =", value, "schedulingTime");
             return (Criteria) this;
         }
 
-        public Criteria andWeekDayNotEqualTo(String value) {
-            addCriterion("week_day <>", value, "weekDay");
+        public Criteria andSchedulingTimeNotEqualTo(Date value) {
+            addCriterionForJDBCDate("scheduling_time <>", value, "schedulingTime");
             return (Criteria) this;
         }
 
-        public Criteria andWeekDayGreaterThan(String value) {
-            addCriterion("week_day >", value, "weekDay");
+        public Criteria andSchedulingTimeGreaterThan(Date value) {
+            addCriterionForJDBCDate("scheduling_time >", value, "schedulingTime");
             return (Criteria) this;
         }
 
-        public Criteria andWeekDayGreaterThanOrEqualTo(String value) {
-            addCriterion("week_day >=", value, "weekDay");
+        public Criteria andSchedulingTimeGreaterThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("scheduling_time >=", value, "schedulingTime");
             return (Criteria) this;
         }
 
-        public Criteria andWeekDayLessThan(String value) {
-            addCriterion("week_day <", value, "weekDay");
+        public Criteria andSchedulingTimeLessThan(Date value) {
+            addCriterionForJDBCDate("scheduling_time <", value, "schedulingTime");
             return (Criteria) this;
         }
 
-        public Criteria andWeekDayLessThanOrEqualTo(String value) {
-            addCriterion("week_day <=", value, "weekDay");
+        public Criteria andSchedulingTimeLessThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("scheduling_time <=", value, "schedulingTime");
             return (Criteria) this;
         }
 
-        public Criteria andWeekDayLike(String value) {
-            addCriterion("week_day like", value, "weekDay");
+        public Criteria andSchedulingTimeIn(List<Date> values) {
+            addCriterionForJDBCDate("scheduling_time in", values, "schedulingTime");
             return (Criteria) this;
         }
 
-        public Criteria andWeekDayNotLike(String value) {
-            addCriterion("week_day not like", value, "weekDay");
+        public Criteria andSchedulingTimeNotIn(List<Date> values) {
+            addCriterionForJDBCDate("scheduling_time not in", values, "schedulingTime");
             return (Criteria) this;
         }
 
-        public Criteria andWeekDayIn(List<String> values) {
-            addCriterion("week_day in", values, "weekDay");
+        public Criteria andSchedulingTimeBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("scheduling_time between", value1, value2, "schedulingTime");
             return (Criteria) this;
         }
 
-        public Criteria andWeekDayNotIn(List<String> values) {
-            addCriterion("week_day not in", values, "weekDay");
-            return (Criteria) this;
-        }
-
-        public Criteria andWeekDayBetween(String value1, String value2) {
-            addCriterion("week_day between", value1, value2, "weekDay");
-            return (Criteria) this;
-        }
-
-        public Criteria andWeekDayNotBetween(String value1, String value2) {
-            addCriterion("week_day not between", value1, value2, "weekDay");
+        public Criteria andSchedulingTimeNotBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("scheduling_time not between", value1, value2, "schedulingTime");
             return (Criteria) this;
         }
 
@@ -782,193 +772,63 @@ public class SchedulingRuleExample {
             return (Criteria) this;
         }
 
-        public Criteria andOperatorIdIsNull() {
-            addCriterion("operator_id is null");
+        public Criteria andRemainNumsIsNull() {
+            addCriterion("remain_nums is null");
             return (Criteria) this;
         }
 
-        public Criteria andOperatorIdIsNotNull() {
-            addCriterion("operator_id is not null");
+        public Criteria andRemainNumsIsNotNull() {
+            addCriterion("remain_nums is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOperatorIdEqualTo(Integer value) {
-            addCriterion("operator_id =", value, "operatorId");
+        public Criteria andRemainNumsEqualTo(Integer value) {
+            addCriterion("remain_nums =", value, "remainNums");
             return (Criteria) this;
         }
 
-        public Criteria andOperatorIdNotEqualTo(Integer value) {
-            addCriterion("operator_id <>", value, "operatorId");
+        public Criteria andRemainNumsNotEqualTo(Integer value) {
+            addCriterion("remain_nums <>", value, "remainNums");
             return (Criteria) this;
         }
 
-        public Criteria andOperatorIdGreaterThan(Integer value) {
-            addCriterion("operator_id >", value, "operatorId");
+        public Criteria andRemainNumsGreaterThan(Integer value) {
+            addCriterion("remain_nums >", value, "remainNums");
             return (Criteria) this;
         }
 
-        public Criteria andOperatorIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("operator_id >=", value, "operatorId");
+        public Criteria andRemainNumsGreaterThanOrEqualTo(Integer value) {
+            addCriterion("remain_nums >=", value, "remainNums");
             return (Criteria) this;
         }
 
-        public Criteria andOperatorIdLessThan(Integer value) {
-            addCriterion("operator_id <", value, "operatorId");
+        public Criteria andRemainNumsLessThan(Integer value) {
+            addCriterion("remain_nums <", value, "remainNums");
             return (Criteria) this;
         }
 
-        public Criteria andOperatorIdLessThanOrEqualTo(Integer value) {
-            addCriterion("operator_id <=", value, "operatorId");
+        public Criteria andRemainNumsLessThanOrEqualTo(Integer value) {
+            addCriterion("remain_nums <=", value, "remainNums");
             return (Criteria) this;
         }
 
-        public Criteria andOperatorIdIn(List<Integer> values) {
-            addCriterion("operator_id in", values, "operatorId");
+        public Criteria andRemainNumsIn(List<Integer> values) {
+            addCriterion("remain_nums in", values, "remainNums");
             return (Criteria) this;
         }
 
-        public Criteria andOperatorIdNotIn(List<Integer> values) {
-            addCriterion("operator_id not in", values, "operatorId");
+        public Criteria andRemainNumsNotIn(List<Integer> values) {
+            addCriterion("remain_nums not in", values, "remainNums");
             return (Criteria) this;
         }
 
-        public Criteria andOperatorIdBetween(Integer value1, Integer value2) {
-            addCriterion("operator_id between", value1, value2, "operatorId");
+        public Criteria andRemainNumsBetween(Integer value1, Integer value2) {
+            addCriterion("remain_nums between", value1, value2, "remainNums");
             return (Criteria) this;
         }
 
-        public Criteria andOperatorIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("operator_id not between", value1, value2, "operatorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperatorNameIsNull() {
-            addCriterion("operator_name is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperatorNameIsNotNull() {
-            addCriterion("operator_name is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperatorNameEqualTo(String value) {
-            addCriterion("operator_name =", value, "operatorName");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperatorNameNotEqualTo(String value) {
-            addCriterion("operator_name <>", value, "operatorName");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperatorNameGreaterThan(String value) {
-            addCriterion("operator_name >", value, "operatorName");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperatorNameGreaterThanOrEqualTo(String value) {
-            addCriterion("operator_name >=", value, "operatorName");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperatorNameLessThan(String value) {
-            addCriterion("operator_name <", value, "operatorName");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperatorNameLessThanOrEqualTo(String value) {
-            addCriterion("operator_name <=", value, "operatorName");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperatorNameLike(String value) {
-            addCriterion("operator_name like", value, "operatorName");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperatorNameNotLike(String value) {
-            addCriterion("operator_name not like", value, "operatorName");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperatorNameIn(List<String> values) {
-            addCriterion("operator_name in", values, "operatorName");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperatorNameNotIn(List<String> values) {
-            addCriterion("operator_name not in", values, "operatorName");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperatorNameBetween(String value1, String value2) {
-            addCriterion("operator_name between", value1, value2, "operatorName");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperatorNameNotBetween(String value1, String value2) {
-            addCriterion("operator_name not between", value1, value2, "operatorName");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperatingDateIsNull() {
-            addCriterion("operating_date is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperatingDateIsNotNull() {
-            addCriterion("operating_date is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperatingDateEqualTo(Date value) {
-            addCriterionForJDBCDate("operating_date =", value, "operatingDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperatingDateNotEqualTo(Date value) {
-            addCriterionForJDBCDate("operating_date <>", value, "operatingDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperatingDateGreaterThan(Date value) {
-            addCriterionForJDBCDate("operating_date >", value, "operatingDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperatingDateGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("operating_date >=", value, "operatingDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperatingDateLessThan(Date value) {
-            addCriterionForJDBCDate("operating_date <", value, "operatingDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperatingDateLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("operating_date <=", value, "operatingDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperatingDateIn(List<Date> values) {
-            addCriterionForJDBCDate("operating_date in", values, "operatingDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperatingDateNotIn(List<Date> values) {
-            addCriterionForJDBCDate("operating_date not in", values, "operatingDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperatingDateBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("operating_date between", value1, value2, "operatingDate");
-            return (Criteria) this;
-        }
-
-        public Criteria andOperatingDateNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("operating_date not between", value1, value2, "operatingDate");
+        public Criteria andRemainNumsNotBetween(Integer value1, Integer value2) {
+            addCriterion("remain_nums not between", value1, value2, "remainNums");
             return (Criteria) this;
         }
     }

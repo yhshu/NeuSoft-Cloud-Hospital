@@ -1,16 +1,17 @@
-package com.neusoft.medical.bean;
+package com.neusoft.medical.example;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class ConstantTypeExample {
+public class UserAuthExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public ConstantTypeExample() {
+    public UserAuthExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -104,203 +105,183 @@ public class ConstantTypeExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andConstantTypeIdIsNull() {
-            addCriterion("constant_type_id is null");
+        public Criteria andUserAuthIdIsNull() {
+            addCriterion("user_auth_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeIdIsNotNull() {
-            addCriterion("constant_type_id is not null");
+        public Criteria andUserAuthIdIsNotNull() {
+            addCriterion("user_auth_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeIdEqualTo(Integer value) {
-            addCriterion("constant_type_id =", value, "constantTypeId");
+        public Criteria andUserAuthIdEqualTo(Integer value) {
+            addCriterion("user_auth_id =", value, "userAuthId");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeIdNotEqualTo(Integer value) {
-            addCriterion("constant_type_id <>", value, "constantTypeId");
+        public Criteria andUserAuthIdNotEqualTo(Integer value) {
+            addCriterion("user_auth_id <>", value, "userAuthId");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeIdGreaterThan(Integer value) {
-            addCriterion("constant_type_id >", value, "constantTypeId");
+        public Criteria andUserAuthIdGreaterThan(Integer value) {
+            addCriterion("user_auth_id >", value, "userAuthId");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("constant_type_id >=", value, "constantTypeId");
+        public Criteria andUserAuthIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("user_auth_id >=", value, "userAuthId");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeIdLessThan(Integer value) {
-            addCriterion("constant_type_id <", value, "constantTypeId");
+        public Criteria andUserAuthIdLessThan(Integer value) {
+            addCriterion("user_auth_id <", value, "userAuthId");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeIdLessThanOrEqualTo(Integer value) {
-            addCriterion("constant_type_id <=", value, "constantTypeId");
+        public Criteria andUserAuthIdLessThanOrEqualTo(Integer value) {
+            addCriterion("user_auth_id <=", value, "userAuthId");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeIdIn(List<Integer> values) {
-            addCriterion("constant_type_id in", values, "constantTypeId");
+        public Criteria andUserAuthIdIn(List<Integer> values) {
+            addCriterion("user_auth_id in", values, "userAuthId");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeIdNotIn(List<Integer> values) {
-            addCriterion("constant_type_id not in", values, "constantTypeId");
+        public Criteria andUserAuthIdNotIn(List<Integer> values) {
+            addCriterion("user_auth_id not in", values, "userAuthId");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeIdBetween(Integer value1, Integer value2) {
-            addCriterion("constant_type_id between", value1, value2, "constantTypeId");
+        public Criteria andUserAuthIdBetween(Integer value1, Integer value2) {
+            addCriterion("user_auth_id between", value1, value2, "userAuthId");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("constant_type_id not between", value1, value2, "constantTypeId");
+        public Criteria andUserAuthIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("user_auth_id not between", value1, value2, "userAuthId");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeCodeIsNull() {
-            addCriterion("constant_type_code is null");
+        public Criteria andUserIdIsNull() {
+            addCriterion("user_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeCodeIsNotNull() {
-            addCriterion("constant_type_code is not null");
+        public Criteria andUserIdIsNotNull() {
+            addCriterion("user_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeCodeEqualTo(String value) {
-            addCriterion("constant_type_code =", value, "constantTypeCode");
+        public Criteria andUserIdEqualTo(Integer value) {
+            addCriterion("user_id =", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeCodeNotEqualTo(String value) {
-            addCriterion("constant_type_code <>", value, "constantTypeCode");
+        public Criteria andUserIdNotEqualTo(Integer value) {
+            addCriterion("user_id <>", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeCodeGreaterThan(String value) {
-            addCriterion("constant_type_code >", value, "constantTypeCode");
+        public Criteria andUserIdGreaterThan(Integer value) {
+            addCriterion("user_id >", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeCodeGreaterThanOrEqualTo(String value) {
-            addCriterion("constant_type_code >=", value, "constantTypeCode");
+        public Criteria andUserIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("user_id >=", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeCodeLessThan(String value) {
-            addCriterion("constant_type_code <", value, "constantTypeCode");
+        public Criteria andUserIdLessThan(Integer value) {
+            addCriterion("user_id <", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeCodeLessThanOrEqualTo(String value) {
-            addCriterion("constant_type_code <=", value, "constantTypeCode");
+        public Criteria andUserIdLessThanOrEqualTo(Integer value) {
+            addCriterion("user_id <=", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeCodeLike(String value) {
-            addCriterion("constant_type_code like", value, "constantTypeCode");
+        public Criteria andUserIdIn(List<Integer> values) {
+            addCriterion("user_id in", values, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeCodeNotLike(String value) {
-            addCriterion("constant_type_code not like", value, "constantTypeCode");
+        public Criteria andUserIdNotIn(List<Integer> values) {
+            addCriterion("user_id not in", values, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeCodeIn(List<String> values) {
-            addCriterion("constant_type_code in", values, "constantTypeCode");
+        public Criteria andUserIdBetween(Integer value1, Integer value2) {
+            addCriterion("user_id between", value1, value2, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeCodeNotIn(List<String> values) {
-            addCriterion("constant_type_code not in", values, "constantTypeCode");
+        public Criteria andUserIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("user_id not between", value1, value2, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeCodeBetween(String value1, String value2) {
-            addCriterion("constant_type_code between", value1, value2, "constantTypeCode");
+        public Criteria andAuthIdIsNull() {
+            addCriterion("auth_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeCodeNotBetween(String value1, String value2) {
-            addCriterion("constant_type_code not between", value1, value2, "constantTypeCode");
+        public Criteria andAuthIdIsNotNull() {
+            addCriterion("auth_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeNameIsNull() {
-            addCriterion("constant_type_name is null");
+        public Criteria andAuthIdEqualTo(Integer value) {
+            addCriterion("auth_id =", value, "authId");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeNameIsNotNull() {
-            addCriterion("constant_type_name is not null");
+        public Criteria andAuthIdNotEqualTo(Integer value) {
+            addCriterion("auth_id <>", value, "authId");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeNameEqualTo(String value) {
-            addCriterion("constant_type_name =", value, "constantTypeName");
+        public Criteria andAuthIdGreaterThan(Integer value) {
+            addCriterion("auth_id >", value, "authId");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeNameNotEqualTo(String value) {
-            addCriterion("constant_type_name <>", value, "constantTypeName");
+        public Criteria andAuthIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("auth_id >=", value, "authId");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeNameGreaterThan(String value) {
-            addCriterion("constant_type_name >", value, "constantTypeName");
+        public Criteria andAuthIdLessThan(Integer value) {
+            addCriterion("auth_id <", value, "authId");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeNameGreaterThanOrEqualTo(String value) {
-            addCriterion("constant_type_name >=", value, "constantTypeName");
+        public Criteria andAuthIdLessThanOrEqualTo(Integer value) {
+            addCriterion("auth_id <=", value, "authId");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeNameLessThan(String value) {
-            addCriterion("constant_type_name <", value, "constantTypeName");
+        public Criteria andAuthIdIn(List<Integer> values) {
+            addCriterion("auth_id in", values, "authId");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeNameLessThanOrEqualTo(String value) {
-            addCriterion("constant_type_name <=", value, "constantTypeName");
+        public Criteria andAuthIdNotIn(List<Integer> values) {
+            addCriterion("auth_id not in", values, "authId");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeNameLike(String value) {
-            addCriterion("constant_type_name like", value, "constantTypeName");
+        public Criteria andAuthIdBetween(Integer value1, Integer value2) {
+            addCriterion("auth_id between", value1, value2, "authId");
             return (Criteria) this;
         }
 
-        public Criteria andConstantTypeNameNotLike(String value) {
-            addCriterion("constant_type_name not like", value, "constantTypeName");
-            return (Criteria) this;
-        }
-
-        public Criteria andConstantTypeNameIn(List<String> values) {
-            addCriterion("constant_type_name in", values, "constantTypeName");
-            return (Criteria) this;
-        }
-
-        public Criteria andConstantTypeNameNotIn(List<String> values) {
-            addCriterion("constant_type_name not in", values, "constantTypeName");
-            return (Criteria) this;
-        }
-
-        public Criteria andConstantTypeNameBetween(String value1, String value2) {
-            addCriterion("constant_type_name between", value1, value2, "constantTypeName");
-            return (Criteria) this;
-        }
-
-        public Criteria andConstantTypeNameNotBetween(String value1, String value2) {
-            addCriterion("constant_type_name not between", value1, value2, "constantTypeName");
+        public Criteria andAuthIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("auth_id not between", value1, value2, "authId");
             return (Criteria) this;
         }
 
@@ -361,6 +342,66 @@ public class ConstantTypeExample {
 
         public Criteria andValidNotBetween(Integer value1, Integer value2) {
             addCriterion("valid not between", value1, value2, "valid");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationTimeIsNull() {
+            addCriterion("operation_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationTimeIsNotNull() {
+            addCriterion("operation_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationTimeEqualTo(Date value) {
+            addCriterion("operation_time =", value, "operationTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationTimeNotEqualTo(Date value) {
+            addCriterion("operation_time <>", value, "operationTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationTimeGreaterThan(Date value) {
+            addCriterion("operation_time >", value, "operationTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("operation_time >=", value, "operationTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationTimeLessThan(Date value) {
+            addCriterion("operation_time <", value, "operationTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationTimeLessThanOrEqualTo(Date value) {
+            addCriterion("operation_time <=", value, "operationTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationTimeIn(List<Date> values) {
+            addCriterion("operation_time in", values, "operationTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationTimeNotIn(List<Date> values) {
+            addCriterion("operation_time not in", values, "operationTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationTimeBetween(Date value1, Date value2) {
+            addCriterion("operation_time between", value1, value2, "operationTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOperationTimeNotBetween(Date value1, Date value2) {
+            addCriterion("operation_time not between", value1, value2, "operationTime");
             return (Criteria) this;
         }
     }

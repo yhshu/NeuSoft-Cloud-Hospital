@@ -1,7 +1,7 @@
 package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.SchedulingInfo;
-import com.neusoft.medical.bean.SchedulingInfoExample;
+import com.neusoft.medical.example.SchedulingInfoExample;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

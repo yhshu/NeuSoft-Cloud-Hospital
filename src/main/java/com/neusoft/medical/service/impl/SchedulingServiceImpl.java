@@ -1,9 +1,9 @@
 package com.neusoft.medical.service.impl;
 
 import com.neusoft.medical.bean.Doctor;
-import com.neusoft.medical.bean.DoctorExample;
+import com.neusoft.medical.example.DoctorExample;
 import com.neusoft.medical.bean.SchedulingInfo;
-import com.neusoft.medical.bean.SchedulingInfoExample;
+import com.neusoft.medical.example.SchedulingInfoExample;
 import com.neusoft.medical.dao.DoctorMapper;
 import com.neusoft.medical.dao.SchedulingInfoMapper;
 import com.neusoft.medical.service.basicInfo.SchedulingService;

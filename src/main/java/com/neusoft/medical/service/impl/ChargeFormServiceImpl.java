@@ -3,7 +3,7 @@ package com.neusoft.medical.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.ChargeForm;
-import com.neusoft.medical.bean.ChargeFormExample;
+import com.neusoft.medical.example.ChargeFormExample;
 import com.neusoft.medical.dao.ChargeFormMapper;
 import com.neusoft.medical.dao.ChargeItemMapper;
 import com.neusoft.medical.service.registration.ChargeFormService;
