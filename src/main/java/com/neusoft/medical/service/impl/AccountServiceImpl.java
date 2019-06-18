@@ -92,7 +92,15 @@ public class AccountServiceImpl implements AccountService {
             accountMapper.insert(account);
             if (account.getAccountId() == null)
                 throw new Exception("accountId is still null after trying to insert the database.");
-            doctorMapper.insert(new Doctor(null, realName, departmentId, jobTitle, account.getAccountId(), accountType, doctorScheduling, 1, null, null, null));
+
+            if (accountType.equals(TYPE_OUTPATIENT_DOCTOR) || accountType.equals(TYPE_TECH_DOCTOR)) {
+                // 如果是门诊医生或医技医生
+                doctorMapper.insert(new Doctor(null, realName, departmentId, jobTitle, account.getAccountId(), accountType, doctorScheduling, 1, null, null, null));
+            } else {
+                // 如果是医院工作人员
+                staffMapper.insert(new Staff(null, realName, departmentId, departmentMapper.selectByPrimaryKey(departmentId).getDepartmentName(), account.getAccountId(), accountType, 1, null, null, null));
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             return false;
