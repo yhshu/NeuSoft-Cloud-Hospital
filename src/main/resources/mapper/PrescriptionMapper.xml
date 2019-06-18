@@ -209,7 +209,7 @@
     update hospital.prescription
     set prescription_id = #{record.prescriptionId,jdbcType=INTEGER},
       registration_id = #{record.registrationId,jdbcType=INTEGER},
-      registration_name = #{record.registrationName,jdbcType=VARCHAR},
+      patient_name = #{record.registrationName,jdbcType=VARCHAR},
       doctor_id = #{record.doctorId,jdbcType=INTEGER},
       content = #{record.content,jdbcType=VARCHAR},
       save_state = #{record.saveState,jdbcType=INTEGER},

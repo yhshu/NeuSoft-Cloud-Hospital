@@ -3,10 +3,7 @@ package com.neusoft.medical.controller.doctorWorkstation;
 import com.neusoft.medical.bean.Medicine;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.doctorWorkstation.PrescriptionService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -46,8 +43,8 @@ public class PrescriptionController {
      */
     @GetMapping("/search_medicine")
     public ResultDTO<List<Medicine>> searchMedicine(
-            @RequestParam("resultNumber") Integer resultNumber,
-            @RequestParam("query") String query
+            @RequestParam(value = "resultNumber") Integer resultNumber,
+            @RequestParam(value = "query") String query
     ) {
         List<Medicine> medicineList = null;
         try {
@@ -56,5 +53,21 @@ public class PrescriptionController {
             e.printStackTrace();
         }
         return new ResultDTO<>(medicineList);
+    }
+
+    /**
+     * 保存处方（暂存、提交或存为模板）
+     *
+     * @param prescriptionJson 表示处方信息的 json 字符串
+     * @return 操作结果
+     * 该 json 字符串包含的属性：
+     * - prescriptionId
+     * - prescriptionName
+     */
+    @PostMapping("/save_prescription")
+    public ResultDTO<Boolean> savePrescription(
+            @RequestParam(value = "prescriptionJson") String prescriptionJson
+    ) {
+        return null;
     }
 }

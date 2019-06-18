@@ -72,14 +72,36 @@ public class AccountController {
         return new ResultDTO<>(doctorPageInfo);
     }
 
-    @PostMapping("/add_account")
-    public ResultDTO<Boolean> addAccount(
+    /**
+     * 保存用户信息（新增或修改）
+     *
+     * @param accountId        帐号编号（新增时为空，修改时必填）
+     * @param userName         用户名
+     * @param userPassword     密码
+     * @param accountType      用户类型
+     * @param realName         用户的真实姓名
+     * @param departmentId     科室编号
+     * @param jobTitle         医生职称
+     * @param doctorScheduling 医生是否参与排班
+     * @return 操作结果
+     */
+    @PostMapping("/save_account")
+    public ResultDTO<Boolean> saveAccount(
+            @RequestParam(value = "accountId", required = false) Integer accountId,
             @RequestParam(value = "userName") String userName,
             @RequestParam(value = "userPassword") String userPassword,
-            @RequestParam(value = "accountType") String accountType
+            @RequestParam(value = "accountType") String accountType,
+            @RequestParam(value = "realName") String realName,
+            @RequestParam(value = "departmentId") Integer departmentId,
+            @RequestParam(value = "jobTitle", required = false) String jobTitle,
+            @RequestParam(value = "doctorScheduling", required = false) Integer doctorScheduling
     ) {
         try {
-            accountService.addAccount(userName, userPassword, accountType);
+            if (accountId == null) {  // 新增帐号
+                accountService.addAccount(userName, userPassword, accountType, realName, departmentId, jobTitle, doctorScheduling);
+            } else {  // 更新帐号信息
+                accountService.updateAccount(accountId, userName, userPassword, accountType, realName, departmentId, jobTitle, doctorScheduling);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultDTO<>(Boolean.FALSE);

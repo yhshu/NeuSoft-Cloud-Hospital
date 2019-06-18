@@ -86,9 +86,13 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public boolean addAccount(String userName, String userPassword, String accountType) {
+    public boolean addAccount(String userName, String userPassword, String accountType, String realName, int departmentId, String jobTitle, int doctorScheduling) {
         try {
-            accountMapper.insert(new Account(null, userName, userPassword, accountType, 1, null, null, null));
+            Account account = new Account(null, userName, userPassword, accountType, 1, null, null, null);
+            accountMapper.insert(account);
+            if (account.getAccountId() == null)
+                throw new Exception("accountId is still null after trying to insert the database.");
+            doctorMapper.insert(new Doctor(null, realName, departmentId, jobTitle, account.getAccountId(), accountType, doctorScheduling, 1, null, null, null));
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -96,12 +100,10 @@ public class AccountServiceImpl implements AccountService {
         return true;
     }
 
-    public boolean updateAccount(int accountId, String userName, String userPassword, String accountType) {
+    public boolean updateAccount(int accountId, String userName, String userPassword, String accountType, String realName, int departmentId, String jobTitle, Integer doctorScheduling) {
         try {
             AccountExample accountExample = new AccountExample();
-            AccountExample.Criteria criteria = accountExample.createCriteria();
-            criteria.andValidEqualTo(1);  // 有效的帐号记录
-            criteria.andAccountIdEqualTo(accountId);
+            accountExample.or().andValidEqualTo(1).andAccountIdEqualTo(accountId);
             accountMapper.updateByExampleSelective(new Account(accountId, userName, userPassword, accountType, 1, null, null, null), accountExample);
         } catch (Exception e) {
             e.printStackTrace();
