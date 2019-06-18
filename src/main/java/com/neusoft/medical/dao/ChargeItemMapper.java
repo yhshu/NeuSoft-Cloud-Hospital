@@ -1,7 +1,7 @@
 package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.ChargeItem;
-import com.neusoft.medical.example.ChargeItemExample;
+import com.neusoft.medical.bean.ChargeItemExample;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.Staff;
-import com.neusoft.medical.example.StaffExample;
+import com.neusoft.medical.bean.StaffExample;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -19,15 +19,13 @@ public interface StaffMapper {
 
     @Insert({
         "insert into hospital.staff (real_name, department_id, ",
-        "department_name, account_id, ",
-        "account_type, valid, ",
-        "reserve1, reserve2, ",
-        "reserve3)",
+        "account_id, account_type, ",
+        "valid, reserve1, ",
+        "reserve2, reserve3)",
         "values (#{realName,jdbcType=VARCHAR}, #{departmentId,jdbcType=INTEGER}, ",
-        "#{departmentName,jdbcType=VARCHAR}, #{accountId,jdbcType=INTEGER}, ",
-        "#{accountType,jdbcType=VARCHAR}, #{valid,jdbcType=INTEGER}, ",
-        "#{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, ",
-        "#{reserve3,jdbcType=VARCHAR})"
+        "#{accountId,jdbcType=INTEGER}, #{accountType,jdbcType=VARCHAR}, ",
+        "#{valid,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
+        "#{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="staffId", before=false, resultType=Integer.class)
     int insert(Staff record);
@@ -38,8 +36,8 @@ public interface StaffMapper {
 
     @Select({
         "select",
-        "staff_id, real_name, department_id, department_name, account_id, account_type, ",
-        "valid, reserve1, reserve2, reserve3",
+        "staff_id, real_name, department_id, account_id, account_type, valid, reserve1, ",
+        "reserve2, reserve3",
         "from hospital.staff",
         "where staff_id = #{staffId,jdbcType=INTEGER}"
     })
@@ -56,7 +54,6 @@ public interface StaffMapper {
         "update hospital.staff",
         "set real_name = #{realName,jdbcType=VARCHAR},",
           "department_id = #{departmentId,jdbcType=INTEGER},",
-          "department_name = #{departmentName,jdbcType=VARCHAR},",
           "account_id = #{accountId,jdbcType=INTEGER},",
           "account_type = #{accountType,jdbcType=VARCHAR},",
           "valid = #{valid,jdbcType=INTEGER},",

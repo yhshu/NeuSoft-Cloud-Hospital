@@ -71,7 +71,7 @@
   <sql id="Base_Column_List">
     constant_item_id, constant_type_id, constant_code, constant_name, valid
   </sql>
-  <select id="selectByExample" parameterType="com.neusoft.medical.example.ConstantItemExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.neusoft.medical.bean.ConstantItemExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -85,7 +85,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.neusoft.medical.example.ConstantItemExample">
+  <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.ConstantItemExample">
     delete from hospital.constant_item
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -125,7 +125,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.neusoft.medical.example.ConstantItemExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.neusoft.medical.bean.ConstantItemExample" resultType="java.lang.Long">
     select count(*) from hospital.constant_item
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

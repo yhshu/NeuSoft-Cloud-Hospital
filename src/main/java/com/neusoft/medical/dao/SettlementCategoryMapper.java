@@ -1,7 +1,7 @@
 package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.SettlementCategory;
-import com.neusoft.medical.example.SettlementCategoryExample;
+import com.neusoft.medical.bean.SettlementCategoryExample;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

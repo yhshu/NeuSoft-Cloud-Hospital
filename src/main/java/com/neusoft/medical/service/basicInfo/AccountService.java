@@ -49,29 +49,36 @@ public interface AccountService {
      * 添加帐号
      * todo 密码存储在数据库前进行加密
      *
-     * @param userName     帐号用户名
-     * @param userPassword 帐号密码
-     * @param accountType  用户类型
-     *                     门诊医生 00
-     *                     医技医生 01
-     *                     医院收费员 10
-     *                     药房操作员 11
-     *                     财务管理员 12
-     *                     挂号管理员 13
+     * @param userName         帐号用户名
+     * @param userPassword     帐号密码
+     * @param accountType      用户类型
+     *                         门诊医生 00
+     *                         医技医生 01
+     *                         医院收费员 10
+     *                         药房操作员 11
+     *                         财务管理员 12
+     *                         挂号管理员 13
+     * @param realName         真实姓名
+     * @param departmentId     科室编号
+     * @param jobTitle         医生职称
+     * @param doctorScheduling 医生是否参与排班
      * @return 操作结果
      */
-    boolean addAccount(String userName, String userPassword, String accountType);
+    boolean addAccount(String userName, String userPassword, String accountType, String realName, int departmentId, String jobTitle, int doctorScheduling);
 
     /**
      * 更新帐号
      *
-     * @param accountId    帐号编号
-     * @param userName     帐号用户名
-     * @param userPassword 帐号密码
-     * @param accountType  用户类型
+     * @param accountId        帐号编号
+     * @param userName         帐号用户名
+     * @param userPassword     帐号密码
+     * @param realName         真实姓名
+     * @param departmentId     科室编号
+     * @param jobTitle         医生职称
+     * @param doctorScheduling 医生是否参与排班
      * @return 操作结果
      */
-    boolean updateAccount(int accountId, String userName, String userPassword, String accountType);
+    boolean updateAccount(int accountId, String userName, String userPassword, String realName, int departmentId, String jobTitle, Integer doctorScheduling);
 
     /**
      * 删除帐号

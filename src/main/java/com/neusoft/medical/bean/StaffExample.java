@@ -1,4 +1,4 @@
-package com.neusoft.medical.example;
+package com.neusoft.medical.bean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -291,76 +291,6 @@ public class StaffExample {
 
         public Criteria andDepartmentIdNotBetween(Integer value1, Integer value2) {
             addCriterion("department_id not between", value1, value2, "departmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentNameIsNull() {
-            addCriterion("department_name is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentNameIsNotNull() {
-            addCriterion("department_name is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentNameEqualTo(String value) {
-            addCriterion("department_name =", value, "departmentName");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentNameNotEqualTo(String value) {
-            addCriterion("department_name <>", value, "departmentName");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentNameGreaterThan(String value) {
-            addCriterion("department_name >", value, "departmentName");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentNameGreaterThanOrEqualTo(String value) {
-            addCriterion("department_name >=", value, "departmentName");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentNameLessThan(String value) {
-            addCriterion("department_name <", value, "departmentName");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentNameLessThanOrEqualTo(String value) {
-            addCriterion("department_name <=", value, "departmentName");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentNameLike(String value) {
-            addCriterion("department_name like", value, "departmentName");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentNameNotLike(String value) {
-            addCriterion("department_name not like", value, "departmentName");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentNameIn(List<String> values) {
-            addCriterion("department_name in", values, "departmentName");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentNameNotIn(List<String> values) {
-            addCriterion("department_name not in", values, "departmentName");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentNameBetween(String value1, String value2) {
-            addCriterion("department_name between", value1, value2, "departmentName");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentNameNotBetween(String value1, String value2) {
-            addCriterion("department_name not between", value1, value2, "departmentName");
             return (Criteria) this;
         }
 

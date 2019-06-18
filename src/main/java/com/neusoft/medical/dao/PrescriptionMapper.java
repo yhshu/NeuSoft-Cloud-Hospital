@@ -1,7 +1,7 @@
 package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.Prescription;
-import com.neusoft.medical.example.PrescriptionExample;
+import com.neusoft.medical.bean.PrescriptionExample;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -18,14 +18,16 @@ public interface PrescriptionMapper {
     int deleteByPrimaryKey(Integer prescriptionId);
 
     @Insert({
-        "insert into hospital.prescription (registration_id, registration_name, ",
-        "doctor_id, content, ",
-        "valid, reserve1, ",
-        "reserve2, reserve3)",
-        "values (#{registrationId,jdbcType=INTEGER}, #{registrationName,jdbcType=VARCHAR}, ",
-        "#{doctorId,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, ",
-        "#{valid,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
-        "#{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR})"
+        "insert into hospital.prescription (prescription_name, registration_id, ",
+        "patient_name, doctor_id, ",
+        "save_state, valid, ",
+        "reserve1, reserve2, ",
+        "reserve3)",
+        "values (#{prescriptionName,jdbcType=VARCHAR}, #{registrationId,jdbcType=INTEGER}, ",
+        "#{patientName,jdbcType=VARCHAR}, #{doctorId,jdbcType=INTEGER}, ",
+        "#{saveState,jdbcType=INTEGER}, #{valid,jdbcType=INTEGER}, ",
+        "#{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, ",
+        "#{reserve3,jdbcType=VARCHAR})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="prescriptionId", before=false, resultType=Integer.class)
     int insert(Prescription record);
@@ -36,8 +38,8 @@ public interface PrescriptionMapper {
 
     @Select({
         "select",
-        "prescription_id, registration_id, registration_name, doctor_id, content, valid, ",
-        "reserve1, reserve2, reserve3",
+        "prescription_id, prescription_name, registration_id, patient_name, doctor_id, ",
+        "save_state, valid, reserve1, reserve2, reserve3",
         "from hospital.prescription",
         "where prescription_id = #{prescriptionId,jdbcType=INTEGER}"
     })
@@ -52,10 +54,11 @@ public interface PrescriptionMapper {
 
     @Update({
         "update hospital.prescription",
-        "set registration_id = #{registrationId,jdbcType=INTEGER},",
-          "registration_name = #{registrationName,jdbcType=VARCHAR},",
+        "set prescription_name = #{prescriptionName,jdbcType=VARCHAR},",
+          "registration_id = #{registrationId,jdbcType=INTEGER},",
+          "patient_name = #{patientName,jdbcType=VARCHAR},",
           "doctor_id = #{doctorId,jdbcType=INTEGER},",
-          "content = #{content,jdbcType=VARCHAR},",
+          "save_state = #{saveState,jdbcType=INTEGER},",
           "valid = #{valid,jdbcType=INTEGER},",
           "reserve1 = #{reserve1,jdbcType=VARCHAR},",
           "reserve2 = #{reserve2,jdbcType=VARCHAR},",

@@ -3,13 +3,15 @@ package com.neusoft.medical.bean;
 public class Prescription {
     private Integer prescriptionId;
 
+    private String prescriptionName;
+
     private Integer registrationId;
 
-    private String registrationName;
+    private String patientName;
 
     private Integer doctorId;
 
-    private String content;
+    private Integer saveState;
 
     private Integer valid;
 
@@ -19,12 +21,13 @@ public class Prescription {
 
     private String reserve3;
 
-    public Prescription(Integer prescriptionId, Integer registrationId, String registrationName, Integer doctorId, String content, Integer valid, String reserve1, String reserve2, String reserve3) {
+    public Prescription(Integer prescriptionId, String prescriptionName, Integer registrationId, String patientName, Integer doctorId, Integer saveState, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.prescriptionId = prescriptionId;
+        this.prescriptionName = prescriptionName;
         this.registrationId = registrationId;
-        this.registrationName = registrationName;
+        this.patientName = patientName;
         this.doctorId = doctorId;
-        this.content = content;
+        this.saveState = saveState;
         this.valid = valid;
         this.reserve1 = reserve1;
         this.reserve2 = reserve2;
@@ -43,6 +46,14 @@ public class Prescription {
         this.prescriptionId = prescriptionId;
     }
 
+    public String getPrescriptionName() {
+        return prescriptionName;
+    }
+
+    public void setPrescriptionName(String prescriptionName) {
+        this.prescriptionName = prescriptionName == null ? null : prescriptionName.trim();
+    }
+
     public Integer getRegistrationId() {
         return registrationId;
     }
@@ -51,12 +62,12 @@ public class Prescription {
         this.registrationId = registrationId;
     }
 
-    public String getRegistrationName() {
-        return registrationName;
+    public String getPatientName() {
+        return patientName;
     }
 
-    public void setRegistrationName(String registrationName) {
-        this.registrationName = registrationName == null ? null : registrationName.trim();
+    public void setPatientName(String patientName) {
+        this.patientName = patientName == null ? null : patientName.trim();
     }
 
     public Integer getDoctorId() {
@@ -67,12 +78,12 @@ public class Prescription {
         this.doctorId = doctorId;
     }
 
-    public String getContent() {
-        return content;
+    public Integer getSaveState() {
+        return saveState;
     }
 
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
+    public void setSaveState(Integer saveState) {
+        this.saveState = saveState;
     }
 
     public Integer getValid() {
