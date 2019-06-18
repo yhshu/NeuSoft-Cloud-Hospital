@@ -137,9 +137,7 @@ public class AccountServiceImpl implements AccountService {
     public boolean deleteAccount(List<Integer> accountIdList) {
         try {
             AccountExample accountExample = new AccountExample();
-            AccountExample.Criteria criteria = accountExample.createCriteria();
-            criteria.andValidEqualTo(1);
-            criteria.andAccountIdIn(accountIdList);
+            accountExample.or().andValidEqualTo(1).andAccountIdIn(accountIdList);
 
             Account record = new Account();
             record.setValid(0);

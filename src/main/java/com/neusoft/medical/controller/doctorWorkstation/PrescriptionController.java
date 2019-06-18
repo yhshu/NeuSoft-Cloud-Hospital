@@ -56,13 +56,15 @@ public class PrescriptionController {
     }
 
     /**
-     * 保存处方（暂存、提交或存为模板）
+     * 保存处方（三种保存状态：暂存、提交、存为模板）
      *
      * @param prescriptionJson 表示处方信息的 json 字符串
      * @return 操作结果
      * 该 json 字符串包含的属性：
-     * - prescriptionId
-     * - prescriptionName
+     * - prescriptionId 处方编号（可空）
+     * - prescriptionName 处方名称
+     * - registrationId 挂号编号
+     * - save_state 保存状态（暂存 0；正式提交 1；模板 2）
      */
     @PostMapping("/save_prescription")
     public ResultDTO<Boolean> savePrescription(
@@ -71,6 +73,12 @@ public class PrescriptionController {
         return null;
     }
 
+    /**
+     * 获取常用药品
+     *
+     * @param medicineNumber 常用药品的数量
+     * @return 常用药品信息列表
+     */
     @GetMapping("/common_medicine")
     public ResultDTO<List<Medicine>> commonMedicine(@RequestParam(value = "medicineNumber") Integer medicineNumber) {
         List<Medicine> medicineList = null;
@@ -81,5 +89,6 @@ public class PrescriptionController {
         }
         return new ResultDTO<>(medicineList);
     }
+
 
 }

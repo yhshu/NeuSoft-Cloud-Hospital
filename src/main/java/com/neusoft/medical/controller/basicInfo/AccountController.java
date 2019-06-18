@@ -109,14 +109,13 @@ public class AccountController {
      * @param accountId        帐号编号
      * @param userName         用户名
      * @param userPassword     密码
-     * @param accountType      用户类型
      * @param realName         用户的真实姓名
      * @param departmentId     科室编号
      * @param jobTitle         医生职称
      * @param doctorScheduling 医生是否参与排班
      * @return 操作结果
      */
-    @PostMapping("/update_account")
+    @PutMapping("/update_account")
     public ResultDTO<Boolean> updateAccount(
             @RequestParam(value = "accountId") Integer accountId,
             @RequestParam(value = "userName") String userName,
@@ -128,6 +127,25 @@ public class AccountController {
     ) {
         try {
             accountService.updateAccount(accountId, userName, userPassword, realName, departmentId, jobTitle, doctorScheduling);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultDTO<>(Boolean.FALSE);
+        }
+        return new ResultDTO<>(Boolean.TRUE);
+    }
+
+    /**
+     * 删除用户信息
+     *
+     * @param accountIdList 帐号编号列表
+     * @return 操作结果
+     */
+    @DeleteMapping("/delete_account")
+    public ResultDTO<Boolean> deleteAccount(
+            @RequestParam(value = "accountIdList[]") Integer[] accountIdList
+    ) {
+        try {
+            accountService.deleteAccount(Arrays.asList(accountIdList));
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultDTO<>(Boolean.FALSE);
