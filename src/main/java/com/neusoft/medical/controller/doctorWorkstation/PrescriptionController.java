@@ -61,10 +61,10 @@ public class PrescriptionController {
      * @param prescriptionJson 表示处方信息的 json 字符串
      * @return 操作结果
      * 该 json 字符串包含的属性：
-     * - prescriptionId 处方编号（可空）
+     * - prescriptionId 处方编号（新增时填 -1，更新时填被更新的编号）
      * - prescriptionName 处方名称
      * - registrationId 挂号编号
-     * - save_state 保存状态（暂存 0；正式提交 1；模板 2）
+     * - saveState 保存状态（暂存 0；正式提交 1；全院模板 2；科室模板 3；医生个人模板 4）
      * - medicine 处方中包含的药物清单，json 数组
      * <p>
      * - medicine 数组中每个元素包含的属性：
