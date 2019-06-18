@@ -63,7 +63,8 @@ public class PrescriptionController {
      * 该 json 字符串包含的属性：
      * - prescriptionId 处方编号（新增时填 -1，更新时填被更新的编号）
      * - prescriptionName 处方名称
-     * - registrationId 挂号编号
+     * - registrationId 挂号编号（暂存或正式提交 必填，模板 可空）
+     * - doctorId 创建模板的医生编号（暂存或正式提交 可空，模板 必填）
      * - saveState 保存状态（暂存 0；正式提交 1；全院模板 2；科室模板 3；医生个人模板 4）
      * - medicine 处方中包含的药物清单，json 数组
      * <p>
@@ -106,6 +107,4 @@ public class PrescriptionController {
         }
         return new ResultDTO<>(medicineList);
     }
-
-
 }

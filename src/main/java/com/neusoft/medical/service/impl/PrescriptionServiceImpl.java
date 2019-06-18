@@ -71,19 +71,27 @@ public class PrescriptionServiceImpl implements PrescriptionService {
             JsonObject prescriptionJsonObject = new JsonParser().parse(prescriptionJson).getAsJsonObject();
             int prescriptionId = prescriptionJsonObject.getAsJsonPrimitive("prescriptionId").getAsInt();
             String prescriptionName = prescriptionJsonObject.getAsJsonPrimitive("prescriptionName").getAsString();
-            int registrationId = prescriptionJsonObject.getAsJsonPrimitive("registrationId").getAsInt();
+            int registrationId = -1;
+            int doctorId = -1;
             int saveState = prescriptionJsonObject.getAsJsonPrimitive("saveState").getAsInt();
+            if (saveState == SAVE_TEMP || saveState == SAVE_FORMAL) {
+                // 暂存或正式提交
+                registrationId = prescriptionJsonObject.getAsJsonPrimitive("registrationId").getAsInt();
+            } else {
+                // 存为模板
+                doctorId = prescriptionJsonObject.getAsJsonPrimitive("doctorId").getAsInt();
+            }
 
             if (prescriptionId == -1) {
                 // 新增处方
-                Prescription record = new Prescription(null, prescriptionName, registrationId, saveState, 1, null, null, null);
+                Prescription record = new Prescription(null, prescriptionName, registrationId, saveState, doctorId, 1, null, null, null);
                 prescriptionMapper.insert(record);
                 if (record.getPrescriptionId() == null)
                     throw new Exception("prescriptionId is still null after trying to insert the database.");
                 prescriptionId = record.getPrescriptionId();
             } else {
                 // 更新现有处方
-                Prescription record = new Prescription(prescriptionId, prescriptionName, registrationId, saveState, 1, null, null, null);
+                Prescription record = new Prescription(prescriptionId, prescriptionName, registrationId, saveState, doctorId, 1, null, null, null);
                 PrescriptionExample prescriptionExample = new PrescriptionExample();
                 prescriptionExample.or().andValidEqualTo(1).andPrescriptionIdEqualTo(prescriptionId);
                 prescriptionMapper.updateByExampleSelective(record, prescriptionExample);
