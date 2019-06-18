@@ -3,6 +3,8 @@ package com.neusoft.medical.service.registration;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.Registration;
 
+import java.util.List;
+
 public interface RegistrationService {
 
     /**
@@ -27,10 +29,26 @@ public interface RegistrationService {
     PageInfo<Registration> listRegistration(int currentPage, int pageSize);
 
     /**
-     * 获取挂号欧信息
+     * 获取挂号信息
      *
      * @param registrationId 挂号编号
      * @return 挂号信息
      */
     Registration selectRegistrationByPrimaryKey(Integer registrationId);
+
+    /**
+     * 按挂号编号获取患者的历史挂号列表
+     *
+     * @param registrationId 挂号单编号
+     * @return 患者的历史挂号信息
+     */
+    List<Registration> historyRegistrationList(int registrationId);
+
+    /**
+     * 按挂号编号获取患者的历史挂号编号列表
+     *
+     * @param registrationId 挂号单编号
+     * @return 患者的历史挂号编号列表
+     */
+    List<Integer> historyRegistratioinIdList(int registrationId);
 }

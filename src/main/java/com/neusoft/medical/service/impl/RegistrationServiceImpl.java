@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
 public class RegistrationServiceImpl implements RegistrationService {
@@ -87,5 +88,33 @@ public class RegistrationServiceImpl implements RegistrationService {
         registration.setReserve1(departmentMapper.selectByPrimaryKey(registration.getDepartmentId()).getDepartmentName());
         registration.setReserve2(doctorMapper.selectByPrimaryKey(registration.getDoctorId()).getDoctorName());
         return registration;
+    }
+
+    @Override
+    public List<Registration> historyRegistrationList(int registrationId) {
+        // 按挂号单编号获取相同患者的挂号单编号列表
+        List<Registration> registrationList = null;
+        try {
+            int patientId = registrationMapper.selectByPrimaryKey(registrationId).getPatientId(); // 获取患者编号
+            RegistrationExample registrationExample = new RegistrationExample();
+            RegistrationExample.Criteria registrationExampleCriteria = registrationExample.createCriteria();
+            registrationExampleCriteria.andValidEqualTo(1);        // 有效的挂号记录
+            registrationExampleCriteria.andPatientIdEqualTo(patientId); // 对应当前患者
+            registrationList = registrationMapper.selectByExample(registrationExample);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return registrationList;
+    }
+
+    @Override
+    public List<Integer> historyRegistratioinIdList(int registrationId) {
+        List<Registration> registrationList = historyRegistrationList(registrationId);
+
+        List<Integer> registrationIdList = new CopyOnWriteArrayList<>(); // 构建患者的挂号单编号列表
+        for (Registration registration : registrationList) {
+            registrationIdList.add(registration.getRegistrationId());
+        }
+        return registrationIdList;
     }
 }

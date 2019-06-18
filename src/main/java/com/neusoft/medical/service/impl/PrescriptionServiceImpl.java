@@ -1,5 +1,6 @@
 package com.neusoft.medical.service.impl;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -8,6 +9,7 @@ import com.neusoft.medical.dao.MedicineMapper;
 import com.neusoft.medical.dao.PrescriptionItemMapper;
 import com.neusoft.medical.dao.PrescriptionMapper;
 import com.neusoft.medical.service.doctorWorkstation.PrescriptionService;
+import com.neusoft.medical.service.registration.RegistrationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,6 +23,9 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     private PrescriptionMapper prescriptionMapper;
     @Resource
     private PrescriptionItemMapper prescriptionItemMapper;
+    @Resource
+    private RegistrationService registrationService;
+    private Gson gson = new Gson();
 
     @Override
     public List<Medicine> selectMedicine() {
@@ -125,5 +130,39 @@ public class PrescriptionServiceImpl implements PrescriptionService {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String selectHistoryPrescription(Integer registrationId) {
+        /*
+         实现过程：
+         1. 按挂号单编号获取相同患者的挂号单编号列表
+         2. 找到每项挂号对应的历史处方
+         3. 找到每项处方对应的处方药品列表
+         4. 将数据转换为 json 字符串返回
+         */
+
+        String res = null;
+        try {
+            // 按挂号单编号获取相同患者的挂号单编号列表
+            List<Integer> registrationIdList = registrationService.historyRegistratioinIdList(registrationId);
+
+            // 找到每项挂号对应的历史处方
+            PrescriptionExample prescriptionExample = new PrescriptionExample();
+            prescriptionExample.or().andValidEqualTo(1).andRegistrationIdIn(registrationIdList).andSaveStateEqualTo(SAVE_FORMAL);
+            List<Prescription> prescriptionList = prescriptionItemMapper.selectByExample(prescriptionExample);
+
+            JsonArray prescriptionMedicineJsonArray = new JsonArray();
+            for (Prescription prescription : prescriptionList) {
+                JsonObject prescriptionJsonObject = gson.toJsonTree(prescription).getAsJsonObject();
+
+                // 找到每项处方对应的药品信息
+                PrescriptionItemExample prescriptionItemExample = new PrescriptionItemExample();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
     }
 }

@@ -48,4 +48,12 @@ public interface PrescriptionService {
      * @param prescriptionJson 表示处方信息的 json 字符串
      */
     boolean savePrescription(String prescriptionJson);
+
+    /**
+     * 获取历史处方（暂存 或 正式提交）
+     *
+     * @param registrationId 挂号编号
+     * @return 历史处方列表，json 字符串列表
+     */
+    String selectHistoryPrescription(Integer registrationId);
 }

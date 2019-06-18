@@ -107,4 +107,22 @@ public class PrescriptionController {
         }
         return new ResultDTO<>(medicineList);
     }
+
+    /**
+     * 获取历史处方（暂存 或 正式提交）
+     *
+     * @param registrationId 挂号编号
+     * @return 历史处方列表，json 字符串列表
+     */
+    public ResultDTO<String> selectHistoryPrescription(
+            @RequestParam(value = "registrationId") Integer registrationId
+    ) {
+        String historyPrescriptionJsonList = null;
+        try {
+            historyPrescriptionJsonList = prescriptionService.selectHistoryPrescription(registrationId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResultDTO<>(historyPrescriptionJsonList);
+    }
 }
