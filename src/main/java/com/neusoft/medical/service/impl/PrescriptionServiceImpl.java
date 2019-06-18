@@ -31,6 +31,18 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
     @Override
     public List<Medicine> searchMedicine(Integer resultNumber, String query) {
-        return null;
+        List<Medicine> medicineList;
+        try {
+            MedicineExample medicineExample = new MedicineExample();
+            medicineExample.or().andValidEqualTo(1).andNameZhLike(query);
+            medicineExample.or().andValidEqualTo(1).andNamePinyinLike(query);
+            medicineExample.setDistinct(true);
+            medicineList = medicineMapper.selectByExample(medicineExample);
+            medicineList = medicineList.subList(0, resultNumber);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return medicineList;
     }
 }

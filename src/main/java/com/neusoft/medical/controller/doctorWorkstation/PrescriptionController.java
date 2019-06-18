@@ -41,7 +41,7 @@ public class PrescriptionController {
      * 通过中文名称或拼音搜索药品信息
      *
      * @param resultNumber 最大结果数量
-     * @param query 搜索关键Ciuda
+     * @param query        搜索关键词
      * @return
      */
     @GetMapping("/search_medicine")

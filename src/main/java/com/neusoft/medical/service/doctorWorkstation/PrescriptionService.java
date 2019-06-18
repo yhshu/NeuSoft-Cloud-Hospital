@@ -17,6 +17,12 @@ public interface PrescriptionService {
      */
     List<Medicine> selectMedicine();
 
-
+    /**
+     * 通过中文名称或拼音搜索药品信息
+     *
+     * @param resultNumber 最大结果数量
+     * @param query        搜索关键词
+     * @return
+     */
     List<Medicine> searchMedicine(Integer resultNumber, String query);
 }
