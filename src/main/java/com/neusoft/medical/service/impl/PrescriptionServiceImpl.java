@@ -28,4 +28,9 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         }
         return medicineList;
     }
+
+    @Override
+    public List<Medicine> searchMedicine(Integer resultNumber, String query) {
+        return null;
+    }
 }

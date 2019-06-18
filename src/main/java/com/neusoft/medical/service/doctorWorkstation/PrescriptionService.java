@@ -9,5 +9,14 @@ import java.util.List;
  */
 public interface PrescriptionService {
 
+    /**
+     * 获取所有药品列表
+     * 药品数量较多，可能增加网络和浏览器的负担
+     *
+     * @return 包含所有药品信息的列表
+     */
     List<Medicine> selectMedicine();
+
+
+    List<Medicine> searchMedicine(Integer resultNumber, String query);
 }
