@@ -65,7 +65,7 @@ public class AccountServiceImpl implements AccountService {
                     Staff staff = staffList.get(0);
                     accountJsonObject.addProperty("realName", staff.getRealName());
                     accountJsonObject.addProperty("departmentId", staff.getDepartmentId());
-                    accountJsonObject.addProperty("departmentName", staff.getDepartmentName());
+                    accountJsonObject.addProperty("departmentName", departmentMapper.selectByPrimaryKey(staff.getDepartmentId()).getDepartmentName());
                 }
             }
             accountJsonList.add(accountJsonObject.toString());  // 将该用户信息添加到列表中
@@ -98,7 +98,7 @@ public class AccountServiceImpl implements AccountService {
                 doctorMapper.insert(new Doctor(null, realName, departmentId, jobTitle, account.getAccountId(), accountType, doctorScheduling, 1, null, null, null));
             } else {
                 // 如果是医院工作人员
-                staffMapper.insert(new Staff(null, realName, departmentId, departmentMapper.selectByPrimaryKey(departmentId).getDepartmentName(), account.getAccountId(), accountType, 1, null, null, null));
+                staffMapper.insert(new Staff(null, realName, departmentId, account.getAccountId(), accountType, 1, null, null, null));
             }
 
         } catch (Exception e) {
@@ -108,11 +108,25 @@ public class AccountServiceImpl implements AccountService {
         return true;
     }
 
-    public boolean updateAccount(int accountId, String userName, String userPassword, String accountType, String realName, int departmentId, String jobTitle, Integer doctorScheduling) {
+    public boolean updateAccount(int accountId, String userName, String userPassword, String realName, int departmentId, String jobTitle, Integer doctorScheduling) {
         try {
             AccountExample accountExample = new AccountExample();
             accountExample.or().andValidEqualTo(1).andAccountIdEqualTo(accountId);
-            accountMapper.updateByExampleSelective(new Account(accountId, userName, userPassword, accountType, 1, null, null, null), accountExample);
+            accountMapper.updateByExampleSelective(new Account(accountId, userName, userPassword, null, 1, null, null, null), accountExample);
+            String accountType = accountMapper.selectByPrimaryKey(accountId).getAccountType();
+
+            if (accountType.equals(TYPE_OUTPATIENT_DOCTOR) || accountType.equals(TYPE_TECH_DOCTOR)) {
+                // 如果是门诊医生或医技医生
+                DoctorExample doctorExample = new DoctorExample();
+                doctorExample.or().andValidEqualTo(1).andAccountIdEqualTo(accountId);
+                doctorMapper.updateByExampleSelective(new Doctor(null, realName, departmentId, jobTitle, accountId, accountType, doctorScheduling, 1, null, null, null), doctorExample);
+            } else {
+                // 如果是医院工作人员
+                StaffExample staffExample = new StaffExample();
+                staffExample.or().andValidEqualTo(1).andAccountIdEqualTo(accountId);
+                staffMapper.updateByExampleSelective(new Staff(null, realName, departmentId, accountId, accountType, 1, null, null, null), staffExample);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             return false;

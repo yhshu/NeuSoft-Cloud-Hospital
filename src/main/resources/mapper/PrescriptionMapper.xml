@@ -4,10 +4,10 @@
   <resultMap id="BaseResultMap" type="com.neusoft.medical.bean.Prescription">
     <constructor>
       <idArg column="prescription_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="prescription_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="registration_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="registration_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="patient_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="doctor_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="content" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="save_state" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -74,7 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    prescription_id, registration_id, registration_name, doctor_id, content, save_state, 
+    prescription_id, prescription_name, registration_id, patient_name, doctor_id, save_state, 
     valid, reserve1, reserve2, reserve3
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.PrescriptionExample" resultMap="BaseResultMap">
@@ -103,17 +103,17 @@
     </selectKey>
     insert into hospital.prescription
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="prescriptionName != null">
+        prescription_name,
+      </if>
       <if test="registrationId != null">
         registration_id,
       </if>
-      <if test="registrationName != null">
-        registration_name,
+      <if test="patientName != null">
+        patient_name,
       </if>
       <if test="doctorId != null">
         doctor_id,
-      </if>
-      <if test="content != null">
-        content,
       </if>
       <if test="saveState != null">
         save_state,
@@ -132,17 +132,17 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="prescriptionName != null">
+        #{prescriptionName,jdbcType=VARCHAR},
+      </if>
       <if test="registrationId != null">
         #{registrationId,jdbcType=INTEGER},
       </if>
-      <if test="registrationName != null">
-        #{registrationName,jdbcType=VARCHAR},
+      <if test="patientName != null">
+        #{patientName,jdbcType=VARCHAR},
       </if>
       <if test="doctorId != null">
         #{doctorId,jdbcType=INTEGER},
-      </if>
-      <if test="content != null">
-        #{content,jdbcType=VARCHAR},
       </if>
       <if test="saveState != null">
         #{saveState,jdbcType=INTEGER},
@@ -173,17 +173,17 @@
       <if test="record.prescriptionId != null">
         prescription_id = #{record.prescriptionId,jdbcType=INTEGER},
       </if>
+      <if test="record.prescriptionName != null">
+        prescription_name = #{record.prescriptionName,jdbcType=VARCHAR},
+      </if>
       <if test="record.registrationId != null">
         registration_id = #{record.registrationId,jdbcType=INTEGER},
       </if>
-      <if test="record.registrationName != null">
-        registration_name = #{record.registrationName,jdbcType=VARCHAR},
+      <if test="record.patientName != null">
+        patient_name = #{record.patientName,jdbcType=VARCHAR},
       </if>
       <if test="record.doctorId != null">
         doctor_id = #{record.doctorId,jdbcType=INTEGER},
-      </if>
-      <if test="record.content != null">
-        content = #{record.content,jdbcType=VARCHAR},
       </if>
       <if test="record.saveState != null">
         save_state = #{record.saveState,jdbcType=INTEGER},
@@ -208,10 +208,10 @@
   <update id="updateByExample" parameterType="map">
     update hospital.prescription
     set prescription_id = #{record.prescriptionId,jdbcType=INTEGER},
+      prescription_name = #{record.prescriptionName,jdbcType=VARCHAR},
       registration_id = #{record.registrationId,jdbcType=INTEGER},
-      patient_name = #{record.registrationName,jdbcType=VARCHAR},
+      patient_name = #{record.patientName,jdbcType=VARCHAR},
       doctor_id = #{record.doctorId,jdbcType=INTEGER},
-      content = #{record.content,jdbcType=VARCHAR},
       save_state = #{record.saveState,jdbcType=INTEGER},
       valid = #{record.valid,jdbcType=INTEGER},
       reserve1 = #{record.reserve1,jdbcType=VARCHAR},
@@ -224,17 +224,17 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.Prescription">
     update hospital.prescription
     <set>
+      <if test="prescriptionName != null">
+        prescription_name = #{prescriptionName,jdbcType=VARCHAR},
+      </if>
       <if test="registrationId != null">
         registration_id = #{registrationId,jdbcType=INTEGER},
       </if>
-      <if test="registrationName != null">
-        registration_name = #{registrationName,jdbcType=VARCHAR},
+      <if test="patientName != null">
+        patient_name = #{patientName,jdbcType=VARCHAR},
       </if>
       <if test="doctorId != null">
         doctor_id = #{doctorId,jdbcType=INTEGER},
-      </if>
-      <if test="content != null">
-        content = #{content,jdbcType=VARCHAR},
       </if>
       <if test="saveState != null">
         save_state = #{saveState,jdbcType=INTEGER},

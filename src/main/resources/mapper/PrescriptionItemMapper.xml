@@ -13,7 +13,6 @@
       <arg column="medicine_quantity" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="skin_test" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="skin_test_result" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="save_state" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -81,7 +80,7 @@
   <sql id="Base_Column_List">
     prescription_item_id, medicine_id, prescription_id, medicine_usage, medicine_dosage, 
     medicine_frequency, medicine_number_day, medicine_quantity, skin_test, skin_test_result, 
-    save_state, valid, reserve1, reserve2, reserve3
+    valid, reserve1, reserve2, reserve3
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.PrescriptionItemExample" resultMap="BaseResultMap">
     select
@@ -136,9 +135,6 @@
       <if test="skinTestResult != null">
         skin_test_result,
       </if>
-      <if test="saveState != null">
-        save_state,
-      </if>
       <if test="valid != null">
         valid,
       </if>
@@ -179,9 +175,6 @@
       </if>
       <if test="skinTestResult != null">
         #{skinTestResult,jdbcType=VARCHAR},
-      </if>
-      <if test="saveState != null">
-        #{saveState,jdbcType=INTEGER},
       </if>
       <if test="valid != null">
         #{valid,jdbcType=INTEGER},
@@ -236,9 +229,6 @@
       <if test="record.skinTestResult != null">
         skin_test_result = #{record.skinTestResult,jdbcType=VARCHAR},
       </if>
-      <if test="record.saveState != null">
-        save_state = #{record.saveState,jdbcType=INTEGER},
-      </if>
       <if test="record.valid != null">
         valid = #{record.valid,jdbcType=INTEGER},
       </if>
@@ -268,7 +258,6 @@
       medicine_quantity = #{record.medicineQuantity,jdbcType=INTEGER},
       skin_test = #{record.skinTest,jdbcType=VARCHAR},
       skin_test_result = #{record.skinTestResult,jdbcType=VARCHAR},
-      save_state = #{record.saveState,jdbcType=INTEGER},
       valid = #{record.valid,jdbcType=INTEGER},
       reserve1 = #{record.reserve1,jdbcType=VARCHAR},
       reserve2 = #{record.reserve2,jdbcType=VARCHAR},
@@ -306,9 +295,6 @@
       </if>
       <if test="skinTestResult != null">
         skin_test_result = #{skinTestResult,jdbcType=VARCHAR},
-      </if>
-      <if test="saveState != null">
-        save_state = #{saveState,jdbcType=INTEGER},
       </if>
       <if test="valid != null">
         valid = #{valid,jdbcType=INTEGER},

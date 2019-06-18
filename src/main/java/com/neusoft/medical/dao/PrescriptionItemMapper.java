@@ -22,16 +22,16 @@ public interface PrescriptionItemMapper {
         "medicine_usage, medicine_dosage, ",
         "medicine_frequency, medicine_number_day, ",
         "medicine_quantity, skin_test, ",
-        "skin_test_result, save_state, ",
-        "valid, reserve1, ",
-        "reserve2, reserve3)",
+        "skin_test_result, valid, ",
+        "reserve1, reserve2, ",
+        "reserve3)",
         "values (#{medicineId,jdbcType=INTEGER}, #{prescriptionId,jdbcType=INTEGER}, ",
         "#{medicineUsage,jdbcType=VARCHAR}, #{medicineDosage,jdbcType=VARCHAR}, ",
         "#{medicineFrequency,jdbcType=VARCHAR}, #{medicineNumberDay,jdbcType=VARCHAR}, ",
         "#{medicineQuantity,jdbcType=INTEGER}, #{skinTest,jdbcType=VARCHAR}, ",
-        "#{skinTestResult,jdbcType=VARCHAR}, #{saveState,jdbcType=INTEGER}, ",
-        "#{valid,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
-        "#{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR})"
+        "#{skinTestResult,jdbcType=VARCHAR}, #{valid,jdbcType=INTEGER}, ",
+        "#{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, ",
+        "#{reserve3,jdbcType=VARCHAR})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="prescriptionItemId", before=false, resultType=Integer.class)
     int insert(PrescriptionItem record);
@@ -44,7 +44,7 @@ public interface PrescriptionItemMapper {
         "select",
         "prescription_item_id, medicine_id, prescription_id, medicine_usage, medicine_dosage, ",
         "medicine_frequency, medicine_number_day, medicine_quantity, skin_test, skin_test_result, ",
-        "save_state, valid, reserve1, reserve2, reserve3",
+        "valid, reserve1, reserve2, reserve3",
         "from hospital.prescription_item",
         "where prescription_item_id = #{prescriptionItemId,jdbcType=INTEGER}"
     })
@@ -68,7 +68,6 @@ public interface PrescriptionItemMapper {
           "medicine_quantity = #{medicineQuantity,jdbcType=INTEGER},",
           "skin_test = #{skinTest,jdbcType=VARCHAR},",
           "skin_test_result = #{skinTestResult,jdbcType=VARCHAR},",
-          "save_state = #{saveState,jdbcType=INTEGER},",
           "valid = #{valid,jdbcType=INTEGER},",
           "reserve1 = #{reserve1,jdbcType=VARCHAR},",
           "reserve2 = #{reserve2,jdbcType=VARCHAR},",

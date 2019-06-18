@@ -22,7 +22,15 @@ public interface PrescriptionService {
      *
      * @param resultNumber 最大结果数量
      * @param query        搜索关键词
-     * @return
+     * @return 中文名称或拼音符合关键词的药品信息列表
      */
     List<Medicine> searchMedicine(Integer resultNumber, String query);
+
+    /**
+     * 获取常用药品列表
+     *
+     * @param medicineNumber 获取的常用药品数量
+     * @return 常用药品列表
+     */
+    List<Medicine> commonMedicine(Integer medicineNumber);
 }

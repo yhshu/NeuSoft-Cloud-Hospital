@@ -7,8 +7,6 @@ public class Staff {
 
     private Integer departmentId;
 
-    private String departmentName;
-
     private Integer accountId;
 
     private String accountType;
@@ -21,11 +19,10 @@ public class Staff {
 
     private String reserve3;
 
-    public Staff(Integer staffId, String realName, Integer departmentId, String departmentName, Integer accountId, String accountType, Integer valid, String reserve1, String reserve2, String reserve3) {
+    public Staff(Integer staffId, String realName, Integer departmentId, Integer accountId, String accountType, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.staffId = staffId;
         this.realName = realName;
         this.departmentId = departmentId;
-        this.departmentName = departmentName;
         this.accountId = accountId;
         this.accountType = accountType;
         this.valid = valid;
@@ -60,14 +57,6 @@ public class Staff {
 
     public void setDepartmentId(Integer departmentId) {
         this.departmentId = departmentId;
-    }
-
-    public String getDepartmentName() {
-        return departmentName;
-    }
-
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName == null ? null : departmentName.trim();
     }
 
     public Integer getAccountId() {

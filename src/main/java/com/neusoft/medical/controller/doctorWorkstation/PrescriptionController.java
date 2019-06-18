@@ -70,4 +70,16 @@ public class PrescriptionController {
     ) {
         return null;
     }
+
+    @GetMapping("/common_medicine")
+    public ResultDTO<List<Medicine>> commonMedicine(@RequestParam(value = "medicineNumber") Integer medicineNumber) {
+        List<Medicine> medicineList = null;
+        try {
+            medicineList = prescriptionService.commonMedicine(medicineNumber);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResultDTO<>(medicineList);
+    }
+
 }

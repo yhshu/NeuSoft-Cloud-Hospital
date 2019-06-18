@@ -72,14 +72,13 @@ public interface AccountService {
      * @param accountId        帐号编号
      * @param userName         帐号用户名
      * @param userPassword     帐号密码
-     * @param accountType      用户类型
      * @param realName         真实姓名
      * @param departmentId     科室编号
      * @param jobTitle         医生职称
      * @param doctorScheduling 医生是否参与排班
      * @return 操作结果
      */
-    boolean updateAccount(int accountId, String userName, String userPassword, String accountType, String realName, int departmentId, String jobTitle, Integer doctorScheduling);
+    boolean updateAccount(int accountId, String userName, String userPassword, String realName, int departmentId, String jobTitle, Integer doctorScheduling);
 
     /**
      * 删除帐号

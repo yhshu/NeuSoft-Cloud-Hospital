@@ -21,8 +21,6 @@ public class PrescriptionItem {
 
     private String skinTestResult;
 
-    private Integer saveState;
-
     private Integer valid;
 
     private String reserve1;
@@ -31,7 +29,7 @@ public class PrescriptionItem {
 
     private String reserve3;
 
-    public PrescriptionItem(Integer prescriptionItemId, Integer medicineId, Integer prescriptionId, String medicineUsage, String medicineDosage, String medicineFrequency, String medicineNumberDay, Integer medicineQuantity, String skinTest, String skinTestResult, Integer saveState, Integer valid, String reserve1, String reserve2, String reserve3) {
+    public PrescriptionItem(Integer prescriptionItemId, Integer medicineId, Integer prescriptionId, String medicineUsage, String medicineDosage, String medicineFrequency, String medicineNumberDay, Integer medicineQuantity, String skinTest, String skinTestResult, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.prescriptionItemId = prescriptionItemId;
         this.medicineId = medicineId;
         this.prescriptionId = prescriptionId;
@@ -42,7 +40,6 @@ public class PrescriptionItem {
         this.medicineQuantity = medicineQuantity;
         this.skinTest = skinTest;
         this.skinTestResult = skinTestResult;
-        this.saveState = saveState;
         this.valid = valid;
         this.reserve1 = reserve1;
         this.reserve2 = reserve2;
@@ -131,14 +128,6 @@ public class PrescriptionItem {
 
     public void setSkinTestResult(String skinTestResult) {
         this.skinTestResult = skinTestResult == null ? null : skinTestResult.trim();
-    }
-
-    public Integer getSaveState() {
-        return saveState;
-    }
-
-    public void setSaveState(Integer saveState) {
-        this.saveState = saveState;
     }
 
     public Integer getValid() {
