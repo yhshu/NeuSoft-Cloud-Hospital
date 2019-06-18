@@ -33,4 +33,11 @@ public interface PrescriptionService {
      * @return 常用药品列表
      */
     List<Medicine> commonMedicine(Integer medicineNumber);
+
+    /**
+     * 保存处方（三种保存状态：暂存、提交、存为模板）
+     *
+     * @param prescriptionJson 表示处方信息的 json 字符串
+     */
+    void savePrescription(String prescriptionJson);
 }

@@ -56,4 +56,9 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         List<Medicine> medicineList = medicineMapper.selectByExample(medicineExample);
         return medicineList.subList(0, medicineNumber);
     }
+
+    @Override
+    public void savePrescription(String prescriptionJson) {
+        
+    }
 }
