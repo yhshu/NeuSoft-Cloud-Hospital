@@ -150,7 +150,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
             // 找到每项挂号对应的历史处方
             PrescriptionExample prescriptionExample = new PrescriptionExample();
             prescriptionExample.or().andValidEqualTo(1).andRegistrationIdIn(registrationIdList).andSaveStateEqualTo(SAVE_FORMAL);
-            List<Prescription> prescriptionList = prescriptionItemMapper.selectByExample(prescriptionExample);
+            List<Prescription> prescriptionList = prescriptionMapper.selectByExample(prescriptionExample);
 
             JsonArray prescriptionMedicineJsonArray = new JsonArray();
             for (Prescription prescription : prescriptionList) {
@@ -158,8 +158,13 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
                 // 找到每项处方对应的药品信息
                 PrescriptionItemExample prescriptionItemExample = new PrescriptionItemExample();
-            }
+                prescriptionItemExample.or().andValidEqualTo(1).andPrescriptionItemIdEqualTo(prescription.getPrescriptionId());
+                List<PrescriptionItem> prescriptionItemList = prescriptionItemMapper.selectByExample(prescriptionItemExample);
 
+                prescriptionJsonObject.addProperty("medicine", gson.toJsonTree(prescriptionItemList).toString());
+                prescriptionMedicineJsonArray.add(prescriptionJsonObject);
+            }
+            res = prescriptionMedicineJsonArray.toString();
         } catch (Exception e) {
             e.printStackTrace();
         }
