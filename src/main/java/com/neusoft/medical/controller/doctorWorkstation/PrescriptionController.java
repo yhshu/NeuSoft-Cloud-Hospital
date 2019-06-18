@@ -65,12 +65,29 @@ public class PrescriptionController {
      * - prescriptionName 处方名称
      * - registrationId 挂号编号
      * - save_state 保存状态（暂存 0；正式提交 1；模板 2）
+     * - medicine 处方中包含的药物清单，json 数组
+     * <p>
+     * - medicine 数组中每个元素包含的属性：
+     * - medicineId 处方药品编号
+     * - medicineUsage 药品用途
+     * - medicineDosage 药品用量
+     * - medicineFrequency 药品使用频率
+     * - medicineNumberDay 药品使用天数
+     * - medicineQuantity 药品数量
+     * - skinTest 皮试
+     * - skinTestResult 皮试结果
      */
     @PostMapping("/save_prescription")
     public ResultDTO<Boolean> savePrescription(
             @RequestParam(value = "prescriptionJson") String prescriptionJson
     ) {
-        return null;
+        try {
+            prescriptionService.savePrescription(prescriptionJson);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultDTO<>(Boolean.FALSE);
+        }
+        return new ResultDTO<>(Boolean.TRUE);
     }
 
     /**
