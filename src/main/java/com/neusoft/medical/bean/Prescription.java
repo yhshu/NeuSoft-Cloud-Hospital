@@ -7,10 +7,6 @@ public class Prescription {
 
     private Integer registrationId;
 
-    private String patientName;
-
-    private Integer doctorId;
-
     private Integer saveState;
 
     private Integer valid;
@@ -21,12 +17,10 @@ public class Prescription {
 
     private String reserve3;
 
-    public Prescription(Integer prescriptionId, String prescriptionName, Integer registrationId, String patientName, Integer doctorId, Integer saveState, Integer valid, String reserve1, String reserve2, String reserve3) {
+    public Prescription(Integer prescriptionId, String prescriptionName, Integer registrationId, Integer saveState, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.prescriptionId = prescriptionId;
         this.prescriptionName = prescriptionName;
         this.registrationId = registrationId;
-        this.patientName = patientName;
-        this.doctorId = doctorId;
         this.saveState = saveState;
         this.valid = valid;
         this.reserve1 = reserve1;
@@ -60,22 +54,6 @@ public class Prescription {
 
     public void setRegistrationId(Integer registrationId) {
         this.registrationId = registrationId;
-    }
-
-    public String getPatientName() {
-        return patientName;
-    }
-
-    public void setPatientName(String patientName) {
-        this.patientName = patientName == null ? null : patientName.trim();
-    }
-
-    public Integer getDoctorId() {
-        return doctorId;
-    }
-
-    public void setDoctorId(Integer doctorId) {
-        this.doctorId = doctorId;
     }
 
     public Integer getSaveState() {

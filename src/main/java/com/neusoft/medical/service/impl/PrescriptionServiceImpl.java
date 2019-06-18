@@ -1,11 +1,12 @@
 package com.neusoft.medical.service.impl;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.neusoft.medical.bean.Medicine;
-import com.neusoft.medical.bean.MedicineExample;
+import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.MedicineMapper;
 import com.neusoft.medical.dao.PrescriptionItemMapper;
+import com.neusoft.medical.dao.PrescriptionMapper;
 import com.neusoft.medical.service.doctorWorkstation.PrescriptionService;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,8 @@ import java.util.List;
 public class PrescriptionServiceImpl implements PrescriptionService {
     @Resource
     private MedicineMapper medicineMapper;
+    @Resource
+    private PrescriptionMapper prescriptionMapper;
     @Resource
     private PrescriptionItemMapper prescriptionItemMapper;
 
@@ -69,20 +72,46 @@ public class PrescriptionServiceImpl implements PrescriptionService {
             int prescriptionId = prescriptionJsonObject.getAsJsonPrimitive("prescriptionId").getAsInt();
             String prescriptionName = prescriptionJsonObject.getAsJsonPrimitive("prescriptionName").getAsString();
             int registrationId = prescriptionJsonObject.getAsJsonPrimitive("registrationId").getAsInt();
-//            int saveState = prescriptionJsonObject
+            int saveState = prescriptionJsonObject.getAsJsonPrimitive("saveState").getAsInt();
 
-//                    * - saveState 保存状态（暂存 0；正式提交 1；全院模板 2；科室模板 3；医生个人模板 4）
-//     * - medicine 处方中包含的药物清单，json 数组
-//     * <p>
-//     * - medicine 数组中每个元素包含的属性：
-//     * - medicineId 处方药品编号
-//                    * - medicineUsage 药品用途
-//                    * - medicineDosage 药品用量
-//                    * - medicineFrequency 药品使用频率
-//                    * - medicineNumberDay 药品使用天数
-//                    * - medicineQuantity 药品数量
-//                    * - skinTest 皮试
-//                    * - skinTestResult 皮试结果
+            if (prescriptionId == -1) {
+                // 新增处方
+                Prescription record = new Prescription(null, prescriptionName, registrationId, saveState, 1, null, null, null);
+                prescriptionMapper.insert(record);
+                if (record.getPrescriptionId() == null)
+                    throw new Exception("prescriptionId is still null after trying to insert the database.");
+                prescriptionId = record.getPrescriptionId();
+            } else {
+                // 更新现有处方
+                Prescription record = new Prescription(prescriptionId, prescriptionName, registrationId, saveState, 1, null, null, null);
+                PrescriptionExample prescriptionExample = new PrescriptionExample();
+                prescriptionExample.or().andValidEqualTo(1).andPrescriptionIdEqualTo(prescriptionId);
+                prescriptionMapper.updateByExampleSelective(record, prescriptionExample);
+            }
+
+            JsonArray medicineJsonArray = prescriptionJsonObject.getAsJsonArray("medicine");
+
+            // 使之前的处方药物项失效
+            PrescriptionItem prescriptionItemRecord = new PrescriptionItem();
+            prescriptionItemRecord.setValid(0);
+            PrescriptionItemExample prescriptionItemExample = new PrescriptionItemExample();
+            prescriptionItemExample.or().andValidEqualTo(1).andPrescriptionIdEqualTo(prescriptionId);
+            prescriptionItemMapper.updateByExampleSelective(prescriptionItemRecord, prescriptionItemExample);
+
+            // 遍历处方药品，逐条存储
+            for (int i = 0; i < medicineJsonArray.size(); i++) {
+                JsonObject medicineJsonObject = medicineJsonArray.get(i).getAsJsonObject();
+                int medicineId = medicineJsonObject.getAsJsonPrimitive("medicineId").getAsInt();
+                String medicineUsage = medicineJsonObject.getAsJsonPrimitive("medicineUsage").getAsString();
+                String medicineDosage = medicineJsonObject.getAsJsonPrimitive("medicineDosage").getAsString();
+                String medicineFrequency = medicineJsonObject.getAsJsonPrimitive("medicineFrequency").getAsString();
+                String medicineNumberDay = medicineJsonObject.getAsJsonPrimitive("medicineNumberDay").getAsString();
+                int medicineQuantity = medicineJsonObject.getAsJsonPrimitive("medicineQuantity").getAsInt();
+                String skinTest = medicineJsonObject.getAsJsonPrimitive("skinTest").getAsString();
+                String skinTestResult = medicineJsonObject.getAsJsonPrimitive("skinTestResult").getAsString();
+
+                prescriptionItemMapper.insert(new PrescriptionItem(null, medicineId, prescriptionId, medicineUsage, medicineDosage, medicineFrequency, medicineNumberDay, medicineQuantity, skinTest, skinTestResult, 1, null, null, null));
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return false;

@@ -6,8 +6,6 @@
       <idArg column="prescription_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="prescription_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="registration_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="patient_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="doctor_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="save_state" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -74,8 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    prescription_id, prescription_name, registration_id, patient_name, doctor_id, save_state, 
-    valid, reserve1, reserve2, reserve3
+    prescription_id, prescription_name, registration_id, save_state, valid, reserve1, 
+    reserve2, reserve3
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.PrescriptionExample" resultMap="BaseResultMap">
     select
@@ -109,12 +107,6 @@
       <if test="registrationId != null">
         registration_id,
       </if>
-      <if test="patientName != null">
-        patient_name,
-      </if>
-      <if test="doctorId != null">
-        doctor_id,
-      </if>
       <if test="saveState != null">
         save_state,
       </if>
@@ -137,12 +129,6 @@
       </if>
       <if test="registrationId != null">
         #{registrationId,jdbcType=INTEGER},
-      </if>
-      <if test="patientName != null">
-        #{patientName,jdbcType=VARCHAR},
-      </if>
-      <if test="doctorId != null">
-        #{doctorId,jdbcType=INTEGER},
       </if>
       <if test="saveState != null">
         #{saveState,jdbcType=INTEGER},
@@ -179,12 +165,6 @@
       <if test="record.registrationId != null">
         registration_id = #{record.registrationId,jdbcType=INTEGER},
       </if>
-      <if test="record.patientName != null">
-        patient_name = #{record.patientName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.doctorId != null">
-        doctor_id = #{record.doctorId,jdbcType=INTEGER},
-      </if>
       <if test="record.saveState != null">
         save_state = #{record.saveState,jdbcType=INTEGER},
       </if>
@@ -210,8 +190,6 @@
     set prescription_id = #{record.prescriptionId,jdbcType=INTEGER},
       prescription_name = #{record.prescriptionName,jdbcType=VARCHAR},
       registration_id = #{record.registrationId,jdbcType=INTEGER},
-      patient_name = #{record.patientName,jdbcType=VARCHAR},
-      doctor_id = #{record.doctorId,jdbcType=INTEGER},
       save_state = #{record.saveState,jdbcType=INTEGER},
       valid = #{record.valid,jdbcType=INTEGER},
       reserve1 = #{record.reserve1,jdbcType=VARCHAR},
@@ -229,12 +207,6 @@
       </if>
       <if test="registrationId != null">
         registration_id = #{registrationId,jdbcType=INTEGER},
-      </if>
-      <if test="patientName != null">
-        patient_name = #{patientName,jdbcType=VARCHAR},
-      </if>
-      <if test="doctorId != null">
-        doctor_id = #{doctorId,jdbcType=INTEGER},
       </if>
       <if test="saveState != null">
         save_state = #{saveState,jdbcType=INTEGER},

@@ -5,9 +5,9 @@ import java.util.Date;
 public class Registration {
     private Integer registrationId;
 
-    private String patientName;
-
     private Integer patientId;
+
+    private String patientName;
 
     private String gender;
 
@@ -51,10 +51,10 @@ public class Registration {
 
     private String reserve3;
 
-    public Registration(Integer registrationId, String patientName, Integer patientId, String gender, Integer age, Date birthday, String registrationCategory, String medicalCategory, String identityCardNo, String registrationStatus, Date visitDate, Date registrationDate, Integer departmentId, Integer doctorId, String registrationSource, String settleAccountsCategory, String isVisited, String familyAddress, Integer collectorId, Integer totalCharge, Integer valid, String reserve1, String reserve2, String reserve3) {
+    public Registration(Integer registrationId, Integer patientId, String patientName, String gender, Integer age, Date birthday, String registrationCategory, String medicalCategory, String identityCardNo, String registrationStatus, Date visitDate, Date registrationDate, Integer departmentId, Integer doctorId, String registrationSource, String settleAccountsCategory, String isVisited, String familyAddress, Integer collectorId, Integer totalCharge, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.registrationId = registrationId;
-        this.patientName = patientName;
         this.patientId = patientId;
+        this.patientName = patientName;
         this.gender = gender;
         this.age = age;
         this.birthday = birthday;
@@ -90,20 +90,20 @@ public class Registration {
         this.registrationId = registrationId;
     }
 
-    public String getPatientName() {
-        return patientName;
-    }
-
-    public void setPatientName(String patientName) {
-        this.patientName = patientName == null ? null : patientName.trim();
-    }
-
     public Integer getPatientId() {
         return patientId;
     }
 
     public void setPatientId(Integer patientId) {
         this.patientId = patientId;
+    }
+
+    public String getPatientName() {
+        return patientName;
+    }
+
+    public void setPatientName(String patientName) {
+        this.patientName = patientName == null ? null : patientName.trim();
     }
 
     public String getGender() {

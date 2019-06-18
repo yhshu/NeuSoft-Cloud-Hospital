@@ -18,7 +18,7 @@ public interface RegistrationMapper {
     int deleteByPrimaryKey(Integer registrationId);
 
     @Insert({
-        "insert into hospital.registration (patient_name, patient_id, ",
+        "insert into hospital.registration (patient_id, patient_name, ",
         "gender, age, birthday, ",
         "registration_category, medical_category, ",
         "identity_card_no, registration_status, ",
@@ -29,7 +29,7 @@ public interface RegistrationMapper {
         "collector_id, total_charge, ",
         "valid, reserve1, ",
         "reserve2, reserve3)",
-        "values (#{patientName,jdbcType=VARCHAR}, #{patientId,jdbcType=INTEGER}, ",
+        "values (#{patientId,jdbcType=INTEGER}, #{patientName,jdbcType=VARCHAR}, ",
         "#{gender,jdbcType=CHAR}, #{age,jdbcType=INTEGER}, #{birthday,jdbcType=DATE}, ",
         "#{registrationCategory,jdbcType=CHAR}, #{medicalCategory,jdbcType=CHAR}, ",
         "#{identityCardNo,jdbcType=CHAR}, #{registrationStatus,jdbcType=CHAR}, ",
@@ -50,7 +50,7 @@ public interface RegistrationMapper {
 
     @Select({
         "select",
-        "registration_id, patient_name, patient_id, gender, age, birthday, registration_category, ",
+        "registration_id, patient_id, patient_name, gender, age, birthday, registration_category, ",
         "medical_category, identity_card_no, registration_status, visit_date, registration_date, ",
         "department_id, doctor_id, registration_source, settle_accounts_category, is_visited, ",
         "family_address, collector_id, total_charge, valid, reserve1, reserve2, reserve3",
@@ -68,8 +68,8 @@ public interface RegistrationMapper {
 
     @Update({
         "update hospital.registration",
-        "set patient_name = #{patientName,jdbcType=VARCHAR},",
-          "patient_id = #{patientId,jdbcType=INTEGER},",
+        "set patient_id = #{patientId,jdbcType=INTEGER},",
+          "patient_name = #{patientName,jdbcType=VARCHAR},",
           "gender = #{gender,jdbcType=CHAR},",
           "age = #{age,jdbcType=INTEGER},",
           "birthday = #{birthday,jdbcType=DATE},",
