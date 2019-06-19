@@ -50,5 +50,5 @@ public interface RegistrationService {
      * @param registrationId 挂号单编号
      * @return 患者的历史挂号编号列表
      */
-    List<Integer> historyRegistratioinIdList(int registrationId);
+    List<Integer> historyRegistrationIdList(int registrationId);
 }

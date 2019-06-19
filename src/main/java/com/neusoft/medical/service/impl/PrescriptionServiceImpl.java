@@ -150,7 +150,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         String res = null;
         try {
             // 按挂号单编号获取相同患者的挂号单编号列表
-            List<Integer> registrationIdList = registrationService.historyRegistratioinIdList(registrationId);
+            List<Integer> registrationIdList = registrationService.historyRegistrationIdList(registrationId);
 
             // 找到每项挂号对应的历史处方
             PrescriptionExample prescriptionExample = new PrescriptionExample();

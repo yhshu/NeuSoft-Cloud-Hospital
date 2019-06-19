@@ -92,6 +92,12 @@ public class RegistrationCategoryController {
         return new ResultDTO<>(Boolean.TRUE);
     }
 
+    /**
+     * 按主键删除挂号级别
+     *
+     * @param registrationCategoryId 挂号级别编号的列表
+     * @return 操作结果
+     */
     @DeleteMapping("/delete")
     public ResultDTO<Boolean> deleteRegistrationCategoryByPrimaryKey(
             @RequestParam(value = "registrationCategoryIdList[]") Integer[] registrationCategoryIdList

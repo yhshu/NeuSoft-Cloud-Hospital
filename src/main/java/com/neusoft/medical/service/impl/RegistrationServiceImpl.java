@@ -33,11 +33,6 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
     public Registration addRegistration(Registration record) throws Exception {
-        // 新增挂号记录
-        System.out.println("RegistrationInfoServiceImpl 尝试新增挂号: " + record.toString());
-        int effectRow = registrationMapper.insert(record);
-        System.out.println("RegistrationInfoServiceImpl 已新增挂号 " + effectRow + " 项");
-
         // 新增患者信息
         System.out.println("RegistrationInfoServiceImpl 新增患者信息: " + record.getPatientName());
         PatientExample patientExample = new PatientExample();
@@ -48,6 +43,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         List<Patient> patientList = patientMapper.selectByExample(patientExample);
         if (patientList.size() > 1)
             throw new Exception("Duplicate selectPatient identity ID");
+
         Patient patient = new Patient(null, record.getPatientName(), record.getBirthday(), null, record.getIdentityCardNo(), null, null, record.getGender(), 1, null, null, null);
         if (patientList.size() == 0) {
             // 暂无该患者信息
@@ -57,6 +53,12 @@ public class RegistrationServiceImpl implements RegistrationService {
             patient.setPatientId(record.getPatientId());
             patientMapper.updateByPrimaryKey(patient);
         }
+
+        // 新增挂号记录
+        System.out.println("RegistrationInfoServiceImpl 尝试新增挂号: " + record.toString());
+        record.setPatientId(patient.getPatientId());
+        int effectRow = registrationMapper.insert(record);
+        System.out.println("RegistrationInfoServiceImpl 已新增挂号 " + effectRow + " 项");
 
         // 病历记录在患者前往医生处就诊后生成
         return registrationMapper.selectByPrimaryKey(record.getRegistrationId());
@@ -108,7 +110,7 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    public List<Integer> historyRegistratioinIdList(int registrationId) {
+    public List<Integer> historyRegistrationIdList(int registrationId) {
         List<Registration> registrationList = historyRegistrationList(registrationId);
 
         List<Integer> registrationIdList = new CopyOnWriteArrayList<>(); // 构建患者的挂号单编号列表

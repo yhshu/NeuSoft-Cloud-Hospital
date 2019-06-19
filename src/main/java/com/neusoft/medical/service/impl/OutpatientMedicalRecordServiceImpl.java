@@ -267,7 +267,7 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
         String res = null;
         try {
             // 构建患者的挂号单编号列表
-            List<Integer> registrationIdList = registrationService.historyRegistratioinIdList(registrationId);
+            List<Integer> registrationIdList = registrationService.historyRegistrationIdList(registrationId);
 
             // 找到每项挂号对应的历史病历
             MedicalRecordsExample medicalRecordsExample = new MedicalRecordsExample();
