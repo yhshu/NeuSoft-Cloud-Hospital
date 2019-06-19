@@ -47,7 +47,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         List<Patient> patientList = patientMapper.selectByExample(patientExample);
         if (patientList.size() > 1)
-            throw new Exception("Duplicate patient identity ID");
+            throw new Exception("Duplicate selectPatient identity ID");
         Patient patient = new Patient(null, record.getPatientName(), record.getBirthday(), null, record.getIdentityCardNo(), null, null, record.getGender(), 1, null, null, null);
         if (patientList.size() == 0) {
             // 暂无该患者信息

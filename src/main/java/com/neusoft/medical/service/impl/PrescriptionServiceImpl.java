@@ -221,6 +221,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
                 prescriptionMedicineJsonArray.add(prescriptionJsonObject);
             }
             res = prescriptionMedicineJsonArray.toString();
+            System.out.println("prescriptionListToJson: " + res);
         } catch (Exception e) {
             e.printStackTrace();
         }
