@@ -26,10 +26,10 @@ public class AccountController {
      * @param accountScope 查找的帐号范围，字符串数组
      *                     门诊医生 00
      *                     医技医生 01
-     *                     医院收费员 10
+     *                     医院管理员 10
      *                     药房操作员 11
      *                     财务管理员 12
-     *                     挂号管理员 13
+     *                     挂号收费员 13
      * @return 指定范围的帐号信息
      */
     @GetMapping("/select_account")
