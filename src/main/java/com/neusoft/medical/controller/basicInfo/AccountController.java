@@ -95,6 +95,7 @@ public class AccountController {
             @RequestParam(value = "doctorScheduling", required = false) Integer doctorScheduling
     ) {
         try {
+            if (doctorScheduling == null) doctorScheduling = -1;
             accountService.addAccount(userName, userPassword, accountType, realName, departmentId, jobTitle, doctorScheduling);
         } catch (Exception e) {
             e.printStackTrace();
@@ -126,6 +127,7 @@ public class AccountController {
             @RequestParam(value = "doctorScheduling", required = false) Integer doctorScheduling
     ) {
         try {
+            if (doctorScheduling == null) doctorScheduling = -1;
             accountService.updateAccount(accountId, userName, userPassword, realName, departmentId, jobTitle, doctorScheduling);
         } catch (Exception e) {
             e.printStackTrace();
