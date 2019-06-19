@@ -214,10 +214,11 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
                 // 找到每项处方对应的药品信息
                 PrescriptionItemExample prescriptionItemExample = new PrescriptionItemExample();
-                prescriptionItemExample.or().andValidEqualTo(1).andPrescriptionItemIdEqualTo(prescription.getPrescriptionId());
+                prescriptionItemExample.or().andValidEqualTo(1).andPrescriptionIdEqualTo(prescription.getPrescriptionId());
                 List<PrescriptionItem> prescriptionItemList = prescriptionItemMapper.selectByExample(prescriptionItemExample);
 
                 prescriptionJsonObject.addProperty("medicine", gson.toJsonTree(prescriptionItemList).toString());
+                System.out.println("prescriptionListToJson: " + gson.toJsonTree(prescriptionItemList).toString());
                 prescriptionMedicineJsonArray.add(prescriptionJsonObject);
             }
             res = prescriptionMedicineJsonArray.toString();
