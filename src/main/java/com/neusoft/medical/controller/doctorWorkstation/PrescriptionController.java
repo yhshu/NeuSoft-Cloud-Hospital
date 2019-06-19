@@ -6,6 +6,7 @@ import com.neusoft.medical.service.doctorWorkstation.PrescriptionService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -124,5 +125,23 @@ public class PrescriptionController {
             e.printStackTrace();
         }
         return new ResultDTO<>(historyPrescriptionJsonList);
+    }
+
+    /**
+     * 删除处方记录
+     *
+     * @param prescriptionIdList 处方编号列表
+     * @return 操作结果
+     */
+    public ResultDTO<Boolean> deletePrescription(
+            @RequestParam(value = "prescriptionIdList[]") Integer[] prescriptionIdList
+    ) {
+        try {
+            prescriptionService.deletePrescription(Arrays.asList(prescriptionIdList));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultDTO<>(Boolean.FALSE);
+        }
+        return new ResultDTO<>(Boolean.TRUE);
     }
 }

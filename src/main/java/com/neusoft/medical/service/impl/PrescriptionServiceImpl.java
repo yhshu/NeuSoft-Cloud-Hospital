@@ -170,4 +170,32 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         }
         return res;
     }
+
+    @Override
+    public boolean deletePrescription(List<Integer> prescriptionIdList) {
+        // 将处方和处方药品清单置为无效
+        try {
+            PrescriptionExample prescriptionExample = new PrescriptionExample();
+            prescriptionExample.or().andValidEqualTo(1).andPrescriptionIdIn(prescriptionIdList);
+            List<Prescription> prescriptionList = prescriptionMapper.selectByExample(prescriptionExample);
+
+            for (Prescription prescription : prescriptionList) {
+                // 将处方和处方药品置为无效
+                Prescription prescriptionRecord = new Prescription();
+                prescriptionRecord.setValid(0);
+                prescriptionRecord.setPrescriptionId(prescription.getPrescriptionId());
+                prescriptionMapper.updateByPrimaryKeySelective(prescriptionRecord);
+
+                PrescriptionItem prescriptionItemRecord = new PrescriptionItem();
+                prescriptionItemRecord.setValid(0);
+                PrescriptionItemExample prescriptionItemExample = new PrescriptionItemExample();  // 该处方的药品清单
+                prescriptionItemExample.or().andValidEqualTo(1).andPrescriptionIdEqualTo(prescription.getPrescriptionId());
+                prescriptionItemMapper.updateByExampleSelective(prescriptionItemRecord, prescriptionItemExample);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }

@@ -56,4 +56,13 @@ public interface PrescriptionService {
      * @return 历史处方列表，json 字符串列表
      */
     String selectHistoryPrescription(Integer registrationId);
+
+
+    /**
+     * 删除处方记录
+     *
+     * @param prescriptionIdList 处方编号列表
+     * @return
+     */
+    boolean deletePrescription(List<Integer> prescriptionIdList);
 }
