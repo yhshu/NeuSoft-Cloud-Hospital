@@ -218,11 +218,9 @@ public class PrescriptionServiceImpl implements PrescriptionService {
                 List<PrescriptionItem> prescriptionItemList = prescriptionItemMapper.selectByExample(prescriptionItemExample);
 
                 prescriptionJsonObject.addProperty("medicine", gson.toJsonTree(prescriptionItemList).toString());
-                System.out.println("prescriptionListToJson: " + gson.toJsonTree(prescriptionItemList).toString());
                 prescriptionMedicineJsonArray.add(prescriptionJsonObject);
             }
             res = prescriptionMedicineJsonArray.toString();
-            System.out.println("prescriptionListToJson: " + res);
         } catch (Exception e) {
             e.printStackTrace();
         }
