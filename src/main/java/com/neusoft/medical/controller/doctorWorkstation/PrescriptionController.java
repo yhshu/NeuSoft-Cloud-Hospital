@@ -115,6 +115,7 @@ public class PrescriptionController {
      * @param registrationId 挂号编号
      * @return 历史处方列表，json 字符串列表
      */
+    @GetMapping("/history_prescription")
     public ResultDTO<String> selectHistoryPrescription(
             @RequestParam(value = "registrationId") Integer registrationId
     ) {
@@ -128,11 +129,33 @@ public class PrescriptionController {
     }
 
     /**
+     * 查询处方模板
+     *
+     * @param prescriptionScope 查询的处方模板的范围（所有 0；医生本人 1；医生所在科室 2）
+     * @param doctorId          医生编号
+     * @return 处方模板列表
+     */
+    @GetMapping("/prescription_template")
+    public ResultDTO<String> selectPrescriptionTemplate(
+            @RequestParam(value = "prescriptionScope") Integer prescriptionScope,
+            @RequestParam(value = "doctorId") Integer doctorId
+    ) {
+        String res = null;
+        try {
+            res = prescriptionService.selectPrescriptionTemplate(prescriptionScope, doctorId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResultDTO<>(res);
+    }
+
+    /**
      * 删除处方记录
      *
      * @param prescriptionIdList 处方编号列表
      * @return 操作结果
      */
+    @DeleteMapping("/delete_prescription")
     public ResultDTO<Boolean> deletePrescription(
             @RequestParam(value = "prescriptionIdList[]") Integer[] prescriptionIdList
     ) {

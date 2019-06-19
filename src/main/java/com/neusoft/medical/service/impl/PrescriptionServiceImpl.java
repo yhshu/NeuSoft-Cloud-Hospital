@@ -150,6 +150,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
             // 找到每项挂号对应的历史处方
             PrescriptionExample prescriptionExample = new PrescriptionExample();
             prescriptionExample.or().andValidEqualTo(1).andRegistrationIdIn(registrationIdList).andSaveStateEqualTo(SAVE_FORMAL);
+            prescriptionExample.or().andValidEqualTo(1).andRegistrationIdIn(registrationIdList).andSaveStateEqualTo(SAVE_TEMP);
             List<Prescription> prescriptionList = prescriptionMapper.selectByExample(prescriptionExample);
 
             JsonArray prescriptionMedicineJsonArray = new JsonArray();
