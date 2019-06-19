@@ -131,7 +131,7 @@ public class PrescriptionController {
     /**
      * 查询处方模板
      *
-     * @param prescriptionScope 查询的处方模板的范围（所有 0；医生本人 1；医生所在科室 2）
+     * @param prescriptionScope 查询的处方模板的范围（全院模板 2；科室模板 3；医生个人模板 4）
      * @param doctorId          医生编号
      * @return 处方模板列表
      */

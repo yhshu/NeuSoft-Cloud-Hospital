@@ -1,6 +1,7 @@
 package com.neusoft.medical.service.doctorWorkstation;
 
 import com.neusoft.medical.bean.Medicine;
+import com.neusoft.medical.bean.Prescription;
 
 import java.util.List;
 
@@ -57,15 +58,6 @@ public interface PrescriptionService {
      */
     String selectHistoryPrescription(Integer registrationId);
 
-
-    /**
-     * 删除处方记录
-     *
-     * @param prescriptionIdList 处方编号列表
-     * @return 操作结果
-     */
-    boolean deletePrescription(List<Integer> prescriptionIdList);
-
     /**
      * 查询处方模板
      *
@@ -74,4 +66,21 @@ public interface PrescriptionService {
      * @return 处方模板列表
      */
     String selectPrescriptionTemplate(Integer prescriptionScope, Integer doctorId);
+
+    /**
+     * 由处方列表获取处方信息 json 字符串
+     * 字符串中除处方基本信息外，还包含处方药品列表的信息
+     *
+     * @param prescriptionList 处方列表
+     * @return 包含处方药品信息的处方信息 json 字符串
+     */
+    String prescriptionListToJson(List<Prescription> prescriptionList);
+
+    /**
+     * 删除处方记录
+     *
+     * @param prescriptionIdList 处方编号列表
+     * @return 操作结果
+     */
+    boolean deletePrescription(List<Integer> prescriptionIdList);
 }

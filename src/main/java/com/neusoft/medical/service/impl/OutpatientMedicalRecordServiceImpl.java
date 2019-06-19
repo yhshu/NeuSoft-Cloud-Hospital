@@ -221,8 +221,7 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
                 // 查找医生所在科室的病历模板
                 DoctorExample doctorExample = new DoctorExample();
                 DoctorExample.Criteria doctorExampleCriteria = doctorExample.createCriteria();
-                doctorExampleCriteria.andValidEqualTo(1);
-                doctorExampleCriteria.andDepartmentIdEqualTo(doctorMapper.selectByPrimaryKey(doctorId).getDepartmentId());
+                doctorExampleCriteria.andValidEqualTo(1).andDepartmentIdEqualTo(doctorMapper.selectByPrimaryKey(doctorId).getDepartmentId());
                 List<Doctor> doctorListOfDepartment = doctorMapper.selectByExample(doctorExample);
                 List<Integer> doctorIdListOfDepartment = new CopyOnWriteArrayList<>();
                 for (Doctor doctor : doctorListOfDepartment) {

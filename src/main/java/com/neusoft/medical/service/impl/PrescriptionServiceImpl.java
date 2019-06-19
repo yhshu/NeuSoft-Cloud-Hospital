@@ -5,6 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.neusoft.medical.bean.*;
+import com.neusoft.medical.dao.DoctorMapper;
 import com.neusoft.medical.dao.MedicineMapper;
 import com.neusoft.medical.dao.PrescriptionItemMapper;
 import com.neusoft.medical.dao.PrescriptionMapper;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
 public class PrescriptionServiceImpl implements PrescriptionService {
@@ -24,7 +26,10 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     @Resource
     private PrescriptionItemMapper prescriptionItemMapper;
     @Resource
+    private DoctorMapper doctorMapper;
+    @Resource
     private RegistrationService registrationService;
+
     private Gson gson = new Gson();
 
     @Override
@@ -153,6 +158,56 @@ public class PrescriptionServiceImpl implements PrescriptionService {
             prescriptionExample.or().andValidEqualTo(1).andRegistrationIdIn(registrationIdList).andSaveStateEqualTo(SAVE_TEMP);
             List<Prescription> prescriptionList = prescriptionMapper.selectByExample(prescriptionExample);
 
+            res = prescriptionListToJson(prescriptionList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    @Override
+    public String selectPrescriptionTemplate(Integer prescriptionScope, Integer doctorId) {
+        String res = null;
+        try {
+            if (prescriptionScope != SAVE_HOSPITAL_TEMPLATE && prescriptionScope != SAVE_DEPART_TEMPLATE && prescriptionScope != SAVE_DOCTOR_TEMPLATE) {
+                System.out.println("关于模板搜索范围的参数非法");
+                return null;
+            }
+
+            PrescriptionExample prescriptionExample = new PrescriptionExample();
+            PrescriptionExample.Criteria prescriptionExampleCriteria = prescriptionExample.createCriteria();
+            prescriptionExampleCriteria.andValidEqualTo(1).andSaveStateEqualTo(prescriptionScope);
+            if (prescriptionScope == SAVE_DEPART_TEMPLATE) {
+                // 科室模板
+                DoctorExample doctorExample = new DoctorExample();
+                DoctorExample.Criteria doctorExampleCriteria = doctorExample.createCriteria();
+                doctorExampleCriteria.andValidEqualTo(1);
+                doctorExampleCriteria.andDepartmentIdEqualTo(doctorMapper.selectByPrimaryKey(doctorId).getDepartmentId());
+                List<Doctor> doctorList = doctorMapper.selectByExample(doctorExample);
+                List<Integer> doctorIdList = new CopyOnWriteArrayList<>();
+                for (Doctor doctor : doctorList) {
+                    doctorIdList.add(doctor.getDoctorId());
+                }
+
+                prescriptionExampleCriteria.andDoctorIdIn(doctorIdList);
+            } else if (prescriptionScope == SAVE_DOCTOR_TEMPLATE) {
+                // 医生个人模板
+                prescriptionExampleCriteria.andDoctorIdEqualTo(doctorId);
+            }
+
+            List<Prescription> prescriptionList = prescriptionMapper.selectByExample(prescriptionExample);
+            res = prescriptionListToJson(prescriptionList);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    @Override
+    public String prescriptionListToJson(List<Prescription> prescriptionList) {
+        String res = null;
+        try {
             JsonArray prescriptionMedicineJsonArray = new JsonArray();
             for (Prescription prescription : prescriptionList) {
                 JsonObject prescriptionJsonObject = gson.toJsonTree(prescription).getAsJsonObject();
