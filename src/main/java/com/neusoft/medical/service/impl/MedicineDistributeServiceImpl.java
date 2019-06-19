@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
+import static java.lang.Math.min;
+
 @Service
 public class MedicineDistributeServiceImpl implements MedicineDistributeService {
     @Resource
@@ -71,6 +73,25 @@ public class MedicineDistributeServiceImpl implements MedicineDistributeService 
             ChargeForm record = new ChargeForm();
             record.setNotGivenNums(0);
             chargeFormMapper.updateByExampleSelective(record, chargeFormExample);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean medicineReturn(String medicineReturnJson) {
+        try {
+            JsonArray medicineReturnJsonArray = gson.toJsonTree(medicineReturnJson).getAsJsonArray();
+            for (JsonElement medicineReturnJsonElement : medicineReturnJsonArray) {
+                JsonObject medicineReturnJsonObject = medicineReturnJsonElement.getAsJsonObject();
+                int chargeFormId = medicineReturnJsonObject.get("chargeFormId").getAsInt();
+                int returnNums = medicineReturnJsonObject.get("returnNums").getAsInt();
+
+                ChargeForm chargeForm = chargeFormMapper.selectByPrimaryKey(chargeFormId);
+                chargeForm.setNotGivenNums(min(chargeForm.getNotGivenNums() + returnNums, chargeForm.getItemCount()));
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return false;

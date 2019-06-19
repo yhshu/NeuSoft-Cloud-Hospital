@@ -76,4 +76,29 @@ public class MedicineDistributeController {
         }
         return new ResultDTO<>(res);
     }
+
+    /**
+     * 门诊退药
+     * 退药数量不能超过可退数量，如果找出只按可退数量计算
+     *
+     * @param medicineReturnJson 退药信息，json 字符串
+     * @return 操作结果
+     * <p>
+     * 退药信息 json 字符串是 json 数组，该数组中的每项元素包含如下属性：
+     * - chargeFormId 收费项目的编号，int 型
+     * - returnNums   退药数量，int 型
+     */
+    @GetMapping("/return")
+    public ResultDTO<Boolean> medicineReturn(
+            @RequestParam(value = "medicineReturn") String medicineReturnJson
+    ) {
+        Boolean res;
+        try {
+            res = medicineDistributeService.medicineReturn(medicineReturnJson);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultDTO<>(Boolean.FALSE);
+        }
+        return new ResultDTO<>(res);
+    }
 }
