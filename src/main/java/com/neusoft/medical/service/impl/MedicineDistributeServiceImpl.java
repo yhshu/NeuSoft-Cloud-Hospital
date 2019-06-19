@@ -60,4 +60,21 @@ public class MedicineDistributeServiceImpl implements MedicineDistributeService 
         }
         return res;
     }
+
+    @Override
+    public boolean medicineDistribute(List<Integer> chargeFormIdList) {
+        try {
+            ChargeFormExample chargeFormExample = new ChargeFormExample();
+            ChargeFormExample.Criteria criteria = chargeFormExample.createCriteria();
+            criteria.andValidEqualTo(1).andChargeFormIdIn(chargeFormIdList);
+
+            ChargeForm record = new ChargeForm();
+            record.setNotGivenNums(0);
+            chargeFormMapper.updateByExampleSelective(record, chargeFormExample);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }
