@@ -44,4 +44,25 @@ public interface ExaminationService {
      * @return 操作结果
      */
     String selectHistoryExam(int registrationId);
+
+    /**
+     * 执行检查
+     * 更改检查状态，提交检查结果
+     * <p>
+     * 修改检查的临床印象、检查结果
+     * 修改收费项目的尚未交付数量
+     *
+     * @param examinationJson 检查信息，json 字符串
+     * @return 操作结果
+     * <p>
+     * examinationJson 中的属性包括：
+     * - examinationId      检查检验编号
+     * - clinicalImpression 临床印象
+     * - examResult         检查结果
+     * <p>
+     * examinationJson 中包含的收费项目列表，属性名为 chargeEntryList
+     * - chargeEntryId 收费项目编号
+     * - notGivenNums  在执行检查检验后，尚未交付的项目数量
+     */
+    boolean updateExamResult(String examinationJson);
 }

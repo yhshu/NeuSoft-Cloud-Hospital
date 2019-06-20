@@ -100,4 +100,33 @@ public class ExaminationServiceImpl implements ExaminationService {
         }
         return examinationJsonArray.toString();
     }
+
+    @Override
+    public boolean updateExamResult(String examinationJson) {
+        try {
+            JsonObject examinationJsonObject = new JsonParser().parse(examinationJson).getAsJsonObject();
+            int examinationId = examinationJsonObject.get("examinationId").getAsInt();
+            String clinicalImpression = examinationJsonObject.get("clinicalImpression").getAsString();
+            String examResult = examinationJsonObject.get("examResult").getAsString();
+            Examination examinationRecord = new Examination();
+            examinationRecord.setExaminationId(examinationId);
+            examinationRecord.setClinicalImpression(clinicalImpression);
+            examinationRecord.setExamResult(examResult);
+
+            JsonArray chargeEntryList = examinationJsonObject.get("chargeEntryList").getAsJsonArray();
+            for (JsonElement chargeEntryJsonElement : chargeEntryList) {
+                JsonObject chargeEntryJsonObject = chargeEntryJsonElement.getAsJsonObject();
+                int chargeEntryId = chargeEntryJsonObject.get("chargeEntryId").getAsInt();
+                int notGivenNums = chargeEntryJsonObject.get("notGivenNums").getAsInt();
+                ChargeEntry chargeEntryRecord = new ChargeEntry();
+                chargeEntryRecord.setChargeEntryId(chargeEntryId);
+                chargeEntryRecord.setNotGivenNums(notGivenNums);
+                chargeEntryMapper.updateByPrimaryKeySelective(chargeEntryRecord);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }

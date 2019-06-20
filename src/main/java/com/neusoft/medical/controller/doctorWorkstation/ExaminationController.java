@@ -93,11 +93,26 @@ public class ExaminationController {
      *
      * @param examinationJson 检查信息，json 字符串
      * @return 操作结果
+     * <p>
+     * examinationJson 中的属性包括：
+     * - examinationId 检查检验编号
+     * - clinicalImpression 临床印象
+     * - examResult 检查结果
+     * <p>
+     * examinationJson 中包含的收费项目列表，属性名为 chargeEntryList
+     * - not_given_nums 在执行检查检验后，尚未交付的项目数量
      */
     @GetMapping("/update_result")
-    public ResultDTO<Boolean> updateExamResult(@RequestParam(value = "examinationJson") String examinationJson) {
-        // todo
-        return null;
+    public ResultDTO<Boolean> updateExamResult(
+            @RequestParam(value = "examinationJson") String examinationJson) {
+        boolean res;
+        try {
+            res = examinationService.updateExamResult(examinationJson);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultDTO<>(Boolean.FALSE);
+        }
+        return new ResultDTO<>(res);
     }
 
     /**
