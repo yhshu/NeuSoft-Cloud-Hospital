@@ -5,7 +5,7 @@ import com.neusoft.medical.bean.ChargeItem;
 import java.util.List;
 
 public interface ExaminationService {
-    int EXPENSE_CATEGORY_EXAM = 3;
+
 
     /**
      * 新增检查检验项目

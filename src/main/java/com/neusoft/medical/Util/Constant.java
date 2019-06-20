@@ -2,6 +2,11 @@ package com.neusoft.medical.Util;
 
 public interface Constant {
     /**
+     * 开销种类
+     */
+    int EXPENSE_CATEGORY_EXAM = 3;
+
+    /**
      * 收费状态
      */
     int CHARGE_STATUS_NOT_CHARGED = 0;

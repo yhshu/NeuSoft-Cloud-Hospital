@@ -124,7 +124,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
             for (int i = 0; i < medicineJsonArray.size(); i++) {
                 JsonObject medicineJsonObject = medicineJsonArray.get(i).getAsJsonObject();
                 int medicineId = medicineJsonObject.getAsJsonPrimitive("medicineId").getAsInt();
-                double unitPrice = MathUtil.doubleSetScale(medicineJsonObject.getAsJsonPrimitive("").getAsDouble(), 2);
+                double unitPrice = MathUtil.doubleSetScale(medicineJsonObject.getAsJsonPrimitive("medicinePrice").getAsDouble(), 2);
                 int nums = medicineJsonObject.getAsJsonPrimitive("nums").getAsInt();
                 double totalPrice = MathUtil.doubleSetScale(unitPrice * nums, 2);
                 String medicineUsage = medicineJsonObject.getAsJsonPrimitive("medicineUsage").getAsString();

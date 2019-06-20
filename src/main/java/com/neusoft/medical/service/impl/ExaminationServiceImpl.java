@@ -1,9 +1,6 @@
 package com.neusoft.medical.service.impl;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.google.gson.*;
 import com.neusoft.medical.Util.Constant;
 import com.neusoft.medical.Util.MathUtil;
 import com.neusoft.medical.bean.*;
@@ -17,6 +14,8 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+
+import static com.neusoft.medical.Util.Constant.EXPENSE_CATEGORY_EXAM;
 
 @Service
 public class ExaminationServiceImpl implements ExaminationService {
@@ -36,7 +35,8 @@ public class ExaminationServiceImpl implements ExaminationService {
     public boolean addExamination(String examinationJson) {
         // 首先获取 json 字符串中的属性值，然后将提交的信息加入到 examination 表和 charge_entry 表
         try {
-            JsonObject examinationJsonObject = gson.toJsonTree(examinationJson).getAsJsonObject();
+            System.out.println("添加检查检验项目　Json 字符串: " + examinationJson);
+            JsonObject examinationJsonObject = new JsonParser().parse(examinationJson).getAsJsonObject();
             int registrationId = examinationJsonObject.get("registrationId").getAsInt();
             int saveState = examinationJsonObject.get("saveState").getAsInt();
             String examName = examinationJsonObject.get("examName").getAsString();

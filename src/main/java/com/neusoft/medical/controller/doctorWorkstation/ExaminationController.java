@@ -3,10 +3,7 @@ package com.neusoft.medical.controller.doctorWorkstation;
 import com.neusoft.medical.bean.ChargeItem;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.doctorWorkstation.ExaminationService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -68,4 +65,57 @@ public class ExaminationController {
         return new ResultDTO<>(res);
     }
 
+
+    // todo 按挂号编号查询所有检查检验项目
+
+    public ResultDTO<Boolean> examinationApply(
+            @RequestParam(value = "registrationId") Integer registrationId
+    ) {
+        try {
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultDTO<>(Boolean.FALSE);
+        }
+        return new ResultDTO<>(Boolean.TRUE);
+    }
+
+    /**
+     * 按挂号单编号获取历史检查项目（所有检查状态）
+     *
+     * @param registrationId
+     * @return
+     */
+    @GetMapping("/history_exam")
+    public ResultDTO<String> selectHistroyExamination(
+            @RequestParam(value = "registrationId") Integer registrationId
+    ) {
+        return null;
+    }
+
+    /**
+     * 检查后更新检查结果
+     * <p>
+     * 修改检查的临床印象、检查结果
+     * 修改收费项目的尚未交付数量
+     *
+     * @param examinationJson
+     * @return 操作结果
+     */
+    @GetMapping("/update_result")
+    public ResultDTO<Boolean> updateExamResult(@RequestParam(value = "examinationJson") String examinationJson) {
+        return null;
+    }
+
+    /**
+     * 删除检查项目
+     * 由医生执行
+     * 只有尚未交付的项目可删除
+     *
+     * @param chargeEntryIdList 删除的检查项目编号列表
+     * @return 操作结果
+     */
+    @DeleteMapping("/delete_exam")
+    public ResultDTO<Boolean> deleteExam(@RequestParam(value = "chargeEntryIdList[]") Integer[] chargeEntryIdList) {
+        return null;
+    }
 }
