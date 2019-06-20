@@ -89,11 +89,14 @@ public class ExaminationServiceImpl implements ExaminationService {
         JsonArray examinationJsonArray = gson.toJsonTree(examinationList).getAsJsonArray();
         for (JsonElement examinationJsonElement : examinationJsonArray) {
             JsonObject examinationJsonObject = examinationJsonElement.getAsJsonObject();
+            int examinationId = examinationJsonObject.get("examinationId").getAsInt();
 
             // 针对每项检查，找到其收费项目列表
             ChargeEntryExample chargeEntryExample = new ChargeEntryExample();
-            chargeEntryExample.or().andValidEqualTo(1).andRegistrationIdEqualTo(registrationId);
-
+            chargeEntryExample.or().andValidEqualTo(1).andRegistrationIdEqualTo(registrationId).andExaminationIdEqualTo(examinationId);
+            List<ChargeEntry> chargeEntryList = chargeEntryMapper.selectByExample(chargeEntryExample);
+            JsonArray chargeEntryListJsonArray = gson.toJsonTree(chargeEntryList).getAsJsonArray();
+            examinationJsonObject.add("chargeEntryList", chargeEntryListJsonArray);
         }
         return examinationJsonArray.toString();
     }
