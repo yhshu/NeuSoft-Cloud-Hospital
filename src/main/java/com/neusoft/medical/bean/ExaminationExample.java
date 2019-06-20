@@ -294,66 +294,6 @@ public class ExaminationExample {
             return (Criteria) this;
         }
 
-        public Criteria andChargeEntryIdIsNull() {
-            addCriterion("charge_entry_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andChargeEntryIdIsNotNull() {
-            addCriterion("charge_entry_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andChargeEntryIdEqualTo(Integer value) {
-            addCriterion("charge_entry_id =", value, "chargeEntryId");
-            return (Criteria) this;
-        }
-
-        public Criteria andChargeEntryIdNotEqualTo(Integer value) {
-            addCriterion("charge_entry_id <>", value, "chargeEntryId");
-            return (Criteria) this;
-        }
-
-        public Criteria andChargeEntryIdGreaterThan(Integer value) {
-            addCriterion("charge_entry_id >", value, "chargeEntryId");
-            return (Criteria) this;
-        }
-
-        public Criteria andChargeEntryIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("charge_entry_id >=", value, "chargeEntryId");
-            return (Criteria) this;
-        }
-
-        public Criteria andChargeEntryIdLessThan(Integer value) {
-            addCriterion("charge_entry_id <", value, "chargeEntryId");
-            return (Criteria) this;
-        }
-
-        public Criteria andChargeEntryIdLessThanOrEqualTo(Integer value) {
-            addCriterion("charge_entry_id <=", value, "chargeEntryId");
-            return (Criteria) this;
-        }
-
-        public Criteria andChargeEntryIdIn(List<Integer> values) {
-            addCriterion("charge_entry_id in", values, "chargeEntryId");
-            return (Criteria) this;
-        }
-
-        public Criteria andChargeEntryIdNotIn(List<Integer> values) {
-            addCriterion("charge_entry_id not in", values, "chargeEntryId");
-            return (Criteria) this;
-        }
-
-        public Criteria andChargeEntryIdBetween(Integer value1, Integer value2) {
-            addCriterion("charge_entry_id between", value1, value2, "chargeEntryId");
-            return (Criteria) this;
-        }
-
-        public Criteria andChargeEntryIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("charge_entry_id not between", value1, value2, "chargeEntryId");
-            return (Criteria) this;
-        }
-
         public Criteria andDoctorIdIsNull() {
             addCriterion("doctor_id is null");
             return (Criteria) this;

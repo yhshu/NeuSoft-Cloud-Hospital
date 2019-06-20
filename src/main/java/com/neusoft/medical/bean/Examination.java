@@ -7,8 +7,6 @@ public class Examination {
 
     private String patientName;
 
-    private Integer chargeEntryId;
-
     private Integer doctorId;
 
     private Integer departmentId;
@@ -31,11 +29,10 @@ public class Examination {
 
     private String reserve3;
 
-    public Examination(Integer examinationId, Integer registrationId, String patientName, Integer chargeEntryId, Integer doctorId, Integer departmentId, Integer saveState, String examName, String clinicalImpression, String requirement, String examResult, Integer valid, String reserve1, String reserve2, String reserve3) {
+    public Examination(Integer examinationId, Integer registrationId, String patientName, Integer doctorId, Integer departmentId, Integer saveState, String examName, String clinicalImpression, String requirement, String examResult, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.examinationId = examinationId;
         this.registrationId = registrationId;
         this.patientName = patientName;
-        this.chargeEntryId = chargeEntryId;
         this.doctorId = doctorId;
         this.departmentId = departmentId;
         this.saveState = saveState;
@@ -75,14 +72,6 @@ public class Examination {
 
     public void setPatientName(String patientName) {
         this.patientName = patientName == null ? null : patientName.trim();
-    }
-
-    public Integer getChargeEntryId() {
-        return chargeEntryId;
-    }
-
-    public void setChargeEntryId(Integer chargeEntryId) {
-        this.chargeEntryId = chargeEntryId;
     }
 
     public Integer getDoctorId() {

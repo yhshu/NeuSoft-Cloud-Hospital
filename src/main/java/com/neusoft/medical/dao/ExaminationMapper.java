@@ -19,19 +19,19 @@ public interface ExaminationMapper {
 
     @Insert({
         "insert into hospital.examination (registration_id, patient_name, ",
-        "charge_entry_id, doctor_id, ",
-        "department_id, save_state, ",
-        "exam_name, clinical_impression, ",
-        "requirement, exam_result, ",
-        "valid, reserve1, ",
-        "reserve2, reserve3)",
+        "doctor_id, department_id, ",
+        "save_state, exam_name, ",
+        "clinical_impression, requirement, ",
+        "exam_result, valid, ",
+        "reserve1, reserve2, ",
+        "reserve3)",
         "values (#{registrationId,jdbcType=INTEGER}, #{patientName,jdbcType=VARCHAR}, ",
-        "#{chargeEntryId,jdbcType=INTEGER}, #{doctorId,jdbcType=INTEGER}, ",
-        "#{departmentId,jdbcType=INTEGER}, #{saveState,jdbcType=INTEGER}, ",
-        "#{examName,jdbcType=VARCHAR}, #{clinicalImpression,jdbcType=VARCHAR}, ",
-        "#{requirement,jdbcType=VARCHAR}, #{examResult,jdbcType=VARCHAR}, ",
-        "#{valid,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
-        "#{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR})"
+        "#{doctorId,jdbcType=INTEGER}, #{departmentId,jdbcType=INTEGER}, ",
+        "#{saveState,jdbcType=INTEGER}, #{examName,jdbcType=VARCHAR}, ",
+        "#{clinicalImpression,jdbcType=VARCHAR}, #{requirement,jdbcType=VARCHAR}, ",
+        "#{examResult,jdbcType=VARCHAR}, #{valid,jdbcType=INTEGER}, ",
+        "#{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, ",
+        "#{reserve3,jdbcType=VARCHAR})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="examinationId", before=false, resultType=Integer.class)
     int insert(Examination record);
@@ -42,9 +42,9 @@ public interface ExaminationMapper {
 
     @Select({
         "select",
-        "examination_id, registration_id, patient_name, charge_entry_id, doctor_id, department_id, ",
-        "save_state, exam_name, clinical_impression, requirement, exam_result, valid, ",
-        "reserve1, reserve2, reserve3",
+        "examination_id, registration_id, patient_name, doctor_id, department_id, save_state, ",
+        "exam_name, clinical_impression, requirement, exam_result, valid, reserve1, reserve2, ",
+        "reserve3",
         "from hospital.examination",
         "where examination_id = #{examinationId,jdbcType=INTEGER}"
     })
@@ -61,7 +61,6 @@ public interface ExaminationMapper {
         "update hospital.examination",
         "set registration_id = #{registrationId,jdbcType=INTEGER},",
           "patient_name = #{patientName,jdbcType=VARCHAR},",
-          "charge_entry_id = #{chargeEntryId,jdbcType=INTEGER},",
           "doctor_id = #{doctorId,jdbcType=INTEGER},",
           "department_id = #{departmentId,jdbcType=INTEGER},",
           "save_state = #{saveState,jdbcType=INTEGER},",
