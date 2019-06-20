@@ -2,6 +2,7 @@ package com.neusoft.medical.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.neusoft.medical.Util.Constant;
 import com.neusoft.medical.Util.MathUtil;
 import com.neusoft.medical.bean.ChargeEntry;
 import com.neusoft.medical.bean.ChargeEntryExample;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+
+import static com.neusoft.medical.Util.Constant.CHARGE_STATUS_NOT_CHARGED;
 
 @Service
 public class ChargeEntryServiceImpl implements ChargeEntryService {
@@ -39,9 +42,9 @@ public class ChargeEntryServiceImpl implements ChargeEntryService {
         if (endDate != null) // 结束时间
             criteria.andMadeTimeLessThan(endDate);
 
-        if (chargeEntryCategory == CATEGORY_UNCHARGED)
+        if (chargeEntryCategory == CHARGE_STATUS_NOT_CHARGED)
             criteria.andUnchargedNumsNotEqualTo(0);
-        else if (chargeEntryCategory == CATEGORY_CHARGED)
+        else if (chargeEntryCategory == Constant.CHARGE_STATUS_CHARGED)
             criteria.andUnchargedNumsEqualTo(0);
 
         List<ChargeEntry> chargeEntryList = chargeEntryMapper.selectByExample(chargeEntryExample);
