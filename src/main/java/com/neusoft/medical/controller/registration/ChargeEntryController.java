@@ -85,6 +85,8 @@ public class ChargeEntryController {
      * @param registrationId 挂号编号
      * @param itemCount      收费项目计数
      * @param collectorId    收费员编号
+     * @param unitPrice      收费项目单价
+     * @param doctorAdvice   医嘱
      * @return 添加成功 true；添加失败 false
      */
     @GetMapping("/add_charge_item_to_form")
