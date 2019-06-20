@@ -60,12 +60,13 @@ public class ChargeEntryServiceImpl implements ChargeEntryService {
     }
 
     @Override
-    public boolean addChargeEntryToForm(int chargeItemId, int registrationId, int itemCount, int collectorId, double unitPrice, String doctorAdvice) {
+    public boolean addChargeEntryToForm(int chargeItemId, int registrationId, int itemCount, int collectorId, String doctorAdvice) {
         try {
             // 获取添加到收费账单中的所需字段
             Date currentDate = new Date();
             int departmentId = registrationService.selectRegistrationByPrimaryKey(registrationId).getDepartmentId();
             int doctorId = registrationService.selectRegistrationByPrimaryKey(registrationId).getDoctorId();
+            double unitPrice = chargeItemMapper.selectByPrimaryKey(chargeItemId).getPrice();
             chargeEntryMapper.insert(new ChargeEntry(null, registrationId, null, chargeItemId, MathUtil.doubleSetScale(unitPrice, 2), MathUtil.doubleSetScale(unitPrice * itemCount, 2), itemCount, itemCount, itemCount, CHARGE_STATUS_NOT_CHARGED, currentDate, departmentId, doctorId, collectorId, 1, doctorAdvice, null, null, null));
         } catch (Exception e) {
             e.printStackTrace();

@@ -85,7 +85,6 @@ public class ChargeEntryController {
      * @param registrationId 挂号编号
      * @param itemCount      收费项目计数
      * @param collectorId    收费员编号
-     * @param unitPrice      收费项目单价
      * @param doctorAdvice   医嘱
      * @return 添加成功 true；添加失败 false
      */
@@ -95,12 +94,11 @@ public class ChargeEntryController {
             @RequestParam("registrationId") Integer registrationId,
             @RequestParam("itemCount") Integer itemCount,
             @RequestParam("collectorId") Integer collectorId,
-            @RequestParam("unitPrice") Double unitPrice,
             @RequestParam("doctorAdvice") String doctorAdvice
     ) {
         System.out.println("ChargeEntryController 添加收费项目到收费账单中");
         try {
-            chargeEntryService.addChargeEntryToForm(chargeItemId, registrationId, itemCount, collectorId, unitPrice, doctorAdvice);
+            chargeEntryService.addChargeEntryToForm(chargeItemId, registrationId, itemCount, collectorId, doctorAdvice);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultDTO<>(Boolean.FALSE);

@@ -41,11 +41,10 @@ public interface ChargeEntryService {
      * @param registrationId 挂号编号
      * @param itemCount      收费项目计数
      * @param collectorId    收费员编号
-     * @param unitPrice
      * @param doctorAdvice
      * @return 添加成功 true；添加失败 false
      */
-    boolean addChargeEntryToForm(int chargeItemId, int registrationId, int itemCount, int collectorId, double unitPrice, String doctorAdvice);
+    boolean addChargeEntryToForm(int chargeItemId, int registrationId, int itemCount, int collectorId, String doctorAdvice);
 
     /**
      * 按收费项目编号列表 删除多个收费项目
