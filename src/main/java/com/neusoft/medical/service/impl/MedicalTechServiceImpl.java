@@ -6,8 +6,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.neusoft.medical.bean.ChargeEntry;
 import com.neusoft.medical.bean.ChargeEntryExample;
-import com.neusoft.medical.bean.Patient;
-import com.neusoft.medical.bean.Registration;
 import com.neusoft.medical.dao.*;
 import com.neusoft.medical.service.techWorkstation.MedicalTechService;
 import org.springframework.stereotype.Service;
@@ -32,11 +30,6 @@ public class MedicalTechServiceImpl implements MedicalTechService {
 
     private Gson gson = new Gson();
 
-    @Override
-    public Patient selectPatient(int registrationId) {
-        Registration registration = registrationMapper.selectByPrimaryKey(registrationId);
-        return patientMapper.selectByPrimaryKey(registration.getPatientId());
-    }
 
     @Override
     public String selectChargeEntryList(int registrationId) {

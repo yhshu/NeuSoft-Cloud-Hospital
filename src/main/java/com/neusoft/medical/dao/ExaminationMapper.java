@@ -19,13 +19,17 @@ public interface ExaminationMapper {
 
     @Insert({
         "insert into hospital.examination (registration_id, patient_name, ",
-        "charge_entry_id, exam_result, ",
-        "doctor_id, department_id, ",
+        "charge_entry_id, doctor_id, ",
+        "department_id, save_state, ",
+        "exam_name, clinical_impression, ",
+        "requirement, exam_result, ",
         "valid, reserve1, ",
         "reserve2, reserve3)",
         "values (#{registrationId,jdbcType=INTEGER}, #{patientName,jdbcType=VARCHAR}, ",
-        "#{chargeEntryId,jdbcType=INTEGER}, #{examResult,jdbcType=VARCHAR}, ",
-        "#{doctorId,jdbcType=INTEGER}, #{departmentId,jdbcType=INTEGER}, ",
+        "#{chargeEntryId,jdbcType=INTEGER}, #{doctorId,jdbcType=INTEGER}, ",
+        "#{departmentId,jdbcType=INTEGER}, #{saveState,jdbcType=INTEGER}, ",
+        "#{examName,jdbcType=VARCHAR}, #{clinicalImpression,jdbcType=VARCHAR}, ",
+        "#{requirement,jdbcType=VARCHAR}, #{examResult,jdbcType=VARCHAR}, ",
         "#{valid,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
         "#{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR})"
     })
@@ -38,8 +42,9 @@ public interface ExaminationMapper {
 
     @Select({
         "select",
-        "examination_id, registration_id, patient_name, charge_entry_id, exam_result, ",
-        "doctor_id, department_id, valid, reserve1, reserve2, reserve3",
+        "examination_id, registration_id, patient_name, charge_entry_id, doctor_id, department_id, ",
+        "save_state, exam_name, clinical_impression, requirement, exam_result, valid, ",
+        "reserve1, reserve2, reserve3",
         "from hospital.examination",
         "where examination_id = #{examinationId,jdbcType=INTEGER}"
     })
@@ -57,9 +62,13 @@ public interface ExaminationMapper {
         "set registration_id = #{registrationId,jdbcType=INTEGER},",
           "patient_name = #{patientName,jdbcType=VARCHAR},",
           "charge_entry_id = #{chargeEntryId,jdbcType=INTEGER},",
-          "exam_result = #{examResult,jdbcType=VARCHAR},",
           "doctor_id = #{doctorId,jdbcType=INTEGER},",
           "department_id = #{departmentId,jdbcType=INTEGER},",
+          "save_state = #{saveState,jdbcType=INTEGER},",
+          "exam_name = #{examName,jdbcType=VARCHAR},",
+          "clinical_impression = #{clinicalImpression,jdbcType=VARCHAR},",
+          "requirement = #{requirement,jdbcType=VARCHAR},",
+          "exam_result = #{examResult,jdbcType=VARCHAR},",
           "valid = #{valid,jdbcType=INTEGER},",
           "reserve1 = #{reserve1,jdbcType=VARCHAR},",
           "reserve2 = #{reserve2,jdbcType=VARCHAR},",

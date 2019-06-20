@@ -1,6 +1,5 @@
 package com.neusoft.medical.controller.techWorkstation;
 
-import com.neusoft.medical.bean.Patient;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.techWorkstation.MedicalTechService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,24 +19,9 @@ public class MedicalTechController {
     @Resource
     private MedicalTechService medicalTechService;
 
-    /**
-     * 按挂号单编号获取患者信息
-     *
-     * @param registrationId 挂号单编号
-     * @return 患者信息
+    /*
+      按挂号单编号获取患者信息，参见 RegistrationController 类的 selectPatient 方法
      */
-    @GetMapping("/patient_info")
-    public ResultDTO<Patient> selectPatient(
-            @RequestParam(value = "registrationId") Integer registrationId
-    ) {
-        Patient patient = null;
-        try {
-            patient = medicalTechService.selectPatient(registrationId);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return new ResultDTO<>(patient);
-    }
 
     /**
      * 按挂号单编号获取收费项目列表
@@ -45,7 +29,7 @@ public class MedicalTechController {
      * @param registrationId 挂号单编号
      * @return 收费项目列表，json 字符串
      */
-    @GetMapping("/list_medicine")
+    @GetMapping("/list_charge_entry")
     public ResultDTO<String> selectChargeEntryList(
             @RequestParam(value = "registrationId") Integer registrationId) {
         String res = null;

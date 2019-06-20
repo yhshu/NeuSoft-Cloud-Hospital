@@ -1,6 +1,7 @@
 package com.neusoft.medical.service.registration;
 
 import com.github.pagehelper.PageInfo;
+import com.neusoft.medical.bean.Patient;
 import com.neusoft.medical.bean.Registration;
 
 import java.util.List;
@@ -51,4 +52,12 @@ public interface RegistrationService {
      * @return 患者的历史挂号编号列表
      */
     List<Integer> historyRegistrationIdList(int registrationId);
+
+    /**
+     * 按挂号单编号获取患者信息
+     *
+     * @param registrationId 挂号单编号
+     * @return 患者信息
+     */
+    Patient selectPatientByRegistrationId(int registrationId);
 }

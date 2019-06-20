@@ -1,21 +1,11 @@
 package com.neusoft.medical.service.techWorkstation;
 
-import com.neusoft.medical.bean.Patient;
-
 import java.util.List;
 
 /**
  * 医技工作站服务
  */
 public interface MedicalTechService {
-    /**
-     * 按挂号单编号获取患者信息
-     *
-     * @param registrationId 挂号单编号
-     * @return 患者信息
-     */
-    Patient selectPatient(int registrationId);
-
     /**
      * 按挂号单编号获取收费项目列表
      *

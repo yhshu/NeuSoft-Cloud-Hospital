@@ -119,4 +119,11 @@ public class RegistrationServiceImpl implements RegistrationService {
         }
         return registrationIdList;
     }
+
+    @Override
+    public Patient selectPatientByRegistrationId(int registrationId) {
+        Registration registration = registrationMapper.selectByPrimaryKey(registrationId);
+        return patientMapper.selectByPrimaryKey(registration.getPatientId());
+
+    }
 }
