@@ -96,6 +96,14 @@ public class ExaminationServiceImpl implements ExaminationService {
             chargeEntryExample.or().andValidEqualTo(1).andRegistrationIdEqualTo(registrationId).andExaminationIdEqualTo(examinationId);
             List<ChargeEntry> chargeEntryList = chargeEntryMapper.selectByExample(chargeEntryExample);
             JsonArray chargeEntryListJsonArray = gson.toJsonTree(chargeEntryList).getAsJsonArray();
+            for (JsonElement chargeEntryJsonElement : chargeEntryListJsonArray) {
+                JsonObject chargeEntryJsonObject = chargeEntryJsonElement.getAsJsonObject();
+                ChargeItem chargeItem = chargeItemMapper.selectByPrimaryKey(chargeEntryJsonObject.get("chargeItemId").getAsInt());
+                chargeEntryJsonObject.addProperty("chargeItemId", chargeEntryJsonObject.get("chargeItemId").getAsInt());
+                chargeEntryJsonObject.addProperty("chargeItemName", chargeItem.getNameZh());
+                chargeEntryJsonObject.addProperty("chargeItemPrice", chargeItem.getPrice());
+                chargeEntryJsonObject.addProperty("chargeEntryNums", chargeItem.getNums());
+            }
             examinationJsonObject.add("chargeEntryList", chargeEntryListJsonArray);
         }
         return examinationJsonArray.toString();
