@@ -1,7 +1,6 @@
 package com.neusoft.medical.bean;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ChargeFormExample {
@@ -225,243 +224,63 @@ public class ChargeFormExample {
             return (Criteria) this;
         }
 
-        public Criteria andChargeItemIdIsNull() {
-            addCriterion("charge_item_id is null");
+        public Criteria andSaveStateIsNull() {
+            addCriterion("save_state is null");
             return (Criteria) this;
         }
 
-        public Criteria andChargeItemIdIsNotNull() {
-            addCriterion("charge_item_id is not null");
+        public Criteria andSaveStateIsNotNull() {
+            addCriterion("save_state is not null");
             return (Criteria) this;
         }
 
-        public Criteria andChargeItemIdEqualTo(Integer value) {
-            addCriterion("charge_item_id =", value, "chargeItemId");
+        public Criteria andSaveStateEqualTo(Integer value) {
+            addCriterion("save_state =", value, "saveState");
             return (Criteria) this;
         }
 
-        public Criteria andChargeItemIdNotEqualTo(Integer value) {
-            addCriterion("charge_item_id <>", value, "chargeItemId");
+        public Criteria andSaveStateNotEqualTo(Integer value) {
+            addCriterion("save_state <>", value, "saveState");
             return (Criteria) this;
         }
 
-        public Criteria andChargeItemIdGreaterThan(Integer value) {
-            addCriterion("charge_item_id >", value, "chargeItemId");
+        public Criteria andSaveStateGreaterThan(Integer value) {
+            addCriterion("save_state >", value, "saveState");
             return (Criteria) this;
         }
 
-        public Criteria andChargeItemIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("charge_item_id >=", value, "chargeItemId");
+        public Criteria andSaveStateGreaterThanOrEqualTo(Integer value) {
+            addCriterion("save_state >=", value, "saveState");
             return (Criteria) this;
         }
 
-        public Criteria andChargeItemIdLessThan(Integer value) {
-            addCriterion("charge_item_id <", value, "chargeItemId");
+        public Criteria andSaveStateLessThan(Integer value) {
+            addCriterion("save_state <", value, "saveState");
             return (Criteria) this;
         }
 
-        public Criteria andChargeItemIdLessThanOrEqualTo(Integer value) {
-            addCriterion("charge_item_id <=", value, "chargeItemId");
+        public Criteria andSaveStateLessThanOrEqualTo(Integer value) {
+            addCriterion("save_state <=", value, "saveState");
             return (Criteria) this;
         }
 
-        public Criteria andChargeItemIdIn(List<Integer> values) {
-            addCriterion("charge_item_id in", values, "chargeItemId");
+        public Criteria andSaveStateIn(List<Integer> values) {
+            addCriterion("save_state in", values, "saveState");
             return (Criteria) this;
         }
 
-        public Criteria andChargeItemIdNotIn(List<Integer> values) {
-            addCriterion("charge_item_id not in", values, "chargeItemId");
+        public Criteria andSaveStateNotIn(List<Integer> values) {
+            addCriterion("save_state not in", values, "saveState");
             return (Criteria) this;
         }
 
-        public Criteria andChargeItemIdBetween(Integer value1, Integer value2) {
-            addCriterion("charge_item_id between", value1, value2, "chargeItemId");
+        public Criteria andSaveStateBetween(Integer value1, Integer value2) {
+            addCriterion("save_state between", value1, value2, "saveState");
             return (Criteria) this;
         }
 
-        public Criteria andChargeItemIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("charge_item_id not between", value1, value2, "chargeItemId");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemCountIsNull() {
-            addCriterion("item_count is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemCountIsNotNull() {
-            addCriterion("item_count is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemCountEqualTo(Integer value) {
-            addCriterion("item_count =", value, "itemCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemCountNotEqualTo(Integer value) {
-            addCriterion("item_count <>", value, "itemCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemCountGreaterThan(Integer value) {
-            addCriterion("item_count >", value, "itemCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemCountGreaterThanOrEqualTo(Integer value) {
-            addCriterion("item_count >=", value, "itemCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemCountLessThan(Integer value) {
-            addCriterion("item_count <", value, "itemCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemCountLessThanOrEqualTo(Integer value) {
-            addCriterion("item_count <=", value, "itemCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemCountIn(List<Integer> values) {
-            addCriterion("item_count in", values, "itemCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemCountNotIn(List<Integer> values) {
-            addCriterion("item_count not in", values, "itemCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemCountBetween(Integer value1, Integer value2) {
-            addCriterion("item_count between", value1, value2, "itemCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andItemCountNotBetween(Integer value1, Integer value2) {
-            addCriterion("item_count not between", value1, value2, "itemCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andUnchargedNumsIsNull() {
-            addCriterion("uncharged_nums is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUnchargedNumsIsNotNull() {
-            addCriterion("uncharged_nums is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUnchargedNumsEqualTo(Integer value) {
-            addCriterion("uncharged_nums =", value, "unchargedNums");
-            return (Criteria) this;
-        }
-
-        public Criteria andUnchargedNumsNotEqualTo(Integer value) {
-            addCriterion("uncharged_nums <>", value, "unchargedNums");
-            return (Criteria) this;
-        }
-
-        public Criteria andUnchargedNumsGreaterThan(Integer value) {
-            addCriterion("uncharged_nums >", value, "unchargedNums");
-            return (Criteria) this;
-        }
-
-        public Criteria andUnchargedNumsGreaterThanOrEqualTo(Integer value) {
-            addCriterion("uncharged_nums >=", value, "unchargedNums");
-            return (Criteria) this;
-        }
-
-        public Criteria andUnchargedNumsLessThan(Integer value) {
-            addCriterion("uncharged_nums <", value, "unchargedNums");
-            return (Criteria) this;
-        }
-
-        public Criteria andUnchargedNumsLessThanOrEqualTo(Integer value) {
-            addCriterion("uncharged_nums <=", value, "unchargedNums");
-            return (Criteria) this;
-        }
-
-        public Criteria andUnchargedNumsIn(List<Integer> values) {
-            addCriterion("uncharged_nums in", values, "unchargedNums");
-            return (Criteria) this;
-        }
-
-        public Criteria andUnchargedNumsNotIn(List<Integer> values) {
-            addCriterion("uncharged_nums not in", values, "unchargedNums");
-            return (Criteria) this;
-        }
-
-        public Criteria andUnchargedNumsBetween(Integer value1, Integer value2) {
-            addCriterion("uncharged_nums between", value1, value2, "unchargedNums");
-            return (Criteria) this;
-        }
-
-        public Criteria andUnchargedNumsNotBetween(Integer value1, Integer value2) {
-            addCriterion("uncharged_nums not between", value1, value2, "unchargedNums");
-            return (Criteria) this;
-        }
-
-        public Criteria andMadeTimeIsNull() {
-            addCriterion("made_time is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMadeTimeIsNotNull() {
-            addCriterion("made_time is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMadeTimeEqualTo(Date value) {
-            addCriterion("made_time =", value, "madeTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andMadeTimeNotEqualTo(Date value) {
-            addCriterion("made_time <>", value, "madeTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andMadeTimeGreaterThan(Date value) {
-            addCriterion("made_time >", value, "madeTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andMadeTimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("made_time >=", value, "madeTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andMadeTimeLessThan(Date value) {
-            addCriterion("made_time <", value, "madeTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andMadeTimeLessThanOrEqualTo(Date value) {
-            addCriterion("made_time <=", value, "madeTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andMadeTimeIn(List<Date> values) {
-            addCriterion("made_time in", values, "madeTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andMadeTimeNotIn(List<Date> values) {
-            addCriterion("made_time not in", values, "madeTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andMadeTimeBetween(Date value1, Date value2) {
-            addCriterion("made_time between", value1, value2, "madeTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andMadeTimeNotBetween(Date value1, Date value2) {
-            addCriterion("made_time not between", value1, value2, "madeTime");
+        public Criteria andSaveStateNotBetween(Integer value1, Integer value2) {
+            addCriterion("save_state not between", value1, value2, "saveState");
             return (Criteria) this;
         }
 
@@ -522,246 +341,6 @@ public class ChargeFormExample {
 
         public Criteria andValidNotBetween(Integer value1, Integer value2) {
             addCriterion("valid not between", value1, value2, "valid");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentIdIsNull() {
-            addCriterion("department_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentIdIsNotNull() {
-            addCriterion("department_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentIdEqualTo(Integer value) {
-            addCriterion("department_id =", value, "departmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentIdNotEqualTo(Integer value) {
-            addCriterion("department_id <>", value, "departmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentIdGreaterThan(Integer value) {
-            addCriterion("department_id >", value, "departmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("department_id >=", value, "departmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentIdLessThan(Integer value) {
-            addCriterion("department_id <", value, "departmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentIdLessThanOrEqualTo(Integer value) {
-            addCriterion("department_id <=", value, "departmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentIdIn(List<Integer> values) {
-            addCriterion("department_id in", values, "departmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentIdNotIn(List<Integer> values) {
-            addCriterion("department_id not in", values, "departmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentIdBetween(Integer value1, Integer value2) {
-            addCriterion("department_id between", value1, value2, "departmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDepartmentIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("department_id not between", value1, value2, "departmentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDoctorIdIsNull() {
-            addCriterion("doctor_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDoctorIdIsNotNull() {
-            addCriterion("doctor_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDoctorIdEqualTo(Integer value) {
-            addCriterion("doctor_id =", value, "doctorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDoctorIdNotEqualTo(Integer value) {
-            addCriterion("doctor_id <>", value, "doctorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDoctorIdGreaterThan(Integer value) {
-            addCriterion("doctor_id >", value, "doctorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDoctorIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("doctor_id >=", value, "doctorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDoctorIdLessThan(Integer value) {
-            addCriterion("doctor_id <", value, "doctorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDoctorIdLessThanOrEqualTo(Integer value) {
-            addCriterion("doctor_id <=", value, "doctorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDoctorIdIn(List<Integer> values) {
-            addCriterion("doctor_id in", values, "doctorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDoctorIdNotIn(List<Integer> values) {
-            addCriterion("doctor_id not in", values, "doctorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDoctorIdBetween(Integer value1, Integer value2) {
-            addCriterion("doctor_id between", value1, value2, "doctorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andDoctorIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("doctor_id not between", value1, value2, "doctorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCollectorIdIsNull() {
-            addCriterion("collector_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCollectorIdIsNotNull() {
-            addCriterion("collector_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCollectorIdEqualTo(Integer value) {
-            addCriterion("collector_id =", value, "collectorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCollectorIdNotEqualTo(Integer value) {
-            addCriterion("collector_id <>", value, "collectorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCollectorIdGreaterThan(Integer value) {
-            addCriterion("collector_id >", value, "collectorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCollectorIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("collector_id >=", value, "collectorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCollectorIdLessThan(Integer value) {
-            addCriterion("collector_id <", value, "collectorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCollectorIdLessThanOrEqualTo(Integer value) {
-            addCriterion("collector_id <=", value, "collectorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCollectorIdIn(List<Integer> values) {
-            addCriterion("collector_id in", values, "collectorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCollectorIdNotIn(List<Integer> values) {
-            addCriterion("collector_id not in", values, "collectorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCollectorIdBetween(Integer value1, Integer value2) {
-            addCriterion("collector_id between", value1, value2, "collectorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCollectorIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("collector_id not between", value1, value2, "collectorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andNotGivenNumsIsNull() {
-            addCriterion("not_given_nums is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNotGivenNumsIsNotNull() {
-            addCriterion("not_given_nums is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andNotGivenNumsEqualTo(Integer value) {
-            addCriterion("not_given_nums =", value, "notGivenNums");
-            return (Criteria) this;
-        }
-
-        public Criteria andNotGivenNumsNotEqualTo(Integer value) {
-            addCriterion("not_given_nums <>", value, "notGivenNums");
-            return (Criteria) this;
-        }
-
-        public Criteria andNotGivenNumsGreaterThan(Integer value) {
-            addCriterion("not_given_nums >", value, "notGivenNums");
-            return (Criteria) this;
-        }
-
-        public Criteria andNotGivenNumsGreaterThanOrEqualTo(Integer value) {
-            addCriterion("not_given_nums >=", value, "notGivenNums");
-            return (Criteria) this;
-        }
-
-        public Criteria andNotGivenNumsLessThan(Integer value) {
-            addCriterion("not_given_nums <", value, "notGivenNums");
-            return (Criteria) this;
-        }
-
-        public Criteria andNotGivenNumsLessThanOrEqualTo(Integer value) {
-            addCriterion("not_given_nums <=", value, "notGivenNums");
-            return (Criteria) this;
-        }
-
-        public Criteria andNotGivenNumsIn(List<Integer> values) {
-            addCriterion("not_given_nums in", values, "notGivenNums");
-            return (Criteria) this;
-        }
-
-        public Criteria andNotGivenNumsNotIn(List<Integer> values) {
-            addCriterion("not_given_nums not in", values, "notGivenNums");
-            return (Criteria) this;
-        }
-
-        public Criteria andNotGivenNumsBetween(Integer value1, Integer value2) {
-            addCriterion("not_given_nums between", value1, value2, "notGivenNums");
-            return (Criteria) this;
-        }
-
-        public Criteria andNotGivenNumsNotBetween(Integer value1, Integer value2) {
-            addCriterion("not_given_nums not between", value1, value2, "notGivenNums");
             return (Criteria) this;
         }
 

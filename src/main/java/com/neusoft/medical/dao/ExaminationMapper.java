@@ -19,12 +19,12 @@ public interface ExaminationMapper {
 
     @Insert({
         "insert into hospital.examination (registration_id, patient_name, ",
-        "charge_item_id, result, ",
+        "charge_entry_id, exam_result, ",
         "doctor_id, department_id, ",
         "valid, reserve1, ",
         "reserve2, reserve3)",
         "values (#{registrationId,jdbcType=INTEGER}, #{patientName,jdbcType=VARCHAR}, ",
-        "#{chargeItemId,jdbcType=INTEGER}, #{result,jdbcType=VARCHAR}, ",
+        "#{chargeEntryId,jdbcType=INTEGER}, #{examResult,jdbcType=VARCHAR}, ",
         "#{doctorId,jdbcType=INTEGER}, #{departmentId,jdbcType=INTEGER}, ",
         "#{valid,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
         "#{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR})"
@@ -38,8 +38,8 @@ public interface ExaminationMapper {
 
     @Select({
         "select",
-        "examination_id, registration_id, patient_name, charge_item_id, result, doctor_id, ",
-        "department_id, valid, reserve1, reserve2, reserve3",
+        "examination_id, registration_id, patient_name, charge_entry_id, exam_result, ",
+        "doctor_id, department_id, valid, reserve1, reserve2, reserve3",
         "from hospital.examination",
         "where examination_id = #{examinationId,jdbcType=INTEGER}"
     })
@@ -56,8 +56,8 @@ public interface ExaminationMapper {
         "update hospital.examination",
         "set registration_id = #{registrationId,jdbcType=INTEGER},",
           "patient_name = #{patientName,jdbcType=VARCHAR},",
-          "charge_item_id = #{chargeItemId,jdbcType=INTEGER},",
-          "result = #{result,jdbcType=VARCHAR},",
+          "charge_entry_id = #{chargeEntryId,jdbcType=INTEGER},",
+          "exam_result = #{examResult,jdbcType=VARCHAR},",
           "doctor_id = #{doctorId,jdbcType=INTEGER},",
           "department_id = #{departmentId,jdbcType=INTEGER},",
           "valid = #{valid,jdbcType=INTEGER},",

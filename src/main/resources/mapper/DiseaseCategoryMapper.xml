@@ -78,7 +78,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hospital.disease_category
+    from hospital..disease_category
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,7 +87,7 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.DiseaseCategoryExample">
-    delete from hospital.disease_category
+    delete from hospital..disease_category
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -96,7 +96,7 @@
     <selectKey keyProperty="diseaseCategoryId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into hospital.disease_category
+    insert into hospital..disease_category
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="diseaseCode != null">
         disease_code,
@@ -133,13 +133,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.neusoft.medical.bean.DiseaseCategoryExample" resultType="java.lang.Long">
-    select count(*) from hospital.disease_category
+    select count(*) from hospital..disease_category
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update hospital.disease_category
+    update hospital..disease_category
     <set>
       <if test="record.diseaseCategoryId != null">
         disease_category_id = #{record.diseaseCategoryId,jdbcType=INTEGER},
@@ -165,7 +165,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update hospital.disease_category
+    update hospital..disease_category
     set disease_category_id = #{record.diseaseCategoryId,jdbcType=INTEGER},
       disease_code = #{record.diseaseCode,jdbcType=VARCHAR},
       disease_name = #{record.diseaseName,jdbcType=VARCHAR},
@@ -177,7 +177,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.DiseaseCategory">
-    update hospital.disease_category
+    update hospital..disease_category
     <set>
       <if test="diseaseCode != null">
         disease_code = #{diseaseCode,jdbcType=VARCHAR},

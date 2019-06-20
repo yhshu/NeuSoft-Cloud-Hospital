@@ -1,8 +1,8 @@
-package com.neusoft.medical.controller.pharmacyWorkstation;
+package com.neusoft.medical.controller.techWorkstation;
 
 import com.neusoft.medical.bean.Patient;
 import com.neusoft.medical.dto.ResultDTO;
-import com.neusoft.medical.service.pharmacyWorkstation.MedicineDistributeService;
+import com.neusoft.medical.service.techWorkstation.MedicalTechService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,13 +12,13 @@ import javax.annotation.Resource;
 import java.util.Arrays;
 
 /**
- * 门诊发药 控制器
+ * 医技工作站 控制器
  */
 @RestController
-@RequestMapping("/medicine_distribute")
-public class MedicineDistributeController {
+@RequestMapping("/medical_tech")
+public class MedicalTechController {
     @Resource
-    private MedicineDistributeService medicineDistributeService;
+    private MedicalTechService medicalTechService;
 
     /**
      * 按挂号单编号获取患者信息
@@ -32,7 +32,7 @@ public class MedicineDistributeController {
     ) {
         Patient patient = null;
         try {
-            patient = medicineDistributeService.selectPatient(registrationId);
+            patient = medicalTechService.selectPatient(registrationId);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -40,17 +40,17 @@ public class MedicineDistributeController {
     }
 
     /**
-     * 按挂号单编号获取药品列表
+     * 按挂号单编号获取收费项目列表
      *
      * @param registrationId 挂号单编号
-     * @return 药品列表，json 字符串
+     * @return 收费项目列表，json 字符串
      */
     @GetMapping("/list_medicine")
-    public ResultDTO<String> selectChargeFormList(
+    public ResultDTO<String> selectChargeEntryList(
             @RequestParam(value = "registrationId") Integer registrationId) {
         String res = null;
         try {
-            res = medicineDistributeService.selectChargeFormList(registrationId);
+            res = medicalTechService.selectChargeEntryList(registrationId);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -58,18 +58,18 @@ public class MedicineDistributeController {
     }
 
     /**
-     * 发放药品
+     * 应用收费项目
      *
-     * @param chargeFormIdList 被发放药品的编号列表
+     * @param chargeEntryIdList 收费项目编号列表
      * @return 操作结果
      */
-    @GetMapping("/distribute")
-    public ResultDTO<Boolean> medicineDistribute(
-            @RequestParam(value = "chargeFormIdList[]") Integer[] chargeFormIdList
+    @GetMapping("/apply")
+    public ResultDTO<Boolean> chargeEntryListApply(
+            @RequestParam(value = "chargeEntryIdList[]") Integer[] chargeEntryIdList
     ) {
-        Boolean res = null;
+        Boolean res;
         try {
-            res = medicineDistributeService.medicineDistribute(Arrays.asList(chargeFormIdList));
+            res = medicalTechService.chargeEntryListApply(Arrays.asList(chargeEntryIdList));
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultDTO<>(Boolean.FALSE);
@@ -78,23 +78,23 @@ public class MedicineDistributeController {
     }
 
     /**
-     * 门诊退药
-     * 退药数量不能超过可退数量，如果找出只按可退数量计算
+     * 收费项目退费
+     * 收费项目只有在执行前可退，执行后的收费项目无法退费
      *
-     * @param medicineReturnJson 退药信息，json 字符串
+     * @param chargeEntryListRefundJson 退费信息，json 字符串
      * @return 操作结果
      * <p>
-     * 退药信息 json 字符串是 json 数组，该数组中的每项元素包含如下属性：
-     * - chargeFormId 收费项目的编号，int 型
-     * - returnNums   退药数量，int 型
+     * 退费信息 json 字符串是 json 数组，该数组中的每项元素包含如下属性：
+     * - chargeId 收费项目的编号，int 型
+     * - returnNums   退费数量，int 型
      */
     @GetMapping("/return")
-    public ResultDTO<Boolean> medicineReturn(
-            @RequestParam(value = "medicineReturn") String medicineReturnJson
+    public ResultDTO<Boolean> chargeEntryListRefund(
+            @RequestParam(value = "chargeEntryListRefund") String chargeEntryListRefundJson
     ) {
         Boolean res;
         try {
-            res = medicineDistributeService.medicineReturn(medicineReturnJson);
+            res = medicalTechService.chargeEntryListRefund(chargeEntryListRefundJson);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultDTO<>(Boolean.FALSE);

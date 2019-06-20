@@ -79,7 +79,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hospital.registration_category
+    from hospital..registration_category
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -88,7 +88,7 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.RegistrationCategoryExample">
-    delete from hospital.registration_category
+    delete from hospital..registration_category
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -97,7 +97,7 @@
     <selectKey keyProperty="registrationCategoryId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into hospital.registration_category
+    insert into hospital..registration_category
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="registrationCategoryName != null">
         registration_category_name,
@@ -134,13 +134,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.neusoft.medical.bean.RegistrationCategoryExample" resultType="java.lang.Long">
-    select count(*) from hospital.registration_category
+    select count(*) from hospital..registration_category
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update hospital.registration_category
+    update hospital..registration_category
     <set>
       <if test="record.registrationCategoryId != null">
         registration_category_id = #{record.registrationCategoryId,jdbcType=INTEGER},
@@ -166,7 +166,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update hospital.registration_category
+    update hospital..registration_category
     set registration_category_id = #{record.registrationCategoryId,jdbcType=INTEGER},
       registration_category_name = #{record.registrationCategoryName,jdbcType=VARCHAR},
       is_default = #{record.isDefault,jdbcType=BIT},
@@ -178,7 +178,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.RegistrationCategory">
-    update hospital.registration_category
+    update hospital..registration_category
     <set>
       <if test="registrationCategoryName != null">
         registration_category_name = #{registrationCategoryName,jdbcType=VARCHAR},

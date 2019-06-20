@@ -10,6 +10,13 @@ import java.util.List;
  */
 public interface PrescriptionService {
     /**
+     * 收费状态
+     */
+    int CHARGE_STATUS_NOT_CHARGED = 0;
+    int CHARGE_STATUS_CHARGED = 1;
+    int CHARGE_STATUS_RETURNED = 2;
+
+    /**
      * 处方保存状态
      */
     int SAVE_TEMP = 0; // 暂存

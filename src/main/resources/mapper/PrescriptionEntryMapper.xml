@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.neusoft.medical.dao.PrescriptionItemMapper">
-  <resultMap id="BaseResultMap" type="com.neusoft.medical.bean.PrescriptionItem">
+<mapper namespace="com.neusoft.medical.dao.PrescriptionEntryMapper">
+  <resultMap id="BaseResultMap" type="com.neusoft.medical.bean.PrescriptionEntry">
     <constructor>
-      <idArg column="prescription_item_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <idArg column="prescription_entry_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="medicine_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="prescription_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="unit_price" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="total_price" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="nums" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="medicine_usage" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="medicine_dosage" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="medicine_frequency" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="medicine_number_day" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="medicine_quantity" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="skin_test" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="skin_test_result" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="pay_state" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="doctor_advice" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -78,17 +82,17 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    prescription_item_id, medicine_id, prescription_id, medicine_usage, medicine_dosage, 
-    medicine_frequency, medicine_number_day, medicine_quantity, skin_test, skin_test_result, 
-    valid, reserve1, reserve2, reserve3
+    prescription_entry_id, medicine_id, prescription_id, unit_price, total_price, nums, 
+    medicine_usage, medicine_dosage, medicine_frequency, medicine_number_day, skin_test, 
+    skin_test_result, pay_state, doctor_advice, valid, reserve1, reserve2, reserve3
   </sql>
-  <select id="selectByExample" parameterType="com.neusoft.medical.bean.PrescriptionItemExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.neusoft.medical.bean.PrescriptionEntryExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hospital.prescription_item
+    from hospital..prescription_entry
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -96,23 +100,32 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.PrescriptionItemExample">
-    delete from hospital.prescription_item
+  <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.PrescriptionEntryExample">
+    delete from hospital..prescription_entry
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insertSelective" parameterType="com.neusoft.medical.bean.PrescriptionItem">
-    <selectKey keyProperty="prescriptionItemId" order="AFTER" resultType="java.lang.Integer">
+  <insert id="insertSelective" parameterType="com.neusoft.medical.bean.PrescriptionEntry">
+    <selectKey keyProperty="prescriptionEntryId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into hospital.prescription_item
+    insert into hospital..prescription_entry
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="medicineId != null">
         medicine_id,
       </if>
       <if test="prescriptionId != null">
         prescription_id,
+      </if>
+      <if test="unitPrice != null">
+        unit_price,
+      </if>
+      <if test="totalPrice != null">
+        total_price,
+      </if>
+      <if test="nums != null">
+        nums,
       </if>
       <if test="medicineUsage != null">
         medicine_usage,
@@ -126,14 +139,17 @@
       <if test="medicineNumberDay != null">
         medicine_number_day,
       </if>
-      <if test="medicineQuantity != null">
-        medicine_quantity,
-      </if>
       <if test="skinTest != null">
         skin_test,
       </if>
       <if test="skinTestResult != null">
         skin_test_result,
+      </if>
+      <if test="payState != null">
+        pay_state,
+      </if>
+      <if test="doctorAdvice != null">
+        doctor_advice,
       </if>
       <if test="valid != null">
         valid,
@@ -155,6 +171,15 @@
       <if test="prescriptionId != null">
         #{prescriptionId,jdbcType=INTEGER},
       </if>
+      <if test="unitPrice != null">
+        #{unitPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="totalPrice != null">
+        #{totalPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="nums != null">
+        #{nums,jdbcType=INTEGER},
+      </if>
       <if test="medicineUsage != null">
         #{medicineUsage,jdbcType=VARCHAR},
       </if>
@@ -167,14 +192,17 @@
       <if test="medicineNumberDay != null">
         #{medicineNumberDay,jdbcType=VARCHAR},
       </if>
-      <if test="medicineQuantity != null">
-        #{medicineQuantity,jdbcType=INTEGER},
-      </if>
       <if test="skinTest != null">
         #{skinTest,jdbcType=VARCHAR},
       </if>
       <if test="skinTestResult != null">
         #{skinTestResult,jdbcType=VARCHAR},
+      </if>
+      <if test="payState != null">
+        #{payState,jdbcType=INTEGER},
+      </if>
+      <if test="doctorAdvice != null">
+        #{doctorAdvice,jdbcType=VARCHAR},
       </if>
       <if test="valid != null">
         #{valid,jdbcType=INTEGER},
@@ -190,23 +218,32 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.neusoft.medical.bean.PrescriptionItemExample" resultType="java.lang.Long">
-    select count(*) from hospital.prescription_item
+  <select id="countByExample" parameterType="com.neusoft.medical.bean.PrescriptionEntryExample" resultType="java.lang.Long">
+    select count(*) from hospital..prescription_entry
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update hospital.prescription_item
+    update hospital..prescription_entry
     <set>
-      <if test="record.prescriptionItemId != null">
-        prescription_item_id = #{record.prescriptionItemId,jdbcType=INTEGER},
+      <if test="record.prescriptionEntryId != null">
+        prescription_entry_id = #{record.prescriptionEntryId,jdbcType=INTEGER},
       </if>
       <if test="record.medicineId != null">
         medicine_id = #{record.medicineId,jdbcType=INTEGER},
       </if>
       <if test="record.prescriptionId != null">
         prescription_id = #{record.prescriptionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.unitPrice != null">
+        unit_price = #{record.unitPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.totalPrice != null">
+        total_price = #{record.totalPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.nums != null">
+        nums = #{record.nums,jdbcType=INTEGER},
       </if>
       <if test="record.medicineUsage != null">
         medicine_usage = #{record.medicineUsage,jdbcType=VARCHAR},
@@ -220,14 +257,17 @@
       <if test="record.medicineNumberDay != null">
         medicine_number_day = #{record.medicineNumberDay,jdbcType=VARCHAR},
       </if>
-      <if test="record.medicineQuantity != null">
-        medicine_quantity = #{record.medicineQuantity,jdbcType=INTEGER},
-      </if>
       <if test="record.skinTest != null">
         skin_test = #{record.skinTest,jdbcType=VARCHAR},
       </if>
       <if test="record.skinTestResult != null">
         skin_test_result = #{record.skinTestResult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payState != null">
+        pay_state = #{record.payState,jdbcType=INTEGER},
+      </if>
+      <if test="record.doctorAdvice != null">
+        doctor_advice = #{record.doctorAdvice,jdbcType=VARCHAR},
       </if>
       <if test="record.valid != null">
         valid = #{record.valid,jdbcType=INTEGER},
@@ -247,17 +287,21 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update hospital.prescription_item
-    set prescription_item_id = #{record.prescriptionItemId,jdbcType=INTEGER},
+    update hospital..prescription_entry
+    set prescription_entry_id = #{record.prescriptionEntryId,jdbcType=INTEGER},
       medicine_id = #{record.medicineId,jdbcType=INTEGER},
       prescription_id = #{record.prescriptionId,jdbcType=INTEGER},
+      unit_price = #{record.unitPrice,jdbcType=DOUBLE},
+      total_price = #{record.totalPrice,jdbcType=DOUBLE},
+      nums = #{record.nums,jdbcType=INTEGER},
       medicine_usage = #{record.medicineUsage,jdbcType=VARCHAR},
       medicine_dosage = #{record.medicineDosage,jdbcType=VARCHAR},
       medicine_frequency = #{record.medicineFrequency,jdbcType=VARCHAR},
       medicine_number_day = #{record.medicineNumberDay,jdbcType=VARCHAR},
-      medicine_quantity = #{record.medicineQuantity,jdbcType=INTEGER},
       skin_test = #{record.skinTest,jdbcType=VARCHAR},
       skin_test_result = #{record.skinTestResult,jdbcType=VARCHAR},
+      pay_state = #{record.payState,jdbcType=INTEGER},
+      doctor_advice = #{record.doctorAdvice,jdbcType=VARCHAR},
       valid = #{record.valid,jdbcType=INTEGER},
       reserve1 = #{record.reserve1,jdbcType=VARCHAR},
       reserve2 = #{record.reserve2,jdbcType=VARCHAR},
@@ -266,14 +310,23 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.PrescriptionItem">
-    update hospital.prescription_item
+  <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.PrescriptionEntry">
+    update hospital..prescription_entry
     <set>
       <if test="medicineId != null">
         medicine_id = #{medicineId,jdbcType=INTEGER},
       </if>
       <if test="prescriptionId != null">
         prescription_id = #{prescriptionId,jdbcType=INTEGER},
+      </if>
+      <if test="unitPrice != null">
+        unit_price = #{unitPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="totalPrice != null">
+        total_price = #{totalPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="nums != null">
+        nums = #{nums,jdbcType=INTEGER},
       </if>
       <if test="medicineUsage != null">
         medicine_usage = #{medicineUsage,jdbcType=VARCHAR},
@@ -287,14 +340,17 @@
       <if test="medicineNumberDay != null">
         medicine_number_day = #{medicineNumberDay,jdbcType=VARCHAR},
       </if>
-      <if test="medicineQuantity != null">
-        medicine_quantity = #{medicineQuantity,jdbcType=INTEGER},
-      </if>
       <if test="skinTest != null">
         skin_test = #{skinTest,jdbcType=VARCHAR},
       </if>
       <if test="skinTestResult != null">
         skin_test_result = #{skinTestResult,jdbcType=VARCHAR},
+      </if>
+      <if test="payState != null">
+        pay_state = #{payState,jdbcType=INTEGER},
+      </if>
+      <if test="doctorAdvice != null">
+        doctor_advice = #{doctorAdvice,jdbcType=VARCHAR},
       </if>
       <if test="valid != null">
         valid = #{valid,jdbcType=INTEGER},
@@ -309,6 +365,6 @@
         reserve3 = #{reserve3,jdbcType=VARCHAR},
       </if>
     </set>
-    where prescription_item_id = #{prescriptionItemId,jdbcType=INTEGER}
+    where prescription_entry_id = #{prescriptionEntryId,jdbcType=INTEGER}
   </update>
 </mapper>

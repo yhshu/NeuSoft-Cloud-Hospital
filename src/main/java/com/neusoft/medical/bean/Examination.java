@@ -7,9 +7,9 @@ public class Examination {
 
     private String patientName;
 
-    private Integer chargeItemId;
+    private Integer chargeEntryId;
 
-    private String result;
+    private String examResult;
 
     private Integer doctorId;
 
@@ -23,12 +23,12 @@ public class Examination {
 
     private String reserve3;
 
-    public Examination(Integer examinationId, Integer registrationId, String patientName, Integer chargeItemId, String result, Integer doctorId, Integer departmentId, Integer valid, String reserve1, String reserve2, String reserve3) {
+    public Examination(Integer examinationId, Integer registrationId, String patientName, Integer chargeEntryId, String examResult, Integer doctorId, Integer departmentId, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.examinationId = examinationId;
         this.registrationId = registrationId;
         this.patientName = patientName;
-        this.chargeItemId = chargeItemId;
-        this.result = result;
+        this.chargeEntryId = chargeEntryId;
+        this.examResult = examResult;
         this.doctorId = doctorId;
         this.departmentId = departmentId;
         this.valid = valid;
@@ -65,20 +65,20 @@ public class Examination {
         this.patientName = patientName == null ? null : patientName.trim();
     }
 
-    public Integer getChargeItemId() {
-        return chargeItemId;
+    public Integer getChargeEntryId() {
+        return chargeEntryId;
     }
 
-    public void setChargeItemId(Integer chargeItemId) {
-        this.chargeItemId = chargeItemId;
+    public void setChargeEntryId(Integer chargeEntryId) {
+        this.chargeEntryId = chargeEntryId;
     }
 
-    public String getResult() {
-        return result;
+    public String getExamResult() {
+        return examResult;
     }
 
-    public void setResult(String result) {
-        this.result = result == null ? null : result.trim();
+    public void setExamResult(String examResult) {
+        this.examResult = examResult == null ? null : examResult.trim();
     }
 
     public Integer getDoctorId() {

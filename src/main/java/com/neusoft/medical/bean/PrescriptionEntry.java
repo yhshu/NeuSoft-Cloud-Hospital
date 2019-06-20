@@ -1,11 +1,17 @@
 package com.neusoft.medical.bean;
 
-public class PrescriptionItem {
-    private Integer prescriptionItemId;
+public class PrescriptionEntry {
+    private Integer prescriptionEntryId;
 
     private Integer medicineId;
 
     private Integer prescriptionId;
+
+    private Double unitPrice;
+
+    private Double totalPrice;
+
+    private Integer nums;
 
     private String medicineUsage;
 
@@ -15,11 +21,13 @@ public class PrescriptionItem {
 
     private String medicineNumberDay;
 
-    private Integer medicineQuantity;
-
     private String skinTest;
 
     private String skinTestResult;
+
+    private Integer payState;
+
+    private String doctorAdvice;
 
     private Integer valid;
 
@@ -29,33 +37,37 @@ public class PrescriptionItem {
 
     private String reserve3;
 
-    public PrescriptionItem(Integer prescriptionItemId, Integer medicineId, Integer prescriptionId, String medicineUsage, String medicineDosage, String medicineFrequency, String medicineNumberDay, Integer medicineQuantity, String skinTest, String skinTestResult, Integer valid, String reserve1, String reserve2, String reserve3) {
-        this.prescriptionItemId = prescriptionItemId;
+    public PrescriptionEntry(Integer prescriptionEntryId, Integer medicineId, Integer prescriptionId, Double unitPrice, Double totalPrice, Integer nums, String medicineUsage, String medicineDosage, String medicineFrequency, String medicineNumberDay, String skinTest, String skinTestResult, Integer payState, String doctorAdvice, Integer valid, String reserve1, String reserve2, String reserve3) {
+        this.prescriptionEntryId = prescriptionEntryId;
         this.medicineId = medicineId;
         this.prescriptionId = prescriptionId;
+        this.unitPrice = unitPrice;
+        this.totalPrice = totalPrice;
+        this.nums = nums;
         this.medicineUsage = medicineUsage;
         this.medicineDosage = medicineDosage;
         this.medicineFrequency = medicineFrequency;
         this.medicineNumberDay = medicineNumberDay;
-        this.medicineQuantity = medicineQuantity;
         this.skinTest = skinTest;
         this.skinTestResult = skinTestResult;
+        this.payState = payState;
+        this.doctorAdvice = doctorAdvice;
         this.valid = valid;
         this.reserve1 = reserve1;
         this.reserve2 = reserve2;
         this.reserve3 = reserve3;
     }
 
-    public PrescriptionItem() {
+    public PrescriptionEntry() {
         super();
     }
 
-    public Integer getPrescriptionItemId() {
-        return prescriptionItemId;
+    public Integer getPrescriptionEntryId() {
+        return prescriptionEntryId;
     }
 
-    public void setPrescriptionItemId(Integer prescriptionItemId) {
-        this.prescriptionItemId = prescriptionItemId;
+    public void setPrescriptionEntryId(Integer prescriptionEntryId) {
+        this.prescriptionEntryId = prescriptionEntryId;
     }
 
     public Integer getMedicineId() {
@@ -72,6 +84,30 @@ public class PrescriptionItem {
 
     public void setPrescriptionId(Integer prescriptionId) {
         this.prescriptionId = prescriptionId;
+    }
+
+    public Double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(Double unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public Integer getNums() {
+        return nums;
+    }
+
+    public void setNums(Integer nums) {
+        this.nums = nums;
     }
 
     public String getMedicineUsage() {
@@ -106,14 +142,6 @@ public class PrescriptionItem {
         this.medicineNumberDay = medicineNumberDay == null ? null : medicineNumberDay.trim();
     }
 
-    public Integer getMedicineQuantity() {
-        return medicineQuantity;
-    }
-
-    public void setMedicineQuantity(Integer medicineQuantity) {
-        this.medicineQuantity = medicineQuantity;
-    }
-
     public String getSkinTest() {
         return skinTest;
     }
@@ -128,6 +156,22 @@ public class PrescriptionItem {
 
     public void setSkinTestResult(String skinTestResult) {
         this.skinTestResult = skinTestResult == null ? null : skinTestResult.trim();
+    }
+
+    public Integer getPayState() {
+        return payState;
+    }
+
+    public void setPayState(Integer payState) {
+        this.payState = payState;
+    }
+
+    public String getDoctorAdvice() {
+        return doctorAdvice;
+    }
+
+    public void setDoctorAdvice(String doctorAdvice) {
+        this.doctorAdvice = doctorAdvice == null ? null : doctorAdvice.trim();
     }
 
     public Integer getValid() {

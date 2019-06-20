@@ -4,10 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.neusoft.medical.Util.MathUtil;
 import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.DoctorMapper;
 import com.neusoft.medical.dao.MedicineMapper;
-import com.neusoft.medical.dao.PrescriptionItemMapper;
+import com.neusoft.medical.dao.PrescriptionEntryMapper;
 import com.neusoft.medical.dao.PrescriptionMapper;
 import com.neusoft.medical.service.doctorWorkstation.PrescriptionService;
 import com.neusoft.medical.service.registration.RegistrationService;
@@ -24,7 +25,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     @Resource
     private PrescriptionMapper prescriptionMapper;
     @Resource
-    private PrescriptionItemMapper prescriptionItemMapper;
+    private PrescriptionEntryMapper prescriptionEntryMapper;
     @Resource
     private DoctorMapper doctorMapper;
     @Resource
@@ -110,25 +111,28 @@ public class PrescriptionServiceImpl implements PrescriptionService {
             JsonArray medicineJsonArray = prescriptionJsonObject.getAsJsonArray("medicine");
 
             // 使之前的处方药物项失效
-            PrescriptionItem prescriptionItemRecord = new PrescriptionItem();
-            prescriptionItemRecord.setValid(0);
-            PrescriptionItemExample prescriptionItemExample = new PrescriptionItemExample();
-            prescriptionItemExample.or().andValidEqualTo(1).andPrescriptionIdEqualTo(prescriptionId);
-            prescriptionItemMapper.updateByExampleSelective(prescriptionItemRecord, prescriptionItemExample);
+            PrescriptionEntry prescriptionEntryRecord = new PrescriptionEntry();
+            prescriptionEntryRecord.setValid(0);
+            PrescriptionEntryExample prescriptionEntryExample = new PrescriptionEntryExample();
+            prescriptionEntryExample.or().andValidEqualTo(1).andPrescriptionIdEqualTo(prescriptionId);
+            prescriptionEntryMapper.updateByExampleSelective(prescriptionEntryRecord, prescriptionEntryExample);
 
             // 遍历处方药品，逐条存储
             for (int i = 0; i < medicineJsonArray.size(); i++) {
                 JsonObject medicineJsonObject = medicineJsonArray.get(i).getAsJsonObject();
                 int medicineId = medicineJsonObject.getAsJsonPrimitive("medicineId").getAsInt();
+                double unitPrice = MathUtil.doubleSetScale(medicineJsonObject.getAsJsonPrimitive("").getAsDouble(), 2);
+                int nums = medicineJsonObject.getAsJsonPrimitive("nums").getAsInt();
+                double totalPrice = MathUtil.doubleSetScale(unitPrice * nums, 2);
                 String medicineUsage = medicineJsonObject.getAsJsonPrimitive("medicineUsage").getAsString();
                 String medicineDosage = medicineJsonObject.getAsJsonPrimitive("medicineDosage").getAsString();
                 String medicineFrequency = medicineJsonObject.getAsJsonPrimitive("medicineFrequency").getAsString();
                 String medicineNumberDay = medicineJsonObject.getAsJsonPrimitive("medicineNumberDay").getAsString();
-                int medicineQuantity = medicineJsonObject.getAsJsonPrimitive("medicineQuantity").getAsInt();
                 String skinTest = medicineJsonObject.getAsJsonPrimitive("skinTest").getAsString();
                 String skinTestResult = medicineJsonObject.getAsJsonPrimitive("skinTestResult").getAsString();
+                String doctorAdvice = medicineJsonObject.getAsJsonPrimitive("doctorAdvice").getAsString();
 
-                prescriptionItemMapper.insert(new PrescriptionItem(null, medicineId, prescriptionId, medicineUsage, medicineDosage, medicineFrequency, medicineNumberDay, medicineQuantity, skinTest, skinTestResult, 1, null, null, null));
+                prescriptionEntryMapper.insert(new PrescriptionEntry(null, medicineId, prescriptionId, unitPrice, totalPrice, nums, medicineUsage, medicineDosage, medicineFrequency, medicineNumberDay, skinTest, skinTestResult, CHARGE_STATUS_NOT_CHARGED, doctorAdvice, 1, null, null, null));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -213,11 +217,11 @@ public class PrescriptionServiceImpl implements PrescriptionService {
                 JsonObject prescriptionJsonObject = gson.toJsonTree(prescription).getAsJsonObject();
 
                 // 找到每项处方对应的药品信息
-                PrescriptionItemExample prescriptionItemExample = new PrescriptionItemExample();
-                prescriptionItemExample.or().andValidEqualTo(1).andPrescriptionIdEqualTo(prescription.getPrescriptionId());
-                List<PrescriptionItem> prescriptionItemList = prescriptionItemMapper.selectByExample(prescriptionItemExample);
+                PrescriptionEntryExample prescriptionEntryExample = new PrescriptionEntryExample();
+                prescriptionEntryExample.or().andValidEqualTo(1).andPrescriptionIdEqualTo(prescription.getPrescriptionId());
+                List<PrescriptionEntry> prescriptionEntryList = prescriptionEntryMapper.selectByExample(prescriptionEntryExample);
 
-                prescriptionJsonObject.addProperty("medicine", gson.toJsonTree(prescriptionItemList).toString());
+                prescriptionJsonObject.addProperty("medicine", gson.toJsonTree(prescriptionEntryList).toString());
                 prescriptionMedicineJsonArray.add(prescriptionJsonObject);
             }
             res = prescriptionMedicineJsonArray.toString();
@@ -242,11 +246,11 @@ public class PrescriptionServiceImpl implements PrescriptionService {
                 prescriptionRecord.setPrescriptionId(prescription.getPrescriptionId());
                 prescriptionMapper.updateByPrimaryKeySelective(prescriptionRecord);
 
-                PrescriptionItem prescriptionItemRecord = new PrescriptionItem();
-                prescriptionItemRecord.setValid(0);
-                PrescriptionItemExample prescriptionItemExample = new PrescriptionItemExample();  // 该处方的药品清单
-                prescriptionItemExample.or().andValidEqualTo(1).andPrescriptionIdEqualTo(prescription.getPrescriptionId());
-                prescriptionItemMapper.updateByExampleSelective(prescriptionItemRecord, prescriptionItemExample);
+                PrescriptionEntry prescriptionEntryRecord = new PrescriptionEntry();
+                prescriptionEntryRecord.setValid(0);
+                PrescriptionEntryExample prescriptionEntryExample = new PrescriptionEntryExample();  // 该处方的药品清单
+                prescriptionEntryExample.or().andValidEqualTo(1).andPrescriptionIdEqualTo(prescription.getPrescriptionId());
+                prescriptionEntryMapper.updateByExampleSelective(prescriptionEntryRecord, prescriptionEntryExample);
             }
         } catch (Exception e) {
             e.printStackTrace();

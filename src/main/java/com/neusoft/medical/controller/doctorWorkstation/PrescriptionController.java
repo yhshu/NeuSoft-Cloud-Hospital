@@ -71,13 +71,15 @@ public class PrescriptionController {
      * <p>
      * - medicine 数组中每个元素包含的属性：
      * - medicineId 处方药品编号
+     * - unitPrice 药品单价
+     * - nums 药品数量
      * - medicineUsage 药品用途
      * - medicineDosage 药品用量
      * - medicineFrequency 药品使用频率
      * - medicineNumberDay 药品使用天数
-     * - medicineQuantity 药品数量
      * - skinTest 皮试
      * - skinTestResult 皮试结果
+     * - doctorAdvice 医嘱
      */
     @PostMapping("/save_prescription")
     public ResultDTO<Boolean> savePrescription(
