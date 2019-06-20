@@ -70,7 +70,7 @@ public class ChargeEntryServiceImpl implements ChargeEntryService {
             int departmentId = registrationService.selectRegistrationByPrimaryKey(registrationId).getDepartmentId();
             int doctorId = registrationService.selectRegistrationByPrimaryKey(registrationId).getDoctorId();
             double unitPrice = chargeItemMapper.selectByPrimaryKey(chargeItemId).getPrice();
-            chargeEntryMapper.insert(new ChargeEntry(null, registrationId, null, chargeItemId, MathUtil.doubleSetScale(unitPrice, 2), MathUtil.doubleSetScale(unitPrice * itemCount, 2), itemCount, itemCount, itemCount, CHARGE_STATUS_NOT_CHARGED, currentDate, departmentId, doctorId, collectorId, 1, doctorAdvice, null, null, null));
+            chargeEntryMapper.insert(new ChargeEntry(null, registrationId, null, chargeItemId, null, MathUtil.doubleSetScale(unitPrice, 2), MathUtil.doubleSetScale(unitPrice * itemCount, 2), itemCount, itemCount, itemCount, CHARGE_STATUS_NOT_CHARGED, currentDate, departmentId, doctorId, collectorId, 1, doctorAdvice, null, null, null));
         } catch (Exception e) {
             e.printStackTrace();
             return false;

@@ -19,23 +19,25 @@ public interface ChargeEntryMapper {
 
     @Insert({
         "insert into hospital.charge_entry (registration_id, charge_form_id, ",
-        "charge_item_id, unit_price, ",
-        "total_price, nums, ",
-        "uncharged_nums, not_given_nums, ",
-        "pay_state, made_time, ",
-        "department_id, doctor_id, ",
-        "collector_id, valid, ",
-        "doctor_advice, reserve1, ",
-        "reserve2, reserve3)",
+        "charge_item_id, examination_id, ",
+        "unit_price, total_price, ",
+        "nums, uncharged_nums, ",
+        "not_given_nums, pay_state, ",
+        "made_time, department_id, ",
+        "doctor_id, collector_id, ",
+        "valid, doctor_advice, ",
+        "reserve1, reserve2, ",
+        "reserve3)",
         "values (#{registrationId,jdbcType=INTEGER}, #{chargeFormId,jdbcType=INTEGER}, ",
-        "#{chargeItemId,jdbcType=INTEGER}, #{unitPrice,jdbcType=DOUBLE}, ",
-        "#{totalPrice,jdbcType=DOUBLE}, #{nums,jdbcType=INTEGER}, ",
-        "#{unchargedNums,jdbcType=INTEGER}, #{notGivenNums,jdbcType=INTEGER}, ",
-        "#{payState,jdbcType=INTEGER}, #{madeTime,jdbcType=TIMESTAMP}, ",
-        "#{departmentId,jdbcType=INTEGER}, #{doctorId,jdbcType=INTEGER}, ",
-        "#{collectorId,jdbcType=INTEGER}, #{valid,jdbcType=INTEGER}, ",
-        "#{doctorAdvice,jdbcType=VARCHAR}, #{reserve1,jdbcType=VARCHAR}, ",
-        "#{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR})"
+        "#{chargeItemId,jdbcType=INTEGER}, #{examinationId,jdbcType=INTEGER}, ",
+        "#{unitPrice,jdbcType=DOUBLE}, #{totalPrice,jdbcType=DOUBLE}, ",
+        "#{nums,jdbcType=INTEGER}, #{unchargedNums,jdbcType=INTEGER}, ",
+        "#{notGivenNums,jdbcType=INTEGER}, #{payState,jdbcType=INTEGER}, ",
+        "#{madeTime,jdbcType=TIMESTAMP}, #{departmentId,jdbcType=INTEGER}, ",
+        "#{doctorId,jdbcType=INTEGER}, #{collectorId,jdbcType=INTEGER}, ",
+        "#{valid,jdbcType=INTEGER}, #{doctorAdvice,jdbcType=VARCHAR}, ",
+        "#{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, ",
+        "#{reserve3,jdbcType=VARCHAR})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="chargeEntryId", before=false, resultType=Integer.class)
     int insert(ChargeEntry record);
@@ -46,9 +48,10 @@ public interface ChargeEntryMapper {
 
     @Select({
         "select",
-        "charge_entry_id, registration_id, charge_form_id, charge_item_id, unit_price, ",
-        "total_price, nums, uncharged_nums, not_given_nums, pay_state, made_time, department_id, ",
-        "doctor_id, collector_id, valid, doctor_advice, reserve1, reserve2, reserve3",
+        "charge_entry_id, registration_id, charge_form_id, charge_item_id, examination_id, ",
+        "unit_price, total_price, nums, uncharged_nums, not_given_nums, pay_state, made_time, ",
+        "department_id, doctor_id, collector_id, valid, doctor_advice, reserve1, reserve2, ",
+        "reserve3",
         "from hospital.charge_entry",
         "where charge_entry_id = #{chargeEntryId,jdbcType=INTEGER}"
     })
@@ -66,6 +69,7 @@ public interface ChargeEntryMapper {
         "set registration_id = #{registrationId,jdbcType=INTEGER},",
           "charge_form_id = #{chargeFormId,jdbcType=INTEGER},",
           "charge_item_id = #{chargeItemId,jdbcType=INTEGER},",
+          "examination_id = #{examinationId,jdbcType=INTEGER},",
           "unit_price = #{unitPrice,jdbcType=DOUBLE},",
           "total_price = #{totalPrice,jdbcType=DOUBLE},",
           "nums = #{nums,jdbcType=INTEGER},",

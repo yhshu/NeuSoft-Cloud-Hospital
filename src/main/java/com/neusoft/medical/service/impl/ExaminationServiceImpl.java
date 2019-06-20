@@ -28,7 +28,6 @@ public class ExaminationServiceImpl implements ExaminationService {
     @Resource
     private RegistrationMapper registrationMapper;
 
-
     private Gson gson = new Gson();
 
     @Override
@@ -48,6 +47,7 @@ public class ExaminationServiceImpl implements ExaminationService {
             Registration registration = registrationMapper.selectByPrimaryKey(registrationId);
             Examination examinationRecord = new Examination(null, registrationId, registration.getPatientName(), registration.getDoctorId(), registration.getDepartmentId(), saveState, examName, clinicalImpression, requirement, examResult, 1, null, null, null);
             examinationMapper.insert(examinationRecord);
+            int examinationId = examinationRecord.getExaminationId();
 
             for (JsonElement chargeEntryJsonElement : chargeEntryListJsonArray) {
                 JsonObject chargeEntryJsonObject = chargeEntryJsonElement.getAsJsonObject();
@@ -59,7 +59,7 @@ public class ExaminationServiceImpl implements ExaminationService {
                 ChargeItem chargeItem = chargeItemMapper.selectByPrimaryKey(chargeItemId);
                 double unitPrice = MathUtil.doubleSetScale(chargeItem.getPrice(), 2);
                 double totalPrice = MathUtil.doubleSetScale(unitPrice, 2);
-                ChargeEntry chargeEntryRecord = new ChargeEntry(null, registrationId, null, chargeItemId, unitPrice, totalPrice, nums, nums, nums, Constant.CHARGE_STATUS_NOT_CHARGED, new Date(), registration.getDepartmentId(), registration.getDoctorId(), collectorId, 1, doctorAdvice, null, null, null);
+                ChargeEntry chargeEntryRecord = new ChargeEntry(null, registrationId, null, chargeItemId, examinationId, unitPrice, totalPrice, nums, nums, nums, Constant.CHARGE_STATUS_NOT_CHARGED, new Date(), registration.getDepartmentId(), registration.getDoctorId(), collectorId, 1, doctorAdvice, null, null, null);
                 chargeEntryMapper.insert(chargeEntryRecord);
             }
         } catch (Exception e) {
@@ -78,5 +78,23 @@ public class ExaminationServiceImpl implements ExaminationService {
         criteria.andExpenseCategoryIdEqualTo(EXPENSE_CATEGORY_EXAM);
 
         return chargeItemMapper.selectByExample(chargeItemExample);
+    }
+
+    @Override
+    public String selectHistoryExam(int registrationId) {
+        ExaminationExample examinationExample = new ExaminationExample();
+        examinationExample.or().andValidEqualTo(1).andRegistrationIdEqualTo(registrationId);
+
+        List<Examination> examinationList = examinationMapper.selectByExample(examinationExample);
+        JsonArray examinationJsonArray = gson.toJsonTree(examinationList).getAsJsonArray();
+        for (JsonElement examinationJsonElement : examinationJsonArray) {
+            JsonObject examinationJsonObject = examinationJsonElement.getAsJsonObject();
+
+            // 针对每项检查，找到其收费项目列表
+            ChargeEntryExample chargeEntryExample = new ChargeEntryExample();
+            chargeEntryExample.or().andValidEqualTo(1).andRegistrationIdEqualTo(registrationId);
+
+        }
+        return examinationJsonArray.toString();
     }
 }

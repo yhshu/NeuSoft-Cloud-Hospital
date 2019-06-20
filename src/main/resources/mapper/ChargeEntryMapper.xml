@@ -7,6 +7,7 @@
       <arg column="registration_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="charge_form_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="charge_item_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="examination_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="unit_price" javaType="java.lang.Double" jdbcType="DOUBLE" />
       <arg column="total_price" javaType="java.lang.Double" jdbcType="DOUBLE" />
       <arg column="nums" javaType="java.lang.Integer" jdbcType="INTEGER" />
@@ -83,9 +84,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    charge_entry_id, registration_id, charge_form_id, charge_item_id, unit_price, total_price, 
-    nums, uncharged_nums, not_given_nums, pay_state, made_time, department_id, doctor_id, 
-    collector_id, valid, doctor_advice, reserve1, reserve2, reserve3
+    charge_entry_id, registration_id, charge_form_id, charge_item_id, examination_id, 
+    unit_price, total_price, nums, uncharged_nums, not_given_nums, pay_state, made_time, 
+    department_id, doctor_id, collector_id, valid, doctor_advice, reserve1, reserve2, 
+    reserve3
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.ChargeEntryExample" resultMap="BaseResultMap">
     select
@@ -121,6 +123,9 @@
       </if>
       <if test="chargeItemId != null">
         charge_item_id,
+      </if>
+      <if test="examinationId != null">
+        examination_id,
       </if>
       <if test="unitPrice != null">
         unit_price,
@@ -177,6 +182,9 @@
       </if>
       <if test="chargeItemId != null">
         #{chargeItemId,jdbcType=INTEGER},
+      </if>
+      <if test="examinationId != null">
+        #{examinationId,jdbcType=INTEGER},
       </if>
       <if test="unitPrice != null">
         #{unitPrice,jdbcType=DOUBLE},
@@ -246,6 +254,9 @@
       <if test="record.chargeItemId != null">
         charge_item_id = #{record.chargeItemId,jdbcType=INTEGER},
       </if>
+      <if test="record.examinationId != null">
+        examination_id = #{record.examinationId,jdbcType=INTEGER},
+      </if>
       <if test="record.unitPrice != null">
         unit_price = #{record.unitPrice,jdbcType=DOUBLE},
       </if>
@@ -302,6 +313,7 @@
       registration_id = #{record.registrationId,jdbcType=INTEGER},
       charge_form_id = #{record.chargeFormId,jdbcType=INTEGER},
       charge_item_id = #{record.chargeItemId,jdbcType=INTEGER},
+      examination_id = #{record.examinationId,jdbcType=INTEGER},
       unit_price = #{record.unitPrice,jdbcType=DOUBLE},
       total_price = #{record.totalPrice,jdbcType=DOUBLE},
       nums = #{record.nums,jdbcType=INTEGER},
@@ -332,6 +344,9 @@
       </if>
       <if test="chargeItemId != null">
         charge_item_id = #{chargeItemId,jdbcType=INTEGER},
+      </if>
+      <if test="examinationId != null">
+        examination_id = #{examinationId,jdbcType=INTEGER},
       </if>
       <if test="unitPrice != null">
         unit_price = #{unitPrice,jdbcType=DOUBLE},

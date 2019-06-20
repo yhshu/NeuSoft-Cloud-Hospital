@@ -11,6 +11,8 @@ public class ChargeEntry {
 
     private Integer chargeItemId;
 
+    private Integer examinationId;
+
     private Double unitPrice;
 
     private Double totalPrice;
@@ -41,11 +43,12 @@ public class ChargeEntry {
 
     private String reserve3;
 
-    public ChargeEntry(Integer chargeEntryId, Integer registrationId, Integer chargeFormId, Integer chargeItemId, Double unitPrice, Double totalPrice, Integer nums, Integer unchargedNums, Integer notGivenNums, Integer payState, Date madeTime, Integer departmentId, Integer doctorId, Integer collectorId, Integer valid, String doctorAdvice, String reserve1, String reserve2, String reserve3) {
+    public ChargeEntry(Integer chargeEntryId, Integer registrationId, Integer chargeFormId, Integer chargeItemId, Integer examinationId, Double unitPrice, Double totalPrice, Integer nums, Integer unchargedNums, Integer notGivenNums, Integer payState, Date madeTime, Integer departmentId, Integer doctorId, Integer collectorId, Integer valid, String doctorAdvice, String reserve1, String reserve2, String reserve3) {
         this.chargeEntryId = chargeEntryId;
         this.registrationId = registrationId;
         this.chargeFormId = chargeFormId;
         this.chargeItemId = chargeItemId;
+        this.examinationId = examinationId;
         this.unitPrice = unitPrice;
         this.totalPrice = totalPrice;
         this.nums = nums;
@@ -97,6 +100,14 @@ public class ChargeEntry {
 
     public void setChargeItemId(Integer chargeItemId) {
         this.chargeItemId = chargeItemId;
+    }
+
+    public Integer getExaminationId() {
+        return examinationId;
+    }
+
+    public void setExaminationId(Integer examinationId) {
+        this.examinationId = examinationId;
     }
 
     public Double getUnitPrice() {

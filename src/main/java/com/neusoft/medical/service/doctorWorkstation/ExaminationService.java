@@ -36,4 +36,12 @@ public interface ExaminationService {
      * @return 指定科室的收费项目中的检查项目列表
      */
     List<ChargeItem> selectExamListInChargeItemByDepartmentId(Integer departmentId);
+
+    /**
+     * 按挂号单编号获取历史检查项目（所有检查状态）
+     *
+     * @param registrationId 挂号单编号
+     * @return 操作结果
+     */
+    String selectHistoryExam(int registrationId);
 }

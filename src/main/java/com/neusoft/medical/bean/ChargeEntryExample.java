@@ -345,6 +345,66 @@ public class ChargeEntryExample {
             return (Criteria) this;
         }
 
+        public Criteria andExaminationIdIsNull() {
+            addCriterion("examination_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationIdIsNotNull() {
+            addCriterion("examination_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationIdEqualTo(Integer value) {
+            addCriterion("examination_id =", value, "examinationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationIdNotEqualTo(Integer value) {
+            addCriterion("examination_id <>", value, "examinationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationIdGreaterThan(Integer value) {
+            addCriterion("examination_id >", value, "examinationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("examination_id >=", value, "examinationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationIdLessThan(Integer value) {
+            addCriterion("examination_id <", value, "examinationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationIdLessThanOrEqualTo(Integer value) {
+            addCriterion("examination_id <=", value, "examinationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationIdIn(List<Integer> values) {
+            addCriterion("examination_id in", values, "examinationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationIdNotIn(List<Integer> values) {
+            addCriterion("examination_id not in", values, "examinationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationIdBetween(Integer value1, Integer value2) {
+            addCriterion("examination_id between", value1, value2, "examinationId");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("examination_id not between", value1, value2, "examinationId");
+            return (Criteria) this;
+        }
+
         public Criteria andUnitPriceIsNull() {
             addCriterion("unit_price is null");
             return (Criteria) this;
