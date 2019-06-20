@@ -19,7 +19,7 @@ import java.util.List;
  * 挂号收费控制器
  */
 @RestController
-@RequestMapping("/charge_form")
+@RequestMapping("/charge_entry")
 public class ChargeEntryController {
     @Resource
     private ChargeEntryService chargeEntryService;

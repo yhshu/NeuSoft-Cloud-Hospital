@@ -30,19 +30,24 @@ public class SchedulingServiceImpl implements SchedulingService {
     @Override
     public List<Doctor> findCurrentAvailableDoctor(int departmentId) {
         SchedulingInfoExample schedulingInfoExample = new SchedulingInfoExample();
-        SchedulingInfoExample.Criteria schedulingInfoExampleCriteriateria = schedulingInfoExample.createCriteria();
-        schedulingInfoExampleCriteriateria.andValidEqualTo(1);  // 有效的排班计划
-        schedulingInfoExampleCriteriateria.andDepartmentIdEqualTo(departmentId); // 指定的科室
-        Date today = new Date();  // 今天日期
-        schedulingInfoExampleCriteriateria.andSchedulingTimeEqualTo(today); // 排班在今天
-        schedulingInfoExampleCriteriateria.andRemainNumsGreaterThan(0); // 剩余限额大于 0
+        SchedulingInfoExample.Criteria schedulingInfoExampleCriteria = schedulingInfoExample.createCriteria();
+        schedulingInfoExampleCriteria.andValidEqualTo(1);              // 有效的排班计划
+        schedulingInfoExampleCriteria.andDepartmentIdEqualTo(departmentId); // 指定的科室
+
+        Date todayDate = new Date();                                        // 今天日期
+        schedulingInfoExampleCriteria.andSchedulingTimeBetween(
+                new Date(todayDate.getTime() - 86400000),
+                new Date(todayDate.getTime() + 86400000));                // 排班在今天
+        schedulingInfoExampleCriteria.andRemainNumsGreaterThan(0);     // 剩余限额大于 0
+        System.out.println("查询科室 #" + departmentId + " 当前可用医生");
+        System.out.println("日期：" + todayDate);
         List<SchedulingInfo> schedulingInfoList = schedulingInfoMapper.selectByExample(schedulingInfoExample);
 
         // 获得可用医生的编号后，获取医生信息的列表
         // 首先构建可用医生的编号列表
         List<Integer> doctorIdList = new CopyOnWriteArrayList<>();
         for (SchedulingInfo schedulingInfo : schedulingInfoList) {
-            doctorIdList.add(schedulingInfo.getDepartmentId());
+            doctorIdList.add(schedulingInfo.getDoctorId());
         }
         // 然后获取医生信息列表
         if (doctorIdList.isEmpty())  // 可用的医生为空，直接返回空列表
