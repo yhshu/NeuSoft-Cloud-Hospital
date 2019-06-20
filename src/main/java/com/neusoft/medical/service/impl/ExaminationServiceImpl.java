@@ -21,9 +21,17 @@ public class ExaminationServiceImpl implements ExaminationService {
 
     @Override
     public boolean addExamination(String examinationJson) {
-        JsonObject examinationJsonObject = gson.toJsonTree(examinationJson).getAsJsonObject();
-
-        return false;
+        try {
+            JsonObject examinationJsonObject = gson.toJsonTree(examinationJson).getAsJsonObject();
+            int registrationId = examinationJsonObject.get("registrationId").getAsInt();
+            int saveState = examinationJsonObject.get("saveState").getAsInt();
+            String examName = examinationJsonObject.get("examName").getAsString();
+            String clinicalImpression = examinationJsonObject.get("clinicalImpression").getAsString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override
