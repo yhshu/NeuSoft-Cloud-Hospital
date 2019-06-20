@@ -77,7 +77,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hospital..user_auth
+    from hospital.user_auth
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -86,7 +86,7 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.UserAuthExample">
-    delete from hospital..user_auth
+    delete from hospital.user_auth
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -95,7 +95,7 @@
     <selectKey keyProperty="userAuthId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into hospital..user_auth
+    insert into hospital.user_auth
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userId != null">
         user_id,
@@ -126,13 +126,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.neusoft.medical.bean.UserAuthExample" resultType="java.lang.Long">
-    select count(*) from hospital..user_auth
+    select count(*) from hospital.user_auth
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update hospital..user_auth
+    update hospital.user_auth
     <set>
       <if test="record.userAuthId != null">
         user_auth_id = #{record.userAuthId,jdbcType=INTEGER},
@@ -155,7 +155,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update hospital..user_auth
+    update hospital.user_auth
     set user_auth_id = #{record.userAuthId,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
       auth_id = #{record.authId,jdbcType=INTEGER},
@@ -166,7 +166,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.UserAuth">
-    update hospital..user_auth
+    update hospital.user_auth
     <set>
       <if test="userId != null">
         user_id = #{userId,jdbcType=INTEGER},

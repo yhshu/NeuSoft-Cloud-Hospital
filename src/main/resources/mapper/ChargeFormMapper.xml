@@ -79,7 +79,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hospital..charge_form
+    from hospital.charge_form
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -88,7 +88,7 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.ChargeFormExample">
-    delete from hospital..charge_form
+    delete from hospital.charge_form
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -97,7 +97,7 @@
     <selectKey keyProperty="chargeFormId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into hospital..charge_form
+    insert into hospital.charge_form
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="registrationId != null">
         registration_id,
@@ -140,13 +140,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.neusoft.medical.bean.ChargeFormExample" resultType="java.lang.Long">
-    select count(*) from hospital..charge_form
+    select count(*) from hospital.charge_form
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update hospital..charge_form
+    update hospital.charge_form
     <set>
       <if test="record.chargeFormId != null">
         charge_form_id = #{record.chargeFormId,jdbcType=INTEGER},
@@ -175,7 +175,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update hospital..charge_form
+    update hospital.charge_form
     set charge_form_id = #{record.chargeFormId,jdbcType=INTEGER},
       registration_id = #{record.registrationId,jdbcType=INTEGER},
       save_state = #{record.saveState,jdbcType=INTEGER},
@@ -188,7 +188,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.ChargeForm">
-    update hospital..charge_form
+    update hospital.charge_form
     <set>
       <if test="registrationId != null">
         registration_id = #{registrationId,jdbcType=INTEGER},
