@@ -31,7 +31,6 @@ public class ExaminationController {
      * - examResult 检验报告
      * - chargeEntryList 收费项目列表，以 json 数组表示
      * chargeEntryList 数组中的每项元素包含的属性如下：
-     * - registrationId 挂号单编号
      * - chargeItemId 收费项目编号
      * - nums 收费项目计数
      * - collectorId 收费员编号

@@ -1,6 +1,8 @@
 package com.neusoft.medical.service.impl;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.neusoft.medical.bean.ChargeItem;
 import com.neusoft.medical.bean.ChargeItemExample;
@@ -27,6 +29,14 @@ public class ExaminationServiceImpl implements ExaminationService {
             int saveState = examinationJsonObject.get("saveState").getAsInt();
             String examName = examinationJsonObject.get("examName").getAsString();
             String clinicalImpression = examinationJsonObject.get("clinicalImpression").getAsString();
+            String requirement = examinationJsonObject.get("requirement").getAsString();
+            String examResult = examinationJsonObject.get("examResult").getAsString();
+            JsonArray chargeEntryListJsonArray = examinationJsonObject.get("chargeEntryList").getAsJsonArray();
+
+            for (JsonElement chargeEntryJsonElement : chargeEntryListJsonArray) {
+                JsonObject chargeEntryJsonObject = chargeEntryJsonElement.getAsJsonObject();
+                
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return false;
