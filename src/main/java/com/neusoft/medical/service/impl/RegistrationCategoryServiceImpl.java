@@ -29,6 +29,11 @@ public class RegistrationCategoryServiceImpl implements RegistrationCategoryServ
     @Override
     public boolean addRegistrationCategory(String registrationCategoryName, boolean isDefault, int sequenceNo, double registrationFee) {
         try {
+            if (isDefault) {
+                RegistrationCategoryExample registrationCategoryExample = new RegistrationCategoryExample();
+                registrationCategoryExample.or().andValidEqualTo(1);
+                registrationCategoryMapper.updateByExampleSelective(new RegistrationCategory(null, null, false, null, null, null), registrationCategoryExample);
+            }
             registrationCategoryMapper.insert(new RegistrationCategory(null, registrationCategoryName, isDefault, sequenceNo, registrationFee, 1));
         } catch (Exception e) {
             e.printStackTrace();
@@ -40,6 +45,11 @@ public class RegistrationCategoryServiceImpl implements RegistrationCategoryServ
     @Override
     public boolean updateRegistrationCategoryByPrimaryKey(int registrationCategoryId, String registrationCategoryName, boolean isDefault, int sequenceNo, double registrationFee) {
         try {
+            if (isDefault) {
+                RegistrationCategoryExample registrationCategoryExample = new RegistrationCategoryExample();
+                registrationCategoryExample.or().andValidEqualTo(1);
+                registrationCategoryMapper.updateByExampleSelective(new RegistrationCategory(null, null, false, null, null, null), registrationCategoryExample);
+            }
             RegistrationCategory record = new RegistrationCategory(registrationCategoryId, registrationCategoryName, isDefault, sequenceNo, registrationFee, 1);
             registrationCategoryMapper.updateByPrimaryKey(record);
         } catch (Exception e) {
