@@ -37,13 +37,14 @@ public class ExaminationController {
     public ResultDTO<Boolean> addExamination(
             @RequestParam(value = "examinationJson") String examinationJson
     ) {
+        boolean res;
         try {
-            examinationService.addExamination(examinationJson);
+            res = examinationService.addExamination(examinationJson);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultDTO<>(Boolean.FALSE);
         }
-        return new ResultDTO<>(Boolean.TRUE);
+        return new ResultDTO<>(res);
     }
 
     /**
