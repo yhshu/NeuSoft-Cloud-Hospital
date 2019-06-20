@@ -1,6 +1,11 @@
 package com.neusoft.medical.service.doctorWorkstation;
 
+import com.neusoft.medical.bean.ChargeItem;
+
+import java.util.List;
+
 public interface ExaminationService {
+    int EXPENSE_CATEGORY_EXAM = 3;
 
     /**
      * 新增检查检验项目
@@ -23,4 +28,12 @@ public interface ExaminationService {
      * - doctorAdvice 医嘱
      */
     boolean addExamination(String examinationJson);
+
+    /**
+     * 根据科室编号获取收费项目中的检查项目
+     *
+     * @param departmentId 科室编号
+     * @return 指定科室的收费项目中的检查项目列表
+     */
+    List<ChargeItem> selectExamListInChargeItemByDepartmentId(Integer departmentId);
 }

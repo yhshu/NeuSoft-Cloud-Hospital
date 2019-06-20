@@ -1,5 +1,6 @@
 package com.neusoft.medical.controller.doctorWorkstation;
 
+import com.neusoft.medical.bean.ChargeItem;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.doctorWorkstation.ExaminationService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 @RequestMapping("/exam")
@@ -46,6 +48,25 @@ public class ExaminationController {
             return new ResultDTO<>(Boolean.FALSE);
         }
         return new ResultDTO<>(Boolean.TRUE);
+    }
+
+    /**
+     * 根据科室编号获取收费项目中的检查项目
+     *
+     * @param departmentId 科室编号
+     * @return 指定科室的收费项目中的检查项目列表
+     */
+    @GetMapping("/select_exam_list")
+    public ResultDTO<List<ChargeItem>> selectExamItemListInChargeItemByDepartmentId(
+            @RequestParam(value = "departmentId") Integer departmentId
+    ) {
+        List<ChargeItem> res = null;
+        try {
+            res = examinationService.selectExamListInChargeItemByDepartmentId(departmentId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResultDTO<>(res);
     }
 
 }
