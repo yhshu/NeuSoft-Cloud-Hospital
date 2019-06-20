@@ -13,4 +13,8 @@ public interface DiagnosticCatalogService {
     PageInfo<Disease> selectDiseaseByPage(int currentPage, int pageSize, int diseaseCategoryId);
 
     Disease addDisease(Disease record);
+
+    boolean updateDisease(Disease record);
+
+    boolean deleteDisease(List<Integer> diseaseIdList);
 }

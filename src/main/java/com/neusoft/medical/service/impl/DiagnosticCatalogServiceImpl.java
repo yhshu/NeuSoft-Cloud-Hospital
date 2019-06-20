@@ -62,4 +62,32 @@ public class DiagnosticCatalogServiceImpl implements DiagnosticCatalogService {
         System.out.println("addDisease 新增记录 " + effectRow + " 项");
         return diseaseMapper.selectByPrimaryKey(record.getDiseaseId());
     }
+
+    @Override
+    public boolean updateDisease(Disease record) {
+        try {
+            diseaseMapper.updateByPrimaryKey(record);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean deleteDisease(List<Integer> diseaseIdList) {
+        try {
+            DiseaseExample diseaseExample = new DiseaseExample();
+            DiseaseExample.Criteria criteria = diseaseExample.createCriteria();
+            criteria.andValidEqualTo(1).andDiseaseIdIn(diseaseIdList);
+
+            Disease diseaseRecord = new Disease();
+            diseaseRecord.setValid(0);
+            diseaseMapper.updateByExampleSelective(diseaseRecord, diseaseExample);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }
