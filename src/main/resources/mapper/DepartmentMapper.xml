@@ -82,7 +82,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hospital..department
+    from hospital.department
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -91,7 +91,7 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.DepartmentExample">
-    delete from hospital..department
+    delete from hospital.department
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -100,7 +100,7 @@
     <selectKey keyProperty="departmentId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into hospital..department
+    insert into hospital.department
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="departmentCode != null">
         department_code,
@@ -155,13 +155,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.neusoft.medical.bean.DepartmentExample" resultType="java.lang.Long">
-    select count(*) from hospital..department
+    select count(*) from hospital.department
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update hospital..department
+    update hospital.department
     <set>
       <if test="record.departmentId != null">
         department_id = #{record.departmentId,jdbcType=INTEGER},
@@ -196,7 +196,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update hospital..department
+    update hospital.department
     set department_id = #{record.departmentId,jdbcType=INTEGER},
       department_code = #{record.departmentCode,jdbcType=VARCHAR},
       department_name = #{record.departmentName,jdbcType=VARCHAR},
@@ -211,7 +211,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.Department">
-    update hospital..department
+    update hospital.department
     <set>
       <if test="departmentCode != null">
         department_code = #{departmentCode,jdbcType=VARCHAR},

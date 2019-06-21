@@ -12,13 +12,13 @@ public interface AccountMapper {
     int deleteByExample(AccountExample example);
 
     @Delete({
-        "delete from hospital..account",
+        "delete from hospital.account",
         "where account_id = #{accountId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer accountId);
 
     @Insert({
-        "insert into hospital..account (user_name, user_password, ",
+        "insert into hospital.account (user_name, user_password, ",
         "account_type, valid, ",
         "reserve1, reserve2, ",
         "reserve3)",
@@ -38,7 +38,7 @@ public interface AccountMapper {
         "select",
         "account_id, user_name, user_password, account_type, valid, reserve1, reserve2, ",
         "reserve3",
-        "from hospital..account",
+        "from hospital.account",
         "where account_id = #{accountId,jdbcType=INTEGER}"
     })
     @ResultMap("com.neusoft.medical.dao.AccountMapper.BaseResultMap")
@@ -51,7 +51,7 @@ public interface AccountMapper {
     int updateByPrimaryKeySelective(Account record);
 
     @Update({
-        "update hospital..account",
+        "update hospital.account",
         "set user_name = #{userName,jdbcType=VARCHAR},",
           "user_password = #{userPassword,jdbcType=VARCHAR},",
           "account_type = #{accountType,jdbcType=VARCHAR},",

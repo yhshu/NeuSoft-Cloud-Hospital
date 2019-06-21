@@ -12,13 +12,13 @@ public interface ConstantItemMapper {
     int deleteByExample(ConstantItemExample example);
 
     @Delete({
-        "delete from hospital..constant_item",
+        "delete from hospital.constant_item",
         "where constant_item_id = #{constantItemId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer constantItemId);
 
     @Insert({
-        "insert into hospital..constant_item (constant_type_id, constant_code, ",
+        "insert into hospital.constant_item (constant_type_id, constant_code, ",
         "constant_name, valid)",
         "values (#{constantTypeId,jdbcType=INTEGER}, #{constantCode,jdbcType=VARCHAR}, ",
         "#{constantName,jdbcType=VARCHAR}, #{valid,jdbcType=INTEGER})"
@@ -33,7 +33,7 @@ public interface ConstantItemMapper {
     @Select({
         "select",
         "constant_item_id, constant_type_id, constant_code, constant_name, valid",
-        "from hospital..constant_item",
+        "from hospital.constant_item",
         "where constant_item_id = #{constantItemId,jdbcType=INTEGER}"
     })
     @ResultMap("com.neusoft.medical.dao.ConstantItemMapper.BaseResultMap")
@@ -46,7 +46,7 @@ public interface ConstantItemMapper {
     int updateByPrimaryKeySelective(ConstantItem record);
 
     @Update({
-        "update hospital..constant_item",
+        "update hospital.constant_item",
         "set constant_type_id = #{constantTypeId,jdbcType=INTEGER},",
           "constant_code = #{constantCode,jdbcType=VARCHAR},",
           "constant_name = #{constantName,jdbcType=VARCHAR},",

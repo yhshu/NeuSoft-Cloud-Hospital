@@ -12,13 +12,13 @@ public interface UserAuthMapper {
     int deleteByExample(UserAuthExample example);
 
     @Delete({
-        "delete from hospital..user_auth",
+        "delete from hospital.user_auth",
         "where user_auth_id = #{userAuthId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer userAuthId);
 
     @Insert({
-        "insert into hospital..user_auth (user_id, auth_id, ",
+        "insert into hospital.user_auth (user_id, auth_id, ",
         "valid, operation_time)",
         "values (#{userId,jdbcType=INTEGER}, #{authId,jdbcType=INTEGER}, ",
         "#{valid,jdbcType=INTEGER}, #{operationTime,jdbcType=TIMESTAMP})"
@@ -33,7 +33,7 @@ public interface UserAuthMapper {
     @Select({
         "select",
         "user_auth_id, user_id, auth_id, valid, operation_time",
-        "from hospital..user_auth",
+        "from hospital.user_auth",
         "where user_auth_id = #{userAuthId,jdbcType=INTEGER}"
     })
     @ResultMap("com.neusoft.medical.dao.UserAuthMapper.BaseResultMap")
@@ -46,7 +46,7 @@ public interface UserAuthMapper {
     int updateByPrimaryKeySelective(UserAuth record);
 
     @Update({
-        "update hospital..user_auth",
+        "update hospital.user_auth",
         "set user_id = #{userId,jdbcType=INTEGER},",
           "auth_id = #{authId,jdbcType=INTEGER},",
           "valid = #{valid,jdbcType=INTEGER},",

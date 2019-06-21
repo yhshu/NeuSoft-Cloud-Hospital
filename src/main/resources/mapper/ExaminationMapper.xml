@@ -90,7 +90,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hospital..examination
+    from hospital.examination
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -99,7 +99,7 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.ExaminationExample">
-    delete from hospital..examination
+    delete from hospital.examination
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -108,7 +108,7 @@
     <selectKey keyProperty="examinationId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into hospital..examination
+    insert into hospital.examination
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="registrationId != null">
         registration_id,
@@ -205,13 +205,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.neusoft.medical.bean.ExaminationExample" resultType="java.lang.Long">
-    select count(*) from hospital..examination
+    select count(*) from hospital.examination
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update hospital..examination
+    update hospital.examination
     <set>
       <if test="record.examinationId != null">
         examination_id = #{record.examinationId,jdbcType=INTEGER},
@@ -267,7 +267,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update hospital..examination
+    update hospital.examination
     set examination_id = #{record.examinationId,jdbcType=INTEGER},
       registration_id = #{record.registrationId,jdbcType=INTEGER},
       patient_name = #{record.patientName,jdbcType=VARCHAR},
@@ -289,7 +289,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.Examination">
-    update hospital..examination
+    update hospital.examination
     <set>
       <if test="registrationId != null">
         registration_id = #{registrationId,jdbcType=INTEGER},

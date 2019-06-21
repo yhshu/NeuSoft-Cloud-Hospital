@@ -12,13 +12,13 @@ public interface ChargeItemMapper {
     int deleteByExample(ChargeItemExample example);
 
     @Delete({
-        "delete from hospital..charge_item",
+        "delete from hospital.charge_item",
         "where charge_item_id = #{chargeItemId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer chargeItemId);
 
     @Insert({
-        "insert into hospital..charge_item (charge_item_code, name_zh, ",
+        "insert into hospital.charge_item (charge_item_code, name_zh, ",
         "specification, price, ",
         "expense_category_id, department_id, ",
         "name_pinyin, charge_type, ",
@@ -47,7 +47,7 @@ public interface ChargeItemMapper {
         "charge_item_id, charge_item_code, name_zh, specification, price, expense_category_id, ",
         "department_id, name_pinyin, charge_type, creation_time, charge_time, nums, name_en, ",
         "valid, reserve1, reserve2, reserve3",
-        "from hospital..charge_item",
+        "from hospital.charge_item",
         "where charge_item_id = #{chargeItemId,jdbcType=INTEGER}"
     })
     @ResultMap("com.neusoft.medical.dao.ChargeItemMapper.BaseResultMap")
@@ -60,7 +60,7 @@ public interface ChargeItemMapper {
     int updateByPrimaryKeySelective(ChargeItem record);
 
     @Update({
-        "update hospital..charge_item",
+        "update hospital.charge_item",
         "set charge_item_code = #{chargeItemCode,jdbcType=VARCHAR},",
           "name_zh = #{nameZh,jdbcType=VARCHAR},",
           "specification = #{specification,jdbcType=VARCHAR},",

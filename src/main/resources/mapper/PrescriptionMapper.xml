@@ -82,7 +82,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hospital..prescription
+    from hospital.prescription
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -91,7 +91,7 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.PrescriptionExample">
-    delete from hospital..prescription
+    delete from hospital.prescription
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -100,7 +100,7 @@
     <selectKey keyProperty="prescriptionId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into hospital..prescription
+    insert into hospital.prescription
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="prescriptionName != null">
         prescription_name,
@@ -155,13 +155,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.neusoft.medical.bean.PrescriptionExample" resultType="java.lang.Long">
-    select count(*) from hospital..prescription
+    select count(*) from hospital.prescription
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update hospital..prescription
+    update hospital.prescription
     <set>
       <if test="record.prescriptionId != null">
         prescription_id = #{record.prescriptionId,jdbcType=INTEGER},
@@ -196,7 +196,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update hospital..prescription
+    update hospital.prescription
     set prescription_id = #{record.prescriptionId,jdbcType=INTEGER},
       prescription_name = #{record.prescriptionName,jdbcType=VARCHAR},
       registration_id = #{record.registrationId,jdbcType=INTEGER},
@@ -211,7 +211,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.Prescription">
-    update hospital..prescription
+    update hospital.prescription
     <set>
       <if test="prescriptionName != null">
         prescription_name = #{prescriptionName,jdbcType=VARCHAR},

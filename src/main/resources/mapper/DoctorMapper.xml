@@ -84,7 +84,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hospital..doctor
+    from hospital.doctor
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -93,7 +93,7 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.DoctorExample">
-    delete from hospital..doctor
+    delete from hospital.doctor
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -102,7 +102,7 @@
     <selectKey keyProperty="doctorId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into hospital..doctor
+    insert into hospital.doctor
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="doctorName != null">
         doctor_name,
@@ -169,13 +169,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.neusoft.medical.bean.DoctorExample" resultType="java.lang.Long">
-    select count(*) from hospital..doctor
+    select count(*) from hospital.doctor
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update hospital..doctor
+    update hospital.doctor
     <set>
       <if test="record.doctorId != null">
         doctor_id = #{record.doctorId,jdbcType=INTEGER},
@@ -216,7 +216,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update hospital..doctor
+    update hospital.doctor
     set doctor_id = #{record.doctorId,jdbcType=INTEGER},
       doctor_name = #{record.doctorName,jdbcType=VARCHAR},
       department_id = #{record.departmentId,jdbcType=INTEGER},
@@ -233,7 +233,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.Doctor">
-    update hospital..doctor
+    update hospital.doctor
     <set>
       <if test="doctorName != null">
         doctor_name = #{doctorName,jdbcType=VARCHAR},

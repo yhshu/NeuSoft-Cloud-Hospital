@@ -12,13 +12,13 @@ public interface ExpenseCategoryMapper {
     int deleteByExample(ExpenseCategoryExample example);
 
     @Delete({
-        "delete from hospital..expense_category",
+        "delete from hospital.expense_category",
         "where expense_category_id = #{expenseCategoryId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer expenseCategoryId);
 
     @Insert({
-        "insert into hospital..expense_category (expense_code, expense_name, ",
+        "insert into hospital.expense_category (expense_code, expense_name, ",
         "valid, reserve1, ",
         "reserve2, reserve3)",
         "values (#{expenseCode,jdbcType=VARCHAR}, #{expenseName,jdbcType=VARCHAR}, ",
@@ -36,7 +36,7 @@ public interface ExpenseCategoryMapper {
         "select",
         "expense_category_id, expense_code, expense_name, valid, reserve1, reserve2, ",
         "reserve3",
-        "from hospital..expense_category",
+        "from hospital.expense_category",
         "where expense_category_id = #{expenseCategoryId,jdbcType=INTEGER}"
     })
     @ResultMap("com.neusoft.medical.dao.ExpenseCategoryMapper.BaseResultMap")
@@ -49,7 +49,7 @@ public interface ExpenseCategoryMapper {
     int updateByPrimaryKeySelective(ExpenseCategory record);
 
     @Update({
-        "update hospital..expense_category",
+        "update hospital.expense_category",
         "set expense_code = #{expenseCode,jdbcType=VARCHAR},",
           "expense_name = #{expenseName,jdbcType=VARCHAR},",
           "valid = #{valid,jdbcType=INTEGER},",

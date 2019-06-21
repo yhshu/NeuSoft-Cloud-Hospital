@@ -12,13 +12,13 @@ public interface DepartmentMapper {
     int deleteByExample(DepartmentExample example);
 
     @Delete({
-        "delete from hospital..department",
+        "delete from hospital.department",
         "where department_id = #{departmentId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer departmentId);
 
     @Insert({
-        "insert into hospital..department (department_code, department_name, ",
+        "insert into hospital.department (department_code, department_name, ",
         "category, type, ",
         "valid, reserve1, ",
         "reserve2, reserve3)",
@@ -38,7 +38,7 @@ public interface DepartmentMapper {
         "select",
         "department_id, department_code, department_name, category, type, valid, reserve1, ",
         "reserve2, reserve3",
-        "from hospital..department",
+        "from hospital.department",
         "where department_id = #{departmentId,jdbcType=INTEGER}"
     })
     @ResultMap("com.neusoft.medical.dao.DepartmentMapper.BaseResultMap")
@@ -51,7 +51,7 @@ public interface DepartmentMapper {
     int updateByPrimaryKeySelective(Department record);
 
     @Update({
-        "update hospital..department",
+        "update hospital.department",
         "set department_code = #{departmentCode,jdbcType=VARCHAR},",
           "department_name = #{departmentName,jdbcType=VARCHAR},",
           "category = #{category,jdbcType=INTEGER},",

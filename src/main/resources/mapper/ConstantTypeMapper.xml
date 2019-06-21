@@ -76,7 +76,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hospital..constant_type
+    from hospital.constant_type
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,7 +85,7 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.ConstantTypeExample">
-    delete from hospital..constant_type
+    delete from hospital.constant_type
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -94,7 +94,7 @@
     <selectKey keyProperty="constantTypeId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into hospital..constant_type
+    insert into hospital.constant_type
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="constantTypeCode != null">
         constant_type_code,
@@ -119,13 +119,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.neusoft.medical.bean.ConstantTypeExample" resultType="java.lang.Long">
-    select count(*) from hospital..constant_type
+    select count(*) from hospital.constant_type
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update hospital..constant_type
+    update hospital.constant_type
     <set>
       <if test="record.constantTypeId != null">
         constant_type_id = #{record.constantTypeId,jdbcType=INTEGER},
@@ -145,7 +145,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update hospital..constant_type
+    update hospital.constant_type
     set constant_type_id = #{record.constantTypeId,jdbcType=INTEGER},
       constant_type_code = #{record.constantTypeCode,jdbcType=VARCHAR},
       constant_type_name = #{record.constantTypeName,jdbcType=VARCHAR},
@@ -155,7 +155,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.ConstantType">
-    update hospital..constant_type
+    update hospital.constant_type
     <set>
       <if test="constantTypeCode != null">
         constant_type_code = #{constantTypeCode,jdbcType=VARCHAR},
