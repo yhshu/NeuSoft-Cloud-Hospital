@@ -66,5 +66,22 @@ public interface ExaminationService {
      */
     boolean updateExamResult(String examinationJson);
 
+    /**
+     * 删除检查项目
+     * 由医生执行
+     * 只有未支付的项目可删除
+     *
+     * @param chargeEntryIdList 删除的检查项目编号列表
+     * @return 操作结果
+     */
     boolean deleteUnpaidChargeEntry(List<Integer> chargeEntryIdList);
+
+    /**
+     * 删除检查单
+     * 这将删除检查单上的所有检查项目
+     *
+     * @param examinationIdList 检查单编号列表
+     * @return 操作结果
+     */
+    boolean deleteExaminationList(List<Integer> examinationIdList);
 }

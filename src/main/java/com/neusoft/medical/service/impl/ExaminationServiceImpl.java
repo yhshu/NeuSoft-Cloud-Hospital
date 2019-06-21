@@ -149,4 +149,31 @@ public class ExaminationServiceImpl implements ExaminationService {
         }
         return true;
     }
+
+    @Override
+    public boolean deleteExaminationList(List<Integer> examinationIdList) {
+        try {
+            ExaminationExample examinationExample = new ExaminationExample();
+            examinationExample.or().andValidEqualTo(1);
+            List<Examination> examinationList = examinationMapper.selectByExample(examinationExample);
+
+            for (Examination examination : examinationList) {
+                if (examination.getSaveState().equals(SAVE_FORMAL) && examination.getExecutionState().equals(Constant.EXEC_DONE))
+                    continue;
+                ChargeEntryExample chargeEntryExample = new ChargeEntryExample();
+                chargeEntryExample.or().andValidEqualTo(1);
+
+                ChargeEntry chargeEntryRecord = new ChargeEntry();
+                chargeEntryRecord.setValid(0);
+                chargeEntryMapper.updateByExampleSelective(chargeEntryRecord, chargeEntryExample);
+
+                examination.setValid(0);
+                examinationMapper.updateByPrimaryKey(examination);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }

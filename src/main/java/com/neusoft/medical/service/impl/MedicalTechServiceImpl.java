@@ -1,9 +1,6 @@
 package com.neusoft.medical.service.impl;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.google.gson.*;
 import com.neusoft.medical.bean.ChargeEntry;
 import com.neusoft.medical.bean.ChargeEntryExample;
 import com.neusoft.medical.dao.*;
@@ -13,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
+import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 @Service
@@ -33,7 +31,7 @@ public class MedicalTechServiceImpl implements MedicalTechService {
 
     @Override
     public String selectChargeEntryList(int registrationId) {
-        String res = null;
+        String res;
         try {
             ChargeEntryExample chargeEntryExample = new ChargeEntryExample();
             chargeEntryExample.or().andValidEqualTo(1).andRegistrationIdEqualTo(registrationId);
@@ -42,9 +40,9 @@ public class MedicalTechServiceImpl implements MedicalTechService {
 
             for (JsonElement chargeEntryJsonElement : chargeEntryListJsonArray) {
                 JsonObject chargeEntryJsonObject = chargeEntryJsonElement.getAsJsonObject();
-                chargeEntryJsonObject.addProperty("doctorName", doctorMapper.selectByPrimaryKey(chargeEntryJsonObject.get("doctorId").getAsInt()).getDoctorName());  // 医生姓名
+                chargeEntryJsonObject.addProperty("doctorName", doctorMapper.selectByPrimaryKey(chargeEntryJsonObject.get("doctorId").getAsInt()).getDoctorName());         // 医生姓名
                 chargeEntryJsonObject.addProperty("chargeItemNameZh", chargeItemMapper.selectByPrimaryKey(chargeEntryJsonObject.get("chargeItemId").getAsInt()).getNameZh());  // 药品中文名称
-                chargeEntryJsonObject.addProperty("price", chargeItemMapper.selectByPrimaryKey(chargeEntryJsonObject.get("chargeItemId").getAsInt()).getPrice());  // 药品单价
+                chargeEntryJsonObject.addProperty("price", chargeItemMapper.selectByPrimaryKey(chargeEntryJsonObject.get("chargeItemId").getAsInt()).getPrice());   // 药品单价
             }
 
             res = chargeEntryListJsonArray.toString();
@@ -57,15 +55,23 @@ public class MedicalTechServiceImpl implements MedicalTechService {
     }
 
     @Override
-    public boolean chargeEntryListApply(List<Integer> chargeEntryIdList) {
+    public boolean chargeEntryListApply(String chargeEntryListJson) {
         try {
-            ChargeEntryExample chargeEntryExample = new ChargeEntryExample();
-            ChargeEntryExample.Criteria criteria = chargeEntryExample.createCriteria();
-            criteria.andValidEqualTo(1).andChargeEntryIdIn(chargeEntryIdList);
+            JsonArray chargeEntryListJsonArray = new JsonParser().parse(chargeEntryListJson).getAsJsonArray();
 
-            ChargeEntry record = new ChargeEntry();
-            record.setNotGivenNums(0);
-            chargeEntryMapper.updateByExampleSelective(record, chargeEntryExample);
+            for (JsonElement chargeEntryJsonElement : chargeEntryListJsonArray) {
+                JsonObject chargeEntryJsonObject = chargeEntryJsonElement.getAsJsonObject();
+                int chargeEntryId = chargeEntryJsonObject.get("chargeEntryId").getAsInt();
+                int executionNums = chargeEntryJsonObject.get("executionNums").getAsInt();
+
+                ChargeEntryExample chargeEntryExample = new ChargeEntryExample();
+                chargeEntryExample.or().andValidEqualTo(1).andChargeEntryIdEqualTo(chargeEntryId);
+
+                ChargeEntry chargeEntry = chargeEntryMapper.selectByPrimaryKey(chargeEntryId);
+                chargeEntry.setNotGivenNums(max(0, chargeEntry.getNotGivenNums() - executionNums));
+                chargeEntryMapper.updateByPrimaryKey(chargeEntry);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             return false;

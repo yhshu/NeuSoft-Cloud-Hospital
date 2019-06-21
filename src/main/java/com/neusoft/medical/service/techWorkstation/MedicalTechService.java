@@ -1,7 +1,5 @@
 package com.neusoft.medical.service.techWorkstation;
 
-import java.util.List;
-
 /**
  * 医技工作站服务
  */
@@ -17,10 +15,10 @@ public interface MedicalTechService {
     /**
      * 应用收费项目
      *
-     * @param chargeEntryIdList 收费项目编号列表
+     * @param chargeEntryListJson 收费项目编号列表
      * @return 操作结果
      */
-    boolean chargeEntryListApply(List<Integer> chargeEntryIdList);
+    boolean chargeEntryListApply(String chargeEntryListJson);
 
     /**
      * 收费项目退费

@@ -124,11 +124,32 @@ public class ExaminationController {
      * @param chargeEntryIdList 删除的检查项目编号列表
      * @return 操作结果
      */
-    @DeleteMapping("/delete_exam")
+    @DeleteMapping("/delete_exam_entry")
     public ResultDTO<Boolean> deleteUnpaidChargeEntry(@RequestParam(value = "chargeEntryIdList[]") Integer[] chargeEntryIdList) {
         boolean res;
         try {
             res = examinationService.deleteUnpaidChargeEntry(Arrays.asList(chargeEntryIdList));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultDTO<>(Boolean.FALSE);
+        }
+        return new ResultDTO<>(res);
+    }
+
+    /**
+     * 删除检查单
+     * 这将删除检查单上的所有检查项目
+     *
+     * @param examinationIdList 检查单编号列表
+     * @return 操作结果
+     */
+    @DeleteMapping("/delete_exam")
+    public ResultDTO<Boolean> deleteExam(
+            @RequestParam(value = "examinationIdList[]") Integer[] examinationIdList
+    ) {
+        boolean res;
+        try {
+            res = examinationService.deleteExaminationList(Arrays.asList(examinationIdList));
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultDTO<>(Boolean.FALSE);

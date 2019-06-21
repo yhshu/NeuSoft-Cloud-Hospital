@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
 
 /**
  * 医技工作站 控制器
@@ -44,16 +43,18 @@ public class MedicalTechController {
     /**
      * 应用收费项目
      *
-     * @param chargeEntryIdList 收费项目编号列表
+     * @param chargeEntryListJson 收费项目信息，json 数组
      * @return 操作结果
+     * chargeEntryListJson 数组中每个元素包含的属性：
+     * - chargeEntryId 收费项目编号
+     * - executionNums 此次消耗的项目数
      */
     @GetMapping("/apply")
     public ResultDTO<Boolean> chargeEntryListApply(
-            @RequestParam(value = "chargeEntryIdList[]") Integer[] chargeEntryIdList
-    ) {
+            @RequestParam("chargeEntryListJson") String chargeEntryListJson) {
         Boolean res;
         try {
-            res = medicalTechService.chargeEntryListApply(Arrays.asList(chargeEntryIdList));
+            res = medicalTechService.chargeEntryListApply(chargeEntryListJson);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultDTO<>(Boolean.FALSE);
