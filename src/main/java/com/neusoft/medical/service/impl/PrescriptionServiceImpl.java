@@ -1,9 +1,6 @@
 package com.neusoft.medical.service.impl;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import com.neusoft.medical.Util.Constant;
 import com.neusoft.medical.Util.MathUtil;
 import com.neusoft.medical.bean.*;
@@ -223,8 +220,13 @@ public class PrescriptionServiceImpl implements PrescriptionService {
                 PrescriptionEntryExample prescriptionEntryExample = new PrescriptionEntryExample();
                 prescriptionEntryExample.or().andValidEqualTo(1).andPrescriptionIdEqualTo(prescription.getPrescriptionId());
                 List<PrescriptionEntry> prescriptionEntryList = prescriptionEntryMapper.selectByExample(prescriptionEntryExample);
+                JsonArray prescriptionEntryListJsonArray = gson.toJsonTree(prescriptionEntryList).getAsJsonArray();
+                for (JsonElement prescriptionEntryJsonElement : prescriptionEntryListJsonArray) {
+                    JsonObject prescriptionEntryJsonObject = prescriptionEntryJsonElement.getAsJsonObject();
+                    prescriptionJsonObject.add("medicine", gson.toJsonTree(medicineMapper.selectByPrimaryKey(prescriptionEntryJsonObject.get("medicineId").getAsInt())));
+                }
 
-                prescriptionJsonObject.addProperty("medicine", gson.toJsonTree(prescriptionEntryList).toString());
+                prescriptionJsonObject.add("prescriptionEntryList", prescriptionEntryListJsonArray);
                 prescriptionMedicineJsonArray.add(prescriptionJsonObject);
             }
             res = prescriptionMedicineJsonArray.toString();
