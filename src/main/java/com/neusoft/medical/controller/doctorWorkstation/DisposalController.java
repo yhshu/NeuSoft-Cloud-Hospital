@@ -27,6 +27,7 @@ public class DisposalController {
      * 在 chargeEntryList 数组中，每个元素的属性：
      * - chargeItemId 处置项目作为收费项目的编号
      * - nums 处置项目的数量
+     * - doctorAdvice 医嘱
      */
     @GetMapping("/add")
     public ResultDTO<Boolean> addDisposal(

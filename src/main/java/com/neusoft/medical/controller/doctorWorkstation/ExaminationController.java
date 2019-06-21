@@ -30,7 +30,6 @@ public class ExaminationController {
      * chargeEntryList 数组中的每项元素包含的属性如下：
      * - chargeItemId 收费项目编号
      * - nums 收费项目计数
-     * - collectorId 收费员编号
      * - doctorAdvice 医嘱
      */
     @GetMapping("/add")
