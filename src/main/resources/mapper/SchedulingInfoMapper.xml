@@ -6,12 +6,10 @@
       <idArg column="scheduling_info_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="scheduling_time" javaType="java.util.Date" jdbcType="DATE" />
       <arg column="department_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="department_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="doctor_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="doctor_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="type" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="registration_category_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="noon" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="period" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="limitation" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="remain_nums" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
@@ -75,8 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    scheduling_info_id, scheduling_time, department_id, department_name, doctor_id, doctor_name, 
-    type, valid, period, limitation, remain_nums
+    scheduling_info_id, scheduling_time, department_id, doctor_id, registration_category_id, 
+    noon, valid, limitation, remain_nums
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.SchedulingInfoExample" resultMap="BaseResultMap">
     select
@@ -110,23 +108,17 @@
       <if test="departmentId != null">
         department_id,
       </if>
-      <if test="departmentName != null">
-        department_name,
-      </if>
       <if test="doctorId != null">
         doctor_id,
       </if>
-      <if test="doctorName != null">
-        doctor_name,
+      <if test="registrationCategoryId != null">
+        registration_category_id,
       </if>
-      <if test="type != null">
-        type,
+      <if test="noon != null">
+        noon,
       </if>
       <if test="valid != null">
         valid,
-      </if>
-      <if test="period != null">
-        period,
       </if>
       <if test="limitation != null">
         limitation,
@@ -142,23 +134,17 @@
       <if test="departmentId != null">
         #{departmentId,jdbcType=INTEGER},
       </if>
-      <if test="departmentName != null">
-        #{departmentName,jdbcType=VARCHAR},
-      </if>
       <if test="doctorId != null">
         #{doctorId,jdbcType=INTEGER},
       </if>
-      <if test="doctorName != null">
-        #{doctorName,jdbcType=VARCHAR},
+      <if test="registrationCategoryId != null">
+        #{registrationCategoryId,jdbcType=INTEGER},
       </if>
-      <if test="type != null">
-        #{type,jdbcType=VARCHAR},
+      <if test="noon != null">
+        #{noon,jdbcType=INTEGER},
       </if>
       <if test="valid != null">
         #{valid,jdbcType=INTEGER},
-      </if>
-      <if test="period != null">
-        #{period,jdbcType=VARCHAR},
       </if>
       <if test="limitation != null">
         #{limitation,jdbcType=INTEGER},
@@ -186,23 +172,17 @@
       <if test="record.departmentId != null">
         department_id = #{record.departmentId,jdbcType=INTEGER},
       </if>
-      <if test="record.departmentName != null">
-        department_name = #{record.departmentName,jdbcType=VARCHAR},
-      </if>
       <if test="record.doctorId != null">
         doctor_id = #{record.doctorId,jdbcType=INTEGER},
       </if>
-      <if test="record.doctorName != null">
-        doctor_name = #{record.doctorName,jdbcType=VARCHAR},
+      <if test="record.registrationCategoryId != null">
+        registration_category_id = #{record.registrationCategoryId,jdbcType=INTEGER},
       </if>
-      <if test="record.type != null">
-        type = #{record.type,jdbcType=VARCHAR},
+      <if test="record.noon != null">
+        noon = #{record.noon,jdbcType=INTEGER},
       </if>
       <if test="record.valid != null">
         valid = #{record.valid,jdbcType=INTEGER},
-      </if>
-      <if test="record.period != null">
-        period = #{record.period,jdbcType=VARCHAR},
       </if>
       <if test="record.limitation != null">
         limitation = #{record.limitation,jdbcType=INTEGER},
@@ -220,12 +200,10 @@
     set scheduling_info_id = #{record.schedulingInfoId,jdbcType=INTEGER},
       scheduling_time = #{record.schedulingTime,jdbcType=DATE},
       department_id = #{record.departmentId,jdbcType=INTEGER},
-      department_name = #{record.departmentName,jdbcType=VARCHAR},
       doctor_id = #{record.doctorId,jdbcType=INTEGER},
-      doctor_name = #{record.doctorName,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=VARCHAR},
+      registration_category_id = #{record.registrationCategoryId,jdbcType=INTEGER},
+      noon = #{record.noon,jdbcType=INTEGER},
       valid = #{record.valid,jdbcType=INTEGER},
-      period = #{record.period,jdbcType=VARCHAR},
       limitation = #{record.limitation,jdbcType=INTEGER},
       remain_nums = #{record.remainNums,jdbcType=INTEGER}
     <if test="_parameter != null">
@@ -241,23 +219,17 @@
       <if test="departmentId != null">
         department_id = #{departmentId,jdbcType=INTEGER},
       </if>
-      <if test="departmentName != null">
-        department_name = #{departmentName,jdbcType=VARCHAR},
-      </if>
       <if test="doctorId != null">
         doctor_id = #{doctorId,jdbcType=INTEGER},
       </if>
-      <if test="doctorName != null">
-        doctor_name = #{doctorName,jdbcType=VARCHAR},
+      <if test="registrationCategoryId != null">
+        registration_category_id = #{registrationCategoryId,jdbcType=INTEGER},
       </if>
-      <if test="type != null">
-        type = #{type,jdbcType=VARCHAR},
+      <if test="noon != null">
+        noon = #{noon,jdbcType=INTEGER},
       </if>
       <if test="valid != null">
         valid = #{valid,jdbcType=INTEGER},
-      </if>
-      <if test="period != null">
-        period = #{period,jdbcType=VARCHAR},
       </if>
       <if test="limitation != null">
         limitation = #{limitation,jdbcType=INTEGER},

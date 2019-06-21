@@ -18,18 +18,16 @@ public interface SchedulingRuleMapper {
     int deleteByPrimaryKey(Integer schedulingRuleId);
 
     @Insert({
-        "insert into hospital.scheduling_rule (week_day, department_id, ",
-        "department_name, doctor_id, ",
-        "doctor_name, type, ",
-        "valid, period, limitation, ",
-        "operator_id, operator_name, ",
-        "operating_date)",
-        "values (#{weekDay,jdbcType=VARCHAR}, #{departmentId,jdbcType=INTEGER}, ",
-        "#{departmentName,jdbcType=VARCHAR}, #{doctorId,jdbcType=INTEGER}, ",
-        "#{doctorName,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, ",
-        "#{valid,jdbcType=INTEGER}, #{period,jdbcType=VARCHAR}, #{limitation,jdbcType=INTEGER}, ",
-        "#{operatorId,jdbcType=INTEGER}, #{operatorName,jdbcType=VARCHAR}, ",
-        "#{operatingDate,jdbcType=DATE})"
+        "insert into hospital.scheduling_rule (weekday, department_id, ",
+        "doctor_id, registration_category_id, ",
+        "noon, limitation, ",
+        "operation_account_id, operation_date, ",
+        "valid)",
+        "values (#{weekday,jdbcType=INTEGER}, #{departmentId,jdbcType=INTEGER}, ",
+        "#{doctorId,jdbcType=INTEGER}, #{registrationCategoryId,jdbcType=INTEGER}, ",
+        "#{noon,jdbcType=INTEGER}, #{limitation,jdbcType=INTEGER}, ",
+        "#{operationAccountId,jdbcType=INTEGER}, #{operationDate,jdbcType=DATE}, ",
+        "#{valid,jdbcType=INTEGER})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="schedulingRuleId", before=false, resultType=Integer.class)
     int insert(SchedulingRule record);
@@ -40,8 +38,8 @@ public interface SchedulingRuleMapper {
 
     @Select({
         "select",
-        "scheduling_rule_id, week_day, department_id, department_name, doctor_id, doctor_name, ",
-        "type, valid, period, limitation, operator_id, operator_name, operating_date",
+        "scheduling_rule_id, weekday, department_id, doctor_id, registration_category_id, ",
+        "noon, limitation, operation_account_id, operation_date, valid",
         "from hospital.scheduling_rule",
         "where scheduling_rule_id = #{schedulingRuleId,jdbcType=INTEGER}"
     })
@@ -56,18 +54,15 @@ public interface SchedulingRuleMapper {
 
     @Update({
         "update hospital.scheduling_rule",
-        "set week_day = #{weekDay,jdbcType=VARCHAR},",
+        "set weekday = #{weekday,jdbcType=INTEGER},",
           "department_id = #{departmentId,jdbcType=INTEGER},",
-          "department_name = #{departmentName,jdbcType=VARCHAR},",
           "doctor_id = #{doctorId,jdbcType=INTEGER},",
-          "doctor_name = #{doctorName,jdbcType=VARCHAR},",
-          "type = #{type,jdbcType=VARCHAR},",
-          "valid = #{valid,jdbcType=INTEGER},",
-          "period = #{period,jdbcType=VARCHAR},",
+          "registration_category_id = #{registrationCategoryId,jdbcType=INTEGER},",
+          "noon = #{noon,jdbcType=INTEGER},",
           "limitation = #{limitation,jdbcType=INTEGER},",
-          "operator_id = #{operatorId,jdbcType=INTEGER},",
-          "operator_name = #{operatorName,jdbcType=VARCHAR},",
-          "operating_date = #{operatingDate,jdbcType=DATE}",
+          "operation_account_id = #{operationAccountId,jdbcType=INTEGER},",
+          "operation_date = #{operationDate,jdbcType=DATE},",
+          "valid = #{valid,jdbcType=INTEGER}",
         "where scheduling_rule_id = #{schedulingRuleId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(SchedulingRule record);

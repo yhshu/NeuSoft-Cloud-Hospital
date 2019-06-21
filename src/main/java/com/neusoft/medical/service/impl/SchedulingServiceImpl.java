@@ -1,11 +1,11 @@
 package com.neusoft.medical.service.impl;
 
-import com.neusoft.medical.bean.Doctor;
-import com.neusoft.medical.bean.DoctorExample;
-import com.neusoft.medical.bean.SchedulingInfo;
-import com.neusoft.medical.bean.SchedulingInfoExample;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.DoctorMapper;
 import com.neusoft.medical.dao.SchedulingInfoMapper;
+import com.neusoft.medical.dao.SchedulingRuleMapper;
 import com.neusoft.medical.service.basicInfo.SchedulingService;
 import org.springframework.stereotype.Service;
 
@@ -18,17 +18,18 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class SchedulingServiceImpl implements SchedulingService {
     @Resource
     private SchedulingInfoMapper schedulingInfoMapper;
-
+    @Resource
+    private SchedulingRuleMapper schedulingRuleMapper;
     @Resource
     private DoctorMapper doctorMapper;
 
-    // 符合条件的医生需要满足
-    // 1. 有效的排班计划
-    // 2. 排班计划在今天
-    // 3. 符合指定的科室
-    // 4. 今天有剩余的挂号限额
     @Override
     public List<Doctor> findCurrentAvailableDoctor(int departmentId) {
+        // 符合条件的医生需要满足
+        // 1. 有效的排班计划
+        // 2. 排班计划在今天
+        // 3. 符合指定的科室
+        // 4. 今天有剩余的挂号限额
         SchedulingInfoExample schedulingInfoExample = new SchedulingInfoExample();
         SchedulingInfoExample.Criteria schedulingInfoExampleCriteria = schedulingInfoExample.createCriteria();
         schedulingInfoExampleCriteria.andValidEqualTo(1);              // 有效的排班计划
@@ -58,5 +59,52 @@ public class SchedulingServiceImpl implements SchedulingService {
         doctorExampleCriteria.andDoctorSchedulingEqualTo(1); // 参与排班的医生
         doctorExampleCriteria.andDoctorIdIn(doctorIdList);
         return doctorMapper.selectByExample(doctorExample);
+    }
+
+    @Override
+    public PageInfo<SchedulingInfo> selectSchedulingRule(Integer currentPage, Integer pageSize) {
+        List<SchedulingInfo> schedulingInfoList = null;
+        try {
+            PageHelper.startPage(currentPage, pageSize);
+
+            SchedulingInfoExample schedulingInfoExample = new SchedulingInfoExample();
+            schedulingInfoExample.or().andValidEqualTo(1);
+            schedulingInfoList = schedulingInfoMapper.selectByExample(schedulingInfoExample);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assert schedulingInfoList != null;
+        return new PageInfo<>(schedulingInfoList);
+    }
+
+    @Override
+    public boolean saveSchedulingRule(Integer schedulingRuleId, Integer weekday, Integer departmentId, Integer doctorId, Integer registrationCategoryId, Integer noon, Integer limitation, Integer accountId) {
+        try {
+            SchedulingRule schedulingRuleRecord = new SchedulingRule(null, weekday, departmentId, doctorId, registrationCategoryId, noon, limitation, accountId, new Date(), 1);
+            if (schedulingRuleId != null) {
+                // 新增排班规则
+                schedulingRuleMapper.insert(schedulingRuleRecord);
+            } else {
+                // 更新排班规则
+                schedulingRuleRecord.setSchedulingRuleId(schedulingRuleId);
+                schedulingRuleMapper.updateByPrimaryKey(schedulingRuleRecord);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean generateSchedulingInfo(String startDate, String endDate) {
+        // todo
+        return false;
+    }
+
+    @Override
+    public boolean saveSchedulingInfo(Integer schedulingInfoId, String schedulingTime, Integer departmentId, Integer doctorId, Integer registrationCategoryId, Integer valid, Integer noon, Integer limitation, Integer remainNums) {
+        // todo
+        return false;
     }
 }

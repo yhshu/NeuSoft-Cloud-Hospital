@@ -5,44 +5,35 @@ import java.util.Date;
 public class SchedulingRule {
     private Integer schedulingRuleId;
 
-    private String weekDay;
+    private Integer weekday;
 
     private Integer departmentId;
 
-    private String departmentName;
-
     private Integer doctorId;
 
-    private String doctorName;
+    private Integer registrationCategoryId;
 
-    private String type;
-
-    private Integer valid;
-
-    private String period;
+    private Integer noon;
 
     private Integer limitation;
 
-    private Integer operatorId;
+    private Integer operationAccountId;
 
-    private String operatorName;
+    private Date operationDate;
 
-    private Date operatingDate;
+    private Integer valid;
 
-    public SchedulingRule(Integer schedulingRuleId, String weekDay, Integer departmentId, String departmentName, Integer doctorId, String doctorName, String type, Integer valid, String period, Integer limitation, Integer operatorId, String operatorName, Date operatingDate) {
+    public SchedulingRule(Integer schedulingRuleId, Integer weekday, Integer departmentId, Integer doctorId, Integer registrationCategoryId, Integer noon, Integer limitation, Integer operationAccountId, Date operationDate, Integer valid) {
         this.schedulingRuleId = schedulingRuleId;
-        this.weekDay = weekDay;
+        this.weekday = weekday;
         this.departmentId = departmentId;
-        this.departmentName = departmentName;
         this.doctorId = doctorId;
-        this.doctorName = doctorName;
-        this.type = type;
-        this.valid = valid;
-        this.period = period;
+        this.registrationCategoryId = registrationCategoryId;
+        this.noon = noon;
         this.limitation = limitation;
-        this.operatorId = operatorId;
-        this.operatorName = operatorName;
-        this.operatingDate = operatingDate;
+        this.operationAccountId = operationAccountId;
+        this.operationDate = operationDate;
+        this.valid = valid;
     }
 
     public SchedulingRule() {
@@ -57,12 +48,12 @@ public class SchedulingRule {
         this.schedulingRuleId = schedulingRuleId;
     }
 
-    public String getWeekDay() {
-        return weekDay;
+    public Integer getWeekday() {
+        return weekday;
     }
 
-    public void setWeekDay(String weekDay) {
-        this.weekDay = weekDay == null ? null : weekDay.trim();
+    public void setWeekday(Integer weekday) {
+        this.weekday = weekday;
     }
 
     public Integer getDepartmentId() {
@@ -73,14 +64,6 @@ public class SchedulingRule {
         this.departmentId = departmentId;
     }
 
-    public String getDepartmentName() {
-        return departmentName;
-    }
-
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName == null ? null : departmentName.trim();
-    }
-
     public Integer getDoctorId() {
         return doctorId;
     }
@@ -89,36 +72,20 @@ public class SchedulingRule {
         this.doctorId = doctorId;
     }
 
-    public String getDoctorName() {
-        return doctorName;
+    public Integer getRegistrationCategoryId() {
+        return registrationCategoryId;
     }
 
-    public void setDoctorName(String doctorName) {
-        this.doctorName = doctorName == null ? null : doctorName.trim();
+    public void setRegistrationCategoryId(Integer registrationCategoryId) {
+        this.registrationCategoryId = registrationCategoryId;
     }
 
-    public String getType() {
-        return type;
+    public Integer getNoon() {
+        return noon;
     }
 
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
-    }
-
-    public Integer getValid() {
-        return valid;
-    }
-
-    public void setValid(Integer valid) {
-        this.valid = valid;
-    }
-
-    public String getPeriod() {
-        return period;
-    }
-
-    public void setPeriod(String period) {
-        this.period = period == null ? null : period.trim();
+    public void setNoon(Integer noon) {
+        this.noon = noon;
     }
 
     public Integer getLimitation() {
@@ -129,27 +96,27 @@ public class SchedulingRule {
         this.limitation = limitation;
     }
 
-    public Integer getOperatorId() {
-        return operatorId;
+    public Integer getOperationAccountId() {
+        return operationAccountId;
     }
 
-    public void setOperatorId(Integer operatorId) {
-        this.operatorId = operatorId;
+    public void setOperationAccountId(Integer operationAccountId) {
+        this.operationAccountId = operationAccountId;
     }
 
-    public String getOperatorName() {
-        return operatorName;
+    public Date getOperationDate() {
+        return operationDate;
     }
 
-    public void setOperatorName(String operatorName) {
-        this.operatorName = operatorName == null ? null : operatorName.trim();
+    public void setOperationDate(Date operationDate) {
+        this.operationDate = operationDate;
     }
 
-    public Date getOperatingDate() {
-        return operatingDate;
+    public Integer getValid() {
+        return valid;
     }
 
-    public void setOperatingDate(Date operatingDate) {
-        this.operatingDate = operatingDate;
+    public void setValid(Integer valid) {
+        this.valid = valid;
     }
 }

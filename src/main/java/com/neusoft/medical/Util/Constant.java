@@ -44,4 +44,11 @@ public interface Constant {
     String REGIST_DONE = "0";
     String REGIST_NOT_VISITED = "0";
     String REGIST_VISITED = "1";
+
+    /**
+     * 午别
+     */
+    int NOON_ALL_DAY = 0;
+    int NOON_MORNING = 1;
+    int NOON_AFTERNOON = 2;
 }
