@@ -162,7 +162,7 @@ public class ExaminationServiceImpl implements ExaminationService {
                     continue;
 
                 ChargeEntryExample chargeEntryExample = new ChargeEntryExample();
-                chargeEntryExample.or().andValidEqualTo(1);
+                chargeEntryExample.or().andValidEqualTo(1).andExaminationIdEqualTo(examination.getExaminationId());
 
                 ChargeEntry chargeEntryRecord = new ChargeEntry();
                 chargeEntryRecord.setValid(0);

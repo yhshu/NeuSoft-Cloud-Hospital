@@ -146,7 +146,7 @@ public class DisposalServiceImpl implements DisposalService {
                     continue;
 
                 ChargeEntryExample chargeEntryExample = new ChargeEntryExample();
-                chargeEntryExample.or().andValidEqualTo(1);
+                chargeEntryExample.or().andValidEqualTo(1).andChargeFormIdEqualTo(chargeForm.getChargeFormId());
 
                 ChargeEntry chargeEntryRecord = new ChargeEntry();
                 chargeEntryRecord.setValid(0);
