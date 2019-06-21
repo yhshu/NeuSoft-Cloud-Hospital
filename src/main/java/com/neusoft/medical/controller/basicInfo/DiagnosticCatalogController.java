@@ -72,7 +72,7 @@ public class DiagnosticCatalogController {
             @RequestParam(value = "diseaseCode") String diseaseCode,
             @RequestParam(value = "diseaseCategory") Integer diseaseCategory) {
         System.out.println("addDisease: " + "新增疾病");
-        Disease added = diagnosticCatalogService.addDisease(new Disease(null, diseaseCode, diseaseName, diseaseIcd, diseaseCategory, null));
+        Disease added = diagnosticCatalogService.addDisease(new Disease(null, diseaseCode, diseaseName, diseaseIcd, diseaseCategory, 1));
         return new ResultDTO<>(added);
     }
 
