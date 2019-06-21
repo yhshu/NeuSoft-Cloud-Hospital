@@ -252,6 +252,66 @@ public class SchedulingInfoExample {
             return (Criteria) this;
         }
 
+        public Criteria andSchedulingRuleIdIsNull() {
+            addCriterion("scheduling_rule_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSchedulingRuleIdIsNotNull() {
+            addCriterion("scheduling_rule_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSchedulingRuleIdEqualTo(Integer value) {
+            addCriterion("scheduling_rule_id =", value, "schedulingRuleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSchedulingRuleIdNotEqualTo(Integer value) {
+            addCriterion("scheduling_rule_id <>", value, "schedulingRuleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSchedulingRuleIdGreaterThan(Integer value) {
+            addCriterion("scheduling_rule_id >", value, "schedulingRuleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSchedulingRuleIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("scheduling_rule_id >=", value, "schedulingRuleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSchedulingRuleIdLessThan(Integer value) {
+            addCriterion("scheduling_rule_id <", value, "schedulingRuleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSchedulingRuleIdLessThanOrEqualTo(Integer value) {
+            addCriterion("scheduling_rule_id <=", value, "schedulingRuleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSchedulingRuleIdIn(List<Integer> values) {
+            addCriterion("scheduling_rule_id in", values, "schedulingRuleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSchedulingRuleIdNotIn(List<Integer> values) {
+            addCriterion("scheduling_rule_id not in", values, "schedulingRuleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSchedulingRuleIdBetween(Integer value1, Integer value2) {
+            addCriterion("scheduling_rule_id between", value1, value2, "schedulingRuleId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSchedulingRuleIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("scheduling_rule_id not between", value1, value2, "schedulingRuleId");
+            return (Criteria) this;
+        }
+
         public Criteria andDepartmentIdIsNull() {
             addCriterion("department_id is null");
             return (Criteria) this;

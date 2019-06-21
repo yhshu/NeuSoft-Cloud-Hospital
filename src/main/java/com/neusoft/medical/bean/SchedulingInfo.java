@@ -7,6 +7,8 @@ public class SchedulingInfo {
 
     private Date schedulingTime;
 
+    private Integer schedulingRuleId;
+
     private Integer departmentId;
 
     private Integer doctorId;
@@ -21,9 +23,10 @@ public class SchedulingInfo {
 
     private Integer remainNums;
 
-    public SchedulingInfo(Integer schedulingInfoId, Date schedulingTime, Integer departmentId, Integer doctorId, Integer registrationCategoryId, Integer noon, Integer valid, Integer limitation, Integer remainNums) {
+    public SchedulingInfo(Integer schedulingInfoId, Date schedulingTime, Integer schedulingRuleId, Integer departmentId, Integer doctorId, Integer registrationCategoryId, Integer noon, Integer valid, Integer limitation, Integer remainNums) {
         this.schedulingInfoId = schedulingInfoId;
         this.schedulingTime = schedulingTime;
+        this.schedulingRuleId = schedulingRuleId;
         this.departmentId = departmentId;
         this.doctorId = doctorId;
         this.registrationCategoryId = registrationCategoryId;
@@ -51,6 +54,14 @@ public class SchedulingInfo {
 
     public void setSchedulingTime(Date schedulingTime) {
         this.schedulingTime = schedulingTime;
+    }
+
+    public Integer getSchedulingRuleId() {
+        return schedulingRuleId;
+    }
+
+    public void setSchedulingRuleId(Integer schedulingRuleId) {
+        this.schedulingRuleId = schedulingRuleId;
     }
 
     public Integer getDepartmentId() {

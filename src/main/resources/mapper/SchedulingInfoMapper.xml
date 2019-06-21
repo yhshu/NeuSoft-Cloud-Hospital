@@ -5,6 +5,7 @@
     <constructor>
       <idArg column="scheduling_info_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="scheduling_time" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="scheduling_rule_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="department_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="doctor_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="registration_category_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
@@ -73,8 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    scheduling_info_id, scheduling_time, department_id, doctor_id, registration_category_id, 
-    noon, valid, limitation, remain_nums
+    scheduling_info_id, scheduling_time, scheduling_rule_id, department_id, doctor_id, 
+    registration_category_id, noon, valid, limitation, remain_nums
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.SchedulingInfoExample" resultMap="BaseResultMap">
     select
@@ -105,6 +106,9 @@
       <if test="schedulingTime != null">
         scheduling_time,
       </if>
+      <if test="schedulingRuleId != null">
+        scheduling_rule_id,
+      </if>
       <if test="departmentId != null">
         department_id,
       </if>
@@ -130,6 +134,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="schedulingTime != null">
         #{schedulingTime,jdbcType=DATE},
+      </if>
+      <if test="schedulingRuleId != null">
+        #{schedulingRuleId,jdbcType=INTEGER},
       </if>
       <if test="departmentId != null">
         #{departmentId,jdbcType=INTEGER},
@@ -169,6 +176,9 @@
       <if test="record.schedulingTime != null">
         scheduling_time = #{record.schedulingTime,jdbcType=DATE},
       </if>
+      <if test="record.schedulingRuleId != null">
+        scheduling_rule_id = #{record.schedulingRuleId,jdbcType=INTEGER},
+      </if>
       <if test="record.departmentId != null">
         department_id = #{record.departmentId,jdbcType=INTEGER},
       </if>
@@ -199,6 +209,7 @@
     update hospital.scheduling_info
     set scheduling_info_id = #{record.schedulingInfoId,jdbcType=INTEGER},
       scheduling_time = #{record.schedulingTime,jdbcType=DATE},
+      scheduling_rule_id = #{record.schedulingRuleId,jdbcType=INTEGER},
       department_id = #{record.departmentId,jdbcType=INTEGER},
       doctor_id = #{record.doctorId,jdbcType=INTEGER},
       registration_category_id = #{record.registrationCategoryId,jdbcType=INTEGER},
@@ -215,6 +226,9 @@
     <set>
       <if test="schedulingTime != null">
         scheduling_time = #{schedulingTime,jdbcType=DATE},
+      </if>
+      <if test="schedulingRuleId != null">
+        scheduling_rule_id = #{schedulingRuleId,jdbcType=INTEGER},
       </if>
       <if test="departmentId != null">
         department_id = #{departmentId,jdbcType=INTEGER},

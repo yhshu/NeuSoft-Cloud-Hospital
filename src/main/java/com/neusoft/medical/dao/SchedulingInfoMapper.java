@@ -18,13 +18,15 @@ public interface SchedulingInfoMapper {
     int deleteByPrimaryKey(Integer schedulingInfoId);
 
     @Insert({
-        "insert into hospital.scheduling_info (scheduling_time, department_id, ",
-        "doctor_id, registration_category_id, ",
-        "noon, valid, limitation, ",
+        "insert into hospital.scheduling_info (scheduling_time, scheduling_rule_id, ",
+        "department_id, doctor_id, ",
+        "registration_category_id, noon, ",
+        "valid, limitation, ",
         "remain_nums)",
-        "values (#{schedulingTime,jdbcType=DATE}, #{departmentId,jdbcType=INTEGER}, ",
-        "#{doctorId,jdbcType=INTEGER}, #{registrationCategoryId,jdbcType=INTEGER}, ",
-        "#{noon,jdbcType=INTEGER}, #{valid,jdbcType=INTEGER}, #{limitation,jdbcType=INTEGER}, ",
+        "values (#{schedulingTime,jdbcType=DATE}, #{schedulingRuleId,jdbcType=INTEGER}, ",
+        "#{departmentId,jdbcType=INTEGER}, #{doctorId,jdbcType=INTEGER}, ",
+        "#{registrationCategoryId,jdbcType=INTEGER}, #{noon,jdbcType=INTEGER}, ",
+        "#{valid,jdbcType=INTEGER}, #{limitation,jdbcType=INTEGER}, ",
         "#{remainNums,jdbcType=INTEGER})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="schedulingInfoId", before=false, resultType=Integer.class)
@@ -36,8 +38,8 @@ public interface SchedulingInfoMapper {
 
     @Select({
         "select",
-        "scheduling_info_id, scheduling_time, department_id, doctor_id, registration_category_id, ",
-        "noon, valid, limitation, remain_nums",
+        "scheduling_info_id, scheduling_time, scheduling_rule_id, department_id, doctor_id, ",
+        "registration_category_id, noon, valid, limitation, remain_nums",
         "from hospital.scheduling_info",
         "where scheduling_info_id = #{schedulingInfoId,jdbcType=INTEGER}"
     })
@@ -53,6 +55,7 @@ public interface SchedulingInfoMapper {
     @Update({
         "update hospital.scheduling_info",
         "set scheduling_time = #{schedulingTime,jdbcType=DATE},",
+          "scheduling_rule_id = #{schedulingRuleId,jdbcType=INTEGER},",
           "department_id = #{departmentId,jdbcType=INTEGER},",
           "doctor_id = #{doctorId,jdbcType=INTEGER},",
           "registration_category_id = #{registrationCategoryId,jdbcType=INTEGER},",

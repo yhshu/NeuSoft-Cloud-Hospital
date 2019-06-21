@@ -78,7 +78,7 @@ public class SchedulingController {
     }
 
     // todo @DeleteMapping("/delete_rule")
-//public ResultDTO<Boolean> delete
+//public ResultDTO<Boolean> deleteSchedulingRule()
 
 
     /**
