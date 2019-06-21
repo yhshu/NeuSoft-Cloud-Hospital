@@ -97,7 +97,7 @@ public class RegistrationCategoryController {
     /**
      * 按主键删除挂号级别
      *
-     * @param registrationCategoryId 挂号级别编号的列表
+     * @param registrationCategoryIdList 挂号级别编号的列表
      * @return 操作结果
      */
     @DeleteMapping("/delete")

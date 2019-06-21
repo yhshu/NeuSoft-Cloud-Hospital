@@ -61,7 +61,13 @@ public class DiagnosticCatalogServiceImpl implements DiagnosticCatalogService {
     public Disease addDisease(Disease record) {
         int effectRow = diseaseMapper.insert(record);
         System.out.println("addDisease 新增记录 " + effectRow + " 项");
-        return diseaseMapper.selectByPrimaryKey(record.getDiseaseId());
+        Disease res = null;
+        try{
+            res =  diseaseMapper.selectByPrimaryKey(record.getDiseaseId());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return res;
     }
 
     @Override
