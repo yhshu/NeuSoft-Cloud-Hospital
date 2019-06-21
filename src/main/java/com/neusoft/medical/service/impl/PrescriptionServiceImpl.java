@@ -132,7 +132,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
                 String skinTestResult = medicineJsonObject.getAsJsonPrimitive("skinTestResult").getAsString();
                 String doctorAdvice = medicineJsonObject.getAsJsonPrimitive("doctorAdvice").getAsString();
 
-                prescriptionEntryMapper.insert(new PrescriptionEntry(null, medicineId, prescriptionId, unitPrice, totalPrice, nums, medicineUsage, medicineDosage, medicineFrequency, medicineNumberDay, skinTest, skinTestResult, Constant.PAY_STATE_NOT_CHARGED, doctorAdvice, 1, null, null, null));
+                prescriptionEntryMapper.insert(new PrescriptionEntry(null, medicineId, prescriptionId, unitPrice, totalPrice, nums, nums, medicineUsage, medicineDosage, medicineFrequency, medicineNumberDay, skinTest, skinTestResult, Constant.PAY_STATE_NOT_CHARGED, doctorAdvice, 1, null, null, null));
             }
         } catch (Exception e) {
             e.printStackTrace();
