@@ -9,6 +9,7 @@ import com.neusoft.medical.service.basicInfo.ChargeItemService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -51,5 +52,25 @@ public class ChargeItemServiceImpl implements ChargeItemService {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public boolean saveChargeItem(Integer chargeItemId, String chargeItemCode, String nameZh, String specification, Double price, Integer expenseCategoryId, Integer departmentId, String namePinyin, String nameEn) {
+        try {
+            ChargeItem chargeItemRecord = new ChargeItem(null, chargeItemCode, nameZh, specification, price, expenseCategoryId, departmentId, namePinyin, null, new Date(), null, null, nameEn, 1, null, null, null);
+
+            if (chargeItemId == null) {
+                // 添加新收费项目
+                chargeItemMapper.insert(chargeItemRecord);
+            } else {
+                // 更新收费项目
+                chargeItemRecord.setChargeItemId(chargeItemId);
+                chargeItemMapper.updateByPrimaryKeySelective(chargeItemRecord);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }

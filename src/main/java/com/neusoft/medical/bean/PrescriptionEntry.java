@@ -13,6 +13,8 @@ public class PrescriptionEntry {
 
     private Integer nums;
 
+    private Integer notGivenNums;
+
     private String medicineUsage;
 
     private String medicineDosage;
@@ -37,13 +39,14 @@ public class PrescriptionEntry {
 
     private String reserve3;
 
-    public PrescriptionEntry(Integer prescriptionEntryId, Integer medicineId, Integer prescriptionId, Double unitPrice, Double totalPrice, Integer nums, String medicineUsage, String medicineDosage, String medicineFrequency, String medicineNumberDay, String skinTest, String skinTestResult, Integer payState, String doctorAdvice, Integer valid, String reserve1, String reserve2, String reserve3) {
+    public PrescriptionEntry(Integer prescriptionEntryId, Integer medicineId, Integer prescriptionId, Double unitPrice, Double totalPrice, Integer nums, Integer notGivenNums, String medicineUsage, String medicineDosage, String medicineFrequency, String medicineNumberDay, String skinTest, String skinTestResult, Integer payState, String doctorAdvice, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.prescriptionEntryId = prescriptionEntryId;
         this.medicineId = medicineId;
         this.prescriptionId = prescriptionId;
         this.unitPrice = unitPrice;
         this.totalPrice = totalPrice;
         this.nums = nums;
+        this.notGivenNums = notGivenNums;
         this.medicineUsage = medicineUsage;
         this.medicineDosage = medicineDosage;
         this.medicineFrequency = medicineFrequency;
@@ -108,6 +111,14 @@ public class PrescriptionEntry {
 
     public void setNums(Integer nums) {
         this.nums = nums;
+    }
+
+    public Integer getNotGivenNums() {
+        return notGivenNums;
+    }
+
+    public void setNotGivenNums(Integer notGivenNums) {
+        this.notGivenNums = notGivenNums;
     }
 
     public String getMedicineUsage() {

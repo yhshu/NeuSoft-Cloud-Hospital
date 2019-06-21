@@ -464,6 +464,66 @@ public class PrescriptionEntryExample {
             return (Criteria) this;
         }
 
+        public Criteria andNotGivenNumsIsNull() {
+            addCriterion("not_given_nums is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotGivenNumsIsNotNull() {
+            addCriterion("not_given_nums is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotGivenNumsEqualTo(Integer value) {
+            addCriterion("not_given_nums =", value, "notGivenNums");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotGivenNumsNotEqualTo(Integer value) {
+            addCriterion("not_given_nums <>", value, "notGivenNums");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotGivenNumsGreaterThan(Integer value) {
+            addCriterion("not_given_nums >", value, "notGivenNums");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotGivenNumsGreaterThanOrEqualTo(Integer value) {
+            addCriterion("not_given_nums >=", value, "notGivenNums");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotGivenNumsLessThan(Integer value) {
+            addCriterion("not_given_nums <", value, "notGivenNums");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotGivenNumsLessThanOrEqualTo(Integer value) {
+            addCriterion("not_given_nums <=", value, "notGivenNums");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotGivenNumsIn(List<Integer> values) {
+            addCriterion("not_given_nums in", values, "notGivenNums");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotGivenNumsNotIn(List<Integer> values) {
+            addCriterion("not_given_nums not in", values, "notGivenNums");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotGivenNumsBetween(Integer value1, Integer value2) {
+            addCriterion("not_given_nums between", value1, value2, "notGivenNums");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotGivenNumsNotBetween(Integer value1, Integer value2) {
+            addCriterion("not_given_nums not between", value1, value2, "notGivenNums");
+            return (Criteria) this;
+        }
+
         public Criteria andMedicineUsageIsNull() {
             addCriterion("medicine_usage is null");
             return (Criteria) this;

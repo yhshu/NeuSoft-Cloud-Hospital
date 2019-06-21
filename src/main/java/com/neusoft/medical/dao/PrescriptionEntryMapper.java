@@ -20,22 +20,22 @@ public interface PrescriptionEntryMapper {
     @Insert({
         "insert into hospital.prescription_entry (medicine_id, prescription_id, ",
         "unit_price, total_price, ",
-        "nums, medicine_usage, ",
-        "medicine_dosage, medicine_frequency, ",
-        "medicine_number_day, skin_test, ",
-        "skin_test_result, pay_state, ",
-        "doctor_advice, valid, ",
-        "reserve1, reserve2, ",
-        "reserve3)",
+        "nums, not_given_nums, ",
+        "medicine_usage, medicine_dosage, ",
+        "medicine_frequency, medicine_number_day, ",
+        "skin_test, skin_test_result, ",
+        "pay_state, doctor_advice, ",
+        "valid, reserve1, ",
+        "reserve2, reserve3)",
         "values (#{medicineId,jdbcType=INTEGER}, #{prescriptionId,jdbcType=INTEGER}, ",
         "#{unitPrice,jdbcType=DOUBLE}, #{totalPrice,jdbcType=DOUBLE}, ",
-        "#{nums,jdbcType=INTEGER}, #{medicineUsage,jdbcType=VARCHAR}, ",
-        "#{medicineDosage,jdbcType=VARCHAR}, #{medicineFrequency,jdbcType=VARCHAR}, ",
-        "#{medicineNumberDay,jdbcType=VARCHAR}, #{skinTest,jdbcType=VARCHAR}, ",
-        "#{skinTestResult,jdbcType=VARCHAR}, #{payState,jdbcType=INTEGER}, ",
-        "#{doctorAdvice,jdbcType=VARCHAR}, #{valid,jdbcType=INTEGER}, ",
-        "#{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, ",
-        "#{reserve3,jdbcType=VARCHAR})"
+        "#{nums,jdbcType=INTEGER}, #{notGivenNums,jdbcType=INTEGER}, ",
+        "#{medicineUsage,jdbcType=VARCHAR}, #{medicineDosage,jdbcType=VARCHAR}, ",
+        "#{medicineFrequency,jdbcType=VARCHAR}, #{medicineNumberDay,jdbcType=VARCHAR}, ",
+        "#{skinTest,jdbcType=VARCHAR}, #{skinTestResult,jdbcType=VARCHAR}, ",
+        "#{payState,jdbcType=INTEGER}, #{doctorAdvice,jdbcType=VARCHAR}, ",
+        "#{valid,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
+        "#{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="prescriptionEntryId", before=false, resultType=Integer.class)
     int insert(PrescriptionEntry record);
@@ -47,7 +47,7 @@ public interface PrescriptionEntryMapper {
     @Select({
         "select",
         "prescription_entry_id, medicine_id, prescription_id, unit_price, total_price, ",
-        "nums, medicine_usage, medicine_dosage, medicine_frequency, medicine_number_day, ",
+        "nums, not_given_nums, medicine_usage, medicine_dosage, medicine_frequency, medicine_number_day, ",
         "skin_test, skin_test_result, pay_state, doctor_advice, valid, reserve1, reserve2, ",
         "reserve3",
         "from hospital.prescription_entry",
@@ -69,6 +69,7 @@ public interface PrescriptionEntryMapper {
           "unit_price = #{unitPrice,jdbcType=DOUBLE},",
           "total_price = #{totalPrice,jdbcType=DOUBLE},",
           "nums = #{nums,jdbcType=INTEGER},",
+          "not_given_nums = #{notGivenNums,jdbcType=INTEGER},",
           "medicine_usage = #{medicineUsage,jdbcType=VARCHAR},",
           "medicine_dosage = #{medicineDosage,jdbcType=VARCHAR},",
           "medicine_frequency = #{medicineFrequency,jdbcType=VARCHAR},",

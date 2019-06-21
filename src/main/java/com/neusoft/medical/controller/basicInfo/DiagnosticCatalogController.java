@@ -113,7 +113,7 @@ public class DiagnosticCatalogController {
             @RequestParam(value = "diseaseIdList[]") Integer[] diseaseIdList
     ) {
         try {
-            System.out.println(diseaseIdList);
+            System.out.println(Arrays.toString(diseaseIdList));
             diagnosticCatalogService.deleteDisease(Arrays.asList(diseaseIdList));
         } catch (Exception e) {
             e.printStackTrace();

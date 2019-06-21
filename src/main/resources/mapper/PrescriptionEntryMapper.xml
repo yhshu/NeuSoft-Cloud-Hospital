@@ -9,6 +9,7 @@
       <arg column="unit_price" javaType="java.lang.Double" jdbcType="DOUBLE" />
       <arg column="total_price" javaType="java.lang.Double" jdbcType="DOUBLE" />
       <arg column="nums" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="not_given_nums" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="medicine_usage" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="medicine_dosage" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="medicine_frequency" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -83,8 +84,9 @@
   </sql>
   <sql id="Base_Column_List">
     prescription_entry_id, medicine_id, prescription_id, unit_price, total_price, nums, 
-    medicine_usage, medicine_dosage, medicine_frequency, medicine_number_day, skin_test, 
-    skin_test_result, pay_state, doctor_advice, valid, reserve1, reserve2, reserve3
+    not_given_nums, medicine_usage, medicine_dosage, medicine_frequency, medicine_number_day, 
+    skin_test, skin_test_result, pay_state, doctor_advice, valid, reserve1, reserve2, 
+    reserve3
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.PrescriptionEntryExample" resultMap="BaseResultMap">
     select
@@ -126,6 +128,9 @@
       </if>
       <if test="nums != null">
         nums,
+      </if>
+      <if test="notGivenNums != null">
+        not_given_nums,
       </if>
       <if test="medicineUsage != null">
         medicine_usage,
@@ -179,6 +184,9 @@
       </if>
       <if test="nums != null">
         #{nums,jdbcType=INTEGER},
+      </if>
+      <if test="notGivenNums != null">
+        #{notGivenNums,jdbcType=INTEGER},
       </if>
       <if test="medicineUsage != null">
         #{medicineUsage,jdbcType=VARCHAR},
@@ -245,6 +253,9 @@
       <if test="record.nums != null">
         nums = #{record.nums,jdbcType=INTEGER},
       </if>
+      <if test="record.notGivenNums != null">
+        not_given_nums = #{record.notGivenNums,jdbcType=INTEGER},
+      </if>
       <if test="record.medicineUsage != null">
         medicine_usage = #{record.medicineUsage,jdbcType=VARCHAR},
       </if>
@@ -294,6 +305,7 @@
       unit_price = #{record.unitPrice,jdbcType=DOUBLE},
       total_price = #{record.totalPrice,jdbcType=DOUBLE},
       nums = #{record.nums,jdbcType=INTEGER},
+      not_given_nums = #{record.notGivenNums,jdbcType=INTEGER},
       medicine_usage = #{record.medicineUsage,jdbcType=VARCHAR},
       medicine_dosage = #{record.medicineDosage,jdbcType=VARCHAR},
       medicine_frequency = #{record.medicineFrequency,jdbcType=VARCHAR},
@@ -327,6 +339,9 @@
       </if>
       <if test="nums != null">
         nums = #{nums,jdbcType=INTEGER},
+      </if>
+      <if test="notGivenNums != null">
+        not_given_nums = #{notGivenNums,jdbcType=INTEGER},
       </if>
       <if test="medicineUsage != null">
         medicine_usage = #{medicineUsage,jdbcType=VARCHAR},
