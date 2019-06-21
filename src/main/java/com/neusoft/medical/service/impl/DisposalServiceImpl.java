@@ -138,7 +138,7 @@ public class DisposalServiceImpl implements DisposalService {
     public boolean deleteDisposal(List<Integer> chargeFormIdList) {
         try {
             ChargeFormExample chargeFormExample = new ChargeFormExample();
-            chargeFormExample.or().andValidEqualTo(1);
+            chargeFormExample.or().andValidEqualTo(1).andChargeFormIdIn(chargeFormIdList);
             List<ChargeForm> chargeFormList = chargeFormMapper.selectByExample(chargeFormExample);
 
             for (ChargeForm chargeForm : chargeFormList) {

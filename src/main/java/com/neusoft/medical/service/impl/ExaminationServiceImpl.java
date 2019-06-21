@@ -154,7 +154,7 @@ public class ExaminationServiceImpl implements ExaminationService {
     public boolean deleteExaminationList(List<Integer> examinationIdList) {
         try {
             ExaminationExample examinationExample = new ExaminationExample();
-            examinationExample.or().andValidEqualTo(1);
+            examinationExample.or().andValidEqualTo(1).andExaminationIdIn(examinationIdList);
             List<Examination> examinationList = examinationMapper.selectByExample(examinationExample);
 
             for (Examination examination : examinationList) {
