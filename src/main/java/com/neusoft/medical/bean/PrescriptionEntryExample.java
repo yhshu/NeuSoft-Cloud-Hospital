@@ -3,14 +3,14 @@ package com.neusoft.medical.bean;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PrescriptionItemExample {
+public class PrescriptionEntryExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public PrescriptionItemExample() {
+    public PrescriptionEntryExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -104,63 +104,63 @@ public class PrescriptionItemExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andPrescriptionItemIdIsNull() {
-            addCriterion("prescription_item_id is null");
+        public Criteria andPrescriptionEntryIdIsNull() {
+            addCriterion("prescription_entry_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andPrescriptionItemIdIsNotNull() {
-            addCriterion("prescription_item_id is not null");
+        public Criteria andPrescriptionEntryIdIsNotNull() {
+            addCriterion("prescription_entry_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPrescriptionItemIdEqualTo(Integer value) {
-            addCriterion("prescription_item_id =", value, "prescriptionItemId");
+        public Criteria andPrescriptionEntryIdEqualTo(Integer value) {
+            addCriterion("prescription_entry_id =", value, "prescriptionEntryId");
             return (Criteria) this;
         }
 
-        public Criteria andPrescriptionItemIdNotEqualTo(Integer value) {
-            addCriterion("prescription_item_id <>", value, "prescriptionItemId");
+        public Criteria andPrescriptionEntryIdNotEqualTo(Integer value) {
+            addCriterion("prescription_entry_id <>", value, "prescriptionEntryId");
             return (Criteria) this;
         }
 
-        public Criteria andPrescriptionItemIdGreaterThan(Integer value) {
-            addCriterion("prescription_item_id >", value, "prescriptionItemId");
+        public Criteria andPrescriptionEntryIdGreaterThan(Integer value) {
+            addCriterion("prescription_entry_id >", value, "prescriptionEntryId");
             return (Criteria) this;
         }
 
-        public Criteria andPrescriptionItemIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("prescription_item_id >=", value, "prescriptionItemId");
+        public Criteria andPrescriptionEntryIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("prescription_entry_id >=", value, "prescriptionEntryId");
             return (Criteria) this;
         }
 
-        public Criteria andPrescriptionItemIdLessThan(Integer value) {
-            addCriterion("prescription_item_id <", value, "prescriptionItemId");
+        public Criteria andPrescriptionEntryIdLessThan(Integer value) {
+            addCriterion("prescription_entry_id <", value, "prescriptionEntryId");
             return (Criteria) this;
         }
 
-        public Criteria andPrescriptionItemIdLessThanOrEqualTo(Integer value) {
-            addCriterion("prescription_item_id <=", value, "prescriptionItemId");
+        public Criteria andPrescriptionEntryIdLessThanOrEqualTo(Integer value) {
+            addCriterion("prescription_entry_id <=", value, "prescriptionEntryId");
             return (Criteria) this;
         }
 
-        public Criteria andPrescriptionItemIdIn(List<Integer> values) {
-            addCriterion("prescription_item_id in", values, "prescriptionItemId");
+        public Criteria andPrescriptionEntryIdIn(List<Integer> values) {
+            addCriterion("prescription_entry_id in", values, "prescriptionEntryId");
             return (Criteria) this;
         }
 
-        public Criteria andPrescriptionItemIdNotIn(List<Integer> values) {
-            addCriterion("prescription_item_id not in", values, "prescriptionItemId");
+        public Criteria andPrescriptionEntryIdNotIn(List<Integer> values) {
+            addCriterion("prescription_entry_id not in", values, "prescriptionEntryId");
             return (Criteria) this;
         }
 
-        public Criteria andPrescriptionItemIdBetween(Integer value1, Integer value2) {
-            addCriterion("prescription_item_id between", value1, value2, "prescriptionItemId");
+        public Criteria andPrescriptionEntryIdBetween(Integer value1, Integer value2) {
+            addCriterion("prescription_entry_id between", value1, value2, "prescriptionEntryId");
             return (Criteria) this;
         }
 
-        public Criteria andPrescriptionItemIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("prescription_item_id not between", value1, value2, "prescriptionItemId");
+        public Criteria andPrescriptionEntryIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("prescription_entry_id not between", value1, value2, "prescriptionEntryId");
             return (Criteria) this;
         }
 
@@ -281,6 +281,246 @@ public class PrescriptionItemExample {
 
         public Criteria andPrescriptionIdNotBetween(Integer value1, Integer value2) {
             addCriterion("prescription_id not between", value1, value2, "prescriptionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitPriceIsNull() {
+            addCriterion("unit_price is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitPriceIsNotNull() {
+            addCriterion("unit_price is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitPriceEqualTo(Double value) {
+            addCriterion("unit_price =", value, "unitPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitPriceNotEqualTo(Double value) {
+            addCriterion("unit_price <>", value, "unitPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitPriceGreaterThan(Double value) {
+            addCriterion("unit_price >", value, "unitPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitPriceGreaterThanOrEqualTo(Double value) {
+            addCriterion("unit_price >=", value, "unitPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitPriceLessThan(Double value) {
+            addCriterion("unit_price <", value, "unitPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitPriceLessThanOrEqualTo(Double value) {
+            addCriterion("unit_price <=", value, "unitPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitPriceIn(List<Double> values) {
+            addCriterion("unit_price in", values, "unitPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitPriceNotIn(List<Double> values) {
+            addCriterion("unit_price not in", values, "unitPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitPriceBetween(Double value1, Double value2) {
+            addCriterion("unit_price between", value1, value2, "unitPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnitPriceNotBetween(Double value1, Double value2) {
+            addCriterion("unit_price not between", value1, value2, "unitPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalPriceIsNull() {
+            addCriterion("total_price is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalPriceIsNotNull() {
+            addCriterion("total_price is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalPriceEqualTo(Double value) {
+            addCriterion("total_price =", value, "totalPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalPriceNotEqualTo(Double value) {
+            addCriterion("total_price <>", value, "totalPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalPriceGreaterThan(Double value) {
+            addCriterion("total_price >", value, "totalPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalPriceGreaterThanOrEqualTo(Double value) {
+            addCriterion("total_price >=", value, "totalPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalPriceLessThan(Double value) {
+            addCriterion("total_price <", value, "totalPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalPriceLessThanOrEqualTo(Double value) {
+            addCriterion("total_price <=", value, "totalPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalPriceIn(List<Double> values) {
+            addCriterion("total_price in", values, "totalPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalPriceNotIn(List<Double> values) {
+            addCriterion("total_price not in", values, "totalPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalPriceBetween(Double value1, Double value2) {
+            addCriterion("total_price between", value1, value2, "totalPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalPriceNotBetween(Double value1, Double value2) {
+            addCriterion("total_price not between", value1, value2, "totalPrice");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumsIsNull() {
+            addCriterion("nums is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumsIsNotNull() {
+            addCriterion("nums is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumsEqualTo(Integer value) {
+            addCriterion("nums =", value, "nums");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumsNotEqualTo(Integer value) {
+            addCriterion("nums <>", value, "nums");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumsGreaterThan(Integer value) {
+            addCriterion("nums >", value, "nums");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumsGreaterThanOrEqualTo(Integer value) {
+            addCriterion("nums >=", value, "nums");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumsLessThan(Integer value) {
+            addCriterion("nums <", value, "nums");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumsLessThanOrEqualTo(Integer value) {
+            addCriterion("nums <=", value, "nums");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumsIn(List<Integer> values) {
+            addCriterion("nums in", values, "nums");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumsNotIn(List<Integer> values) {
+            addCriterion("nums not in", values, "nums");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumsBetween(Integer value1, Integer value2) {
+            addCriterion("nums between", value1, value2, "nums");
+            return (Criteria) this;
+        }
+
+        public Criteria andNumsNotBetween(Integer value1, Integer value2) {
+            addCriterion("nums not between", value1, value2, "nums");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotGivenNumsIsNull() {
+            addCriterion("not_given_nums is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotGivenNumsIsNotNull() {
+            addCriterion("not_given_nums is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotGivenNumsEqualTo(Integer value) {
+            addCriterion("not_given_nums =", value, "notGivenNums");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotGivenNumsNotEqualTo(Integer value) {
+            addCriterion("not_given_nums <>", value, "notGivenNums");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotGivenNumsGreaterThan(Integer value) {
+            addCriterion("not_given_nums >", value, "notGivenNums");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotGivenNumsGreaterThanOrEqualTo(Integer value) {
+            addCriterion("not_given_nums >=", value, "notGivenNums");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotGivenNumsLessThan(Integer value) {
+            addCriterion("not_given_nums <", value, "notGivenNums");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotGivenNumsLessThanOrEqualTo(Integer value) {
+            addCriterion("not_given_nums <=", value, "notGivenNums");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotGivenNumsIn(List<Integer> values) {
+            addCriterion("not_given_nums in", values, "notGivenNums");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotGivenNumsNotIn(List<Integer> values) {
+            addCriterion("not_given_nums not in", values, "notGivenNums");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotGivenNumsBetween(Integer value1, Integer value2) {
+            addCriterion("not_given_nums between", value1, value2, "notGivenNums");
+            return (Criteria) this;
+        }
+
+        public Criteria andNotGivenNumsNotBetween(Integer value1, Integer value2) {
+            addCriterion("not_given_nums not between", value1, value2, "notGivenNums");
             return (Criteria) this;
         }
 
@@ -564,66 +804,6 @@ public class PrescriptionItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andMedicineQuantityIsNull() {
-            addCriterion("medicine_quantity is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMedicineQuantityIsNotNull() {
-            addCriterion("medicine_quantity is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andMedicineQuantityEqualTo(Integer value) {
-            addCriterion("medicine_quantity =", value, "medicineQuantity");
-            return (Criteria) this;
-        }
-
-        public Criteria andMedicineQuantityNotEqualTo(Integer value) {
-            addCriterion("medicine_quantity <>", value, "medicineQuantity");
-            return (Criteria) this;
-        }
-
-        public Criteria andMedicineQuantityGreaterThan(Integer value) {
-            addCriterion("medicine_quantity >", value, "medicineQuantity");
-            return (Criteria) this;
-        }
-
-        public Criteria andMedicineQuantityGreaterThanOrEqualTo(Integer value) {
-            addCriterion("medicine_quantity >=", value, "medicineQuantity");
-            return (Criteria) this;
-        }
-
-        public Criteria andMedicineQuantityLessThan(Integer value) {
-            addCriterion("medicine_quantity <", value, "medicineQuantity");
-            return (Criteria) this;
-        }
-
-        public Criteria andMedicineQuantityLessThanOrEqualTo(Integer value) {
-            addCriterion("medicine_quantity <=", value, "medicineQuantity");
-            return (Criteria) this;
-        }
-
-        public Criteria andMedicineQuantityIn(List<Integer> values) {
-            addCriterion("medicine_quantity in", values, "medicineQuantity");
-            return (Criteria) this;
-        }
-
-        public Criteria andMedicineQuantityNotIn(List<Integer> values) {
-            addCriterion("medicine_quantity not in", values, "medicineQuantity");
-            return (Criteria) this;
-        }
-
-        public Criteria andMedicineQuantityBetween(Integer value1, Integer value2) {
-            addCriterion("medicine_quantity between", value1, value2, "medicineQuantity");
-            return (Criteria) this;
-        }
-
-        public Criteria andMedicineQuantityNotBetween(Integer value1, Integer value2) {
-            addCriterion("medicine_quantity not between", value1, value2, "medicineQuantity");
-            return (Criteria) this;
-        }
-
         public Criteria andSkinTestIsNull() {
             addCriterion("skin_test is null");
             return (Criteria) this;
@@ -761,6 +941,136 @@ public class PrescriptionItemExample {
 
         public Criteria andSkinTestResultNotBetween(String value1, String value2) {
             addCriterion("skin_test_result not between", value1, value2, "skinTestResult");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStateIsNull() {
+            addCriterion("pay_state is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStateIsNotNull() {
+            addCriterion("pay_state is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStateEqualTo(Integer value) {
+            addCriterion("pay_state =", value, "payState");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStateNotEqualTo(Integer value) {
+            addCriterion("pay_state <>", value, "payState");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStateGreaterThan(Integer value) {
+            addCriterion("pay_state >", value, "payState");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStateGreaterThanOrEqualTo(Integer value) {
+            addCriterion("pay_state >=", value, "payState");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStateLessThan(Integer value) {
+            addCriterion("pay_state <", value, "payState");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStateLessThanOrEqualTo(Integer value) {
+            addCriterion("pay_state <=", value, "payState");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStateIn(List<Integer> values) {
+            addCriterion("pay_state in", values, "payState");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStateNotIn(List<Integer> values) {
+            addCriterion("pay_state not in", values, "payState");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStateBetween(Integer value1, Integer value2) {
+            addCriterion("pay_state between", value1, value2, "payState");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStateNotBetween(Integer value1, Integer value2) {
+            addCriterion("pay_state not between", value1, value2, "payState");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorAdviceIsNull() {
+            addCriterion("doctor_advice is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorAdviceIsNotNull() {
+            addCriterion("doctor_advice is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorAdviceEqualTo(String value) {
+            addCriterion("doctor_advice =", value, "doctorAdvice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorAdviceNotEqualTo(String value) {
+            addCriterion("doctor_advice <>", value, "doctorAdvice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorAdviceGreaterThan(String value) {
+            addCriterion("doctor_advice >", value, "doctorAdvice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorAdviceGreaterThanOrEqualTo(String value) {
+            addCriterion("doctor_advice >=", value, "doctorAdvice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorAdviceLessThan(String value) {
+            addCriterion("doctor_advice <", value, "doctorAdvice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorAdviceLessThanOrEqualTo(String value) {
+            addCriterion("doctor_advice <=", value, "doctorAdvice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorAdviceLike(String value) {
+            addCriterion("doctor_advice like", value, "doctorAdvice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorAdviceNotLike(String value) {
+            addCriterion("doctor_advice not like", value, "doctorAdvice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorAdviceIn(List<String> values) {
+            addCriterion("doctor_advice in", values, "doctorAdvice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorAdviceNotIn(List<String> values) {
+            addCriterion("doctor_advice not in", values, "doctorAdvice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorAdviceBetween(String value1, String value2) {
+            addCriterion("doctor_advice between", value1, value2, "doctorAdvice");
+            return (Criteria) this;
+        }
+
+        public Criteria andDoctorAdviceNotBetween(String value1, String value2) {
+            addCriterion("doctor_advice not between", value1, value2, "doctorAdvice");
             return (Criteria) this;
         }
 

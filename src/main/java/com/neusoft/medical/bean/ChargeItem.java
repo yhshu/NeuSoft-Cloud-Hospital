@@ -11,7 +11,7 @@ public class ChargeItem {
 
     private String specification;
 
-    private Long price;
+    private Double price;
 
     private Integer expenseCategoryId;
 
@@ -37,7 +37,7 @@ public class ChargeItem {
 
     private String reserve3;
 
-    public ChargeItem(Integer chargeItemId, String chargeItemCode, String nameZh, String specification, Long price, Integer expenseCategoryId, Integer departmentId, String namePinyin, Integer chargeType, Date creationTime, Date chargeTime, Integer nums, String nameEn, Integer valid, String reserve1, String reserve2, String reserve3) {
+    public ChargeItem(Integer chargeItemId, String chargeItemCode, String nameZh, String specification, Double price, Integer expenseCategoryId, Integer departmentId, String namePinyin, Integer chargeType, Date creationTime, Date chargeTime, Integer nums, String nameEn, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.chargeItemId = chargeItemId;
         this.chargeItemCode = chargeItemCode;
         this.nameZh = nameZh;
@@ -93,11 +93,11 @@ public class ChargeItem {
         this.specification = specification == null ? null : specification.trim();
     }
 
-    public Long getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

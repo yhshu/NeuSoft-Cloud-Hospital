@@ -6,10 +6,15 @@
       <idArg column="examination_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="registration_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="patient_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="charge_item_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="result" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="doctor_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="department_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="save_state" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="pay_state" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="execution_state" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="exam_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="clinical_impression" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="requirement" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="exam_result" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -75,8 +80,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    examination_id, registration_id, patient_name, charge_item_id, result, doctor_id, 
-    department_id, valid, reserve1, reserve2, reserve3
+    examination_id, registration_id, patient_name, doctor_id, department_id, save_state, 
+    pay_state, execution_state, exam_name, clinical_impression, requirement, exam_result, 
+    valid, reserve1, reserve2, reserve3
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.ExaminationExample" resultMap="BaseResultMap">
     select
@@ -110,17 +116,32 @@
       <if test="patientName != null">
         patient_name,
       </if>
-      <if test="chargeItemId != null">
-        charge_item_id,
-      </if>
-      <if test="result != null">
-        result,
-      </if>
       <if test="doctorId != null">
         doctor_id,
       </if>
       <if test="departmentId != null">
         department_id,
+      </if>
+      <if test="saveState != null">
+        save_state,
+      </if>
+      <if test="payState != null">
+        pay_state,
+      </if>
+      <if test="executionState != null">
+        execution_state,
+      </if>
+      <if test="examName != null">
+        exam_name,
+      </if>
+      <if test="clinicalImpression != null">
+        clinical_impression,
+      </if>
+      <if test="requirement != null">
+        requirement,
+      </if>
+      <if test="examResult != null">
+        exam_result,
       </if>
       <if test="valid != null">
         valid,
@@ -142,17 +163,32 @@
       <if test="patientName != null">
         #{patientName,jdbcType=VARCHAR},
       </if>
-      <if test="chargeItemId != null">
-        #{chargeItemId,jdbcType=INTEGER},
-      </if>
-      <if test="result != null">
-        #{result,jdbcType=VARCHAR},
-      </if>
       <if test="doctorId != null">
         #{doctorId,jdbcType=INTEGER},
       </if>
       <if test="departmentId != null">
         #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="saveState != null">
+        #{saveState,jdbcType=INTEGER},
+      </if>
+      <if test="payState != null">
+        #{payState,jdbcType=INTEGER},
+      </if>
+      <if test="executionState != null">
+        #{executionState,jdbcType=INTEGER},
+      </if>
+      <if test="examName != null">
+        #{examName,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicalImpression != null">
+        #{clinicalImpression,jdbcType=VARCHAR},
+      </if>
+      <if test="requirement != null">
+        #{requirement,jdbcType=VARCHAR},
+      </if>
+      <if test="examResult != null">
+        #{examResult,jdbcType=VARCHAR},
       </if>
       <if test="valid != null">
         #{valid,jdbcType=INTEGER},
@@ -186,17 +222,32 @@
       <if test="record.patientName != null">
         patient_name = #{record.patientName,jdbcType=VARCHAR},
       </if>
-      <if test="record.chargeItemId != null">
-        charge_item_id = #{record.chargeItemId,jdbcType=INTEGER},
-      </if>
-      <if test="record.result != null">
-        result = #{record.result,jdbcType=VARCHAR},
-      </if>
       <if test="record.doctorId != null">
         doctor_id = #{record.doctorId,jdbcType=INTEGER},
       </if>
       <if test="record.departmentId != null">
         department_id = #{record.departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.saveState != null">
+        save_state = #{record.saveState,jdbcType=INTEGER},
+      </if>
+      <if test="record.payState != null">
+        pay_state = #{record.payState,jdbcType=INTEGER},
+      </if>
+      <if test="record.executionState != null">
+        execution_state = #{record.executionState,jdbcType=INTEGER},
+      </if>
+      <if test="record.examName != null">
+        exam_name = #{record.examName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clinicalImpression != null">
+        clinical_impression = #{record.clinicalImpression,jdbcType=VARCHAR},
+      </if>
+      <if test="record.requirement != null">
+        requirement = #{record.requirement,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examResult != null">
+        exam_result = #{record.examResult,jdbcType=VARCHAR},
       </if>
       <if test="record.valid != null">
         valid = #{record.valid,jdbcType=INTEGER},
@@ -220,10 +271,15 @@
     set examination_id = #{record.examinationId,jdbcType=INTEGER},
       registration_id = #{record.registrationId,jdbcType=INTEGER},
       patient_name = #{record.patientName,jdbcType=VARCHAR},
-      charge_item_id = #{record.chargeItemId,jdbcType=INTEGER},
-      result = #{record.result,jdbcType=VARCHAR},
       doctor_id = #{record.doctorId,jdbcType=INTEGER},
       department_id = #{record.departmentId,jdbcType=INTEGER},
+      save_state = #{record.saveState,jdbcType=INTEGER},
+      pay_state = #{record.payState,jdbcType=INTEGER},
+      execution_state = #{record.executionState,jdbcType=INTEGER},
+      exam_name = #{record.examName,jdbcType=VARCHAR},
+      clinical_impression = #{record.clinicalImpression,jdbcType=VARCHAR},
+      requirement = #{record.requirement,jdbcType=VARCHAR},
+      exam_result = #{record.examResult,jdbcType=VARCHAR},
       valid = #{record.valid,jdbcType=INTEGER},
       reserve1 = #{record.reserve1,jdbcType=VARCHAR},
       reserve2 = #{record.reserve2,jdbcType=VARCHAR},
@@ -241,17 +297,32 @@
       <if test="patientName != null">
         patient_name = #{patientName,jdbcType=VARCHAR},
       </if>
-      <if test="chargeItemId != null">
-        charge_item_id = #{chargeItemId,jdbcType=INTEGER},
-      </if>
-      <if test="result != null">
-        result = #{result,jdbcType=VARCHAR},
-      </if>
       <if test="doctorId != null">
         doctor_id = #{doctorId,jdbcType=INTEGER},
       </if>
       <if test="departmentId != null">
         department_id = #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="saveState != null">
+        save_state = #{saveState,jdbcType=INTEGER},
+      </if>
+      <if test="payState != null">
+        pay_state = #{payState,jdbcType=INTEGER},
+      </if>
+      <if test="executionState != null">
+        execution_state = #{executionState,jdbcType=INTEGER},
+      </if>
+      <if test="examName != null">
+        exam_name = #{examName,jdbcType=VARCHAR},
+      </if>
+      <if test="clinicalImpression != null">
+        clinical_impression = #{clinicalImpression,jdbcType=VARCHAR},
+      </if>
+      <if test="requirement != null">
+        requirement = #{requirement,jdbcType=VARCHAR},
+      </if>
+      <if test="examResult != null">
+        exam_result = #{examResult,jdbcType=VARCHAR},
       </if>
       <if test="valid != null">
         valid = #{valid,jdbcType=INTEGER},

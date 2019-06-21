@@ -7,13 +7,23 @@ public class Examination {
 
     private String patientName;
 
-    private Integer chargeItemId;
-
-    private String result;
-
     private Integer doctorId;
 
     private Integer departmentId;
+
+    private Integer saveState;
+
+    private Integer payState;
+
+    private Integer executionState;
+
+    private String examName;
+
+    private String clinicalImpression;
+
+    private String requirement;
+
+    private String examResult;
 
     private Integer valid;
 
@@ -23,14 +33,19 @@ public class Examination {
 
     private String reserve3;
 
-    public Examination(Integer examinationId, Integer registrationId, String patientName, Integer chargeItemId, String result, Integer doctorId, Integer departmentId, Integer valid, String reserve1, String reserve2, String reserve3) {
+    public Examination(Integer examinationId, Integer registrationId, String patientName, Integer doctorId, Integer departmentId, Integer saveState, Integer payState, Integer executionState, String examName, String clinicalImpression, String requirement, String examResult, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.examinationId = examinationId;
         this.registrationId = registrationId;
         this.patientName = patientName;
-        this.chargeItemId = chargeItemId;
-        this.result = result;
         this.doctorId = doctorId;
         this.departmentId = departmentId;
+        this.saveState = saveState;
+        this.payState = payState;
+        this.executionState = executionState;
+        this.examName = examName;
+        this.clinicalImpression = clinicalImpression;
+        this.requirement = requirement;
+        this.examResult = examResult;
         this.valid = valid;
         this.reserve1 = reserve1;
         this.reserve2 = reserve2;
@@ -65,22 +80,6 @@ public class Examination {
         this.patientName = patientName == null ? null : patientName.trim();
     }
 
-    public Integer getChargeItemId() {
-        return chargeItemId;
-    }
-
-    public void setChargeItemId(Integer chargeItemId) {
-        this.chargeItemId = chargeItemId;
-    }
-
-    public String getResult() {
-        return result;
-    }
-
-    public void setResult(String result) {
-        this.result = result == null ? null : result.trim();
-    }
-
     public Integer getDoctorId() {
         return doctorId;
     }
@@ -95,6 +94,62 @@ public class Examination {
 
     public void setDepartmentId(Integer departmentId) {
         this.departmentId = departmentId;
+    }
+
+    public Integer getSaveState() {
+        return saveState;
+    }
+
+    public void setSaveState(Integer saveState) {
+        this.saveState = saveState;
+    }
+
+    public Integer getPayState() {
+        return payState;
+    }
+
+    public void setPayState(Integer payState) {
+        this.payState = payState;
+    }
+
+    public Integer getExecutionState() {
+        return executionState;
+    }
+
+    public void setExecutionState(Integer executionState) {
+        this.executionState = executionState;
+    }
+
+    public String getExamName() {
+        return examName;
+    }
+
+    public void setExamName(String examName) {
+        this.examName = examName == null ? null : examName.trim();
+    }
+
+    public String getClinicalImpression() {
+        return clinicalImpression;
+    }
+
+    public void setClinicalImpression(String clinicalImpression) {
+        this.clinicalImpression = clinicalImpression == null ? null : clinicalImpression.trim();
+    }
+
+    public String getRequirement() {
+        return requirement;
+    }
+
+    public void setRequirement(String requirement) {
+        this.requirement = requirement == null ? null : requirement.trim();
+    }
+
+    public String getExamResult() {
+        return examResult;
+    }
+
+    public void setExamResult(String examResult) {
+        this.examResult = examResult == null ? null : examResult.trim();
     }
 
     public Integer getValid() {

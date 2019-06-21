@@ -192,6 +192,66 @@ public class RegistrationExample {
             return (Criteria) this;
         }
 
+        public Criteria andPatientIdIsNull() {
+            addCriterion("patient_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatientIdIsNotNull() {
+            addCriterion("patient_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatientIdEqualTo(Integer value) {
+            addCriterion("patient_id =", value, "patientId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatientIdNotEqualTo(Integer value) {
+            addCriterion("patient_id <>", value, "patientId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatientIdGreaterThan(Integer value) {
+            addCriterion("patient_id >", value, "patientId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatientIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("patient_id >=", value, "patientId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatientIdLessThan(Integer value) {
+            addCriterion("patient_id <", value, "patientId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatientIdLessThanOrEqualTo(Integer value) {
+            addCriterion("patient_id <=", value, "patientId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatientIdIn(List<Integer> values) {
+            addCriterion("patient_id in", values, "patientId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatientIdNotIn(List<Integer> values) {
+            addCriterion("patient_id not in", values, "patientId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatientIdBetween(Integer value1, Integer value2) {
+            addCriterion("patient_id between", value1, value2, "patientId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPatientIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("patient_id not between", value1, value2, "patientId");
+            return (Criteria) this;
+        }
+
         public Criteria andPatientNameIsNull() {
             addCriterion("patient_name is null");
             return (Criteria) this;
@@ -259,66 +319,6 @@ public class RegistrationExample {
 
         public Criteria andPatientNameNotBetween(String value1, String value2) {
             addCriterion("patient_name not between", value1, value2, "patientName");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatientIdIsNull() {
-            addCriterion("patient_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatientIdIsNotNull() {
-            addCriterion("patient_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatientIdEqualTo(Integer value) {
-            addCriterion("patient_id =", value, "patientId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatientIdNotEqualTo(Integer value) {
-            addCriterion("patient_id <>", value, "patientId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatientIdGreaterThan(Integer value) {
-            addCriterion("patient_id >", value, "patientId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatientIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("patient_id >=", value, "patientId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatientIdLessThan(Integer value) {
-            addCriterion("patient_id <", value, "patientId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatientIdLessThanOrEqualTo(Integer value) {
-            addCriterion("patient_id <=", value, "patientId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatientIdIn(List<Integer> values) {
-            addCriterion("patient_id in", values, "patientId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatientIdNotIn(List<Integer> values) {
-            addCriterion("patient_id not in", values, "patientId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatientIdBetween(Integer value1, Integer value2) {
-            addCriterion("patient_id between", value1, value2, "patientId");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatientIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("patient_id not between", value1, value2, "patientId");
             return (Criteria) this;
         }
 

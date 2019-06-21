@@ -32,6 +32,8 @@ public class RegistrationCategoryController {
             @RequestParam(value = "pageSize") Integer pageSize
     ) {
         PageInfo<RegistrationCategory> registrationCategoryPageInfo = null;
+        System.out.println("current——page" + currentPage);
+        System.out.println("page Sizew" + pageSize);
         try {
             registrationCategoryPageInfo = registrationCategoryService.selectRegistrationCategory(currentPage, pageSize);
         } catch (Exception e) {
@@ -92,6 +94,12 @@ public class RegistrationCategoryController {
         return new ResultDTO<>(Boolean.TRUE);
     }
 
+    /**
+     * 按主键删除挂号级别
+     *
+     * @param registrationCategoryIdList 挂号级别编号的列表
+     * @return 操作结果
+     */
     @DeleteMapping("/delete")
     public ResultDTO<Boolean> deleteRegistrationCategoryByPrimaryKey(
             @RequestParam(value = "registrationCategoryIdList[]") Integer[] registrationCategoryIdList

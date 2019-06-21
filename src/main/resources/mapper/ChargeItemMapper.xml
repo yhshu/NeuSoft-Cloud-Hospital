@@ -7,7 +7,7 @@
       <arg column="charge_item_code" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="name_zh" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="specification" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="price" javaType="java.lang.Long" jdbcType="DECIMAL" />
+      <arg column="price" javaType="java.lang.Double" jdbcType="DOUBLE" />
       <arg column="expense_category_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="department_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="name_pinyin" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -171,7 +171,7 @@
         #{specification,jdbcType=VARCHAR},
       </if>
       <if test="price != null">
-        #{price,jdbcType=DECIMAL},
+        #{price,jdbcType=DOUBLE},
       </if>
       <if test="expenseCategoryId != null">
         #{expenseCategoryId,jdbcType=INTEGER},
@@ -233,7 +233,7 @@
         specification = #{record.specification,jdbcType=VARCHAR},
       </if>
       <if test="record.price != null">
-        price = #{record.price,jdbcType=DECIMAL},
+        price = #{record.price,jdbcType=DOUBLE},
       </if>
       <if test="record.expenseCategoryId != null">
         expense_category_id = #{record.expenseCategoryId,jdbcType=INTEGER},
@@ -282,7 +282,7 @@
       charge_item_code = #{record.chargeItemCode,jdbcType=VARCHAR},
       name_zh = #{record.nameZh,jdbcType=VARCHAR},
       specification = #{record.specification,jdbcType=VARCHAR},
-      price = #{record.price,jdbcType=DECIMAL},
+      price = #{record.price,jdbcType=DOUBLE},
       expense_category_id = #{record.expenseCategoryId,jdbcType=INTEGER},
       department_id = #{record.departmentId,jdbcType=INTEGER},
       name_pinyin = #{record.namePinyin,jdbcType=VARCHAR},
@@ -312,7 +312,7 @@
         specification = #{specification,jdbcType=VARCHAR},
       </if>
       <if test="price != null">
-        price = #{price,jdbcType=DECIMAL},
+        price = #{price,jdbcType=DOUBLE},
       </if>
       <if test="expenseCategoryId != null">
         expense_category_id = #{expenseCategoryId,jdbcType=INTEGER},

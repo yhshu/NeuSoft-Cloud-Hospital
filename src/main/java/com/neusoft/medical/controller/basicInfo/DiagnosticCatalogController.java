@@ -8,6 +8,7 @@ import com.neusoft.medical.service.basicInfo.DiagnosticCatalogService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -71,7 +72,53 @@ public class DiagnosticCatalogController {
             @RequestParam(value = "diseaseCode") String diseaseCode,
             @RequestParam(value = "diseaseCategory") Integer diseaseCategory) {
         System.out.println("addDisease: " + "新增疾病");
-        Disease added = diagnosticCatalogService.addDisease(new Disease(null, diseaseCode, diseaseName, diseaseIcd, diseaseCategory, null));
+        Disease added = diagnosticCatalogService.addDisease(new Disease(null, diseaseCode, diseaseName, diseaseIcd, diseaseCategory, 1));
         return new ResultDTO<>(added);
+    }
+
+    /**
+     * 更新疾病信息
+     *
+     * @param diseaseId       疾病编号
+     * @param diseaseIcd      疾病编码
+     * @param diseaseName     疾病名称
+     * @param diseaseCode     疾病拼音码
+     * @param diseaseCategory 疾病种类
+     * @return 操作结果
+     */
+    @PutMapping(value = "/update")
+    public ResultDTO<Boolean> updateDisease(
+            @RequestParam(value = "diseaseId") Integer diseaseId,
+            @RequestParam(value = "diseaseIcd") String diseaseIcd,
+            @RequestParam(value = "diseaseName") String diseaseName,
+            @RequestParam(value = "diseaseCode") String diseaseCode,
+            @RequestParam(value = "diseaseCategory") Integer diseaseCategory
+    ) {
+        try {
+            diagnosticCatalogService.updateDisease(new Disease(diseaseId, diseaseIcd, diseaseName, diseaseCode, diseaseCategory, 1));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResultDTO<>(Boolean.TRUE);
+    }
+
+    /**
+     * 删除疾病信息
+     *
+     * @param diseaseIdList 疾病编号列表
+     * @return 操作结果
+     */
+    @DeleteMapping(value = "/delete")
+    public ResultDTO<Boolean> deleteDisease(
+            @RequestParam(value = "diseaseIdList[]") Integer[] diseaseIdList
+    ) {
+        try {
+            System.out.println(Arrays.toString(diseaseIdList));
+            diagnosticCatalogService.deleteDisease(Arrays.asList(diseaseIdList));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultDTO<>(Boolean.FALSE);
+        }
+        return new ResultDTO<>(Boolean.TRUE);
     }
 }

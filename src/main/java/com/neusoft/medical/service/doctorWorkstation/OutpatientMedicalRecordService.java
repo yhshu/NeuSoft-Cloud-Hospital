@@ -10,21 +10,6 @@ import java.util.List;
  * 门诊病历首页
  */
 public interface OutpatientMedicalRecordService {
-    /**
-     * 挂号搜索范围
-     */
-    int REGIST_SCOPE_ALL = 0;
-    int REGIST_SCOPE_DOCTOR = 1;
-    int REGIST_SCOPE_DEPRAT = 2;
-
-    /**
-     * 病历保存状态
-     */
-    int SAVE_TEMP = 0; // 暂存
-    int SAVE_FORMAL = 1; // 正式提交
-    int SAVE_HOSPITAL_TEMPLATE = 2; // 全院模板
-    int SAVE_DEPART_TEMPLATE = 3; // 科室模板
-    int SAVE_DOCTOR_TEMPLATE = 4; // 医生个人模板
 
     /**
      * 获取医生的待诊患者列表

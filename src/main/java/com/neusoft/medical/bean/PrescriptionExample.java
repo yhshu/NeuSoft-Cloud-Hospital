@@ -294,73 +294,63 @@ public class PrescriptionExample {
             return (Criteria) this;
         }
 
-        public Criteria andPatientNameIsNull() {
-            addCriterion("patient_name is null");
+        public Criteria andSaveStateIsNull() {
+            addCriterion("save_state is null");
             return (Criteria) this;
         }
 
-        public Criteria andPatientNameIsNotNull() {
-            addCriterion("patient_name is not null");
+        public Criteria andSaveStateIsNotNull() {
+            addCriterion("save_state is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPatientNameEqualTo(String value) {
-            addCriterion("patient_name =", value, "patientName");
+        public Criteria andSaveStateEqualTo(Integer value) {
+            addCriterion("save_state =", value, "saveState");
             return (Criteria) this;
         }
 
-        public Criteria andPatientNameNotEqualTo(String value) {
-            addCriterion("patient_name <>", value, "patientName");
+        public Criteria andSaveStateNotEqualTo(Integer value) {
+            addCriterion("save_state <>", value, "saveState");
             return (Criteria) this;
         }
 
-        public Criteria andPatientNameGreaterThan(String value) {
-            addCriterion("patient_name >", value, "patientName");
+        public Criteria andSaveStateGreaterThan(Integer value) {
+            addCriterion("save_state >", value, "saveState");
             return (Criteria) this;
         }
 
-        public Criteria andPatientNameGreaterThanOrEqualTo(String value) {
-            addCriterion("patient_name >=", value, "patientName");
+        public Criteria andSaveStateGreaterThanOrEqualTo(Integer value) {
+            addCriterion("save_state >=", value, "saveState");
             return (Criteria) this;
         }
 
-        public Criteria andPatientNameLessThan(String value) {
-            addCriterion("patient_name <", value, "patientName");
+        public Criteria andSaveStateLessThan(Integer value) {
+            addCriterion("save_state <", value, "saveState");
             return (Criteria) this;
         }
 
-        public Criteria andPatientNameLessThanOrEqualTo(String value) {
-            addCriterion("patient_name <=", value, "patientName");
+        public Criteria andSaveStateLessThanOrEqualTo(Integer value) {
+            addCriterion("save_state <=", value, "saveState");
             return (Criteria) this;
         }
 
-        public Criteria andPatientNameLike(String value) {
-            addCriterion("patient_name like", value, "patientName");
+        public Criteria andSaveStateIn(List<Integer> values) {
+            addCriterion("save_state in", values, "saveState");
             return (Criteria) this;
         }
 
-        public Criteria andPatientNameNotLike(String value) {
-            addCriterion("patient_name not like", value, "patientName");
+        public Criteria andSaveStateNotIn(List<Integer> values) {
+            addCriterion("save_state not in", values, "saveState");
             return (Criteria) this;
         }
 
-        public Criteria andPatientNameIn(List<String> values) {
-            addCriterion("patient_name in", values, "patientName");
+        public Criteria andSaveStateBetween(Integer value1, Integer value2) {
+            addCriterion("save_state between", value1, value2, "saveState");
             return (Criteria) this;
         }
 
-        public Criteria andPatientNameNotIn(List<String> values) {
-            addCriterion("patient_name not in", values, "patientName");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatientNameBetween(String value1, String value2) {
-            addCriterion("patient_name between", value1, value2, "patientName");
-            return (Criteria) this;
-        }
-
-        public Criteria andPatientNameNotBetween(String value1, String value2) {
-            addCriterion("patient_name not between", value1, value2, "patientName");
+        public Criteria andSaveStateNotBetween(Integer value1, Integer value2) {
+            addCriterion("save_state not between", value1, value2, "saveState");
             return (Criteria) this;
         }
 
@@ -421,66 +411,6 @@ public class PrescriptionExample {
 
         public Criteria andDoctorIdNotBetween(Integer value1, Integer value2) {
             addCriterion("doctor_id not between", value1, value2, "doctorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andSaveStateIsNull() {
-            addCriterion("save_state is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSaveStateIsNotNull() {
-            addCriterion("save_state is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSaveStateEqualTo(Integer value) {
-            addCriterion("save_state =", value, "saveState");
-            return (Criteria) this;
-        }
-
-        public Criteria andSaveStateNotEqualTo(Integer value) {
-            addCriterion("save_state <>", value, "saveState");
-            return (Criteria) this;
-        }
-
-        public Criteria andSaveStateGreaterThan(Integer value) {
-            addCriterion("save_state >", value, "saveState");
-            return (Criteria) this;
-        }
-
-        public Criteria andSaveStateGreaterThanOrEqualTo(Integer value) {
-            addCriterion("save_state >=", value, "saveState");
-            return (Criteria) this;
-        }
-
-        public Criteria andSaveStateLessThan(Integer value) {
-            addCriterion("save_state <", value, "saveState");
-            return (Criteria) this;
-        }
-
-        public Criteria andSaveStateLessThanOrEqualTo(Integer value) {
-            addCriterion("save_state <=", value, "saveState");
-            return (Criteria) this;
-        }
-
-        public Criteria andSaveStateIn(List<Integer> values) {
-            addCriterion("save_state in", values, "saveState");
-            return (Criteria) this;
-        }
-
-        public Criteria andSaveStateNotIn(List<Integer> values) {
-            addCriterion("save_state not in", values, "saveState");
-            return (Criteria) this;
-        }
-
-        public Criteria andSaveStateBetween(Integer value1, Integer value2) {
-            addCriterion("save_state between", value1, value2, "saveState");
-            return (Criteria) this;
-        }
-
-        public Criteria andSaveStateNotBetween(Integer value1, Integer value2) {
-            addCriterion("save_state not between", value1, value2, "saveState");
             return (Criteria) this;
         }
 

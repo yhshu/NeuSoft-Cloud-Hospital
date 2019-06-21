@@ -4,16 +4,20 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.neusoft.medical.Util.Constant;
 import com.neusoft.medical.Util.DateConverter;
 import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.*;
 import com.neusoft.medical.service.doctorWorkstation.OutpatientMedicalRecordService;
+import com.neusoft.medical.service.registration.RegistrationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+
+import static com.neusoft.medical.Util.Constant.*;
 
 @Service
 public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalRecordService {
@@ -31,6 +35,8 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
     private DateConverter dateConverter;
     @Resource
     private DiseaseMapper diseaseMapper;
+    @Resource
+    private RegistrationService registrationService;
 
     private Gson gson = new Gson();
 
@@ -39,8 +45,7 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
         RegistrationExample registrationExample = new RegistrationExample();
         try {
             RegistrationExample.Criteria criteria = registrationExample.createCriteria();
-            criteria.andValidEqualTo(1);
-            criteria.andIsVisitedEqualTo("0");
+            criteria.andValidEqualTo(1).andRegistrationStatusEqualTo(REGIST_IN_PROCESS);
             if (registrationScope == REGIST_SCOPE_DOCTOR) {
                 criteria.andDoctorIdEqualTo(doctorId);
             }
@@ -69,7 +74,7 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
         try {
             RegistrationExample.Criteria criteria = registrationExample.createCriteria();
             criteria.andValidEqualTo(1);
-            criteria.andIsVisitedEqualTo("1");
+            criteria.andRegistrationStatusEqualTo(REGIST_DONE);
             if (registrationScope == REGIST_SCOPE_DOCTOR) {
                 criteria.andDoctorIdEqualTo(doctorId);
             }
@@ -211,15 +216,14 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
             MedicalRecordsExample.Criteria medicalRecordsExampleCriteria = medicalRecordsExample.createCriteria();
             medicalRecordsExampleCriteria.andValidEqualTo(1);
             medicalRecordsExampleCriteria.andSaveStateEqualTo(templateScope);
-            if (templateScope == OutpatientMedicalRecordService.SAVE_DOCTOR_TEMPLATE) {
+            if (templateScope == Constant.SAVE_DOCTOR_TEMPLATE) {
                 // 查找医生本人可见的病历模板
                 medicalRecordsExampleCriteria.andDoctorIdEqualTo(doctorId);
-            } else if (templateScope == OutpatientMedicalRecordService.SAVE_DEPART_TEMPLATE) {
+            } else if (templateScope == Constant.SAVE_DEPART_TEMPLATE) {
                 // 查找医生所在科室的病历模板
                 DoctorExample doctorExample = new DoctorExample();
                 DoctorExample.Criteria doctorExampleCriteria = doctorExample.createCriteria();
-                doctorExampleCriteria.andValidEqualTo(1);
-                doctorExampleCriteria.andDepartmentIdEqualTo(doctorMapper.selectByPrimaryKey(doctorId).getDepartmentId());
+                doctorExampleCriteria.andValidEqualTo(1).andDepartmentIdEqualTo(doctorMapper.selectByPrimaryKey(doctorId).getDepartmentId());
                 List<Doctor> doctorListOfDepartment = doctorMapper.selectByExample(doctorExample);
                 List<Integer> doctorIdListOfDepartment = new CopyOnWriteArrayList<>();
                 for (Doctor doctor : doctorListOfDepartment) {
@@ -237,12 +241,10 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
     public boolean endRegistration(int registrationId) {
         try {
             Registration record = new Registration();
-            record.setRegistrationStatus("0");
+            record.setRegistrationStatus(REGIST_DONE);
 
             RegistrationExample registrationExample = new RegistrationExample();
-            RegistrationExample.Criteria criteria = registrationExample.createCriteria();
-            criteria.andValidEqualTo(1);
-            criteria.andRegistrationIdEqualTo(registrationId);
+            registrationExample.or().andValidEqualTo(1).andRegistrationIdEqualTo(registrationId);
 
             registrationMapper.updateByExampleSelective(record, registrationExample);
         } catch (Exception e) {
@@ -254,32 +256,24 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
 
     @Override
     public String selectPatientHistoryMedicalRecords(Integer registrationId) {
-        // 实现过程：
-        // 1. 按挂号单编号获取相同患者的挂号单编号列表
-        // 2. 找到每项挂号对应的历史病历
-        // 3. 找到每项病历对应的诊断信息
-        // 4. 将数据转换为 json 字符串返回
+        /*
+         实现过程：
+          1. 按挂号单编号获取相同患者的挂号单编号列表
+          2. 找到每项挂号对应的历史病历
+          3. 找到每项病历对应的诊断信息
+          4. 将数据转换为 json 字符串返回
+         */
 
         String res = null;
         try {
-            // 按挂号单编号获取相同患者的挂号单编号列表
-            int patientId = registrationMapper.selectByPrimaryKey(registrationId).getPatientId(); // 获取患者编号
-            RegistrationExample registrationExample = new RegistrationExample();
-            RegistrationExample.Criteria registrationExampleCriteria = registrationExample.createCriteria();
-            registrationExampleCriteria.andValidEqualTo(1);        // 有效的挂号记录
-            registrationExampleCriteria.andPatientIdEqualTo(patientId); // 对应当前患者
-            List<Registration> registrationList = registrationMapper.selectByExample(registrationExample);
-            List<Integer> registrationIdList = new CopyOnWriteArrayList<>(); // 构建患者的挂号单编号列表
-            for (Registration registration : registrationList) {
-                registrationIdList.add(registration.getRegistrationId());
-            }
+            // 构建患者的挂号单编号列表
+            List<Integer> registrationIdList = registrationService.historyRegistrationIdList(registrationId);
 
             // 找到每项挂号对应的历史病历
             MedicalRecordsExample medicalRecordsExample = new MedicalRecordsExample();
-            MedicalRecordsExample.Criteria medicalRecordsExampleCriteria = medicalRecordsExample.createCriteria();
-            medicalRecordsExampleCriteria.andValidEqualTo(1);                 // 有效的病历记录
-            medicalRecordsExampleCriteria.andRegistrationIdIn(registrationIdList); // 病历记录在患者的挂号单编号列表中
-            medicalRecordsExampleCriteria.andSaveStateEqualTo(SAVE_FORMAL);        // 正式提交的病历记录
+            // 病历记录是有效的，且在患者的挂号单编号列表中，且已正式提交或确诊
+            medicalRecordsExample.or().andValidEqualTo(1).andRegistrationIdIn(registrationIdList).andSaveStateEqualTo(SAVE_FORMAL);
+            medicalRecordsExample.or().andValidEqualTo(1).andRegistrationIdIn(registrationIdList).andSaveStateEqualTo(SAVE_CONFIRMED);
             List<MedicalRecords> medicalRecordsList = medicalRecordsMapper.selectByExample(medicalRecordsExample);
             JsonArray medicalRecordsJsonArray = new JsonArray();
             for (MedicalRecords medicalRecords : medicalRecordsList) {

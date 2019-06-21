@@ -26,10 +26,10 @@ public class AccountController {
      * @param accountScope 查找的帐号范围，字符串数组
      *                     门诊医生 00
      *                     医技医生 01
-     *                     医院收费员 10
+     *                     医院管理员 10
      *                     药房操作员 11
      *                     财务管理员 12
-     *                     挂号管理员 13
+     *                     挂号收费员 13
      * @return 指定范围的帐号信息
      */
     @GetMapping("/select_account")
@@ -95,6 +95,7 @@ public class AccountController {
             @RequestParam(value = "doctorScheduling", required = false) Integer doctorScheduling
     ) {
         try {
+            if (doctorScheduling == null) doctorScheduling = -1;
             accountService.addAccount(userName, userPassword, accountType, realName, departmentId, jobTitle, doctorScheduling);
         } catch (Exception e) {
             e.printStackTrace();
@@ -126,6 +127,7 @@ public class AccountController {
             @RequestParam(value = "doctorScheduling", required = false) Integer doctorScheduling
     ) {
         try {
+            if (doctorScheduling == null) doctorScheduling = -1;
             accountService.updateAccount(accountId, userName, userPassword, realName, departmentId, jobTitle, doctorScheduling);
         } catch (Exception e) {
             e.printStackTrace();

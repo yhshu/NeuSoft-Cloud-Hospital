@@ -84,20 +84,20 @@ public class RegistrationController {
      * 1. 添加挂号信息
      * 2. 添加患者信息
      *
-     * @param patientName            患者姓名
-     * @param gender                 患者性别
-     * @param age                    患者年龄
-     * @param birthday               患者生日
-     * @param registrationCategoryName   挂号类型
-     * @param medicalCategory        医疗类别
-     * @param identityCardNo         患者身份证号
-     * @param registrationDate       挂号日期
-     * @param departmentId           挂号科室编号
-     * @param doctorId               看诊医生编号
-     * @param registrationSource     挂号来源
-     * @param settleAccountsCategory 结算类别
-     * @param familyAddress          家庭住址
-     * @param collectorId            收费员编号
+     * @param patientName              患者姓名
+     * @param gender                   患者性别
+     * @param age                      患者年龄
+     * @param birthday                 患者生日
+     * @param registrationCategoryName 挂号类型
+     * @param medicalCategory          医疗类别
+     * @param identityCardNo           患者身份证号
+     * @param registrationDate         挂号日期
+     * @param departmentId             挂号科室编号
+     * @param doctorId                 看诊医生编号
+     * @param registrationSource       挂号来源
+     * @param settleAccountsCategory   结算类别
+     * @param familyAddress            家庭住址
+     * @param collectorId              收费员编号
      * @return 挂号成功 true，挂号失败 false
      */
     @PostMapping("/add_registration")
@@ -121,7 +121,7 @@ public class RegistrationController {
         Date registrationDateConverted = dateConverter.convert(registrationDate);
         try {
             registrationService.addRegistration(
-                    new Registration(null, patientName, null, gender, age, birthdayConverted, registrationCategoryName, medicalCategory, identityCardNo, "1", null, registrationDateConverted, departmentId, doctorId, registrationSource, settleAccountsCategory, null, familyAddress, collectorId, null, 1, null, null, null));
+                    new Registration(null, null, patientName, gender, age, birthdayConverted, registrationCategoryName, medicalCategory, identityCardNo, "1", null, registrationDateConverted, departmentId, doctorId, registrationSource, settleAccountsCategory, "0", familyAddress, collectorId, null, 1, null, null, null));
             System.out.println("已提交挂号信息");
         } catch (Exception e) {
             e.printStackTrace();
@@ -159,5 +159,24 @@ public class RegistrationController {
         System.out.println("RegistrationInfoController 按主键获取挂号信息");
         Registration registration = registrationService.selectRegistrationByPrimaryKey(registrationId);
         return new ResultDTO<>(registration);
+    }
+
+    /**
+     * 按挂号单编号获取患者信息
+     *
+     * @param registrationId 挂号单编号
+     * @return 患者信息
+     */
+    @GetMapping("/patient_info_by_registration")
+    public ResultDTO<Patient> selectPatient(
+            @RequestParam(value = "registrationId") Integer registrationId
+    ) {
+        Patient patient = null;
+        try {
+            patient = registrationService.selectPatientByRegistrationId(registrationId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResultDTO<>(patient);
     }
 }

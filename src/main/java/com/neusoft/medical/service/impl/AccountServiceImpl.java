@@ -49,6 +49,7 @@ public class AccountServiceImpl implements AccountService {
                 List<Doctor> doctorList = doctorMapper.selectByExample(doctorExample);
                 if (doctorList.size() == 1) {
                     Doctor doctor = doctorList.get(0);
+                    System.out.println("selectAccount: "+doctor.toString());
                     accountJsonObject.addProperty("realName", doctor.getDoctorName());
                     accountJsonObject.addProperty("departmentId", doctor.getDepartmentId());
                     accountJsonObject.addProperty("departmentName", departmentMapper.selectByPrimaryKey(doctor.getDepartmentId()).getDepartmentName());
@@ -63,6 +64,7 @@ public class AccountServiceImpl implements AccountService {
                 List<Staff> staffList = staffMapper.selectByExample(staffExample);
                 if (staffList.size() == 1) {
                     Staff staff = staffList.get(0);
+                    System.out.println("selectAccount: "+staff.toString());
                     accountJsonObject.addProperty("realName", staff.getRealName());
                     accountJsonObject.addProperty("departmentId", staff.getDepartmentId());
                     accountJsonObject.addProperty("departmentName", departmentMapper.selectByPrimaryKey(staff.getDepartmentId()).getDepartmentName());

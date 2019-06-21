@@ -4,16 +4,12 @@
   <resultMap id="BaseResultMap" type="com.neusoft.medical.bean.ChargeForm">
     <constructor>
       <idArg column="charge_form_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="charge_form_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="registration_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="charge_item_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="item_count" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="uncharged_nums" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="made_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="save_state" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="pay_state" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="execution_state" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="department_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="doctor_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="collector_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="not_given_nums" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="reserve3" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -78,9 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    charge_form_id, registration_id, charge_item_id, item_count, uncharged_nums, made_time, 
-    valid, department_id, doctor_id, collector_id, not_given_nums, reserve1, reserve2, 
-    reserve3
+    charge_form_id, charge_form_name, registration_id, save_state, pay_state, execution_state, 
+    valid, reserve1, reserve2, reserve3
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.ChargeFormExample" resultMap="BaseResultMap">
     select
@@ -108,35 +103,23 @@
     </selectKey>
     insert into hospital.charge_form
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="chargeFormName != null">
+        charge_form_name,
+      </if>
       <if test="registrationId != null">
         registration_id,
       </if>
-      <if test="chargeItemId != null">
-        charge_item_id,
+      <if test="saveState != null">
+        save_state,
       </if>
-      <if test="itemCount != null">
-        item_count,
+      <if test="payState != null">
+        pay_state,
       </if>
-      <if test="unchargedNums != null">
-        uncharged_nums,
-      </if>
-      <if test="madeTime != null">
-        made_time,
+      <if test="executionState != null">
+        execution_state,
       </if>
       <if test="valid != null">
         valid,
-      </if>
-      <if test="departmentId != null">
-        department_id,
-      </if>
-      <if test="doctorId != null">
-        doctor_id,
-      </if>
-      <if test="collectorId != null">
-        collector_id,
-      </if>
-      <if test="notGivenNums != null">
-        not_given_nums,
       </if>
       <if test="reserve1 != null">
         reserve1,
@@ -149,35 +132,23 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="chargeFormName != null">
+        #{chargeFormName,jdbcType=VARCHAR},
+      </if>
       <if test="registrationId != null">
         #{registrationId,jdbcType=INTEGER},
       </if>
-      <if test="chargeItemId != null">
-        #{chargeItemId,jdbcType=INTEGER},
+      <if test="saveState != null">
+        #{saveState,jdbcType=INTEGER},
       </if>
-      <if test="itemCount != null">
-        #{itemCount,jdbcType=INTEGER},
+      <if test="payState != null">
+        #{payState,jdbcType=INTEGER},
       </if>
-      <if test="unchargedNums != null">
-        #{unchargedNums,jdbcType=INTEGER},
-      </if>
-      <if test="madeTime != null">
-        #{madeTime,jdbcType=TIMESTAMP},
+      <if test="executionState != null">
+        #{executionState,jdbcType=INTEGER},
       </if>
       <if test="valid != null">
         #{valid,jdbcType=INTEGER},
-      </if>
-      <if test="departmentId != null">
-        #{departmentId,jdbcType=INTEGER},
-      </if>
-      <if test="doctorId != null">
-        #{doctorId,jdbcType=INTEGER},
-      </if>
-      <if test="collectorId != null">
-        #{collectorId,jdbcType=INTEGER},
-      </if>
-      <if test="notGivenNums != null">
-        #{notGivenNums,jdbcType=INTEGER},
       </if>
       <if test="reserve1 != null">
         #{reserve1,jdbcType=VARCHAR},
@@ -202,35 +173,23 @@
       <if test="record.chargeFormId != null">
         charge_form_id = #{record.chargeFormId,jdbcType=INTEGER},
       </if>
+      <if test="record.chargeFormName != null">
+        charge_form_name = #{record.chargeFormName,jdbcType=VARCHAR},
+      </if>
       <if test="record.registrationId != null">
         registration_id = #{record.registrationId,jdbcType=INTEGER},
       </if>
-      <if test="record.chargeItemId != null">
-        charge_item_id = #{record.chargeItemId,jdbcType=INTEGER},
+      <if test="record.saveState != null">
+        save_state = #{record.saveState,jdbcType=INTEGER},
       </if>
-      <if test="record.itemCount != null">
-        item_count = #{record.itemCount,jdbcType=INTEGER},
+      <if test="record.payState != null">
+        pay_state = #{record.payState,jdbcType=INTEGER},
       </if>
-      <if test="record.unchargedNums != null">
-        uncharged_nums = #{record.unchargedNums,jdbcType=INTEGER},
-      </if>
-      <if test="record.madeTime != null">
-        made_time = #{record.madeTime,jdbcType=TIMESTAMP},
+      <if test="record.executionState != null">
+        execution_state = #{record.executionState,jdbcType=INTEGER},
       </if>
       <if test="record.valid != null">
         valid = #{record.valid,jdbcType=INTEGER},
-      </if>
-      <if test="record.departmentId != null">
-        department_id = #{record.departmentId,jdbcType=INTEGER},
-      </if>
-      <if test="record.doctorId != null">
-        doctor_id = #{record.doctorId,jdbcType=INTEGER},
-      </if>
-      <if test="record.collectorId != null">
-        collector_id = #{record.collectorId,jdbcType=INTEGER},
-      </if>
-      <if test="record.notGivenNums != null">
-        not_given_nums = #{record.notGivenNums,jdbcType=INTEGER},
       </if>
       <if test="record.reserve1 != null">
         reserve1 = #{record.reserve1,jdbcType=VARCHAR},
@@ -249,16 +208,12 @@
   <update id="updateByExample" parameterType="map">
     update hospital.charge_form
     set charge_form_id = #{record.chargeFormId,jdbcType=INTEGER},
+      charge_form_name = #{record.chargeFormName,jdbcType=VARCHAR},
       registration_id = #{record.registrationId,jdbcType=INTEGER},
-      charge_item_id = #{record.chargeItemId,jdbcType=INTEGER},
-      item_count = #{record.itemCount,jdbcType=INTEGER},
-      uncharged_nums = #{record.unchargedNums,jdbcType=INTEGER},
-      made_time = #{record.madeTime,jdbcType=TIMESTAMP},
+      save_state = #{record.saveState,jdbcType=INTEGER},
+      pay_state = #{record.payState,jdbcType=INTEGER},
+      execution_state = #{record.executionState,jdbcType=INTEGER},
       valid = #{record.valid,jdbcType=INTEGER},
-      department_id = #{record.departmentId,jdbcType=INTEGER},
-      doctor_id = #{record.doctorId,jdbcType=INTEGER},
-      collector_id = #{record.collectorId,jdbcType=INTEGER},
-      not_given_nums = #{record.notGivenNums,jdbcType=INTEGER},
       reserve1 = #{record.reserve1,jdbcType=VARCHAR},
       reserve2 = #{record.reserve2,jdbcType=VARCHAR},
       reserve3 = #{record.reserve3,jdbcType=VARCHAR}
@@ -269,35 +224,23 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.ChargeForm">
     update hospital.charge_form
     <set>
+      <if test="chargeFormName != null">
+        charge_form_name = #{chargeFormName,jdbcType=VARCHAR},
+      </if>
       <if test="registrationId != null">
         registration_id = #{registrationId,jdbcType=INTEGER},
       </if>
-      <if test="chargeItemId != null">
-        charge_item_id = #{chargeItemId,jdbcType=INTEGER},
+      <if test="saveState != null">
+        save_state = #{saveState,jdbcType=INTEGER},
       </if>
-      <if test="itemCount != null">
-        item_count = #{itemCount,jdbcType=INTEGER},
+      <if test="payState != null">
+        pay_state = #{payState,jdbcType=INTEGER},
       </if>
-      <if test="unchargedNums != null">
-        uncharged_nums = #{unchargedNums,jdbcType=INTEGER},
-      </if>
-      <if test="madeTime != null">
-        made_time = #{madeTime,jdbcType=TIMESTAMP},
+      <if test="executionState != null">
+        execution_state = #{executionState,jdbcType=INTEGER},
       </if>
       <if test="valid != null">
         valid = #{valid,jdbcType=INTEGER},
-      </if>
-      <if test="departmentId != null">
-        department_id = #{departmentId,jdbcType=INTEGER},
-      </if>
-      <if test="doctorId != null">
-        doctor_id = #{doctorId,jdbcType=INTEGER},
-      </if>
-      <if test="collectorId != null">
-        collector_id = #{collectorId,jdbcType=INTEGER},
-      </if>
-      <if test="notGivenNums != null">
-        not_given_nums = #{notGivenNums,jdbcType=INTEGER},
       </if>
       <if test="reserve1 != null">
         reserve1 = #{reserve1,jdbcType=VARCHAR},

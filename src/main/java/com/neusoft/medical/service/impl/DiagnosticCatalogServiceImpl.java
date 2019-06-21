@@ -29,6 +29,7 @@ public class DiagnosticCatalogServiceImpl implements DiagnosticCatalogService {
      */
     public List<DiseaseCategory> findAllDiseaseCategory() {
         DiseaseCategoryExample diseaseCategoryExample = new DiseaseCategoryExample();
+        diseaseCategoryExample.or().andValidEqualTo(1);
         return diseaseCategoryMapper.selectByExample(diseaseCategoryExample);
     }
 
@@ -44,7 +45,7 @@ public class DiagnosticCatalogServiceImpl implements DiagnosticCatalogService {
 
         DiseaseExample diseaseExample = new DiseaseExample();
         DiseaseExample.Criteria criteria = diseaseExample.createCriteria();
-        criteria.andDiseaseCategoryEqualTo(diseaseCategoryId);
+        criteria.andDiseaseCategoryEqualTo(diseaseCategoryId).andValidEqualTo(1);
 
         List<Disease> diseaseList = diseaseMapper.selectByExample(diseaseExample);
         return new PageInfo<>(diseaseList);
@@ -60,6 +61,40 @@ public class DiagnosticCatalogServiceImpl implements DiagnosticCatalogService {
     public Disease addDisease(Disease record) {
         int effectRow = diseaseMapper.insert(record);
         System.out.println("addDisease 新增记录 " + effectRow + " 项");
-        return diseaseMapper.selectByPrimaryKey(record.getDiseaseId());
+        Disease res = null;
+        try{
+            res =  diseaseMapper.selectByPrimaryKey(record.getDiseaseId());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    @Override
+    public boolean updateDisease(Disease record) {
+        try {
+            diseaseMapper.updateByPrimaryKey(record);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean deleteDisease(List<Integer> diseaseIdList) {
+        try {
+            DiseaseExample diseaseExample = new DiseaseExample();
+            DiseaseExample.Criteria criteria = diseaseExample.createCriteria();
+            criteria.andValidEqualTo(1).andDiseaseIdIn(diseaseIdList);
+
+            Disease diseaseRecord = new Disease();
+            diseaseRecord.setValid(0);
+            diseaseMapper.updateByExampleSelective(diseaseRecord, diseaseExample);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }

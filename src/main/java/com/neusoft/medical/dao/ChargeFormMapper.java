@@ -18,18 +18,14 @@ public interface ChargeFormMapper {
     int deleteByPrimaryKey(Integer chargeFormId);
 
     @Insert({
-        "insert into hospital.charge_form (registration_id, charge_item_id, ",
-        "item_count, uncharged_nums, ",
-        "made_time, valid, ",
-        "department_id, doctor_id, ",
-        "collector_id, not_given_nums, ",
+        "insert into hospital.charge_form (charge_form_name, registration_id, ",
+        "save_state, pay_state, ",
+        "execution_state, valid, ",
         "reserve1, reserve2, ",
         "reserve3)",
-        "values (#{registrationId,jdbcType=INTEGER}, #{chargeItemId,jdbcType=INTEGER}, ",
-        "#{itemCount,jdbcType=INTEGER}, #{unchargedNums,jdbcType=INTEGER}, ",
-        "#{madeTime,jdbcType=TIMESTAMP}, #{valid,jdbcType=INTEGER}, ",
-        "#{departmentId,jdbcType=INTEGER}, #{doctorId,jdbcType=INTEGER}, ",
-        "#{collectorId,jdbcType=INTEGER}, #{notGivenNums,jdbcType=INTEGER}, ",
+        "values (#{chargeFormName,jdbcType=VARCHAR}, #{registrationId,jdbcType=INTEGER}, ",
+        "#{saveState,jdbcType=INTEGER}, #{payState,jdbcType=INTEGER}, ",
+        "#{executionState,jdbcType=INTEGER}, #{valid,jdbcType=INTEGER}, ",
         "#{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, ",
         "#{reserve3,jdbcType=VARCHAR})"
     })
@@ -42,9 +38,8 @@ public interface ChargeFormMapper {
 
     @Select({
         "select",
-        "charge_form_id, registration_id, charge_item_id, item_count, uncharged_nums, ",
-        "made_time, valid, department_id, doctor_id, collector_id, not_given_nums, reserve1, ",
-        "reserve2, reserve3",
+        "charge_form_id, charge_form_name, registration_id, save_state, pay_state, execution_state, ",
+        "valid, reserve1, reserve2, reserve3",
         "from hospital.charge_form",
         "where charge_form_id = #{chargeFormId,jdbcType=INTEGER}"
     })
@@ -59,16 +54,12 @@ public interface ChargeFormMapper {
 
     @Update({
         "update hospital.charge_form",
-        "set registration_id = #{registrationId,jdbcType=INTEGER},",
-          "charge_item_id = #{chargeItemId,jdbcType=INTEGER},",
-          "item_count = #{itemCount,jdbcType=INTEGER},",
-          "uncharged_nums = #{unchargedNums,jdbcType=INTEGER},",
-          "made_time = #{madeTime,jdbcType=TIMESTAMP},",
+        "set charge_form_name = #{chargeFormName,jdbcType=VARCHAR},",
+          "registration_id = #{registrationId,jdbcType=INTEGER},",
+          "save_state = #{saveState,jdbcType=INTEGER},",
+          "pay_state = #{payState,jdbcType=INTEGER},",
+          "execution_state = #{executionState,jdbcType=INTEGER},",
           "valid = #{valid,jdbcType=INTEGER},",
-          "department_id = #{departmentId,jdbcType=INTEGER},",
-          "doctor_id = #{doctorId,jdbcType=INTEGER},",
-          "collector_id = #{collectorId,jdbcType=INTEGER},",
-          "not_given_nums = #{notGivenNums,jdbcType=INTEGER},",
           "reserve1 = #{reserve1,jdbcType=VARCHAR},",
           "reserve2 = #{reserve2,jdbcType=VARCHAR},",
           "reserve3 = #{reserve3,jdbcType=VARCHAR}",
