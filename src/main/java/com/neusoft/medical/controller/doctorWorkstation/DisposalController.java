@@ -21,6 +21,7 @@ public class DisposalController {
      * @return 操作结果
      * disposalJson 包含的属性：
      * - registrationId 挂号单编号
+     * - chargeFormName 处置单名称
      * - chargeEntryList 处置项目列表，json 数组
      * 在 chargeEntryList 数组中，每个元素的属性：
      * - chargeItemId 处置项目作为收费项目的编号
