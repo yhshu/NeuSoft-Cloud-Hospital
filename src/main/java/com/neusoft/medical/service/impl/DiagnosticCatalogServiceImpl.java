@@ -29,6 +29,7 @@ public class DiagnosticCatalogServiceImpl implements DiagnosticCatalogService {
      */
     public List<DiseaseCategory> findAllDiseaseCategory() {
         DiseaseCategoryExample diseaseCategoryExample = new DiseaseCategoryExample();
+        diseaseCategoryExample.or().andValidEqualTo(1);
         return diseaseCategoryMapper.selectByExample(diseaseCategoryExample);
     }
 
@@ -44,7 +45,7 @@ public class DiagnosticCatalogServiceImpl implements DiagnosticCatalogService {
 
         DiseaseExample diseaseExample = new DiseaseExample();
         DiseaseExample.Criteria criteria = diseaseExample.createCriteria();
-        criteria.andDiseaseCategoryEqualTo(diseaseCategoryId);
+        criteria.andDiseaseCategoryEqualTo(diseaseCategoryId).andValidEqualTo(1);
 
         List<Disease> diseaseList = diseaseMapper.selectByExample(diseaseExample);
         return new PageInfo<>(diseaseList);
