@@ -6,6 +6,7 @@ import com.neusoft.medical.service.doctorWorkstation.ExaminationService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -118,14 +119,20 @@ public class ExaminationController {
     /**
      * 删除检查项目
      * 由医生执行
-     * 只有尚未交付的项目可删除
+     * 只有未支付的项目可删除
      *
      * @param chargeEntryIdList 删除的检查项目编号列表
      * @return 操作结果
      */
     @DeleteMapping("/delete_exam")
-    public ResultDTO<Boolean> deleteExam(@RequestParam(value = "chargeEntryIdList[]") Integer[] chargeEntryIdList) {
-        // todo
-        return null;
+    public ResultDTO<Boolean> deleteUnpaidChargeEntry(@RequestParam(value = "chargeEntryIdList[]") Integer[] chargeEntryIdList) {
+        boolean res;
+        try {
+            res = examinationService.deleteUnpaidChargeEntry(Arrays.asList(chargeEntryIdList));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultDTO<>(Boolean.FALSE);
+        }
+        return new ResultDTO<>(res);
     }
 }

@@ -9,6 +9,7 @@ import com.neusoft.medical.dao.ChargeFormMapper;
 import com.neusoft.medical.dao.ChargeItemMapper;
 import com.neusoft.medical.dao.RegistrationMapper;
 import com.neusoft.medical.service.doctorWorkstation.DisposalService;
+import com.neusoft.medical.service.doctorWorkstation.ExaminationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -27,6 +28,8 @@ public class DisposalServiceImpl implements DisposalService {
     private ChargeEntryMapper chargeEntryMapper;
     @Resource
     private RegistrationMapper registrationMapper;
+    @Resource
+    private ExaminationService examinationService;
 
     private Gson gson = new Gson();
 
@@ -123,5 +126,10 @@ public class DisposalServiceImpl implements DisposalService {
             e.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public boolean deleteDisposal(List<Integer> chargeEntryIdList) {
+        return examinationService.deleteUnpaidChargeEntry(chargeEntryIdList);
     }
 }

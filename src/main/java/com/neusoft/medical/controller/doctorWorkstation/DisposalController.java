@@ -6,6 +6,7 @@ import com.neusoft.medical.service.doctorWorkstation.DisposalService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -112,14 +113,20 @@ public class DisposalController {
     /**
      * 删除处置项目
      * 由医生执行
-     * 只有尚未交付的项目可删除
+     * 只有未支付的项目可删除
      *
      * @param chargeEntryIdList 删除的处置项目编号列表
      * @return 操作结果
      */
     @DeleteMapping("/delete")
     public ResultDTO<Boolean> deleteDisposal(@RequestParam(value = "chargeEntryIdList[]") Integer[] chargeEntryIdList) {
-        // todo
-        return null;
+        boolean res;
+        try {
+            res = disposalService.deleteDisposal(Arrays.asList(chargeEntryIdList));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultDTO<>(Boolean.FALSE);
+        }
+        return new ResultDTO<>(res);
     }
 }

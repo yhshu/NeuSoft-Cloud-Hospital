@@ -133,4 +133,20 @@ public class ExaminationServiceImpl implements ExaminationService {
         }
         return true;
     }
+
+    @Override
+    public boolean deleteUnpaidChargeEntry(List<Integer> chargeEntryIdList) {
+        try {
+            ChargeEntryExample chargeEntryExample = new ChargeEntryExample();
+            chargeEntryExample.or().andChargeEntryIdIn(chargeEntryIdList).andValidEqualTo(1).andPayStateEqualTo(PAY_STATE_NOT_CHARGED);
+
+            ChargeEntry chargeEntryRecord = new ChargeEntry();
+            chargeEntryRecord.setValid(0);
+            chargeEntryMapper.updateByExampleSelective(chargeEntryRecord, chargeEntryExample);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }

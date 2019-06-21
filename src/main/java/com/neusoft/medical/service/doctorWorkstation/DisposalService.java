@@ -12,4 +12,6 @@ public interface DisposalService {
     String selectHistoryDisposal(Integer registrationId);
 
     boolean updateDisposal(String disposalJson);
+
+    boolean deleteDisposal(List<Integer> chargeEntryIdList);
 }
