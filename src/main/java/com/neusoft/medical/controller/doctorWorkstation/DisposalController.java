@@ -90,8 +90,10 @@ public class DisposalController {
      * @return 操作结果
      * <p>
      * disposalJson 包含的属性：
+     * - chargeFormId 处置项目单编号
      * - chargeEntryList 处置项目列表，json 数组
      * chargeEntryList 数组包含的属性：
+     * - chargeEntryId 处置项目作为收费项目的编号
      * - not_given_nums 在执行处置后，尚未交付的项目数量，（不修改填-1）
      */
     @GetMapping("/update")

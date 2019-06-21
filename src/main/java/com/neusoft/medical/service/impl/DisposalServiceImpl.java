@@ -107,7 +107,18 @@ public class DisposalServiceImpl implements DisposalService {
     public boolean updateDisposal(String disposalJson) {
         try {
             JsonObject disposalJsonObject = new JsonParser().parse(disposalJson).getAsJsonObject();
+            int chargeFormId = disposalJsonObject.get("chargeFormId").getAsInt();
 
+            JsonArray chargeEntryList = disposalJsonObject.get("chargeEntryList").getAsJsonArray();
+            for (JsonElement chargeEntryJsonElement : chargeEntryList) {
+                JsonObject chargeEntryJsonObject = chargeEntryJsonElement.getAsJsonObject();
+                int chargeEntryId = chargeEntryJsonObject.get("chargeEntryId").getAsInt();
+                int notGivenNums = chargeEntryJsonObject.get("notGivenNums").getAsInt();
+                ChargeEntry chargeEntryRecord = new ChargeEntry();
+                chargeEntryRecord.setChargeEntryId(chargeEntryId);
+                chargeEntryRecord.setNotGivenNums(notGivenNums);
+                chargeEntryMapper.updateByPrimaryKeySelective(chargeEntryRecord);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
