@@ -40,8 +40,8 @@ public interface Constant {
     /**
      * 挂号状态
      */
-    String REGIST_IN_PROCESS = "0";
-    String REGIST_DONE = "1";
+    String REGIST_IN_PROCESS = "1";
+    String REGIST_DONE = "0";
     String REGIST_NOT_VISITED = "0";
     String REGIST_VISITED = "1";
 }
