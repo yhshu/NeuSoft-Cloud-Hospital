@@ -110,9 +110,10 @@ public class DiagnosticCatalogController {
      */
     @DeleteMapping(value = "/delete")
     public ResultDTO<Boolean> deleteDisease(
-            @RequestParam(value = "diseaseId[]") Integer[] diseaseIdList
+            @RequestParam(value = "diseaseIdList[]") Integer[] diseaseIdList
     ) {
         try {
+            System.out.println(diseaseIdList);
             diagnosticCatalogService.deleteDisease(Arrays.asList(diseaseIdList));
         } catch (Exception e) {
             e.printStackTrace();

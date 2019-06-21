@@ -32,6 +32,8 @@ public class RegistrationCategoryController {
             @RequestParam(value = "pageSize") Integer pageSize
     ) {
         PageInfo<RegistrationCategory> registrationCategoryPageInfo = null;
+        System.out.println("current——page" + currentPage);
+        System.out.println("page Sizew" + pageSize);
         try {
             registrationCategoryPageInfo = registrationCategoryService.selectRegistrationCategory(currentPage, pageSize);
         } catch (Exception e) {
