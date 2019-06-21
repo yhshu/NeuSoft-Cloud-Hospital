@@ -223,7 +223,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
                 JsonArray prescriptionEntryListJsonArray = gson.toJsonTree(prescriptionEntryList).getAsJsonArray();
                 for (JsonElement prescriptionEntryJsonElement : prescriptionEntryListJsonArray) {
                     JsonObject prescriptionEntryJsonObject = prescriptionEntryJsonElement.getAsJsonObject();
-                    prescriptionJsonObject.add("medicine", gson.toJsonTree(medicineMapper.selectByPrimaryKey(prescriptionEntryJsonObject.get("medicineId").getAsInt())));
+                    prescriptionEntryJsonObject.add("medicine", gson.toJsonTree(medicineMapper.selectByPrimaryKey(prescriptionEntryJsonObject.get("medicineId").getAsInt())));
                 }
 
                 prescriptionJsonObject.add("prescriptionEntryList", prescriptionEntryListJsonArray);
