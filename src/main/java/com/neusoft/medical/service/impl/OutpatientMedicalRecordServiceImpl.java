@@ -274,11 +274,9 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
 
             // 找到每项挂号对应的历史病历
             MedicalRecordsExample medicalRecordsExample = new MedicalRecordsExample();
-            MedicalRecordsExample.Criteria medicalRecordsExampleCriteria = medicalRecordsExample.createCriteria();
-            medicalRecordsExampleCriteria.andValidEqualTo(1);                 // 有效的病历记录
-            medicalRecordsExampleCriteria.andRegistrationIdIn(registrationIdList); // 病历记录在患者的挂号单编号列表中
-            medicalRecordsExampleCriteria.andSaveStateEqualTo(SAVE_FORMAL);        // 正式提交的病历记录
-            medicalRecordsExampleCriteria.andSaveStateEqualTo(SAVE_CONFIRMED);     // 确诊的病历记录
+            // 病历记录是有效的，且在患者的挂号单编号列表中，且已正式提交或确诊
+            medicalRecordsExample.or().andValidEqualTo(1).andRegistrationIdIn(registrationIdList).andSaveStateEqualTo(SAVE_FORMAL);
+            medicalRecordsExample.or().andValidEqualTo(1).andRegistrationIdIn(registrationIdList).andSaveStateEqualTo(SAVE_CONFIRMED);
             List<MedicalRecords> medicalRecordsList = medicalRecordsMapper.selectByExample(medicalRecordsExample);
             JsonArray medicalRecordsJsonArray = new JsonArray();
             for (MedicalRecords medicalRecords : medicalRecordsList) {
