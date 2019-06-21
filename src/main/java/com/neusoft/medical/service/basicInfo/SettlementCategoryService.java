@@ -11,9 +11,7 @@ import java.util.List;
 public interface SettlementCategoryService {
     PageInfo<SettlementCategory> selectSettlementCategory(int currentPage, int pageSize);
 
-    boolean addSettlementCategory(String settlementCategoryName);
-
-    boolean updateSettlementCategory(int settlementCategoryId, String settlementCategoryName);
-
     boolean deleteSettlementCategory(List<Integer> settlementCategoryIdList);
+
+    boolean saveSettlementCategory(Integer settlementCategoryId, String settlementCategoryName);
 }

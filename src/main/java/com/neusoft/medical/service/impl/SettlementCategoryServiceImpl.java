@@ -26,35 +26,6 @@ public class SettlementCategoryServiceImpl implements SettlementCategoryService 
     }
 
     @Override
-    public boolean addSettlementCategory(String settlementCategoryName) {
-        try {
-            settlementCategoryMapper.insert(new SettlementCategory(null, settlementCategoryName, 1, null, null, null));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public boolean updateSettlementCategory(int settlementCategoryId, String settlementCategoryName) {
-        try {
-            SettlementCategoryExample settlementCategoryExample = new SettlementCategoryExample();
-            SettlementCategoryExample.Criteria criteria = settlementCategoryExample.createCriteria();
-            criteria.andValidEqualTo(1);
-            criteria.andSettlementCategoryIdEqualTo(settlementCategoryId);
-
-            SettlementCategory record = new SettlementCategory();
-            record.setSettlementCategoryName(settlementCategoryName);
-            settlementCategoryMapper.updateByExampleSelective(record, settlementCategoryExample);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public boolean deleteSettlementCategory(List<Integer> settlementCategoryIdList) {
         try {
             SettlementCategory record = new SettlementCategory();
@@ -65,6 +36,28 @@ public class SettlementCategoryServiceImpl implements SettlementCategoryService 
             criteria.andValidEqualTo(1);
             criteria.andSettlementCategoryIdIn(settlementCategoryIdList);
             settlementCategoryMapper.updateByExampleSelective(record, settlementCategoryExample);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean saveSettlementCategory(Integer settlementCategoryId, String settlementCategoryName) {
+        try {
+            if (settlementCategoryId == null) {
+                // 新增结算类别
+                settlementCategoryMapper.insert(new SettlementCategory(null, settlementCategoryName, 1, null, null, null));
+            } else {
+                // 更新结算类别
+                SettlementCategoryExample settlementCategoryExample = new SettlementCategoryExample();
+                settlementCategoryExample.or().andValidEqualTo(1).andSettlementCategoryIdEqualTo(settlementCategoryId);
+
+                SettlementCategory record = new SettlementCategory();
+                record.setSettlementCategoryName(settlementCategoryName);
+                settlementCategoryMapper.updateByExampleSelective(record, settlementCategoryExample);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return false;

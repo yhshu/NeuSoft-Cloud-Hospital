@@ -30,7 +30,7 @@ public class ChargeItemController {
         return new ResultDTO<>(chargeItemPageInfo);
     }
 
-    @PutMapping("/save")
+    @PostMapping("/save")
     public ResultDTO<Boolean> saveChargeItem(
             @RequestParam(value = "chargeItemId") Integer chargeItemId,
             @RequestParam(value = "chargeItemCode") String chargeItemCode,
