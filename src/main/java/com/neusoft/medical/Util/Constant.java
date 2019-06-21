@@ -36,4 +36,12 @@ public interface Constant {
      */
     int EXEC_NOT_DONE = 0;             // 未执行或未完全执行
     int EXEC_DONE = 1;                 // 已执行
+
+    /**
+     * 挂号状态
+     */
+    String REGIST_IN_PROCESS = "0";
+    String REGIST_DONE = "1";
+    String REGIST_NOT_VISITED = "0";
+    String REGIST_VISITED = "1";
 }

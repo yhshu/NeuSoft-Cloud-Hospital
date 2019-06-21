@@ -45,8 +45,7 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
         RegistrationExample registrationExample = new RegistrationExample();
         try {
             RegistrationExample.Criteria criteria = registrationExample.createCriteria();
-            criteria.andValidEqualTo(1);
-            criteria.andIsVisitedEqualTo("0");
+            criteria.andValidEqualTo(1).andRegistrationStatusEqualTo(REGIST_IN_PROCESS);
             if (registrationScope == REGIST_SCOPE_DOCTOR) {
                 criteria.andDoctorIdEqualTo(doctorId);
             }
@@ -75,7 +74,7 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
         try {
             RegistrationExample.Criteria criteria = registrationExample.createCriteria();
             criteria.andValidEqualTo(1);
-            criteria.andIsVisitedEqualTo("1");
+            criteria.andRegistrationStatusEqualTo(REGIST_DONE);
             if (registrationScope == REGIST_SCOPE_DOCTOR) {
                 criteria.andDoctorIdEqualTo(doctorId);
             }
@@ -242,12 +241,10 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
     public boolean endRegistration(int registrationId) {
         try {
             Registration record = new Registration();
-            record.setRegistrationStatus("0");
+            record.setRegistrationStatus(REGIST_DONE);
 
             RegistrationExample registrationExample = new RegistrationExample();
-            RegistrationExample.Criteria criteria = registrationExample.createCriteria();
-            criteria.andValidEqualTo(1);
-            criteria.andRegistrationIdEqualTo(registrationId);
+            registrationExample.or().andValidEqualTo(1).andRegistrationIdEqualTo(registrationId);
 
             registrationMapper.updateByExampleSelective(record, registrationExample);
         } catch (Exception e) {
