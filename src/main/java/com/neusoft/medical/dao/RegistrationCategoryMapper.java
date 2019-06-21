@@ -12,13 +12,13 @@ public interface RegistrationCategoryMapper {
     int deleteByExample(RegistrationCategoryExample example);
 
     @Delete({
-        "delete from hospital.registration_category",
+        "delete from hospital..registration_category",
         "where registration_category_id = #{registrationCategoryId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer registrationCategoryId);
 
     @Insert({
-        "insert into hospital.registration_category (registration_category_name, is_default, ",
+        "insert into hospital..registration_category (registration_category_name, is_default, ",
         "sequence_no, registration_fee, ",
         "valid)",
         "values (#{registrationCategoryName,jdbcType=VARCHAR}, #{isDefault,jdbcType=BIT}, ",
@@ -36,7 +36,7 @@ public interface RegistrationCategoryMapper {
         "select",
         "registration_category_id, registration_category_name, is_default, sequence_no, ",
         "registration_fee, valid",
-        "from hospital.registration_category",
+        "from hospital..registration_category",
         "where registration_category_id = #{registrationCategoryId,jdbcType=INTEGER}"
     })
     @ResultMap("com.neusoft.medical.dao.RegistrationCategoryMapper.BaseResultMap")
@@ -49,7 +49,7 @@ public interface RegistrationCategoryMapper {
     int updateByPrimaryKeySelective(RegistrationCategory record);
 
     @Update({
-        "update hospital.registration_category",
+        "update hospital..registration_category",
         "set registration_category_name = #{registrationCategoryName,jdbcType=VARCHAR},",
           "is_default = #{isDefault,jdbcType=BIT},",
           "sequence_no = #{sequenceNo,jdbcType=INTEGER},",

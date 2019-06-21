@@ -79,7 +79,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hospital.expense_category
+    from hospital..expense_category
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -88,7 +88,7 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.ExpenseCategoryExample">
-    delete from hospital.expense_category
+    delete from hospital..expense_category
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -97,7 +97,7 @@
     <selectKey keyProperty="expenseCategoryId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into hospital.expense_category
+    insert into hospital..expense_category
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="expenseCode != null">
         expense_code,
@@ -140,13 +140,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.neusoft.medical.bean.ExpenseCategoryExample" resultType="java.lang.Long">
-    select count(*) from hospital.expense_category
+    select count(*) from hospital..expense_category
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update hospital.expense_category
+    update hospital..expense_category
     <set>
       <if test="record.expenseCategoryId != null">
         expense_category_id = #{record.expenseCategoryId,jdbcType=INTEGER},
@@ -175,7 +175,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update hospital.expense_category
+    update hospital..expense_category
     set expense_category_id = #{record.expenseCategoryId,jdbcType=INTEGER},
       expense_code = #{record.expenseCode,jdbcType=VARCHAR},
       expense_name = #{record.expenseName,jdbcType=VARCHAR},
@@ -188,7 +188,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.ExpenseCategory">
-    update hospital.expense_category
+    update hospital..expense_category
     <set>
       <if test="expenseCode != null">
         expense_code = #{expenseCode,jdbcType=VARCHAR},

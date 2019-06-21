@@ -12,13 +12,13 @@ public interface StaffMapper {
     int deleteByExample(StaffExample example);
 
     @Delete({
-        "delete from hospital.staff",
+        "delete from hospital..staff",
         "where staff_id = #{staffId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer staffId);
 
     @Insert({
-        "insert into hospital.staff (real_name, department_id, ",
+        "insert into hospital..staff (real_name, department_id, ",
         "account_id, account_type, ",
         "valid, reserve1, ",
         "reserve2, reserve3)",
@@ -38,7 +38,7 @@ public interface StaffMapper {
         "select",
         "staff_id, real_name, department_id, account_id, account_type, valid, reserve1, ",
         "reserve2, reserve3",
-        "from hospital.staff",
+        "from hospital..staff",
         "where staff_id = #{staffId,jdbcType=INTEGER}"
     })
     @ResultMap("com.neusoft.medical.dao.StaffMapper.BaseResultMap")
@@ -51,7 +51,7 @@ public interface StaffMapper {
     int updateByPrimaryKeySelective(Staff record);
 
     @Update({
-        "update hospital.staff",
+        "update hospital..staff",
         "set real_name = #{realName,jdbcType=VARCHAR},",
           "department_id = #{departmentId,jdbcType=INTEGER},",
           "account_id = #{accountId,jdbcType=INTEGER},",

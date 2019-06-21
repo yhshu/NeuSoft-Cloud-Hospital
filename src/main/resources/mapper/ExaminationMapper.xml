@@ -9,6 +9,8 @@
       <arg column="doctor_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="department_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="save_state" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="pay_state" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="execution_state" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="exam_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="clinical_impression" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="requirement" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -79,8 +81,8 @@
   </sql>
   <sql id="Base_Column_List">
     examination_id, registration_id, patient_name, doctor_id, department_id, save_state, 
-    exam_name, clinical_impression, requirement, exam_result, valid, reserve1, reserve2, 
-    reserve3
+    pay_state, execution_state, exam_name, clinical_impression, requirement, exam_result, 
+    valid, reserve1, reserve2, reserve3
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.ExaminationExample" resultMap="BaseResultMap">
     select
@@ -88,7 +90,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hospital.examination
+    from hospital..examination
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -97,7 +99,7 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.ExaminationExample">
-    delete from hospital.examination
+    delete from hospital..examination
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -106,7 +108,7 @@
     <selectKey keyProperty="examinationId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into hospital.examination
+    insert into hospital..examination
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="registrationId != null">
         registration_id,
@@ -122,6 +124,12 @@
       </if>
       <if test="saveState != null">
         save_state,
+      </if>
+      <if test="payState != null">
+        pay_state,
+      </if>
+      <if test="executionState != null">
+        execution_state,
       </if>
       <if test="examName != null">
         exam_name,
@@ -164,6 +172,12 @@
       <if test="saveState != null">
         #{saveState,jdbcType=INTEGER},
       </if>
+      <if test="payState != null">
+        #{payState,jdbcType=INTEGER},
+      </if>
+      <if test="executionState != null">
+        #{executionState,jdbcType=INTEGER},
+      </if>
       <if test="examName != null">
         #{examName,jdbcType=VARCHAR},
       </if>
@@ -191,13 +205,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.neusoft.medical.bean.ExaminationExample" resultType="java.lang.Long">
-    select count(*) from hospital.examination
+    select count(*) from hospital..examination
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update hospital.examination
+    update hospital..examination
     <set>
       <if test="record.examinationId != null">
         examination_id = #{record.examinationId,jdbcType=INTEGER},
@@ -216,6 +230,12 @@
       </if>
       <if test="record.saveState != null">
         save_state = #{record.saveState,jdbcType=INTEGER},
+      </if>
+      <if test="record.payState != null">
+        pay_state = #{record.payState,jdbcType=INTEGER},
+      </if>
+      <if test="record.executionState != null">
+        execution_state = #{record.executionState,jdbcType=INTEGER},
       </if>
       <if test="record.examName != null">
         exam_name = #{record.examName,jdbcType=VARCHAR},
@@ -247,13 +267,15 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update hospital.examination
+    update hospital..examination
     set examination_id = #{record.examinationId,jdbcType=INTEGER},
       registration_id = #{record.registrationId,jdbcType=INTEGER},
       patient_name = #{record.patientName,jdbcType=VARCHAR},
       doctor_id = #{record.doctorId,jdbcType=INTEGER},
       department_id = #{record.departmentId,jdbcType=INTEGER},
       save_state = #{record.saveState,jdbcType=INTEGER},
+      pay_state = #{record.payState,jdbcType=INTEGER},
+      execution_state = #{record.executionState,jdbcType=INTEGER},
       exam_name = #{record.examName,jdbcType=VARCHAR},
       clinical_impression = #{record.clinicalImpression,jdbcType=VARCHAR},
       requirement = #{record.requirement,jdbcType=VARCHAR},
@@ -267,7 +289,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.Examination">
-    update hospital.examination
+    update hospital..examination
     <set>
       <if test="registrationId != null">
         registration_id = #{registrationId,jdbcType=INTEGER},
@@ -283,6 +305,12 @@
       </if>
       <if test="saveState != null">
         save_state = #{saveState,jdbcType=INTEGER},
+      </if>
+      <if test="payState != null">
+        pay_state = #{payState,jdbcType=INTEGER},
+      </if>
+      <if test="executionState != null">
+        execution_state = #{executionState,jdbcType=INTEGER},
       </if>
       <if test="examName != null">
         exam_name = #{examName,jdbcType=VARCHAR},

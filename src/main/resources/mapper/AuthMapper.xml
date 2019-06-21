@@ -76,7 +76,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hospital.auth
+    from hospital..auth
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,7 +85,7 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.AuthExample">
-    delete from hospital.auth
+    delete from hospital..auth
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -94,7 +94,7 @@
     <selectKey keyProperty="authId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into hospital.auth
+    insert into hospital..auth
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="authName != null">
         auth_name,
@@ -119,13 +119,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.neusoft.medical.bean.AuthExample" resultType="java.lang.Long">
-    select count(*) from hospital.auth
+    select count(*) from hospital..auth
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update hospital.auth
+    update hospital..auth
     <set>
       <if test="record.authId != null">
         auth_id = #{record.authId,jdbcType=INTEGER},
@@ -145,7 +145,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update hospital.auth
+    update hospital..auth
     set auth_id = #{record.authId,jdbcType=INTEGER},
       auth_name = #{record.authName,jdbcType=VARCHAR},
       auth_description = #{record.authDescription,jdbcType=VARCHAR},
@@ -155,7 +155,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.Auth">
-    update hospital.auth
+    update hospital..auth
     <set>
       <if test="authName != null">
         auth_name = #{authName,jdbcType=VARCHAR},

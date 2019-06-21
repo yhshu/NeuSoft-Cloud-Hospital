@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
-import static com.neusoft.medical.Util.Constant.CHARGE_STATUS_NOT_CHARGED;
+import static com.neusoft.medical.Util.Constant.PAY_STATE_NOT_CHARGED;
 
 @Service
 public class ChargeEntryServiceImpl implements ChargeEntryService {
@@ -42,9 +42,9 @@ public class ChargeEntryServiceImpl implements ChargeEntryService {
         if (endDate != null) // 结束时间
             criteria.andMadeTimeLessThan(endDate);
 
-        if (chargeEntryCategory == CHARGE_STATUS_NOT_CHARGED)
+        if (chargeEntryCategory == PAY_STATE_NOT_CHARGED)
             criteria.andUnchargedNumsNotEqualTo(0);
-        else if (chargeEntryCategory == Constant.CHARGE_STATUS_CHARGED)
+        else if (chargeEntryCategory == Constant.PAY_STATE_CHARGED)
             criteria.andUnchargedNumsEqualTo(0);
 
         List<ChargeEntry> chargeEntryList = chargeEntryMapper.selectByExample(chargeEntryExample);
@@ -70,7 +70,7 @@ public class ChargeEntryServiceImpl implements ChargeEntryService {
             int departmentId = registrationService.selectRegistrationByPrimaryKey(registrationId).getDepartmentId();
             int doctorId = registrationService.selectRegistrationByPrimaryKey(registrationId).getDoctorId();
             double unitPrice = chargeItemMapper.selectByPrimaryKey(chargeItemId).getPrice();
-            chargeEntryMapper.insert(new ChargeEntry(null, registrationId, null, chargeItemId, null, MathUtil.doubleSetScale(unitPrice, 2), MathUtil.doubleSetScale(unitPrice * itemCount, 2), itemCount, itemCount, itemCount, CHARGE_STATUS_NOT_CHARGED, currentDate, departmentId, doctorId, collectorId, 1, doctorAdvice, null, null, null));
+            chargeEntryMapper.insert(new ChargeEntry(null, registrationId, null, chargeItemId, null, MathUtil.doubleSetScale(unitPrice, 2), MathUtil.doubleSetScale(unitPrice * itemCount, 2), itemCount, itemCount, itemCount, PAY_STATE_NOT_CHARGED, currentDate, departmentId, doctorId, collectorId, 1, doctorAdvice, null, null, null));
         } catch (Exception e) {
             e.printStackTrace();
             return false;

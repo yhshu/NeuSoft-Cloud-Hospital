@@ -3,9 +3,15 @@ package com.neusoft.medical.bean;
 public class ChargeForm {
     private Integer chargeFormId;
 
+    private String chargeFormName;
+
     private Integer registrationId;
 
     private Integer saveState;
+
+    private Integer payState;
+
+    private Integer executionState;
 
     private Integer valid;
 
@@ -15,10 +21,13 @@ public class ChargeForm {
 
     private String reserve3;
 
-    public ChargeForm(Integer chargeFormId, Integer registrationId, Integer saveState, Integer valid, String reserve1, String reserve2, String reserve3) {
+    public ChargeForm(Integer chargeFormId, String chargeFormName, Integer registrationId, Integer saveState, Integer payState, Integer executionState, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.chargeFormId = chargeFormId;
+        this.chargeFormName = chargeFormName;
         this.registrationId = registrationId;
         this.saveState = saveState;
+        this.payState = payState;
+        this.executionState = executionState;
         this.valid = valid;
         this.reserve1 = reserve1;
         this.reserve2 = reserve2;
@@ -37,6 +46,14 @@ public class ChargeForm {
         this.chargeFormId = chargeFormId;
     }
 
+    public String getChargeFormName() {
+        return chargeFormName;
+    }
+
+    public void setChargeFormName(String chargeFormName) {
+        this.chargeFormName = chargeFormName == null ? null : chargeFormName.trim();
+    }
+
     public Integer getRegistrationId() {
         return registrationId;
     }
@@ -51,6 +68,22 @@ public class ChargeForm {
 
     public void setSaveState(Integer saveState) {
         this.saveState = saveState;
+    }
+
+    public Integer getPayState() {
+        return payState;
+    }
+
+    public void setPayState(Integer payState) {
+        this.payState = payState;
+    }
+
+    public Integer getExecutionState() {
+        return executionState;
+    }
+
+    public void setExecutionState(Integer executionState) {
+        this.executionState = executionState;
     }
 
     public Integer getValid() {

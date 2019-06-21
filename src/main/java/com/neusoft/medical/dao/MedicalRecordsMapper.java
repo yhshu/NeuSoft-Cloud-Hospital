@@ -12,13 +12,13 @@ public interface MedicalRecordsMapper {
     int deleteByExample(MedicalRecordsExample example);
 
     @Delete({
-        "delete from hospital.medical_records",
+        "delete from hospital..medical_records",
         "where medical_records_id = #{medicalRecordsId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer medicalRecordsId);
 
     @Insert({
-        "insert into hospital.medical_records (registration_id, main_info, ",
+        "insert into hospital..medical_records (registration_id, main_info, ",
         "current_disease, past_disease, ",
         "physical_exam, auxiliary_exam, ",
         "opinion, valid, ",
@@ -45,7 +45,7 @@ public interface MedicalRecordsMapper {
         "medical_records_id, registration_id, main_info, current_disease, past_disease, ",
         "physical_exam, auxiliary_exam, opinion, valid, save_state, doctor_id, template_name, ",
         "reserve1, reserve2, reserve3",
-        "from hospital.medical_records",
+        "from hospital..medical_records",
         "where medical_records_id = #{medicalRecordsId,jdbcType=INTEGER}"
     })
     @ResultMap("com.neusoft.medical.dao.MedicalRecordsMapper.BaseResultMap")
@@ -58,7 +58,7 @@ public interface MedicalRecordsMapper {
     int updateByPrimaryKeySelective(MedicalRecords record);
 
     @Update({
-        "update hospital.medical_records",
+        "update hospital..medical_records",
         "set registration_id = #{registrationId,jdbcType=INTEGER},",
           "main_info = #{mainInfo,jdbcType=VARCHAR},",
           "current_disease = #{currentDisease,jdbcType=VARCHAR},",

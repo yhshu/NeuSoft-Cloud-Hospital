@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
-import static com.neusoft.medical.Util.Constant.EXPENSE_CATEGORY_EXAM;
+import static com.neusoft.medical.Util.Constant.*;
 
 @Service
 public class ExaminationServiceImpl implements ExaminationService {
@@ -45,7 +45,7 @@ public class ExaminationServiceImpl implements ExaminationService {
             JsonArray chargeEntryListJsonArray = examinationJsonObject.get("chargeEntryList").getAsJsonArray();
 
             Registration registration = registrationMapper.selectByPrimaryKey(registrationId);
-            Examination examinationRecord = new Examination(null, registrationId, registration.getPatientName(), registration.getDoctorId(), registration.getDepartmentId(), saveState, examName, clinicalImpression, requirement, examResult, 1, null, null, null);
+            Examination examinationRecord = new Examination(null, registrationId, registration.getPatientName(), registration.getDoctorId(), registration.getDepartmentId(), saveState, PAY_STATE_NOT_CHARGED, EXEC_NOT_DONE, examName, clinicalImpression, requirement, examResult, 1, null, null, null);
             examinationMapper.insert(examinationRecord);
             int examinationId = examinationRecord.getExaminationId();
 
@@ -59,7 +59,7 @@ public class ExaminationServiceImpl implements ExaminationService {
                 ChargeItem chargeItem = chargeItemMapper.selectByPrimaryKey(chargeItemId);
                 double unitPrice = MathUtil.doubleSetScale(chargeItem.getPrice(), 2);
                 double totalPrice = MathUtil.doubleSetScale(unitPrice, 2);
-                ChargeEntry chargeEntryRecord = new ChargeEntry(null, registrationId, null, chargeItemId, examinationId, unitPrice, totalPrice, nums, nums, nums, Constant.CHARGE_STATUS_NOT_CHARGED, new Date(), registration.getDepartmentId(), registration.getDoctorId(), collectorId, 1, doctorAdvice, null, null, null);
+                ChargeEntry chargeEntryRecord = new ChargeEntry(null, registrationId, null, chargeItemId, examinationId, unitPrice, totalPrice, nums, nums, nums, Constant.PAY_STATE_NOT_CHARGED, new Date(), registration.getDepartmentId(), registration.getDoctorId(), collectorId, 1, doctorAdvice, null, null, null);
                 chargeEntryMapper.insert(chargeEntryRecord);
             }
         } catch (Exception e) {

@@ -9,9 +9,9 @@ public interface Constant {
     /**
      * 收费状态
      */
-    int CHARGE_STATUS_NOT_CHARGED = 0; // 未支付
-    int CHARGE_STATUS_CHARGED = 1;     // 已支付
-    int CHARGE_STATUS_RETURNED = 2;    // 已退费
+    int PAY_STATE_NOT_CHARGED = 0; // 未支付
+    int PAY_STATE_CHARGED = 1;     // 已支付
+    int PAY_STATE_RETURNED = 2;    // 已退费
 
     /**
      * 保存状态
@@ -29,4 +29,10 @@ public interface Constant {
     int REGIST_SCOPE_ALL = 0;          // 全院搜索
     int REGIST_SCOPE_DOCTOR = 1;       // 按医生搜索
     int REGIST_SCOPE_DEPRAT = 2;       // 按科室搜索
+
+    /**
+     * 执行状态
+     */
+    int EXEC_NOT_DONE = 0;             // 未执行或未完全执行
+    int EXEC_DONE = 1;                 // 已执行
 }

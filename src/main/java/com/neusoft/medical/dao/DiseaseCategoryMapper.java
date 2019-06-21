@@ -12,13 +12,13 @@ public interface DiseaseCategoryMapper {
     int deleteByExample(DiseaseCategoryExample example);
 
     @Delete({
-        "delete from hospital.disease_category",
+        "delete from hospital..disease_category",
         "where disease_category_id = #{diseaseCategoryId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer diseaseCategoryId);
 
     @Insert({
-        "insert into hospital.disease_category (disease_code, disease_name, ",
+        "insert into hospital..disease_category (disease_code, disease_name, ",
         "sequence_no, disease_type, ",
         "valid)",
         "values (#{diseaseCode,jdbcType=VARCHAR}, #{diseaseName,jdbcType=VARCHAR}, ",
@@ -36,7 +36,7 @@ public interface DiseaseCategoryMapper {
         "select",
         "disease_category_id, disease_code, disease_name, sequence_no, disease_type, ",
         "valid",
-        "from hospital.disease_category",
+        "from hospital..disease_category",
         "where disease_category_id = #{diseaseCategoryId,jdbcType=INTEGER}"
     })
     @ResultMap("com.neusoft.medical.dao.DiseaseCategoryMapper.BaseResultMap")
@@ -49,7 +49,7 @@ public interface DiseaseCategoryMapper {
     int updateByPrimaryKeySelective(DiseaseCategory record);
 
     @Update({
-        "update hospital.disease_category",
+        "update hospital..disease_category",
         "set disease_code = #{diseaseCode,jdbcType=VARCHAR},",
           "disease_name = #{diseaseName,jdbcType=VARCHAR},",
           "sequence_no = #{sequenceNo,jdbcType=INTEGER},",

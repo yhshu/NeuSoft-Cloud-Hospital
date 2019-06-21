@@ -12,13 +12,13 @@ public interface SchedulingInfoMapper {
     int deleteByExample(SchedulingInfoExample example);
 
     @Delete({
-        "delete from hospital.scheduling_info",
+        "delete from hospital..scheduling_info",
         "where scheduling_info_id = #{schedulingInfoId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer schedulingInfoId);
 
     @Insert({
-        "insert into hospital.scheduling_info (scheduling_time, department_id, ",
+        "insert into hospital..scheduling_info (scheduling_time, department_id, ",
         "department_name, doctor_id, ",
         "doctor_name, type, ",
         "valid, period, limitation, ",
@@ -40,7 +40,7 @@ public interface SchedulingInfoMapper {
         "select",
         "scheduling_info_id, scheduling_time, department_id, department_name, doctor_id, ",
         "doctor_name, type, valid, period, limitation, remain_nums",
-        "from hospital.scheduling_info",
+        "from hospital..scheduling_info",
         "where scheduling_info_id = #{schedulingInfoId,jdbcType=INTEGER}"
     })
     @ResultMap("com.neusoft.medical.dao.SchedulingInfoMapper.BaseResultMap")
@@ -53,7 +53,7 @@ public interface SchedulingInfoMapper {
     int updateByPrimaryKeySelective(SchedulingInfo record);
 
     @Update({
-        "update hospital.scheduling_info",
+        "update hospital..scheduling_info",
         "set scheduling_time = #{schedulingTime,jdbcType=DATE},",
           "department_id = #{departmentId,jdbcType=INTEGER},",
           "department_name = #{departmentName,jdbcType=VARCHAR},",

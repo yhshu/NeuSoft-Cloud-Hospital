@@ -12,13 +12,13 @@ public interface PrescriptionMapper {
     int deleteByExample(PrescriptionExample example);
 
     @Delete({
-        "delete from hospital.prescription",
+        "delete from hospital..prescription",
         "where prescription_id = #{prescriptionId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer prescriptionId);
 
     @Insert({
-        "insert into hospital.prescription (prescription_name, registration_id, ",
+        "insert into hospital..prescription (prescription_name, registration_id, ",
         "save_state, doctor_id, ",
         "valid, reserve1, ",
         "reserve2, reserve3)",
@@ -38,7 +38,7 @@ public interface PrescriptionMapper {
         "select",
         "prescription_id, prescription_name, registration_id, save_state, doctor_id, ",
         "valid, reserve1, reserve2, reserve3",
-        "from hospital.prescription",
+        "from hospital..prescription",
         "where prescription_id = #{prescriptionId,jdbcType=INTEGER}"
     })
     @ResultMap("com.neusoft.medical.dao.PrescriptionMapper.BaseResultMap")
@@ -51,7 +51,7 @@ public interface PrescriptionMapper {
     int updateByPrimaryKeySelective(Prescription record);
 
     @Update({
-        "update hospital.prescription",
+        "update hospital..prescription",
         "set prescription_name = #{prescriptionName,jdbcType=VARCHAR},",
           "registration_id = #{registrationId,jdbcType=INTEGER},",
           "save_state = #{saveState,jdbcType=INTEGER},",

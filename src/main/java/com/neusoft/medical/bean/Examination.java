@@ -13,6 +13,10 @@ public class Examination {
 
     private Integer saveState;
 
+    private Integer payState;
+
+    private Integer executionState;
+
     private String examName;
 
     private String clinicalImpression;
@@ -29,13 +33,15 @@ public class Examination {
 
     private String reserve3;
 
-    public Examination(Integer examinationId, Integer registrationId, String patientName, Integer doctorId, Integer departmentId, Integer saveState, String examName, String clinicalImpression, String requirement, String examResult, Integer valid, String reserve1, String reserve2, String reserve3) {
+    public Examination(Integer examinationId, Integer registrationId, String patientName, Integer doctorId, Integer departmentId, Integer saveState, Integer payState, Integer executionState, String examName, String clinicalImpression, String requirement, String examResult, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.examinationId = examinationId;
         this.registrationId = registrationId;
         this.patientName = patientName;
         this.doctorId = doctorId;
         this.departmentId = departmentId;
         this.saveState = saveState;
+        this.payState = payState;
+        this.executionState = executionState;
         this.examName = examName;
         this.clinicalImpression = clinicalImpression;
         this.requirement = requirement;
@@ -96,6 +102,22 @@ public class Examination {
 
     public void setSaveState(Integer saveState) {
         this.saveState = saveState;
+    }
+
+    public Integer getPayState() {
+        return payState;
+    }
+
+    public void setPayState(Integer payState) {
+        this.payState = payState;
+    }
+
+    public Integer getExecutionState() {
+        return executionState;
+    }
+
+    public void setExecutionState(Integer executionState) {
+        this.executionState = executionState;
     }
 
     public String getExamName() {

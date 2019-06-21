@@ -92,7 +92,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hospital.prescription_entry
+    from hospital..prescription_entry
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -101,7 +101,7 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.PrescriptionEntryExample">
-    delete from hospital.prescription_entry
+    delete from hospital..prescription_entry
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -110,7 +110,7 @@
     <selectKey keyProperty="prescriptionEntryId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into hospital.prescription_entry
+    insert into hospital..prescription_entry
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="medicineId != null">
         medicine_id,
@@ -219,13 +219,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.neusoft.medical.bean.PrescriptionEntryExample" resultType="java.lang.Long">
-    select count(*) from hospital.prescription_entry
+    select count(*) from hospital..prescription_entry
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update hospital.prescription_entry
+    update hospital..prescription_entry
     <set>
       <if test="record.prescriptionEntryId != null">
         prescription_entry_id = #{record.prescriptionEntryId,jdbcType=INTEGER},
@@ -287,7 +287,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update hospital.prescription_entry
+    update hospital..prescription_entry
     set prescription_entry_id = #{record.prescriptionEntryId,jdbcType=INTEGER},
       medicine_id = #{record.medicineId,jdbcType=INTEGER},
       prescription_id = #{record.prescriptionId,jdbcType=INTEGER},
@@ -311,7 +311,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.PrescriptionEntry">
-    update hospital.prescription_entry
+    update hospital..prescription_entry
     <set>
       <if test="medicineId != null">
         medicine_id = #{medicineId,jdbcType=INTEGER},

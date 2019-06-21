@@ -78,7 +78,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hospital.settlement_category
+    from hospital..settlement_category
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,7 +87,7 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.SettlementCategoryExample">
-    delete from hospital.settlement_category
+    delete from hospital..settlement_category
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -96,7 +96,7 @@
     <selectKey keyProperty="settlementCategoryId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into hospital.settlement_category
+    insert into hospital..settlement_category
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="settlementCategoryName != null">
         settlement_category_name,
@@ -133,13 +133,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.neusoft.medical.bean.SettlementCategoryExample" resultType="java.lang.Long">
-    select count(*) from hospital.settlement_category
+    select count(*) from hospital..settlement_category
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update hospital.settlement_category
+    update hospital..settlement_category
     <set>
       <if test="record.settlementCategoryId != null">
         settlement_category_id = #{record.settlementCategoryId,jdbcType=INTEGER},
@@ -165,7 +165,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update hospital.settlement_category
+    update hospital..settlement_category
     set settlement_category_id = #{record.settlementCategoryId,jdbcType=INTEGER},
       settlement_category_name = #{record.settlementCategoryName,jdbcType=VARCHAR},
       valid = #{record.valid,jdbcType=INTEGER},
@@ -177,7 +177,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.SettlementCategory">
-    update hospital.settlement_category
+    update hospital..settlement_category
     <set>
       <if test="settlementCategoryName != null">
         settlement_category_name = #{settlementCategoryName,jdbcType=VARCHAR},

@@ -12,13 +12,13 @@ public interface SettlementCategoryMapper {
     int deleteByExample(SettlementCategoryExample example);
 
     @Delete({
-        "delete from hospital.settlement_category",
+        "delete from hospital..settlement_category",
         "where settlement_category_id = #{settlementCategoryId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer settlementCategoryId);
 
     @Insert({
-        "insert into hospital.settlement_category (settlement_category_name, valid, ",
+        "insert into hospital..settlement_category (settlement_category_name, valid, ",
         "reserve1, reserve2, ",
         "reserve3)",
         "values (#{settlementCategoryName,jdbcType=VARCHAR}, #{valid,jdbcType=INTEGER}, ",
@@ -36,7 +36,7 @@ public interface SettlementCategoryMapper {
         "select",
         "settlement_category_id, settlement_category_name, valid, reserve1, reserve2, ",
         "reserve3",
-        "from hospital.settlement_category",
+        "from hospital..settlement_category",
         "where settlement_category_id = #{settlementCategoryId,jdbcType=INTEGER}"
     })
     @ResultMap("com.neusoft.medical.dao.SettlementCategoryMapper.BaseResultMap")
@@ -49,7 +49,7 @@ public interface SettlementCategoryMapper {
     int updateByPrimaryKeySelective(SettlementCategory record);
 
     @Update({
-        "update hospital.settlement_category",
+        "update hospital..settlement_category",
         "set settlement_category_name = #{settlementCategoryName,jdbcType=VARCHAR},",
           "valid = #{valid,jdbcType=INTEGER},",
           "reserve1 = #{reserve1,jdbcType=VARCHAR},",

@@ -12,22 +12,24 @@ public interface ExaminationMapper {
     int deleteByExample(ExaminationExample example);
 
     @Delete({
-        "delete from hospital.examination",
+        "delete from hospital..examination",
         "where examination_id = #{examinationId,jdbcType=INTEGER}"
     })
     int deleteByPrimaryKey(Integer examinationId);
 
     @Insert({
-        "insert into hospital.examination (registration_id, patient_name, ",
+        "insert into hospital..examination (registration_id, patient_name, ",
         "doctor_id, department_id, ",
-        "save_state, exam_name, ",
+        "save_state, pay_state, ",
+        "execution_state, exam_name, ",
         "clinical_impression, requirement, ",
         "exam_result, valid, ",
         "reserve1, reserve2, ",
         "reserve3)",
         "values (#{registrationId,jdbcType=INTEGER}, #{patientName,jdbcType=VARCHAR}, ",
         "#{doctorId,jdbcType=INTEGER}, #{departmentId,jdbcType=INTEGER}, ",
-        "#{saveState,jdbcType=INTEGER}, #{examName,jdbcType=VARCHAR}, ",
+        "#{saveState,jdbcType=INTEGER}, #{payState,jdbcType=INTEGER}, ",
+        "#{executionState,jdbcType=INTEGER}, #{examName,jdbcType=VARCHAR}, ",
         "#{clinicalImpression,jdbcType=VARCHAR}, #{requirement,jdbcType=VARCHAR}, ",
         "#{examResult,jdbcType=VARCHAR}, #{valid,jdbcType=INTEGER}, ",
         "#{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, ",
@@ -43,9 +45,9 @@ public interface ExaminationMapper {
     @Select({
         "select",
         "examination_id, registration_id, patient_name, doctor_id, department_id, save_state, ",
-        "exam_name, clinical_impression, requirement, exam_result, valid, reserve1, reserve2, ",
-        "reserve3",
-        "from hospital.examination",
+        "pay_state, execution_state, exam_name, clinical_impression, requirement, exam_result, ",
+        "valid, reserve1, reserve2, reserve3",
+        "from hospital..examination",
         "where examination_id = #{examinationId,jdbcType=INTEGER}"
     })
     @ResultMap("com.neusoft.medical.dao.ExaminationMapper.BaseResultMap")
@@ -58,12 +60,14 @@ public interface ExaminationMapper {
     int updateByPrimaryKeySelective(Examination record);
 
     @Update({
-        "update hospital.examination",
+        "update hospital..examination",
         "set registration_id = #{registrationId,jdbcType=INTEGER},",
           "patient_name = #{patientName,jdbcType=VARCHAR},",
           "doctor_id = #{doctorId,jdbcType=INTEGER},",
           "department_id = #{departmentId,jdbcType=INTEGER},",
           "save_state = #{saveState,jdbcType=INTEGER},",
+          "pay_state = #{payState,jdbcType=INTEGER},",
+          "execution_state = #{executionState,jdbcType=INTEGER},",
           "exam_name = #{examName,jdbcType=VARCHAR},",
           "clinical_impression = #{clinicalImpression,jdbcType=VARCHAR},",
           "requirement = #{requirement,jdbcType=VARCHAR},",

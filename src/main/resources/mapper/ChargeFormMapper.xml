@@ -4,8 +4,11 @@
   <resultMap id="BaseResultMap" type="com.neusoft.medical.bean.ChargeForm">
     <constructor>
       <idArg column="charge_form_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="charge_form_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="registration_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="save_state" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="pay_state" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="execution_state" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -71,7 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    charge_form_id, registration_id, save_state, valid, reserve1, reserve2, reserve3
+    charge_form_id, charge_form_name, registration_id, save_state, pay_state, execution_state, 
+    valid, reserve1, reserve2, reserve3
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.ChargeFormExample" resultMap="BaseResultMap">
     select
@@ -79,7 +83,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hospital.charge_form
+    from hospital..charge_form
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -88,7 +92,7 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.ChargeFormExample">
-    delete from hospital.charge_form
+    delete from hospital..charge_form
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -97,13 +101,22 @@
     <selectKey keyProperty="chargeFormId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into hospital.charge_form
+    insert into hospital..charge_form
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="chargeFormName != null">
+        charge_form_name,
+      </if>
       <if test="registrationId != null">
         registration_id,
       </if>
       <if test="saveState != null">
         save_state,
+      </if>
+      <if test="payState != null">
+        pay_state,
+      </if>
+      <if test="executionState != null">
+        execution_state,
       </if>
       <if test="valid != null">
         valid,
@@ -119,11 +132,20 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="chargeFormName != null">
+        #{chargeFormName,jdbcType=VARCHAR},
+      </if>
       <if test="registrationId != null">
         #{registrationId,jdbcType=INTEGER},
       </if>
       <if test="saveState != null">
         #{saveState,jdbcType=INTEGER},
+      </if>
+      <if test="payState != null">
+        #{payState,jdbcType=INTEGER},
+      </if>
+      <if test="executionState != null">
+        #{executionState,jdbcType=INTEGER},
       </if>
       <if test="valid != null">
         #{valid,jdbcType=INTEGER},
@@ -140,22 +162,31 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.neusoft.medical.bean.ChargeFormExample" resultType="java.lang.Long">
-    select count(*) from hospital.charge_form
+    select count(*) from hospital..charge_form
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update hospital.charge_form
+    update hospital..charge_form
     <set>
       <if test="record.chargeFormId != null">
         charge_form_id = #{record.chargeFormId,jdbcType=INTEGER},
+      </if>
+      <if test="record.chargeFormName != null">
+        charge_form_name = #{record.chargeFormName,jdbcType=VARCHAR},
       </if>
       <if test="record.registrationId != null">
         registration_id = #{record.registrationId,jdbcType=INTEGER},
       </if>
       <if test="record.saveState != null">
         save_state = #{record.saveState,jdbcType=INTEGER},
+      </if>
+      <if test="record.payState != null">
+        pay_state = #{record.payState,jdbcType=INTEGER},
+      </if>
+      <if test="record.executionState != null">
+        execution_state = #{record.executionState,jdbcType=INTEGER},
       </if>
       <if test="record.valid != null">
         valid = #{record.valid,jdbcType=INTEGER},
@@ -175,10 +206,13 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update hospital.charge_form
+    update hospital..charge_form
     set charge_form_id = #{record.chargeFormId,jdbcType=INTEGER},
+      charge_form_name = #{record.chargeFormName,jdbcType=VARCHAR},
       registration_id = #{record.registrationId,jdbcType=INTEGER},
       save_state = #{record.saveState,jdbcType=INTEGER},
+      pay_state = #{record.payState,jdbcType=INTEGER},
+      execution_state = #{record.executionState,jdbcType=INTEGER},
       valid = #{record.valid,jdbcType=INTEGER},
       reserve1 = #{record.reserve1,jdbcType=VARCHAR},
       reserve2 = #{record.reserve2,jdbcType=VARCHAR},
@@ -188,13 +222,22 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.ChargeForm">
-    update hospital.charge_form
+    update hospital..charge_form
     <set>
+      <if test="chargeFormName != null">
+        charge_form_name = #{chargeFormName,jdbcType=VARCHAR},
+      </if>
       <if test="registrationId != null">
         registration_id = #{registrationId,jdbcType=INTEGER},
       </if>
       <if test="saveState != null">
         save_state = #{saveState,jdbcType=INTEGER},
+      </if>
+      <if test="payState != null">
+        pay_state = #{payState,jdbcType=INTEGER},
+      </if>
+      <if test="executionState != null">
+        execution_state = #{executionState,jdbcType=INTEGER},
       </if>
       <if test="valid != null">
         valid = #{valid,jdbcType=INTEGER},

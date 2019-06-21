@@ -78,7 +78,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hospital.disease
+    from hospital..disease
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,7 +87,7 @@
     </if>
   </select>
   <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.DiseaseExample">
-    delete from hospital.disease
+    delete from hospital..disease
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -96,7 +96,7 @@
     <selectKey keyProperty="diseaseId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into hospital.disease
+    insert into hospital..disease
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="diseaseIcd != null">
         disease_ICD,
@@ -133,13 +133,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.neusoft.medical.bean.DiseaseExample" resultType="java.lang.Long">
-    select count(*) from hospital.disease
+    select count(*) from hospital..disease
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update hospital.disease
+    update hospital..disease
     <set>
       <if test="record.diseaseId != null">
         disease_id = #{record.diseaseId,jdbcType=INTEGER},
@@ -165,7 +165,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update hospital.disease
+    update hospital..disease
     set disease_id = #{record.diseaseId,jdbcType=INTEGER},
       disease_ICD = #{record.diseaseIcd,jdbcType=VARCHAR},
       disease_name = #{record.diseaseName,jdbcType=VARCHAR},
@@ -177,7 +177,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.Disease">
-    update hospital.disease
+    update hospital..disease
     <set>
       <if test="diseaseIcd != null">
         disease_ICD = #{diseaseIcd,jdbcType=VARCHAR},

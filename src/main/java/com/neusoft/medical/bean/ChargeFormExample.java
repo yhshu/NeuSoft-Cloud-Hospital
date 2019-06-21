@@ -164,6 +164,76 @@ public class ChargeFormExample {
             return (Criteria) this;
         }
 
+        public Criteria andChargeFormNameIsNull() {
+            addCriterion("charge_form_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeFormNameIsNotNull() {
+            addCriterion("charge_form_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeFormNameEqualTo(String value) {
+            addCriterion("charge_form_name =", value, "chargeFormName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeFormNameNotEqualTo(String value) {
+            addCriterion("charge_form_name <>", value, "chargeFormName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeFormNameGreaterThan(String value) {
+            addCriterion("charge_form_name >", value, "chargeFormName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeFormNameGreaterThanOrEqualTo(String value) {
+            addCriterion("charge_form_name >=", value, "chargeFormName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeFormNameLessThan(String value) {
+            addCriterion("charge_form_name <", value, "chargeFormName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeFormNameLessThanOrEqualTo(String value) {
+            addCriterion("charge_form_name <=", value, "chargeFormName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeFormNameLike(String value) {
+            addCriterion("charge_form_name like", value, "chargeFormName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeFormNameNotLike(String value) {
+            addCriterion("charge_form_name not like", value, "chargeFormName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeFormNameIn(List<String> values) {
+            addCriterion("charge_form_name in", values, "chargeFormName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeFormNameNotIn(List<String> values) {
+            addCriterion("charge_form_name not in", values, "chargeFormName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeFormNameBetween(String value1, String value2) {
+            addCriterion("charge_form_name between", value1, value2, "chargeFormName");
+            return (Criteria) this;
+        }
+
+        public Criteria andChargeFormNameNotBetween(String value1, String value2) {
+            addCriterion("charge_form_name not between", value1, value2, "chargeFormName");
+            return (Criteria) this;
+        }
+
         public Criteria andRegistrationIdIsNull() {
             addCriterion("registration_id is null");
             return (Criteria) this;
@@ -281,6 +351,126 @@ public class ChargeFormExample {
 
         public Criteria andSaveStateNotBetween(Integer value1, Integer value2) {
             addCriterion("save_state not between", value1, value2, "saveState");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStateIsNull() {
+            addCriterion("pay_state is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStateIsNotNull() {
+            addCriterion("pay_state is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStateEqualTo(Integer value) {
+            addCriterion("pay_state =", value, "payState");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStateNotEqualTo(Integer value) {
+            addCriterion("pay_state <>", value, "payState");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStateGreaterThan(Integer value) {
+            addCriterion("pay_state >", value, "payState");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStateGreaterThanOrEqualTo(Integer value) {
+            addCriterion("pay_state >=", value, "payState");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStateLessThan(Integer value) {
+            addCriterion("pay_state <", value, "payState");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStateLessThanOrEqualTo(Integer value) {
+            addCriterion("pay_state <=", value, "payState");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStateIn(List<Integer> values) {
+            addCriterion("pay_state in", values, "payState");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStateNotIn(List<Integer> values) {
+            addCriterion("pay_state not in", values, "payState");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStateBetween(Integer value1, Integer value2) {
+            addCriterion("pay_state between", value1, value2, "payState");
+            return (Criteria) this;
+        }
+
+        public Criteria andPayStateNotBetween(Integer value1, Integer value2) {
+            addCriterion("pay_state not between", value1, value2, "payState");
+            return (Criteria) this;
+        }
+
+        public Criteria andExecutionStateIsNull() {
+            addCriterion("execution_state is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExecutionStateIsNotNull() {
+            addCriterion("execution_state is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExecutionStateEqualTo(Integer value) {
+            addCriterion("execution_state =", value, "executionState");
+            return (Criteria) this;
+        }
+
+        public Criteria andExecutionStateNotEqualTo(Integer value) {
+            addCriterion("execution_state <>", value, "executionState");
+            return (Criteria) this;
+        }
+
+        public Criteria andExecutionStateGreaterThan(Integer value) {
+            addCriterion("execution_state >", value, "executionState");
+            return (Criteria) this;
+        }
+
+        public Criteria andExecutionStateGreaterThanOrEqualTo(Integer value) {
+            addCriterion("execution_state >=", value, "executionState");
+            return (Criteria) this;
+        }
+
+        public Criteria andExecutionStateLessThan(Integer value) {
+            addCriterion("execution_state <", value, "executionState");
+            return (Criteria) this;
+        }
+
+        public Criteria andExecutionStateLessThanOrEqualTo(Integer value) {
+            addCriterion("execution_state <=", value, "executionState");
+            return (Criteria) this;
+        }
+
+        public Criteria andExecutionStateIn(List<Integer> values) {
+            addCriterion("execution_state in", values, "executionState");
+            return (Criteria) this;
+        }
+
+        public Criteria andExecutionStateNotIn(List<Integer> values) {
+            addCriterion("execution_state not in", values, "executionState");
+            return (Criteria) this;
+        }
+
+        public Criteria andExecutionStateBetween(Integer value1, Integer value2) {
+            addCriterion("execution_state between", value1, value2, "executionState");
+            return (Criteria) this;
+        }
+
+        public Criteria andExecutionStateNotBetween(Integer value1, Integer value2) {
+            addCriterion("execution_state not between", value1, value2, "executionState");
             return (Criteria) this;
         }
 
