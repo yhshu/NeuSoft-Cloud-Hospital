@@ -13,5 +13,7 @@ public interface DisposalService {
 
     boolean updateDisposal(String disposalJson);
 
-    boolean deleteDisposal(List<Integer> chargeEntryIdList);
+    boolean deleteDisposalEntry(List<Integer> chargeEntryIdList);
+
+    boolean deleteDisposal(List<Integer> chargeFormIdList);
 }

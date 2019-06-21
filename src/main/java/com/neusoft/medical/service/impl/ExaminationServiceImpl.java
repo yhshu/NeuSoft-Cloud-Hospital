@@ -160,6 +160,7 @@ public class ExaminationServiceImpl implements ExaminationService {
             for (Examination examination : examinationList) {
                 if (examination.getSaveState().equals(SAVE_FORMAL) && examination.getExecutionState().equals(Constant.EXEC_DONE))
                     continue;
+
                 ChargeEntryExample chargeEntryExample = new ChargeEntryExample();
                 chargeEntryExample.or().andValidEqualTo(1);
 

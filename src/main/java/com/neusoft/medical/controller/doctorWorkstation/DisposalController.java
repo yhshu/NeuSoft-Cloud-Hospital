@@ -118,11 +118,25 @@ public class DisposalController {
      * @param chargeEntryIdList 删除的处置项目编号列表
      * @return 操作结果
      */
-    @DeleteMapping("/delete")
-    public ResultDTO<Boolean> deleteDisposal(@RequestParam(value = "chargeEntryIdList[]") Integer[] chargeEntryIdList) {
+    @DeleteMapping("/delete_disposal_entry")
+    public ResultDTO<Boolean> deleteDisposalEntry(@RequestParam(value = "chargeEntryIdList[]") Integer[] chargeEntryIdList) {
         boolean res;
         try {
-            res = disposalService.deleteDisposal(Arrays.asList(chargeEntryIdList));
+            res = disposalService.deleteDisposalEntry(Arrays.asList(chargeEntryIdList));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultDTO<>(Boolean.FALSE);
+        }
+        return new ResultDTO<>(res);
+    }
+
+    @DeleteMapping("/delete_disposal")
+    public ResultDTO<Boolean> deleteDisposal(
+            @RequestParam(value = "chargeFormIdList[]") Integer[] chargeFormIdList
+    ) {
+        boolean res;
+        try {
+            res = disposalService.deleteDisposal(Arrays.asList(chargeFormIdList));
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultDTO<>(Boolean.FALSE);

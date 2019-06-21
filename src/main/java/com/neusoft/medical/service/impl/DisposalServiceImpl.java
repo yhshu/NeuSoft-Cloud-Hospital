@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 import static com.neusoft.medical.Util.Constant.EXPENSE_CATEGORY_DISPOSAL;
+import static com.neusoft.medical.Util.Constant.SAVE_FORMAL;
 
 @Service
 public class DisposalServiceImpl implements DisposalService {
@@ -129,7 +130,36 @@ public class DisposalServiceImpl implements DisposalService {
     }
 
     @Override
-    public boolean deleteDisposal(List<Integer> chargeEntryIdList) {
+    public boolean deleteDisposalEntry(List<Integer> chargeEntryIdList) {
         return examinationService.deleteUnpaidChargeEntry(chargeEntryIdList);
+    }
+
+    @Override
+    public boolean deleteDisposal(List<Integer> chargeFormIdList) {
+        try {
+            ChargeFormExample chargeFormExample = new ChargeFormExample();
+            chargeFormExample.or().andValidEqualTo(1);
+            List<ChargeForm> chargeFormList = chargeFormMapper.selectByExample(chargeFormExample);
+
+            for (ChargeForm chargeForm : chargeFormList) {
+                if (chargeForm.getSaveState().equals(SAVE_FORMAL) && chargeForm.getExecutionState().equals(Constant.EXEC_DONE))
+                    continue;
+
+                ChargeEntryExample chargeEntryExample = new ChargeEntryExample();
+                chargeEntryExample.or().andValidEqualTo(1);
+
+                ChargeEntry chargeEntryRecord = new ChargeEntry();
+                chargeEntryRecord.setValid(0);
+                chargeEntryMapper.updateByExampleSelective(chargeEntryRecord, chargeEntryExample);
+
+                chargeForm.setValid(0);
+                chargeFormMapper.updateByPrimaryKey(chargeForm);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }
