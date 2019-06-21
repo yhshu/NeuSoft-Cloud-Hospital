@@ -53,13 +53,12 @@ public class ExaminationServiceImpl implements ExaminationService {
                 JsonObject chargeEntryJsonObject = chargeEntryJsonElement.getAsJsonObject();
                 int chargeItemId = chargeEntryJsonObject.get("chargeItemId").getAsInt();
                 int nums = chargeEntryJsonObject.get("nums").getAsInt();
-                int collectorId = chargeEntryJsonObject.get("collectorId").getAsInt();
                 String doctorAdvice = chargeEntryJsonObject.get("doctorAdvice").getAsString();
 
-                ChargeItem chargeItem = chargeItemMapper.selectByPrimaryKey(chargeItemId);
-                double unitPrice = MathUtil.doubleSetScale(chargeItem.getPrice(), 2);
+                ChargeItem chargeItemRecord = chargeItemMapper.selectByPrimaryKey(chargeItemId);
+                double unitPrice = MathUtil.doubleSetScale(chargeItemRecord.getPrice(), 2);
                 double totalPrice = MathUtil.doubleSetScale(unitPrice, 2);
-                ChargeEntry chargeEntryRecord = new ChargeEntry(null, registrationId, null, chargeItemId, examinationId, unitPrice, totalPrice, nums, nums, nums, Constant.PAY_STATE_NOT_CHARGED, new Date(), registration.getDepartmentId(), registration.getDoctorId(), collectorId, 1, doctorAdvice, null, null, null);
+                ChargeEntry chargeEntryRecord = new ChargeEntry(null, registrationId, null, chargeItemId, examinationId, unitPrice, totalPrice, nums, nums, nums, Constant.PAY_STATE_NOT_CHARGED, new Date(), registration.getDepartmentId(), registration.getDoctorId(), null, 1, doctorAdvice, null, null, null);
                 chargeEntryMapper.insert(chargeEntryRecord);
             }
         } catch (Exception e) {
@@ -99,10 +98,7 @@ public class ExaminationServiceImpl implements ExaminationService {
             for (JsonElement chargeEntryJsonElement : chargeEntryListJsonArray) {
                 JsonObject chargeEntryJsonObject = chargeEntryJsonElement.getAsJsonObject();
                 ChargeItem chargeItem = chargeItemMapper.selectByPrimaryKey(chargeEntryJsonObject.get("chargeItemId").getAsInt());
-                chargeEntryJsonObject.addProperty("chargeItemId", chargeEntryJsonObject.get("chargeItemId").getAsInt());
-                chargeEntryJsonObject.addProperty("chargeItemName", chargeItem.getNameZh());
-                chargeEntryJsonObject.addProperty("chargeItemPrice", chargeItem.getPrice());
-                chargeEntryJsonObject.addProperty("chargeEntryNums", chargeItem.getNums());
+                chargeEntryJsonObject.add("chargeItem", gson.toJsonTree(chargeItem));
             }
             examinationJsonObject.add("chargeEntryList", chargeEntryListJsonArray);
         }
@@ -131,6 +127,22 @@ public class ExaminationServiceImpl implements ExaminationService {
                 chargeEntryRecord.setNotGivenNums(notGivenNums);
                 chargeEntryMapper.updateByPrimaryKeySelective(chargeEntryRecord);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean deleteUnpaidChargeEntry(List<Integer> chargeEntryIdList) {
+        try {
+            ChargeEntryExample chargeEntryExample = new ChargeEntryExample();
+            chargeEntryExample.or().andChargeEntryIdIn(chargeEntryIdList).andValidEqualTo(1).andPayStateEqualTo(PAY_STATE_NOT_CHARGED);
+
+            ChargeEntry chargeEntryRecord = new ChargeEntry();
+            chargeEntryRecord.setValid(0);
+            chargeEntryMapper.updateByExampleSelective(chargeEntryRecord, chargeEntryExample);
         } catch (Exception e) {
             e.printStackTrace();
             return false;

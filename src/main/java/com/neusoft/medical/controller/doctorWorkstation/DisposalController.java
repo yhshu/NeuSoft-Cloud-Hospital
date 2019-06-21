@@ -6,6 +6,7 @@ import com.neusoft.medical.service.doctorWorkstation.DisposalService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -27,6 +28,7 @@ public class DisposalController {
      * 在 chargeEntryList 数组中，每个元素的属性：
      * - chargeItemId 处置项目作为收费项目的编号
      * - nums 处置项目的数量
+     * - doctorAdvice 医嘱
      */
     @GetMapping("/add")
     public ResultDTO<Boolean> addDisposal(
@@ -89,8 +91,10 @@ public class DisposalController {
      * @return 操作结果
      * <p>
      * disposalJson 包含的属性：
+     * - chargeFormId 处置项目单编号
      * - chargeEntryList 处置项目列表，json 数组
      * chargeEntryList 数组包含的属性：
+     * - chargeEntryId 处置项目作为收费项目的编号
      * - not_given_nums 在执行处置后，尚未交付的项目数量，（不修改填-1）
      */
     @GetMapping("/update")
@@ -109,14 +113,20 @@ public class DisposalController {
     /**
      * 删除处置项目
      * 由医生执行
-     * 只有尚未交付的项目可删除
+     * 只有未支付的项目可删除
      *
      * @param chargeEntryIdList 删除的处置项目编号列表
      * @return 操作结果
      */
     @DeleteMapping("/delete")
     public ResultDTO<Boolean> deleteDisposal(@RequestParam(value = "chargeEntryIdList[]") Integer[] chargeEntryIdList) {
-        // todo
-        return null;
+        boolean res;
+        try {
+            res = disposalService.deleteDisposal(Arrays.asList(chargeEntryIdList));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultDTO<>(Boolean.FALSE);
+        }
+        return new ResultDTO<>(res);
     }
 }

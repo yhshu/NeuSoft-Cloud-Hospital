@@ -65,4 +65,6 @@ public interface ExaminationService {
      * - notGivenNums  在执行检查检验后，尚未交付的项目数量
      */
     boolean updateExamResult(String examinationJson);
+
+    boolean deleteUnpaidChargeEntry(List<Integer> chargeEntryIdList);
 }
