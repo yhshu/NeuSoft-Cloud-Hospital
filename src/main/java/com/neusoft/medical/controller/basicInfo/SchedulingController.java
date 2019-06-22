@@ -3,11 +3,13 @@ package com.neusoft.medical.controller.basicInfo;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.Util.DateConverter;
 import com.neusoft.medical.bean.SchedulingInfo;
+import com.neusoft.medical.bean.SchedulingRule;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.basicInfo.SchedulingService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -29,18 +31,18 @@ public class SchedulingController {
      * @param pageSize    页面大小
      * @return 分页的排班计划
      */
-    @GetMapping("/list_rule")
-    public ResultDTO<PageInfo<SchedulingInfo>> selectSchedulingRule(
+    @GetMapping("/select_rule")
+    public ResultDTO<PageInfo<SchedulingRule>> selectSchedulingRule(
             @RequestParam(value = "currentPage") Integer currentPage,
             @RequestParam(value = "pageSize") Integer pageSize
     ) {
-        PageInfo<SchedulingInfo> schedulingInfoPageInfo = null;
+        PageInfo<SchedulingRule> schedulingRulePageInfo = null;
         try {
-            schedulingInfoPageInfo = schedulingService.selectSchedulingRule(currentPage, pageSize);
+            schedulingRulePageInfo = schedulingService.selectSchedulingRule(currentPage, pageSize);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new ResultDTO<>(schedulingInfoPageInfo);
+        return new ResultDTO<>(schedulingRulePageInfo);
     }
 
     /**
@@ -57,7 +59,7 @@ public class SchedulingController {
      * @return 操作结果
      */
     @GetMapping("/save_rule")
-    public ResultDTO<Boolean> addSchedulingRule(
+    public ResultDTO<Boolean> saveSchedulingRule(
             @RequestParam(value = "schedulingRuleId", required = false) Integer schedulingRuleId,
             @RequestParam(value = "weekday") Integer weekday,
             @RequestParam(value = "departmentId") Integer departmentId,
@@ -77,8 +79,26 @@ public class SchedulingController {
         return new ResultDTO<>(res);
     }
 
-    // todo @DeleteMapping("/delete_rule")
-//public ResultDTO<Boolean> deleteSchedulingRule()
+    /**
+     * 删除排班规则
+     * 这将导致由该规则生成的排班计划无效，无效的排班计划仍将显示在排班计划列表中
+     *
+     * @param schedulingRuleIdList 排班规则编号列表
+     * @return 操作结果
+     */
+    @DeleteMapping("/delete_rule")
+    public ResultDTO<Boolean> deleteSchedulingRule(
+            @RequestParam(value = "schedulingRuleIdList[]") Integer[] schedulingRuleIdList
+    ) {
+        boolean res;
+        try {
+            res = schedulingService.deleteSchedulingRule(Arrays.asList(schedulingRuleIdList));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultDTO<>(Boolean.FALSE);
+        }
+        return new ResultDTO<>(res);
+    }
 
 
     /**
@@ -100,7 +120,7 @@ public class SchedulingController {
         try {
             Date startDateConverted = dateConverter.convert(startDate);
             Date endDateConverted = dateConverter.convert(endDate);
-            res = schedulingService.generateSchedulingInfo(startDate, endDate);
+            res = schedulingService.generateSchedulingInfo(startDateConverted, endDateConverted);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultDTO<>(Boolean.FALSE);
@@ -108,7 +128,19 @@ public class SchedulingController {
         return new ResultDTO<>(res);
     }
 
-    // todo 获取排班计划列表
+    @GetMapping("/select_info")
+    public ResultDTO<PageInfo<SchedulingInfo>> selectSchedulingInfo(
+            @RequestParam("currentPage") Integer currentPage,
+            @RequestParam("pageSize") Integer pageSize
+    ) {
+        PageInfo<SchedulingInfo> schedulingInfoPageInfo = null;
+        try {
+            schedulingInfoPageInfo = schedulingService.selectSchedulingInfo(currentPage, pageSize);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResultDTO<>(schedulingInfoPageInfo);
+    }
 
     /**
      * 保存排班计划
@@ -140,7 +172,7 @@ public class SchedulingController {
         boolean res;
         try {
             Date schedulingTimeConverted = dateConverter.convert(schedulingTime);
-            res = schedulingService.saveSchedulingInfo(schedulingInfoId, schedulingTime, departmentId, doctorId, registrationCategoryId, valid, noon, limitation, remainNums);
+            res = schedulingService.saveSchedulingInfo(schedulingInfoId, schedulingTimeConverted, departmentId, doctorId, registrationCategoryId, valid, noon, limitation, remainNums);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultDTO<>(Boolean.FALSE);
@@ -148,5 +180,17 @@ public class SchedulingController {
         return new ResultDTO<>(res);
     }
 
-    // todo 删除排班计划
+    @DeleteMapping("/delete_info")
+    public ResultDTO<Boolean> deleteSchedulingInfo(
+            @RequestParam(value = "schedulingInfoIdList[]") Integer[] schedulingInfoIdList
+    ) {
+        boolean res;
+        try {
+            res = schedulingService.deleteSchedulingInfo(Arrays.asList(schedulingInfoIdList));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultDTO<>(Boolean.FALSE);
+        }
+        return new ResultDTO<>(res);
+    }
 }

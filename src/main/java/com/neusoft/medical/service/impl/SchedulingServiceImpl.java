@@ -62,19 +62,25 @@ public class SchedulingServiceImpl implements SchedulingService {
     }
 
     @Override
-    public PageInfo<SchedulingInfo> selectSchedulingRule(Integer currentPage, Integer pageSize) {
-        List<SchedulingInfo> schedulingInfoList = null;
+    public PageInfo<SchedulingRule> selectSchedulingRule(Integer currentPage, Integer pageSize) {
+        List<SchedulingRule> schedulingRuleList = null;
         try {
             PageHelper.startPage(currentPage, pageSize);
 
-            SchedulingInfoExample schedulingInfoExample = new SchedulingInfoExample();
-            schedulingInfoExample.or().andValidEqualTo(1);
-            schedulingInfoList = schedulingInfoMapper.selectByExample(schedulingInfoExample);
+            SchedulingRuleExample schedulingRuleExample = new SchedulingRuleExample();
+            schedulingRuleExample.or().andValidEqualTo(1);
+            schedulingRuleList = schedulingRuleMapper.selectByExample(schedulingRuleExample);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assert schedulingInfoList != null;
-        return new PageInfo<>(schedulingInfoList);
+        assert schedulingRuleList != null;
+        return new PageInfo<>(schedulingRuleList);
+    }
+
+    @Override
+    public PageInfo<SchedulingInfo> selectSchedulingInfo(Integer currentPage, Integer pageSize) {
+        // todo
+        return null;
     }
 
     @Override
@@ -97,13 +103,25 @@ public class SchedulingServiceImpl implements SchedulingService {
     }
 
     @Override
-    public boolean generateSchedulingInfo(String startDate, String endDate) {
+    public boolean generateSchedulingInfo(Date startDate, Date endDate) {
         // todo
         return false;
     }
 
     @Override
-    public boolean saveSchedulingInfo(Integer schedulingInfoId, String schedulingTime, Integer departmentId, Integer doctorId, Integer registrationCategoryId, Integer valid, Integer noon, Integer limitation, Integer remainNums) {
+    public boolean saveSchedulingInfo(Integer schedulingInfoId, Date schedulingTime, Integer departmentId, Integer doctorId, Integer registrationCategoryId, Integer valid, Integer noon, Integer limitation, Integer remainNums) {
+        // todo
+        return false;
+    }
+
+    @Override
+    public boolean deleteSchedulingRule(List<Integer> schedulingRuleIdList) {
+        // todo
+        return false;
+    }
+
+    @Override
+    public boolean deleteSchedulingInfo(List<Integer> schedulingInfoIdList) {
         // todo
         return false;
     }
