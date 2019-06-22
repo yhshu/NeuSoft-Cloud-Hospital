@@ -32,9 +32,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         // 新增患者信息
         System.out.println("RegistrationInfoServiceImpl 新增患者信息: " + record.getPatientName());
         PatientExample patientExample = new PatientExample();
-        PatientExample.Criteria criteria = patientExample.createCriteria();
-        criteria.andValidEqualTo(1);
-        criteria.andIdentityCardNoEqualTo(record.getIdentityCardNo());
+        patientExample.or().andValidEqualTo(1).andIdentityCardNoEqualTo(record.getIdentityCardNo());
 
         List<Patient> patientList = patientMapper.selectByExample(patientExample);
         if (patientList.size() > 1)
@@ -46,13 +44,12 @@ public class RegistrationServiceImpl implements RegistrationService {
             patientMapper.insert(patient);
         } else {
             // 已有该患者信息
-            patient.setPatientId(record.getPatientId());
-            patientMapper.updateByPrimaryKey(patient);
+            patientMapper.updateByExampleSelective(patient, patientExample);
         }
 
         // 新增挂号记录
         System.out.println("RegistrationInfoServiceImpl 尝试新增挂号: " + record.toString());
-        record.setPatientId(patient.getPatientId());
+        record.setPatientId(patientList.get(0).getPatientId());
         int effectRow = registrationMapper.insert(record);
         System.out.println("RegistrationInfoServiceImpl 已新增挂号 " + effectRow + " 项");
 
