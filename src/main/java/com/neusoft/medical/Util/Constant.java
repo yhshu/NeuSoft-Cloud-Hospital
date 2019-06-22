@@ -40,15 +40,16 @@ public interface Constant {
     /**
      * 挂号状态
      */
-    String REGIST_IN_PROCESS = "1";
-    String REGIST_DONE = "0";
-    String REGIST_NOT_VISITED = "0";
-    String REGIST_VISITED = "1";
+    String REGIST_WITHDRAW = "2";      // 退号
+    String REGIST_IN_PROCESS = "1";    // 诊断过程中
+    String REGIST_DONE = "0";          // 诊断结束
+    String REGIST_NOT_VISITED = "0";   // 尚未就诊
+    String REGIST_VISITED = "1";       // 就诊过
 
     /**
      * 午别
      */
-    int NOON_ALL_DAY = 0;
-    int NOON_MORNING = 1;
-    int NOON_AFTERNOON = 2;
+    int NOON_ALL_DAY = 0;              // 全天
+    int NOON_MORNING = 1;              // 上午
+    int NOON_AFTERNOON = 2;            // 下午
 }

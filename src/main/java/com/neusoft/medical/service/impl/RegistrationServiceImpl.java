@@ -2,15 +2,13 @@ package com.neusoft.medical.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.neusoft.medical.bean.Patient;
-import com.neusoft.medical.bean.PatientExample;
-import com.neusoft.medical.bean.Registration;
-import com.neusoft.medical.bean.RegistrationExample;
+import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.*;
 import com.neusoft.medical.service.registration.RegistrationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -59,13 +57,18 @@ public class RegistrationServiceImpl implements RegistrationService {
         System.out.println("RegistrationInfoServiceImpl 已新增挂号 " + effectRow + " 项");
 
         // 医生的剩余号数减少
-//        SchedulingInfoExample schedulingInfoExample = new SchedulingInfoExample();
-//        Date todayDate = new Date();
-//        Date d1 = new Date(todayDate.getTime() / 86400000 * 86400000);
-//        Date d2 = new Date((todayDate.getTime() / 86400000 + 1) * 86400000 - 1);
-//        schedulingInfoExample.or().andValidEqualTo(1).andSchedulingTimeBetween(d1, d2);
-//        List<> schedulingInfo = schedulingInfoMapper.selectByExample(schedulingInfoExample);
-//        schedulingInfoMapper.updateByPrimaryKeySelective();
+        SchedulingInfoExample schedulingInfoExample = new SchedulingInfoExample();
+        Date todayDate = new Date();
+        Date d1 = new Date(todayDate.getTime() / 86400000 * 86400000);
+        Date d2 = new Date((todayDate.getTime() / 86400000 + 1) * 86400000 - 1);
+        schedulingInfoExample.or().andValidEqualTo(1).andSchedulingTimeBetween(d1, d2);
+        List<SchedulingInfo> schedulingInfoList = schedulingInfoMapper.selectByExample(schedulingInfoExample);
+        if (schedulingInfoList != null && !schedulingInfoList.isEmpty()) {
+            for (SchedulingInfo schedulingInfo : schedulingInfoList) {
+                schedulingInfo.setLimitation(schedulingInfo.getLimitation() - 1);
+                schedulingInfoMapper.updateByPrimaryKeySelective(schedulingInfo);
+            }
+        }
 
         // 病历记录在患者前往医生处就诊后生成
         return registrationMapper.selectByPrimaryKey(record.getRegistrationId());
