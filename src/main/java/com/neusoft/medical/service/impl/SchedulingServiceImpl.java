@@ -68,7 +68,6 @@ public class SchedulingServiceImpl implements SchedulingService {
             PageHelper.startPage(currentPage, pageSize);
 
             SchedulingRuleExample schedulingRuleExample = new SchedulingRuleExample();
-            schedulingRuleExample.or().andValidEqualTo(1);
             schedulingRuleList = schedulingRuleMapper.selectByExample(schedulingRuleExample);
         } catch (Exception e) {
             e.printStackTrace();
@@ -79,8 +78,17 @@ public class SchedulingServiceImpl implements SchedulingService {
 
     @Override
     public PageInfo<SchedulingInfo> selectSchedulingInfo(Integer currentPage, Integer pageSize) {
-        // todo
-        return null;
+        List<SchedulingInfo> schedulingInfoList = null;
+        try {
+            PageHelper.startPage(currentPage, pageSize);
+
+            SchedulingInfoExample schedulingInfoExample = new SchedulingInfoExample();
+            schedulingInfoList = schedulingInfoMapper.selectByExample(schedulingInfoExample);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        assert schedulingInfoList != null;
+        return new PageInfo<>(schedulingInfoList);
     }
 
     @Override
@@ -104,25 +112,79 @@ public class SchedulingServiceImpl implements SchedulingService {
 
     @Override
     public boolean generateSchedulingInfo(Date startDate, Date endDate) {
-        // todo
-        return false;
+        try {
+            // 找到指定的起止时间之间且不早于当前时间的时间段中的所有排班规则
+            SchedulingRuleExample schedulingRuleExample = new SchedulingRuleExample();
+            schedulingRuleExample.or().andValidEqualTo(1);
+
+            Date today = new Date();
+            List<SchedulingRule> schedulingRuleList = new CopyOnWriteArrayList<>();
+//            for (SchedulingRule schedulingRule : schedulingRuleList) {
+//
+//            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean saveSchedulingInfo(Integer schedulingInfoId, Date schedulingTime, Integer departmentId, Integer doctorId, Integer registrationCategoryId, Integer valid, Integer noon, Integer limitation, Integer remainNums) {
-        // todo
-        return false;
+        try {
+            SchedulingInfo schedulingInfoRecord = new SchedulingInfo(null, schedulingTime, null, departmentId, doctorId, registrationCategoryId, noon, valid, limitation, remainNums);
+            if (schedulingInfoId == null) {
+                // 新增排班计划
+                schedulingInfoMapper.insert(schedulingInfoRecord);
+            } else {
+                // 更新排班计划
+                schedulingInfoRecord.setSchedulingInfoId(schedulingInfoId);
+                schedulingInfoMapper.updateByPrimaryKeySelective(schedulingInfoRecord);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean deleteSchedulingRule(List<Integer> schedulingRuleIdList) {
-        // todo
-        return false;
+        try {
+            SchedulingRuleExample schedulingRuleExample = new SchedulingRuleExample();
+            schedulingRuleExample.or().andValidEqualTo(1).andSchedulingRuleIdIn(schedulingRuleIdList);
+
+            SchedulingInfo schedulingInfoRecord = new SchedulingInfo();
+            schedulingInfoRecord.setValid(0);
+            SchedulingRule schedulingRuleRecord = new SchedulingRule();
+            schedulingRuleRecord.setValid(0);
+
+            SchedulingInfoExample schedulingInfoExample = new SchedulingInfoExample();
+            schedulingInfoExample.or().andValidEqualTo(1).andSchedulingRuleIdIn(schedulingRuleIdList);
+
+            schedulingInfoMapper.updateByExampleSelective(schedulingInfoRecord, schedulingInfoExample);
+            schedulingRuleMapper.updateByExampleSelective(schedulingRuleRecord, schedulingRuleExample);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean deleteSchedulingInfo(List<Integer> schedulingInfoIdList) {
-        // todo
-        return false;
+        try {
+            SchedulingInfoExample schedulingInfoExample = new SchedulingInfoExample();
+            schedulingInfoExample.or().andValidEqualTo(1).andSchedulingInfoIdIn(schedulingInfoIdList);
+
+            SchedulingInfo schedulingInfoRecord = new SchedulingInfo();
+            schedulingInfoRecord.setValid(0);
+            schedulingInfoMapper.updateByExampleSelective(schedulingInfoRecord, schedulingInfoExample);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }
