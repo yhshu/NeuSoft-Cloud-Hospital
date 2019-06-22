@@ -92,7 +92,6 @@ public class RegistrationController {
      * @param medicalCategory          医疗类别
      * @param identityCardNo           患者身份证号
      * @param visitDate                预约日期（年-月-日）
-     * @param visitNoon                预约午别（全天 0；上午 1；下午 2）
      * @param registrationDate         挂号日期
      * @param departmentId             挂号科室编号
      * @param doctorId                 看诊医生编号
