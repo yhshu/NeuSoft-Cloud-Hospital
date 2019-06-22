@@ -39,17 +39,18 @@ public class RegistrationServiceImpl implements RegistrationService {
             throw new Exception("Duplicate selectPatient identity ID");
 
         Patient patient = new Patient(null, record.getPatientName(), record.getBirthday(), null, record.getIdentityCardNo(), null, record.getFamilyAddress(), record.getGender(), 1, null, null, null);
+        System.out.println("RegistrationInfoServiceImpl 尝试新增挂号: " + record.toString());
         if (patientList.size() == 0) {
             // 暂无该患者信息
             patientMapper.insert(patient);
-        } else {
+            record.setPatientId(patient.getPatientId());
+          } else {
             // 已有该患者信息
             patientMapper.updateByExampleSelective(patient, patientExample);
+            record.setPatientId(patientList.get(0).getPatientId());
         }
 
         // 新增挂号记录
-        System.out.println("RegistrationInfoServiceImpl 尝试新增挂号: " + record.toString());
-        record.setPatientId(patientList.get(0).getPatientId());
         int effectRow = registrationMapper.insert(record);
         System.out.println("RegistrationInfoServiceImpl 已新增挂号 " + effectRow + " 项");
 

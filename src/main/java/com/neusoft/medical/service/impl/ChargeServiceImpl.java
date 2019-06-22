@@ -1,9 +1,6 @@
 package com.neusoft.medical.service.impl;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.google.gson.*;
 import com.neusoft.medical.Util.Constant;
 import com.neusoft.medical.bean.ChargeEntry;
 import com.neusoft.medical.bean.PrescriptionEntry;
@@ -35,7 +32,7 @@ public class ChargeServiceImpl implements ChargeService {
     @Override
     public boolean checkout(String checkoutJson) {
         try {
-            JsonArray checkoutJsonArray = gson.toJsonTree(checkoutJson).getAsJsonArray();
+            JsonArray checkoutJsonArray = new JsonParser().parse(checkoutJson).getAsJsonArray();
             for (JsonElement checkoutJsonElement : checkoutJsonArray) {
                 JsonObject checkoutJsonObject = checkoutJsonElement.getAsJsonObject();
                 int entryType = checkoutJsonObject.get("entryType").getAsInt();
@@ -63,7 +60,7 @@ public class ChargeServiceImpl implements ChargeService {
     @Override
     public boolean refund(String refundJson) {
         try {
-            JsonArray refundJsonArray = gson.toJsonTree(refundJson).getAsJsonArray();
+            JsonArray refundJsonArray = new JsonParser().parse(refundJson).getAsJsonArray();
             for (JsonElement refundJsonElement : refundJsonArray) {
                 JsonObject refundJsonObject = refundJsonElement.getAsJsonObject();
                 int entryType = refundJsonObject.get("entryType").getAsInt();
