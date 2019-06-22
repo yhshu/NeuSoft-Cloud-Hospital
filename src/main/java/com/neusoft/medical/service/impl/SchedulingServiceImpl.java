@@ -10,6 +10,7 @@ import com.neusoft.medical.service.basicInfo.SchedulingService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -36,9 +37,9 @@ public class SchedulingServiceImpl implements SchedulingService {
         schedulingInfoExampleCriteria.andDepartmentIdEqualTo(departmentId); // 指定的科室
 
         Date todayDate = new Date();                                        // 今天日期
-        schedulingInfoExampleCriteria.andSchedulingTimeBetween(
-                new Date(todayDate.getTime() - 86400000),
-                new Date(todayDate.getTime() + 86400000));                // 排班在今天
+        Date d1 = new Date(todayDate.getTime() / 86400000 * 86400000);
+        Date d2 = new Date((todayDate.getTime() / 86400000 + 1) * 86400000 - 1);
+        schedulingInfoExampleCriteria.andSchedulingTimeBetween(d1, d2);     // 排班在今天
         schedulingInfoExampleCriteria.andRemainNumsGreaterThan(0);     // 剩余限额大于 0
         System.out.println("查询科室 #" + departmentId + " 当前可用医生");
         System.out.println("日期：" + todayDate);
@@ -117,11 +118,28 @@ public class SchedulingServiceImpl implements SchedulingService {
             SchedulingRuleExample schedulingRuleExample = new SchedulingRuleExample();
             schedulingRuleExample.or().andValidEqualTo(1);
 
+            List<SchedulingRule> schedulingRuleList = schedulingRuleMapper.selectByExample(schedulingRuleExample);
             Date today = new Date();
-            List<SchedulingRule> schedulingRuleList = new CopyOnWriteArrayList<>();
-//            for (SchedulingRule schedulingRule : schedulingRuleList) {
-//
-//            }
+            // 针对每项排班规则，生成对应的排班计划
+            for (SchedulingRule schedulingRule : schedulingRuleList) {
+                // 在当前日期与开始日期两者中取较晚的日期，该日期与结束日期之间的时间段为有效的排班时间段
+                if (today.after(startDate)) startDate = today;
+                if (startDate.after(endDate)) continue;
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.setFirstDayOfWeek(Calendar.SUNDAY);
+
+                Date curDate = new Date(startDate.getTime());
+                while (curDate.before(endDate)) {
+                    calendar.setTime(curDate);
+                    curDate.setTime(curDate.getTime() + 86400000);
+                    int curWeekday = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+                    if (schedulingRule.getWeekday() == curWeekday) {  // 星期符合，排班
+                        SchedulingInfo schedulingInfoRecord = new SchedulingInfo(null, curDate, schedulingRule.getSchedulingRuleId(), schedulingRule.getDepartmentId(), schedulingRule.getDoctorId(), schedulingRule.getRegistrationCategoryId(), schedulingRule.getNoon(), schedulingRule.getValid(), schedulingRule.getLimitation(), schedulingRule.getLimitation());
+                        schedulingInfoMapper.insert(schedulingInfoRecord);
+                    }
+                }
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -18,18 +18,16 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class RegistrationServiceImpl implements RegistrationService {
     @Resource
     private RegistrationMapper registrationMapper;
-
     @Resource
     private DepartmentMapper departmentMapper;
-
     @Resource
     private DoctorMapper doctorMapper;
-
     @Resource
     private PatientMapper patientMapper;
-
     @Resource
     private MedicalRecordsMapper medicalRecordsMapper;
+    @Resource
+    private SchedulingInfoMapper schedulingInfoMapper;
 
     @Override
     public Registration addRegistration(Registration record) throws Exception {
@@ -59,6 +57,15 @@ public class RegistrationServiceImpl implements RegistrationService {
         record.setPatientId(patient.getPatientId());
         int effectRow = registrationMapper.insert(record);
         System.out.println("RegistrationInfoServiceImpl 已新增挂号 " + effectRow + " 项");
+
+        // 医生的剩余号数减少
+//        SchedulingInfoExample schedulingInfoExample = new SchedulingInfoExample();
+//        Date todayDate = new Date();
+//        Date d1 = new Date(todayDate.getTime() / 86400000 * 86400000);
+//        Date d2 = new Date((todayDate.getTime() / 86400000 + 1) * 86400000 - 1);
+//        schedulingInfoExample.or().andValidEqualTo(1).andSchedulingTimeBetween(d1, d2);
+//        List<> schedulingInfo = schedulingInfoMapper.selectByExample(schedulingInfoExample);
+//        schedulingInfoMapper.updateByPrimaryKeySelective();
 
         // 病历记录在患者前往医生处就诊后生成
         return registrationMapper.selectByPrimaryKey(record.getRegistrationId());
