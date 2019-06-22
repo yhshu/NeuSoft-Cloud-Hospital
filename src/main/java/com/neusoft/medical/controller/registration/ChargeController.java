@@ -18,9 +18,9 @@ public class ChargeController {
     /**
      * 收费（包括检查检验项目、处置项目、药品等收费项目）
      *
-     * @param checkoutJson 收费信息，json 字符串
+     * @param checkoutJson 收费信息，json 数组
      * @return 操作结果
-     * checkoutJson 字符串中的属性包括：
+     * checkoutJson 数组中每个元素的属性包括：
      * - entryType: charge_entry: 0, prescription_entry: 1
      * - entryId    收费条目或处方条目的编号
      */
@@ -41,9 +41,9 @@ public class ChargeController {
     /**
      * 退费（包括检查检验项目、处置项目、药品等收费项目）
      *
-     * @param refundJson 退费信息，json 字符串
+     * @param refundJson 退费信息，json 数组
      * @return 操作结果
-     * refundJson 字符串中的属性包括：
+     * refundJson 数组中每个元素的属性包括：
      * - entryType: charge_entry: 0, prescription_entry: 1
      * - entryId    收费条目或处方条目的编号
      * - refundNums 退费数量
@@ -62,6 +62,12 @@ public class ChargeController {
         return new ResultDTO<>(res);
     }
 
+    /**
+     * 退号，即撤回挂号
+     *
+     * @param registrationId 挂号单编号
+     * @return 操作结果
+     */
     @GetMapping("/withdraw_registration")
     public ResultDTO<Boolean> withdrawRegistration(
             @RequestParam(value = "registrationId") Integer registrationId
@@ -75,7 +81,4 @@ public class ChargeController {
         }
         return new ResultDTO<>(res);
     }
-
-//    @GetMapping("select_history_cost")
-//    public ResultDTO<String >
 }

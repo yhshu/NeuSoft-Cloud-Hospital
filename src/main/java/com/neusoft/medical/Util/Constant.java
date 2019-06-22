@@ -52,4 +52,10 @@ public interface Constant {
     int NOON_ALL_DAY = 0;              // 全天
     int NOON_MORNING = 1;              // 上午
     int NOON_AFTERNOON = 2;            // 下午
+
+    /**
+     * 收费项目的类别
+     */
+    int ENTRY_TYPE_CHARGE_ENTRY = 0;       // 检查检验项目、处置项目
+    int ENTRY_TYPE_PRESCRIPTION_ENTRY = 1; // 药品
 }
