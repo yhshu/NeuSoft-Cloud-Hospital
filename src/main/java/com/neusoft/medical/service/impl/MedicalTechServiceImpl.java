@@ -55,7 +55,7 @@ public class MedicalTechServiceImpl implements MedicalTechService {
     }
 
     @Override
-    public boolean chargeEntryListApply(String chargeEntryListJson) {
+    public boolean chargeEntryListDelivery(String chargeEntryListJson) {
         try {
             JsonArray chargeEntryListJsonArray = new JsonParser().parse(chargeEntryListJson).getAsJsonArray();
 

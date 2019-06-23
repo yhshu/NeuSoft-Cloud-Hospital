@@ -3,7 +3,6 @@ package com.neusoft.medical.controller.basicInfo;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.Util.DateConverter;
 import com.neusoft.medical.bean.SchedulingInfo;
-import com.neusoft.medical.bean.SchedulingRule;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.basicInfo.SchedulingService;
 import org.springframework.web.bind.annotation.*;
@@ -32,11 +31,11 @@ public class SchedulingController {
      * @return 分页的排班计划
      */
     @GetMapping("/select_rule")
-    public ResultDTO<PageInfo<SchedulingRule>> selectSchedulingRule(
+    public ResultDTO<PageInfo<String>> selectSchedulingRule(
             @RequestParam(value = "currentPage") Integer currentPage,
             @RequestParam(value = "pageSize") Integer pageSize
     ) {
-        PageInfo<SchedulingRule> schedulingRulePageInfo = null;
+        PageInfo<String> schedulingRulePageInfo = null;
         try {
             schedulingRulePageInfo = schedulingService.selectSchedulingRule(currentPage, pageSize);
         } catch (Exception e) {

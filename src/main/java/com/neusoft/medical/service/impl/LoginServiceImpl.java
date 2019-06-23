@@ -25,7 +25,7 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public String signIn(String userName, String userPassword) {
         // 找到数据库中加密的用户密码，与用户当前输入的密码进行比对
-        Account account = accountService.findAccountByUserName(userName);
+        Account account = accountService.selectAccountByUserName(userName);
         if (account == null)
             return Constant.SIGNIN_MISMATCH;
 

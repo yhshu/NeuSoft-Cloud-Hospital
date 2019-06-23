@@ -2,10 +2,13 @@ package com.neusoft.medical.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.neusoft.medical.bean.*;
-import com.neusoft.medical.dao.DoctorMapper;
-import com.neusoft.medical.dao.SchedulingInfoMapper;
-import com.neusoft.medical.dao.SchedulingRuleMapper;
+import com.neusoft.medical.dao.*;
+import com.neusoft.medical.service.basicInfo.AccountService;
 import com.neusoft.medical.service.basicInfo.SchedulingService;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +26,14 @@ public class SchedulingServiceImpl implements SchedulingService {
     private SchedulingRuleMapper schedulingRuleMapper;
     @Resource
     private DoctorMapper doctorMapper;
+    @Resource
+    private DepartmentMapper departmentMapper;
+    @Resource
+    private RegistrationMapper registrationMapper;
+    @Resource
+    private AccountService accountService;
+
+    private Gson gson = new Gson();
 
     @Override
     public List<Doctor> findCurrentAvailableDoctor(int departmentId) {
@@ -63,18 +74,33 @@ public class SchedulingServiceImpl implements SchedulingService {
     }
 
     @Override
-    public PageInfo<SchedulingRule> selectSchedulingRule(Integer currentPage, Integer pageSize) {
-        List<SchedulingRule> schedulingRuleList = null;
+    public PageInfo<String> selectSchedulingRule(Integer currentPage, Integer pageSize) {
+        List<String> res = new CopyOnWriteArrayList<>();
         try {
             PageHelper.startPage(currentPage, pageSize);
 
             SchedulingRuleExample schedulingRuleExample = new SchedulingRuleExample();
-            schedulingRuleList = schedulingRuleMapper.selectByExample(schedulingRuleExample);
+            List<SchedulingRule> schedulingRuleList = schedulingRuleMapper.selectByExample(schedulingRuleExample);
+
+            JsonArray schedulingRuleListJsonArray = gson.toJsonTree(schedulingRuleList).getAsJsonArray();
+            for (JsonElement schedulingRuleJsonElement : schedulingRuleListJsonArray) {
+                JsonObject schedulingRuleJsonObject = schedulingRuleJsonElement.getAsJsonObject();
+                Integer departmentId = schedulingRuleJsonObject.get("departmentId").getAsInt();
+                Integer doctorId = schedulingRuleJsonObject.get("doctorId").getAsInt();
+                Integer operationAccountId = schedulingRuleJsonObject.get("operationAccountId").getAsInt();
+                Integer registrationCategoryId = schedulingRuleJsonObject.get("registrationCategoryId").getAsInt();
+
+                schedulingRuleJsonObject.addProperty("departmentName", departmentMapper.selectByPrimaryKey(departmentId).getDepartmentName());
+                schedulingRuleJsonObject.addProperty("doctorName", doctorMapper.selectByPrimaryKey(doctorId).getDoctorName());
+                schedulingRuleJsonObject.addProperty("registrationCategoryName", registrationMapper.selectByPrimaryKey(registrationCategoryId).getRegistrationCategory());
+                schedulingRuleJsonObject.addProperty("operationAccountName", accountService.selectStaffByAccountId(operationAccountId).getRealName());
+                res.add(schedulingRuleJsonObject.toString());
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assert schedulingRuleList != null;
-        return new PageInfo<>(schedulingRuleList);
+        return new PageInfo<>(res);
     }
 
     @Override

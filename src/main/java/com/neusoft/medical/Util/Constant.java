@@ -65,4 +65,15 @@ public interface Constant {
     String SIGNIN_SUCCESS = "0";       // 登录完成
     String SIGNIN_MISMATCH = "1";      // 用户名或密码错误
     String SIGNIN_EXCEPTION = "2";     // 登录异常：数据库存在用户名重复
+
+    /**
+     * 用户类别
+     */
+    String TYPE_OUTPATIENT_DOCTOR = "00";   // 门诊医生
+    String TYPE_TECH_DOCTOR = "01";         // 医技医生
+    String TYPE_COLLECTOR_STAFF = "10";     // 医院收费员
+    String TYPE_PHARMACY_STAFF = "11";      // 药房操作员
+    String TYPE_FINANCIAL_STAFF = "12";     // 财务管理员
+    String TYPE_REGISTRATION_STAFF = "13";  // 挂号管理员
+    String TYPE_SYSTEM_ADMIN = "20";        // 系统管理员
 }

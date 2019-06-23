@@ -3,7 +3,6 @@ package com.neusoft.medical.service.basicInfo;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.Doctor;
 import com.neusoft.medical.bean.SchedulingInfo;
-import com.neusoft.medical.bean.SchedulingRule;
 
 import java.util.Date;
 import java.util.List;
@@ -21,7 +20,7 @@ public interface SchedulingService {
      */
     List<Doctor> findCurrentAvailableDoctor(int departmentId);
 
-    PageInfo<SchedulingRule> selectSchedulingRule(Integer currentPage, Integer pageSize);
+    PageInfo<String> selectSchedulingRule(Integer currentPage, Integer pageSize);
 
     PageInfo<SchedulingInfo> selectSchedulingInfo(Integer currentPage, Integer pageSize);
 

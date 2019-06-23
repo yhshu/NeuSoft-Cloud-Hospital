@@ -41,7 +41,7 @@ public class MedicalTechController {
     }
 
     /**
-     * 应用收费项目
+     * 交付收费项目
      *
      * @param chargeEntryListJson 收费项目信息，json 数组
      * @return 操作结果
@@ -50,11 +50,11 @@ public class MedicalTechController {
      * - executionNums 此次消耗的项目数
      */
     @GetMapping("/apply")
-    public ResultDTO<Boolean> chargeEntryListApply(
-            @RequestParam("chargeEntryListJson") String chargeEntryListJson) {
+    public ResultDTO<Boolean> chargeEntryListDelivery(
+            @RequestParam(value = "chargeEntryListJson") String chargeEntryListJson) {
         Boolean res;
         try {
-            res = medicalTechService.chargeEntryListApply(chargeEntryListJson);
+            res = medicalTechService.chargeEntryListDelivery(chargeEntryListJson);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultDTO<>(Boolean.FALSE);

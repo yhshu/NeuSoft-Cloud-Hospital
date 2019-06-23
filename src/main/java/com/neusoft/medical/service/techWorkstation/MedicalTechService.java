@@ -18,7 +18,7 @@ public interface MedicalTechService {
      * @param chargeEntryListJson 收费项目编号列表
      * @return 操作结果
      */
-    boolean chargeEntryListApply(String chargeEntryListJson);
+    boolean chargeEntryListDelivery(String chargeEntryListJson);
 
     /**
      * 收费项目退费

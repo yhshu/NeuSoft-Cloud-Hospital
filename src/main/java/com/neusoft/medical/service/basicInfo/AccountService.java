@@ -3,17 +3,11 @@ package com.neusoft.medical.service.basicInfo;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.Account;
 import com.neusoft.medical.bean.Doctor;
+import com.neusoft.medical.bean.Staff;
 
 import java.util.List;
 
 public interface AccountService {
-
-    String TYPE_OUTPATIENT_DOCTOR = "00";   // 门诊医生
-    String TYPE_TECH_DOCTOR = "01";         // 医技医生
-    String TYPE_COLLECTOR_STAFF = "10";     // 医院收费员
-    String TYPE_PHARMACY_STAFF = "11";      // 药房操作员
-    String TYPE_FINANCIAL_STAFF = "12";     // 财务管理员
-    String TYPE_REGISTRATION_STAFF = "13";  // 挂号管理员
 
     /**
      * 分页、分类查找帐号信息
@@ -95,5 +89,13 @@ public interface AccountService {
      * @param userName 用户名
      * @return 帐户信息
      */
-    Account findAccountByUserName(String userName);
+    Account selectAccountByUserName(String userName);
+
+    /**
+     * 按帐户编号查找工作人员信息
+     *
+     * @param accountId 帐户编号
+     * @return 工作人员信息
+     */
+    Staff selectStaffByAccountId(Integer accountId);
 }
