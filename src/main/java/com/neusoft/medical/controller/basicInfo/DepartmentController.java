@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/department")
 public class DepartmentController {
-    private Logger log = Logger.getLogger(String.valueOf(DepartmentController.class));
+    private Logger logger = Logger.getLogger(DepartmentController.class);
 
     @Resource
     private DepartmentService departmentService;

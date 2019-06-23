@@ -58,4 +58,11 @@ public interface Constant {
      */
     int ENTRY_TYPE_CHARGE_ENTRY = 0;       // 检查检验项目、处置项目
     int ENTRY_TYPE_PRESCRIPTION_ENTRY = 1; // 药品
+
+    /**
+     * 登录状态反馈
+     */
+    String SIGNIN_SUCCESS = "0";       // 登录完成
+    String SIGNIN_MISMATCH = "1";      // 用户名或密码错误
+    String SIGNIN_EXCEPTION = "2";     // 登录异常：数据库存在用户名重复
 }

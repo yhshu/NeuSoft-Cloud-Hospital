@@ -15,12 +15,14 @@ class Advices {
      *
      * @param joinPoint 连接点
      */
-    @Before(value = "execution(* com.neusoft.medical.*.*(..))")
+    @Before(value = "execution(* com.neusoft.medical..*.*(..))")
     public void before(JoinPoint joinPoint) {
-        log.info(joinPoint.getSignature().getName() + " method starts");
+        log.info("Method starts: " + joinPoint.getSignature().getName());
         log.info("Arguments: ");
         for (Object o : joinPoint.getArgs()) {
-            log.info(o.toString());
+            if (o != null) {
+                log.info(o.toString());
+            }
         }
     }
 
@@ -29,10 +31,9 @@ class Advices {
      *
      * @param joinPoint 连接点
      */
-    @After(value = "execution(* com.neusoft.medical.*.*(..))")
+    @After(value = "execution(* com.neusoft.medical..*.*(..))")
     public void after(JoinPoint joinPoint) {
-        log.info(joinPoint.getSignature().getName() + " method ends");
-
+        log.info("Method ends: " + joinPoint.getSignature().getName());
     }
 
     /**
@@ -41,9 +42,9 @@ class Advices {
      * @param resObj 连接点
      * @return 返回值
      */
-    @AfterReturning(value = "execution(* com.neusoft.medical.*.*(..))", returning = "resObj")
+    @AfterReturning(value = "execution(* com.neusoft.medical..*.*(..))", returning = "resObj")
     public Object afterReturn(Object resObj) {
-        log.info("Return value: " + resObj);
+        log.info("Return value: " + resObj + "\n---------------------------");
         return resObj;
     }
 
@@ -52,7 +53,7 @@ class Advices {
      *
      * @param e 异常
      */
-    @AfterThrowing(value = "execution(* com.neusoft.medical.*.*(..))", throwing = "e")
+    @AfterThrowing(value = "execution(* com.neusoft.medical..*.*(..))", throwing = "e")
     public void afterThrowing(Exception e) {
         log.info("Exception occurs: " + e.getMessage());
     }
