@@ -66,6 +66,7 @@ public class ChargeServiceImpl implements ChargeService {
                 int entryType = refundJsonObject.get("entryType").getAsInt();
                 int entryId = refundJsonObject.get("entryId").getAsInt();
                 int refundNums = refundJsonObject.get("refundNums").getAsInt();
+
                 if (entryType == Constant.ENTRY_TYPE_CHARGE_ENTRY) {
                     ChargeEntry chargeEntryRecord = chargeEntryMapper.selectByPrimaryKey(entryId);
                     chargeEntryRecord.setNotGivenNums(max(chargeEntryRecord.getNotGivenNums() - refundNums, 0));

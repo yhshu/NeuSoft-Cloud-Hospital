@@ -1,16 +1,16 @@
 package com.neusoft.medical.controller.basicInfo;
 
 import com.github.pagehelper.PageInfo;
-import com.neusoft.medical.service.impl.ConstantConverter;
 import com.neusoft.medical.bean.Department;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.basicInfo.DepartmentService;
+import com.neusoft.medical.service.impl.ConstantConverter;
+import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * 科室管理控制器

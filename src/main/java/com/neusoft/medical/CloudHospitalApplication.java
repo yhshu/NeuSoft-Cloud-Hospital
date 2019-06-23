@@ -1,5 +1,6 @@
 package com.neusoft.medical;
 
+import org.apache.log4j.Logger;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 @MapperScan(basePackages = "com.neusoft.medical.dao")
 public class CloudHospitalApplication {
+    private static Logger log = Logger.getLogger(CloudHospitalApplication.class);
 
     /**
      * 允许传输特定字符
@@ -24,5 +26,6 @@ public class CloudHospitalApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(CloudHospitalApplication.class, args);
+        log.info("Application is starting...");
     }
 }
