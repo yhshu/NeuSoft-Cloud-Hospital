@@ -1,6 +1,7 @@
 package com.neusoft.medical.service.basicInfo;
 
 import com.github.pagehelper.PageInfo;
+import com.neusoft.medical.bean.Account;
 import com.neusoft.medical.bean.Doctor;
 
 import java.util.List;
@@ -47,7 +48,6 @@ public interface AccountService {
 
     /**
      * 添加帐号
-     * todo 密码存储在数据库前进行加密
      *
      * @param userName         帐号用户名
      * @param userPassword     帐号密码
@@ -87,4 +87,13 @@ public interface AccountService {
      * @return 操作结果
      */
     boolean deleteAccount(List<Integer> accountIdList);
+
+    /**
+     * 按用户名查找帐号信息
+     * 注意，该函数将查询到数据库中加密后的用户密码
+     *
+     * @param userName 用户名
+     * @return 帐户信息
+     */
+    Account findAccountByUserName(String userName);
 }

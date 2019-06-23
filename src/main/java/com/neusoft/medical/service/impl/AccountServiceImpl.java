@@ -10,6 +10,8 @@ import com.neusoft.medical.dao.DepartmentMapper;
 import com.neusoft.medical.dao.DoctorMapper;
 import com.neusoft.medical.dao.StaffMapper;
 import com.neusoft.medical.service.basicInfo.AccountService;
+import org.apache.log4j.Logger;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,6 +20,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
 public class AccountServiceImpl implements AccountService {
+    private Logger logger = Logger.getLogger(AccountService.class);
+
     @Resource
     private AccountMapper accountMapper;
     @Resource
@@ -26,6 +30,8 @@ public class AccountServiceImpl implements AccountService {
     private DepartmentMapper departmentMapper;
     @Resource
     private StaffMapper staffMapper;
+    @Resource
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     private Gson gson = new Gson();
 
@@ -41,6 +47,7 @@ public class AccountServiceImpl implements AccountService {
         List<String> accountJsonList = new CopyOnWriteArrayList<>();
         for (Account account : accountList) {
             JsonObject accountJsonObject = gson.toJsonTree(account).getAsJsonObject();
+            accountJsonObject.remove("userPassword");
             if (account.getAccountType().equals(TYPE_OUTPATIENT_DOCTOR) || account.getAccountType().equals(TYPE_TECH_DOCTOR)) {  // 该用户是医生
                 DoctorExample doctorExample = new DoctorExample();
                 DoctorExample.Criteria doctorCriteria = doctorExample.createCriteria();
@@ -49,7 +56,7 @@ public class AccountServiceImpl implements AccountService {
                 List<Doctor> doctorList = doctorMapper.selectByExample(doctorExample);
                 if (doctorList.size() == 1) {
                     Doctor doctor = doctorList.get(0);
-                    System.out.println("selectAccount: "+doctor.toString());
+                    System.out.println("selectAccount: " + doctor.toString());
                     accountJsonObject.addProperty("realName", doctor.getDoctorName());
                     accountJsonObject.addProperty("departmentId", doctor.getDepartmentId());
                     accountJsonObject.addProperty("departmentName", departmentMapper.selectByPrimaryKey(doctor.getDepartmentId()).getDepartmentName());
@@ -64,7 +71,7 @@ public class AccountServiceImpl implements AccountService {
                 List<Staff> staffList = staffMapper.selectByExample(staffExample);
                 if (staffList.size() == 1) {
                     Staff staff = staffList.get(0);
-                    System.out.println("selectAccount: "+staff.toString());
+                    System.out.println("selectAccount: " + staff.toString());
                     accountJsonObject.addProperty("realName", staff.getRealName());
                     accountJsonObject.addProperty("departmentId", staff.getDepartmentId());
                     accountJsonObject.addProperty("departmentName", departmentMapper.selectByPrimaryKey(staff.getDepartmentId()).getDepartmentName());
@@ -90,10 +97,15 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public boolean addAccount(String userName, String userPassword, String accountType, String realName, int departmentId, String jobTitle, int doctorScheduling) {
         try {
-            Account account = new Account(null, userName, userPassword, accountType, 1, null, null, null);
+            if (findAccountByUserName(userName) != null) {
+                logger.info("username " + userName + " has been registered");
+                return false;
+            }
+            Account account = new Account(null, userName, bCryptPasswordEncoder.encode(userPassword), accountType, 1, null, null, null);
             accountMapper.insert(account);
-            if (account.getAccountId() == null)
+            if (account.getAccountId() == null) {
                 throw new Exception("accountId is still null after trying to insert the database.");
+            }
 
             if (accountType.equals(TYPE_OUTPATIENT_DOCTOR) || accountType.equals(TYPE_TECH_DOCTOR)) {
                 // 如果是门诊医生或医技医生
@@ -114,7 +126,7 @@ public class AccountServiceImpl implements AccountService {
         try {
             AccountExample accountExample = new AccountExample();
             accountExample.or().andValidEqualTo(1).andAccountIdEqualTo(accountId);
-            accountMapper.updateByExampleSelective(new Account(accountId, userName, userPassword, null, 1, null, null, null), accountExample);
+            accountMapper.updateByExampleSelective(new Account(accountId, userName, bCryptPasswordEncoder.encode(userPassword), null, 1, null, null, null), accountExample);
             String accountType = accountMapper.selectByPrimaryKey(accountId).getAccountType();
 
             if (accountType.equals(TYPE_OUTPATIENT_DOCTOR) || accountType.equals(TYPE_TECH_DOCTOR)) {
@@ -149,5 +161,24 @@ public class AccountServiceImpl implements AccountService {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public Account findAccountByUserName(String userName) {
+        AccountExample accountExample = new AccountExample();
+        accountExample.or().andValidEqualTo(1).andUserNameEqualTo(userName);
+
+        List<Account> accountList = accountMapper.selectByExample(accountExample);
+
+        if (accountList.isEmpty()) {
+            logger.info("username " + userName + " does not exist");
+            return null;
+
+        } else if (accountList.size() > 1) {
+            logger.error("username " + userName + " is duplicate, please check the uniqueness of the account table in the database");
+            return null;
+        }
+
+        return accountList.get(0);
     }
 }

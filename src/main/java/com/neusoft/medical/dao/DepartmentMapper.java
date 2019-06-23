@@ -2,9 +2,14 @@ package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.Department;
 import com.neusoft.medical.bean.DepartmentExample;
-import org.apache.ibatis.annotations.*;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 
 public interface DepartmentMapper {
     long countByExample(DepartmentExample example);

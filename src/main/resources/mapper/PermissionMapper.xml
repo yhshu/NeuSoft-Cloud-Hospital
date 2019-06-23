@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.neusoft.medical.dao.UserAuthMapper">
-  <resultMap id="BaseResultMap" type="com.neusoft.medical.bean.UserAuth">
+<mapper namespace="com.neusoft.medical.dao.PermissionMapper">
+  <resultMap id="BaseResultMap" type="com.neusoft.medical.bean.Permission">
     <constructor>
-      <idArg column="user_auth_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="auth_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <idArg column="permission_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="permission_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="permission_description" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="operation_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -69,15 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    user_auth_id, user_id, auth_id, valid, operation_time
+    permission_id, permission_name, permission_description, valid
   </sql>
-  <select id="selectByExample" parameterType="com.neusoft.medical.bean.UserAuthExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.neusoft.medical.bean.PermissionExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from hospital.user_auth
+    from hospital.permission
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -85,69 +84,60 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.UserAuthExample">
-    delete from hospital.user_auth
+  <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.PermissionExample">
+    delete from hospital.permission
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insertSelective" parameterType="com.neusoft.medical.bean.UserAuth">
-    <selectKey keyProperty="userAuthId" order="AFTER" resultType="java.lang.Integer">
+  <insert id="insertSelective" parameterType="com.neusoft.medical.bean.Permission">
+    <selectKey keyProperty="permissionId" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into hospital.user_auth
+    insert into hospital.permission
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        user_id,
+      <if test="permissionName != null">
+        permission_name,
       </if>
-      <if test="authId != null">
-        auth_id,
+      <if test="permissionDescription != null">
+        permission_description,
       </if>
       <if test="valid != null">
         valid,
       </if>
-      <if test="operationTime != null">
-        operation_time,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
+      <if test="permissionName != null">
+        #{permissionName,jdbcType=VARCHAR},
       </if>
-      <if test="authId != null">
-        #{authId,jdbcType=INTEGER},
+      <if test="permissionDescription != null">
+        #{permissionDescription,jdbcType=VARCHAR},
       </if>
       <if test="valid != null">
         #{valid,jdbcType=INTEGER},
       </if>
-      <if test="operationTime != null">
-        #{operationTime,jdbcType=TIMESTAMP},
-      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.neusoft.medical.bean.UserAuthExample" resultType="java.lang.Long">
-    select count(*) from hospital.user_auth
+  <select id="countByExample" parameterType="com.neusoft.medical.bean.PermissionExample" resultType="java.lang.Long">
+    select count(*) from hospital.permission
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update hospital.user_auth
+    update hospital.permission
     <set>
-      <if test="record.userAuthId != null">
-        user_auth_id = #{record.userAuthId,jdbcType=INTEGER},
+      <if test="record.permissionId != null">
+        permission_id = #{record.permissionId,jdbcType=INTEGER},
       </if>
-      <if test="record.userId != null">
-        user_id = #{record.userId,jdbcType=INTEGER},
+      <if test="record.permissionName != null">
+        permission_name = #{record.permissionName,jdbcType=VARCHAR},
       </if>
-      <if test="record.authId != null">
-        auth_id = #{record.authId,jdbcType=INTEGER},
+      <if test="record.permissionDescription != null">
+        permission_description = #{record.permissionDescription,jdbcType=VARCHAR},
       </if>
       <if test="record.valid != null">
         valid = #{record.valid,jdbcType=INTEGER},
-      </if>
-      <if test="record.operationTime != null">
-        operation_time = #{record.operationTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null">
@@ -155,32 +145,28 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update hospital.user_auth
-    set user_auth_id = #{record.userAuthId,jdbcType=INTEGER},
-      user_id = #{record.userId,jdbcType=INTEGER},
-      auth_id = #{record.authId,jdbcType=INTEGER},
-      valid = #{record.valid,jdbcType=INTEGER},
-      operation_time = #{record.operationTime,jdbcType=TIMESTAMP}
+    update hospital.permission
+    set permission_id = #{record.permissionId,jdbcType=INTEGER},
+      permission_name = #{record.permissionName,jdbcType=VARCHAR},
+      permission_description = #{record.permissionDescription,jdbcType=VARCHAR},
+      valid = #{record.valid,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.UserAuth">
-    update hospital.user_auth
+  <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.Permission">
+    update hospital.permission
     <set>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=INTEGER},
+      <if test="permissionName != null">
+        permission_name = #{permissionName,jdbcType=VARCHAR},
       </if>
-      <if test="authId != null">
-        auth_id = #{authId,jdbcType=INTEGER},
+      <if test="permissionDescription != null">
+        permission_description = #{permissionDescription,jdbcType=VARCHAR},
       </if>
       <if test="valid != null">
         valid = #{valid,jdbcType=INTEGER},
       </if>
-      <if test="operationTime != null">
-        operation_time = #{operationTime,jdbcType=TIMESTAMP},
-      </if>
     </set>
-    where user_auth_id = #{userAuthId,jdbcType=INTEGER}
+    where permission_id = #{permissionId,jdbcType=INTEGER}
   </update>
 </mapper>
