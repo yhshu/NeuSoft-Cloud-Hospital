@@ -3,9 +3,7 @@ package com.neusoft.medical.controller.pharmacyWorkstation;
 import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.pharmacyWorkstation.MedicineCatalogService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
@@ -26,7 +24,7 @@ public class MedicineCatalogController {
      * @param pageSize    页面大小
      * @return 药品信息
      */
-    @RequestMapping("/select")
+    @GetMapping("/select")
     public ResultDTO<PageInfo<String>> selectMedicine(
             @RequestParam(value = "currentPage") Integer currentPage,
             @RequestParam(value = "pageSize") Integer pageSize
@@ -59,7 +57,7 @@ public class MedicineCatalogController {
      * - nums                  库存数目
      * - nameEn                英文名称
      */
-    @RequestMapping("/save")
+    @PostMapping("/save")
     public ResultDTO<Boolean> saveMedicine(
             @RequestParam(value = "medicineJson") String medicineJson
     ) {
@@ -79,7 +77,7 @@ public class MedicineCatalogController {
      * @param medicineIdList 药品编号列表
      * @return 操作结果
      */
-    @RequestMapping("/delete")
+    @DeleteMapping("/delete")
     public ResultDTO<Boolean> deleteMedicine(
             @RequestParam(value = "medicineIdList[]") Integer[] medicineIdList
     ) {
