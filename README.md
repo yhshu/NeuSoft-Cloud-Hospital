@@ -73,10 +73,27 @@ maxWait=60000
 
 - 建议部署于 Linux，使用 Docker 分配资源
 
+在服务器上安装 docker 等软件，使用 Git 在服务器上 clone 本项目，然后执行如下命令：
+
+```
+# 打包
+mvn package
+# 启动
+java -jar target/medical-0.0.1-SNAPSHOT.jar 
+# 看到 SpringBoot 启动日志后表示环境配置没有问题，然后使用 DockerFile 构建镜像
+mvn package docker:build
+```
+
+常用的 docker 命令：
+
+```
+docker images # 查看构建好的镜像
+docker ps     # 查看正在运行的镜像 
+```
 
 #### 开发工具
 
-- 建议 WebStorm 与 Intellij IDEA
+- 建议使用 WebStorm 与 Intellij IDEA
 
 ### JavaDoc
 

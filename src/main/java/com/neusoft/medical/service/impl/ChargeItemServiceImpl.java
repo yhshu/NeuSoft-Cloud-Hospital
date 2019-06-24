@@ -73,4 +73,21 @@ public class ChargeItemServiceImpl implements ChargeItemService {
         }
         return true;
     }
+
+    @Override
+    public boolean deleteChargeItem(List<Integer> chargeItemIdList) {
+        try {
+            ChargeItemExample chargeItemExample = new ChargeItemExample();
+            chargeItemExample.or().andValidEqualTo(1).andChargeItemIdIn(chargeItemIdList);
+
+            ChargeItem chargeItemRecord = new ChargeItem();
+            chargeItemRecord.setValid(0);
+
+            chargeItemMapper.updateByExampleSelective(chargeItemRecord, chargeItemExample);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }
