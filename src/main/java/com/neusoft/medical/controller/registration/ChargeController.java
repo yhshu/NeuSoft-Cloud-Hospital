@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
+/**
+ * 收费 控制器
+ */
 @RestController
 @RequestMapping("/charge")
 public class ChargeController {
