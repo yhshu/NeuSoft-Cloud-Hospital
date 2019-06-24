@@ -94,11 +94,12 @@ public class ChargeEntryController {
             @RequestParam("registrationId") Integer registrationId,
             @RequestParam("itemCount") Integer itemCount,
             @RequestParam("collectorId") Integer collectorId,
-            @RequestParam("doctorAdvice") String doctorAdvice
+            @RequestParam("doctorAdvice") String doctorAdvice,
+            @RequestParam(value = "examinationId", required = false) Integer examinationId,
+            @RequestParam(value = "chargeFormId", required = false) Integer chargeFormId
     ) {
-        System.out.println("ChargeEntryController 添加收费项目到收费账单中");
         try {
-            chargeEntryService.addChargeEntryToForm(chargeItemId, registrationId, itemCount, collectorId, doctorAdvice);
+            chargeEntryService.addChargeEntryToForm(chargeItemId, registrationId, itemCount, collectorId, doctorAdvice, examinationId, chargeFormId);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultDTO<>(Boolean.FALSE);
