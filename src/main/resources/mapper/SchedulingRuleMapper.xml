@@ -4,18 +4,15 @@
   <resultMap id="BaseResultMap" type="com.neusoft.medical.bean.SchedulingRule">
     <constructor>
       <idArg column="scheduling_rule_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="week_day" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="weekday" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="department_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="department_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="doctor_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="doctor_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="type" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="period" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="registration_category_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="noon" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="limitation" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="operator_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="operator_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="operating_date" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="operation_account_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="operation_date" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -77,8 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    scheduling_rule_id, week_day, department_id, department_name, doctor_id, doctor_name, 
-    type, valid, period, limitation, operator_id, operator_name, operating_date
+    scheduling_rule_id, weekday, department_id, doctor_id, registration_category_id, 
+    noon, limitation, operation_account_id, operation_date, valid
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.SchedulingRuleExample" resultMap="BaseResultMap">
     select
@@ -106,79 +103,61 @@
     </selectKey>
     insert into hospital.scheduling_rule
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="weekDay != null">
-        week_day,
+      <if test="weekday != null">
+        weekday,
       </if>
       <if test="departmentId != null">
         department_id,
       </if>
-      <if test="departmentName != null">
-        department_name,
-      </if>
       <if test="doctorId != null">
         doctor_id,
       </if>
-      <if test="doctorName != null">
-        doctor_name,
+      <if test="registrationCategoryId != null">
+        registration_category_id,
       </if>
-      <if test="type != null">
-        type,
-      </if>
-      <if test="valid != null">
-        valid,
-      </if>
-      <if test="period != null">
-        period,
+      <if test="noon != null">
+        noon,
       </if>
       <if test="limitation != null">
         limitation,
       </if>
-      <if test="operatorId != null">
-        operator_id,
+      <if test="operationAccountId != null">
+        operation_account_id,
       </if>
-      <if test="operatorName != null">
-        operator_name,
+      <if test="operationDate != null">
+        operation_date,
       </if>
-      <if test="operatingDate != null">
-        operating_date,
+      <if test="valid != null">
+        valid,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="weekDay != null">
-        #{weekDay,jdbcType=VARCHAR},
+      <if test="weekday != null">
+        #{weekday,jdbcType=INTEGER},
       </if>
       <if test="departmentId != null">
         #{departmentId,jdbcType=INTEGER},
       </if>
-      <if test="departmentName != null">
-        #{departmentName,jdbcType=VARCHAR},
-      </if>
       <if test="doctorId != null">
         #{doctorId,jdbcType=INTEGER},
       </if>
-      <if test="doctorName != null">
-        #{doctorName,jdbcType=VARCHAR},
+      <if test="registrationCategoryId != null">
+        #{registrationCategoryId,jdbcType=INTEGER},
       </if>
-      <if test="type != null">
-        #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="valid != null">
-        #{valid,jdbcType=INTEGER},
-      </if>
-      <if test="period != null">
-        #{period,jdbcType=VARCHAR},
+      <if test="noon != null">
+        #{noon,jdbcType=INTEGER},
       </if>
       <if test="limitation != null">
         #{limitation,jdbcType=INTEGER},
       </if>
-      <if test="operatorId != null">
-        #{operatorId,jdbcType=INTEGER},
+      <if test="operationAccountId != null">
+        #{operationAccountId,jdbcType=INTEGER},
       </if>
-      <if test="operatorName != null">
-        #{operatorName,jdbcType=VARCHAR},
+      <if test="operationDate != null">
+        #{operationDate,jdbcType=DATE},
       </if>
-      <if test="operatingDate != null">
-        #{operatingDate,jdbcType=DATE},
+      <if test="valid != null">
+        #{valid,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -194,41 +173,32 @@
       <if test="record.schedulingRuleId != null">
         scheduling_rule_id = #{record.schedulingRuleId,jdbcType=INTEGER},
       </if>
-      <if test="record.weekDay != null">
-        week_day = #{record.weekDay,jdbcType=VARCHAR},
+      <if test="record.weekday != null">
+        weekday = #{record.weekday,jdbcType=INTEGER},
       </if>
       <if test="record.departmentId != null">
         department_id = #{record.departmentId,jdbcType=INTEGER},
       </if>
-      <if test="record.departmentName != null">
-        department_name = #{record.departmentName,jdbcType=VARCHAR},
-      </if>
       <if test="record.doctorId != null">
         doctor_id = #{record.doctorId,jdbcType=INTEGER},
       </if>
-      <if test="record.doctorName != null">
-        doctor_name = #{record.doctorName,jdbcType=VARCHAR},
+      <if test="record.registrationCategoryId != null">
+        registration_category_id = #{record.registrationCategoryId,jdbcType=INTEGER},
       </if>
-      <if test="record.type != null">
-        type = #{record.type,jdbcType=VARCHAR},
-      </if>
-      <if test="record.valid != null">
-        valid = #{record.valid,jdbcType=INTEGER},
-      </if>
-      <if test="record.period != null">
-        period = #{record.period,jdbcType=VARCHAR},
+      <if test="record.noon != null">
+        noon = #{record.noon,jdbcType=INTEGER},
       </if>
       <if test="record.limitation != null">
         limitation = #{record.limitation,jdbcType=INTEGER},
       </if>
-      <if test="record.operatorId != null">
-        operator_id = #{record.operatorId,jdbcType=INTEGER},
+      <if test="record.operationAccountId != null">
+        operation_account_id = #{record.operationAccountId,jdbcType=INTEGER},
       </if>
-      <if test="record.operatorName != null">
-        operator_name = #{record.operatorName,jdbcType=VARCHAR},
+      <if test="record.operationDate != null">
+        operation_date = #{record.operationDate,jdbcType=DATE},
       </if>
-      <if test="record.operatingDate != null">
-        operating_date = #{record.operatingDate,jdbcType=DATE},
+      <if test="record.valid != null">
+        valid = #{record.valid,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -238,18 +208,15 @@
   <update id="updateByExample" parameterType="map">
     update hospital.scheduling_rule
     set scheduling_rule_id = #{record.schedulingRuleId,jdbcType=INTEGER},
-      week_day = #{record.weekDay,jdbcType=VARCHAR},
+      weekday = #{record.weekday,jdbcType=INTEGER},
       department_id = #{record.departmentId,jdbcType=INTEGER},
-      department_name = #{record.departmentName,jdbcType=VARCHAR},
       doctor_id = #{record.doctorId,jdbcType=INTEGER},
-      doctor_name = #{record.doctorName,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=VARCHAR},
-      valid = #{record.valid,jdbcType=INTEGER},
-      period = #{record.period,jdbcType=VARCHAR},
+      registration_category_id = #{record.registrationCategoryId,jdbcType=INTEGER},
+      noon = #{record.noon,jdbcType=INTEGER},
       limitation = #{record.limitation,jdbcType=INTEGER},
-      operator_id = #{record.operatorId,jdbcType=INTEGER},
-      operator_name = #{record.operatorName,jdbcType=VARCHAR},
-      operating_date = #{record.operatingDate,jdbcType=DATE}
+      operation_account_id = #{record.operationAccountId,jdbcType=INTEGER},
+      operation_date = #{record.operationDate,jdbcType=DATE},
+      valid = #{record.valid,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -257,41 +224,32 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.SchedulingRule">
     update hospital.scheduling_rule
     <set>
-      <if test="weekDay != null">
-        week_day = #{weekDay,jdbcType=VARCHAR},
+      <if test="weekday != null">
+        weekday = #{weekday,jdbcType=INTEGER},
       </if>
       <if test="departmentId != null">
         department_id = #{departmentId,jdbcType=INTEGER},
       </if>
-      <if test="departmentName != null">
-        department_name = #{departmentName,jdbcType=VARCHAR},
-      </if>
       <if test="doctorId != null">
         doctor_id = #{doctorId,jdbcType=INTEGER},
       </if>
-      <if test="doctorName != null">
-        doctor_name = #{doctorName,jdbcType=VARCHAR},
+      <if test="registrationCategoryId != null">
+        registration_category_id = #{registrationCategoryId,jdbcType=INTEGER},
       </if>
-      <if test="type != null">
-        type = #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="valid != null">
-        valid = #{valid,jdbcType=INTEGER},
-      </if>
-      <if test="period != null">
-        period = #{period,jdbcType=VARCHAR},
+      <if test="noon != null">
+        noon = #{noon,jdbcType=INTEGER},
       </if>
       <if test="limitation != null">
         limitation = #{limitation,jdbcType=INTEGER},
       </if>
-      <if test="operatorId != null">
-        operator_id = #{operatorId,jdbcType=INTEGER},
+      <if test="operationAccountId != null">
+        operation_account_id = #{operationAccountId,jdbcType=INTEGER},
       </if>
-      <if test="operatorName != null">
-        operator_name = #{operatorName,jdbcType=VARCHAR},
+      <if test="operationDate != null">
+        operation_date = #{operationDate,jdbcType=DATE},
       </if>
-      <if test="operatingDate != null">
-        operating_date = #{operatingDate,jdbcType=DATE},
+      <if test="valid != null">
+        valid = #{valid,jdbcType=INTEGER},
       </if>
     </set>
     where scheduling_rule_id = #{schedulingRuleId,jdbcType=INTEGER}

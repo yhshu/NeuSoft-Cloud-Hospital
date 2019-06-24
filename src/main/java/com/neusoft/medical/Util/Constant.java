@@ -40,8 +40,40 @@ public interface Constant {
     /**
      * 挂号状态
      */
-    String REGIST_IN_PROCESS = "1";
-    String REGIST_DONE = "0";
-    String REGIST_NOT_VISITED = "0";
-    String REGIST_VISITED = "1";
+    String REGIST_WITHDRAW = "2";      // 退号
+    String REGIST_IN_PROCESS = "1";    // 诊断过程中
+    String REGIST_DONE = "0";          // 诊断结束
+    String REGIST_NOT_VISITED = "0";   // 尚未就诊
+    String REGIST_VISITED = "1";       // 就诊过
+
+    /**
+     * 午别
+     */
+    int NOON_ALL_DAY = 0;              // 全天
+    int NOON_MORNING = 1;              // 上午
+    int NOON_AFTERNOON = 2;            // 下午
+
+    /**
+     * 收费项目的类别
+     */
+    int ENTRY_TYPE_CHARGE_ENTRY = 0;       // 检查检验项目、处置项目
+    int ENTRY_TYPE_PRESCRIPTION_ENTRY = 1; // 药品
+
+    /**
+     * 登录状态反馈
+     */
+    String SIGNIN_SUCCESS = "0";       // 登录完成
+    String SIGNIN_MISMATCH = "1";      // 用户名或密码错误
+    String SIGNIN_EXCEPTION = "2";     // 登录异常：数据库存在用户名重复
+
+    /**
+     * 用户类别
+     */
+    String TYPE_OUTPATIENT_DOCTOR = "00";   // 门诊医生
+    String TYPE_TECH_DOCTOR = "01";         // 医技医生
+    String TYPE_COLLECTOR_STAFF = "10";     // 医院收费员
+    String TYPE_PHARMACY_STAFF = "11";      // 药房操作员
+    String TYPE_FINANCIAL_STAFF = "12";     // 财务管理员
+    String TYPE_REGISTRATION_STAFF = "13";  // 挂号管理员
+    String TYPE_SYSTEM_ADMIN = "20";        // 系统管理员
 }

@@ -91,6 +91,7 @@ public class RegistrationController {
      * @param registrationCategoryName 挂号类型
      * @param medicalCategory          医疗类别
      * @param identityCardNo           患者身份证号
+     * @param visitDate                预约日期（年-月-日）
      * @param registrationDate         挂号日期
      * @param departmentId             挂号科室编号
      * @param doctorId                 看诊医生编号
@@ -109,6 +110,7 @@ public class RegistrationController {
             @RequestParam(value = "registrationCategory") String registrationCategoryName,
             @RequestParam(value = "medicalCategory") String medicalCategory,
             @RequestParam(value = "identityCardNo") String identityCardNo,
+            @RequestParam(value = "visitDate") String visitDate,
             @RequestParam(value = "registrationDate") String registrationDate,
             @RequestParam(value = "departmentId") Integer departmentId,
             @RequestParam(value = "doctorId") Integer doctorId,
@@ -117,11 +119,12 @@ public class RegistrationController {
             @RequestParam(value = "familyAddress") String familyAddress,
             @RequestParam(value = "collectorId") Integer collectorId) {
 
+        Date visitDateConverted = dateConverter.convert(visitDate);
         Date birthdayConverted = dateConverter.convert(birthday);
         Date registrationDateConverted = dateConverter.convert(registrationDate);
         try {
             registrationService.addRegistration(
-                    new Registration(null, null, patientName, gender, age, birthdayConverted, registrationCategoryName, medicalCategory, identityCardNo, "1", null, registrationDateConverted, departmentId, doctorId, registrationSource, settleAccountsCategory, "0", familyAddress, collectorId, null, 1, null, null, null));
+                    new Registration(null, null, patientName, gender, age, birthdayConverted, registrationCategoryName, medicalCategory, identityCardNo, "1", visitDateConverted, registrationDateConverted, departmentId, doctorId, registrationSource, settleAccountsCategory, "0", familyAddress, collectorId, null, 1, null, null, null));
             System.out.println("已提交挂号信息");
         } catch (Exception e) {
             e.printStackTrace();

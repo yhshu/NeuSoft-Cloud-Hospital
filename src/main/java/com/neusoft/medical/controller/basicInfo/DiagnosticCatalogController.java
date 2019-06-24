@@ -5,12 +5,12 @@ import com.neusoft.medical.bean.Disease;
 import com.neusoft.medical.bean.DiseaseCategory;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.basicInfo.DiagnosticCatalogService;
+import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * 诊断目录控制器

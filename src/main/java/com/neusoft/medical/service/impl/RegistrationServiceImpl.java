@@ -2,15 +2,13 @@ package com.neusoft.medical.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.neusoft.medical.bean.Patient;
-import com.neusoft.medical.bean.PatientExample;
-import com.neusoft.medical.bean.Registration;
-import com.neusoft.medical.bean.RegistrationExample;
+import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.*;
 import com.neusoft.medical.service.registration.RegistrationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -18,47 +16,57 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class RegistrationServiceImpl implements RegistrationService {
     @Resource
     private RegistrationMapper registrationMapper;
-
     @Resource
     private DepartmentMapper departmentMapper;
-
     @Resource
     private DoctorMapper doctorMapper;
-
     @Resource
     private PatientMapper patientMapper;
-
     @Resource
     private MedicalRecordsMapper medicalRecordsMapper;
+    @Resource
+    private SchedulingInfoMapper schedulingInfoMapper;
 
     @Override
     public Registration addRegistration(Registration record) throws Exception {
         // 新增患者信息
         System.out.println("RegistrationInfoServiceImpl 新增患者信息: " + record.getPatientName());
         PatientExample patientExample = new PatientExample();
-        PatientExample.Criteria criteria = patientExample.createCriteria();
-        criteria.andValidEqualTo(1);
-        criteria.andIdentityCardNoEqualTo(record.getIdentityCardNo());
+        patientExample.or().andValidEqualTo(1).andIdentityCardNoEqualTo(record.getIdentityCardNo());
 
         List<Patient> patientList = patientMapper.selectByExample(patientExample);
         if (patientList.size() > 1)
             throw new Exception("Duplicate selectPatient identity ID");
 
-        Patient patient = new Patient(null, record.getPatientName(), record.getBirthday(), null, record.getIdentityCardNo(), null, null, record.getGender(), 1, null, null, null);
+        Patient patient = new Patient(null, record.getPatientName(), record.getBirthday(), null, record.getIdentityCardNo(), null, record.getFamilyAddress(), record.getGender(), 1, null, null, null);
+        System.out.println("RegistrationInfoServiceImpl 尝试新增挂号: " + record.toString());
         if (patientList.size() == 0) {
             // 暂无该患者信息
             patientMapper.insert(patient);
-        } else {
+            record.setPatientId(patient.getPatientId());
+          } else {
             // 已有该患者信息
-            patient.setPatientId(record.getPatientId());
-            patientMapper.updateByPrimaryKey(patient);
+            patientMapper.updateByExampleSelective(patient, patientExample);
+            record.setPatientId(patientList.get(0).getPatientId());
         }
 
         // 新增挂号记录
-        System.out.println("RegistrationInfoServiceImpl 尝试新增挂号: " + record.toString());
-        record.setPatientId(patient.getPatientId());
         int effectRow = registrationMapper.insert(record);
         System.out.println("RegistrationInfoServiceImpl 已新增挂号 " + effectRow + " 项");
+
+        // 医生的剩余号数减少
+        SchedulingInfoExample schedulingInfoExample = new SchedulingInfoExample();
+        Date todayDate = new Date();
+        Date d1 = new Date(todayDate.getTime() / 86400000 * 86400000);
+        Date d2 = new Date((todayDate.getTime() / 86400000 + 1) * 86400000 - 1);
+        schedulingInfoExample.or().andValidEqualTo(1).andSchedulingTimeBetween(d1, d2);
+        List<SchedulingInfo> schedulingInfoList = schedulingInfoMapper.selectByExample(schedulingInfoExample);
+        if (schedulingInfoList != null && !schedulingInfoList.isEmpty()) {
+            for (SchedulingInfo schedulingInfo : schedulingInfoList) {
+                schedulingInfo.setLimitation(schedulingInfo.getLimitation() - 1);
+                schedulingInfoMapper.updateByPrimaryKeySelective(schedulingInfo);
+            }
+        }
 
         // 病历记录在患者前往医生处就诊后生成
         return registrationMapper.selectByPrimaryKey(record.getRegistrationId());

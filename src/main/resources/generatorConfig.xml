@@ -118,8 +118,8 @@ database types (e.g. MySql's unsigned bigint type should be mapped to java.lang.
         <table tableName="account" catalog="hospital">
             <generatedKey column="account_id" sqlStatement="Mysql" identity="true"/>
         </table>
-        <table tableName="auth" catalog="hospital">
-            <generatedKey column="auth_id" sqlStatement="Mysql" identity="true"/>
+        <table tableName="account_type_permission" catalog="hospital">
+            <generatedKey column="account_type_permission_id" sqlStatement="Mysql" identity="true"/>
         </table>
         <table tableName="charge_entry" catalog="hospital">
             <generatedKey column="charge_entry_id" sqlStatement="Mysql" identity="true"/>
@@ -163,6 +163,9 @@ database types (e.g. MySql's unsigned bigint type should be mapped to java.lang.
         <table tableName="patient" catalog="hospital">
             <generatedKey column="patient_id" sqlStatement="Mysql" identity="true"/>
         </table>
+        <table tableName="permission" catalog="hospital">
+            <generatedKey column="permission_id" sqlStatement="Mysql" identity="true"/>
+        </table>
         <table tableName="prescription" catalog="hospital">
             <generatedKey column="prescription_id" sqlStatement="Mysql" identity="true"/>
         </table>
@@ -189,9 +192,6 @@ database types (e.g. MySql's unsigned bigint type should be mapped to java.lang.
         </table>
         <table tableName="staff" catalog="hospital">
             <generatedKey column="staff_id" sqlStatement="Mysql" identity="true"/>
-        </table>
-        <table tableName="user_auth" catalog="hospital">
-            <generatedKey column="user_auth_id" sqlStatement="Mysql" identity="true"/>
         </table>
     </context>
 </generatorConfiguration>

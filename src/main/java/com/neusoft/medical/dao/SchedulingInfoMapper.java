@@ -2,9 +2,14 @@ package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.SchedulingInfo;
 import com.neusoft.medical.bean.SchedulingInfoExample;
-import org.apache.ibatis.annotations.*;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 
 public interface SchedulingInfoMapper {
     long countByExample(SchedulingInfoExample example);
@@ -18,15 +23,15 @@ public interface SchedulingInfoMapper {
     int deleteByPrimaryKey(Integer schedulingInfoId);
 
     @Insert({
-        "insert into hospital.scheduling_info (scheduling_time, department_id, ",
-        "department_name, doctor_id, ",
-        "doctor_name, type, ",
-        "valid, period, limitation, ",
+        "insert into hospital.scheduling_info (scheduling_time, scheduling_rule_id, ",
+        "department_id, doctor_id, ",
+        "registration_category_id, noon, ",
+        "valid, limitation, ",
         "remain_nums)",
-        "values (#{schedulingTime,jdbcType=DATE}, #{departmentId,jdbcType=INTEGER}, ",
-        "#{departmentName,jdbcType=VARCHAR}, #{doctorId,jdbcType=INTEGER}, ",
-        "#{doctorName,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, ",
-        "#{valid,jdbcType=INTEGER}, #{period,jdbcType=VARCHAR}, #{limitation,jdbcType=INTEGER}, ",
+        "values (#{schedulingTime,jdbcType=DATE}, #{schedulingRuleId,jdbcType=INTEGER}, ",
+        "#{departmentId,jdbcType=INTEGER}, #{doctorId,jdbcType=INTEGER}, ",
+        "#{registrationCategoryId,jdbcType=INTEGER}, #{noon,jdbcType=INTEGER}, ",
+        "#{valid,jdbcType=INTEGER}, #{limitation,jdbcType=INTEGER}, ",
         "#{remainNums,jdbcType=INTEGER})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="schedulingInfoId", before=false, resultType=Integer.class)
@@ -38,8 +43,8 @@ public interface SchedulingInfoMapper {
 
     @Select({
         "select",
-        "scheduling_info_id, scheduling_time, department_id, department_name, doctor_id, ",
-        "doctor_name, type, valid, period, limitation, remain_nums",
+        "scheduling_info_id, scheduling_time, scheduling_rule_id, department_id, doctor_id, ",
+        "registration_category_id, noon, valid, limitation, remain_nums",
         "from hospital.scheduling_info",
         "where scheduling_info_id = #{schedulingInfoId,jdbcType=INTEGER}"
     })
@@ -55,13 +60,12 @@ public interface SchedulingInfoMapper {
     @Update({
         "update hospital.scheduling_info",
         "set scheduling_time = #{schedulingTime,jdbcType=DATE},",
+          "scheduling_rule_id = #{schedulingRuleId,jdbcType=INTEGER},",
           "department_id = #{departmentId,jdbcType=INTEGER},",
-          "department_name = #{departmentName,jdbcType=VARCHAR},",
           "doctor_id = #{doctorId,jdbcType=INTEGER},",
-          "doctor_name = #{doctorName,jdbcType=VARCHAR},",
-          "type = #{type,jdbcType=VARCHAR},",
+          "registration_category_id = #{registrationCategoryId,jdbcType=INTEGER},",
+          "noon = #{noon,jdbcType=INTEGER},",
           "valid = #{valid,jdbcType=INTEGER},",
-          "period = #{period,jdbcType=VARCHAR},",
           "limitation = #{limitation,jdbcType=INTEGER},",
           "remain_nums = #{remainNums,jdbcType=INTEGER}",
         "where scheduling_info_id = #{schedulingInfoId,jdbcType=INTEGER}"

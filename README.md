@@ -115,7 +115,7 @@ maxWait=60000
 2. 数据库设计：Navicat 或 Jetbrains DataGrip，数据库表中属性必须添加注释，注释中指定好各参数值；设计过程中不必指定外键，每个表有单独的 `int(11)` 类型的自增主键 `id`，约束尽量使用程序实现
 3. 使用 Maven 搭建项目，使用 Git 团队协作
 4. 单元测试：代码量可达到源代码的三分之一，主要是黑盒测试
-5. 部署
+5. 部署：Linux 集群
 
 #### 成果物
 
@@ -123,9 +123,15 @@ maxWait=60000
 - 项目源代码
 - 数据库设计
 
-### 参考项目
+### 用户权限设计
+
+用户权限研究的是 用户-角色-权限 之间的关系。本系统中的用户基本信息使用 account 表存储，用户与角色一一对应，因此角色信息也存储在 account 表中。每种角色拥有若干种系统权限。原子系统权限使用 permission 表存储，角色与系统权限之间的关系由 account_type_permission 表存储。
+
+
+### 参考
 
 - [安逸医院](
 https://mingmliang.github.io/his-demo/#/home)
+- [Docker 部署 SpringBoot 项目](http://www.ityouknow.com/springboot/2018/03/19/spring-boot-docker.html)
 
 :-) 

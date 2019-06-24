@@ -7,34 +7,31 @@ public class SchedulingInfo {
 
     private Date schedulingTime;
 
-    private Integer departmentId;
+    private Integer schedulingRuleId;
 
-    private String departmentName;
+    private Integer departmentId;
 
     private Integer doctorId;
 
-    private String doctorName;
+    private Integer registrationCategoryId;
 
-    private String type;
+    private Integer noon;
 
     private Integer valid;
-
-    private String period;
 
     private Integer limitation;
 
     private Integer remainNums;
 
-    public SchedulingInfo(Integer schedulingInfoId, Date schedulingTime, Integer departmentId, String departmentName, Integer doctorId, String doctorName, String type, Integer valid, String period, Integer limitation, Integer remainNums) {
+    public SchedulingInfo(Integer schedulingInfoId, Date schedulingTime, Integer schedulingRuleId, Integer departmentId, Integer doctorId, Integer registrationCategoryId, Integer noon, Integer valid, Integer limitation, Integer remainNums) {
         this.schedulingInfoId = schedulingInfoId;
         this.schedulingTime = schedulingTime;
+        this.schedulingRuleId = schedulingRuleId;
         this.departmentId = departmentId;
-        this.departmentName = departmentName;
         this.doctorId = doctorId;
-        this.doctorName = doctorName;
-        this.type = type;
+        this.registrationCategoryId = registrationCategoryId;
+        this.noon = noon;
         this.valid = valid;
-        this.period = period;
         this.limitation = limitation;
         this.remainNums = remainNums;
     }
@@ -59,20 +56,20 @@ public class SchedulingInfo {
         this.schedulingTime = schedulingTime;
     }
 
+    public Integer getSchedulingRuleId() {
+        return schedulingRuleId;
+    }
+
+    public void setSchedulingRuleId(Integer schedulingRuleId) {
+        this.schedulingRuleId = schedulingRuleId;
+    }
+
     public Integer getDepartmentId() {
         return departmentId;
     }
 
     public void setDepartmentId(Integer departmentId) {
         this.departmentId = departmentId;
-    }
-
-    public String getDepartmentName() {
-        return departmentName;
-    }
-
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName == null ? null : departmentName.trim();
     }
 
     public Integer getDoctorId() {
@@ -83,20 +80,20 @@ public class SchedulingInfo {
         this.doctorId = doctorId;
     }
 
-    public String getDoctorName() {
-        return doctorName;
+    public Integer getRegistrationCategoryId() {
+        return registrationCategoryId;
     }
 
-    public void setDoctorName(String doctorName) {
-        this.doctorName = doctorName == null ? null : doctorName.trim();
+    public void setRegistrationCategoryId(Integer registrationCategoryId) {
+        this.registrationCategoryId = registrationCategoryId;
     }
 
-    public String getType() {
-        return type;
+    public Integer getNoon() {
+        return noon;
     }
 
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
+    public void setNoon(Integer noon) {
+        this.noon = noon;
     }
 
     public Integer getValid() {
@@ -105,14 +102,6 @@ public class SchedulingInfo {
 
     public void setValid(Integer valid) {
         this.valid = valid;
-    }
-
-    public String getPeriod() {
-        return period;
-    }
-
-    public void setPeriod(String period) {
-        this.period = period == null ? null : period.trim();
     }
 
     public Integer getLimitation() {
