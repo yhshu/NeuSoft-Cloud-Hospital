@@ -7,7 +7,7 @@ import java.util.List;
 public interface MedicineCatalogService {
     PageInfo<String> selectMedicine(int currentPage, int pageSize);
 
-    boolean addMedicine(String medicineJson);
+    boolean saveMedicine(String medicineJson);
 
     boolean deleteMedicine(List<Integer> medicineIdList);
 }

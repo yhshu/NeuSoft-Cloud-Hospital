@@ -60,12 +60,12 @@ public class MedicineCatalogController {
      * - nameEn                英文名称
      */
     @RequestMapping("/save")
-    public ResultDTO<Boolean> addMedicine(
+    public ResultDTO<Boolean> saveMedicine(
             @RequestParam(value = "medicineJson") String medicineJson
     ) {
         boolean res;
         try {
-            res = medicineCatalogService.addMedicine(medicineJson);
+            res = medicineCatalogService.saveMedicine(medicineJson);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultDTO<>(Boolean.FALSE);
