@@ -47,7 +47,11 @@ public class MedicineCatalogServiceImpl implements MedicineCatalogService {
     public boolean saveMedicine(String medicineJson) {
         try {
             JsonObject medicineJsonObject = new JsonParser().parse(medicineJson).getAsJsonObject();
-            Integer medicineId = medicineJsonObject.get("medicineId").getAsInt();
+            Integer medicineId = null;
+            try {
+                medicineId = medicineJsonObject.get("medicineId").getAsInt();
+            } catch (NullPointerException ignored) {
+            }
             String medicineCode = medicineJsonObject.get("medicineCode").getAsString();
             String nameZh = medicineJsonObject.get("nameZh").getAsString();
             String medicineSpecification = medicineJsonObject.get("medicineSpecification").getAsString();
@@ -87,7 +91,7 @@ public class MedicineCatalogServiceImpl implements MedicineCatalogService {
             Medicine medicineRecord = new Medicine();
             medicineRecord.setValid(0);
 
-            medicineMapper.updateByExampleSelective(medicineRecord,medicineExample);
+            medicineMapper.updateByExampleSelective(medicineRecord, medicineExample);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
