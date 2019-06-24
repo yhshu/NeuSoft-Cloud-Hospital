@@ -39,13 +39,14 @@ public class MedicineDistributionController {
     }
 
     /**
-     * 交付药品项目
+     * 修改药品项目数目
+     * 交付药品或收到退药
      *
      * @param prescriptionEntryListJson 药品项目信息，json 数组
      * @return 操作结果
      * prescriptionEntryListJson 数组中每个元素包含的属性：
      * - prescriptionEntryId 药品项编号
-     * - executionNums       此次消耗的药品数
+     * - executionNums       变动的药品数（交付药品为正数，收到退药为负数）
      */
     @GetMapping("/apply")
     public ResultDTO<Boolean> prescriptionEntryDelivery(@RequestParam(value = "prescriptionEntryListJson") String prescriptionEntryListJson) {

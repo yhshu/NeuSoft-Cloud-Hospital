@@ -14,6 +14,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 @Service
 public class MedicineDistributionServiceImpl implements MedicineDistributionService {
@@ -57,7 +58,11 @@ public class MedicineDistributionServiceImpl implements MedicineDistributionServ
                 Integer executionNums = prescriptionEntryJsonObject.get("executionNums").getAsInt();
 
                 PrescriptionEntry prescriptionEntry = prescriptionEntryMapper.selectByPrimaryKey(prescriptionEntryId);
-                prescriptionEntry.setNotGivenNums(max(0, prescriptionEntry.getNotGivenNums() - executionNums));
+                if (executionNums > 0) {  // 发药
+                    prescriptionEntry.setNotGivenNums(max(0, prescriptionEntry.getNotGivenNums() - executionNums));
+                } else if (executionNums < 0) {  // 退药
+                    prescriptionEntry.setNotGivenNums(min(prescriptionEntry.getNums(), prescriptionEntry.getNotGivenNums() - executionNums));
+                }
                 prescriptionEntryMapper.updateByPrimaryKeySelective(prescriptionEntry);
             }
         } catch (Exception e) {
