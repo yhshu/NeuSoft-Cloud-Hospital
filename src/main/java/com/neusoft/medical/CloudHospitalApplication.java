@@ -1,9 +1,7 @@
 package com.neusoft.medical;
 
-import com.neusoft.medical.service.StoreService;
 import org.apache.log4j.Logger;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -19,14 +17,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @EnableWebSecurity
 public class CloudHospitalApplication {
     private static Logger logger = Logger.getLogger(CloudHospitalApplication.class);
-
-    @Bean
-    CommandLineRunner init(StoreService storagService) {
-        return (args) -> {
-            storagService.deleteAll();
-            storagService.init();
-        };
-    }
 
     /**
      * 允许传输特定字符

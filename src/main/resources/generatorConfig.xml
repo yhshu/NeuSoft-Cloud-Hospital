@@ -136,6 +136,12 @@ database types (e.g. MySql's unsigned bigint type should be mapped to java.lang.
         <table tableName="constant_type" catalog="hospital">
             <generatedKey column="constant_type_id" sqlStatement="Mysql" identity="true"/>
         </table>
+        <table tableName="daily_settlement" catalog="hospital">
+            <generatedKey column="daily_settlement_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="daily_settlement_detail" catalog="hospital">
+            <generatedKey column="daily_settlement_detail_id" sqlStatement="Mysql" identity="true"/>
+        </table>
         <table tableName="department" catalog="hospital">
             <generatedKey column="department_id" sqlStatement="Mysql" identity="true"/>
         </table>
