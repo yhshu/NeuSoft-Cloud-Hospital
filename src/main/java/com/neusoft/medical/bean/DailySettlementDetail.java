@@ -7,7 +7,7 @@ public class DailySettlementDetail {
 
     private Integer registrationId;
 
-    private String patientname;
+    private String patientName;
 
     private Double invoiceTotalAmount;
 
@@ -23,11 +23,11 @@ public class DailySettlementDetail {
 
     private Integer settlementCategoryId;
 
-    public DailySettlementDetail(Integer dailySettlementDetailId, Integer invoiceNums, Integer registrationId, String patientname, Double invoiceTotalAmount, Double selfPay, Double accountPay, Double reimbursementPay, Double discounted, Integer dailySettlementDetailState, Integer settlementCategoryId) {
+    public DailySettlementDetail(Integer dailySettlementDetailId, Integer invoiceNums, Integer registrationId, String patientName, Double invoiceTotalAmount, Double selfPay, Double accountPay, Double reimbursementPay, Double discounted, Integer dailySettlementDetailState, Integer settlementCategoryId) {
         this.dailySettlementDetailId = dailySettlementDetailId;
         this.invoiceNums = invoiceNums;
         this.registrationId = registrationId;
-        this.patientname = patientname;
+        this.patientName = patientName;
         this.invoiceTotalAmount = invoiceTotalAmount;
         this.selfPay = selfPay;
         this.accountPay = accountPay;
@@ -65,12 +65,12 @@ public class DailySettlementDetail {
         this.registrationId = registrationId;
     }
 
-    public String getPatientname() {
-        return patientname;
+    public String getPatientName() {
+        return patientName;
     }
 
-    public void setPatientname(String patientname) {
-        this.patientname = patientname == null ? null : patientname.trim();
+    public void setPatientName(String patientName) {
+        this.patientName = patientName == null ? null : patientName.trim();
     }
 
     public Double getInvoiceTotalAmount() {

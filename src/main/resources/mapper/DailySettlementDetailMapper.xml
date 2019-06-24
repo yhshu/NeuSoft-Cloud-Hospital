@@ -6,7 +6,7 @@
       <idArg column="daily_settlement_detail_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="invoice_nums" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="registration_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="patientName" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="patient_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="invoice_total_amount" javaType="java.lang.Double" jdbcType="DOUBLE" />
       <arg column="self_pay" javaType="java.lang.Double" jdbcType="DOUBLE" />
       <arg column="account_pay" javaType="java.lang.Double" jdbcType="DOUBLE" />
@@ -75,7 +75,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    daily_settlement_detail_id, invoice_nums, registration_id, patientName, invoice_total_amount, 
+    daily_settlement_detail_id, invoice_nums, registration_id, patient_name, invoice_total_amount, 
     self_pay, account_pay, reimbursement_pay, discounted, daily_settlement_detail_state, 
     settlement_category_id
   </sql>
@@ -111,8 +111,8 @@
       <if test="registrationId != null">
         registration_id,
       </if>
-      <if test="patientname != null">
-        patientName,
+      <if test="patientName != null">
+        patient_name,
       </if>
       <if test="invoiceTotalAmount != null">
         invoice_total_amount,
@@ -143,8 +143,8 @@
       <if test="registrationId != null">
         #{registrationId,jdbcType=INTEGER},
       </if>
-      <if test="patientname != null">
-        #{patientname,jdbcType=VARCHAR},
+      <if test="patientName != null">
+        #{patientName,jdbcType=VARCHAR},
       </if>
       <if test="invoiceTotalAmount != null">
         #{invoiceTotalAmount,jdbcType=DOUBLE},
@@ -187,8 +187,8 @@
       <if test="record.registrationId != null">
         registration_id = #{record.registrationId,jdbcType=INTEGER},
       </if>
-      <if test="record.patientname != null">
-        patientName = #{record.patientname,jdbcType=VARCHAR},
+      <if test="record.patientName != null">
+        patient_name = #{record.patientName,jdbcType=VARCHAR},
       </if>
       <if test="record.invoiceTotalAmount != null">
         invoice_total_amount = #{record.invoiceTotalAmount,jdbcType=DOUBLE},
@@ -221,7 +221,7 @@
     set daily_settlement_detail_id = #{record.dailySettlementDetailId,jdbcType=INTEGER},
       invoice_nums = #{record.invoiceNums,jdbcType=INTEGER},
       registration_id = #{record.registrationId,jdbcType=INTEGER},
-      patient_name = #{record.patientname,jdbcType=VARCHAR},
+      patient_name = #{record.patientName,jdbcType=VARCHAR},
       invoice_total_amount = #{record.invoiceTotalAmount,jdbcType=DOUBLE},
       self_pay = #{record.selfPay,jdbcType=DOUBLE},
       account_pay = #{record.accountPay,jdbcType=DOUBLE},
@@ -242,8 +242,8 @@
       <if test="registrationId != null">
         registration_id = #{registrationId,jdbcType=INTEGER},
       </if>
-      <if test="patientname != null">
-        patientName = #{patientname,jdbcType=VARCHAR},
+      <if test="patientName != null">
+        patient_name = #{patientName,jdbcType=VARCHAR},
       </if>
       <if test="invoiceTotalAmount != null">
         invoice_total_amount = #{invoiceTotalAmount,jdbcType=DOUBLE},

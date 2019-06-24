@@ -6,7 +6,7 @@
       <idArg column="daily_settlement_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="collector_account_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="collector_real_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="daily_settlement_date" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="daily_settlement_date" javaType="java.util.Date" jdbcType="TIMESTAMP" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -114,7 +114,7 @@
         #{collectorRealName,jdbcType=VARCHAR},
       </if>
       <if test="dailySettlementDate != null">
-        #{dailySettlementDate,jdbcType=DATE},
+        #{dailySettlementDate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -137,7 +137,7 @@
         collector_real_name = #{record.collectorRealName,jdbcType=VARCHAR},
       </if>
       <if test="record.dailySettlementDate != null">
-        daily_settlement_date = #{record.dailySettlementDate,jdbcType=DATE},
+        daily_settlement_date = #{record.dailySettlementDate,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null">
@@ -149,7 +149,7 @@
     set daily_settlement_id = #{record.dailySettlementId,jdbcType=INTEGER},
       collector_account_id = #{record.collectorAccountId,jdbcType=INTEGER},
       collector_real_name = #{record.collectorRealName,jdbcType=VARCHAR},
-      daily_settlement_date = #{record.dailySettlementDate,jdbcType=DATE}
+      daily_settlement_date = #{record.dailySettlementDate,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -164,7 +164,7 @@
         collector_real_name = #{collectorRealName,jdbcType=VARCHAR},
       </if>
       <if test="dailySettlementDate != null">
-        daily_settlement_date = #{dailySettlementDate,jdbcType=DATE},
+        daily_settlement_date = #{dailySettlementDate,jdbcType=TIMESTAMP},
       </if>
     </set>
     where daily_settlement_id = #{dailySettlementId,jdbcType=INTEGER}

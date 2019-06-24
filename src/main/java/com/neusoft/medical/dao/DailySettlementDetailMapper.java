@@ -19,12 +19,12 @@ public interface DailySettlementDetailMapper {
 
     @Insert({
         "insert into hospital.daily_settlement_detail (invoice_nums, registration_id, ",
-        "patientName, invoice_total_amount, ",
+        "patient_name, invoice_total_amount, ",
         "self_pay, account_pay, ",
         "reimbursement_pay, discounted, ",
         "daily_settlement_detail_state, settlement_category_id)",
         "values (#{invoiceNums,jdbcType=INTEGER}, #{registrationId,jdbcType=INTEGER}, ",
-        "#{patientname,jdbcType=VARCHAR}, #{invoiceTotalAmount,jdbcType=DOUBLE}, ",
+        "#{patientName,jdbcType=VARCHAR}, #{invoiceTotalAmount,jdbcType=DOUBLE}, ",
         "#{selfPay,jdbcType=DOUBLE}, #{accountPay,jdbcType=DOUBLE}, ",
         "#{reimbursementPay,jdbcType=DOUBLE}, #{discounted,jdbcType=DOUBLE}, ",
         "#{dailySettlementDetailState,jdbcType=INTEGER}, #{settlementCategoryId,jdbcType=INTEGER})"
@@ -38,7 +38,7 @@ public interface DailySettlementDetailMapper {
 
     @Select({
         "select",
-        "daily_settlement_detail_id, invoice_nums, registration_id, patientName, invoice_total_amount, ",
+        "daily_settlement_detail_id, invoice_nums, registration_id, patient_name, invoice_total_amount, ",
         "self_pay, account_pay, reimbursement_pay, discounted, daily_settlement_detail_state, ",
         "settlement_category_id",
         "from hospital.daily_settlement_detail",
@@ -57,7 +57,7 @@ public interface DailySettlementDetailMapper {
         "update hospital.daily_settlement_detail",
         "set invoice_nums = #{invoiceNums,jdbcType=INTEGER},",
           "registration_id = #{registrationId,jdbcType=INTEGER},",
-          "patientName = #{patientname,jdbcType=VARCHAR},",
+          "patient_name = #{patientName,jdbcType=VARCHAR},",
           "invoice_total_amount = #{invoiceTotalAmount,jdbcType=DOUBLE},",
           "self_pay = #{selfPay,jdbcType=DOUBLE},",
           "account_pay = #{accountPay,jdbcType=DOUBLE},",
