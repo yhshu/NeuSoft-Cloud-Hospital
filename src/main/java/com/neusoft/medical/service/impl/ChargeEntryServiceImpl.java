@@ -62,8 +62,9 @@ public class ChargeEntryServiceImpl implements ChargeEntryService {
         return new PageInfo<>(chargeEntryList);
     }
 
+
     @Override
-    public boolean addChargeEntryToForm(int chargeItemId, int registrationId, int itemCount, int collectorId, String doctorAdvice, int examinationId, int chargeFormId) {
+    public boolean addChargeEntryToForm(Integer chargeItemId, Integer registrationId, Integer itemCount, Integer collectorId, String doctorAdvice, Integer examinationId, Integer chargeFormId) {
         try {
             // 获取添加到收费账单中的所需字段
             Date currentDate = new Date();
