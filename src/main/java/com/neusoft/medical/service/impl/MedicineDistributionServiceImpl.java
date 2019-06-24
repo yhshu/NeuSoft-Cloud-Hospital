@@ -1,7 +1,6 @@
 package com.neusoft.medical.service.impl;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
+import com.google.gson.*;
 import com.neusoft.medical.bean.Prescription;
 import com.neusoft.medical.bean.PrescriptionEntry;
 import com.neusoft.medical.bean.PrescriptionEntryExample;
@@ -13,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+
+import static java.lang.Math.max;
 
 @Service
 public class MedicineDistributionServiceImpl implements MedicineDistributionService {
@@ -48,7 +49,21 @@ public class MedicineDistributionServiceImpl implements MedicineDistributionServ
 
     @Override
     public Boolean prescriptionEntryDelivery(String prescriptionEntryListJson) {
-        // todo
-        return null;
+        try {
+            JsonArray prescriptionEntryListJsonArray = new JsonParser().parse(prescriptionEntryListJson).getAsJsonArray();
+            for (JsonElement prescriptionEntryJsonElement : prescriptionEntryListJsonArray) {
+                JsonObject prescriptionEntryJsonObject = prescriptionEntryJsonElement.getAsJsonObject();
+                Integer prescriptionEntryId = prescriptionEntryJsonObject.get("prescriptionEntryId").getAsInt();
+                Integer executionNums = prescriptionEntryJsonObject.get("executionNums").getAsInt();
+
+                PrescriptionEntry prescriptionEntry = prescriptionEntryMapper.selectByPrimaryKey(prescriptionEntryId);
+                prescriptionEntry.setNotGivenNums(max(0, prescriptionEntry.getNotGivenNums() - executionNums));
+                prescriptionEntryMapper.updateByPrimaryKeySelective(prescriptionEntry);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }
