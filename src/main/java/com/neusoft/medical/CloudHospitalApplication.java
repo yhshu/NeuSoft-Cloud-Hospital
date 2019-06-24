@@ -1,9 +1,12 @@
 package com.neusoft.medical;
 
+import com.neusoft.medical.service.StoreService;
 import org.apache.log4j.Logger;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
@@ -12,9 +15,18 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 
 @SpringBootApplication
 @MapperScan(basePackages = "com.neusoft.medical.dao")
+@EnableConfigurationProperties
 @EnableWebSecurity
 public class CloudHospitalApplication {
-    private static Logger log = Logger.getLogger(CloudHospitalApplication.class);
+    private static Logger logger = Logger.getLogger(CloudHospitalApplication.class);
+
+    @Bean
+    CommandLineRunner init(StoreService storagService) {
+        return (args) -> {
+            storagService.deleteAll();
+            storagService.init();
+        };
+    }
 
     /**
      * 允许传输特定字符
@@ -28,6 +40,6 @@ public class CloudHospitalApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(CloudHospitalApplication.class, args);
-        log.info("SpringBoot main function has started");
+        logger.info("SpringBoot main function has started");
     }
 }

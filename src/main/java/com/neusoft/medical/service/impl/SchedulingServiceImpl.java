@@ -123,12 +123,12 @@ public class SchedulingServiceImpl implements SchedulingService {
         try {
             SchedulingRule schedulingRuleRecord = new SchedulingRule(null, weekday, departmentId, doctorId, registrationCategoryId, noon, limitation, accountId, new Date(), 1);
             if (schedulingRuleId != null) {
-                // 新增排班规则
-                schedulingRuleMapper.insert(schedulingRuleRecord);
-            } else {
                 // 更新排班规则
                 schedulingRuleRecord.setSchedulingRuleId(schedulingRuleId);
-                schedulingRuleMapper.updateByPrimaryKey(schedulingRuleRecord);
+                schedulingRuleMapper.updateByPrimaryKeySelective(schedulingRuleRecord);
+            } else {
+                // 新增排班规则
+                schedulingRuleMapper.insert(schedulingRuleRecord);
             }
         } catch (Exception e) {
             e.printStackTrace();
