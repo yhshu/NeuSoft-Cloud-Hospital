@@ -1,6 +1,7 @@
 package com.neusoft.medical.controller.registration;
 
 import com.github.pagehelper.PageInfo;
+import com.neusoft.medical.Util.DateTimeConverter;
 import com.neusoft.medical.bean.DailySettlement;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.registration.DailySettlementService;
@@ -10,12 +11,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/daily_settlement")
 public class DailySettlementController {
     @Resource
     private DailySettlementService dailySettlementService;
+    @Resource
+    private DateTimeConverter dateTimeConverter;
 
     /**
      * 获取所有日结信息列表
@@ -40,7 +44,7 @@ public class DailySettlementController {
 
     /**
      * 获取指定起止时间和收费员的日结记录列表
-     * 日期格式 yyyy-MM-dd
+     * 日期格式 yyyy-MM-dd HH:mm:ss
      *
      * @param startDatetime 统计的开始时间
      * @param endDatetime   统计的结束时间
@@ -57,8 +61,16 @@ public class DailySettlementController {
             @RequestParam(value = "currentPage") Integer currentPage,
             @RequestParam(value = "pageSize") Integer pageSize) {
 
-        // todo
-        return null;
+        PageInfo<DailySettlement> dailySettlementPageInfo = null;
+
+        try {
+            Date startDatetimeConverted = dateTimeConverter.convert(startDatetime);
+            Date endDatetimeConverted = dateTimeConverter.convert(endDatetime);
+            dailySettlementPageInfo = dailySettlementService.selectDailySettlementList(startDatetimeConverted, endDatetimeConverted, collectorId, currentPage, pageSize);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResultDTO<>(dailySettlementPageInfo);
     }
 
     /**
