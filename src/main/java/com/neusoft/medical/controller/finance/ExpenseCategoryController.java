@@ -4,11 +4,10 @@ import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.ExpenseCategory;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.finance.ExpenseCategoryService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 
 /**
  * 费用科目管理
@@ -26,6 +25,7 @@ public class ExpenseCategoryController {
      * @param pageSize    页面大小
      * @return 分页的费用科目列表
      */
+    @GetMapping("/select")
     public ResultDTO<PageInfo<ExpenseCategory>> selectExpenseCategory(
             @RequestParam(value = "currentPage") Integer currentPage,
             @RequestParam(value = "pageSize") Integer pageSize
@@ -45,11 +45,12 @@ public class ExpenseCategoryController {
      * @param expenseCategoryJson 费用科目信息，json 字符串
      * @return 操作结果
      * expenseCategoryJson 中的属性包括：
-     * - expenseCategoryId 费用科目编号
+     * - expenseCategoryId 费用科目编号（新增时不填，更新时必填）
      * - expenseCode 费用代码
      * - expenseName 费用名称
      */
-    public ResultDTO<Boolean> saveExpenseCategory(String expenseCategoryJson) {
+    @PostMapping("/save")
+    public ResultDTO<Boolean> saveExpenseCategory(@RequestParam(value = "expenseCategoryJson") String expenseCategoryJson) {
         boolean res;
         try {
             res = expenseCategoryService.saveExpenseCategory(expenseCategoryJson);
@@ -66,8 +67,15 @@ public class ExpenseCategoryController {
      * @param expenseCategoryIdList 费用科目编号列表
      * @return 操作结果
      */
+    @DeleteMapping("/delete")
     public ResultDTO<Boolean> deleteExpenseCategory(@RequestParam(value = "expenseCategoryIdList[]") Integer[] expenseCategoryIdList) {
-        // todo
-        return null;
+        boolean res;
+        try {
+            res = expenseCategoryService.deleteExpenseCategory(Arrays.asList(expenseCategoryIdList));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultDTO<>(Boolean.FALSE);
+        }
+        return new ResultDTO<>(res);
     }
 }

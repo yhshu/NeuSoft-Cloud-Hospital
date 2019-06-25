@@ -83,10 +83,11 @@ public class ChargeEntryServiceImpl implements ChargeEntryService {
     public boolean deleteChargeItemInForm(List<Integer> chargeItemIdList) {
         try {
             ChargeEntryExample chargeEntryExample = new ChargeEntryExample();
-            ChargeEntryExample.Criteria criteria = chargeEntryExample.createCriteria();
-            criteria.andValidEqualTo(1);
-            criteria.andChargeEntryIdIn(chargeItemIdList);
-            chargeEntryMapper.deleteByExample(chargeEntryExample);
+            chargeEntryExample.or().andValidEqualTo(1).andChargeEntryIdIn(chargeItemIdList);
+
+            ChargeEntry chargeEntryRecord = new ChargeEntry();
+            chargeEntryRecord.setValid(0);
+            chargeEntryMapper.updateByExample(chargeEntryRecord, chargeEntryExample);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
