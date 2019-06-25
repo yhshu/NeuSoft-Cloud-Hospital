@@ -1,10 +1,14 @@
 package com.neusoft.medical.controller.finance;
 
+import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.ExpenseCategory;
 import com.neusoft.medical.dto.ResultDTO;
+import com.neusoft.medical.service.finance.ExpenseCategoryService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
 
 /**
  * 费用科目管理
@@ -12,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/expense_category")
 public class ExpenseCategoryController {
+    @Resource
+    private ExpenseCategoryService expenseCategoryService;
 
     /**
      * 获取分页的费用科目列表
@@ -20,12 +26,17 @@ public class ExpenseCategoryController {
      * @param pageSize    页面大小
      * @return 分页的费用科目列表
      */
-    public ResultDTO<ExpenseCategory> selectExpenseCategory(
+    public ResultDTO<PageInfo<ExpenseCategory>> selectExpenseCategory(
             @RequestParam(value = "currentPage") Integer currentPage,
             @RequestParam(value = "pageSize") Integer pageSize
     ) {
-        // todo
-        return null;
+        PageInfo<ExpenseCategory> expenseCategoryPageInfo = null;
+        try {
+            expenseCategoryPageInfo = expenseCategoryService.selectExpenseCategory(currentPage, pageSize);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResultDTO<>(expenseCategoryPageInfo);
     }
 
     /**

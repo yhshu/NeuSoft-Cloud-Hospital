@@ -29,7 +29,7 @@ public class DailySettlementController {
             @RequestParam(value = "currentPage") Integer currentPage,
             @RequestParam(value = "pageSize") Integer pageSize
     ) {
-        PageInfo<DailySettlement> res;
+        PageInfo<DailySettlement> res = null;
         try {
             res = dailySettlementService.selectAllDailySettlementList(currentPage, pageSize);
         } catch (Exception e) {
@@ -56,6 +56,7 @@ public class DailySettlementController {
             @RequestParam(value = "currentPage") Integer currentPage,
             @RequestParam(value = "pageSize") Integer pageSize) {
 // todo
+        return null;
     }
 
     /**
