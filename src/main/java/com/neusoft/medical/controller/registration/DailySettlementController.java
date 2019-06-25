@@ -44,7 +44,7 @@ public class DailySettlementController {
 
     /**
      * 获取指定起止时间和收费员的日结记录列表
-     * 日期格式 yyyy-MM-dd HH:mm:ss
+     * 时间格式 yyyy-MM-dd HH:mm:ss
      *
      * @param startDatetime 统计的开始时间
      * @param endDatetime   统计的结束时间
@@ -75,16 +75,30 @@ public class DailySettlementController {
 
     /**
      * 生成收费员的日结记录
+     * 时间格式 yyyy-MM-dd HH:mm:ss
      *
      * @param collectorId 收费员编号
+     * @param endDatetime 日结的截止时间（选填，默认为当前时间）
      * @return 操作结果
      */
     @GetMapping("/generate")
     public ResultDTO<Boolean> generateDailySettlement(
-            @RequestParam(value = "collectorId") Integer collectorId
+            @RequestParam(value = "collectorId") Integer collectorId,
+            @RequestParam(value = "endDatetime", required = false) String endDatetime
     ) {
-        // todo
-        return null;
+        boolean res;
+        try {
+            Date endDatetimeConverted;
+            if (endDatetime != null)
+                endDatetimeConverted = dateTimeConverter.convert(endDatetime);
+            else
+                endDatetimeConverted = new Date();
+            res = dailySettlementService.generateDailySettlement(collectorId, endDatetimeConverted);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultDTO<>(Boolean.FALSE);
+        }
+        return new ResultDTO<>(res);
     }
 
     /**
@@ -97,15 +111,16 @@ public class DailySettlementController {
      */
     @GetMapping("/select_daily_settlement_detail")
     public ResultDTO<PageInfo<String>> selectDailySettlementDetail(
-            @RequestParam(value = "daily_settlement_id") Integer dailySettlementId,
+            @RequestParam(value = "dailySettlementId") Integer dailySettlementId,
             @RequestParam(value = "currentPage") Integer currentPage,
             @RequestParam(value = "pageSize") Integer pageSize) {
+        PageInfo<String> res = null;
         try {
-            // todo
+            res = dailySettlementService.selectDailySettlementDetail(dailySettlementId, currentPage, pageSize);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return new ResultDTO<>(res);
     }
 
     /**
@@ -118,14 +133,33 @@ public class DailySettlementController {
     public ResultDTO<String> dailySettlementDocument(
             @RequestParam(value = "dailySettlementId") Integer dailySettlementId
     ) {
-        return null;
+        String res = null;
+        try {
+            res = dailySettlementService.dailySettlementDocument(dailySettlementId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResultDTO<>(res);
     }
 
+    /**
+     * 门诊日结核对
+     * 财务核对挂号收费员的报账
+     *
+     * @param dailySettlementId 日结记录编号
+     * @return 操作结果
+     */
     @GetMapping("/check")
     public ResultDTO<Boolean> checkDailySettlement(
             @RequestParam(value = "dailySettlementId") Integer dailySettlementId
     ) {
-        return null;
+        boolean res;
+        try {
+            res = dailySettlementService.checkDailySettlement(dailySettlementId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultDTO<>(Boolean.FALSE);
+        }
+        return new ResultDTO<>(res);
     }
-
 }

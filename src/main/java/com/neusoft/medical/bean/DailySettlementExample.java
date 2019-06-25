@@ -355,6 +355,66 @@ public class DailySettlementExample {
             return (Criteria) this;
         }
 
+        public Criteria andCheckedIsNull() {
+            addCriterion("checked is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckedIsNotNull() {
+            addCriterion("checked is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckedEqualTo(Integer value) {
+            addCriterion("checked =", value, "checked");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckedNotEqualTo(Integer value) {
+            addCriterion("checked <>", value, "checked");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckedGreaterThan(Integer value) {
+            addCriterion("checked >", value, "checked");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckedGreaterThanOrEqualTo(Integer value) {
+            addCriterion("checked >=", value, "checked");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckedLessThan(Integer value) {
+            addCriterion("checked <", value, "checked");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckedLessThanOrEqualTo(Integer value) {
+            addCriterion("checked <=", value, "checked");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckedIn(List<Integer> values) {
+            addCriterion("checked in", values, "checked");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckedNotIn(List<Integer> values) {
+            addCriterion("checked not in", values, "checked");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckedBetween(Integer value1, Integer value2) {
+            addCriterion("checked between", value1, value2, "checked");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckedNotBetween(Integer value1, Integer value2) {
+            addCriterion("checked not between", value1, value2, "checked");
+            return (Criteria) this;
+        }
+
         public Criteria andValidIsNull() {
             addCriterion("valid is null");
             return (Criteria) this;

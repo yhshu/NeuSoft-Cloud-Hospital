@@ -26,6 +26,8 @@ public class ChargeController {
      * checkoutJson 是一个 json 字符串，其属性包括：
      * - invoiceTitle 支付者
      * - collectorId 收银员编号
+     * - invoiceNums 发票数量
+     * - registrationId 挂号单编号
      * - invoiceAmount 找零后的实际入账金额
      * - selfPay 自费支付金额
      * - accountPay 账户支付金额

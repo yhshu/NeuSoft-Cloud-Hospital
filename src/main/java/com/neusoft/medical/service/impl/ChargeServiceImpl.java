@@ -36,6 +36,8 @@ public class ChargeServiceImpl implements ChargeService {
 
             String invoiceTitle = checkoutJsonObject.get("invoiceTitle").getAsString();
             int collectorId = checkoutJsonObject.get("collectorId").getAsInt();
+            int invoiceNums = checkoutJsonObject.get("invoiceNums").getAsInt();
+            int registrationId = checkoutJsonObject.get("registrationId").getAsInt();
             double invoiceAmount = checkoutJsonObject.get("invoiceAmount").getAsDouble();
             double selfPay = checkoutJsonObject.get("selfPay").getAsDouble();
             double accountPay = checkoutJsonObject.get("accountPay").getAsDouble();
@@ -65,7 +67,7 @@ public class ChargeServiceImpl implements ChargeService {
                 }
 
                 // 处理支付记录
-                Invoice invoiceRecord = new Invoice(null, invoiceTitle, collectorId, new Date(), invoiceAmount, selfPay, accountPay, reimbursementPay, discounted, Constant.INVOICE_VALID, 1);
+                Invoice invoiceRecord = new Invoice(null, invoiceTitle, invoiceNums, collectorId, registrationId, new Date(), invoiceAmount, selfPay, accountPay, reimbursementPay, discounted, Constant.INVOICE_VALID, 1);
                 invoiceMapper.insert(invoiceRecord);
             }
 

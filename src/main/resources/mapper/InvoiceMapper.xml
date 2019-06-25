@@ -5,7 +5,9 @@
     <constructor>
       <idArg column="invoice_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="invoice_title" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="invoice_nums" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="collector_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="registration_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="pay_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="invoice_amount" javaType="java.lang.Double" jdbcType="DOUBLE" />
       <arg column="self_pay" javaType="java.lang.Double" jdbcType="DOUBLE" />
@@ -75,8 +77,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    invoice_id, invoice_title, collector_id, pay_time, invoice_amount, self_pay, account_pay, 
-    reimbursement_pay, discounted, invoice_state, valid
+    invoice_id, invoice_title, invoice_nums, collector_id, registration_id, pay_time, 
+    invoice_amount, self_pay, account_pay, reimbursement_pay, discounted, invoice_state, 
+    valid
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.InvoiceExample" resultMap="BaseResultMap">
     select
@@ -107,8 +110,14 @@
       <if test="invoiceTitle != null">
         invoice_title,
       </if>
+      <if test="invoiceNums != null">
+        invoice_nums,
+      </if>
       <if test="collectorId != null">
         collector_id,
+      </if>
+      <if test="registrationId != null">
+        registration_id,
       </if>
       <if test="payTime != null">
         pay_time,
@@ -139,8 +148,14 @@
       <if test="invoiceTitle != null">
         #{invoiceTitle,jdbcType=VARCHAR},
       </if>
+      <if test="invoiceNums != null">
+        #{invoiceNums,jdbcType=INTEGER},
+      </if>
       <if test="collectorId != null">
         #{collectorId,jdbcType=INTEGER},
+      </if>
+      <if test="registrationId != null">
+        #{registrationId,jdbcType=INTEGER},
       </if>
       <if test="payTime != null">
         #{payTime,jdbcType=TIMESTAMP},
@@ -183,8 +198,14 @@
       <if test="record.invoiceTitle != null">
         invoice_title = #{record.invoiceTitle,jdbcType=VARCHAR},
       </if>
+      <if test="record.invoiceNums != null">
+        invoice_nums = #{record.invoiceNums,jdbcType=INTEGER},
+      </if>
       <if test="record.collectorId != null">
         collector_id = #{record.collectorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.registrationId != null">
+        registration_id = #{record.registrationId,jdbcType=INTEGER},
       </if>
       <if test="record.payTime != null">
         pay_time = #{record.payTime,jdbcType=TIMESTAMP},
@@ -219,7 +240,9 @@
     update hospital.invoice
     set invoice_id = #{record.invoiceId,jdbcType=INTEGER},
       invoice_title = #{record.invoiceTitle,jdbcType=VARCHAR},
+      invoice_nums = #{record.invoiceNums,jdbcType=INTEGER},
       collector_id = #{record.collectorId,jdbcType=INTEGER},
+      registration_id = #{record.registrationId,jdbcType=INTEGER},
       pay_time = #{record.payTime,jdbcType=TIMESTAMP},
       invoice_amount = #{record.invoiceAmount,jdbcType=DOUBLE},
       self_pay = #{record.selfPay,jdbcType=DOUBLE},
@@ -238,8 +261,14 @@
       <if test="invoiceTitle != null">
         invoice_title = #{invoiceTitle,jdbcType=VARCHAR},
       </if>
+      <if test="invoiceNums != null">
+        invoice_nums = #{invoiceNums,jdbcType=INTEGER},
+      </if>
       <if test="collectorId != null">
         collector_id = #{collectorId,jdbcType=INTEGER},
+      </if>
+      <if test="registrationId != null">
+        registration_id = #{registrationId,jdbcType=INTEGER},
       </if>
       <if test="payTime != null">
         pay_time = #{payTime,jdbcType=TIMESTAMP},

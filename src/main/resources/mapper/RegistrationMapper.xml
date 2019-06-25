@@ -18,7 +18,7 @@
       <arg column="department_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="doctor_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="registration_source" javaType="java.lang.String" jdbcType="CHAR" />
-      <arg column="settle_accounts_category" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="settlement_category_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="is_visited" javaType="java.lang.String" jdbcType="CHAR" />
       <arg column="family_address" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="collector_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
@@ -90,7 +90,7 @@
   <sql id="Base_Column_List">
     registration_id, patient_id, patient_name, registration_category_id, gender, age, 
     birthday, medical_category, identity_card_no, registration_status, visit_date, registration_date, 
-    department_id, doctor_id, registration_source, settle_accounts_category, is_visited, 
+    department_id, doctor_id, registration_source, settlement_category_id, is_visited, 
     family_address, collector_id, total_charge, valid, reserve1, reserve2, reserve3
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.RegistrationExample" resultMap="BaseResultMap">
@@ -161,8 +161,8 @@
       <if test="registrationSource != null">
         registration_source,
       </if>
-      <if test="settleAccountsCategory != null">
-        settle_accounts_category,
+      <if test="settlementCategoryId != null">
+        settlement_category_id,
       </if>
       <if test="isVisited != null">
         is_visited,
@@ -232,8 +232,8 @@
       <if test="registrationSource != null">
         #{registrationSource,jdbcType=CHAR},
       </if>
-      <if test="settleAccountsCategory != null">
-        #{settleAccountsCategory,jdbcType=CHAR},
+      <if test="settlementCategoryId != null">
+        #{settlementCategoryId,jdbcType=INTEGER},
       </if>
       <if test="isVisited != null">
         #{isVisited,jdbcType=CHAR},
@@ -315,8 +315,8 @@
       <if test="record.registrationSource != null">
         registration_source = #{record.registrationSource,jdbcType=CHAR},
       </if>
-      <if test="record.settleAccountsCategory != null">
-        settle_accounts_category = #{record.settleAccountsCategory,jdbcType=CHAR},
+      <if test="record.settlementCategoryId != null">
+        settlement_category_id = #{record.settlementCategoryId,jdbcType=INTEGER},
       </if>
       <if test="record.isVisited != null">
         is_visited = #{record.isVisited,jdbcType=CHAR},
@@ -364,7 +364,7 @@
       department_id = #{record.departmentId,jdbcType=INTEGER},
       doctor_id = #{record.doctorId,jdbcType=INTEGER},
       registration_source = #{record.registrationSource,jdbcType=CHAR},
-      settle_accounts_category = #{record.settleAccountsCategory,jdbcType=CHAR},
+      settlement_category_id = #{record.settlementCategoryId,jdbcType=INTEGER},
       is_visited = #{record.isVisited,jdbcType=CHAR},
       family_address = #{record.familyAddress,jdbcType=VARCHAR},
       collector_id = #{record.collectorId,jdbcType=INTEGER},
@@ -422,8 +422,8 @@
       <if test="registrationSource != null">
         registration_source = #{registrationSource,jdbcType=CHAR},
       </if>
-      <if test="settleAccountsCategory != null">
-        settle_accounts_category = #{settleAccountsCategory,jdbcType=CHAR},
+      <if test="settlementCategoryId != null">
+        settlement_category_id = #{settlementCategoryId,jdbcType=INTEGER},
       </if>
       <if test="isVisited != null">
         is_visited = #{isVisited,jdbcType=CHAR},

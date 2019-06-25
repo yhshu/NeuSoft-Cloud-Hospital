@@ -2,14 +2,9 @@ package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.ChargeForm;
 import com.neusoft.medical.bean.ChargeFormExample;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
-import org.apache.ibatis.annotations.Update;
 
 public interface ChargeFormMapper {
     long countByExample(ChargeFormExample example);

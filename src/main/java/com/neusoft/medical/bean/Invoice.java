@@ -7,7 +7,11 @@ public class Invoice {
 
     private String invoiceTitle;
 
+    private Integer invoiceNums;
+
     private Integer collectorId;
+
+    private Integer registrationId;
 
     private Date payTime;
 
@@ -25,10 +29,12 @@ public class Invoice {
 
     private Integer valid;
 
-    public Invoice(Integer invoiceId, String invoiceTitle, Integer collectorId, Date payTime, Double invoiceAmount, Double selfPay, Double accountPay, Double reimbursementPay, Double discounted, Integer invoiceState, Integer valid) {
+    public Invoice(Integer invoiceId, String invoiceTitle, Integer invoiceNums, Integer collectorId, Integer registrationId, Date payTime, Double invoiceAmount, Double selfPay, Double accountPay, Double reimbursementPay, Double discounted, Integer invoiceState, Integer valid) {
         this.invoiceId = invoiceId;
         this.invoiceTitle = invoiceTitle;
+        this.invoiceNums = invoiceNums;
         this.collectorId = collectorId;
+        this.registrationId = registrationId;
         this.payTime = payTime;
         this.invoiceAmount = invoiceAmount;
         this.selfPay = selfPay;
@@ -59,12 +65,28 @@ public class Invoice {
         this.invoiceTitle = invoiceTitle == null ? null : invoiceTitle.trim();
     }
 
+    public Integer getInvoiceNums() {
+        return invoiceNums;
+    }
+
+    public void setInvoiceNums(Integer invoiceNums) {
+        this.invoiceNums = invoiceNums;
+    }
+
     public Integer getCollectorId() {
         return collectorId;
     }
 
     public void setCollectorId(Integer collectorId) {
         this.collectorId = collectorId;
+    }
+
+    public Integer getRegistrationId() {
+        return registrationId;
+    }
+
+    public void setRegistrationId(Integer registrationId) {
+        this.registrationId = registrationId;
     }
 
     public Date getPayTime() {

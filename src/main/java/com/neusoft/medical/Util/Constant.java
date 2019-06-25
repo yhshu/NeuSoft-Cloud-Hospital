@@ -81,4 +81,6 @@ public interface Constant {
      * 支付记录状态
      */
     int INVOICE_VALID = 1;                  // 有效
+    int INVOICE_RUSHED = 2;                 // 红冲
+    int INVOICE_REINVOICE = 3;              // 重打
 }

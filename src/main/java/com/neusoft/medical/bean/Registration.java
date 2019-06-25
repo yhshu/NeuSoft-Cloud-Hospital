@@ -33,7 +33,7 @@ public class Registration {
 
     private String registrationSource;
 
-    private String settleAccountsCategory;
+    private Integer settlementCategoryId;
 
     private String isVisited;
 
@@ -51,7 +51,7 @@ public class Registration {
 
     private String reserve3;
 
-    public Registration(Integer registrationId, Integer patientId, String patientName, Integer registrationCategoryId, String gender, Integer age, Date birthday, String medicalCategory, String identityCardNo, String registrationStatus, Date visitDate, Date registrationDate, Integer departmentId, Integer doctorId, String registrationSource, String settleAccountsCategory, String isVisited, String familyAddress, Integer collectorId, Integer totalCharge, Integer valid, String reserve1, String reserve2, String reserve3) {
+    public Registration(Integer registrationId, Integer patientId, String patientName, Integer registrationCategoryId, String gender, Integer age, Date birthday, String medicalCategory, String identityCardNo, String registrationStatus, Date visitDate, Date registrationDate, Integer departmentId, Integer doctorId, String registrationSource, Integer settlementCategoryId, String isVisited, String familyAddress, Integer collectorId, Integer totalCharge, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.registrationId = registrationId;
         this.patientId = patientId;
         this.patientName = patientName;
@@ -67,7 +67,7 @@ public class Registration {
         this.departmentId = departmentId;
         this.doctorId = doctorId;
         this.registrationSource = registrationSource;
-        this.settleAccountsCategory = settleAccountsCategory;
+        this.settlementCategoryId = settlementCategoryId;
         this.isVisited = isVisited;
         this.familyAddress = familyAddress;
         this.collectorId = collectorId;
@@ -202,12 +202,12 @@ public class Registration {
         this.registrationSource = registrationSource == null ? null : registrationSource.trim();
     }
 
-    public String getSettleAccountsCategory() {
-        return settleAccountsCategory;
+    public Integer getSettlementCategoryId() {
+        return settlementCategoryId;
     }
 
-    public void setSettleAccountsCategory(String settleAccountsCategory) {
-        this.settleAccountsCategory = settleAccountsCategory == null ? null : settleAccountsCategory.trim();
+    public void setSettlementCategoryId(Integer settlementCategoryId) {
+        this.settlementCategoryId = settlementCategoryId;
     }
 
     public String getIsVisited() {

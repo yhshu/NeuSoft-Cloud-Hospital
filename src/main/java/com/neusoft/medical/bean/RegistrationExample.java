@@ -1092,73 +1092,63 @@ public class RegistrationExample {
             return (Criteria) this;
         }
 
-        public Criteria andSettleAccountsCategoryIsNull() {
-            addCriterion("settle_accounts_category is null");
+        public Criteria andSettlementCategoryIdIsNull() {
+            addCriterion("settlement_category_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andSettleAccountsCategoryIsNotNull() {
-            addCriterion("settle_accounts_category is not null");
+        public Criteria andSettlementCategoryIdIsNotNull() {
+            addCriterion("settlement_category_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSettleAccountsCategoryEqualTo(String value) {
-            addCriterion("settle_accounts_category =", value, "settleAccountsCategory");
+        public Criteria andSettlementCategoryIdEqualTo(Integer value) {
+            addCriterion("settlement_category_id =", value, "settlementCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andSettleAccountsCategoryNotEqualTo(String value) {
-            addCriterion("settle_accounts_category <>", value, "settleAccountsCategory");
+        public Criteria andSettlementCategoryIdNotEqualTo(Integer value) {
+            addCriterion("settlement_category_id <>", value, "settlementCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andSettleAccountsCategoryGreaterThan(String value) {
-            addCriterion("settle_accounts_category >", value, "settleAccountsCategory");
+        public Criteria andSettlementCategoryIdGreaterThan(Integer value) {
+            addCriterion("settlement_category_id >", value, "settlementCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andSettleAccountsCategoryGreaterThanOrEqualTo(String value) {
-            addCriterion("settle_accounts_category >=", value, "settleAccountsCategory");
+        public Criteria andSettlementCategoryIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("settlement_category_id >=", value, "settlementCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andSettleAccountsCategoryLessThan(String value) {
-            addCriterion("settle_accounts_category <", value, "settleAccountsCategory");
+        public Criteria andSettlementCategoryIdLessThan(Integer value) {
+            addCriterion("settlement_category_id <", value, "settlementCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andSettleAccountsCategoryLessThanOrEqualTo(String value) {
-            addCriterion("settle_accounts_category <=", value, "settleAccountsCategory");
+        public Criteria andSettlementCategoryIdLessThanOrEqualTo(Integer value) {
+            addCriterion("settlement_category_id <=", value, "settlementCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andSettleAccountsCategoryLike(String value) {
-            addCriterion("settle_accounts_category like", value, "settleAccountsCategory");
+        public Criteria andSettlementCategoryIdIn(List<Integer> values) {
+            addCriterion("settlement_category_id in", values, "settlementCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andSettleAccountsCategoryNotLike(String value) {
-            addCriterion("settle_accounts_category not like", value, "settleAccountsCategory");
+        public Criteria andSettlementCategoryIdNotIn(List<Integer> values) {
+            addCriterion("settlement_category_id not in", values, "settlementCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andSettleAccountsCategoryIn(List<String> values) {
-            addCriterion("settle_accounts_category in", values, "settleAccountsCategory");
+        public Criteria andSettlementCategoryIdBetween(Integer value1, Integer value2) {
+            addCriterion("settlement_category_id between", value1, value2, "settlementCategoryId");
             return (Criteria) this;
         }
 
-        public Criteria andSettleAccountsCategoryNotIn(List<String> values) {
-            addCriterion("settle_accounts_category not in", values, "settleAccountsCategory");
-            return (Criteria) this;
-        }
-
-        public Criteria andSettleAccountsCategoryBetween(String value1, String value2) {
-            addCriterion("settle_accounts_category between", value1, value2, "settleAccountsCategory");
-            return (Criteria) this;
-        }
-
-        public Criteria andSettleAccountsCategoryNotBetween(String value1, String value2) {
-            addCriterion("settle_accounts_category not between", value1, value2, "settleAccountsCategory");
+        public Criteria andSettlementCategoryIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("settlement_category_id not between", value1, value2, "settlementCategoryId");
             return (Criteria) this;
         }
 

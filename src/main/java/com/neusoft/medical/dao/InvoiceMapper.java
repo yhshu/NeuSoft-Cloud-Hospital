@@ -18,12 +18,14 @@ public interface InvoiceMapper {
     int deleteByPrimaryKey(Integer invoiceId);
 
     @Insert({
-        "insert into hospital.invoice (invoice_title, collector_id, ",
+        "insert into hospital.invoice (invoice_title, invoice_nums, ",
+        "collector_id, registration_id, ",
         "pay_time, invoice_amount, ",
         "self_pay, account_pay, ",
         "reimbursement_pay, discounted, ",
         "invoice_state, valid)",
-        "values (#{invoiceTitle,jdbcType=VARCHAR}, #{collectorId,jdbcType=INTEGER}, ",
+        "values (#{invoiceTitle,jdbcType=VARCHAR}, #{invoiceNums,jdbcType=INTEGER}, ",
+        "#{collectorId,jdbcType=INTEGER}, #{registrationId,jdbcType=INTEGER}, ",
         "#{payTime,jdbcType=TIMESTAMP}, #{invoiceAmount,jdbcType=DOUBLE}, ",
         "#{selfPay,jdbcType=DOUBLE}, #{accountPay,jdbcType=DOUBLE}, ",
         "#{reimbursementPay,jdbcType=DOUBLE}, #{discounted,jdbcType=DOUBLE}, ",
@@ -38,8 +40,9 @@ public interface InvoiceMapper {
 
     @Select({
         "select",
-        "invoice_id, invoice_title, collector_id, pay_time, invoice_amount, self_pay, ",
-        "account_pay, reimbursement_pay, discounted, invoice_state, valid",
+        "invoice_id, invoice_title, invoice_nums, collector_id, registration_id, pay_time, ",
+        "invoice_amount, self_pay, account_pay, reimbursement_pay, discounted, invoice_state, ",
+        "valid",
         "from hospital.invoice",
         "where invoice_id = #{invoiceId,jdbcType=INTEGER}"
     })
@@ -55,7 +58,9 @@ public interface InvoiceMapper {
     @Update({
         "update hospital.invoice",
         "set invoice_title = #{invoiceTitle,jdbcType=VARCHAR},",
+          "invoice_nums = #{invoiceNums,jdbcType=INTEGER},",
           "collector_id = #{collectorId,jdbcType=INTEGER},",
+          "registration_id = #{registrationId,jdbcType=INTEGER},",
           "pay_time = #{payTime,jdbcType=TIMESTAMP},",
           "invoice_amount = #{invoiceAmount,jdbcType=DOUBLE},",
           "self_pay = #{selfPay,jdbcType=DOUBLE},",
