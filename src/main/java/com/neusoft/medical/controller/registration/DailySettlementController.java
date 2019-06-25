@@ -40,7 +40,8 @@ public class DailySettlementController {
 
     /**
      * 获取指定起止时间和收费员的日结记录列表
-     * 日期格式 yyyy
+     * 日期格式 yyyy-MM-dd
+     *
      * @param startDatetime 统计的开始时间
      * @param endDatetime   统计的结束时间
      * @param collectorId   收费员编号

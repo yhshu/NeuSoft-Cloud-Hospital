@@ -105,6 +105,7 @@ public class SchedulingController {
      * 只能生成未来的排班计划，生成的排班计划可以修改
      * 排班计划可以重复生成，在指定的时间段内替换之前生成的排班计划
      * 历史排班计划不能被修改，或替换
+     * 日期格式 yyyy-MM-dd
      *
      * @param startDate 开始日期
      * @param endDate   结束日期

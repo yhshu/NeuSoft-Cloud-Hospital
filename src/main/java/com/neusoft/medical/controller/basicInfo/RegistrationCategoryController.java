@@ -22,6 +22,8 @@ public class RegistrationCategoryController {
 
     /**
      * 获取包含所有挂号级别的列表
+     *
+     * @return 挂号级别列表
      */
     @GetMapping("/list_all")
     public ResultDTO<List<RegistrationCategory>> selectAllRegistrationCategory() {
