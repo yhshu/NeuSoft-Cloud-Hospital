@@ -104,18 +104,27 @@ public class SchedulingServiceImpl implements SchedulingService {
     }
 
     @Override
-    public PageInfo<SchedulingInfo> selectSchedulingInfo(Integer currentPage, Integer pageSize) {
-        List<SchedulingInfo> schedulingInfoList = null;
+    public PageInfo<String> selectSchedulingInfo(Integer currentPage, Integer pageSize) {
+        List<String> res = new CopyOnWriteArrayList<>();
         try {
             PageHelper.startPage(currentPage, pageSize);
 
             SchedulingInfoExample schedulingInfoExample = new SchedulingInfoExample();
-            schedulingInfoList = schedulingInfoMapper.selectByExample(schedulingInfoExample);
+            List<SchedulingInfo> schedulingInfoList = schedulingInfoMapper.selectByExample(schedulingInfoExample);
+
+            JsonArray schedulingInfoListJsonArray = gson.toJsonTree(schedulingInfoList).getAsJsonArray();
+            for (JsonElement schedulingInfoJsonElement : schedulingInfoListJsonArray) {
+                JsonObject schedulingInfoJsonObject = schedulingInfoJsonElement.getAsJsonObject();
+
+                Integer registrationCategoryId = schedulingInfoJsonObject.get("registrationCategoryId").getAsInt();
+                schedulingInfoJsonObject.addProperty("registrationCategoryName", registrationCategoryMapper.selectByPrimaryKey(registrationCategoryId).getRegistrationCategoryName());
+
+                res.add(schedulingInfoJsonObject.toString());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assert schedulingInfoList != null;
-        return new PageInfo<>(schedulingInfoList);
+        return new PageInfo<>(res);
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.neusoft.medical.controller.basicInfo;
 
 import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.Util.DateConverter;
-import com.neusoft.medical.bean.SchedulingInfo;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.basicInfo.SchedulingService;
 import org.springframework.web.bind.annotation.*;
@@ -129,11 +128,11 @@ public class SchedulingController {
     }
 
     @GetMapping("/select_info")
-    public ResultDTO<PageInfo<SchedulingInfo>> selectSchedulingInfo(
+    public ResultDTO<PageInfo<String>> selectSchedulingInfo(
             @RequestParam("currentPage") Integer currentPage,
             @RequestParam("pageSize") Integer pageSize
     ) {
-        PageInfo<SchedulingInfo> schedulingInfoPageInfo = null;
+        PageInfo<String> schedulingInfoPageInfo = null;
         try {
             schedulingInfoPageInfo = schedulingService.selectSchedulingInfo(currentPage, pageSize);
         } catch (Exception e) {

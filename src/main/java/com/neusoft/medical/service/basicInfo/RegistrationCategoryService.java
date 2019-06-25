@@ -48,4 +48,6 @@ public interface RegistrationCategoryService {
     boolean deleteRegistrationCategoryByPrimaryKey(List<Integer> registrationCategoryId);
 
     List<RegistrationCategory> selectAllRegistrationCategory();
+
+    double registrationFee(Integer registrationCategoryId);
 }

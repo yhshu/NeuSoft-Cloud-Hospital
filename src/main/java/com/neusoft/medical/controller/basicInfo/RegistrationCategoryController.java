@@ -58,6 +58,24 @@ public class RegistrationCategoryController {
     }
 
     /**
+     * 获取指定挂号类别的费用
+     *
+     * @param registrationCategoryId 挂号类别编号
+     * @return 挂号费
+     */
+    public ResultDTO<Double> registrationFee(
+            @RequestParam(value = "registrationCategoryId") Integer registrationCategoryId
+    ) {
+        double res = 0.0;
+        try {
+            res = registrationCategoryService.registrationFee(registrationCategoryId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResultDTO<>(res);
+    }
+
+    /**
      * 添加挂号级别
      *
      * @param registrationCategoryName 挂号级别名称

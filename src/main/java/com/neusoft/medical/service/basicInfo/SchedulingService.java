@@ -2,7 +2,6 @@ package com.neusoft.medical.service.basicInfo;
 
 import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.Doctor;
-import com.neusoft.medical.bean.SchedulingInfo;
 
 import java.util.Date;
 import java.util.List;
@@ -22,7 +21,7 @@ public interface SchedulingService {
 
     PageInfo<String> selectSchedulingRule(Integer currentPage, Integer pageSize);
 
-    PageInfo<SchedulingInfo> selectSchedulingInfo(Integer currentPage, Integer pageSize);
+    PageInfo<String> selectSchedulingInfo(Integer currentPage, Integer pageSize);
 
     boolean saveSchedulingRule(Integer schedulingRuleId, Integer weekday, Integer departmentId, Integer doctorId, Integer registrationCategoryId, Integer noon, Integer limitation, Integer accountId);
 

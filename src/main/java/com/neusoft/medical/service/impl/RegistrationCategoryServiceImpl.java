@@ -90,4 +90,11 @@ public class RegistrationCategoryServiceImpl implements RegistrationCategoryServ
         }
         return registrationCategoryList;
     }
+
+    @Override
+    public double registrationFee(Integer registrationCategoryId) {
+
+        // todo
+        return 0.0;
+    }
 }
