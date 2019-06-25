@@ -160,6 +160,9 @@ database types (e.g. MySql's unsigned bigint type should be mapped to java.lang.
         <table tableName="expense_category" catalog="hospital">
             <generatedKey column="expense_category_id" sqlStatement="Mysql" identity="true"/>
         </table>
+        <table tableName="invoice" catalog="hospital">
+            <generatedKey column="invoice_id" sqlStatement="Mysql" identity="true"/>
+        </table>
         <table tableName="medical_records" catalog="hospital">
             <generatedKey column="medical_records_id" sqlStatement="Mysql" identity="true"/>
         </table>

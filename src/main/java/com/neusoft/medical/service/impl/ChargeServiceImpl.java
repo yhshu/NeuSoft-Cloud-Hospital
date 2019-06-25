@@ -26,17 +26,19 @@ public class ChargeServiceImpl implements ChargeService {
     @Resource
     private RegistrationMapper registrationMapper;
 
-
     private Gson gson = new Gson();
 
     @Override
     public boolean checkout(String checkoutJson) {
         try {
             JsonArray checkoutJsonArray = new JsonParser().parse(checkoutJson).getAsJsonArray();
+
             for (JsonElement checkoutJsonElement : checkoutJsonArray) {
                 JsonObject checkoutJsonObject = checkoutJsonElement.getAsJsonObject();
+
                 int entryType = checkoutJsonObject.get("entryType").getAsInt();
                 int entryId = checkoutJsonObject.get("entryId").getAsInt();
+
                 if (entryType == Constant.ENTRY_TYPE_CHARGE_ENTRY) {
                     ChargeEntry chargeEntryRecord = chargeEntryMapper.selectByPrimaryKey(entryId);
                     chargeEntryRecord.setPayState(Constant.PAY_STATE_CHARGED);
@@ -50,6 +52,7 @@ public class ChargeServiceImpl implements ChargeService {
                     throw new Exception("The value of entryType is null or wrong.");
                 }
             }
+
         } catch (Exception e) {
             e.printStackTrace();
             return false;

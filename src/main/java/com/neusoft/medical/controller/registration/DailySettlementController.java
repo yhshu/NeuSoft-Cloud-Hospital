@@ -55,7 +55,8 @@ public class DailySettlementController {
             @RequestParam(value = "collectorId") Integer collectorId,
             @RequestParam(value = "currentPage") Integer currentPage,
             @RequestParam(value = "pageSize") Integer pageSize) {
-// todo
+
+        // todo
         return null;
     }
 
