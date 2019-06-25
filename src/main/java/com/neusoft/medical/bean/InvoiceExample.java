@@ -165,123 +165,73 @@ public class InvoiceExample {
             return (Criteria) this;
         }
 
-        public Criteria andExpenseCategoryIdIsNull() {
-            addCriterion("expense_category_id is null");
+        public Criteria andInvoiceTitleIsNull() {
+            addCriterion("invoice_title is null");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseCategoryIdIsNotNull() {
-            addCriterion("expense_category_id is not null");
+        public Criteria andInvoiceTitleIsNotNull() {
+            addCriterion("invoice_title is not null");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseCategoryIdEqualTo(Integer value) {
-            addCriterion("expense_category_id =", value, "expenseCategoryId");
+        public Criteria andInvoiceTitleEqualTo(String value) {
+            addCriterion("invoice_title =", value, "invoiceTitle");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseCategoryIdNotEqualTo(Integer value) {
-            addCriterion("expense_category_id <>", value, "expenseCategoryId");
+        public Criteria andInvoiceTitleNotEqualTo(String value) {
+            addCriterion("invoice_title <>", value, "invoiceTitle");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseCategoryIdGreaterThan(Integer value) {
-            addCriterion("expense_category_id >", value, "expenseCategoryId");
+        public Criteria andInvoiceTitleGreaterThan(String value) {
+            addCriterion("invoice_title >", value, "invoiceTitle");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseCategoryIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("expense_category_id >=", value, "expenseCategoryId");
+        public Criteria andInvoiceTitleGreaterThanOrEqualTo(String value) {
+            addCriterion("invoice_title >=", value, "invoiceTitle");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseCategoryIdLessThan(Integer value) {
-            addCriterion("expense_category_id <", value, "expenseCategoryId");
+        public Criteria andInvoiceTitleLessThan(String value) {
+            addCriterion("invoice_title <", value, "invoiceTitle");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseCategoryIdLessThanOrEqualTo(Integer value) {
-            addCriterion("expense_category_id <=", value, "expenseCategoryId");
+        public Criteria andInvoiceTitleLessThanOrEqualTo(String value) {
+            addCriterion("invoice_title <=", value, "invoiceTitle");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseCategoryIdIn(List<Integer> values) {
-            addCriterion("expense_category_id in", values, "expenseCategoryId");
+        public Criteria andInvoiceTitleLike(String value) {
+            addCriterion("invoice_title like", value, "invoiceTitle");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseCategoryIdNotIn(List<Integer> values) {
-            addCriterion("expense_category_id not in", values, "expenseCategoryId");
+        public Criteria andInvoiceTitleNotLike(String value) {
+            addCriterion("invoice_title not like", value, "invoiceTitle");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseCategoryIdBetween(Integer value1, Integer value2) {
-            addCriterion("expense_category_id between", value1, value2, "expenseCategoryId");
+        public Criteria andInvoiceTitleIn(List<String> values) {
+            addCriterion("invoice_title in", values, "invoiceTitle");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseCategoryIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("expense_category_id not between", value1, value2, "expenseCategoryId");
+        public Criteria andInvoiceTitleNotIn(List<String> values) {
+            addCriterion("invoice_title not in", values, "invoiceTitle");
             return (Criteria) this;
         }
 
-        public Criteria andRegistrationIdIsNull() {
-            addCriterion("registration_id is null");
+        public Criteria andInvoiceTitleBetween(String value1, String value2) {
+            addCriterion("invoice_title between", value1, value2, "invoiceTitle");
             return (Criteria) this;
         }
 
-        public Criteria andRegistrationIdIsNotNull() {
-            addCriterion("registration_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegistrationIdEqualTo(Integer value) {
-            addCriterion("registration_id =", value, "registrationId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegistrationIdNotEqualTo(Integer value) {
-            addCriterion("registration_id <>", value, "registrationId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegistrationIdGreaterThan(Integer value) {
-            addCriterion("registration_id >", value, "registrationId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegistrationIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("registration_id >=", value, "registrationId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegistrationIdLessThan(Integer value) {
-            addCriterion("registration_id <", value, "registrationId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegistrationIdLessThanOrEqualTo(Integer value) {
-            addCriterion("registration_id <=", value, "registrationId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegistrationIdIn(List<Integer> values) {
-            addCriterion("registration_id in", values, "registrationId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegistrationIdNotIn(List<Integer> values) {
-            addCriterion("registration_id not in", values, "registrationId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegistrationIdBetween(Integer value1, Integer value2) {
-            addCriterion("registration_id between", value1, value2, "registrationId");
-            return (Criteria) this;
-        }
-
-        public Criteria andRegistrationIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("registration_id not between", value1, value2, "registrationId");
+        public Criteria andInvoiceTitleNotBetween(String value1, String value2) {
+            addCriterion("invoice_title not between", value1, value2, "invoiceTitle");
             return (Criteria) this;
         }
 
@@ -405,63 +355,363 @@ public class InvoiceExample {
             return (Criteria) this;
         }
 
-        public Criteria andPayAmountIsNull() {
-            addCriterion("pay_amount is null");
+        public Criteria andInvoiceAmountIsNull() {
+            addCriterion("invoice_amount is null");
             return (Criteria) this;
         }
 
-        public Criteria andPayAmountIsNotNull() {
-            addCriterion("pay_amount is not null");
+        public Criteria andInvoiceAmountIsNotNull() {
+            addCriterion("invoice_amount is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPayAmountEqualTo(Double value) {
-            addCriterion("pay_amount =", value, "payAmount");
+        public Criteria andInvoiceAmountEqualTo(Double value) {
+            addCriterion("invoice_amount =", value, "invoiceAmount");
             return (Criteria) this;
         }
 
-        public Criteria andPayAmountNotEqualTo(Double value) {
-            addCriterion("pay_amount <>", value, "payAmount");
+        public Criteria andInvoiceAmountNotEqualTo(Double value) {
+            addCriterion("invoice_amount <>", value, "invoiceAmount");
             return (Criteria) this;
         }
 
-        public Criteria andPayAmountGreaterThan(Double value) {
-            addCriterion("pay_amount >", value, "payAmount");
+        public Criteria andInvoiceAmountGreaterThan(Double value) {
+            addCriterion("invoice_amount >", value, "invoiceAmount");
             return (Criteria) this;
         }
 
-        public Criteria andPayAmountGreaterThanOrEqualTo(Double value) {
-            addCriterion("pay_amount >=", value, "payAmount");
+        public Criteria andInvoiceAmountGreaterThanOrEqualTo(Double value) {
+            addCriterion("invoice_amount >=", value, "invoiceAmount");
             return (Criteria) this;
         }
 
-        public Criteria andPayAmountLessThan(Double value) {
-            addCriterion("pay_amount <", value, "payAmount");
+        public Criteria andInvoiceAmountLessThan(Double value) {
+            addCriterion("invoice_amount <", value, "invoiceAmount");
             return (Criteria) this;
         }
 
-        public Criteria andPayAmountLessThanOrEqualTo(Double value) {
-            addCriterion("pay_amount <=", value, "payAmount");
+        public Criteria andInvoiceAmountLessThanOrEqualTo(Double value) {
+            addCriterion("invoice_amount <=", value, "invoiceAmount");
             return (Criteria) this;
         }
 
-        public Criteria andPayAmountIn(List<Double> values) {
-            addCriterion("pay_amount in", values, "payAmount");
+        public Criteria andInvoiceAmountIn(List<Double> values) {
+            addCriterion("invoice_amount in", values, "invoiceAmount");
             return (Criteria) this;
         }
 
-        public Criteria andPayAmountNotIn(List<Double> values) {
-            addCriterion("pay_amount not in", values, "payAmount");
+        public Criteria andInvoiceAmountNotIn(List<Double> values) {
+            addCriterion("invoice_amount not in", values, "invoiceAmount");
             return (Criteria) this;
         }
 
-        public Criteria andPayAmountBetween(Double value1, Double value2) {
-            addCriterion("pay_amount between", value1, value2, "payAmount");
+        public Criteria andInvoiceAmountBetween(Double value1, Double value2) {
+            addCriterion("invoice_amount between", value1, value2, "invoiceAmount");
             return (Criteria) this;
         }
 
-        public Criteria andPayAmountNotBetween(Double value1, Double value2) {
-            addCriterion("pay_amount not between", value1, value2, "payAmount");
+        public Criteria andInvoiceAmountNotBetween(Double value1, Double value2) {
+            addCriterion("invoice_amount not between", value1, value2, "invoiceAmount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSelfPayIsNull() {
+            addCriterion("self_pay is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSelfPayIsNotNull() {
+            addCriterion("self_pay is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSelfPayEqualTo(Double value) {
+            addCriterion("self_pay =", value, "selfPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andSelfPayNotEqualTo(Double value) {
+            addCriterion("self_pay <>", value, "selfPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andSelfPayGreaterThan(Double value) {
+            addCriterion("self_pay >", value, "selfPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andSelfPayGreaterThanOrEqualTo(Double value) {
+            addCriterion("self_pay >=", value, "selfPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andSelfPayLessThan(Double value) {
+            addCriterion("self_pay <", value, "selfPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andSelfPayLessThanOrEqualTo(Double value) {
+            addCriterion("self_pay <=", value, "selfPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andSelfPayIn(List<Double> values) {
+            addCriterion("self_pay in", values, "selfPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andSelfPayNotIn(List<Double> values) {
+            addCriterion("self_pay not in", values, "selfPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andSelfPayBetween(Double value1, Double value2) {
+            addCriterion("self_pay between", value1, value2, "selfPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andSelfPayNotBetween(Double value1, Double value2) {
+            addCriterion("self_pay not between", value1, value2, "selfPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountPayIsNull() {
+            addCriterion("account_pay is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountPayIsNotNull() {
+            addCriterion("account_pay is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountPayEqualTo(Double value) {
+            addCriterion("account_pay =", value, "accountPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountPayNotEqualTo(Double value) {
+            addCriterion("account_pay <>", value, "accountPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountPayGreaterThan(Double value) {
+            addCriterion("account_pay >", value, "accountPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountPayGreaterThanOrEqualTo(Double value) {
+            addCriterion("account_pay >=", value, "accountPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountPayLessThan(Double value) {
+            addCriterion("account_pay <", value, "accountPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountPayLessThanOrEqualTo(Double value) {
+            addCriterion("account_pay <=", value, "accountPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountPayIn(List<Double> values) {
+            addCriterion("account_pay in", values, "accountPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountPayNotIn(List<Double> values) {
+            addCriterion("account_pay not in", values, "accountPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountPayBetween(Double value1, Double value2) {
+            addCriterion("account_pay between", value1, value2, "accountPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andAccountPayNotBetween(Double value1, Double value2) {
+            addCriterion("account_pay not between", value1, value2, "accountPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andReimbursementPayIsNull() {
+            addCriterion("reimbursement_pay is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReimbursementPayIsNotNull() {
+            addCriterion("reimbursement_pay is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReimbursementPayEqualTo(Double value) {
+            addCriterion("reimbursement_pay =", value, "reimbursementPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andReimbursementPayNotEqualTo(Double value) {
+            addCriterion("reimbursement_pay <>", value, "reimbursementPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andReimbursementPayGreaterThan(Double value) {
+            addCriterion("reimbursement_pay >", value, "reimbursementPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andReimbursementPayGreaterThanOrEqualTo(Double value) {
+            addCriterion("reimbursement_pay >=", value, "reimbursementPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andReimbursementPayLessThan(Double value) {
+            addCriterion("reimbursement_pay <", value, "reimbursementPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andReimbursementPayLessThanOrEqualTo(Double value) {
+            addCriterion("reimbursement_pay <=", value, "reimbursementPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andReimbursementPayIn(List<Double> values) {
+            addCriterion("reimbursement_pay in", values, "reimbursementPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andReimbursementPayNotIn(List<Double> values) {
+            addCriterion("reimbursement_pay not in", values, "reimbursementPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andReimbursementPayBetween(Double value1, Double value2) {
+            addCriterion("reimbursement_pay between", value1, value2, "reimbursementPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andReimbursementPayNotBetween(Double value1, Double value2) {
+            addCriterion("reimbursement_pay not between", value1, value2, "reimbursementPay");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountedIsNull() {
+            addCriterion("discounted is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountedIsNotNull() {
+            addCriterion("discounted is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountedEqualTo(Double value) {
+            addCriterion("discounted =", value, "discounted");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountedNotEqualTo(Double value) {
+            addCriterion("discounted <>", value, "discounted");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountedGreaterThan(Double value) {
+            addCriterion("discounted >", value, "discounted");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountedGreaterThanOrEqualTo(Double value) {
+            addCriterion("discounted >=", value, "discounted");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountedLessThan(Double value) {
+            addCriterion("discounted <", value, "discounted");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountedLessThanOrEqualTo(Double value) {
+            addCriterion("discounted <=", value, "discounted");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountedIn(List<Double> values) {
+            addCriterion("discounted in", values, "discounted");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountedNotIn(List<Double> values) {
+            addCriterion("discounted not in", values, "discounted");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountedBetween(Double value1, Double value2) {
+            addCriterion("discounted between", value1, value2, "discounted");
+            return (Criteria) this;
+        }
+
+        public Criteria andDiscountedNotBetween(Double value1, Double value2) {
+            addCriterion("discounted not between", value1, value2, "discounted");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvoiceStateIsNull() {
+            addCriterion("invoice_state is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvoiceStateIsNotNull() {
+            addCriterion("invoice_state is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvoiceStateEqualTo(Integer value) {
+            addCriterion("invoice_state =", value, "invoiceState");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvoiceStateNotEqualTo(Integer value) {
+            addCriterion("invoice_state <>", value, "invoiceState");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvoiceStateGreaterThan(Integer value) {
+            addCriterion("invoice_state >", value, "invoiceState");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvoiceStateGreaterThanOrEqualTo(Integer value) {
+            addCriterion("invoice_state >=", value, "invoiceState");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvoiceStateLessThan(Integer value) {
+            addCriterion("invoice_state <", value, "invoiceState");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvoiceStateLessThanOrEqualTo(Integer value) {
+            addCriterion("invoice_state <=", value, "invoiceState");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvoiceStateIn(List<Integer> values) {
+            addCriterion("invoice_state in", values, "invoiceState");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvoiceStateNotIn(List<Integer> values) {
+            addCriterion("invoice_state not in", values, "invoiceState");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvoiceStateBetween(Integer value1, Integer value2) {
+            addCriterion("invoice_state between", value1, value2, "invoiceState");
+            return (Criteria) this;
+        }
+
+        public Criteria andInvoiceStateNotBetween(Integer value1, Integer value2) {
+            addCriterion("invoice_state not between", value1, value2, "invoiceState");
             return (Criteria) this;
         }
 
@@ -475,52 +725,52 @@ public class InvoiceExample {
             return (Criteria) this;
         }
 
-        public Criteria andValidEqualTo(Boolean value) {
+        public Criteria andValidEqualTo(Integer value) {
             addCriterion("valid =", value, "valid");
             return (Criteria) this;
         }
 
-        public Criteria andValidNotEqualTo(Boolean value) {
+        public Criteria andValidNotEqualTo(Integer value) {
             addCriterion("valid <>", value, "valid");
             return (Criteria) this;
         }
 
-        public Criteria andValidGreaterThan(Boolean value) {
+        public Criteria andValidGreaterThan(Integer value) {
             addCriterion("valid >", value, "valid");
             return (Criteria) this;
         }
 
-        public Criteria andValidGreaterThanOrEqualTo(Boolean value) {
+        public Criteria andValidGreaterThanOrEqualTo(Integer value) {
             addCriterion("valid >=", value, "valid");
             return (Criteria) this;
         }
 
-        public Criteria andValidLessThan(Boolean value) {
+        public Criteria andValidLessThan(Integer value) {
             addCriterion("valid <", value, "valid");
             return (Criteria) this;
         }
 
-        public Criteria andValidLessThanOrEqualTo(Boolean value) {
+        public Criteria andValidLessThanOrEqualTo(Integer value) {
             addCriterion("valid <=", value, "valid");
             return (Criteria) this;
         }
 
-        public Criteria andValidIn(List<Boolean> values) {
+        public Criteria andValidIn(List<Integer> values) {
             addCriterion("valid in", values, "valid");
             return (Criteria) this;
         }
 
-        public Criteria andValidNotIn(List<Boolean> values) {
+        public Criteria andValidNotIn(List<Integer> values) {
             addCriterion("valid not in", values, "valid");
             return (Criteria) this;
         }
 
-        public Criteria andValidBetween(Boolean value1, Boolean value2) {
+        public Criteria andValidBetween(Integer value1, Integer value2) {
             addCriterion("valid between", value1, value2, "valid");
             return (Criteria) this;
         }
 
-        public Criteria andValidNotBetween(Boolean value1, Boolean value2) {
+        public Criteria andValidNotBetween(Integer value1, Integer value2) {
             addCriterion("valid not between", value1, value2, "valid");
             return (Criteria) this;
         }

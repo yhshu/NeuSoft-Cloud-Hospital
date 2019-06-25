@@ -18,12 +18,16 @@ public interface InvoiceMapper {
     int deleteByPrimaryKey(Integer invoiceId);
 
     @Insert({
-        "insert into hospital.invoice (expense_category_id, registration_id, ",
-        "collector_id, pay_time, ",
-        "pay_amount, valid)",
-        "values (#{expenseCategoryId,jdbcType=INTEGER}, #{registrationId,jdbcType=INTEGER}, ",
-        "#{collectorId,jdbcType=INTEGER}, #{payTime,jdbcType=TIMESTAMP}, ",
-        "#{payAmount,jdbcType=DOUBLE}, #{valid,jdbcType=BIT})"
+        "insert into hospital.invoice (invoice_title, collector_id, ",
+        "pay_time, invoice_amount, ",
+        "self_pay, account_pay, ",
+        "reimbursement_pay, discounted, ",
+        "invoice_state, valid)",
+        "values (#{invoiceTitle,jdbcType=VARCHAR}, #{collectorId,jdbcType=INTEGER}, ",
+        "#{payTime,jdbcType=TIMESTAMP}, #{invoiceAmount,jdbcType=DOUBLE}, ",
+        "#{selfPay,jdbcType=DOUBLE}, #{accountPay,jdbcType=DOUBLE}, ",
+        "#{reimbursementPay,jdbcType=DOUBLE}, #{discounted,jdbcType=DOUBLE}, ",
+        "#{invoiceState,jdbcType=INTEGER}, #{valid,jdbcType=INTEGER})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="invoiceId", before=false, resultType=Integer.class)
     int insert(Invoice record);
@@ -34,8 +38,8 @@ public interface InvoiceMapper {
 
     @Select({
         "select",
-        "invoice_id, expense_category_id, registration_id, collector_id, pay_time, pay_amount, ",
-        "valid",
+        "invoice_id, invoice_title, collector_id, pay_time, invoice_amount, self_pay, ",
+        "account_pay, reimbursement_pay, discounted, invoice_state, valid",
         "from hospital.invoice",
         "where invoice_id = #{invoiceId,jdbcType=INTEGER}"
     })
@@ -50,12 +54,16 @@ public interface InvoiceMapper {
 
     @Update({
         "update hospital.invoice",
-        "set expense_category_id = #{expenseCategoryId,jdbcType=INTEGER},",
-          "registration_id = #{registrationId,jdbcType=INTEGER},",
+        "set invoice_title = #{invoiceTitle,jdbcType=VARCHAR},",
           "collector_id = #{collectorId,jdbcType=INTEGER},",
           "pay_time = #{payTime,jdbcType=TIMESTAMP},",
-          "pay_amount = #{payAmount,jdbcType=DOUBLE},",
-          "valid = #{valid,jdbcType=BIT}",
+          "invoice_amount = #{invoiceAmount,jdbcType=DOUBLE},",
+          "self_pay = #{selfPay,jdbcType=DOUBLE},",
+          "account_pay = #{accountPay,jdbcType=DOUBLE},",
+          "reimbursement_pay = #{reimbursementPay,jdbcType=DOUBLE},",
+          "discounted = #{discounted,jdbcType=DOUBLE},",
+          "invoice_state = #{invoiceState,jdbcType=INTEGER},",
+          "valid = #{valid,jdbcType=INTEGER}",
         "where invoice_id = #{invoiceId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(Invoice record);
