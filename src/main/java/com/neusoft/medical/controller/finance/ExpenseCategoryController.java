@@ -46,8 +46,8 @@ public class ExpenseCategoryController {
      * @return 操作结果
      * expenseCategoryJson 中的属性包括：
      * - expenseCategoryId 费用科目编号（新增时不填，更新时必填）
-     * - expenseCode 费用代码
-     * - expenseName 费用名称
+     * - expenseCategoryCode 费用代码
+     * - expenseCategoryName 费用名称
      */
     @PostMapping("/save")
     public ResultDTO<Boolean> saveExpenseCategory(@RequestParam(value = "expenseCategoryJson") String expenseCategoryJson) {

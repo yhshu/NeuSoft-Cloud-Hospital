@@ -29,8 +29,6 @@ public class SchedulingServiceImpl implements SchedulingService {
     @Resource
     private DepartmentMapper departmentMapper;
     @Resource
-    private RegistrationMapper registrationMapper;
-    @Resource
     private RegistrationCategoryMapper registrationCategoryMapper;
     @Resource
     private AccountService accountService;
