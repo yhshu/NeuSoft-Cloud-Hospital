@@ -93,8 +93,12 @@ public class RegistrationCategoryServiceImpl implements RegistrationCategoryServ
 
     @Override
     public double registrationFee(Integer registrationCategoryId) {
-
-        // todo
-        return 0.0;
+        double res = 0.0;
+        try {
+            res = registrationCategoryMapper.selectByPrimaryKey(registrationCategoryId).getRegistrationFee();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
     }
 }

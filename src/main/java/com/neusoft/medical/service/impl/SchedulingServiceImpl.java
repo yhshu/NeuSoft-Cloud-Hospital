@@ -117,7 +117,12 @@ public class SchedulingServiceImpl implements SchedulingService {
                 JsonObject schedulingInfoJsonObject = schedulingInfoJsonElement.getAsJsonObject();
 
                 Integer registrationCategoryId = schedulingInfoJsonObject.get("registrationCategoryId").getAsInt();
+                Integer doctorId = schedulingInfoJsonObject.get("doctorId").getAsInt();
+                Integer departmentId = schedulingInfoJsonObject.get("departmentId").getAsInt();
+
                 schedulingInfoJsonObject.addProperty("registrationCategoryName", registrationCategoryMapper.selectByPrimaryKey(registrationCategoryId).getRegistrationCategoryName());
+                schedulingInfoJsonObject.addProperty("doctorName", doctorMapper.selectByPrimaryKey(doctorId).getDoctorName());
+                schedulingInfoJsonObject.addProperty("departmentId", departmentMapper.selectByPrimaryKey(departmentId).getDepartmentName());
 
                 res.add(schedulingInfoJsonObject.toString());
             }

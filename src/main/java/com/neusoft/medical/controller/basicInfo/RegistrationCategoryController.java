@@ -63,6 +63,7 @@ public class RegistrationCategoryController {
      * @param registrationCategoryId 挂号类别编号
      * @return 挂号费
      */
+    @GetMapping("/registration_fee")
     public ResultDTO<Double> registrationFee(
             @RequestParam(value = "registrationCategoryId") Integer registrationCategoryId
     ) {
