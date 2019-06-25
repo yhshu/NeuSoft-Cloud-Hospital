@@ -23,7 +23,9 @@ public class DailySettlementDetail {
 
     private Integer settlementCategoryId;
 
-    public DailySettlementDetail(Integer dailySettlementDetailId, Integer invoiceNums, Integer registrationId, String patientName, Double invoiceTotalAmount, Double selfPay, Double accountPay, Double reimbursementPay, Double discounted, Integer dailySettlementDetailState, Integer settlementCategoryId) {
+    private Integer valid;
+
+    public DailySettlementDetail(Integer dailySettlementDetailId, Integer invoiceNums, Integer registrationId, String patientName, Double invoiceTotalAmount, Double selfPay, Double accountPay, Double reimbursementPay, Double discounted, Integer dailySettlementDetailState, Integer settlementCategoryId, Integer valid) {
         this.dailySettlementDetailId = dailySettlementDetailId;
         this.invoiceNums = invoiceNums;
         this.registrationId = registrationId;
@@ -35,6 +37,7 @@ public class DailySettlementDetail {
         this.discounted = discounted;
         this.dailySettlementDetailState = dailySettlementDetailState;
         this.settlementCategoryId = settlementCategoryId;
+        this.valid = valid;
     }
 
     public DailySettlementDetail() {
@@ -127,5 +130,13 @@ public class DailySettlementDetail {
 
     public void setSettlementCategoryId(Integer settlementCategoryId) {
         this.settlementCategoryId = settlementCategoryId;
+    }
+
+    public Integer getValid() {
+        return valid;
+    }
+
+    public void setValid(Integer valid) {
+        this.valid = valid;
     }
 }

@@ -19,9 +19,9 @@ public interface DailySettlementMapper {
 
     @Insert({
         "insert into hospital.daily_settlement (collector_account_id, collector_real_name, ",
-        "daily_settlement_date)",
+        "daily_settlement_date, valid)",
         "values (#{collectorAccountId,jdbcType=INTEGER}, #{collectorRealName,jdbcType=VARCHAR}, ",
-        "#{dailySettlementDate,jdbcType=TIMESTAMP})"
+        "#{dailySettlementDate,jdbcType=TIMESTAMP}, #{valid,jdbcType=INTEGER})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="dailySettlementId", before=false, resultType=Integer.class)
     int insert(DailySettlement record);
@@ -32,7 +32,8 @@ public interface DailySettlementMapper {
 
     @Select({
         "select",
-        "daily_settlement_id, collector_account_id, collector_real_name, daily_settlement_date",
+        "daily_settlement_id, collector_account_id, collector_real_name, daily_settlement_date, ",
+        "valid",
         "from hospital.daily_settlement",
         "where daily_settlement_id = #{dailySettlementId,jdbcType=INTEGER}"
     })
@@ -49,7 +50,8 @@ public interface DailySettlementMapper {
         "update hospital.daily_settlement",
         "set collector_account_id = #{collectorAccountId,jdbcType=INTEGER},",
           "collector_real_name = #{collectorRealName,jdbcType=VARCHAR},",
-          "daily_settlement_date = #{dailySettlementDate,jdbcType=TIMESTAMP}",
+          "daily_settlement_date = #{dailySettlementDate,jdbcType=TIMESTAMP},",
+          "valid = #{valid,jdbcType=INTEGER}",
         "where daily_settlement_id = #{dailySettlementId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(DailySettlement record);

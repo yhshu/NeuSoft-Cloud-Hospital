@@ -773,6 +773,66 @@ public class DailySettlementDetailExample {
             addCriterion("settlement_category_id not between", value1, value2, "settlementCategoryId");
             return (Criteria) this;
         }
+
+        public Criteria andValidIsNull() {
+            addCriterion("valid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidIsNotNull() {
+            addCriterion("valid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidEqualTo(Integer value) {
+            addCriterion("valid =", value, "valid");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidNotEqualTo(Integer value) {
+            addCriterion("valid <>", value, "valid");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidGreaterThan(Integer value) {
+            addCriterion("valid >", value, "valid");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("valid >=", value, "valid");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidLessThan(Integer value) {
+            addCriterion("valid <", value, "valid");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidLessThanOrEqualTo(Integer value) {
+            addCriterion("valid <=", value, "valid");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidIn(List<Integer> values) {
+            addCriterion("valid in", values, "valid");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidNotIn(List<Integer> values) {
+            addCriterion("valid not in", values, "valid");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidBetween(Integer value1, Integer value2) {
+            addCriterion("valid between", value1, value2, "valid");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidNotBetween(Integer value1, Integer value2) {
+            addCriterion("valid not between", value1, value2, "valid");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

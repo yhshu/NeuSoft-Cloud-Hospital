@@ -11,11 +11,14 @@ public class DailySettlement {
 
     private Date dailySettlementDate;
 
-    public DailySettlement(Integer dailySettlementId, Integer collectorAccountId, String collectorRealName, Date dailySettlementDate) {
+    private Integer valid;
+
+    public DailySettlement(Integer dailySettlementId, Integer collectorAccountId, String collectorRealName, Date dailySettlementDate, Integer valid) {
         this.dailySettlementId = dailySettlementId;
         this.collectorAccountId = collectorAccountId;
         this.collectorRealName = collectorRealName;
         this.dailySettlementDate = dailySettlementDate;
+        this.valid = valid;
     }
 
     public DailySettlement() {
@@ -52,5 +55,13 @@ public class DailySettlement {
 
     public void setDailySettlementDate(Date dailySettlementDate) {
         this.dailySettlementDate = dailySettlementDate;
+    }
+
+    public Integer getValid() {
+        return valid;
+    }
+
+    public void setValid(Integer valid) {
+        this.valid = valid;
     }
 }

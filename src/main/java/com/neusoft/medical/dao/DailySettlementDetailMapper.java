@@ -22,12 +22,14 @@ public interface DailySettlementDetailMapper {
         "patient_name, invoice_total_amount, ",
         "self_pay, account_pay, ",
         "reimbursement_pay, discounted, ",
-        "daily_settlement_detail_state, settlement_category_id)",
+        "daily_settlement_detail_state, settlement_category_id, ",
+        "valid)",
         "values (#{invoiceNums,jdbcType=INTEGER}, #{registrationId,jdbcType=INTEGER}, ",
         "#{patientName,jdbcType=VARCHAR}, #{invoiceTotalAmount,jdbcType=DOUBLE}, ",
         "#{selfPay,jdbcType=DOUBLE}, #{accountPay,jdbcType=DOUBLE}, ",
         "#{reimbursementPay,jdbcType=DOUBLE}, #{discounted,jdbcType=DOUBLE}, ",
-        "#{dailySettlementDetailState,jdbcType=INTEGER}, #{settlementCategoryId,jdbcType=INTEGER})"
+        "#{dailySettlementDetailState,jdbcType=INTEGER}, #{settlementCategoryId,jdbcType=INTEGER}, ",
+        "#{valid,jdbcType=INTEGER})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="dailySettlementDetailId", before=false, resultType=Integer.class)
     int insert(DailySettlementDetail record);
@@ -40,7 +42,7 @@ public interface DailySettlementDetailMapper {
         "select",
         "daily_settlement_detail_id, invoice_nums, registration_id, patient_name, invoice_total_amount, ",
         "self_pay, account_pay, reimbursement_pay, discounted, daily_settlement_detail_state, ",
-        "settlement_category_id",
+        "settlement_category_id, valid",
         "from hospital.daily_settlement_detail",
         "where daily_settlement_detail_id = #{dailySettlementDetailId,jdbcType=INTEGER}"
     })
@@ -64,7 +66,8 @@ public interface DailySettlementDetailMapper {
           "reimbursement_pay = #{reimbursementPay,jdbcType=DOUBLE},",
           "discounted = #{discounted,jdbcType=DOUBLE},",
           "daily_settlement_detail_state = #{dailySettlementDetailState,jdbcType=INTEGER},",
-          "settlement_category_id = #{settlementCategoryId,jdbcType=INTEGER}",
+          "settlement_category_id = #{settlementCategoryId,jdbcType=INTEGER},",
+          "valid = #{valid,jdbcType=INTEGER}",
         "where daily_settlement_detail_id = #{dailySettlementDetailId,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(DailySettlementDetail record);

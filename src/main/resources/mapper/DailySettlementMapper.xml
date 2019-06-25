@@ -7,6 +7,7 @@
       <arg column="collector_account_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="collector_real_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="daily_settlement_date" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -68,7 +69,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    daily_settlement_id, collector_account_id, collector_real_name, daily_settlement_date
+    daily_settlement_id, collector_account_id, collector_real_name, daily_settlement_date, 
+    valid
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.DailySettlementExample" resultMap="BaseResultMap">
     select
@@ -105,6 +107,9 @@
       <if test="dailySettlementDate != null">
         daily_settlement_date,
       </if>
+      <if test="valid != null">
+        valid,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="collectorAccountId != null">
@@ -115,6 +120,9 @@
       </if>
       <if test="dailySettlementDate != null">
         #{dailySettlementDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="valid != null">
+        #{valid,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -139,6 +147,9 @@
       <if test="record.dailySettlementDate != null">
         daily_settlement_date = #{record.dailySettlementDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.valid != null">
+        valid = #{record.valid,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -149,7 +160,8 @@
     set daily_settlement_id = #{record.dailySettlementId,jdbcType=INTEGER},
       collector_account_id = #{record.collectorAccountId,jdbcType=INTEGER},
       collector_real_name = #{record.collectorRealName,jdbcType=VARCHAR},
-      daily_settlement_date = #{record.dailySettlementDate,jdbcType=TIMESTAMP}
+      daily_settlement_date = #{record.dailySettlementDate,jdbcType=TIMESTAMP},
+      valid = #{record.valid,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -165,6 +177,9 @@
       </if>
       <if test="dailySettlementDate != null">
         daily_settlement_date = #{dailySettlementDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="valid != null">
+        valid = #{valid,jdbcType=INTEGER},
       </if>
     </set>
     where daily_settlement_id = #{dailySettlementId,jdbcType=INTEGER}
