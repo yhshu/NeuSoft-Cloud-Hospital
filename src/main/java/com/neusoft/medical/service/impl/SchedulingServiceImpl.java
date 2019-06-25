@@ -31,6 +31,8 @@ public class SchedulingServiceImpl implements SchedulingService {
     @Resource
     private RegistrationMapper registrationMapper;
     @Resource
+    private RegistrationCategoryMapper registrationCategoryMapper;
+    @Resource
     private AccountService accountService;
 
     private Gson gson = new Gson();
@@ -92,7 +94,7 @@ public class SchedulingServiceImpl implements SchedulingService {
 
                 schedulingRuleJsonObject.addProperty("departmentName", departmentMapper.selectByPrimaryKey(departmentId).getDepartmentName());
                 schedulingRuleJsonObject.addProperty("doctorName", doctorMapper.selectByPrimaryKey(doctorId).getDoctorName());
-                schedulingRuleJsonObject.addProperty("registrationCategoryName", registrationMapper.selectByPrimaryKey(registrationCategoryId).getRegistrationCategory());
+                schedulingRuleJsonObject.addProperty("registrationCategoryName", registrationCategoryMapper.selectByPrimaryKey(registrationCategoryId).getRegistrationCategoryName());
                 schedulingRuleJsonObject.addProperty("operationAccountName", accountService.selectStaffByAccountId(operationAccountId).getRealName());
                 res.add(schedulingRuleJsonObject.toString());
             }

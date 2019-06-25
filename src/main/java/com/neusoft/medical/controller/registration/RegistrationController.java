@@ -107,7 +107,7 @@ public class RegistrationController {
             @RequestParam(value = "gender") String gender,
             @RequestParam(value = "age") Integer age,
             @RequestParam(value = "birthday") String birthday,
-            @RequestParam(value = "registrationCategory") String registrationCategoryName,
+            @RequestParam(value = "registrationCategoryId") Integer registrationCategoryId,
             @RequestParam(value = "medicalCategory") String medicalCategory,
             @RequestParam(value = "identityCardNo") String identityCardNo,
             @RequestParam(value = "visitDate") String visitDate,
@@ -124,7 +124,7 @@ public class RegistrationController {
         Date registrationDateConverted = dateConverter.convert(registrationDate);
         try {
             registrationService.addRegistration(
-                    new Registration(null, null, patientName, gender, age, birthdayConverted, registrationCategoryName, medicalCategory, identityCardNo, "1", visitDateConverted, registrationDateConverted, departmentId, doctorId, registrationSource, settleAccountsCategory, "0", familyAddress, collectorId, null, 1, null, null, null));
+                    new Registration(null, null, patientName, registrationCategoryId, gender, age, birthdayConverted, medicalCategory, identityCardNo, "1", visitDateConverted, registrationDateConverted, departmentId, doctorId, registrationSource, settleAccountsCategory, "0", familyAddress, collectorId, null, 1, null, null, null));
             System.out.println("已提交挂号信息");
         } catch (Exception e) {
             e.printStackTrace();

@@ -65,7 +65,7 @@ public class ChargeServiceImpl implements ChargeService {
                 }
 
                 // 处理支付记录
-                Invoice invoiceRecord = new Invoice(null, invoiceTitle, collectorId, new Date(), invoiceAmount, selfPay, accountPay, reimbursementPay, discounted, invoiceState, 1);
+                Invoice invoiceRecord = new Invoice(null, invoiceTitle, collectorId, new Date(), invoiceAmount, selfPay, accountPay, reimbursementPay, discounted, Constant.INVOICE_VALID, 1);
                 invoiceMapper.insert(invoiceRecord);
             }
 
