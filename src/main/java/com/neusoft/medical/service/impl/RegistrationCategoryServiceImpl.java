@@ -76,4 +76,18 @@ public class RegistrationCategoryServiceImpl implements RegistrationCategoryServ
         }
         return true;
     }
+
+    @Override
+    public List<RegistrationCategory> selectAllRegistrationCategory() {
+        List<RegistrationCategory> registrationCategoryList = null;
+        try {
+            RegistrationCategoryExample registrationCategoryExample = new RegistrationCategoryExample();
+            registrationCategoryExample.or().andValidEqualTo(1);
+
+            registrationCategoryList = registrationCategoryMapper.selectByExample(registrationCategoryExample);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return registrationCategoryList;
+    }
 }
