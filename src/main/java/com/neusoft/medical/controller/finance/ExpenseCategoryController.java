@@ -44,10 +44,20 @@ public class ExpenseCategoryController {
      *
      * @param expenseCategoryJson 费用科目信息，json 字符串
      * @return 操作结果
+     * expenseCategoryJson 中的属性包括：
+     * - expenseCategoryId 费用科目编号
+     * - expenseCode 费用代码
+     * - expenseName 费用名称
      */
     public ResultDTO<Boolean> saveExpenseCategory(String expenseCategoryJson) {
-        // todo
-        return null;
+        boolean res;
+        try {
+            res = expenseCategoryService.saveExpenseCategory(expenseCategoryJson);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultDTO<>(Boolean.FALSE);
+        }
+        return new ResultDTO<>(res);
     }
 
     /**

@@ -6,10 +6,12 @@ import com.neusoft.medical.bean.ExpenseCategory;
 import com.neusoft.medical.bean.ExpenseCategoryExample;
 import com.neusoft.medical.dao.ExpenseCategoryMapper;
 import com.neusoft.medical.service.finance.ExpenseCategoryService;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
+@Service
 public class ExpenseCategoryServiceImpl implements ExpenseCategoryService {
     @Resource
     private ExpenseCategoryMapper expenseCategoryMapper;
@@ -23,5 +25,10 @@ public class ExpenseCategoryServiceImpl implements ExpenseCategoryService {
 
         List<ExpenseCategory> expenseCategoryList = expenseCategoryMapper.selectByExample(expenseCategoryExample);
         return new PageInfo<>(expenseCategoryList);
+    }
+
+    @Override
+    public boolean saveExpenseCategory(String expenseCategoryJson) {
+        return false;
     }
 }

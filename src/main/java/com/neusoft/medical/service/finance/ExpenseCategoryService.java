@@ -7,4 +7,5 @@ public interface ExpenseCategoryService {
 
     PageInfo<ExpenseCategory> selectExpenseCategory(Integer currentPage, Integer pageSize);
 
+    boolean saveExpenseCategory(String expenseCategoryJson);
 }
