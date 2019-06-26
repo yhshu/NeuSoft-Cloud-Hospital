@@ -6,12 +6,15 @@ import org.springframework.stereotype.Component;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 @Component
 public class DateTimeConverter implements Converter<String, Date> {
     @Override
     public Date convert(String str) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
         Date date = null;
         try {
             date = simpleDateFormat.parse(str);

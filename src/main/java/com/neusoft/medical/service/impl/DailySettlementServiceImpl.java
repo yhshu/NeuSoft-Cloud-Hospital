@@ -139,7 +139,9 @@ public class DailySettlementServiceImpl implements DailySettlementService {
             InvoiceExample invoiceExample = new InvoiceExample();
             InvoiceExample.Criteria criteria = invoiceExample.createCriteria();
             assert endDatetime != null;
-            criteria.andValidEqualTo(1).andPayTimeLessThan(endDatetime);
+            criteria.andValidEqualTo(1);
+            System.out.println(endDatetime);
+            criteria.andPayTimeLessThan(endDatetime);
             if (lastDailySettlementDate != null)
                 criteria.andPayTimeGreaterThan(lastDailySettlementDate);
             List<Invoice> invoiceList = invoiceMapper.selectByExample(invoiceExample);
