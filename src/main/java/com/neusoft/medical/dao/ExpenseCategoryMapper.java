@@ -18,10 +18,10 @@ public interface ExpenseCategoryMapper {
     int deleteByPrimaryKey(Integer expenseCategoryId);
 
     @Insert({
-        "insert into hospital.expense_category (expense_code, expense_name, ",
+        "insert into hospital.expense_category (expense_category_code, expense_category_name, ",
         "valid, reserve1, ",
         "reserve2, reserve3)",
-        "values (#{expenseCode,jdbcType=VARCHAR}, #{expenseName,jdbcType=VARCHAR}, ",
+        "values (#{expenseCategoryCode,jdbcType=VARCHAR}, #{expenseCategoryName,jdbcType=VARCHAR}, ",
         "#{valid,jdbcType=INTEGER}, #{reserve1,jdbcType=VARCHAR}, ",
         "#{reserve2,jdbcType=VARCHAR}, #{reserve3,jdbcType=VARCHAR})"
     })
@@ -34,8 +34,8 @@ public interface ExpenseCategoryMapper {
 
     @Select({
         "select",
-        "expense_category_id, expense_code, expense_name, valid, reserve1, reserve2, ",
-        "reserve3",
+        "expense_category_id, expense_category_code, expense_category_name, valid, reserve1, ",
+        "reserve2, reserve3",
         "from hospital.expense_category",
         "where expense_category_id = #{expenseCategoryId,jdbcType=INTEGER}"
     })
@@ -50,8 +50,8 @@ public interface ExpenseCategoryMapper {
 
     @Update({
         "update hospital.expense_category",
-        "set expense_code = #{expenseCode,jdbcType=VARCHAR},",
-          "expense_name = #{expenseName,jdbcType=VARCHAR},",
+        "set expense_category_code = #{expenseCategoryCode,jdbcType=VARCHAR},",
+          "expense_category_name = #{expenseCategoryName,jdbcType=VARCHAR},",
           "valid = #{valid,jdbcType=INTEGER},",
           "reserve1 = #{reserve1,jdbcType=VARCHAR},",
           "reserve2 = #{reserve2,jdbcType=VARCHAR},",

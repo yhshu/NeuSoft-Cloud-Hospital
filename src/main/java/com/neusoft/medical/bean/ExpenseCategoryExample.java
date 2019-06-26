@@ -164,143 +164,143 @@ public class ExpenseCategoryExample {
             return (Criteria) this;
         }
 
-        public Criteria andExpenseCodeIsNull() {
-            addCriterion("expense_code is null");
+        public Criteria andExpenseCategoryCodeIsNull() {
+            addCriterion("expense_category_code is null");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseCodeIsNotNull() {
-            addCriterion("expense_code is not null");
+        public Criteria andExpenseCategoryCodeIsNotNull() {
+            addCriterion("expense_category_code is not null");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseCodeEqualTo(String value) {
-            addCriterion("expense_code =", value, "expenseCode");
+        public Criteria andExpenseCategoryCodeEqualTo(String value) {
+            addCriterion("expense_category_code =", value, "expenseCategoryCode");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseCodeNotEqualTo(String value) {
-            addCriterion("expense_code <>", value, "expenseCode");
+        public Criteria andExpenseCategoryCodeNotEqualTo(String value) {
+            addCriterion("expense_category_code <>", value, "expenseCategoryCode");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseCodeGreaterThan(String value) {
-            addCriterion("expense_code >", value, "expenseCode");
+        public Criteria andExpenseCategoryCodeGreaterThan(String value) {
+            addCriterion("expense_category_code >", value, "expenseCategoryCode");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseCodeGreaterThanOrEqualTo(String value) {
-            addCriterion("expense_code >=", value, "expenseCode");
+        public Criteria andExpenseCategoryCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("expense_category_code >=", value, "expenseCategoryCode");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseCodeLessThan(String value) {
-            addCriterion("expense_code <", value, "expenseCode");
+        public Criteria andExpenseCategoryCodeLessThan(String value) {
+            addCriterion("expense_category_code <", value, "expenseCategoryCode");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseCodeLessThanOrEqualTo(String value) {
-            addCriterion("expense_code <=", value, "expenseCode");
+        public Criteria andExpenseCategoryCodeLessThanOrEqualTo(String value) {
+            addCriterion("expense_category_code <=", value, "expenseCategoryCode");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseCodeLike(String value) {
-            addCriterion("expense_code like", value, "expenseCode");
+        public Criteria andExpenseCategoryCodeLike(String value) {
+            addCriterion("expense_category_code like", value, "expenseCategoryCode");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseCodeNotLike(String value) {
-            addCriterion("expense_code not like", value, "expenseCode");
+        public Criteria andExpenseCategoryCodeNotLike(String value) {
+            addCriterion("expense_category_code not like", value, "expenseCategoryCode");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseCodeIn(List<String> values) {
-            addCriterion("expense_code in", values, "expenseCode");
+        public Criteria andExpenseCategoryCodeIn(List<String> values) {
+            addCriterion("expense_category_code in", values, "expenseCategoryCode");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseCodeNotIn(List<String> values) {
-            addCriterion("expense_code not in", values, "expenseCode");
+        public Criteria andExpenseCategoryCodeNotIn(List<String> values) {
+            addCriterion("expense_category_code not in", values, "expenseCategoryCode");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseCodeBetween(String value1, String value2) {
-            addCriterion("expense_code between", value1, value2, "expenseCode");
+        public Criteria andExpenseCategoryCodeBetween(String value1, String value2) {
+            addCriterion("expense_category_code between", value1, value2, "expenseCategoryCode");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseCodeNotBetween(String value1, String value2) {
-            addCriterion("expense_code not between", value1, value2, "expenseCode");
+        public Criteria andExpenseCategoryCodeNotBetween(String value1, String value2) {
+            addCriterion("expense_category_code not between", value1, value2, "expenseCategoryCode");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseNameIsNull() {
-            addCriterion("expense_name is null");
+        public Criteria andExpenseCategoryNameIsNull() {
+            addCriterion("expense_category_name is null");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseNameIsNotNull() {
-            addCriterion("expense_name is not null");
+        public Criteria andExpenseCategoryNameIsNotNull() {
+            addCriterion("expense_category_name is not null");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseNameEqualTo(String value) {
-            addCriterion("expense_name =", value, "expenseName");
+        public Criteria andExpenseCategoryNameEqualTo(String value) {
+            addCriterion("expense_category_name =", value, "expenseCategoryName");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseNameNotEqualTo(String value) {
-            addCriterion("expense_name <>", value, "expenseName");
+        public Criteria andExpenseCategoryNameNotEqualTo(String value) {
+            addCriterion("expense_category_name <>", value, "expenseCategoryName");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseNameGreaterThan(String value) {
-            addCriterion("expense_name >", value, "expenseName");
+        public Criteria andExpenseCategoryNameGreaterThan(String value) {
+            addCriterion("expense_category_name >", value, "expenseCategoryName");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseNameGreaterThanOrEqualTo(String value) {
-            addCriterion("expense_name >=", value, "expenseName");
+        public Criteria andExpenseCategoryNameGreaterThanOrEqualTo(String value) {
+            addCriterion("expense_category_name >=", value, "expenseCategoryName");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseNameLessThan(String value) {
-            addCriterion("expense_name <", value, "expenseName");
+        public Criteria andExpenseCategoryNameLessThan(String value) {
+            addCriterion("expense_category_name <", value, "expenseCategoryName");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseNameLessThanOrEqualTo(String value) {
-            addCriterion("expense_name <=", value, "expenseName");
+        public Criteria andExpenseCategoryNameLessThanOrEqualTo(String value) {
+            addCriterion("expense_category_name <=", value, "expenseCategoryName");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseNameLike(String value) {
-            addCriterion("expense_name like", value, "expenseName");
+        public Criteria andExpenseCategoryNameLike(String value) {
+            addCriterion("expense_category_name like", value, "expenseCategoryName");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseNameNotLike(String value) {
-            addCriterion("expense_name not like", value, "expenseName");
+        public Criteria andExpenseCategoryNameNotLike(String value) {
+            addCriterion("expense_category_name not like", value, "expenseCategoryName");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseNameIn(List<String> values) {
-            addCriterion("expense_name in", values, "expenseName");
+        public Criteria andExpenseCategoryNameIn(List<String> values) {
+            addCriterion("expense_category_name in", values, "expenseCategoryName");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseNameNotIn(List<String> values) {
-            addCriterion("expense_name not in", values, "expenseName");
+        public Criteria andExpenseCategoryNameNotIn(List<String> values) {
+            addCriterion("expense_category_name not in", values, "expenseCategoryName");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseNameBetween(String value1, String value2) {
-            addCriterion("expense_name between", value1, value2, "expenseName");
+        public Criteria andExpenseCategoryNameBetween(String value1, String value2) {
+            addCriterion("expense_category_name between", value1, value2, "expenseCategoryName");
             return (Criteria) this;
         }
 
-        public Criteria andExpenseNameNotBetween(String value1, String value2) {
-            addCriterion("expense_name not between", value1, value2, "expenseName");
+        public Criteria andExpenseCategoryNameNotBetween(String value1, String value2) {
+            addCriterion("expense_category_name not between", value1, value2, "expenseCategoryName");
             return (Criteria) this;
         }
 
