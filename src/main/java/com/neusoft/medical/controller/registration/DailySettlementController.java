@@ -93,6 +93,8 @@ public class DailySettlementController {
                 endDatetimeConverted = dateTimeConverter.convert(endDatetime);
             else
                 endDatetimeConverted = new Date();
+            assert endDatetimeConverted != null;
+
             res = dailySettlementService.generateDailySettlement(collectorId, endDatetimeConverted);
         } catch (Exception e) {
             e.printStackTrace();

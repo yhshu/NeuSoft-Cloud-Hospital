@@ -138,6 +138,7 @@ public class DailySettlementServiceImpl implements DailySettlementService {
             // 获取上次日结到现在的收费记录
             InvoiceExample invoiceExample = new InvoiceExample();
             InvoiceExample.Criteria criteria = invoiceExample.createCriteria();
+            assert endDatetime != null;
             criteria.andValidEqualTo(1).andPayTimeLessThan(endDatetime);
             if (lastDailySettlementDate != null)
                 criteria.andPayTimeGreaterThan(lastDailySettlementDate);
