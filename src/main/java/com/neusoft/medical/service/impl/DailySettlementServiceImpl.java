@@ -111,7 +111,6 @@ public class DailySettlementServiceImpl implements DailySettlementService {
 
     @Override
     public String dailySettlementDocument(Integer dailySettlementId) {
-        // todo
         JsonObject dailySettlementDocument = new JsonObject();
         try {
             DailySettlement dailySettlement = dailySettlementMapper.selectByPrimaryKey(dailySettlementId);

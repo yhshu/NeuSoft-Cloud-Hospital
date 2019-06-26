@@ -10,7 +10,6 @@ import java.util.List;
  */
 public interface PrescriptionService {
 
-
     /**
      * 获取所有药品列表
      * 药品数量较多，可能增加网络和浏览器的负担
