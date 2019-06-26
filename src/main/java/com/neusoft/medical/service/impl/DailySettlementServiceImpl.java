@@ -118,7 +118,9 @@ public class DailySettlementServiceImpl implements DailySettlementService {
             // 日结单上的数据包括：开始时间、结束时间、收款员姓名、制表时间
             // 发票张数、总金额、总自费支付、总账户支付、总报销支付、总折扣金额
             // 总药费、总处置费、总检查费、总挂号费、总金额的汉字大写
-            dailySettlementDocumentJsonObject.addProperty("previousDailySettlementDate", dateTimeToStringConverter.convert(dailySettlement.getPreviousDailySettlementDate()));
+            if (dailySettlement == null) return null;
+            if (dailySettlement.getPreviousDailySettlementDate() != null)
+                dailySettlementDocumentJsonObject.addProperty("previousDailySettlementDate", dateTimeToStringConverter.convert(dailySettlement.getPreviousDailySettlementDate()));
             dailySettlementDocumentJsonObject.addProperty("endDatetime", dateTimeToStringConverter.convert(dailySettlement.getDailySettlementDate()));
             dailySettlementDocumentJsonObject.addProperty("collectorName", dailySettlement.getCollectorRealName());
             dailySettlementDocumentJsonObject.addProperty("tabulationTime", dateTimeToStringConverter.convert(new Date()));
