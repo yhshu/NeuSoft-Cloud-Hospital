@@ -5,7 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.neusoft.medical.Util.Constant;
-import com.neusoft.medical.Util.DateConverter;
+import com.neusoft.medical.Util.converter.StringToDateConverter;
 import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.*;
 import com.neusoft.medical.service.doctorWorkstation.OutpatientMedicalRecordService;
@@ -32,7 +32,7 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
     @Resource
     private DoctorMapper doctorMapper;
     @Resource
-    private DateConverter dateConverter;
+    private StringToDateConverter stringToDateConverter;
     @Resource
     private DiseaseMapper diseaseMapper;
     @Resource
@@ -168,7 +168,7 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
                 int mainDisease = diseaseJsonObject.getAsJsonPrimitive("mainDisease").getAsInt();
                 int suspect = diseaseJsonObject.getAsJsonPrimitive("suspect").getAsInt();
                 String incidenceDate = diseaseJsonObject.getAsJsonPrimitive("incidenceDate").getAsString();
-                Date incidenceDateConverted = dateConverter.convert(incidenceDate);
+                Date incidenceDateConverted = stringToDateConverter.convert(incidenceDate);
 
                 // 新增诊断记录
                 if (-1 == medicalRecordsId)

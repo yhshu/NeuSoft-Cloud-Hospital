@@ -7,6 +7,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.neusoft.medical.Util.Constant;
+import com.neusoft.medical.Util.converter.DateTimeToStringConverter;
 import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.*;
 import com.neusoft.medical.service.basicInfo.AccountService;
@@ -35,6 +36,8 @@ public class DailySettlementServiceImpl implements DailySettlementService {
     private AccountService accountService;
     @Resource
     private RegistrationMapper registrationMapper;
+    @Resource
+    private DateTimeToStringConverter dateTimeToStringConverter;
 
     private Gson gson = new Gson();
 
@@ -106,7 +109,22 @@ public class DailySettlementServiceImpl implements DailySettlementService {
     @Override
     public String dailySettlementDocument(Integer dailySettlementId) {
         // todo
+        JsonObject dailySettlementDocument = new JsonObject();
+        try {
+            DailySettlement dailySettlement = dailySettlementMapper.selectByPrimaryKey(dailySettlementId);
 
+            // 日结单上的数据包括：开始时间、结束时间、收款员姓名、制表时间
+            // 发票张数、总金额、总自费支付、总账户支付、总报销支付、总折扣金额
+            // 总药费、总处置费、总检查费、总挂号费、总金额的汉字大写
+            dailySettlementDocument.addProperty("previousDailySettlementDate", dateTimeToStringConverter.convert(dailySettlement.getPreviousDailySettlementDate()));
+            dailySettlementDocument.addProperty("endDatetime", dateTimeToStringConverter.convert(dailySettlement.getDailySettlementDate()));
+            dailySettlementDocument.addProperty("collectorName", dailySettlement.getCollectorRealName());
+            dailySettlementDocument.addProperty("tabulationTime", dateTimeToStringConverter.convert(new Date()));
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return null;
     }
@@ -152,7 +170,7 @@ public class DailySettlementServiceImpl implements DailySettlementService {
 
             // 将收费记录存储为日结记录与日结明细
             String collectorRealName = accountService.selectStaffByAccountId(collectorId).getRealName();
-            DailySettlement dailySettlement = new DailySettlement(null, collectorId, collectorRealName, new Date(), 0, 1);
+            DailySettlement dailySettlement = new DailySettlement(null, collectorId, collectorRealName, new Date(), lastDailySettlementDate, 0, 1);
             dailySettlementMapper.insert(dailySettlement);
 
             Integer dailySettlementId = dailySettlement.getDailySettlementId();

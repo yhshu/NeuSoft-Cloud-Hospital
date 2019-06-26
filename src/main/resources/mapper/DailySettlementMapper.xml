@@ -7,6 +7,7 @@
       <arg column="collector_account_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="collector_real_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="daily_settlement_date" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="previous_daily_settlement_date" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="checked" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
@@ -71,7 +72,7 @@
   </sql>
   <sql id="Base_Column_List">
     daily_settlement_id, collector_account_id, collector_real_name, daily_settlement_date, 
-    checked, valid
+    previous_daily_settlement_date, checked, valid
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.DailySettlementExample" resultMap="BaseResultMap">
     select
@@ -108,6 +109,9 @@
       <if test="dailySettlementDate != null">
         daily_settlement_date,
       </if>
+      <if test="previousDailySettlementDate != null">
+        previous_daily_settlement_date,
+      </if>
       <if test="checked != null">
         checked,
       </if>
@@ -124,6 +128,9 @@
       </if>
       <if test="dailySettlementDate != null">
         #{dailySettlementDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="previousDailySettlementDate != null">
+        #{previousDailySettlementDate,jdbcType=TIMESTAMP},
       </if>
       <if test="checked != null">
         #{checked,jdbcType=INTEGER},
@@ -154,6 +161,9 @@
       <if test="record.dailySettlementDate != null">
         daily_settlement_date = #{record.dailySettlementDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.previousDailySettlementDate != null">
+        previous_daily_settlement_date = #{record.previousDailySettlementDate,jdbcType=TIMESTAMP},
+      </if>
       <if test="record.checked != null">
         checked = #{record.checked,jdbcType=INTEGER},
       </if>
@@ -171,6 +181,7 @@
       collector_account_id = #{record.collectorAccountId,jdbcType=INTEGER},
       collector_real_name = #{record.collectorRealName,jdbcType=VARCHAR},
       daily_settlement_date = #{record.dailySettlementDate,jdbcType=TIMESTAMP},
+      previous_daily_settlement_date = #{record.previousDailySettlementDate,jdbcType=TIMESTAMP},
       checked = #{record.checked,jdbcType=INTEGER},
       valid = #{record.valid,jdbcType=INTEGER}
     <if test="_parameter != null">
@@ -188,6 +199,9 @@
       </if>
       <if test="dailySettlementDate != null">
         daily_settlement_date = #{dailySettlementDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="previousDailySettlementDate != null">
+        previous_daily_settlement_date = #{previousDailySettlementDate,jdbcType=TIMESTAMP},
       </if>
       <if test="checked != null">
         checked = #{checked,jdbcType=INTEGER},

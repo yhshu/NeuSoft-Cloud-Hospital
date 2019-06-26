@@ -11,15 +11,18 @@ public class DailySettlement {
 
     private Date dailySettlementDate;
 
+    private Date previousDailySettlementDate;
+
     private Integer checked;
 
     private Integer valid;
 
-    public DailySettlement(Integer dailySettlementId, Integer collectorAccountId, String collectorRealName, Date dailySettlementDate, Integer checked, Integer valid) {
+    public DailySettlement(Integer dailySettlementId, Integer collectorAccountId, String collectorRealName, Date dailySettlementDate, Date previousDailySettlementDate, Integer checked, Integer valid) {
         this.dailySettlementId = dailySettlementId;
         this.collectorAccountId = collectorAccountId;
         this.collectorRealName = collectorRealName;
         this.dailySettlementDate = dailySettlementDate;
+        this.previousDailySettlementDate = previousDailySettlementDate;
         this.checked = checked;
         this.valid = valid;
     }
@@ -58,6 +61,14 @@ public class DailySettlement {
 
     public void setDailySettlementDate(Date dailySettlementDate) {
         this.dailySettlementDate = dailySettlementDate;
+    }
+
+    public Date getPreviousDailySettlementDate() {
+        return previousDailySettlementDate;
+    }
+
+    public void setPreviousDailySettlementDate(Date previousDailySettlementDate) {
+        this.previousDailySettlementDate = previousDailySettlementDate;
     }
 
     public Integer getChecked() {

@@ -1,6 +1,6 @@
 package com.neusoft.medical.controller;
 
-import com.neusoft.medical.Util.DateTimeConverter;
+import com.neusoft.medical.Util.converter.StringToDateTimeConverter;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.WorkloadStatisticsService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +20,7 @@ public class WorkloadStatisticsController {
     @Resource
     private WorkloadStatisticsService workloadStatisticsService;
     @Resource
-    private DateTimeConverter dateTimeConverter;
+    private StringToDateTimeConverter stringToDateTimeConverter;
 
     /**
      * 临床医生个人工作量统计
@@ -39,8 +39,8 @@ public class WorkloadStatisticsController {
     ) {
         String res = null;
         try {
-            Date startDatetimeConverted = dateTimeConverter.convert(startDatetime);
-            Date endDatetimeConverted = dateTimeConverter.convert(endDatetime);
+            Date startDatetimeConverted = stringToDateTimeConverter.convert(startDatetime);
+            Date endDatetimeConverted = stringToDateTimeConverter.convert(endDatetime);
             res = workloadStatisticsService.outpatientDoctorWorkloadStatistics(startDatetimeConverted, endDatetimeConverted, doctorId);
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,8 +65,8 @@ public class WorkloadStatisticsController {
     ) {
         String res = null;
         try {
-            Date startDatetimeConverted = dateTimeConverter.convert(startDatetime);
-            Date endDatetimeConverted = dateTimeConverter.convert(endDatetime);
+            Date startDatetimeConverted = stringToDateTimeConverter.convert(startDatetime);
+            Date endDatetimeConverted = stringToDateTimeConverter.convert(endDatetime);
             res = workloadStatisticsService.techDoctorWorkloadStatistics(startDatetimeConverted, endDatetimeConverted, doctorId);
         } catch (Exception e) {
             e.printStackTrace();
@@ -89,8 +89,8 @@ public class WorkloadStatisticsController {
     ) {
         String res = null;
         try {
-            Date startDatetimeConverted = dateTimeConverter.convert(startDatetime);
-            Date endDatetimeConverted = dateTimeConverter.convert(endDatetime);
+            Date startDatetimeConverted = stringToDateTimeConverter.convert(startDatetime);
+            Date endDatetimeConverted = stringToDateTimeConverter.convert(endDatetime);
             res = workloadStatisticsService.departmentWorkloadFinancialStatistics(startDatetimeConverted, endDatetimeConverted);
         } catch (Exception e) {
             e.printStackTrace();
@@ -112,8 +112,8 @@ public class WorkloadStatisticsController {
     ) {
         String res = null;
         try {
-            Date startDatetimeConverted = dateTimeConverter.convert(startDatetime);
-            Date endDatetimeConverted = dateTimeConverter.convert(endDatetime);
+            Date startDatetimeConverted = stringToDateTimeConverter.convert(startDatetime);
+            Date endDatetimeConverted = stringToDateTimeConverter.convert(endDatetime);
             res = workloadStatisticsService.doctorWorkloadFinancialStatistics(startDatetimeConverted, endDatetimeConverted);
         } catch (Exception e) {
             e.printStackTrace();

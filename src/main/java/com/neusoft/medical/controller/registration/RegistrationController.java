@@ -1,7 +1,7 @@
 package com.neusoft.medical.controller.registration;
 
 import com.github.pagehelper.PageInfo;
-import com.neusoft.medical.Util.DateConverter;
+import com.neusoft.medical.Util.converter.StringToDateConverter;
 import com.neusoft.medical.bean.Department;
 import com.neusoft.medical.bean.Doctor;
 import com.neusoft.medical.bean.Patient;
@@ -36,7 +36,7 @@ public class RegistrationController {
     private SchedulingService schedulingService;
 
     @Resource
-    private DateConverter dateConverter;
+    private StringToDateConverter stringToDateConverter;
 
     /**
      * 获取挂号科室列表
@@ -119,9 +119,9 @@ public class RegistrationController {
             @RequestParam(value = "familyAddress") String familyAddress,
             @RequestParam(value = "collectorId") Integer collectorId) {
 
-        Date visitDateConverted = dateConverter.convert(visitDate);
-        Date birthdayConverted = dateConverter.convert(birthday);
-        Date registrationDateConverted = dateConverter.convert(registrationDate);
+        Date visitDateConverted = stringToDateConverter.convert(visitDate);
+        Date birthdayConverted = stringToDateConverter.convert(birthday);
+        Date registrationDateConverted = stringToDateConverter.convert(registrationDate);
         try {
             registrationService.addRegistration(
                     new Registration(null, null, patientName, registrationCategoryId, gender, age, birthdayConverted, medicalCategory, identityCardNo, "1", visitDateConverted, registrationDateConverted, departmentId, doctorId, registrationSource, settlementCategoryId, "0", familyAddress, collectorId, null, 1, null, null, null));

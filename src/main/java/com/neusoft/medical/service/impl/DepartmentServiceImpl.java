@@ -2,6 +2,7 @@ package com.neusoft.medical.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.gson.Gson;
 import com.neusoft.medical.bean.Department;
 import com.neusoft.medical.bean.DepartmentExample;
 import com.neusoft.medical.dao.DepartmentMapper;
@@ -15,6 +16,8 @@ import java.util.List;
 public class DepartmentServiceImpl implements DepartmentService {
     @Resource
     private DepartmentMapper departmentMapper;
+
+    private Gson gson = new Gson();
 
     @Override
     public List<Department> findAllDepartment() {

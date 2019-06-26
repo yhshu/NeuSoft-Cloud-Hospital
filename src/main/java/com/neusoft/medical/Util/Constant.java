@@ -4,7 +4,7 @@ public interface Constant {
     /**
      * 开销种类
      */
-    int EXPENSE_CATEGORY_EXAM = 3;    // 检查费
+    int EXPENSE_CATEGORY_EXAM = 3;     // 检查费
     int EXPENSE_CATEGORY_DISPOSAL = 16;// 处置费
 
     /**
