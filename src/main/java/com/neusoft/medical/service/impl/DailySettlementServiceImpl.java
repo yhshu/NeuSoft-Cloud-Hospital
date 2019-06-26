@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
 public class DailySettlementServiceImpl implements DailySettlementService {
@@ -73,6 +74,7 @@ public class DailySettlementServiceImpl implements DailySettlementService {
 
     @Override
     public PageInfo<String> selectDailySettlementDetail(Integer dailySettlementId, Integer currentPage, Integer pageSize) {
+        List<String> res = new CopyOnWriteArrayList<>();
         try {
             PageHelper.startPage(currentPage, pageSize);
             DailySettlementDetailExample dailySettlementDetailExample = new DailySettlementDetailExample();
@@ -92,16 +94,19 @@ public class DailySettlementServiceImpl implements DailySettlementService {
                     dailySettlementDetailJsonObject.addProperty("dailySettlementDetailState", invoiceService.getInvoiceState(dailySettlementDetailState));
                 }
                 dailySettlementDetailJsonObject.addProperty("settlementCategoryName", settlementCategoryMapper.selectByPrimaryKey(settlementCategoryId).getSettlementCategoryName());
+
+                res.add(dailySettlementDetailJsonObject.toString());
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return new PageInfo<>(res);
     }
 
     @Override
     public String dailySettlementDocument(Integer dailySettlementId) {
         // todo
+
 
         return null;
     }
@@ -124,7 +129,6 @@ public class DailySettlementServiceImpl implements DailySettlementService {
     public boolean generateDailySettlement(Integer collectorId, Date endDatetime) {
         // 首先获取指定收费员的上次日结时间，如果找不到上次日结时间，本次日结是该收费员的初次日结
         try {
-
             DailySettlementExample dailySettlementExample = new DailySettlementExample();
             dailySettlementExample.or().andValidEqualTo(1).andCollectorAccountIdEqualTo(collectorId);
             dailySettlementExample.setOrderByClause("daily_settlement_date desc");

@@ -32,7 +32,7 @@ public class WorkloadStatisticsController {
      * @return 临床医生个人工作量数据
      */
     @GetMapping("/outpatient_doctor")
-    public ResultDTO<String> outpatientDoctorWorkloadStatistics(
+    public ResultDTO<String> doctorWorkloadFinancialStatistics(
             @RequestParam(value = "startDatetime") String startDatetime,
             @RequestParam(value = "endDatetime") String endDatetime,
             @RequestParam(value = "doctorId") Integer doctorId
@@ -76,7 +76,6 @@ public class WorkloadStatisticsController {
 
     /**
      * 门诊科室工作量统计
-     * <p>
      * 日期格式 yyyy-MM-dd HH:mm:ss
      *
      * @param startDatetime 开始时间
@@ -84,11 +83,41 @@ public class WorkloadStatisticsController {
      * @return 各科室工作量统计数据
      */
     @GetMapping("/department")
-    public ResultDTO<String> outpatientDepartmentWorkloadStatistics(
+    public ResultDTO<String> departmentWorkloadFinancialStatistics(
             @RequestParam(value = "startDatetime") String startDatetime,
             @RequestParam(value = "endDatetime") String endDatetime
     ) {
-// todo
-        return null;
+        String res = null;
+        try {
+            Date startDatetimeConverted = dateTimeConverter.convert(startDatetime);
+            Date endDatetimeConverted = dateTimeConverter.convert(endDatetime);
+            res = workloadStatisticsService.departmentWorkloadFinancialStatistics(startDatetimeConverted, endDatetimeConverted);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResultDTO<>(res);
+    }
+
+    /**
+     * 门诊医生工作量统计
+     *
+     * @param startDatetime 开始时间
+     * @param endDatetime   结束时间
+     * @return 各医生工作量统计数据
+     */
+    @GetMapping("/doctor")
+    public ResultDTO<String> doctorWorkloadFinancialStatistics(
+            @RequestParam(value = "startDatetime") String startDatetime,
+            @RequestParam(value = "endDatetime") String endDatetime
+    ) {
+        String res = null;
+        try {
+            Date startDatetimeConverted = dateTimeConverter.convert(startDatetime);
+            Date endDatetimeConverted = dateTimeConverter.convert(endDatetime);
+            res = workloadStatisticsService.doctorWorkloadFinancialStatistics(startDatetimeConverted, endDatetimeConverted);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResultDTO<>(res);
     }
 }

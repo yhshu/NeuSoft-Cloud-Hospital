@@ -9,13 +9,25 @@ import java.util.Date;
 public class WorkloadStatisticsServiceImpl implements WorkloadStatisticsService {
 
     @Override
-    public String techDoctorWorkloadStatistics(Date startDatetimeConverted, Date endDatetimeConverted, Integer doctorId) {
+    public String outpatientDoctorWorkloadStatistics(Date startDatetime, Date endDatetime, Integer doctorId) {
         // todo
         return null;
     }
 
     @Override
-    public String outpatientDoctorWorkloadStatistics(Date startDatetimeConverted, Date endDatetimeConverted, Integer doctorId) {
+    public String techDoctorWorkloadStatistics(Date startDatetime, Date endDatetime, Integer doctorId) {
+        // todo
+        return null;
+    }
+
+    @Override
+    public String departmentWorkloadFinancialStatistics(Date startDatetime, Date endDatetime) {
+        // todo
+        return null;
+    }
+
+    @Override
+    public String doctorWorkloadFinancialStatistics(Date startDatetime, Date endDatetime) {
         // todo
         return null;
     }
