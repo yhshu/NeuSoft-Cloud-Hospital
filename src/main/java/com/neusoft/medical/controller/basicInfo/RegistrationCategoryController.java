@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * 挂号级别管理 控制器
@@ -20,7 +21,23 @@ public class RegistrationCategoryController {
     private RegistrationCategoryService registrationCategoryService;
 
     /**
-     * 获取挂号级别列表
+     * 获取包含所有挂号级别的列表
+     *
+     * @return 挂号级别列表
+     */
+    @GetMapping("/list_all")
+    public ResultDTO<List<RegistrationCategory>> selectAllRegistrationCategory() {
+        List<RegistrationCategory> registrationCategoryList = null;
+        try {
+            registrationCategoryList = registrationCategoryService.selectAllRegistrationCategory();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResultDTO<>(registrationCategoryList);
+    }
+
+    /**
+     * 分页获取挂号级别列表
      *
      * @param currentPage 当前页码
      * @param pageSize    页面大小
@@ -38,6 +55,25 @@ public class RegistrationCategoryController {
             e.printStackTrace();
         }
         return new ResultDTO<>(registrationCategoryPageInfo);
+    }
+
+    /**
+     * 获取指定挂号类别的费用
+     *
+     * @param registrationCategoryId 挂号类别编号
+     * @return 挂号费
+     */
+    @GetMapping("/registration_fee")
+    public ResultDTO<Double> registrationFee(
+            @RequestParam(value = "registrationCategoryId") Integer registrationCategoryId
+    ) {
+        double res = 0.0;
+        try {
+            res = registrationCategoryService.registrationFee(registrationCategoryId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResultDTO<>(res);
     }
 
     /**

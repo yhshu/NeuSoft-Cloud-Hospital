@@ -84,21 +84,21 @@ public class RegistrationController {
      * 1. 添加挂号信息
      * 2. 添加患者信息
      *
-     * @param patientName              患者姓名
-     * @param gender                   患者性别
-     * @param age                      患者年龄
-     * @param birthday                 患者生日
-     * @param registrationCategoryName 挂号类型
-     * @param medicalCategory          医疗类别
-     * @param identityCardNo           患者身份证号
-     * @param visitDate                预约日期（年-月-日）
-     * @param registrationDate         挂号日期
-     * @param departmentId             挂号科室编号
-     * @param doctorId                 看诊医生编号
-     * @param registrationSource       挂号来源
-     * @param settleAccountsCategory   结算类别
-     * @param familyAddress            家庭住址
-     * @param collectorId              收费员编号
+     * @param patientName            患者姓名
+     * @param gender                 患者性别
+     * @param age                    患者年龄
+     * @param birthday               患者生日
+     * @param registrationCategoryId 挂号类型
+     * @param medicalCategory        医疗类别
+     * @param identityCardNo         患者身份证号
+     * @param visitDate              预约日期（年-月-日）
+     * @param registrationDate       挂号日期
+     * @param departmentId           挂号科室编号
+     * @param doctorId               看诊医生编号
+     * @param registrationSource     挂号来源
+     * @param settleAccountsCategory 结算类别
+     * @param familyAddress          家庭住址
+     * @param collectorId            收费员编号
      * @return 挂号成功 true，挂号失败 false
      */
     @PostMapping("/add_registration")
@@ -107,7 +107,7 @@ public class RegistrationController {
             @RequestParam(value = "gender") String gender,
             @RequestParam(value = "age") Integer age,
             @RequestParam(value = "birthday") String birthday,
-            @RequestParam(value = "registrationCategory") String registrationCategoryName,
+            @RequestParam(value = "registrationCategoryId") Integer registrationCategoryId,
             @RequestParam(value = "medicalCategory") String medicalCategory,
             @RequestParam(value = "identityCardNo") String identityCardNo,
             @RequestParam(value = "visitDate") String visitDate,
@@ -115,7 +115,7 @@ public class RegistrationController {
             @RequestParam(value = "departmentId") Integer departmentId,
             @RequestParam(value = "doctorId") Integer doctorId,
             @RequestParam(value = "registrationSource") String registrationSource,
-            @RequestParam(value = "settleAccountsCategory") String settleAccountsCategory,
+            @RequestParam(value = "settlementCategoryId") Integer settlementCategoryId,
             @RequestParam(value = "familyAddress") String familyAddress,
             @RequestParam(value = "collectorId") Integer collectorId) {
 
@@ -124,7 +124,7 @@ public class RegistrationController {
         Date registrationDateConverted = dateConverter.convert(registrationDate);
         try {
             registrationService.addRegistration(
-                    new Registration(null, null, patientName, gender, age, birthdayConverted, registrationCategoryName, medicalCategory, identityCardNo, "1", visitDateConverted, registrationDateConverted, departmentId, doctorId, registrationSource, settleAccountsCategory, "0", familyAddress, collectorId, null, 1, null, null, null));
+                    new Registration(null, null, patientName, registrationCategoryId, gender, age, birthdayConverted, medicalCategory, identityCardNo, "1", visitDateConverted, registrationDateConverted, departmentId, doctorId, registrationSource, settlementCategoryId, "0", familyAddress, collectorId, null, 1, null, null, null));
             System.out.println("已提交挂号信息");
         } catch (Exception e) {
             e.printStackTrace();

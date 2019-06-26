@@ -2,7 +2,6 @@ package com.neusoft.medical.controller.basicInfo;
 
 import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.Util.DateConverter;
-import com.neusoft.medical.bean.SchedulingInfo;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.basicInfo.SchedulingService;
 import org.springframework.web.bind.annotation.*;
@@ -105,6 +104,7 @@ public class SchedulingController {
      * 只能生成未来的排班计划，生成的排班计划可以修改
      * 排班计划可以重复生成，在指定的时间段内替换之前生成的排班计划
      * 历史排班计划不能被修改，或替换
+     * 日期格式 yyyy-MM-dd
      *
      * @param startDate 开始日期
      * @param endDate   结束日期
@@ -128,11 +128,11 @@ public class SchedulingController {
     }
 
     @GetMapping("/select_info")
-    public ResultDTO<PageInfo<SchedulingInfo>> selectSchedulingInfo(
+    public ResultDTO<PageInfo<String>> selectSchedulingInfo(
             @RequestParam("currentPage") Integer currentPage,
             @RequestParam("pageSize") Integer pageSize
     ) {
-        PageInfo<SchedulingInfo> schedulingInfoPageInfo = null;
+        PageInfo<String> schedulingInfoPageInfo = null;
         try {
             schedulingInfoPageInfo = schedulingService.selectSchedulingInfo(currentPage, pageSize);
         } catch (Exception e) {

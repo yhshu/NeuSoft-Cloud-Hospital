@@ -76,4 +76,29 @@ public class RegistrationCategoryServiceImpl implements RegistrationCategoryServ
         }
         return true;
     }
+
+    @Override
+    public List<RegistrationCategory> selectAllRegistrationCategory() {
+        List<RegistrationCategory> registrationCategoryList = null;
+        try {
+            RegistrationCategoryExample registrationCategoryExample = new RegistrationCategoryExample();
+            registrationCategoryExample.or().andValidEqualTo(1);
+
+            registrationCategoryList = registrationCategoryMapper.selectByExample(registrationCategoryExample);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return registrationCategoryList;
+    }
+
+    @Override
+    public double registrationFee(Integer registrationCategoryId) {
+        double res = 0.0;
+        try {
+            res = registrationCategoryMapper.selectByPrimaryKey(registrationCategoryId).getRegistrationFee();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
 }

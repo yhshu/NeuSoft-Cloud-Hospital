@@ -76,4 +76,11 @@ public interface Constant {
     String TYPE_FINANCIAL_STAFF = "12";     // 财务管理员
     String TYPE_REGISTRATION_STAFF = "13";  // 挂号管理员
     String TYPE_SYSTEM_ADMIN = "20";        // 系统管理员
+
+    /**
+     * 支付记录状态
+     */
+    int INVOICE_VALID = 1;                  // 有效
+    int INVOICE_RUSHED = 2;                 // 红冲
+    int INVOICE_REINVOICE = 3;              // 重打
 }

@@ -2,14 +2,9 @@ package com.neusoft.medical.dao;
 
 import com.neusoft.medical.bean.Medicine;
 import com.neusoft.medical.bean.MedicineExample;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
-import org.apache.ibatis.annotations.Update;
 
 public interface MedicineMapper {
     long countByExample(MedicineExample example);
@@ -34,7 +29,7 @@ public interface MedicineMapper {
         "values (#{medicineCode,jdbcType=VARCHAR}, #{nameZh,jdbcType=VARCHAR}, ",
         "#{medicineSpecification,jdbcType=VARCHAR}, #{medicineUnit,jdbcType=VARCHAR}, ",
         "#{medicineManufacturer,jdbcType=VARCHAR}, #{medicineDosageId,jdbcType=INTEGER}, ",
-        "#{medicineTypeId,jdbcType=INTEGER}, #{medicinePrice,jdbcType=DECIMAL}, ",
+        "#{medicineTypeId,jdbcType=INTEGER}, #{medicinePrice,jdbcType=DOUBLE}, ",
         "#{namePinyin,jdbcType=VARCHAR}, #{creationTime,jdbcType=DATE}, ",
         "#{nums,jdbcType=INTEGER}, #{nameEn,jdbcType=VARCHAR}, #{valid,jdbcType=INTEGER}, ",
         "#{reserve1,jdbcType=VARCHAR}, #{reserve2,jdbcType=VARCHAR}, ",
@@ -73,7 +68,7 @@ public interface MedicineMapper {
           "medicine_manufacturer = #{medicineManufacturer,jdbcType=VARCHAR},",
           "medicine_dosage_id = #{medicineDosageId,jdbcType=INTEGER},",
           "medicine_type_id = #{medicineTypeId,jdbcType=INTEGER},",
-          "medicine_price = #{medicinePrice,jdbcType=DECIMAL},",
+          "medicine_price = #{medicinePrice,jdbcType=DOUBLE},",
           "name_pinyin = #{namePinyin,jdbcType=VARCHAR},",
           "creation_time = #{creationTime,jdbcType=DATE},",
           "nums = #{nums,jdbcType=INTEGER},",

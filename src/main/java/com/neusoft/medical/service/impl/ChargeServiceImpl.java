@@ -2,17 +2,16 @@ package com.neusoft.medical.service.impl;
 
 import com.google.gson.*;
 import com.neusoft.medical.Util.Constant;
-import com.neusoft.medical.bean.ChargeEntry;
-import com.neusoft.medical.bean.PrescriptionEntry;
-import com.neusoft.medical.bean.Registration;
-import com.neusoft.medical.bean.RegistrationExample;
+import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.ChargeEntryMapper;
+import com.neusoft.medical.dao.InvoiceMapper;
 import com.neusoft.medical.dao.PrescriptionEntryMapper;
 import com.neusoft.medical.dao.RegistrationMapper;
 import com.neusoft.medical.service.registration.ChargeService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 import static java.lang.Math.max;
@@ -25,18 +24,35 @@ public class ChargeServiceImpl implements ChargeService {
     private PrescriptionEntryMapper prescriptionEntryMapper;
     @Resource
     private RegistrationMapper registrationMapper;
-
+    @Resource
+    private InvoiceMapper invoiceMapper;
 
     private Gson gson = new Gson();
 
     @Override
     public boolean checkout(String checkoutJson) {
         try {
-            JsonArray checkoutJsonArray = new JsonParser().parse(checkoutJson).getAsJsonArray();
-            for (JsonElement checkoutJsonElement : checkoutJsonArray) {
-                JsonObject checkoutJsonObject = checkoutJsonElement.getAsJsonObject();
-                int entryType = checkoutJsonObject.get("entryType").getAsInt();
-                int entryId = checkoutJsonObject.get("entryId").getAsInt();
+            JsonObject checkoutJsonObject = new JsonParser().parse(checkoutJson).getAsJsonObject();
+
+            String invoiceTitle = checkoutJsonObject.get("invoiceTitle").getAsString();
+            int collectorId = checkoutJsonObject.get("collectorId").getAsInt();
+            int invoiceNums = checkoutJsonObject.get("invoiceNums").getAsInt();
+            int registrationId = checkoutJsonObject.get("registrationId").getAsInt();
+            double invoiceAmount = checkoutJsonObject.get("invoiceAmount").getAsDouble();
+            double selfPay = checkoutJsonObject.get("selfPay").getAsDouble();
+            double accountPay = checkoutJsonObject.get("accountPay").getAsDouble();
+            double reimbursementPay = checkoutJsonObject.get("reimbursementPay").getAsDouble();
+            double discounted = checkoutJsonObject.get("discounted").getAsDouble();
+            int invoiceState = checkoutJsonObject.get("invoiceState").getAsInt();
+            JsonArray entryListJsonArray = checkoutJsonObject.get("entryList").getAsJsonArray();
+
+            for (JsonElement entryJsonElement : entryListJsonArray) {
+                JsonObject entryJsonObject = entryJsonElement.getAsJsonObject();
+
+                int entryType = entryJsonObject.get("entryType").getAsInt();
+                int entryId = entryJsonObject.get("entryId").getAsInt();
+
+                // 处理收费条目：chargeEntry 或 prescriptionEntry
                 if (entryType == Constant.ENTRY_TYPE_CHARGE_ENTRY) {
                     ChargeEntry chargeEntryRecord = chargeEntryMapper.selectByPrimaryKey(entryId);
                     chargeEntryRecord.setPayState(Constant.PAY_STATE_CHARGED);
@@ -49,7 +65,12 @@ public class ChargeServiceImpl implements ChargeService {
                 } else {
                     throw new Exception("The value of entryType is null or wrong.");
                 }
+
+                // 处理支付记录
+                Invoice invoiceRecord = new Invoice(null, invoiceTitle, invoiceNums, collectorId, registrationId, new Date(), invoiceAmount, selfPay, accountPay, reimbursementPay, discounted, Constant.INVOICE_VALID, 1);
+                invoiceMapper.insert(invoiceRecord);
             }
+
         } catch (Exception e) {
             e.printStackTrace();
             return false;

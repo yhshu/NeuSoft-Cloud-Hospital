@@ -17,7 +17,7 @@ public class DiagnosticCatalogServiceImplTest {
 
     @Test
     public void findAllDiseaseCategory() {
-        // todo
+
     }
 
     @Test

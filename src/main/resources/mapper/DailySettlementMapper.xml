@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.medical.dao.DailySettlementMapper">
+  <resultMap id="BaseResultMap" type="com.neusoft.medical.bean.DailySettlement">
+    <constructor>
+      <idArg column="daily_settlement_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="collector_account_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="collector_real_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="daily_settlement_date" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="checked" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    daily_settlement_id, collector_account_id, collector_real_name, daily_settlement_date, 
+    checked, valid
+  </sql>
+  <select id="selectByExample" parameterType="com.neusoft.medical.bean.DailySettlementExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hospital.daily_settlement
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.neusoft.medical.bean.DailySettlementExample">
+    delete from hospital.daily_settlement
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="com.neusoft.medical.bean.DailySettlement">
+    <selectKey keyProperty="dailySettlementId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hospital.daily_settlement
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="collectorAccountId != null">
+        collector_account_id,
+      </if>
+      <if test="collectorRealName != null">
+        collector_real_name,
+      </if>
+      <if test="dailySettlementDate != null">
+        daily_settlement_date,
+      </if>
+      <if test="checked != null">
+        checked,
+      </if>
+      <if test="valid != null">
+        valid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="collectorAccountId != null">
+        #{collectorAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="collectorRealName != null">
+        #{collectorRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="dailySettlementDate != null">
+        #{dailySettlementDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checked != null">
+        #{checked,jdbcType=INTEGER},
+      </if>
+      <if test="valid != null">
+        #{valid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.neusoft.medical.bean.DailySettlementExample" resultType="java.lang.Long">
+    select count(*) from hospital.daily_settlement
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update hospital.daily_settlement
+    <set>
+      <if test="record.dailySettlementId != null">
+        daily_settlement_id = #{record.dailySettlementId,jdbcType=INTEGER},
+      </if>
+      <if test="record.collectorAccountId != null">
+        collector_account_id = #{record.collectorAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="record.collectorRealName != null">
+        collector_real_name = #{record.collectorRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dailySettlementDate != null">
+        daily_settlement_date = #{record.dailySettlementDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.checked != null">
+        checked = #{record.checked,jdbcType=INTEGER},
+      </if>
+      <if test="record.valid != null">
+        valid = #{record.valid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update hospital.daily_settlement
+    set daily_settlement_id = #{record.dailySettlementId,jdbcType=INTEGER},
+      collector_account_id = #{record.collectorAccountId,jdbcType=INTEGER},
+      collector_real_name = #{record.collectorRealName,jdbcType=VARCHAR},
+      daily_settlement_date = #{record.dailySettlementDate,jdbcType=TIMESTAMP},
+      checked = #{record.checked,jdbcType=INTEGER},
+      valid = #{record.valid,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.DailySettlement">
+    update hospital.daily_settlement
+    <set>
+      <if test="collectorAccountId != null">
+        collector_account_id = #{collectorAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="collectorRealName != null">
+        collector_real_name = #{collectorRealName,jdbcType=VARCHAR},
+      </if>
+      <if test="dailySettlementDate != null">
+        daily_settlement_date = #{dailySettlementDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checked != null">
+        checked = #{checked,jdbcType=INTEGER},
+      </if>
+      <if test="valid != null">
+        valid = #{valid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where daily_settlement_id = #{dailySettlementId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -9,13 +9,13 @@ public class Registration {
 
     private String patientName;
 
+    private Integer registrationCategoryId;
+
     private String gender;
 
     private Integer age;
 
     private Date birthday;
-
-    private String registrationCategory;
 
     private String medicalCategory;
 
@@ -33,7 +33,7 @@ public class Registration {
 
     private String registrationSource;
 
-    private String settleAccountsCategory;
+    private Integer settlementCategoryId;
 
     private String isVisited;
 
@@ -51,14 +51,14 @@ public class Registration {
 
     private String reserve3;
 
-    public Registration(Integer registrationId, Integer patientId, String patientName, String gender, Integer age, Date birthday, String registrationCategory, String medicalCategory, String identityCardNo, String registrationStatus, Date visitDate, Date registrationDate, Integer departmentId, Integer doctorId, String registrationSource, String settleAccountsCategory, String isVisited, String familyAddress, Integer collectorId, Integer totalCharge, Integer valid, String reserve1, String reserve2, String reserve3) {
+    public Registration(Integer registrationId, Integer patientId, String patientName, Integer registrationCategoryId, String gender, Integer age, Date birthday, String medicalCategory, String identityCardNo, String registrationStatus, Date visitDate, Date registrationDate, Integer departmentId, Integer doctorId, String registrationSource, Integer settlementCategoryId, String isVisited, String familyAddress, Integer collectorId, Integer totalCharge, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.registrationId = registrationId;
         this.patientId = patientId;
         this.patientName = patientName;
+        this.registrationCategoryId = registrationCategoryId;
         this.gender = gender;
         this.age = age;
         this.birthday = birthday;
-        this.registrationCategory = registrationCategory;
         this.medicalCategory = medicalCategory;
         this.identityCardNo = identityCardNo;
         this.registrationStatus = registrationStatus;
@@ -67,7 +67,7 @@ public class Registration {
         this.departmentId = departmentId;
         this.doctorId = doctorId;
         this.registrationSource = registrationSource;
-        this.settleAccountsCategory = settleAccountsCategory;
+        this.settlementCategoryId = settlementCategoryId;
         this.isVisited = isVisited;
         this.familyAddress = familyAddress;
         this.collectorId = collectorId;
@@ -106,6 +106,14 @@ public class Registration {
         this.patientName = patientName == null ? null : patientName.trim();
     }
 
+    public Integer getRegistrationCategoryId() {
+        return registrationCategoryId;
+    }
+
+    public void setRegistrationCategoryId(Integer registrationCategoryId) {
+        this.registrationCategoryId = registrationCategoryId;
+    }
+
     public String getGender() {
         return gender;
     }
@@ -128,14 +136,6 @@ public class Registration {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
-    }
-
-    public String getRegistrationCategory() {
-        return registrationCategory;
-    }
-
-    public void setRegistrationCategory(String registrationCategory) {
-        this.registrationCategory = registrationCategory == null ? null : registrationCategory.trim();
     }
 
     public String getMedicalCategory() {
@@ -202,12 +202,12 @@ public class Registration {
         this.registrationSource = registrationSource == null ? null : registrationSource.trim();
     }
 
-    public String getSettleAccountsCategory() {
-        return settleAccountsCategory;
+    public Integer getSettlementCategoryId() {
+        return settlementCategoryId;
     }
 
-    public void setSettleAccountsCategory(String settleAccountsCategory) {
-        this.settleAccountsCategory = settleAccountsCategory == null ? null : settleAccountsCategory.trim();
+    public void setSettlementCategoryId(Integer settlementCategoryId) {
+        this.settlementCategoryId = settlementCategoryId;
     }
 
     public String getIsVisited() {

@@ -46,4 +46,8 @@ public interface RegistrationCategoryService {
      * @return 操作结果
      */
     boolean deleteRegistrationCategoryByPrimaryKey(List<Integer> registrationCategoryId);
+
+    List<RegistrationCategory> selectAllRegistrationCategory();
+
+    double registrationFee(Integer registrationCategoryId);
 }

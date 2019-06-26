@@ -2,6 +2,7 @@ package com.neusoft.medical.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.neusoft.medical.Util.Constant;
 import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.*;
 import com.neusoft.medical.service.registration.RegistrationService;
@@ -23,35 +24,37 @@ public class RegistrationServiceImpl implements RegistrationService {
     @Resource
     private PatientMapper patientMapper;
     @Resource
-    private MedicalRecordsMapper medicalRecordsMapper;
+    private RegistrationCategoryMapper registrationCategoryMapper;
     @Resource
     private SchedulingInfoMapper schedulingInfoMapper;
+    @Resource
+    private InvoiceMapper invoiceMapper;
 
     @Override
-    public Registration addRegistration(Registration record) throws Exception {
+    public Registration addRegistration(Registration registrationRecord) throws Exception {
         // 新增患者信息
-        System.out.println("RegistrationInfoServiceImpl 新增患者信息: " + record.getPatientName());
+        System.out.println("RegistrationInfoServiceImpl 新增患者信息: " + registrationRecord.getPatientName());
         PatientExample patientExample = new PatientExample();
-        patientExample.or().andValidEqualTo(1).andIdentityCardNoEqualTo(record.getIdentityCardNo());
+        patientExample.or().andValidEqualTo(1).andIdentityCardNoEqualTo(registrationRecord.getIdentityCardNo());
 
         List<Patient> patientList = patientMapper.selectByExample(patientExample);
         if (patientList.size() > 1)
             throw new Exception("Duplicate selectPatient identity ID");
 
-        Patient patient = new Patient(null, record.getPatientName(), record.getBirthday(), null, record.getIdentityCardNo(), null, record.getFamilyAddress(), record.getGender(), 1, null, null, null);
-        System.out.println("RegistrationInfoServiceImpl 尝试新增挂号: " + record.toString());
+        Patient patient = new Patient(null, registrationRecord.getPatientName(), registrationRecord.getBirthday(), null, registrationRecord.getIdentityCardNo(), null, registrationRecord.getFamilyAddress(), registrationRecord.getGender(), 1, null, null, null);
+        System.out.println("RegistrationInfoServiceImpl 尝试新增挂号: " + registrationRecord.toString());
         if (patientList.size() == 0) {
             // 暂无该患者信息
             patientMapper.insert(patient);
-            record.setPatientId(patient.getPatientId());
-          } else {
+            registrationRecord.setPatientId(patient.getPatientId());
+        } else {
             // 已有该患者信息
             patientMapper.updateByExampleSelective(patient, patientExample);
-            record.setPatientId(patientList.get(0).getPatientId());
+            registrationRecord.setPatientId(patientList.get(0).getPatientId());
         }
 
         // 新增挂号记录
-        int effectRow = registrationMapper.insert(record);
+        int effectRow = registrationMapper.insert(registrationRecord);
         System.out.println("RegistrationInfoServiceImpl 已新增挂号 " + effectRow + " 项");
 
         // 医生的剩余号数减少
@@ -68,8 +71,13 @@ public class RegistrationServiceImpl implements RegistrationService {
             }
         }
 
+        // 此次挂号的收费记录
+        double registrationFee = registrationCategoryMapper.selectByPrimaryKey(registrationRecord.getRegistrationCategoryId()).getRegistrationFee();
+        Invoice invoiceRecord = new Invoice(null, registrationRecord.getPatientName(), 1, registrationRecord.getCollectorId(), registrationRecord.getRegistrationId(), new Date(), registrationFee, registrationFee, 0.0, 0.0, 0.0, Constant.INVOICE_VALID, 1);
+        invoiceMapper.insert(invoiceRecord);
+
         // 病历记录在患者前往医生处就诊后生成
-        return registrationMapper.selectByPrimaryKey(record.getRegistrationId());
+        return registrationMapper.selectByPrimaryKey(registrationRecord.getRegistrationId());
     }
 
     @Override

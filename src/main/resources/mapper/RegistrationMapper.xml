@@ -6,10 +6,10 @@
       <idArg column="registration_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="patient_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="patient_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="registration_category_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="gender" javaType="java.lang.String" jdbcType="CHAR" />
       <arg column="age" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="birthday" javaType="java.util.Date" jdbcType="DATE" />
-      <arg column="registration_category" javaType="java.lang.String" jdbcType="CHAR" />
       <arg column="medical_category" javaType="java.lang.String" jdbcType="CHAR" />
       <arg column="identity_card_no" javaType="java.lang.String" jdbcType="CHAR" />
       <arg column="registration_status" javaType="java.lang.String" jdbcType="CHAR" />
@@ -18,7 +18,7 @@
       <arg column="department_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="doctor_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="registration_source" javaType="java.lang.String" jdbcType="CHAR" />
-      <arg column="settle_accounts_category" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="settlement_category_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="is_visited" javaType="java.lang.String" jdbcType="CHAR" />
       <arg column="family_address" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="collector_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
@@ -88,9 +88,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    registration_id, patient_id, patient_name, gender, age, birthday, registration_category, 
-    medical_category, identity_card_no, registration_status, visit_date, registration_date, 
-    department_id, doctor_id, registration_source, settle_accounts_category, is_visited, 
+    registration_id, patient_id, patient_name, registration_category_id, gender, age, 
+    birthday, medical_category, identity_card_no, registration_status, visit_date, registration_date, 
+    department_id, doctor_id, registration_source, settlement_category_id, is_visited, 
     family_address, collector_id, total_charge, valid, reserve1, reserve2, reserve3
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.RegistrationExample" resultMap="BaseResultMap">
@@ -125,6 +125,9 @@
       <if test="patientName != null">
         patient_name,
       </if>
+      <if test="registrationCategoryId != null">
+        registration_category_id,
+      </if>
       <if test="gender != null">
         gender,
       </if>
@@ -133,9 +136,6 @@
       </if>
       <if test="birthday != null">
         birthday,
-      </if>
-      <if test="registrationCategory != null">
-        registration_category,
       </if>
       <if test="medicalCategory != null">
         medical_category,
@@ -161,8 +161,8 @@
       <if test="registrationSource != null">
         registration_source,
       </if>
-      <if test="settleAccountsCategory != null">
-        settle_accounts_category,
+      <if test="settlementCategoryId != null">
+        settlement_category_id,
       </if>
       <if test="isVisited != null">
         is_visited,
@@ -196,6 +196,9 @@
       <if test="patientName != null">
         #{patientName,jdbcType=VARCHAR},
       </if>
+      <if test="registrationCategoryId != null">
+        #{registrationCategoryId,jdbcType=INTEGER},
+      </if>
       <if test="gender != null">
         #{gender,jdbcType=CHAR},
       </if>
@@ -204,9 +207,6 @@
       </if>
       <if test="birthday != null">
         #{birthday,jdbcType=DATE},
-      </if>
-      <if test="registrationCategory != null">
-        #{registrationCategory,jdbcType=CHAR},
       </if>
       <if test="medicalCategory != null">
         #{medicalCategory,jdbcType=CHAR},
@@ -232,8 +232,8 @@
       <if test="registrationSource != null">
         #{registrationSource,jdbcType=CHAR},
       </if>
-      <if test="settleAccountsCategory != null">
-        #{settleAccountsCategory,jdbcType=CHAR},
+      <if test="settlementCategoryId != null">
+        #{settlementCategoryId,jdbcType=INTEGER},
       </if>
       <if test="isVisited != null">
         #{isVisited,jdbcType=CHAR},
@@ -279,6 +279,9 @@
       <if test="record.patientName != null">
         patient_name = #{record.patientName,jdbcType=VARCHAR},
       </if>
+      <if test="record.registrationCategoryId != null">
+        registration_category_id = #{record.registrationCategoryId,jdbcType=INTEGER},
+      </if>
       <if test="record.gender != null">
         gender = #{record.gender,jdbcType=CHAR},
       </if>
@@ -287,9 +290,6 @@
       </if>
       <if test="record.birthday != null">
         birthday = #{record.birthday,jdbcType=DATE},
-      </if>
-      <if test="record.registrationCategory != null">
-        registration_category = #{record.registrationCategory,jdbcType=CHAR},
       </if>
       <if test="record.medicalCategory != null">
         medical_category = #{record.medicalCategory,jdbcType=CHAR},
@@ -315,8 +315,8 @@
       <if test="record.registrationSource != null">
         registration_source = #{record.registrationSource,jdbcType=CHAR},
       </if>
-      <if test="record.settleAccountsCategory != null">
-        settle_accounts_category = #{record.settleAccountsCategory,jdbcType=CHAR},
+      <if test="record.settlementCategoryId != null">
+        settlement_category_id = #{record.settlementCategoryId,jdbcType=INTEGER},
       </if>
       <if test="record.isVisited != null">
         is_visited = #{record.isVisited,jdbcType=CHAR},
@@ -352,10 +352,10 @@
     set registration_id = #{record.registrationId,jdbcType=INTEGER},
       patient_id = #{record.patientId,jdbcType=INTEGER},
       patient_name = #{record.patientName,jdbcType=VARCHAR},
+      registration_category_id = #{record.registrationCategoryId,jdbcType=INTEGER},
       gender = #{record.gender,jdbcType=CHAR},
       age = #{record.age,jdbcType=INTEGER},
       birthday = #{record.birthday,jdbcType=DATE},
-      registration_category = #{record.registrationCategory,jdbcType=CHAR},
       medical_category = #{record.medicalCategory,jdbcType=CHAR},
       identity_card_no = #{record.identityCardNo,jdbcType=CHAR},
       registration_status = #{record.registrationStatus,jdbcType=CHAR},
@@ -364,7 +364,7 @@
       department_id = #{record.departmentId,jdbcType=INTEGER},
       doctor_id = #{record.doctorId,jdbcType=INTEGER},
       registration_source = #{record.registrationSource,jdbcType=CHAR},
-      settle_accounts_category = #{record.settleAccountsCategory,jdbcType=CHAR},
+      settlement_category_id = #{record.settlementCategoryId,jdbcType=INTEGER},
       is_visited = #{record.isVisited,jdbcType=CHAR},
       family_address = #{record.familyAddress,jdbcType=VARCHAR},
       collector_id = #{record.collectorId,jdbcType=INTEGER},
@@ -386,6 +386,9 @@
       <if test="patientName != null">
         patient_name = #{patientName,jdbcType=VARCHAR},
       </if>
+      <if test="registrationCategoryId != null">
+        registration_category_id = #{registrationCategoryId,jdbcType=INTEGER},
+      </if>
       <if test="gender != null">
         gender = #{gender,jdbcType=CHAR},
       </if>
@@ -394,9 +397,6 @@
       </if>
       <if test="birthday != null">
         birthday = #{birthday,jdbcType=DATE},
-      </if>
-      <if test="registrationCategory != null">
-        registration_category = #{registrationCategory,jdbcType=CHAR},
       </if>
       <if test="medicalCategory != null">
         medical_category = #{medicalCategory,jdbcType=CHAR},
@@ -422,8 +422,8 @@
       <if test="registrationSource != null">
         registration_source = #{registrationSource,jdbcType=CHAR},
       </if>
-      <if test="settleAccountsCategory != null">
-        settle_accounts_category = #{settleAccountsCategory,jdbcType=CHAR},
+      <if test="settlementCategoryId != null">
+        settlement_category_id = #{settlementCategoryId,jdbcType=INTEGER},
       </if>
       <if test="isVisited != null">
         is_visited = #{isVisited,jdbcType=CHAR},

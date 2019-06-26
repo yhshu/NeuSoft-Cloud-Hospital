@@ -19,7 +19,7 @@ public class Medicine {
 
     private Integer medicineTypeId;
 
-    private Long medicinePrice;
+    private Double medicinePrice;
 
     private String namePinyin;
 
@@ -37,7 +37,7 @@ public class Medicine {
 
     private String reserve3;
 
-    public Medicine(Integer medicineId, String medicineCode, String nameZh, String medicineSpecification, String medicineUnit, String medicineManufacturer, Integer medicineDosageId, Integer medicineTypeId, Long medicinePrice, String namePinyin, Date creationTime, Integer nums, String nameEn, Integer valid, String reserve1, String reserve2, String reserve3) {
+    public Medicine(Integer medicineId, String medicineCode, String nameZh, String medicineSpecification, String medicineUnit, String medicineManufacturer, Integer medicineDosageId, Integer medicineTypeId, Double medicinePrice, String namePinyin, Date creationTime, Integer nums, String nameEn, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.medicineId = medicineId;
         this.medicineCode = medicineCode;
         this.nameZh = nameZh;
@@ -125,11 +125,11 @@ public class Medicine {
         this.medicineTypeId = medicineTypeId;
     }
 
-    public Long getMedicinePrice() {
+    public Double getMedicinePrice() {
         return medicinePrice;
     }
 
-    public void setMedicinePrice(Long medicinePrice) {
+    public void setMedicinePrice(Double medicinePrice) {
         this.medicinePrice = medicinePrice;
     }
 

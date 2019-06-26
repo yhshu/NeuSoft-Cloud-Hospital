@@ -672,52 +672,52 @@ public class MedicineExample {
             return (Criteria) this;
         }
 
-        public Criteria andMedicinePriceEqualTo(Long value) {
+        public Criteria andMedicinePriceEqualTo(Double value) {
             addCriterion("medicine_price =", value, "medicinePrice");
             return (Criteria) this;
         }
 
-        public Criteria andMedicinePriceNotEqualTo(Long value) {
+        public Criteria andMedicinePriceNotEqualTo(Double value) {
             addCriterion("medicine_price <>", value, "medicinePrice");
             return (Criteria) this;
         }
 
-        public Criteria andMedicinePriceGreaterThan(Long value) {
+        public Criteria andMedicinePriceGreaterThan(Double value) {
             addCriterion("medicine_price >", value, "medicinePrice");
             return (Criteria) this;
         }
 
-        public Criteria andMedicinePriceGreaterThanOrEqualTo(Long value) {
+        public Criteria andMedicinePriceGreaterThanOrEqualTo(Double value) {
             addCriterion("medicine_price >=", value, "medicinePrice");
             return (Criteria) this;
         }
 
-        public Criteria andMedicinePriceLessThan(Long value) {
+        public Criteria andMedicinePriceLessThan(Double value) {
             addCriterion("medicine_price <", value, "medicinePrice");
             return (Criteria) this;
         }
 
-        public Criteria andMedicinePriceLessThanOrEqualTo(Long value) {
+        public Criteria andMedicinePriceLessThanOrEqualTo(Double value) {
             addCriterion("medicine_price <=", value, "medicinePrice");
             return (Criteria) this;
         }
 
-        public Criteria andMedicinePriceIn(List<Long> values) {
+        public Criteria andMedicinePriceIn(List<Double> values) {
             addCriterion("medicine_price in", values, "medicinePrice");
             return (Criteria) this;
         }
 
-        public Criteria andMedicinePriceNotIn(List<Long> values) {
+        public Criteria andMedicinePriceNotIn(List<Double> values) {
             addCriterion("medicine_price not in", values, "medicinePrice");
             return (Criteria) this;
         }
 
-        public Criteria andMedicinePriceBetween(Long value1, Long value2) {
+        public Criteria andMedicinePriceBetween(Double value1, Double value2) {
             addCriterion("medicine_price between", value1, value2, "medicinePrice");
             return (Criteria) this;
         }
 
-        public Criteria andMedicinePriceNotBetween(Long value1, Long value2) {
+        public Criteria andMedicinePriceNotBetween(Double value1, Double value2) {
             addCriterion("medicine_price not between", value1, value2, "medicinePrice");
             return (Criteria) this;
         }

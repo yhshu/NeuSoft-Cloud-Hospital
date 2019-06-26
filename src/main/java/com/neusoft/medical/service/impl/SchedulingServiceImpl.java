@@ -29,7 +29,7 @@ public class SchedulingServiceImpl implements SchedulingService {
     @Resource
     private DepartmentMapper departmentMapper;
     @Resource
-    private RegistrationMapper registrationMapper;
+    private RegistrationCategoryMapper registrationCategoryMapper;
     @Resource
     private AccountService accountService;
 
@@ -92,7 +92,7 @@ public class SchedulingServiceImpl implements SchedulingService {
 
                 schedulingRuleJsonObject.addProperty("departmentName", departmentMapper.selectByPrimaryKey(departmentId).getDepartmentName());
                 schedulingRuleJsonObject.addProperty("doctorName", doctorMapper.selectByPrimaryKey(doctorId).getDoctorName());
-                schedulingRuleJsonObject.addProperty("registrationCategoryName", registrationMapper.selectByPrimaryKey(registrationCategoryId).getRegistrationCategory());
+                schedulingRuleJsonObject.addProperty("registrationCategoryName", registrationCategoryMapper.selectByPrimaryKey(registrationCategoryId).getRegistrationCategoryName());
                 schedulingRuleJsonObject.addProperty("operationAccountName", accountService.selectStaffByAccountId(operationAccountId).getRealName());
                 res.add(schedulingRuleJsonObject.toString());
             }
@@ -104,18 +104,32 @@ public class SchedulingServiceImpl implements SchedulingService {
     }
 
     @Override
-    public PageInfo<SchedulingInfo> selectSchedulingInfo(Integer currentPage, Integer pageSize) {
-        List<SchedulingInfo> schedulingInfoList = null;
+    public PageInfo<String> selectSchedulingInfo(Integer currentPage, Integer pageSize) {
+        List<String> res = new CopyOnWriteArrayList<>();
         try {
             PageHelper.startPage(currentPage, pageSize);
 
             SchedulingInfoExample schedulingInfoExample = new SchedulingInfoExample();
-            schedulingInfoList = schedulingInfoMapper.selectByExample(schedulingInfoExample);
+            List<SchedulingInfo> schedulingInfoList = schedulingInfoMapper.selectByExample(schedulingInfoExample);
+
+            JsonArray schedulingInfoListJsonArray = gson.toJsonTree(schedulingInfoList).getAsJsonArray();
+            for (JsonElement schedulingInfoJsonElement : schedulingInfoListJsonArray) {
+                JsonObject schedulingInfoJsonObject = schedulingInfoJsonElement.getAsJsonObject();
+
+                Integer registrationCategoryId = schedulingInfoJsonObject.get("registrationCategoryId").getAsInt();
+                Integer doctorId = schedulingInfoJsonObject.get("doctorId").getAsInt();
+                Integer departmentId = schedulingInfoJsonObject.get("departmentId").getAsInt();
+
+                schedulingInfoJsonObject.addProperty("registrationCategoryName", registrationCategoryMapper.selectByPrimaryKey(registrationCategoryId).getRegistrationCategoryName());
+                schedulingInfoJsonObject.addProperty("doctorName", doctorMapper.selectByPrimaryKey(doctorId).getDoctorName());
+                schedulingInfoJsonObject.addProperty("departmentName", departmentMapper.selectByPrimaryKey(departmentId).getDepartmentName());
+
+                res.add(schedulingInfoJsonObject.toString());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        assert schedulingInfoList != null;
-        return new PageInfo<>(schedulingInfoList);
+        return new PageInfo<>(res);
     }
 
     @Override
@@ -123,12 +137,12 @@ public class SchedulingServiceImpl implements SchedulingService {
         try {
             SchedulingRule schedulingRuleRecord = new SchedulingRule(null, weekday, departmentId, doctorId, registrationCategoryId, noon, limitation, accountId, new Date(), 1);
             if (schedulingRuleId != null) {
-                // 新增排班规则
-                schedulingRuleMapper.insert(schedulingRuleRecord);
-            } else {
                 // 更新排班规则
                 schedulingRuleRecord.setSchedulingRuleId(schedulingRuleId);
-                schedulingRuleMapper.updateByPrimaryKey(schedulingRuleRecord);
+                schedulingRuleMapper.updateByPrimaryKeySelective(schedulingRuleRecord);
+            } else {
+                // 新增排班规则
+                schedulingRuleMapper.insert(schedulingRuleRecord);
             }
         } catch (Exception e) {
             e.printStackTrace();

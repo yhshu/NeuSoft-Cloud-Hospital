@@ -62,15 +62,16 @@ public class ChargeEntryServiceImpl implements ChargeEntryService {
         return new PageInfo<>(chargeEntryList);
     }
 
+
     @Override
-    public boolean addChargeEntryToForm(int chargeItemId, int registrationId, int itemCount, int collectorId, String doctorAdvice) {
+    public boolean addChargeEntryToForm(Integer chargeItemId, Integer registrationId, Integer itemCount, Integer collectorId, String doctorAdvice, Integer examinationId, Integer chargeFormId) {
         try {
             // 获取添加到收费账单中的所需字段
             Date currentDate = new Date();
             int departmentId = registrationService.selectRegistrationByPrimaryKey(registrationId).getDepartmentId();
             int doctorId = registrationService.selectRegistrationByPrimaryKey(registrationId).getDoctorId();
             double unitPrice = chargeItemMapper.selectByPrimaryKey(chargeItemId).getPrice();
-            chargeEntryMapper.insert(new ChargeEntry(null, registrationId, null, chargeItemId, null, MathUtil.doubleSetScale(unitPrice, 2), MathUtil.doubleSetScale(unitPrice * itemCount, 2), itemCount, itemCount, itemCount, PAY_STATE_NOT_CHARGED, currentDate, departmentId, doctorId, collectorId, 1, doctorAdvice, null, null, null));
+            chargeEntryMapper.insert(new ChargeEntry(null, registrationId, chargeFormId, chargeItemId, examinationId, MathUtil.doubleSetScale(unitPrice, 2), MathUtil.doubleSetScale(unitPrice * itemCount, 2), itemCount, itemCount, itemCount, PAY_STATE_NOT_CHARGED, currentDate, departmentId, doctorId, collectorId, 1, doctorAdvice, null, null, null));
         } catch (Exception e) {
             e.printStackTrace();
             return false;
@@ -82,10 +83,11 @@ public class ChargeEntryServiceImpl implements ChargeEntryService {
     public boolean deleteChargeItemInForm(List<Integer> chargeItemIdList) {
         try {
             ChargeEntryExample chargeEntryExample = new ChargeEntryExample();
-            ChargeEntryExample.Criteria criteria = chargeEntryExample.createCriteria();
-            criteria.andValidEqualTo(1);
-            criteria.andChargeEntryIdIn(chargeItemIdList);
-            chargeEntryMapper.deleteByExample(chargeEntryExample);
+            chargeEntryExample.or().andValidEqualTo(1).andChargeEntryIdIn(chargeItemIdList);
+
+            ChargeEntry chargeEntryRecord = new ChargeEntry();
+            chargeEntryRecord.setValid(0);
+            chargeEntryMapper.updateByExample(chargeEntryRecord, chargeEntryExample);
         } catch (Exception e) {
             e.printStackTrace();
             return false;
