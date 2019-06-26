@@ -8,6 +8,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.neusoft.medical.Util.Constant;
 import com.neusoft.medical.Util.converter.DateTimeToStringConverter;
+import com.neusoft.medical.Util.converter.DoubleToUpperCaseConverter;
 import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.*;
 import com.neusoft.medical.service.basicInfo.AccountService;
@@ -38,6 +39,8 @@ public class DailySettlementServiceImpl implements DailySettlementService {
     private RegistrationMapper registrationMapper;
     @Resource
     private DateTimeToStringConverter dateTimeToStringConverter;
+    @Resource
+    private DoubleToUpperCaseConverter doubleToUpperCaseConverter;
 
     private Gson gson = new Gson();
 
@@ -121,6 +124,30 @@ public class DailySettlementServiceImpl implements DailySettlementService {
             dailySettlementDocument.addProperty("collectorName", dailySettlement.getCollectorRealName());
             dailySettlementDocument.addProperty("tabulationTime", dateTimeToStringConverter.convert(new Date()));
 
+            DailySettlementDetailExample dailySettlementDetailExample = new DailySettlementDetailExample();
+            dailySettlementDetailExample.or().andValidEqualTo(1).andDailySettlementIdEqualTo(dailySettlementId);
+            List<DailySettlementDetail> dailySettlementDetailList = dailySettlementDetailMapper.selectByExample(dailySettlementDetailExample);
+            int invoiceNums = 0;
+            double invoiceTotalAmount = 0.0;
+            double selfPay = 0.0;
+            double accountPay = 0.0;
+            double reimbursementPay = 0.0;
+            double discounted = 0.0;
+            for (DailySettlementDetail dailySettlementDetail : dailySettlementDetailList) {
+                invoiceNums += dailySettlementDetail.getInvoiceNums();
+                invoiceTotalAmount += dailySettlementDetail.getInvoiceTotalAmount();
+                selfPay += dailySettlementDetail.getSelfPay();
+                accountPay += dailySettlementDetail.getAccountPay();
+                reimbursementPay += dailySettlementDetail.getReimbursementPay();
+                discounted += dailySettlementDetail.getDiscounted();
+            }
+            dailySettlementDocument.addProperty("invoiceNums", invoiceNums);
+            dailySettlementDocument.addProperty("invoiceTotalAmount", invoiceTotalAmount);
+            dailySettlementDocument.addProperty("selfPay", selfPay);
+            dailySettlementDocument.addProperty("accountPay", accountPay);
+            dailySettlementDocument.addProperty("reimbursementPay", reimbursementPay);
+            dailySettlementDocument.addProperty("discounted", discounted);
+            dailySettlementDocument.addProperty("invoiceTotalAmountCapital", doubleToUpperCaseConverter.convert(invoiceTotalAmount));
 
         } catch (Exception e) {
             e.printStackTrace();
