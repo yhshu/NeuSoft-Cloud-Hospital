@@ -13,6 +13,7 @@ import com.neusoft.medical.service.registration.RegistrationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -262,6 +263,19 @@ public class PrescriptionServiceImpl implements PrescriptionService {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public List<Prescription> selectPrescriptionList(Date startDate, Date endDate, Integer doctorId) {
+        List<Prescription> prescriptionList = null;
+        try {
+            PrescriptionExample prescriptionExample = new PrescriptionExample();
+            prescriptionExample.or().andValidEqualTo(1).andDoctorIdEqualTo(doctorId);
+            prescriptionList = prescriptionMapper.selectByExample(prescriptionExample);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return prescriptionList;
     }
 
 }

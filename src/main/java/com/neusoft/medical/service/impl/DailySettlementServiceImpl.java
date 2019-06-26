@@ -111,17 +111,17 @@ public class DailySettlementServiceImpl implements DailySettlementService {
 
     @Override
     public String dailySettlementDocument(Integer dailySettlementId) {
-        JsonObject dailySettlementDocument = new JsonObject();
+        JsonObject dailySettlementDocumentJsonObject = new JsonObject();
         try {
             DailySettlement dailySettlement = dailySettlementMapper.selectByPrimaryKey(dailySettlementId);
 
             // 日结单上的数据包括：开始时间、结束时间、收款员姓名、制表时间
             // 发票张数、总金额、总自费支付、总账户支付、总报销支付、总折扣金额
             // 总药费、总处置费、总检查费、总挂号费、总金额的汉字大写
-            dailySettlementDocument.addProperty("previousDailySettlementDate", dateTimeToStringConverter.convert(dailySettlement.getPreviousDailySettlementDate()));
-            dailySettlementDocument.addProperty("endDatetime", dateTimeToStringConverter.convert(dailySettlement.getDailySettlementDate()));
-            dailySettlementDocument.addProperty("collectorName", dailySettlement.getCollectorRealName());
-            dailySettlementDocument.addProperty("tabulationTime", dateTimeToStringConverter.convert(new Date()));
+            dailySettlementDocumentJsonObject.addProperty("previousDailySettlementDate", dateTimeToStringConverter.convert(dailySettlement.getPreviousDailySettlementDate()));
+            dailySettlementDocumentJsonObject.addProperty("endDatetime", dateTimeToStringConverter.convert(dailySettlement.getDailySettlementDate()));
+            dailySettlementDocumentJsonObject.addProperty("collectorName", dailySettlement.getCollectorRealName());
+            dailySettlementDocumentJsonObject.addProperty("tabulationTime", dateTimeToStringConverter.convert(new Date()));
 
             DailySettlementDetailExample dailySettlementDetailExample = new DailySettlementDetailExample();
             dailySettlementDetailExample.or().andValidEqualTo(1).andDailySettlementIdEqualTo(dailySettlementId);
@@ -140,19 +140,19 @@ public class DailySettlementServiceImpl implements DailySettlementService {
                 reimbursementPay += dailySettlementDetail.getReimbursementPay();
                 discounted += dailySettlementDetail.getDiscounted();
             }
-            dailySettlementDocument.addProperty("invoiceNums", invoiceNums);
-            dailySettlementDocument.addProperty("invoiceTotalAmount", invoiceTotalAmount);
-            dailySettlementDocument.addProperty("selfPay", selfPay);
-            dailySettlementDocument.addProperty("accountPay", accountPay);
-            dailySettlementDocument.addProperty("reimbursementPay", reimbursementPay);
-            dailySettlementDocument.addProperty("discounted", discounted);
-            dailySettlementDocument.addProperty("invoiceTotalAmountCapital", doubleToUpperCaseConverter.convert(invoiceTotalAmount));
+            dailySettlementDocumentJsonObject.addProperty("invoiceNums", invoiceNums);
+            dailySettlementDocumentJsonObject.addProperty("invoiceTotalAmount", invoiceTotalAmount);
+            dailySettlementDocumentJsonObject.addProperty("selfPay", selfPay);
+            dailySettlementDocumentJsonObject.addProperty("accountPay", accountPay);
+            dailySettlementDocumentJsonObject.addProperty("reimbursementPay", reimbursementPay);
+            dailySettlementDocumentJsonObject.addProperty("discounted", discounted);
+            dailySettlementDocumentJsonObject.addProperty("invoiceTotalAmountCapital", doubleToUpperCaseConverter.convert(invoiceTotalAmount));
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return null;
+        return dailySettlementDocumentJsonObject.toString();
     }
 
     @Override
