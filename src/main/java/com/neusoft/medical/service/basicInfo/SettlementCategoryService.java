@@ -14,4 +14,6 @@ public interface SettlementCategoryService {
     boolean deleteSettlementCategory(List<Integer> settlementCategoryIdList);
 
     boolean saveSettlementCategory(Integer settlementCategoryId, String settlementCategoryName);
+
+    List<SettlementCategory> selectAllSettlementCategory();
 }

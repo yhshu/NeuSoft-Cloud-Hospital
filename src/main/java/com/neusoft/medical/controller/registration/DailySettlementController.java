@@ -129,7 +129,7 @@ public class DailySettlementController {
      * @param dailySettlementId 日结记录编号
      * @return 日结单信息，json 字符串
      */
-    @GetMapping("daily_settlement_document")
+    @GetMapping("/daily_settlement_document")
     public ResultDTO<String> dailySettlementDocument(
             @RequestParam(value = "dailySettlementId") Integer dailySettlementId
     ) {

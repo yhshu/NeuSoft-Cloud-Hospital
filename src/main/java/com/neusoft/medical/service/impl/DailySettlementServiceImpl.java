@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.neusoft.medical.Util.Constant;
 import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.*;
 import com.neusoft.medical.service.basicInfo.AccountService;
@@ -49,6 +50,7 @@ public class DailySettlementServiceImpl implements DailySettlementService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        assert dailySettlementList != null;
         return new PageInfo<>(dailySettlementList);
     }
 
@@ -74,7 +76,7 @@ public class DailySettlementServiceImpl implements DailySettlementService {
         try {
             PageHelper.startPage(currentPage, pageSize);
             DailySettlementDetailExample dailySettlementDetailExample = new DailySettlementDetailExample();
-            dailySettlementDetailExample.or().andValidEqualTo(1).andDailySettlementDetailIdEqualTo(dailySettlementId);
+            dailySettlementDetailExample.or().andValidEqualTo(1).andDailySettlementIdEqualTo(dailySettlementId);
 
             List<DailySettlementDetail> dailySettlementDetailList = dailySettlementDetailMapper.selectByExample(dailySettlementDetailExample);
             JsonArray dailySettlementDetailListJsonArray = gson.toJsonTree(dailySettlementDetailList).getAsJsonArray();
@@ -100,6 +102,7 @@ public class DailySettlementServiceImpl implements DailySettlementService {
     @Override
     public String dailySettlementDocument(Integer dailySettlementId) {
         // todo
+
         return null;
     }
 
@@ -144,10 +147,12 @@ public class DailySettlementServiceImpl implements DailySettlementService {
             String collectorRealName = accountService.selectStaffByAccountId(collectorId).getRealName();
             DailySettlement dailySettlement = new DailySettlement(null, collectorId, collectorRealName, new Date(), 0, 1);
             dailySettlementMapper.insert(dailySettlement);
+
             Integer dailySettlementId = dailySettlement.getDailySettlementId();
             for (Invoice invoice : invoiceList) {
                 Registration registration = registrationMapper.selectByPrimaryKey(invoice.getRegistrationId());
-//                DailySettlementDetail dailySettlementDetail = new DailySettlementDetail(null, invoice.getInvoiceNums(), invoice.getRegistrationId(), invoice.getInvoiceTitle(), invoice.getInvoiceAmount(), invoice.getSelfPay(), invoice.getAccountPay(), invoice.getReimbursementPay(), invoice.getDiscounted(), Constant.INVOICE_VALID, registration. , 1);
+                DailySettlementDetail dailySettlementDetail = new DailySettlementDetail(null, dailySettlementId, invoice.getInvoiceNums(), invoice.getRegistrationId(), invoice.getInvoiceTitle(), invoice.getInvoiceAmount(), invoice.getSelfPay(), invoice.getAccountPay(), invoice.getReimbursementPay(), invoice.getDiscounted(), Constant.INVOICE_VALID, registration.getSettlementCategoryId(), 1);
+                dailySettlementDetailMapper.insert(dailySettlementDetail);
             }
 
         } catch (Exception e) {

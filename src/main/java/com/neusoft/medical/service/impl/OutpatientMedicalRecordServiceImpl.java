@@ -216,6 +216,7 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
             MedicalRecordsExample.Criteria medicalRecordsExampleCriteria = medicalRecordsExample.createCriteria();
             medicalRecordsExampleCriteria.andValidEqualTo(1);
             medicalRecordsExampleCriteria.andSaveStateEqualTo(templateScope);
+
             if (templateScope == Constant.SAVE_DOCTOR_TEMPLATE) {
                 // 查找医生本人可见的病历模板
                 medicalRecordsExampleCriteria.andDoctorIdEqualTo(doctorId);
@@ -231,6 +232,7 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
                 }
                 medicalRecordsExampleCriteria.andDoctorIdIn(doctorIdListOfDepartment);
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -240,13 +242,13 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
     @Override
     public boolean endRegistration(int registrationId) {
         try {
-            Registration record = new Registration();
-            record.setRegistrationStatus(REGIST_DONE);
+            Registration registrationRecord = new Registration();
+            registrationRecord.setRegistrationStatus(REGIST_DONE);
 
             RegistrationExample registrationExample = new RegistrationExample();
             registrationExample.or().andValidEqualTo(1).andRegistrationIdEqualTo(registrationId);
 
-            registrationMapper.updateByExampleSelective(record, registrationExample);
+            registrationMapper.updateByExampleSelective(registrationRecord, registrationExample);
         } catch (Exception e) {
             e.printStackTrace();
             return false;

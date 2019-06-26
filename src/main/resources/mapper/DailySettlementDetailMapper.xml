@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.neusoft.medical.bean.DailySettlementDetail">
     <constructor>
       <idArg column="daily_settlement_detail_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="daily_settlement_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="invoice_nums" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="registration_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="patient_name" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -76,8 +77,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    daily_settlement_detail_id, invoice_nums, registration_id, patient_name, invoice_total_amount, 
-    self_pay, account_pay, reimbursement_pay, discounted, daily_settlement_detail_state, 
+    daily_settlement_detail_id, daily_settlement_id, invoice_nums, registration_id, patient_name, 
+    invoice_total_amount, self_pay, account_pay, reimbursement_pay, discounted, daily_settlement_detail_state, 
     settlement_category_id, valid
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.DailySettlementDetailExample" resultMap="BaseResultMap">
@@ -106,6 +107,9 @@
     </selectKey>
     insert into hospital.daily_settlement_detail
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dailySettlementId != null">
+        daily_settlement_id,
+      </if>
       <if test="invoiceNums != null">
         invoice_nums,
       </if>
@@ -141,6 +145,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dailySettlementId != null">
+        #{dailySettlementId,jdbcType=INTEGER},
+      </if>
       <if test="invoiceNums != null">
         #{invoiceNums,jdbcType=INTEGER},
       </if>
@@ -188,6 +195,9 @@
       <if test="record.dailySettlementDetailId != null">
         daily_settlement_detail_id = #{record.dailySettlementDetailId,jdbcType=INTEGER},
       </if>
+      <if test="record.dailySettlementId != null">
+        daily_settlement_id = #{record.dailySettlementId,jdbcType=INTEGER},
+      </if>
       <if test="record.invoiceNums != null">
         invoice_nums = #{record.invoiceNums,jdbcType=INTEGER},
       </if>
@@ -229,6 +239,7 @@
   <update id="updateByExample" parameterType="map">
     update hospital.daily_settlement_detail
     set daily_settlement_detail_id = #{record.dailySettlementDetailId,jdbcType=INTEGER},
+      daily_settlement_id = #{record.dailySettlementId,jdbcType=INTEGER},
       invoice_nums = #{record.invoiceNums,jdbcType=INTEGER},
       registration_id = #{record.registrationId,jdbcType=INTEGER},
       patient_name = #{record.patientName,jdbcType=VARCHAR},
@@ -247,6 +258,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.DailySettlementDetail">
     update hospital.daily_settlement_detail
     <set>
+      <if test="dailySettlementId != null">
+        daily_settlement_id = #{dailySettlementId,jdbcType=INTEGER},
+      </if>
       <if test="invoiceNums != null">
         invoice_nums = #{invoiceNums,jdbcType=INTEGER},
       </if>

@@ -164,6 +164,66 @@ public class DailySettlementDetailExample {
             return (Criteria) this;
         }
 
+        public Criteria andDailySettlementIdIsNull() {
+            addCriterion("daily_settlement_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDailySettlementIdIsNotNull() {
+            addCriterion("daily_settlement_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDailySettlementIdEqualTo(Integer value) {
+            addCriterion("daily_settlement_id =", value, "dailySettlementId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDailySettlementIdNotEqualTo(Integer value) {
+            addCriterion("daily_settlement_id <>", value, "dailySettlementId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDailySettlementIdGreaterThan(Integer value) {
+            addCriterion("daily_settlement_id >", value, "dailySettlementId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDailySettlementIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("daily_settlement_id >=", value, "dailySettlementId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDailySettlementIdLessThan(Integer value) {
+            addCriterion("daily_settlement_id <", value, "dailySettlementId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDailySettlementIdLessThanOrEqualTo(Integer value) {
+            addCriterion("daily_settlement_id <=", value, "dailySettlementId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDailySettlementIdIn(List<Integer> values) {
+            addCriterion("daily_settlement_id in", values, "dailySettlementId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDailySettlementIdNotIn(List<Integer> values) {
+            addCriterion("daily_settlement_id not in", values, "dailySettlementId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDailySettlementIdBetween(Integer value1, Integer value2) {
+            addCriterion("daily_settlement_id between", value1, value2, "dailySettlementId");
+            return (Criteria) this;
+        }
+
+        public Criteria andDailySettlementIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("daily_settlement_id not between", value1, value2, "dailySettlementId");
+            return (Criteria) this;
+        }
+
         public Criteria andInvoiceNumsIsNull() {
             addCriterion("invoice_nums is null");
             return (Criteria) this;
