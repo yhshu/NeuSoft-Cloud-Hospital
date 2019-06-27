@@ -23,13 +23,17 @@ public interface InvoiceMapper {
         "pay_time, invoice_amount, ",
         "self_pay, account_pay, ",
         "reimbursement_pay, discounted, ",
-        "invoice_state, valid)",
+        "invoice_state, prescription_fee, ",
+        "examination_fee, disposal_fee, ",
+        "registration_fee, valid)",
         "values (#{invoiceTitle,jdbcType=VARCHAR}, #{invoiceNums,jdbcType=INTEGER}, ",
         "#{collectorId,jdbcType=INTEGER}, #{registrationId,jdbcType=INTEGER}, ",
         "#{payTime,jdbcType=TIMESTAMP}, #{invoiceAmount,jdbcType=DOUBLE}, ",
         "#{selfPay,jdbcType=DOUBLE}, #{accountPay,jdbcType=DOUBLE}, ",
         "#{reimbursementPay,jdbcType=DOUBLE}, #{discounted,jdbcType=DOUBLE}, ",
-        "#{invoiceState,jdbcType=INTEGER}, #{valid,jdbcType=INTEGER})"
+        "#{invoiceState,jdbcType=INTEGER}, #{prescriptionFee,jdbcType=DOUBLE}, ",
+        "#{examinationFee,jdbcType=DOUBLE}, #{disposalFee,jdbcType=DOUBLE}, ",
+        "#{registrationFee,jdbcType=DOUBLE}, #{valid,jdbcType=INTEGER})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="invoiceId", before=false, resultType=Integer.class)
     int insert(Invoice record);
@@ -42,7 +46,7 @@ public interface InvoiceMapper {
         "select",
         "invoice_id, invoice_title, invoice_nums, collector_id, registration_id, pay_time, ",
         "invoice_amount, self_pay, account_pay, reimbursement_pay, discounted, invoice_state, ",
-        "valid",
+        "prescription_fee, examination_fee, disposal_fee, registration_fee, valid",
         "from hospital.invoice",
         "where invoice_id = #{invoiceId,jdbcType=INTEGER}"
     })
@@ -68,6 +72,10 @@ public interface InvoiceMapper {
           "reimbursement_pay = #{reimbursementPay,jdbcType=DOUBLE},",
           "discounted = #{discounted,jdbcType=DOUBLE},",
           "invoice_state = #{invoiceState,jdbcType=INTEGER},",
+          "prescription_fee = #{prescriptionFee,jdbcType=DOUBLE},",
+          "examination_fee = #{examinationFee,jdbcType=DOUBLE},",
+          "disposal_fee = #{disposalFee,jdbcType=DOUBLE},",
+          "registration_fee = #{registrationFee,jdbcType=DOUBLE},",
           "valid = #{valid,jdbcType=INTEGER}",
         "where invoice_id = #{invoiceId,jdbcType=INTEGER}"
     })

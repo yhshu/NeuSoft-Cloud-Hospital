@@ -13,7 +13,6 @@ import com.neusoft.medical.service.registration.RegistrationService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -266,7 +265,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     }
 
     @Override
-    public List<Prescription> selectPrescriptionList(Date startDate, Date endDate, Integer doctorId) {
+    public List<Prescription> selectPrescriptionList(Integer doctorId) {
         List<Prescription> prescriptionList = null;
         try {
             PrescriptionExample prescriptionExample = new PrescriptionExample();

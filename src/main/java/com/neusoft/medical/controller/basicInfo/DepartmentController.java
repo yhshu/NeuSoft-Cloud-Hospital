@@ -37,7 +37,12 @@ public class DepartmentController {
             @RequestParam(value = "pageSize") Integer pageSize,
             @RequestParam(value = "departmentCategory[]", required = false) Integer[] departmentCategory) {
         System.out.println("selectDepartment: " + "查询科室列表");
-        PageInfo<Department> departmentList = departmentService.selectDepartment(currentPage, pageSize, Arrays.asList(departmentCategory));
+        PageInfo<Department> departmentList;
+        if (departmentCategory == null) {
+            departmentList = departmentService.selectDepartment(currentPage, pageSize, null);
+        } else {
+            departmentList = departmentService.selectDepartment(currentPage, pageSize, Arrays.asList(departmentCategory));
+        }
         return new ResultDTO<>(departmentList);
     }
 

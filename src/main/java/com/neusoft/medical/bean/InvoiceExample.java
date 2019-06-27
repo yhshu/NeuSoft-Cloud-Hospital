@@ -835,6 +835,246 @@ public class InvoiceExample {
             return (Criteria) this;
         }
 
+        public Criteria andPrescriptionFeeIsNull() {
+            addCriterion("prescription_fee is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrescriptionFeeIsNotNull() {
+            addCriterion("prescription_fee is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrescriptionFeeEqualTo(Double value) {
+            addCriterion("prescription_fee =", value, "prescriptionFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrescriptionFeeNotEqualTo(Double value) {
+            addCriterion("prescription_fee <>", value, "prescriptionFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrescriptionFeeGreaterThan(Double value) {
+            addCriterion("prescription_fee >", value, "prescriptionFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrescriptionFeeGreaterThanOrEqualTo(Double value) {
+            addCriterion("prescription_fee >=", value, "prescriptionFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrescriptionFeeLessThan(Double value) {
+            addCriterion("prescription_fee <", value, "prescriptionFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrescriptionFeeLessThanOrEqualTo(Double value) {
+            addCriterion("prescription_fee <=", value, "prescriptionFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrescriptionFeeIn(List<Double> values) {
+            addCriterion("prescription_fee in", values, "prescriptionFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrescriptionFeeNotIn(List<Double> values) {
+            addCriterion("prescription_fee not in", values, "prescriptionFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrescriptionFeeBetween(Double value1, Double value2) {
+            addCriterion("prescription_fee between", value1, value2, "prescriptionFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andPrescriptionFeeNotBetween(Double value1, Double value2) {
+            addCriterion("prescription_fee not between", value1, value2, "prescriptionFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationFeeIsNull() {
+            addCriterion("examination_fee is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationFeeIsNotNull() {
+            addCriterion("examination_fee is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationFeeEqualTo(Double value) {
+            addCriterion("examination_fee =", value, "examinationFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationFeeNotEqualTo(Double value) {
+            addCriterion("examination_fee <>", value, "examinationFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationFeeGreaterThan(Double value) {
+            addCriterion("examination_fee >", value, "examinationFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationFeeGreaterThanOrEqualTo(Double value) {
+            addCriterion("examination_fee >=", value, "examinationFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationFeeLessThan(Double value) {
+            addCriterion("examination_fee <", value, "examinationFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationFeeLessThanOrEqualTo(Double value) {
+            addCriterion("examination_fee <=", value, "examinationFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationFeeIn(List<Double> values) {
+            addCriterion("examination_fee in", values, "examinationFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationFeeNotIn(List<Double> values) {
+            addCriterion("examination_fee not in", values, "examinationFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationFeeBetween(Double value1, Double value2) {
+            addCriterion("examination_fee between", value1, value2, "examinationFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andExaminationFeeNotBetween(Double value1, Double value2) {
+            addCriterion("examination_fee not between", value1, value2, "examinationFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDisposalFeeIsNull() {
+            addCriterion("disposal_fee is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDisposalFeeIsNotNull() {
+            addCriterion("disposal_fee is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDisposalFeeEqualTo(Double value) {
+            addCriterion("disposal_fee =", value, "disposalFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDisposalFeeNotEqualTo(Double value) {
+            addCriterion("disposal_fee <>", value, "disposalFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDisposalFeeGreaterThan(Double value) {
+            addCriterion("disposal_fee >", value, "disposalFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDisposalFeeGreaterThanOrEqualTo(Double value) {
+            addCriterion("disposal_fee >=", value, "disposalFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDisposalFeeLessThan(Double value) {
+            addCriterion("disposal_fee <", value, "disposalFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDisposalFeeLessThanOrEqualTo(Double value) {
+            addCriterion("disposal_fee <=", value, "disposalFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDisposalFeeIn(List<Double> values) {
+            addCriterion("disposal_fee in", values, "disposalFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDisposalFeeNotIn(List<Double> values) {
+            addCriterion("disposal_fee not in", values, "disposalFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDisposalFeeBetween(Double value1, Double value2) {
+            addCriterion("disposal_fee between", value1, value2, "disposalFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andDisposalFeeNotBetween(Double value1, Double value2) {
+            addCriterion("disposal_fee not between", value1, value2, "disposalFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationFeeIsNull() {
+            addCriterion("registration_fee is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationFeeIsNotNull() {
+            addCriterion("registration_fee is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationFeeEqualTo(Double value) {
+            addCriterion("registration_fee =", value, "registrationFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationFeeNotEqualTo(Double value) {
+            addCriterion("registration_fee <>", value, "registrationFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationFeeGreaterThan(Double value) {
+            addCriterion("registration_fee >", value, "registrationFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationFeeGreaterThanOrEqualTo(Double value) {
+            addCriterion("registration_fee >=", value, "registrationFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationFeeLessThan(Double value) {
+            addCriterion("registration_fee <", value, "registrationFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationFeeLessThanOrEqualTo(Double value) {
+            addCriterion("registration_fee <=", value, "registrationFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationFeeIn(List<Double> values) {
+            addCriterion("registration_fee in", values, "registrationFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationFeeNotIn(List<Double> values) {
+            addCriterion("registration_fee not in", values, "registrationFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationFeeBetween(Double value1, Double value2) {
+            addCriterion("registration_fee between", value1, value2, "registrationFee");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrationFeeNotBetween(Double value1, Double value2) {
+            addCriterion("registration_fee not between", value1, value2, "registrationFee");
+            return (Criteria) this;
+        }
+
         public Criteria andValidIsNull() {
             addCriterion("valid is null");
             return (Criteria) this;

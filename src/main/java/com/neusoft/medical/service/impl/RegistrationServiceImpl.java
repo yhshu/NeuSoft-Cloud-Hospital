@@ -73,7 +73,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         // 此次挂号的收费记录
         double registrationFee = registrationCategoryMapper.selectByPrimaryKey(registrationRecord.getRegistrationCategoryId()).getRegistrationFee();
-        Invoice invoiceRecord = new Invoice(null, registrationRecord.getPatientName(), 1, registrationRecord.getCollectorId(), registrationRecord.getRegistrationId(), new Date(), registrationFee, registrationFee, 0.0, 0.0, 0.0, Constant.INVOICE_VALID, 1);
+        Invoice invoiceRecord = new Invoice(null, registrationRecord.getPatientName(), 1, registrationRecord.getCollectorId(), registrationRecord.getRegistrationId(), new Date(), registrationFee, registrationFee, 0.0, 0.0, 0.0, Constant.INVOICE_VALID, 0.0, 0.0, 0.0, registrationFee, 1);
         invoiceMapper.insert(invoiceRecord);
 
         // 病历记录在患者前往医生处就诊后生成

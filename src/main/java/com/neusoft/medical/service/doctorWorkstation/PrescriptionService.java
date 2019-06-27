@@ -3,7 +3,6 @@ package com.neusoft.medical.service.doctorWorkstation;
 import com.neusoft.medical.bean.Medicine;
 import com.neusoft.medical.bean.Prescription;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -77,6 +76,12 @@ public interface PrescriptionService {
      */
     boolean deletePrescription(List<Integer> prescriptionIdList);
 
-    List<Prescription> selectPrescriptionList(Date startDate, Date endDate, Integer doctorId);
+    /**
+     * 按医生获取处方列表
+     *
+     * @param doctorId 医生编号
+     * @return 医生的处方列表
+     */
+    List<Prescription> selectPrescriptionList(Integer doctorId);
 
 }
