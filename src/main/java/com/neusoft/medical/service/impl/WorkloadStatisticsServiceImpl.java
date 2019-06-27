@@ -32,6 +32,8 @@ public class WorkloadStatisticsServiceImpl implements WorkloadStatisticsService 
     private DoctorMapper doctorMapper;
     @Resource
     private DepartmentMapper departmentMapper;
+    @Resource
+    private PatientMapper patientMapper;
 
     private String doctorWorkloadStatistics(Date startDatetime, Date endDatetime, Integer doctorId) {
         JsonObject workloadStatistics = new JsonObject();
@@ -110,6 +112,7 @@ public class WorkloadStatisticsServiceImpl implements WorkloadStatisticsService 
             patientJsonObject.addProperty("patientExaminationFee", patientExaminationFee);
             patientJsonObject.addProperty("patientDisposalFee", patientDisposalFee);
             patientJsonObject.addProperty("patientPrescriptionFee", patientPrescriptionFee);
+            patientJsonObject.addProperty("patientName", patientMapper.selectByPrimaryKey(patientId).getPatientName());
             patientJsonArray.add(patientJsonObject);
         }
         workloadStatistics.add("patientChargeInfo", patientJsonArray);  // 患者数量
@@ -169,6 +172,7 @@ public class WorkloadStatisticsServiceImpl implements WorkloadStatisticsService 
             departmentJsonObject.addProperty("departmentExaminationFee", departmentExaminationFee);
             departmentJsonObject.addProperty("departmentDisposalFee", departmentDisposalFee);
             departmentJsonObject.addProperty("departmentInvoiceNums", departmentInvoiceNums);
+            departmentJsonObject.addProperty("departmentName", department.getDepartmentName());
 
             departmentWorkloadJsonArray.add(departmentJsonObject);
         }
@@ -219,6 +223,7 @@ public class WorkloadStatisticsServiceImpl implements WorkloadStatisticsService 
             doctorJsonObject.addProperty("doctorExaminationFee", doctorExaminationFee);
             doctorJsonObject.addProperty("doctorDisposalFee", doctorDisposalFee);
             doctorJsonObject.addProperty("doctorInvoiceNums", doctorInvoiceNums);
+            doctorJsonObject.addProperty("doctorName", doctorMapper.selectByPrimaryKey(doctorId).getDoctorName());
             doctorWorkloadJsonArray.add(doctorJsonObject);  // 添加到统计医生工作量的数组
         }
 
