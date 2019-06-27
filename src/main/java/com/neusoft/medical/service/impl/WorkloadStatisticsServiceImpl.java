@@ -147,25 +147,33 @@ public class WorkloadStatisticsServiceImpl implements WorkloadStatisticsService 
             for (Doctor doctor : doctorList) {
                 doctorIdList.add(doctor.getDoctorId());
             }
-            RegistrationExample registrationExample = new RegistrationExample();
-            registrationExample.or().andValidEqualTo(1).andDoctorIdIn(doctorIdList).andRegistrationDateBetween(startDatetime, endDatetime);
-            List<Registration> registrationList = registrationMapper.selectByExample(registrationExample);
-            List<Integer> registrationIdList = new CopyOnWriteArrayList<>();
-            for (Registration registration : registrationList) {
-                registrationIdList.add(registration.getRegistrationId());
+
+            List<Integer> registrationIdList = null;
+            if (!doctorIdList.isEmpty()) {
+                RegistrationExample registrationExample = new RegistrationExample();
+                registrationExample.or().andValidEqualTo(1).andDoctorIdIn(doctorIdList).andRegistrationDateBetween(startDatetime, endDatetime);
+                List<Registration> registrationList = registrationMapper.selectByExample(registrationExample);
+                registrationIdList = new CopyOnWriteArrayList<>();
+                for (Registration registration : registrationList) {
+                    registrationIdList.add(registration.getRegistrationId());
+                }
             }
-            InvoiceExample invoiceExample = new InvoiceExample();
-            invoiceExample.or().andValidEqualTo(1).andRegistrationIdIn(registrationIdList).andPayTimeBetween(startDatetime, endDatetime);
-            List<Invoice> invoiceList = invoiceMapper.selectByExample(invoiceExample);
+
             double departmentPrescriptionFee = 0.0;
             double departmentExaminationFee = 0.0;
             double departmentDisposalFee = 0.0;
             int departmentInvoiceNums = 0;
-            for (Invoice invoice : invoiceList) {
-                departmentPrescriptionFee += invoice.getPrescriptionFee();
-                departmentExaminationFee += invoice.getExaminationFee();
-                departmentDisposalFee += invoice.getDisposalFee();
-                departmentInvoiceNums += invoice.getInvoiceNums();
+            if (registrationIdList != null && !registrationIdList.isEmpty()) {
+                InvoiceExample invoiceExample = new InvoiceExample();
+                invoiceExample.or().andValidEqualTo(1).andRegistrationIdIn(registrationIdList).andPayTimeBetween(startDatetime, endDatetime);
+                List<Invoice> invoiceList = invoiceMapper.selectByExample(invoiceExample);
+
+                for (Invoice invoice : invoiceList) {
+                    departmentPrescriptionFee += invoice.getPrescriptionFee();
+                    departmentExaminationFee += invoice.getExaminationFee();
+                    departmentDisposalFee += invoice.getDisposalFee();
+                    departmentInvoiceNums += invoice.getInvoiceNums();
+                }
             }
 
             departmentJsonObject.addProperty("departmentPrescriptionFee", departmentPrescriptionFee);
@@ -205,18 +213,20 @@ public class WorkloadStatisticsServiceImpl implements WorkloadStatisticsService 
             }
             doctorJsonObject.addProperty("visitNums", doctorRegistrationList.size());  // 看诊人次
 
-            InvoiceExample invoiceExample = new InvoiceExample();
-            invoiceExample.or().andValidEqualTo(1).andRegistrationIdIn(doctorRegistrationIdList).andPayTimeBetween(startDatetime, endDatetime);
-            List<Invoice> invoiceList = invoiceMapper.selectByExample(invoiceExample);
             double doctorPrescriptionFee = 0.0;
             double doctorExaminationFee = 0.0;
             double doctorDisposalFee = 0.0;
             int doctorInvoiceNums = 0;
-            for (Invoice invoice : invoiceList) {
-                doctorPrescriptionFee += invoice.getPrescriptionFee();
-                doctorExaminationFee += invoice.getExaminationFee();
-                doctorDisposalFee += invoice.getDisposalFee();
-                doctorInvoiceNums += invoice.getInvoiceNums();
+            if (!doctorRegistrationIdList.isEmpty()) {
+                InvoiceExample invoiceExample = new InvoiceExample();
+                invoiceExample.or().andValidEqualTo(1).andRegistrationIdIn(doctorRegistrationIdList).andPayTimeBetween(startDatetime, endDatetime);
+                List<Invoice> invoiceList = invoiceMapper.selectByExample(invoiceExample);
+                for (Invoice invoice : invoiceList) {
+                    doctorPrescriptionFee += invoice.getPrescriptionFee();
+                    doctorExaminationFee += invoice.getExaminationFee();
+                    doctorDisposalFee += invoice.getDisposalFee();
+                    doctorInvoiceNums += invoice.getInvoiceNums();
+                }
             }
 
             doctorJsonObject.addProperty("doctorPrescriptionFee", doctorPrescriptionFee);
