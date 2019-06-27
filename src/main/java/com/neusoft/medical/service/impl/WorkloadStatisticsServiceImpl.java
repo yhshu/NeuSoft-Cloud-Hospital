@@ -65,20 +65,22 @@ public class WorkloadStatisticsServiceImpl implements WorkloadStatisticsService 
 
             ChargeFormExample chargeFormExample = new ChargeFormExample();
             chargeFormExample.or().andValidEqualTo(1).andRegistrationIdIn(patientRegistrationIdList);
-
             List<ChargeForm> chargeFormList = chargeFormMapper.selectByExample(chargeFormExample);
             List<Integer> chargeFormIdList = new CopyOnWriteArrayList<>();
             for (ChargeForm chargeForm : chargeFormList) {
                 chargeFormIdList.add(chargeForm.getChargeFormId());
             }
-            ChargeEntryExample chargeEntryExample = new ChargeEntryExample();
-            chargeEntryExample.or().andValidEqualTo(1).andChargeFormIdIn(chargeFormIdList);
-            List<ChargeEntry> chargeEntryList = chargeEntryMapper.selectByExample(chargeEntryExample);
-            for (ChargeEntry chargeEntry : chargeEntryList) {
-                if (chargeEntry.getExaminationId() != null) {
-                    patientExaminationFee += chargeEntry.getTotalPrice();
-                } else if (chargeEntry.getChargeFormId() != null) {
-                    patientDisposalFee += chargeEntry.getTotalPrice();
+
+            if (!chargeFormIdList.isEmpty()) {
+                ChargeEntryExample chargeEntryExample = new ChargeEntryExample();
+                chargeEntryExample.or().andValidEqualTo(1).andChargeFormIdIn(chargeFormIdList);
+                List<ChargeEntry> chargeEntryList = chargeEntryMapper.selectByExample(chargeEntryExample);
+                for (ChargeEntry chargeEntry : chargeEntryList) {
+                    if (chargeEntry.getExaminationId() != null) {
+                        patientExaminationFee += chargeEntry.getTotalPrice();
+                    } else if (chargeEntry.getChargeFormId() != null) {
+                        patientDisposalFee += chargeEntry.getTotalPrice();
+                    }
                 }
             }
 
@@ -89,11 +91,13 @@ public class WorkloadStatisticsServiceImpl implements WorkloadStatisticsService 
             for (Prescription prescription : prescriptionList) {
                 prescriptionIdList.add(prescription.getPrescriptionId());
             }
-            PrescriptionEntryExample prescriptionEntryExample = new PrescriptionEntryExample();
-            prescriptionEntryExample.or().andValidEqualTo(1).andPrescriptionIdIn(prescriptionIdList);
-            List<PrescriptionEntry> prescriptionEntryList = prescriptionEntryMapper.selectByExample(prescriptionEntryExample);
-            for (PrescriptionEntry prescriptionEntry : prescriptionEntryList) {
-                patientPrescriptionFee += prescriptionEntry.getTotalPrice();
+            if (!prescriptionIdList.isEmpty()) {
+                PrescriptionEntryExample prescriptionEntryExample = new PrescriptionEntryExample();
+                prescriptionEntryExample.or().andValidEqualTo(1).andPrescriptionIdIn(prescriptionIdList);
+                List<PrescriptionEntry> prescriptionEntryList = prescriptionEntryMapper.selectByExample(prescriptionEntryExample);
+                for (PrescriptionEntry prescriptionEntry : prescriptionEntryList) {
+                    patientPrescriptionFee += prescriptionEntry.getTotalPrice();
+                }
             }
 
             patientJsonObject.addProperty("patientExaminationFee", patientExaminationFee);

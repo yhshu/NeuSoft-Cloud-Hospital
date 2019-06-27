@@ -5,7 +5,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.neusoft.medical.Util.Constant;
 import com.neusoft.medical.bean.*;
-import com.neusoft.medical.dao.AccountMapper;
 import com.neusoft.medical.dao.AccountTypePermissionMapper;
 import com.neusoft.medical.dao.PermissionMapper;
 import com.neusoft.medical.service.LoginService;
@@ -25,8 +24,6 @@ public class LoginServiceImpl implements LoginService {
     @Resource
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     @Resource
-    private AccountMapper accountMapper;
-    @Resource
     private AccountService accountService;
     @Resource
     private AccountTypePermissionMapper accountTypePermissionMapper;
@@ -43,9 +40,11 @@ public class LoginServiceImpl implements LoginService {
             return Constant.SIGNIN_MISMATCH;
 
         if (bCryptPasswordEncoder.matches(userPassword, account.getUserPassword())) {
-            // 用户密码核对成功，签发 token
+            // 用户密码核对成功，签发 token；同一用户每次生成的 token 不同
             logger.info("user " + userName + " successfully logged in");
-            return bCryptPasswordEncoder.encode(userName);
+            String token = bCryptPasswordEncoder.encode(userName);
+            logger.info("token: " + token);
+            return token;
 
         } else {
             logger.info("password mismatch, username: " + userName + ", password: " + userPassword);
@@ -61,7 +60,6 @@ public class LoginServiceImpl implements LoginService {
         Account account = accountService.selectAccountByUserName(userName);
         JsonObject accountJsonObject = gson.toJsonTree(account).getAsJsonObject();
         accountJsonObject.remove("userPassword"); // 移除数据库中的密码
-
 
         String accountType = account.getAccountType();
 
