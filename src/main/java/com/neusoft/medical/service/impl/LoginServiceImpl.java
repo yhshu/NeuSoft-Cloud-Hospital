@@ -10,6 +10,7 @@ import com.neusoft.medical.dao.PermissionMapper;
 import com.neusoft.medical.service.LoginService;
 import com.neusoft.medical.service.basicInfo.AccountService;
 import org.apache.log4j.Logger;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,8 @@ public class LoginServiceImpl implements LoginService {
     private AccountTypePermissionMapper accountTypePermissionMapper;
     @Resource
     private PermissionMapper permissionMapper;
+    @Resource
+    private RedisTemplate redisTemplate;
 
     private Gson gson = new Gson();
 
