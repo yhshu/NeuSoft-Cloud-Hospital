@@ -64,4 +64,12 @@ public class SettlementCategoryServiceImpl implements SettlementCategoryService 
         }
         return true;
     }
+
+    @Override
+    public List<SettlementCategory> selectAllSettlementCategory() {
+        SettlementCategoryExample settlementCategoryExample = new SettlementCategoryExample();
+        settlementCategoryExample.or().andValidEqualTo(1);
+
+        return settlementCategoryMapper.selectByExample(settlementCategoryExample);
+    }
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
+import java.util.List;
 
 @RestController
 @RequestMapping("/settlement_category")
@@ -37,6 +38,22 @@ public class SettlementCategoryController {
     }
 
     /**
+     * 获取所有结算类别
+     *
+     * @return 所有结算类别信息
+     */
+    @GetMapping("/list_all")
+    public ResultDTO<List<SettlementCategory>> selectAllSettlementCategory() {
+        List<SettlementCategory> settlementCategoryList = null;
+        try {
+            settlementCategoryList = settlementCategoryService.selectAllSettlementCategory();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResultDTO<>(settlementCategoryList);
+    }
+
+    /**
      * 保存结算类别信息
      * 包括新增或更新
      *
@@ -59,6 +76,12 @@ public class SettlementCategoryController {
         return new ResultDTO<>(res);
     }
 
+    /**
+     * 删除结算类别信息
+     *
+     * @param settlementCategoryIdList 结算类别编号列表
+     * @return 操作结果
+     */
     @DeleteMapping("/delete")
     public ResultDTO<Boolean> deleteSettlementCategory(
             @RequestParam(value = "settlementCategoryIdList[]") Integer[] settlementCategoryIdList

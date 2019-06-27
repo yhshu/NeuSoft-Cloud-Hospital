@@ -46,6 +46,10 @@ public class ChargeServiceImpl implements ChargeService {
             int invoiceState = checkoutJsonObject.get("invoiceState").getAsInt();
             JsonArray entryListJsonArray = checkoutJsonObject.get("entryList").getAsJsonArray();
 
+            double examinationFee = 0.0;  // 总检查费
+            double disposalFee = 0.0;     // 总处置费
+            double prescriptionFee = 0.0; // 总处方费
+
             for (JsonElement entryJsonElement : entryListJsonArray) {
                 JsonObject entryJsonObject = entryJsonElement.getAsJsonObject();
 
@@ -55,19 +59,25 @@ public class ChargeServiceImpl implements ChargeService {
                 // 处理收费条目：chargeEntry 或 prescriptionEntry
                 if (entryType == Constant.ENTRY_TYPE_CHARGE_ENTRY) {
                     ChargeEntry chargeEntryRecord = chargeEntryMapper.selectByPrimaryKey(entryId);
+                    if (chargeEntryRecord.getChargeFormId() != null) {
+                        disposalFee += chargeEntryRecord.getTotalPrice();
+                    } else if (chargeEntryRecord.getExaminationId() != null) {
+                        examinationFee += chargeEntryRecord.getTotalPrice();
+                    }
                     chargeEntryRecord.setPayState(Constant.PAY_STATE_CHARGED);
                     chargeEntryRecord.setUnchargedNums(0);
                     chargeEntryMapper.updateByPrimaryKeySelective(chargeEntryRecord);
                 } else if (entryType == Constant.ENTRY_TYPE_PRESCRIPTION_ENTRY) {
                     PrescriptionEntry prescriptionEntryRecord = prescriptionEntryMapper.selectByPrimaryKey(entryId);
+                    prescriptionFee += prescriptionEntryRecord.getTotalPrice();
                     prescriptionEntryRecord.setPayState(Constant.PAY_STATE_CHARGED);
                     prescriptionEntryMapper.updateByPrimaryKeySelective(prescriptionEntryRecord);
                 } else {
-                    throw new Exception("The value of entryType is null or wrong.");
+                    throw new Exception("The value of entryType is null or wrong");
                 }
 
                 // 处理支付记录
-                Invoice invoiceRecord = new Invoice(null, invoiceTitle, invoiceNums, collectorId, registrationId, new Date(), invoiceAmount, selfPay, accountPay, reimbursementPay, discounted, Constant.INVOICE_VALID, 1);
+                Invoice invoiceRecord = new Invoice(null, invoiceTitle, invoiceNums, collectorId, registrationId, new Date(), invoiceAmount, selfPay, accountPay, reimbursementPay, discounted, invoiceState, prescriptionFee, examinationFee, disposalFee, 0.0, 1);
                 invoiceMapper.insert(invoiceRecord);
             }
 

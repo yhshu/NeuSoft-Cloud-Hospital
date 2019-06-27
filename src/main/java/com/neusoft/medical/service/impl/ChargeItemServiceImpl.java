@@ -2,20 +2,36 @@ package com.neusoft.medical.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.neusoft.medical.bean.ChargeItem;
 import com.neusoft.medical.bean.ChargeItemExample;
 import com.neusoft.medical.dao.ChargeItemMapper;
+import com.neusoft.medical.dao.DepartmentMapper;
+import com.neusoft.medical.dao.ExpenseCategoryMapper;
 import com.neusoft.medical.service.basicInfo.ChargeItemService;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
 public class ChargeItemServiceImpl implements ChargeItemService {
+    private Logger logger = Logger.getLogger(ChargeItemService.class);
     @Resource
     private ChargeItemMapper chargeItemMapper;
+    @Resource
+    private DepartmentMapper departmentMapper;
+    @Resource
+    private ExpenseCategoryMapper expenseCategoryMapper;
+
+
+    private Gson gson = new Gson();
 
     @Override
     public List<ChargeItem> selectChargeItemByDepartmentId(int departmentId) {
@@ -24,10 +40,11 @@ public class ChargeItemServiceImpl implements ChargeItemService {
             chargeItemExample.or().andValidEqualTo(1).andDepartmentIdEqualTo(departmentId);
             List<ChargeItem> chargeItemList = chargeItemMapper.selectByExample(chargeItemExample);
 
-            if (!chargeItemList.isEmpty())
+            if (!chargeItemList.isEmpty()) {
                 return chargeItemList;
-            else
-                System.out.println("ChargeItemServiceImpl 未找到科室 " + departmentId + " 可用的收费项目");
+            } else {
+                logger.info("No charge items available for this department");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -35,7 +52,7 @@ public class ChargeItemServiceImpl implements ChargeItemService {
     }
 
     @Override
-    public PageInfo<ChargeItem> selectChargeItemByDepartmentIdWithPaging(List<Integer> departmentId, int currentPage, int pageSize) {
+    public PageInfo<String> selectChargeItemByDepartmentIdWithPaging(List<Integer> departmentId, int currentPage, int pageSize) {
         try {
             PageHelper.startPage(currentPage, pageSize);
 
@@ -43,11 +60,24 @@ public class ChargeItemServiceImpl implements ChargeItemService {
             chargeItemExample.or().andValidEqualTo(1).andDepartmentIdIn(departmentId);
 
             List<ChargeItem> chargeItemList = chargeItemMapper.selectByExample(chargeItemExample);
+            List<String> res = new CopyOnWriteArrayList<>();
+            JsonArray chargeItemListJsonArray = gson.toJsonTree(chargeItemList).getAsJsonArray();
+            for (JsonElement chargeItemJsonElement : chargeItemListJsonArray) {
+                JsonObject chargeItemJsonObject = chargeItemJsonElement.getAsJsonObject();
 
-            if (!chargeItemList.isEmpty())
-                return new PageInfo<>(chargeItemList);
-            else
-                System.out.println("ChargeItemServiceImpl 未找到科室 " + departmentId + " 可用的收费项目");
+                Integer curDepartmentId = chargeItemJsonObject.get("departmentId").getAsInt();
+                Integer expenseCategoryId = chargeItemJsonObject.get("expenseCategoryId").getAsInt();
+                chargeItemJsonObject.addProperty("departmentName", departmentMapper.selectByPrimaryKey(curDepartmentId).getDepartmentName());
+                chargeItemJsonObject.addProperty("expenseCategoryName", expenseCategoryMapper.selectByPrimaryKey(expenseCategoryId).getExpenseCategoryName());
+
+                res.add(chargeItemJsonObject.toString());
+            }
+
+            if (!chargeItemList.isEmpty()) {  // chargeItemList not empty
+                return new PageInfo<>(res);
+            } else {
+                logger.info("No charge items available for this department");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

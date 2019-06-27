@@ -355,6 +355,66 @@ public class DailySettlementExample {
             return (Criteria) this;
         }
 
+        public Criteria andPreviousDailySettlementDateIsNull() {
+            addCriterion("previous_daily_settlement_date is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPreviousDailySettlementDateIsNotNull() {
+            addCriterion("previous_daily_settlement_date is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPreviousDailySettlementDateEqualTo(Date value) {
+            addCriterion("previous_daily_settlement_date =", value, "previousDailySettlementDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andPreviousDailySettlementDateNotEqualTo(Date value) {
+            addCriterion("previous_daily_settlement_date <>", value, "previousDailySettlementDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andPreviousDailySettlementDateGreaterThan(Date value) {
+            addCriterion("previous_daily_settlement_date >", value, "previousDailySettlementDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andPreviousDailySettlementDateGreaterThanOrEqualTo(Date value) {
+            addCriterion("previous_daily_settlement_date >=", value, "previousDailySettlementDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andPreviousDailySettlementDateLessThan(Date value) {
+            addCriterion("previous_daily_settlement_date <", value, "previousDailySettlementDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andPreviousDailySettlementDateLessThanOrEqualTo(Date value) {
+            addCriterion("previous_daily_settlement_date <=", value, "previousDailySettlementDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andPreviousDailySettlementDateIn(List<Date> values) {
+            addCriterion("previous_daily_settlement_date in", values, "previousDailySettlementDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andPreviousDailySettlementDateNotIn(List<Date> values) {
+            addCriterion("previous_daily_settlement_date not in", values, "previousDailySettlementDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andPreviousDailySettlementDateBetween(Date value1, Date value2) {
+            addCriterion("previous_daily_settlement_date between", value1, value2, "previousDailySettlementDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andPreviousDailySettlementDateNotBetween(Date value1, Date value2) {
+            addCriterion("previous_daily_settlement_date not between", value1, value2, "previousDailySettlementDate");
+            return (Criteria) this;
+        }
+
         public Criteria andCheckedIsNull() {
             addCriterion("checked is null");
             return (Criteria) this;

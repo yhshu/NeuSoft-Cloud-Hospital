@@ -20,7 +20,7 @@ public interface AccountTypePermissionMapper {
     @Insert({
         "insert into hospital.account_type_permission (account_type, permission_id, ",
         "valid)",
-        "values (#{accountType,jdbcType=INTEGER}, #{permissionId,jdbcType=INTEGER}, ",
+        "values (#{accountType,jdbcType=VARCHAR}, #{permissionId,jdbcType=INTEGER}, ",
         "#{valid,jdbcType=INTEGER})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="accountTypePermissionId", before=false, resultType=Integer.class)
@@ -47,7 +47,7 @@ public interface AccountTypePermissionMapper {
 
     @Update({
         "update hospital.account_type_permission",
-        "set account_type = #{accountType,jdbcType=INTEGER},",
+        "set account_type = #{accountType,jdbcType=VARCHAR},",
           "permission_id = #{permissionId,jdbcType=INTEGER},",
           "valid = #{valid,jdbcType=INTEGER}",
         "where account_type_permission_id = #{accountTypePermissionId,jdbcType=INTEGER}"

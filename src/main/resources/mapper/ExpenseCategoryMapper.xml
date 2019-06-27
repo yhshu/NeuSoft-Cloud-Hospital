@@ -4,8 +4,8 @@
   <resultMap id="BaseResultMap" type="com.neusoft.medical.bean.ExpenseCategory">
     <constructor>
       <idArg column="expense_category_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="expense_code" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="expense_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="expense_category_code" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="expense_category_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="reserve1" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="reserve2" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -71,7 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    expense_category_id, expense_code, expense_name, valid, reserve1, reserve2, reserve3
+    expense_category_id, expense_category_code, expense_category_name, valid, reserve1, 
+    reserve2, reserve3
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.ExpenseCategoryExample" resultMap="BaseResultMap">
     select
@@ -99,11 +100,11 @@
     </selectKey>
     insert into hospital.expense_category
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="expenseCode != null">
-        expense_code,
+      <if test="expenseCategoryCode != null">
+        expense_category_code,
       </if>
-      <if test="expenseName != null">
-        expense_name,
+      <if test="expenseCategoryName != null">
+        expense_category_name,
       </if>
       <if test="valid != null">
         valid,
@@ -119,11 +120,11 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="expenseCode != null">
-        #{expenseCode,jdbcType=VARCHAR},
+      <if test="expenseCategoryCode != null">
+        #{expenseCategoryCode,jdbcType=VARCHAR},
       </if>
-      <if test="expenseName != null">
-        #{expenseName,jdbcType=VARCHAR},
+      <if test="expenseCategoryName != null">
+        #{expenseCategoryName,jdbcType=VARCHAR},
       </if>
       <if test="valid != null">
         #{valid,jdbcType=INTEGER},
@@ -151,11 +152,11 @@
       <if test="record.expenseCategoryId != null">
         expense_category_id = #{record.expenseCategoryId,jdbcType=INTEGER},
       </if>
-      <if test="record.expenseCode != null">
-        expense_code = #{record.expenseCode,jdbcType=VARCHAR},
+      <if test="record.expenseCategoryCode != null">
+        expense_category_code = #{record.expenseCategoryCode,jdbcType=VARCHAR},
       </if>
-      <if test="record.expenseName != null">
-        expense_name = #{record.expenseName,jdbcType=VARCHAR},
+      <if test="record.expenseCategoryName != null">
+        expense_category_name = #{record.expenseCategoryName,jdbcType=VARCHAR},
       </if>
       <if test="record.valid != null">
         valid = #{record.valid,jdbcType=INTEGER},
@@ -177,8 +178,8 @@
   <update id="updateByExample" parameterType="map">
     update hospital.expense_category
     set expense_category_id = #{record.expenseCategoryId,jdbcType=INTEGER},
-      expense_code = #{record.expenseCode,jdbcType=VARCHAR},
-      expense_name = #{record.expenseName,jdbcType=VARCHAR},
+      expense_category_code = #{record.expenseCategoryCode,jdbcType=VARCHAR},
+      expense_category_name = #{record.expenseCategoryName,jdbcType=VARCHAR},
       valid = #{record.valid,jdbcType=INTEGER},
       reserve1 = #{record.reserve1,jdbcType=VARCHAR},
       reserve2 = #{record.reserve2,jdbcType=VARCHAR},
@@ -190,11 +191,11 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.neusoft.medical.bean.ExpenseCategory">
     update hospital.expense_category
     <set>
-      <if test="expenseCode != null">
-        expense_code = #{expenseCode,jdbcType=VARCHAR},
+      <if test="expenseCategoryCode != null">
+        expense_category_code = #{expenseCategoryCode,jdbcType=VARCHAR},
       </if>
-      <if test="expenseName != null">
-        expense_name = #{expenseName,jdbcType=VARCHAR},
+      <if test="expenseCategoryName != null">
+        expense_category_name = #{expenseCategoryName,jdbcType=VARCHAR},
       </if>
       <if test="valid != null">
         valid = #{valid,jdbcType=INTEGER},

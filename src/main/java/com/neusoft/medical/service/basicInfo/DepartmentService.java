@@ -27,7 +27,7 @@ public interface DepartmentService {
      * 新增一个科室
      *
      * @param record 新增的科室信息
-     * @return
+     * @return 科室信息
      */
     Department addDepartment(Department record);
 

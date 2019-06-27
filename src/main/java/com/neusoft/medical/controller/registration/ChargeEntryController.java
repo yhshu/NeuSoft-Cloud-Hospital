@@ -2,7 +2,7 @@ package com.neusoft.medical.controller.registration;
 
 
 import com.github.pagehelper.PageInfo;
-import com.neusoft.medical.Util.DateConverter;
+import com.neusoft.medical.Util.converter.StringToDateConverter;
 import com.neusoft.medical.bean.ChargeEntry;
 import com.neusoft.medical.bean.ChargeItem;
 import com.neusoft.medical.dto.ResultDTO;
@@ -28,7 +28,7 @@ public class ChargeEntryController {
     private ChargeItemService chargeItemService;
 
     @Resource
-    private DateConverter dateConverter;
+    private StringToDateConverter stringToDateConverter;
 
     /**
      * 按挂号编号获取收费账单
@@ -55,9 +55,9 @@ public class ChargeEntryController {
         Date startDateConverted = null;
         Date endDateConverted = null;
         if (startDate != null)
-            startDateConverted = dateConverter.convert(startDate);
+            startDateConverted = stringToDateConverter.convert(startDate);
         if (endDate != null)
-            endDateConverted = dateConverter.convert(endDate);
+            endDateConverted = stringToDateConverter.convert(endDate);
         PageInfo<ChargeEntry> chargeEntryPageInfo = chargeEntryService.selectChargeEntryByRegistrationId(currentPage, pageSize, registrationId, startDateConverted, endDateConverted, chargeEntryCategory);
 
         return new ResultDTO<>(chargeEntryPageInfo);

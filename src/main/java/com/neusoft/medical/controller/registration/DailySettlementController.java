@@ -1,7 +1,7 @@
 package com.neusoft.medical.controller.registration;
 
 import com.github.pagehelper.PageInfo;
-import com.neusoft.medical.Util.DateTimeConverter;
+import com.neusoft.medical.Util.converter.StringToDateTimeConverter;
 import com.neusoft.medical.bean.DailySettlement;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.registration.DailySettlementService;
@@ -19,7 +19,7 @@ public class DailySettlementController {
     @Resource
     private DailySettlementService dailySettlementService;
     @Resource
-    private DateTimeConverter dateTimeConverter;
+    private StringToDateTimeConverter stringToDateTimeConverter;
 
     /**
      * 获取所有日结信息列表
@@ -64,8 +64,8 @@ public class DailySettlementController {
         PageInfo<DailySettlement> dailySettlementPageInfo = null;
 
         try {
-            Date startDatetimeConverted = dateTimeConverter.convert(startDatetime);
-            Date endDatetimeConverted = dateTimeConverter.convert(endDatetime);
+            Date startDatetimeConverted = stringToDateTimeConverter.convert(startDatetime);
+            Date endDatetimeConverted = stringToDateTimeConverter.convert(endDatetime);
             dailySettlementPageInfo = dailySettlementService.selectDailySettlementList(startDatetimeConverted, endDatetimeConverted, collectorId, currentPage, pageSize);
         } catch (Exception e) {
             e.printStackTrace();
@@ -90,9 +90,11 @@ public class DailySettlementController {
         try {
             Date endDatetimeConverted;
             if (endDatetime != null)
-                endDatetimeConverted = dateTimeConverter.convert(endDatetime);
+                endDatetimeConverted = stringToDateTimeConverter.convert(endDatetime);
             else
                 endDatetimeConverted = new Date();
+            assert endDatetimeConverted != null;
+
             res = dailySettlementService.generateDailySettlement(collectorId, endDatetimeConverted);
         } catch (Exception e) {
             e.printStackTrace();
@@ -129,7 +131,7 @@ public class DailySettlementController {
      * @param dailySettlementId 日结记录编号
      * @return 日结单信息，json 字符串
      */
-    @GetMapping("daily_settlement_document")
+    @GetMapping("/daily_settlement_document")
     public ResultDTO<String> dailySettlementDocument(
             @RequestParam(value = "dailySettlementId") Integer dailySettlementId
     ) {

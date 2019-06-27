@@ -3,6 +3,8 @@ package com.neusoft.medical.bean;
 public class DailySettlementDetail {
     private Integer dailySettlementDetailId;
 
+    private Integer dailySettlementId;
+
     private Integer invoiceNums;
 
     private Integer registrationId;
@@ -25,8 +27,9 @@ public class DailySettlementDetail {
 
     private Integer valid;
 
-    public DailySettlementDetail(Integer dailySettlementDetailId, Integer invoiceNums, Integer registrationId, String patientName, Double invoiceTotalAmount, Double selfPay, Double accountPay, Double reimbursementPay, Double discounted, Integer dailySettlementDetailState, Integer settlementCategoryId, Integer valid) {
+    public DailySettlementDetail(Integer dailySettlementDetailId, Integer dailySettlementId, Integer invoiceNums, Integer registrationId, String patientName, Double invoiceTotalAmount, Double selfPay, Double accountPay, Double reimbursementPay, Double discounted, Integer dailySettlementDetailState, Integer settlementCategoryId, Integer valid) {
         this.dailySettlementDetailId = dailySettlementDetailId;
+        this.dailySettlementId = dailySettlementId;
         this.invoiceNums = invoiceNums;
         this.registrationId = registrationId;
         this.patientName = patientName;
@@ -50,6 +53,14 @@ public class DailySettlementDetail {
 
     public void setDailySettlementDetailId(Integer dailySettlementDetailId) {
         this.dailySettlementDetailId = dailySettlementDetailId;
+    }
+
+    public Integer getDailySettlementId() {
+        return dailySettlementId;
+    }
+
+    public void setDailySettlementId(Integer dailySettlementId) {
+        this.dailySettlementId = dailySettlementId;
     }
 
     public Integer getInvoiceNums() {

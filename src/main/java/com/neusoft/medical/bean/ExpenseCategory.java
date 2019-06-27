@@ -3,9 +3,9 @@ package com.neusoft.medical.bean;
 public class ExpenseCategory {
     private Integer expenseCategoryId;
 
-    private String expenseCode;
+    private String expenseCategoryCode;
 
-    private String expenseName;
+    private String expenseCategoryName;
 
     private Integer valid;
 
@@ -15,10 +15,10 @@ public class ExpenseCategory {
 
     private String reserve3;
 
-    public ExpenseCategory(Integer expenseCategoryId, String expenseCode, String expenseName, Integer valid, String reserve1, String reserve2, String reserve3) {
+    public ExpenseCategory(Integer expenseCategoryId, String expenseCategoryCode, String expenseCategoryName, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.expenseCategoryId = expenseCategoryId;
-        this.expenseCode = expenseCode;
-        this.expenseName = expenseName;
+        this.expenseCategoryCode = expenseCategoryCode;
+        this.expenseCategoryName = expenseCategoryName;
         this.valid = valid;
         this.reserve1 = reserve1;
         this.reserve2 = reserve2;
@@ -37,20 +37,20 @@ public class ExpenseCategory {
         this.expenseCategoryId = expenseCategoryId;
     }
 
-    public String getExpenseCode() {
-        return expenseCode;
+    public String getExpenseCategoryCode() {
+        return expenseCategoryCode;
     }
 
-    public void setExpenseCode(String expenseCode) {
-        this.expenseCode = expenseCode == null ? null : expenseCode.trim();
+    public void setExpenseCategoryCode(String expenseCategoryCode) {
+        this.expenseCategoryCode = expenseCategoryCode == null ? null : expenseCategoryCode.trim();
     }
 
-    public String getExpenseName() {
-        return expenseName;
+    public String getExpenseCategoryName() {
+        return expenseCategoryName;
     }
 
-    public void setExpenseName(String expenseName) {
-        this.expenseName = expenseName == null ? null : expenseName.trim();
+    public void setExpenseCategoryName(String expenseCategoryName) {
+        this.expenseCategoryName = expenseCategoryName == null ? null : expenseCategoryName.trim();
     }
 
     public Integer getValid() {

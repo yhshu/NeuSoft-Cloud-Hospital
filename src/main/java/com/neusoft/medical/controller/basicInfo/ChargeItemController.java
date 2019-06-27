@@ -1,7 +1,6 @@
 package com.neusoft.medical.controller.basicInfo;
 
 import com.github.pagehelper.PageInfo;
-import com.neusoft.medical.bean.ChargeItem;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.basicInfo.ChargeItemService;
 import org.springframework.web.bind.annotation.*;
@@ -24,12 +23,12 @@ public class ChargeItemController {
      * @return 分页的指定科室的收费项目信息
      */
     @GetMapping("/select")
-    public ResultDTO<PageInfo<ChargeItem>> selectChargeItem(
+    public ResultDTO<PageInfo<String>> selectChargeItem(
             @RequestParam(value = "currentPage") Integer currentPage,
             @RequestParam(value = "pageSize") Integer pageSize,
             @RequestParam(value = "departmentIdList[]") Integer[] departmentIdList
     ) {
-        PageInfo<ChargeItem> chargeItemPageInfo = null;
+        PageInfo<String> chargeItemPageInfo = null;
         try {
             chargeItemPageInfo = chargeItemService.selectChargeItemByDepartmentIdWithPaging(Arrays.asList(departmentIdList), currentPage, pageSize);
         } catch (Exception e) {

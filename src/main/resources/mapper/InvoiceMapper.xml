@@ -15,6 +15,10 @@
       <arg column="reimbursement_pay" javaType="java.lang.Double" jdbcType="DOUBLE" />
       <arg column="discounted" javaType="java.lang.Double" jdbcType="DOUBLE" />
       <arg column="invoice_state" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="prescription_fee" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="examination_fee" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="disposal_fee" javaType="java.lang.Double" jdbcType="DOUBLE" />
+      <arg column="registration_fee" javaType="java.lang.Double" jdbcType="DOUBLE" />
       <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
@@ -79,7 +83,7 @@
   <sql id="Base_Column_List">
     invoice_id, invoice_title, invoice_nums, collector_id, registration_id, pay_time, 
     invoice_amount, self_pay, account_pay, reimbursement_pay, discounted, invoice_state, 
-    valid
+    prescription_fee, examination_fee, disposal_fee, registration_fee, valid
   </sql>
   <select id="selectByExample" parameterType="com.neusoft.medical.bean.InvoiceExample" resultMap="BaseResultMap">
     select
@@ -140,6 +144,18 @@
       <if test="invoiceState != null">
         invoice_state,
       </if>
+      <if test="prescriptionFee != null">
+        prescription_fee,
+      </if>
+      <if test="examinationFee != null">
+        examination_fee,
+      </if>
+      <if test="disposalFee != null">
+        disposal_fee,
+      </if>
+      <if test="registrationFee != null">
+        registration_fee,
+      </if>
       <if test="valid != null">
         valid,
       </if>
@@ -177,6 +193,18 @@
       </if>
       <if test="invoiceState != null">
         #{invoiceState,jdbcType=INTEGER},
+      </if>
+      <if test="prescriptionFee != null">
+        #{prescriptionFee,jdbcType=DOUBLE},
+      </if>
+      <if test="examinationFee != null">
+        #{examinationFee,jdbcType=DOUBLE},
+      </if>
+      <if test="disposalFee != null">
+        #{disposalFee,jdbcType=DOUBLE},
+      </if>
+      <if test="registrationFee != null">
+        #{registrationFee,jdbcType=DOUBLE},
       </if>
       <if test="valid != null">
         #{valid,jdbcType=INTEGER},
@@ -228,6 +256,18 @@
       <if test="record.invoiceState != null">
         invoice_state = #{record.invoiceState,jdbcType=INTEGER},
       </if>
+      <if test="record.prescriptionFee != null">
+        prescription_fee = #{record.prescriptionFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.examinationFee != null">
+        examination_fee = #{record.examinationFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.disposalFee != null">
+        disposal_fee = #{record.disposalFee,jdbcType=DOUBLE},
+      </if>
+      <if test="record.registrationFee != null">
+        registration_fee = #{record.registrationFee,jdbcType=DOUBLE},
+      </if>
       <if test="record.valid != null">
         valid = #{record.valid,jdbcType=INTEGER},
       </if>
@@ -250,6 +290,10 @@
       reimbursement_pay = #{record.reimbursementPay,jdbcType=DOUBLE},
       discounted = #{record.discounted,jdbcType=DOUBLE},
       invoice_state = #{record.invoiceState,jdbcType=INTEGER},
+      prescription_fee = #{record.prescriptionFee,jdbcType=DOUBLE},
+      examination_fee = #{record.examinationFee,jdbcType=DOUBLE},
+      disposal_fee = #{record.disposalFee,jdbcType=DOUBLE},
+      registration_fee = #{record.registrationFee,jdbcType=DOUBLE},
       valid = #{record.valid,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -290,6 +334,18 @@
       </if>
       <if test="invoiceState != null">
         invoice_state = #{invoiceState,jdbcType=INTEGER},
+      </if>
+      <if test="prescriptionFee != null">
+        prescription_fee = #{prescriptionFee,jdbcType=DOUBLE},
+      </if>
+      <if test="examinationFee != null">
+        examination_fee = #{examinationFee,jdbcType=DOUBLE},
+      </if>
+      <if test="disposalFee != null">
+        disposal_fee = #{disposalFee,jdbcType=DOUBLE},
+      </if>
+      <if test="registrationFee != null">
+        registration_fee = #{registrationFee,jdbcType=DOUBLE},
       </if>
       <if test="valid != null">
         valid = #{valid,jdbcType=INTEGER},

@@ -264,4 +264,17 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         return true;
     }
 
+    @Override
+    public List<Prescription> selectPrescriptionList(Integer doctorId) {
+        List<Prescription> prescriptionList = null;
+        try {
+            PrescriptionExample prescriptionExample = new PrescriptionExample();
+            prescriptionExample.or().andValidEqualTo(1).andDoctorIdEqualTo(doctorId);
+            prescriptionList = prescriptionMapper.selectByExample(prescriptionExample);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return prescriptionList;
+    }
+
 }

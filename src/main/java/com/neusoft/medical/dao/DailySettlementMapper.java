@@ -19,11 +19,11 @@ public interface DailySettlementMapper {
 
     @Insert({
         "insert into hospital.daily_settlement (collector_account_id, collector_real_name, ",
-        "daily_settlement_date, checked, ",
-        "valid)",
+        "daily_settlement_date, previous_daily_settlement_date, ",
+        "checked, valid)",
         "values (#{collectorAccountId,jdbcType=INTEGER}, #{collectorRealName,jdbcType=VARCHAR}, ",
-        "#{dailySettlementDate,jdbcType=TIMESTAMP}, #{checked,jdbcType=INTEGER}, ",
-        "#{valid,jdbcType=INTEGER})"
+        "#{dailySettlementDate,jdbcType=TIMESTAMP}, #{previousDailySettlementDate,jdbcType=TIMESTAMP}, ",
+        "#{checked,jdbcType=INTEGER}, #{valid,jdbcType=INTEGER})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="dailySettlementId", before=false, resultType=Integer.class)
     int insert(DailySettlement record);
@@ -35,7 +35,7 @@ public interface DailySettlementMapper {
     @Select({
         "select",
         "daily_settlement_id, collector_account_id, collector_real_name, daily_settlement_date, ",
-        "checked, valid",
+        "previous_daily_settlement_date, checked, valid",
         "from hospital.daily_settlement",
         "where daily_settlement_id = #{dailySettlementId,jdbcType=INTEGER}"
     })
@@ -53,6 +53,7 @@ public interface DailySettlementMapper {
         "set collector_account_id = #{collectorAccountId,jdbcType=INTEGER},",
           "collector_real_name = #{collectorRealName,jdbcType=VARCHAR},",
           "daily_settlement_date = #{dailySettlementDate,jdbcType=TIMESTAMP},",
+          "previous_daily_settlement_date = #{previousDailySettlementDate,jdbcType=TIMESTAMP},",
           "checked = #{checked,jdbcType=INTEGER},",
           "valid = #{valid,jdbcType=INTEGER}",
         "where daily_settlement_id = #{dailySettlementId,jdbcType=INTEGER}"

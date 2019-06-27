@@ -1,7 +1,7 @@
 package com.neusoft.medical.controller.basicInfo;
 
 import com.github.pagehelper.PageInfo;
-import com.neusoft.medical.Util.DateConverter;
+import com.neusoft.medical.Util.converter.StringToDateConverter;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.basicInfo.SchedulingService;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +20,7 @@ public class SchedulingController {
     @Resource
     private SchedulingService schedulingService;
 
-    private DateConverter dateConverter = new DateConverter();
+    private StringToDateConverter stringToDateConverter = new StringToDateConverter();
 
     /**
      * 分页获取排班计划
@@ -117,8 +117,8 @@ public class SchedulingController {
     ) {
         boolean res;
         try {
-            Date startDateConverted = dateConverter.convert(startDate);
-            Date endDateConverted = dateConverter.convert(endDate);
+            Date startDateConverted = stringToDateConverter.convert(startDate);
+            Date endDateConverted = stringToDateConverter.convert(endDate);
             res = schedulingService.generateSchedulingInfo(startDateConverted, endDateConverted);
         } catch (Exception e) {
             e.printStackTrace();
@@ -170,7 +170,7 @@ public class SchedulingController {
     ) {
         boolean res;
         try {
-            Date schedulingTimeConverted = dateConverter.convert(schedulingTime);
+            Date schedulingTimeConverted = stringToDateConverter.convert(schedulingTime);
             res = schedulingService.saveSchedulingInfo(schedulingInfoId, schedulingTimeConverted, departmentId, doctorId, registrationCategoryId, valid, noon, limitation, remainNums);
         } catch (Exception e) {
             e.printStackTrace();

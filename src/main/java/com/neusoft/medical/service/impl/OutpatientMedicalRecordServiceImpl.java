@@ -5,7 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.neusoft.medical.Util.Constant;
-import com.neusoft.medical.Util.DateConverter;
+import com.neusoft.medical.Util.converter.StringToDateConverter;
 import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.*;
 import com.neusoft.medical.service.doctorWorkstation.OutpatientMedicalRecordService;
@@ -32,7 +32,7 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
     @Resource
     private DoctorMapper doctorMapper;
     @Resource
-    private DateConverter dateConverter;
+    private StringToDateConverter stringToDateConverter;
     @Resource
     private DiseaseMapper diseaseMapper;
     @Resource
@@ -168,7 +168,7 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
                 int mainDisease = diseaseJsonObject.getAsJsonPrimitive("mainDisease").getAsInt();
                 int suspect = diseaseJsonObject.getAsJsonPrimitive("suspect").getAsInt();
                 String incidenceDate = diseaseJsonObject.getAsJsonPrimitive("incidenceDate").getAsString();
-                Date incidenceDateConverted = dateConverter.convert(incidenceDate);
+                Date incidenceDateConverted = stringToDateConverter.convert(incidenceDate);
 
                 // 新增诊断记录
                 if (-1 == medicalRecordsId)
@@ -216,6 +216,7 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
             MedicalRecordsExample.Criteria medicalRecordsExampleCriteria = medicalRecordsExample.createCriteria();
             medicalRecordsExampleCriteria.andValidEqualTo(1);
             medicalRecordsExampleCriteria.andSaveStateEqualTo(templateScope);
+
             if (templateScope == Constant.SAVE_DOCTOR_TEMPLATE) {
                 // 查找医生本人可见的病历模板
                 medicalRecordsExampleCriteria.andDoctorIdEqualTo(doctorId);
@@ -231,6 +232,7 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
                 }
                 medicalRecordsExampleCriteria.andDoctorIdIn(doctorIdListOfDepartment);
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -240,13 +242,13 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
     @Override
     public boolean endRegistration(int registrationId) {
         try {
-            Registration record = new Registration();
-            record.setRegistrationStatus(REGIST_DONE);
+            Registration registrationRecord = new Registration();
+            registrationRecord.setRegistrationStatus(REGIST_DONE);
 
             RegistrationExample registrationExample = new RegistrationExample();
             registrationExample.or().andValidEqualTo(1).andRegistrationIdEqualTo(registrationId);
 
-            registrationMapper.updateByExampleSelective(record, registrationExample);
+            registrationMapper.updateByExampleSelective(registrationRecord, registrationExample);
         } catch (Exception e) {
             e.printStackTrace();
             return false;

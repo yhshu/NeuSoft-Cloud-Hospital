@@ -10,7 +10,6 @@ import java.util.List;
  */
 public interface PrescriptionService {
 
-
     /**
      * 获取所有药品列表
      * 药品数量较多，可能增加网络和浏览器的负担
@@ -76,4 +75,13 @@ public interface PrescriptionService {
      * @return 操作结果
      */
     boolean deletePrescription(List<Integer> prescriptionIdList);
+
+    /**
+     * 按医生获取处方列表
+     *
+     * @param doctorId 医生编号
+     * @return 医生的处方列表
+     */
+    List<Prescription> selectPrescriptionList(Integer doctorId);
+
 }

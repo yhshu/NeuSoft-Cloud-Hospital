@@ -6,6 +6,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.neusoft.medical.Util.Constant;
+import com.neusoft.medical.Util.converter.DateTimeToStringConverter;
+import com.neusoft.medical.Util.converter.DoubleToUpperCaseConverter;
 import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.*;
 import com.neusoft.medical.service.basicInfo.AccountService;
@@ -16,6 +19,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
 public class DailySettlementServiceImpl implements DailySettlementService {
@@ -33,6 +37,10 @@ public class DailySettlementServiceImpl implements DailySettlementService {
     private AccountService accountService;
     @Resource
     private RegistrationMapper registrationMapper;
+    @Resource
+    private DateTimeToStringConverter dateTimeToStringConverter;
+    @Resource
+    private DoubleToUpperCaseConverter doubleToUpperCaseConverter;
 
     private Gson gson = new Gson();
 
@@ -49,6 +57,7 @@ public class DailySettlementServiceImpl implements DailySettlementService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        assert dailySettlementList != null;
         return new PageInfo<>(dailySettlementList);
     }
 
@@ -71,10 +80,11 @@ public class DailySettlementServiceImpl implements DailySettlementService {
 
     @Override
     public PageInfo<String> selectDailySettlementDetail(Integer dailySettlementId, Integer currentPage, Integer pageSize) {
+        List<String> res = new CopyOnWriteArrayList<>();
         try {
             PageHelper.startPage(currentPage, pageSize);
             DailySettlementDetailExample dailySettlementDetailExample = new DailySettlementDetailExample();
-            dailySettlementDetailExample.or().andValidEqualTo(1).andDailySettlementDetailIdEqualTo(dailySettlementId);
+            dailySettlementDetailExample.or().andValidEqualTo(1).andDailySettlementIdEqualTo(dailySettlementId);
 
             List<DailySettlementDetail> dailySettlementDetailList = dailySettlementDetailMapper.selectByExample(dailySettlementDetailExample);
             JsonArray dailySettlementDetailListJsonArray = gson.toJsonTree(dailySettlementDetailList).getAsJsonArray();
@@ -90,17 +100,61 @@ public class DailySettlementServiceImpl implements DailySettlementService {
                     dailySettlementDetailJsonObject.addProperty("dailySettlementDetailState", invoiceService.getInvoiceState(dailySettlementDetailState));
                 }
                 dailySettlementDetailJsonObject.addProperty("settlementCategoryName", settlementCategoryMapper.selectByPrimaryKey(settlementCategoryId).getSettlementCategoryName());
+
+                res.add(dailySettlementDetailJsonObject.toString());
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return new PageInfo<>(res);
     }
 
     @Override
     public String dailySettlementDocument(Integer dailySettlementId) {
-        // todo
-        return null;
+        JsonObject dailySettlementDocumentJsonObject = new JsonObject();
+        try {
+            DailySettlement dailySettlement = dailySettlementMapper.selectByPrimaryKey(dailySettlementId);
+
+            // 日结单上的数据包括：开始时间、结束时间、收款员姓名、制表时间
+            // 发票张数、总金额、总自费支付、总账户支付、总报销支付、总折扣金额
+            // 总药费、总处置费、总检查费、总挂号费、总金额的汉字大写
+            if (dailySettlement == null) return null;
+            if (dailySettlement.getPreviousDailySettlementDate() != null)
+                dailySettlementDocumentJsonObject.addProperty("previousDailySettlementDate", dateTimeToStringConverter.convert(dailySettlement.getPreviousDailySettlementDate()));
+            dailySettlementDocumentJsonObject.addProperty("endDatetime", dateTimeToStringConverter.convert(dailySettlement.getDailySettlementDate()));
+            dailySettlementDocumentJsonObject.addProperty("collectorName", dailySettlement.getCollectorRealName());
+            dailySettlementDocumentJsonObject.addProperty("tabulationTime", dateTimeToStringConverter.convert(new Date()));
+
+            DailySettlementDetailExample dailySettlementDetailExample = new DailySettlementDetailExample();
+            dailySettlementDetailExample.or().andValidEqualTo(1).andDailySettlementIdEqualTo(dailySettlementId);
+            List<DailySettlementDetail> dailySettlementDetailList = dailySettlementDetailMapper.selectByExample(dailySettlementDetailExample);
+            int invoiceNums = 0;
+            double invoiceTotalAmount = 0.0;
+            double selfPay = 0.0;
+            double accountPay = 0.0;
+            double reimbursementPay = 0.0;
+            double discounted = 0.0;
+            for (DailySettlementDetail dailySettlementDetail : dailySettlementDetailList) {
+                invoiceNums += dailySettlementDetail.getInvoiceNums();
+                invoiceTotalAmount += dailySettlementDetail.getInvoiceTotalAmount();
+                selfPay += dailySettlementDetail.getSelfPay();
+                accountPay += dailySettlementDetail.getAccountPay();
+                reimbursementPay += dailySettlementDetail.getReimbursementPay();
+                discounted += dailySettlementDetail.getDiscounted();
+            }
+            dailySettlementDocumentJsonObject.addProperty("invoiceNums", invoiceNums);
+            dailySettlementDocumentJsonObject.addProperty("invoiceTotalAmount", invoiceTotalAmount);
+            dailySettlementDocumentJsonObject.addProperty("selfPay", selfPay);
+            dailySettlementDocumentJsonObject.addProperty("accountPay", accountPay);
+            dailySettlementDocumentJsonObject.addProperty("reimbursementPay", reimbursementPay);
+            dailySettlementDocumentJsonObject.addProperty("discounted", discounted);
+            dailySettlementDocumentJsonObject.addProperty("invoiceTotalAmountCapital", doubleToUpperCaseConverter.convert(invoiceTotalAmount));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return dailySettlementDocumentJsonObject.toString();
     }
 
     @Override
@@ -121,7 +175,6 @@ public class DailySettlementServiceImpl implements DailySettlementService {
     public boolean generateDailySettlement(Integer collectorId, Date endDatetime) {
         // 首先获取指定收费员的上次日结时间，如果找不到上次日结时间，本次日结是该收费员的初次日结
         try {
-
             DailySettlementExample dailySettlementExample = new DailySettlementExample();
             dailySettlementExample.or().andValidEqualTo(1).andCollectorAccountIdEqualTo(collectorId);
             dailySettlementExample.setOrderByClause("daily_settlement_date desc");
@@ -135,19 +188,24 @@ public class DailySettlementServiceImpl implements DailySettlementService {
             // 获取上次日结到现在的收费记录
             InvoiceExample invoiceExample = new InvoiceExample();
             InvoiceExample.Criteria criteria = invoiceExample.createCriteria();
-            criteria.andValidEqualTo(1).andPayTimeLessThan(endDatetime);
+            assert endDatetime != null;
+            criteria.andValidEqualTo(1);
+            System.out.println(endDatetime);
+            criteria.andPayTimeLessThan(endDatetime);
             if (lastDailySettlementDate != null)
                 criteria.andPayTimeGreaterThan(lastDailySettlementDate);
             List<Invoice> invoiceList = invoiceMapper.selectByExample(invoiceExample);
 
             // 将收费记录存储为日结记录与日结明细
             String collectorRealName = accountService.selectStaffByAccountId(collectorId).getRealName();
-            DailySettlement dailySettlement = new DailySettlement(null, collectorId, collectorRealName, new Date(), 0, 1);
+            DailySettlement dailySettlement = new DailySettlement(null, collectorId, collectorRealName, new Date(), lastDailySettlementDate, 0, 1);
             dailySettlementMapper.insert(dailySettlement);
+
             Integer dailySettlementId = dailySettlement.getDailySettlementId();
             for (Invoice invoice : invoiceList) {
                 Registration registration = registrationMapper.selectByPrimaryKey(invoice.getRegistrationId());
-//                DailySettlementDetail dailySettlementDetail = new DailySettlementDetail(null, invoice.getInvoiceNums(), invoice.getRegistrationId(), invoice.getInvoiceTitle(), invoice.getInvoiceAmount(), invoice.getSelfPay(), invoice.getAccountPay(), invoice.getReimbursementPay(), invoice.getDiscounted(), Constant.INVOICE_VALID, registration. , 1);
+                DailySettlementDetail dailySettlementDetail = new DailySettlementDetail(null, dailySettlementId, invoice.getInvoiceNums(), invoice.getRegistrationId(), invoice.getInvoiceTitle(), invoice.getInvoiceAmount(), invoice.getSelfPay(), invoice.getAccountPay(), invoice.getReimbursementPay(), invoice.getDiscounted(), Constant.INVOICE_VALID, registration.getSettlementCategoryId(), 1);
+                dailySettlementDetailMapper.insert(dailySettlementDetail);
             }
 
         } catch (Exception e) {

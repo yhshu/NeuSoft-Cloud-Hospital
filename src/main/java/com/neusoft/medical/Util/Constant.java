@@ -2,10 +2,14 @@ package com.neusoft.medical.Util;
 
 public interface Constant {
     /**
-     * 开销种类
+     * 开销种类 详见 expense_category 表
      */
-    int EXPENSE_CATEGORY_EXAM = 3;    // 检查费
-    int EXPENSE_CATEGORY_DISPOSAL = 16;// 处置费
+    int EXPENSE_CATEGORY_REGISTRATION = 1;  // 挂号费
+    int EXPENSE_CATEGORY_WESTERN_MEDICINE = 13; // 西药费
+    int EXPENSE_CATEGORY_CHINESE_PATENT_MEDICINE = 14; // 中成药费
+    int EXPENSE_CATEGORY_CHINESE_HERBAL_MEDICINE = 15; // 中草药费
+    int EXPENSE_CATEGORY_EXAM = 3;          // 检查费
+    int EXPENSE_CATEGORY_DISPOSAL = 16;     // 处置费
 
     /**
      * 收费状态
@@ -62,9 +66,9 @@ public interface Constant {
     /**
      * 登录状态反馈
      */
-    String SIGNIN_SUCCESS = "0";       // 登录完成
-    String SIGNIN_MISMATCH = "1";      // 用户名或密码错误
-    String SIGNIN_EXCEPTION = "2";     // 登录异常：数据库存在用户名重复
+    String SIGNIN_SUCCESS = "signin_success";       // 登录完成
+    String SIGNIN_MISMATCH = "signin_mismatch";  // 用户名或密码错误
+    String SIGNIN_EXCEPTION = "signin_exception";// 登录异常：数据库存在用户名重复
 
     /**
      * 用户类别

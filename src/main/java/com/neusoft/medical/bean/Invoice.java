@@ -27,9 +27,17 @@ public class Invoice {
 
     private Integer invoiceState;
 
+    private Double prescriptionFee;
+
+    private Double examinationFee;
+
+    private Double disposalFee;
+
+    private Double registrationFee;
+
     private Integer valid;
 
-    public Invoice(Integer invoiceId, String invoiceTitle, Integer invoiceNums, Integer collectorId, Integer registrationId, Date payTime, Double invoiceAmount, Double selfPay, Double accountPay, Double reimbursementPay, Double discounted, Integer invoiceState, Integer valid) {
+    public Invoice(Integer invoiceId, String invoiceTitle, Integer invoiceNums, Integer collectorId, Integer registrationId, Date payTime, Double invoiceAmount, Double selfPay, Double accountPay, Double reimbursementPay, Double discounted, Integer invoiceState, Double prescriptionFee, Double examinationFee, Double disposalFee, Double registrationFee, Integer valid) {
         this.invoiceId = invoiceId;
         this.invoiceTitle = invoiceTitle;
         this.invoiceNums = invoiceNums;
@@ -42,6 +50,10 @@ public class Invoice {
         this.reimbursementPay = reimbursementPay;
         this.discounted = discounted;
         this.invoiceState = invoiceState;
+        this.prescriptionFee = prescriptionFee;
+        this.examinationFee = examinationFee;
+        this.disposalFee = disposalFee;
+        this.registrationFee = registrationFee;
         this.valid = valid;
     }
 
@@ -143,6 +155,38 @@ public class Invoice {
 
     public void setInvoiceState(Integer invoiceState) {
         this.invoiceState = invoiceState;
+    }
+
+    public Double getPrescriptionFee() {
+        return prescriptionFee;
+    }
+
+    public void setPrescriptionFee(Double prescriptionFee) {
+        this.prescriptionFee = prescriptionFee;
+    }
+
+    public Double getExaminationFee() {
+        return examinationFee;
+    }
+
+    public void setExaminationFee(Double examinationFee) {
+        this.examinationFee = examinationFee;
+    }
+
+    public Double getDisposalFee() {
+        return disposalFee;
+    }
+
+    public void setDisposalFee(Double disposalFee) {
+        this.disposalFee = disposalFee;
+    }
+
+    public Double getRegistrationFee() {
+        return registrationFee;
+    }
+
+    public void setRegistrationFee(Double registrationFee) {
+        this.registrationFee = registrationFee;
     }
 
     public Integer getValid() {

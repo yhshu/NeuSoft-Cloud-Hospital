@@ -32,9 +32,17 @@ public class DepartmentController {
      * @return 分页、分类的科室信息列表
      */
     @GetMapping(value = "/list")
-    public ResultDTO<PageInfo<Department>> selectDepartment(@RequestParam(value = "currentPage") Integer currentPage, @RequestParam(value = "pageSize") Integer pageSize, @RequestParam(value = "departmentCategory", required = false) List<Integer> departmentCategory) {
+    public ResultDTO<PageInfo<Department>> selectDepartment(
+            @RequestParam(value = "currentPage") Integer currentPage,
+            @RequestParam(value = "pageSize") Integer pageSize,
+            @RequestParam(value = "departmentCategory[]", required = false) Integer[] departmentCategory) {
         System.out.println("selectDepartment: " + "查询科室列表");
-        PageInfo<Department> departmentList = departmentService.selectDepartment(currentPage, pageSize, departmentCategory);
+        PageInfo<Department> departmentList;
+        if (departmentCategory == null) {
+            departmentList = departmentService.selectDepartment(currentPage, pageSize, null);
+        } else {
+            departmentList = departmentService.selectDepartment(currentPage, pageSize, Arrays.asList(departmentCategory));
+        }
         return new ResultDTO<>(departmentList);
     }
 
@@ -44,7 +52,10 @@ public class DepartmentController {
      * @return 操作结果
      */
     @PostMapping(value = "/add")
-    public ResultDTO<Department> addDepartment(@RequestParam(value = "category") Integer category, @RequestParam(value = "departmentCode") String departmentCode, @RequestParam(value = "departmentName") String departmentName) {
+    public ResultDTO<Department> addDepartment(
+            @RequestParam(value = "category") Integer category,
+            @RequestParam(value = "departmentCode") String departmentCode,
+            @RequestParam(value = "departmentName") String departmentName) {
         System.out.println("addDepartment: " + "新增科室");
         Department added = departmentService.addDepartment(new Department(null, departmentCode, departmentName, category, null, 1, null, null, null));
         return new ResultDTO<>(added);
@@ -56,7 +67,8 @@ public class DepartmentController {
      * @return 操作结果
      */
     @DeleteMapping(value = "/delete")
-    public ResultDTO<Integer> deleteDepartmentByPrimaryKey(@RequestParam(value = "department_id_list[]") Integer[] departmentId) {
+    public ResultDTO<Integer> deleteDepartmentByPrimaryKey(
+            @RequestParam(value = "department_id_list[]") Integer[] departmentId) {
         System.out.println("DepartmentController: " + "按主键删除科室信息");
         List<Integer> departmentList = Arrays.asList(departmentId);
         int res = departmentService.deleteDepartmentByPrimaryKey(departmentList);
@@ -73,7 +85,11 @@ public class DepartmentController {
      * @return 更新后的科室信息
      */
     @PutMapping(value = "/update")
-    public ResultDTO<Department> updateDepartmentByPrimaryKey(@RequestParam(value = "departmentId") Integer departmentId, @RequestParam(value = "category") Integer category, @RequestParam(value = "departmentCode") String departmentCode, @RequestParam(value = "departmentName") String departmentName) {
+    public ResultDTO<Department> updateDepartmentByPrimaryKey(
+            @RequestParam(value = "departmentId") Integer departmentId,
+            @RequestParam(value = "category") Integer category,
+            @RequestParam(value = "departmentCode") String departmentCode,
+            @RequestParam(value = "departmentName") String departmentName) {
         System.out.println("DepartmentController: " + "按主键修改科室信息");
         Department updated = departmentService.updateDepartmentByPrimaryKey(new Department(departmentId, departmentCode, departmentName, category, null, 1, null, null, null));
         return new ResultDTO<>(updated);

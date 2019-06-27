@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.neusoft.medical.bean.AccountTypePermission">
     <constructor>
       <idArg column="account_type_permission_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="account_type" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="account_type" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="permission_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="valid" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
@@ -108,7 +108,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="accountType != null">
-        #{accountType,jdbcType=INTEGER},
+        #{accountType,jdbcType=VARCHAR},
       </if>
       <if test="permissionId != null">
         #{permissionId,jdbcType=INTEGER},
@@ -131,7 +131,7 @@
         account_type_permission_id = #{record.accountTypePermissionId,jdbcType=INTEGER},
       </if>
       <if test="record.accountType != null">
-        account_type = #{record.accountType,jdbcType=INTEGER},
+        account_type = #{record.accountType,jdbcType=VARCHAR},
       </if>
       <if test="record.permissionId != null">
         permission_id = #{record.permissionId,jdbcType=INTEGER},
@@ -147,7 +147,7 @@
   <update id="updateByExample" parameterType="map">
     update hospital.account_type_permission
     set account_type_permission_id = #{record.accountTypePermissionId,jdbcType=INTEGER},
-      account_type = #{record.accountType,jdbcType=INTEGER},
+      account_type = #{record.accountType,jdbcType=VARCHAR},
       permission_id = #{record.permissionId,jdbcType=INTEGER},
       valid = #{record.valid,jdbcType=INTEGER}
     <if test="_parameter != null">
@@ -158,7 +158,7 @@
     update hospital.account_type_permission
     <set>
       <if test="accountType != null">
-        account_type = #{accountType,jdbcType=INTEGER},
+        account_type = #{accountType,jdbcType=VARCHAR},
       </if>
       <if test="permissionId != null">
         permission_id = #{permissionId,jdbcType=INTEGER},
