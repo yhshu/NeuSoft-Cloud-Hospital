@@ -63,15 +63,18 @@ public class WorkloadStatisticsServiceImpl implements WorkloadStatisticsService 
                 patientRegistrationIdList.add(registration.getRegistrationId());
             }
 
-            ChargeFormExample chargeFormExample = new ChargeFormExample();
-            chargeFormExample.or().andValidEqualTo(1).andRegistrationIdIn(patientRegistrationIdList);
-            List<ChargeForm> chargeFormList = chargeFormMapper.selectByExample(chargeFormExample);
-            List<Integer> chargeFormIdList = new CopyOnWriteArrayList<>();
-            for (ChargeForm chargeForm : chargeFormList) {
-                chargeFormIdList.add(chargeForm.getChargeFormId());
+            List<Integer> chargeFormIdList = null;
+            if (!patientRegistrationIdList.isEmpty()) {
+                ChargeFormExample chargeFormExample = new ChargeFormExample();
+                chargeFormExample.or().andValidEqualTo(1).andRegistrationIdIn(patientRegistrationIdList);
+                List<ChargeForm> chargeFormList = chargeFormMapper.selectByExample(chargeFormExample);
+                chargeFormIdList = new CopyOnWriteArrayList<>();
+                for (ChargeForm chargeForm : chargeFormList) {
+                    chargeFormIdList.add(chargeForm.getChargeFormId());
+                }
             }
 
-            if (!chargeFormIdList.isEmpty()) {
+            if (chargeFormIdList != null && !chargeFormIdList.isEmpty()) {
                 ChargeEntryExample chargeEntryExample = new ChargeEntryExample();
                 chargeEntryExample.or().andValidEqualTo(1).andChargeFormIdIn(chargeFormIdList);
                 List<ChargeEntry> chargeEntryList = chargeEntryMapper.selectByExample(chargeEntryExample);
@@ -84,14 +87,18 @@ public class WorkloadStatisticsServiceImpl implements WorkloadStatisticsService 
                 }
             }
 
-            PrescriptionExample prescriptionExample = new PrescriptionExample();
-            prescriptionExample.or().andValidEqualTo(1).andRegistrationIdIn(patientRegistrationIdList);
-            List<Prescription> prescriptionList = prescriptionMapper.selectByExample(prescriptionExample);
-            List<Integer> prescriptionIdList = new CopyOnWriteArrayList<>();
-            for (Prescription prescription : prescriptionList) {
-                prescriptionIdList.add(prescription.getPrescriptionId());
+            List<Integer> prescriptionIdList = null;
+            if (!patientRegistrationIdList.isEmpty()) {
+                PrescriptionExample prescriptionExample = new PrescriptionExample();
+                prescriptionExample.or().andValidEqualTo(1).andRegistrationIdIn(patientRegistrationIdList);
+                List<Prescription> prescriptionList = prescriptionMapper.selectByExample(prescriptionExample);
+                prescriptionIdList = new CopyOnWriteArrayList<>();
+                for (Prescription prescription : prescriptionList) {
+                    prescriptionIdList.add(prescription.getPrescriptionId());
+                }
             }
-            if (!prescriptionIdList.isEmpty()) {
+
+            if (prescriptionIdList != null && !prescriptionIdList.isEmpty()) {
                 PrescriptionEntryExample prescriptionEntryExample = new PrescriptionEntryExample();
                 prescriptionEntryExample.or().andValidEqualTo(1).andPrescriptionIdIn(prescriptionIdList);
                 List<PrescriptionEntry> prescriptionEntryList = prescriptionEntryMapper.selectByExample(prescriptionEntryExample);
