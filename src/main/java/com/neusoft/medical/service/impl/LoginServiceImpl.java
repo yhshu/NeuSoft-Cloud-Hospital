@@ -43,37 +43,47 @@ public class LoginServiceImpl implements LoginService {
             return Constant.SIGNIN_MISMATCH;
 
         if (bCryptPasswordEncoder.matches(userPassword, account.getUserPassword())) {
-            // 用户密码核对成功，返回用户信息与权限
+            // 用户密码核对成功，签发 token
             logger.info("user " + userName + " successfully logged in");
-
-            JsonObject accountJsonObject = gson.toJsonTree(account).getAsJsonObject();
-            accountJsonObject.remove("userPassword"); // 移除数据库中的密码
-            String accountType = account.getAccountType();
-
-            // 用户权限
-            AccountTypePermissionExample accountTypePermissionExample = new AccountTypePermissionExample();
-            accountTypePermissionExample.or().andValidEqualTo(1).andAccountTypeEqualTo(accountType);
-            List<AccountTypePermission> accountTypePermissionList = accountTypePermissionMapper.selectByExample(accountTypePermissionExample);
-            List<Integer> permissionIdList = new CopyOnWriteArrayList<>();
-            for (AccountTypePermission accountTypePermission : accountTypePermissionList) {
-                permissionIdList.add(accountTypePermission.getPermissionId());
-            }
-
-            PermissionExample permissionExample = new PermissionExample();
-            permissionExample.or().andValidEqualTo(1).andPermissionIdIn(permissionIdList);
-            List<Permission> permissionList = permissionMapper.selectByExample(permissionExample);
-            List<String> permissionNameList = new CopyOnWriteArrayList<>();
-            for (Permission permission : permissionList) {
-                permissionNameList.add(permission.getPermissionName());
-            }
-            JsonArray permissionNameListJsonArray = gson.toJsonTree(permissionNameList).getAsJsonArray();
-            accountJsonObject.add("permissionNameList", permissionNameListJsonArray);
-
-            return accountJsonObject.toString();
+            return bCryptPasswordEncoder.encode(userName);
 
         } else {
             logger.info("password mismatch, username: " + userName + ", password: " + userPassword);
             return Constant.SIGNIN_MISMATCH;
         }
+    }
+
+    public String permissionRequest(String userName, String token) {
+        if (!bCryptPasswordEncoder.matches(userName, token)) {
+            // 客户端可能正在伪造 token
+            return Constant.SIGNIN_MISMATCH;
+        }
+        Account account = accountService.selectAccountByUserName(userName);
+        JsonObject accountJsonObject = gson.toJsonTree(account).getAsJsonObject();
+        accountJsonObject.remove("userPassword"); // 移除数据库中的密码
+
+
+        String accountType = account.getAccountType();
+
+        // 用户权限
+        AccountTypePermissionExample accountTypePermissionExample = new AccountTypePermissionExample();
+        accountTypePermissionExample.or().andValidEqualTo(1).andAccountTypeEqualTo(accountType);
+        List<AccountTypePermission> accountTypePermissionList = accountTypePermissionMapper.selectByExample(accountTypePermissionExample);
+        List<Integer> permissionIdList = new CopyOnWriteArrayList<>();
+        for (AccountTypePermission accountTypePermission : accountTypePermissionList) {
+            permissionIdList.add(accountTypePermission.getPermissionId());
+        }
+
+        PermissionExample permissionExample = new PermissionExample();
+        permissionExample.or().andValidEqualTo(1).andPermissionIdIn(permissionIdList);
+        List<Permission> permissionList = permissionMapper.selectByExample(permissionExample);
+        List<String> permissionNameList = new CopyOnWriteArrayList<>();
+        for (Permission permission : permissionList) {
+            permissionNameList.add(permission.getPermissionName());
+        }
+        JsonArray permissionNameListJsonArray = gson.toJsonTree(permissionNameList).getAsJsonArray();
+        accountJsonObject.add("permissionNameList", permissionNameListJsonArray);
+
+        return accountJsonObject.toString();
     }
 }
