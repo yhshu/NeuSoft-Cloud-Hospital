@@ -26,6 +26,8 @@ public class WorkloadStatisticsServiceImpl implements WorkloadStatisticsService 
     private PrescriptionMapper prescriptionMapper;
     @Resource
     private PrescriptionEntryMapper prescriptionEntryMapper;
+    @Resource
+    private InvoiceMapper invoiceMapper;
 
     private String doctorWorkloadStatistics(Date startDatetime, Date endDatetime, Integer doctorId) {
         JsonObject workloadStatistics = new JsonObject();
@@ -111,13 +113,57 @@ public class WorkloadStatisticsServiceImpl implements WorkloadStatisticsService 
 
     @Override
     public String departmentWorkloadFinancialStatistics(Date startDatetime, Date endDatetime) {
-        // todo
-        return null;
+
+        return null; // todo
+
     }
 
     @Override
     public String doctorWorkloadFinancialStatistics(Date startDatetime, Date endDatetime) {
-        // todo
-        return null;
+        JsonArray doctorWorkloadJsonArray = new JsonArray();
+
+        RegistrationExample registrationExample = new RegistrationExample();
+        registrationExample.or().andValidEqualTo(1).andRegistrationDateBetween(startDatetime, endDatetime);
+        List<Registration> registrationList = registrationMapper.selectByExample(registrationExample);
+        Set<Integer> doctorIdSet = new CopyOnWriteArraySet<>();
+        for (Registration registration : registrationList) {
+            doctorIdSet.add(registration.getDoctorId());
+        }
+
+        for (Integer doctorId : doctorIdSet) {
+            JsonObject doctorJsonObject = new JsonObject();
+            // 获取该医生在指定时间段内的看诊人次、各项收费总额
+
+            RegistrationExample doctorRegistrationExample = new RegistrationExample();
+            doctorRegistrationExample.or().andValidEqualTo(1).andDoctorIdEqualTo(doctorId).andRegistrationDateBetween(startDatetime, endDatetime);
+            List<Registration> doctorRegistrationList = registrationMapper.selectByExample(doctorRegistrationExample);
+            List<Integer> doctorRegistrationIdList = new CopyOnWriteArrayList<>();
+            for (Registration registration : doctorRegistrationList) {
+                doctorRegistrationIdList.add(registration.getRegistrationId());
+            }
+            doctorJsonObject.addProperty("visitNums", doctorRegistrationList.size());  // 看诊人次
+
+            InvoiceExample invoiceExample = new InvoiceExample();
+            invoiceExample.or().andValidEqualTo(1).andRegistrationIdIn(doctorRegistrationIdList).andPayTimeBetween(startDatetime, endDatetime);
+            List<Invoice> invoiceList = invoiceMapper.selectByExample(invoiceExample);
+            double doctorPrescriptionFee = 0.0;
+            double doctorExaminationFee = 0.0;
+            double doctorDisposalFee = 0.0;
+            int doctorInvoiceNums = 0;
+            for (Invoice invoice : invoiceList) {
+                doctorPrescriptionFee += invoice.getPrescriptionFee();
+                doctorExaminationFee += invoice.getExaminationFee();
+                doctorDisposalFee += invoice.getDisposalFee();
+                doctorInvoiceNums += invoice.getInvoiceNums();
+            }
+
+            doctorJsonObject.addProperty("doctorPrescriptionFee", doctorPrescriptionFee);
+            doctorJsonObject.addProperty("doctorExaminationFee", doctorExaminationFee);
+            doctorJsonObject.addProperty("doctorDisposalFee", doctorDisposalFee);
+            doctorJsonObject.addProperty("doctorInvoiceNums", doctorInvoiceNums);
+            doctorWorkloadJsonArray.add(doctorJsonObject);  // 添加到统计医生工作量的数组
+        }
+
+        return doctorWorkloadJsonArray.toString();
     }
 }
