@@ -28,6 +28,10 @@ public class WorkloadStatisticsServiceImpl implements WorkloadStatisticsService 
     private PrescriptionEntryMapper prescriptionEntryMapper;
     @Resource
     private InvoiceMapper invoiceMapper;
+    @Resource
+    private DoctorMapper doctorMapper;
+    @Resource
+    private DepartmentMapper departmentMapper;
 
     private String doctorWorkloadStatistics(Date startDatetime, Date endDatetime, Integer doctorId) {
         JsonObject workloadStatistics = new JsonObject();
@@ -113,8 +117,51 @@ public class WorkloadStatisticsServiceImpl implements WorkloadStatisticsService 
 
     @Override
     public String departmentWorkloadFinancialStatistics(Date startDatetime, Date endDatetime) {
+        JsonArray departmentWorkloadJsonArray = new JsonArray();
 
-        return null; // todo
+        DepartmentExample departmentExample = new DepartmentExample();
+        departmentExample.or().andValidEqualTo(1);
+        List<Department> departmentList = departmentMapper.selectByExample(departmentExample);
+
+        for (Department department : departmentList) {
+            JsonObject departmentJsonObject = new JsonObject();
+            DoctorExample doctorExample = new DoctorExample();
+            doctorExample.or().andValidEqualTo(1).andDepartmentIdEqualTo(department.getDepartmentId());
+
+            List<Doctor> doctorList = doctorMapper.selectByExample(doctorExample);
+            List<Integer> doctorIdList = new CopyOnWriteArrayList<>();
+            for (Doctor doctor : doctorList) {
+                doctorIdList.add(doctor.getDoctorId());
+            }
+            RegistrationExample registrationExample = new RegistrationExample();
+            registrationExample.or().andValidEqualTo(1).andDoctorIdIn(doctorIdList).andRegistrationDateBetween(startDatetime, endDatetime);
+            List<Registration> registrationList = registrationMapper.selectByExample(registrationExample);
+            List<Integer> registrationIdList = new CopyOnWriteArrayList<>();
+            for (Registration registration : registrationList) {
+                registrationIdList.add(registration.getRegistrationId());
+            }
+            InvoiceExample invoiceExample = new InvoiceExample();
+            invoiceExample.or().andValidEqualTo(1).andRegistrationIdIn(registrationIdList).andPayTimeBetween(startDatetime, endDatetime);
+            List<Invoice> invoiceList = invoiceMapper.selectByExample(invoiceExample);
+            double departmentPrescriptionFee = 0.0;
+            double departmentExaminationFee = 0.0;
+            double departmentDisposalFee = 0.0;
+            int departmentInvoiceNums = 0;
+            for (Invoice invoice : invoiceList) {
+                departmentPrescriptionFee += invoice.getPrescriptionFee();
+                departmentExaminationFee += invoice.getExaminationFee();
+                departmentDisposalFee += invoice.getDisposalFee();
+                departmentInvoiceNums += invoice.getInvoiceNums();
+            }
+
+            departmentJsonObject.addProperty("departmentPrescriptionFee", departmentPrescriptionFee);
+            departmentJsonObject.addProperty("departmentExaminationFee", departmentExaminationFee);
+            departmentJsonObject.addProperty("departmentDisposalFee", departmentDisposalFee);
+            departmentJsonObject.addProperty("departmentInvoiceNums", departmentInvoiceNums);
+
+            departmentWorkloadJsonArray.add(departmentJsonObject);
+        }
+        return departmentWorkloadJsonArray.toString();
 
     }
 
@@ -122,12 +169,12 @@ public class WorkloadStatisticsServiceImpl implements WorkloadStatisticsService 
     public String doctorWorkloadFinancialStatistics(Date startDatetime, Date endDatetime) {
         JsonArray doctorWorkloadJsonArray = new JsonArray();
 
-        RegistrationExample registrationExample = new RegistrationExample();
-        registrationExample.or().andValidEqualTo(1).andRegistrationDateBetween(startDatetime, endDatetime);
-        List<Registration> registrationList = registrationMapper.selectByExample(registrationExample);
+        DoctorExample doctorExample = new DoctorExample();
+        doctorExample.or().andValidEqualTo(1);
+        List<Doctor> doctorList = doctorMapper.selectByExample(doctorExample);
         Set<Integer> doctorIdSet = new CopyOnWriteArraySet<>();
-        for (Registration registration : registrationList) {
-            doctorIdSet.add(registration.getDoctorId());
+        for (Doctor doctor : doctorList) {
+            doctorIdSet.add(doctor.getDoctorId());
         }
 
         for (Integer doctorId : doctorIdSet) {
