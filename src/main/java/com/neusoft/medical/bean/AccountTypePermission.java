@@ -3,13 +3,13 @@ package com.neusoft.medical.bean;
 public class AccountTypePermission {
     private Integer accountTypePermissionId;
 
-    private Integer accountType;
+    private String accountType;
 
     private Integer permissionId;
 
     private Integer valid;
 
-    public AccountTypePermission(Integer accountTypePermissionId, Integer accountType, Integer permissionId, Integer valid) {
+    public AccountTypePermission(Integer accountTypePermissionId, String accountType, Integer permissionId, Integer valid) {
         this.accountTypePermissionId = accountTypePermissionId;
         this.accountType = accountType;
         this.permissionId = permissionId;
@@ -28,12 +28,12 @@ public class AccountTypePermission {
         this.accountTypePermissionId = accountTypePermissionId;
     }
 
-    public Integer getAccountType() {
+    public String getAccountType() {
         return accountType;
     }
 
-    public void setAccountType(Integer accountType) {
-        this.accountType = accountType;
+    public void setAccountType(String accountType) {
+        this.accountType = accountType == null ? null : accountType.trim();
     }
 
     public Integer getPermissionId() {

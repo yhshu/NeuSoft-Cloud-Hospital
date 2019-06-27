@@ -66,9 +66,9 @@ public interface Constant {
     /**
      * 登录状态反馈
      */
-    String SIGNIN_SUCCESS = "0";       // 登录完成
-    String SIGNIN_MISMATCH = "SIGNIN_MISMATCH";  // 用户名或密码错误
-    String SIGNIN_EXCEPTION = "SIGNIN_EXCEPTION";// 登录异常：数据库存在用户名重复
+    String SIGNIN_SUCCESS = "signin_success";       // 登录完成
+    String SIGNIN_MISMATCH = "signin_mismatch";  // 用户名或密码错误
+    String SIGNIN_EXCEPTION = "signin_exception";// 登录异常：数据库存在用户名重复
 
     /**
      * 用户类别
