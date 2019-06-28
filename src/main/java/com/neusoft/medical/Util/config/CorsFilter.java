@@ -1,4 +1,4 @@
-package com.neusoft.medical.Util;
+package com.neusoft.medical.Util.config;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

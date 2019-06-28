@@ -56,6 +56,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     public String permissionRequest(String userName, String token) {
+        // redis token todo
         if (!bCryptPasswordEncoder.matches(userName, token)) {
             // 客户端可能正在伪造 token
             return Constant.SIGNIN_MISMATCH;

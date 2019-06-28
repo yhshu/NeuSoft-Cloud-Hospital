@@ -1,4 +1,4 @@
-package com.neusoft.medical.Util;
+package com.neusoft.medical.Util.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
