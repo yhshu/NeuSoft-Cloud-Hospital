@@ -69,6 +69,7 @@ public interface Constant {
     String SIGNIN_SUCCESS = "signin_success";       // 登录完成
     String SIGNIN_MISMATCH = "signin_mismatch";  // 用户名或密码错误
     String SIGNIN_EXCEPTION = "signin_exception";// 登录异常：数据库存在用户名重复
+    String SIGNIN_TOKEN_EXPIRED = "signin_token_expired";
 
     /**
      * 用户类别
@@ -87,4 +88,6 @@ public interface Constant {
     int INVOICE_VALID = 1;                  // 有效
     int INVOICE_RUSHED = 2;                 // 红冲
     int INVOICE_REINVOICE = 3;              // 重打
+
+    long TOKEN_AVAILABLE_TIME = 1000 * 60 * 30; // millisecond
 }

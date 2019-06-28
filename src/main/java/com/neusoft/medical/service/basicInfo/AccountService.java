@@ -98,4 +98,6 @@ public interface AccountService {
      * @return 工作人员信息
      */
     Staff selectStaffByAccountId(Integer accountId);
+
+    Doctor selectDoctorByAccountId(Integer accountId);
 }

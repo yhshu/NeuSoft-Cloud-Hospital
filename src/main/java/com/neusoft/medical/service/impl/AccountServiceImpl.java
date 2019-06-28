@@ -196,4 +196,19 @@ public class AccountServiceImpl implements AccountService {
         }
         return staffList.get(0);
     }
+
+    @Override
+    public Doctor selectDoctorByAccountId(Integer accountId) {
+        DoctorExample doctorExample = new DoctorExample();
+        doctorExample.or().andValidEqualTo(1).andAccountIdEqualTo(accountId);
+
+        List<Doctor> doctorList = doctorMapper.selectByExample(doctorExample);
+        if (doctorList.isEmpty()) return null;
+        if (doctorList.size() > 1) {
+            logger.error("accountId is duplicated, please check the uniqueness setting in related tables");
+            return null;
+        }
+        return doctorList.get(0);
+    }
+
 }
