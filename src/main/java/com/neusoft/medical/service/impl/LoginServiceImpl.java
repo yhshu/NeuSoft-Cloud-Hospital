@@ -2,10 +2,12 @@ package com.neusoft.medical.service.impl;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.neusoft.medical.Util.Constant;
 import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.AccountTypePermissionMapper;
+import com.neusoft.medical.dao.DepartmentMapper;
 import com.neusoft.medical.dao.DoctorMapper;
 import com.neusoft.medical.dao.PermissionMapper;
 import com.neusoft.medical.service.LoginService;
@@ -20,7 +22,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import static com.neusoft.medical.Util.Constant.TOKEN_AVAILABLE_TIME;
+import static com.neusoft.medical.Util.Constant.*;
 
 @Service
 public class LoginServiceImpl implements LoginService {
@@ -37,7 +39,7 @@ public class LoginServiceImpl implements LoginService {
     @Resource
     private RedisTemplate redisTemplate;
     @Resource
-    private DoctorMapper doctorMapper;
+    private DepartmentMapper departmentMapper;
 
     private Gson gson = new Gson();
 
@@ -75,7 +77,7 @@ public class LoginServiceImpl implements LoginService {
             return Constant.SIGNIN_MISMATCH;
         }
         if (now.after(deadline)) {
-            // token is not available now
+            // token 不再可用
             return Constant.SIGNIN_TOKEN_EXPIRED;
         }
 
@@ -83,10 +85,27 @@ public class LoginServiceImpl implements LoginService {
         JsonObject accountJsonObject = gson.toJsonTree(account).getAsJsonObject();
         accountJsonObject.remove("userPassword"); // 移除数据库中的密码
 
+        // 返回用户信息，包括用户真实姓名、用户类型、科室名称、系统权限等
         String accountType = account.getAccountType();
-//        if (accountType.equals(TYPE_OUTPATIENT_DOCTOR) || accountType.equals(TYPE_TECH_DOCTOR)) {
-//
-//        }
+        if (accountType.equals(TYPE_OUTPATIENT_DOCTOR) || accountType.equals(TYPE_TECH_DOCTOR)) {
+
+            // 如果该用户是某种类型的医生
+            Doctor doctor = accountService.selectDoctorByAccountId(account.getAccountId());
+            JsonObject doctorJsonObject = gson.toJsonTree(doctor).getAsJsonObject();
+            doctorJsonObject.addProperty("departmentName", departmentMapper.selectByPrimaryKey(doctor.getDepartmentId()).getDepartmentName());  // 科室名称
+            // todo 用户类型
+            accountJsonObject.add("accountInfo", doctorJsonObject);
+        } else if (accountType.equals(TYPE_COLLECTOR_STAFF) || accountType.equals(TYPE_PHARMACY_STAFF) || accountType.equals(TYPE_FINANCIAL_STAFF) || accountType.equals(TYPE_REGISTRATION_STAFF)) {
+
+            // 如果该用户是某种类型的医院工作人员
+            Staff staff = accountService.selectStaffByAccountId(account.getAccountId());
+            accountJsonObject.add("staff", gson.toJsonTree(staff));
+        } else if (accountType.equals(TYPE_SYSTEM_ADMIN)) {
+
+            // 如果该用户是系统管理员
+            Staff staff = accountService.selectStaffByAccountId(account.getAccountId());
+            accountJsonObject.add("staff", gson.toJsonTree(staff));
+        }
 
         // 用户权限
         AccountTypePermissionExample accountTypePermissionExample = new AccountTypePermissionExample();

@@ -96,7 +96,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public boolean addAccount(String userName, String userPassword, String accountType, String realName, int departmentId, String jobTitle, int doctorScheduling) {
+    public boolean addAccount(String userName, String userPassword, String accountType, String realName, Integer departmentId, String jobTitle, Integer doctorScheduling) {
         try {
             if (selectAccountByUserName(userName) != null) {
                 logger.info("username " + userName + " has been registered");

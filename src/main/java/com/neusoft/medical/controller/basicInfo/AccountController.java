@@ -90,7 +90,7 @@ public class AccountController {
             @RequestParam(value = "userPassword") String userPassword,
             @RequestParam(value = "accountType") String accountType,
             @RequestParam(value = "realName") String realName,
-            @RequestParam(value = "departmentId") Integer departmentId,
+            @RequestParam(value = "departmentId", required = false) Integer departmentId,
             @RequestParam(value = "jobTitle", required = false) String jobTitle,
             @RequestParam(value = "doctorScheduling", required = false) Integer doctorScheduling
     ) {
