@@ -10,6 +10,7 @@
     <!--指定特定数据库的jdbc驱动jar包的位置 -->
     <classPathEntry location="${driverLocation}"/>
     <context id="default" targetRuntime="MyBatis3">
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
         <!-- optional，旨在创建class时，对注释进行控制 -->
         <commentGenerator>
             <property name="suppressAllComments" value="true"/>

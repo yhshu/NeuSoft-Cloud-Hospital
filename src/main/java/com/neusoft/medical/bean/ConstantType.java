@@ -1,6 +1,8 @@
 package com.neusoft.medical.bean;
 
-public class ConstantType {
+import java.io.Serializable;
+
+public class ConstantType implements Serializable {
     private Integer constantTypeId;
 
     private String constantTypeCode;
@@ -8,6 +10,8 @@ public class ConstantType {
     private String constantTypeName;
 
     private Integer valid;
+
+    private static final long serialVersionUID = 1L;
 
     public ConstantType(Integer constantTypeId, String constantTypeCode, String constantTypeName, Integer valid) {
         this.constantTypeId = constantTypeId;

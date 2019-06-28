@@ -1,6 +1,8 @@
 package com.neusoft.medical.bean;
 
-public class DiseaseCategory {
+import java.io.Serializable;
+
+public class DiseaseCategory implements Serializable {
     private Integer diseaseCategoryId;
 
     private String diseaseCode;
@@ -12,6 +14,8 @@ public class DiseaseCategory {
     private Integer diseaseType;
 
     private Integer valid;
+
+    private static final long serialVersionUID = 1L;
 
     public DiseaseCategory(Integer diseaseCategoryId, String diseaseCode, String diseaseName, Integer sequenceNo, Integer diseaseType, Integer valid) {
         this.diseaseCategoryId = diseaseCategoryId;

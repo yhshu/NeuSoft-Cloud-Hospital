@@ -1,6 +1,8 @@
 package com.neusoft.medical.bean;
 
-public class RegistrationCategory {
+import java.io.Serializable;
+
+public class RegistrationCategory implements Serializable {
     private Integer registrationCategoryId;
 
     private String registrationCategoryName;
@@ -12,6 +14,8 @@ public class RegistrationCategory {
     private Double registrationFee;
 
     private Integer valid;
+
+    private static final long serialVersionUID = 1L;
 
     public RegistrationCategory(Integer registrationCategoryId, String registrationCategoryName, Boolean isDefault, Integer sequenceNo, Double registrationFee, Integer valid) {
         this.registrationCategoryId = registrationCategoryId;

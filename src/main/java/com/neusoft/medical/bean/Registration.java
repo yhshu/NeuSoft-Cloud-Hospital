@@ -1,8 +1,9 @@
 package com.neusoft.medical.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Registration {
+public class Registration implements Serializable {
     private Integer registrationId;
 
     private Integer patientId;
@@ -50,6 +51,8 @@ public class Registration {
     private String reserve2;
 
     private String reserve3;
+
+    private static final long serialVersionUID = 1L;
 
     public Registration(Integer registrationId, Integer patientId, String patientName, Integer registrationCategoryId, String gender, Integer age, Date birthday, String medicalCategory, String identityCardNo, String registrationStatus, Date visitDate, Date registrationDate, Integer departmentId, Integer doctorId, String registrationSource, Integer settlementCategoryId, String isVisited, String familyAddress, Integer collectorId, Integer totalCharge, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.registrationId = registrationId;

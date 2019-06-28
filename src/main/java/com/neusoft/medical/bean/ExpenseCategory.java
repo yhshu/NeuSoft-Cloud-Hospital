@@ -1,6 +1,8 @@
 package com.neusoft.medical.bean;
 
-public class ExpenseCategory {
+import java.io.Serializable;
+
+public class ExpenseCategory implements Serializable {
     private Integer expenseCategoryId;
 
     private String expenseCategoryCode;
@@ -14,6 +16,8 @@ public class ExpenseCategory {
     private String reserve2;
 
     private String reserve3;
+
+    private static final long serialVersionUID = 1L;
 
     public ExpenseCategory(Integer expenseCategoryId, String expenseCategoryCode, String expenseCategoryName, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.expenseCategoryId = expenseCategoryId;

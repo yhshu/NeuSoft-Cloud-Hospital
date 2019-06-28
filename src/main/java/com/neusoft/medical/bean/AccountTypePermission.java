@@ -1,6 +1,8 @@
 package com.neusoft.medical.bean;
 
-public class AccountTypePermission {
+import java.io.Serializable;
+
+public class AccountTypePermission implements Serializable {
     private Integer accountTypePermissionId;
 
     private String accountType;
@@ -8,6 +10,8 @@ public class AccountTypePermission {
     private Integer permissionId;
 
     private Integer valid;
+
+    private static final long serialVersionUID = 1L;
 
     public AccountTypePermission(Integer accountTypePermissionId, String accountType, Integer permissionId, Integer valid) {
         this.accountTypePermissionId = accountTypePermissionId;

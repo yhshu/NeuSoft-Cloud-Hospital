@@ -1,8 +1,9 @@
 package com.neusoft.medical.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class RecordDisease {
+public class RecordDisease implements Serializable {
     private Integer recordDiseaseId;
 
     private Integer medicalRecordsId;
@@ -26,6 +27,8 @@ public class RecordDisease {
     private String reserve2;
 
     private String reserve3;
+
+    private static final long serialVersionUID = 1L;
 
     public RecordDisease(Integer recordDiseaseId, Integer medicalRecordsId, Integer diseaseId, String diseaseIcd, String diseaseName, Integer mainDisease, Integer suspect, Date incidenceDate, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.recordDiseaseId = recordDiseaseId;

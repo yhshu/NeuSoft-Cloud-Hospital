@@ -1,6 +1,8 @@
 package com.neusoft.medical.bean;
 
-public class DailySettlementDetail {
+import java.io.Serializable;
+
+public class DailySettlementDetail implements Serializable {
     private Integer dailySettlementDetailId;
 
     private Integer dailySettlementId;
@@ -26,6 +28,8 @@ public class DailySettlementDetail {
     private Integer settlementCategoryId;
 
     private Integer valid;
+
+    private static final long serialVersionUID = 1L;
 
     public DailySettlementDetail(Integer dailySettlementDetailId, Integer dailySettlementId, Integer invoiceNums, Integer registrationId, String patientName, Double invoiceTotalAmount, Double selfPay, Double accountPay, Double reimbursementPay, Double discounted, Integer dailySettlementDetailState, Integer settlementCategoryId, Integer valid) {
         this.dailySettlementDetailId = dailySettlementDetailId;

@@ -1,6 +1,8 @@
 package com.neusoft.medical.bean;
 
-public class ChargeForm {
+import java.io.Serializable;
+
+public class ChargeForm implements Serializable {
     private Integer chargeFormId;
 
     private String chargeFormName;
@@ -20,6 +22,8 @@ public class ChargeForm {
     private String reserve2;
 
     private String reserve3;
+
+    private static final long serialVersionUID = 1L;
 
     public ChargeForm(Integer chargeFormId, String chargeFormName, Integer registrationId, Integer saveState, Integer payState, Integer executionState, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.chargeFormId = chargeFormId;

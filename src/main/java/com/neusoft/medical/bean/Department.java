@@ -1,6 +1,8 @@
 package com.neusoft.medical.bean;
 
-public class Department {
+import java.io.Serializable;
+
+public class Department implements Serializable {
     private Integer departmentId;
 
     private String departmentCode;
@@ -18,6 +20,8 @@ public class Department {
     private String reserve2;
 
     private String reserve3;
+
+    private static final long serialVersionUID = 1L;
 
     public Department(Integer departmentId, String departmentCode, String departmentName, Integer category, Integer type, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.departmentId = departmentId;

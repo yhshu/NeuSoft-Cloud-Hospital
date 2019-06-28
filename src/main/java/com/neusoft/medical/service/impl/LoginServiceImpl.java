@@ -47,6 +47,9 @@ public class LoginServiceImpl implements LoginService {
             logger.info("user " + userName + " successfully logged in");
             String token = bCryptPasswordEncoder.encode(userName);
             logger.info("token: " + token);
+
+            redisTemplate.opsForHash().put("accountInfo", token, account);
+//            redisTemplate.opsForHash().put("tokenDeadline", token, );
             return token;
 
         } else {
@@ -56,7 +59,7 @@ public class LoginServiceImpl implements LoginService {
     }
 
     public String permissionRequest(String userName, String token) {
-        // redis token todo
+        // redis token
         if (!bCryptPasswordEncoder.matches(userName, token)) {
             // 客户端可能正在伪造 token
             return Constant.SIGNIN_MISMATCH;

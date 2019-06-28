@@ -1,8 +1,9 @@
 package com.neusoft.medical.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Invoice {
+public class Invoice implements Serializable {
     private Integer invoiceId;
 
     private String invoiceTitle;
@@ -36,6 +37,8 @@ public class Invoice {
     private Double registrationFee;
 
     private Integer valid;
+
+    private static final long serialVersionUID = 1L;
 
     public Invoice(Integer invoiceId, String invoiceTitle, Integer invoiceNums, Integer collectorId, Integer registrationId, Date payTime, Double invoiceAmount, Double selfPay, Double accountPay, Double reimbursementPay, Double discounted, Integer invoiceState, Double prescriptionFee, Double examinationFee, Double disposalFee, Double registrationFee, Integer valid) {
         this.invoiceId = invoiceId;

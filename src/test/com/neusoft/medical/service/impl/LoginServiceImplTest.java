@@ -29,8 +29,10 @@ public class LoginServiceImplTest {
     public void permissionRequest() {
         // redis token
         Map<String, Account> stringAccountMap = new HashMap<>();
+        stringAccountMap.put("token_example", new Account(null, "username_example", "userpassword_example", "accounttype_example", 1, null, null, null));
+        stringAccountMap.put("token_example2", new Account(null, "username_example", "userpassword_example", "accounttype_example", 1, null, null, null));
         redisTemplate.opsForHash().putAll("tokens", stringAccountMap);
         Map map = redisTemplate.opsForHash().entries("tokens");
-        System.out.println(map);
+        System.out.println("Map: " + map);
     }
 }

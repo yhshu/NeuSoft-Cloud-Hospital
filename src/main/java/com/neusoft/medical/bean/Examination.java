@@ -1,6 +1,8 @@
 package com.neusoft.medical.bean;
 
-public class Examination {
+import java.io.Serializable;
+
+public class Examination implements Serializable {
     private Integer examinationId;
 
     private Integer registrationId;
@@ -32,6 +34,8 @@ public class Examination {
     private String reserve2;
 
     private String reserve3;
+
+    private static final long serialVersionUID = 1L;
 
     public Examination(Integer examinationId, Integer registrationId, String patientName, Integer doctorId, Integer departmentId, Integer saveState, Integer payState, Integer executionState, String examName, String clinicalImpression, String requirement, String examResult, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.examinationId = examinationId;
