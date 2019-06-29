@@ -299,4 +299,20 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
         }
         return res;
     }
+
+    @Override
+    public boolean deleteMedicalRecords(List<Integer> medicalRecordsIdList) {
+        try {
+            MedicalRecordsExample medicalRecordsExample = new MedicalRecordsExample();
+            medicalRecordsExample.or().andValidEqualTo(1).andMedicalRecordsIdIn(medicalRecordsIdList);
+
+            MedicalRecords medicalRecords = new MedicalRecords();
+            medicalRecords.setValid(0);
+            medicalRecordsMapper.updateByExampleSelective(medicalRecords, medicalRecordsExample);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }

@@ -81,4 +81,12 @@ public interface OutpatientMedicalRecordService {
      * @return 患者的历史病历记录
      */
     String selectPatientHistoryMedicalRecords(Integer registrationId);
+
+    /**
+     * 删除病历记录
+     *
+     * @param medicalRecordsIdList 病历编号列表
+     * @return 操作结果
+     */
+    boolean deleteMedicalRecords(List<Integer> medicalRecordsIdList);
 }
