@@ -155,7 +155,7 @@ public class DisposalController {
      *
      * @param disposalScope 查询的处置项目模板范围（全院模板 2；科室模板 3；医生个人模板 4）
      * @param doctorId      医生编号
-     * @return 处置项目模板列表
+     * @return 处置项目模板列表，json 字符串
      */
     @GetMapping("/disposal_template")
     public ResultDTO<String> selectDisposalTemplate(

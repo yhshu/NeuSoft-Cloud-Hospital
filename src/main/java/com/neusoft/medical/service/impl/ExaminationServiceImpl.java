@@ -8,17 +8,22 @@ import com.neusoft.medical.dao.ChargeEntryMapper;
 import com.neusoft.medical.dao.ChargeItemMapper;
 import com.neusoft.medical.dao.ExaminationMapper;
 import com.neusoft.medical.dao.RegistrationMapper;
+import com.neusoft.medical.service.basicInfo.DoctorService;
 import com.neusoft.medical.service.doctorWorkstation.ExaminationService;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import static com.neusoft.medical.service.ConstantService.*;
 
 @Service
 public class ExaminationServiceImpl implements ExaminationService {
+    private Logger logger = Logger.getLogger(ExaminationService.class);
+
     @Resource
     private ChargeItemMapper chargeItemMapper;
     @Resource
@@ -27,6 +32,8 @@ public class ExaminationServiceImpl implements ExaminationService {
     private ChargeEntryMapper chargeEntryMapper;
     @Resource
     private RegistrationMapper registrationMapper;
+    @Resource
+    private DoctorService doctorService;
 
     private Gson gson = new Gson();
 
@@ -176,5 +183,66 @@ public class ExaminationServiceImpl implements ExaminationService {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String selectExaminationTemplate(Integer examinationScope, Integer doctorId) {
+        String res = null;
+        try {
+            if (examinationScope != SAVE_HOSPITAL_TEMPLATE && examinationScope != SAVE_DEPART_TEMPLATE && examinationScope != SAVE_DOCTOR_TEMPLATE) {
+                // 模板范围 参数非法
+                logger.error("The search scope for templates is illegal");
+                return null;
+            }
+
+            ExaminationExample examinationExample = new ExaminationExample();
+            ExaminationExample.Criteria examinationExampleCriteria = examinationExample.createCriteria();
+            examinationExampleCriteria.andValidEqualTo(1).andSaveStateEqualTo(examinationScope);
+            if (examinationScope == SAVE_DEPART_TEMPLATE) {
+                // 科室模板
+                List<Integer> doctorIdList = doctorService.selectDepartmentDoctorIdListByDoctorId(doctorId);
+                examinationExampleCriteria.andDoctorIdIn(doctorIdList);
+            } else {
+                // 医生个人模板
+                examinationExampleCriteria.andDoctorIdEqualTo(doctorId);
+            }
+
+            List<Examination> examinationList = examinationMapper.selectByExample(examinationExample);
+            res = examinationListToJson(examinationList);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    @Override
+    public String examinationListToJson(List<Examination> examinationList) {
+        // todo
+        String res = null;
+        try {
+            JsonArray examinationWithEntryJsonArray = new JsonArray();
+            for (Examination examination : examinationList) {
+                JsonObject examinationJsonObject = gson.toJsonTree(examination).getAsJsonObject();
+
+                // 找到每张检查单对应的检查项目
+                ChargeEntryExample chargeEntryExample = new ChargeEntryExample();
+                chargeEntryExample.or().andValidEqualTo(1).andExaminationIdEqualTo(examination.getExaminationId());
+                List<ChargeEntry> chargeEntryList = chargeEntryMapper.selectByExample(chargeEntryExample);
+                JsonArray chargeEntryListJsonArray = gson.toJsonTree(chargeEntryList).getAsJsonArray();
+                for (JsonElement chargeEntryJsonElement : chargeEntryListJsonArray) {
+                    JsonObject chargeEntryJsonObject = chargeEntryJsonElement.getAsJsonObject();
+                    chargeEntryJsonObject.add("chargeItem", gson.toJsonTree(chargeItemMapper.selectByPrimaryKey(chargeEntryJsonObject.get("chargeItemId").getAsInt())));
+                }
+
+                examinationJsonObject.add("chargeEntryList", chargeEntryListJsonArray);
+                examinationWithEntryJsonArray.add(examinationJsonObject);
+            }
+            res = examinationWithEntryJsonArray.toString();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
     }
 }

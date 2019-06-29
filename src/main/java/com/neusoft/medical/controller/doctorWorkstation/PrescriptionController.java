@@ -135,7 +135,7 @@ public class PrescriptionController {
      *
      * @param prescriptionScope 查询的处方模板的范围（全院模板 2；科室模板 3；医生个人模板 4）
      * @param doctorId          医生编号
-     * @return 处方模板列表
+     * @return 处方模板列表，json 字符串
      */
     @GetMapping("/prescription_template")
     public ResultDTO<String> selectPrescriptionTemplate(

@@ -1,6 +1,7 @@
 package com.neusoft.medical.service.doctorWorkstation;
 
 import com.neusoft.medical.bean.ChargeItem;
+import com.neusoft.medical.bean.Examination;
 
 import java.util.List;
 
@@ -84,4 +85,22 @@ public interface ExaminationService {
      * @return 操作结果
      */
     boolean deleteExaminationList(List<Integer> examinationIdList);
+
+    /**
+     * 获取检查单模板
+     *
+     * @param examinationScope 查询的检查单模板范围（全院模板 2；科室模板 3；医生个人模板 4）
+     * @param doctorId         医生编号
+     * @return 检查单模板列表，json 字符串
+     */
+    String selectExaminationTemplate(Integer examinationScope, Integer doctorId);
+
+    /**
+     * 由检查单列表获取检查单信息 json 字符串
+     * 字符串中除检查单基本信息外，还包括检查项目列表的信息
+     *
+     * @param examinationList 检查单列表
+     * @return 包含检查项目信息的检查单信息，json 字符串
+     */
+    String examinationListToJson(List<Examination> examinationList);
 }

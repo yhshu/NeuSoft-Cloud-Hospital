@@ -8,6 +8,7 @@ import com.neusoft.medical.dao.DoctorMapper;
 import com.neusoft.medical.dao.MedicineMapper;
 import com.neusoft.medical.dao.PrescriptionEntryMapper;
 import com.neusoft.medical.dao.PrescriptionMapper;
+import com.neusoft.medical.service.basicInfo.DoctorService;
 import com.neusoft.medical.service.doctorWorkstation.PrescriptionService;
 import com.neusoft.medical.service.registration.RegistrationService;
 import org.apache.log4j.Logger;
@@ -33,6 +34,8 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     private DoctorMapper doctorMapper;
     @Resource
     private RegistrationService registrationService;
+    @Resource
+    private DoctorService doctorService;
 
     private Gson gson = new Gson();
 
@@ -186,16 +189,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
             prescriptionExampleCriteria.andValidEqualTo(1).andSaveStateEqualTo(prescriptionScope);
             if (prescriptionScope == SAVE_DEPART_TEMPLATE) {
                 // 科室模板
-                DoctorExample doctorExample = new DoctorExample();
-                DoctorExample.Criteria doctorExampleCriteria = doctorExample.createCriteria();
-                doctorExampleCriteria.andValidEqualTo(1);
-                doctorExampleCriteria.andDepartmentIdEqualTo(doctorMapper.selectByPrimaryKey(doctorId).getDepartmentId());
-                List<Doctor> doctorList = doctorMapper.selectByExample(doctorExample);
-                List<Integer> doctorIdList = new CopyOnWriteArrayList<>();
-                for (Doctor doctor : doctorList) {
-                    doctorIdList.add(doctor.getDoctorId());
-                }
-
+                List<Integer> doctorIdList = doctorService.selectDepartmentDoctorIdListByDoctorId(doctorId);
                 prescriptionExampleCriteria.andDoctorIdIn(doctorIdList);
             } else if (prescriptionScope == SAVE_DOCTOR_TEMPLATE) {
                 // 医生个人模板

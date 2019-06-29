@@ -171,6 +171,7 @@ public class DisposalServiceImpl implements DisposalService {
         String res = null;
         try {
             if (disposalScope != SAVE_HOSPITAL_TEMPLATE && disposalScope != SAVE_DEPART_TEMPLATE && disposalScope != SAVE_DOCTOR_TEMPLATE) {
+                // 模板范围 参数非法
                 logger.error("The search scope for templates is illegal");
                 return null;
             }
@@ -178,17 +179,11 @@ public class DisposalServiceImpl implements DisposalService {
             ChargeFormExample chargeFormExample = new ChargeFormExample();
             ChargeFormExample.Criteria chargeFormExampleCriteria = chargeFormExample.createCriteria();
             chargeFormExampleCriteria.andValidEqualTo(1).andSaveStateEqualTo(disposalScope);
-            if (disposalScope == SAVE_DEPART_TEMPLATE) {
-                // 科室模板
-                DoctorExample doctorExample = new DoctorExample();
-                doctorExample.or().andValidEqualTo(1).andDepartmentIdEqualTo(doctorMapper.selectByPrimaryKey(doctorId).getDepartmentId());
-                List<Doctor> doctorList = doctorMapper.selectByExample(doctorExample);
-                List<Integer> doctorIdList = new CopyOnWriteArrayList<>();
-                for (Doctor doctor : doctorList) {
-                    doctorIdList.add(doctor.getDoctorId());
-                }
-                // 找到由该医生所在科室的所有医生创建的模板
-            }
+//            if (disposalScope == SAVE_DEPART_TEMPLATE) {
+//                // 科室模板
+//
+//                // 找到由该医生所在科室的所有医生创建的模板
+//            }
 //            else if (disposalScope == SAVE_DOCTOR_TEMPLATE) {
 //                // 医生个人模板
 //            }
@@ -204,7 +199,6 @@ public class DisposalServiceImpl implements DisposalService {
 
     @Override
     public String chargeFormListToJson(List<ChargeForm> chargeFormList) {
-        // todo
         String res = null;
         try {
             JsonArray chargeFormWithEntryJsonArray = new JsonArray();

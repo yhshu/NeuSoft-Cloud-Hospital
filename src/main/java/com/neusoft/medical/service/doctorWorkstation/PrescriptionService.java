@@ -64,7 +64,7 @@ public interface PrescriptionService {
      * 字符串中除处方基本信息外，还包含处方药品列表的信息
      *
      * @param prescriptionList 处方列表
-     * @return 包含处方药品信息的处方信息 json 字符串
+     * @return 包含处方药品信息的处方信息，json 字符串
      */
     String prescriptionListToJson(List<Prescription> prescriptionList);
 

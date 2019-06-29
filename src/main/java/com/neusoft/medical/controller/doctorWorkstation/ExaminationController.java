@@ -21,7 +21,7 @@ public class ExaminationController {
      * @param examinationJson 检查检验项目信息，json 字符串
      * @return 操作结果
      * examinationJson 中包含的属性如下：
-     * - registrationId 挂号单编号
+     * - registrationId 挂号单编号 （正式提交 必填，暂存 选填，模板 不填）
      * - saveState 保存状态（暂存 0；正式提交 1；全院模板 2；科室模板 3；医生个人模板 4）
      * - examName 检查名称
      * - clinicalImpression 临床印象
@@ -49,6 +49,7 @@ public class ExaminationController {
 
     /**
      * 根据科室编号获取收费项目中的检查项目
+     * 使用场景：医生为患者添加检查项目前
      *
      * @param departmentId 科室编号
      * @return 指定科室的收费项目中的检查项目列表
@@ -153,6 +154,27 @@ public class ExaminationController {
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultDTO<>(Boolean.FALSE);
+        }
+        return new ResultDTO<>(res);
+    }
+
+    /**
+     * 获取检查单模板
+     *
+     * @param examinationScope 查询的检查单模板范围（全院模板 2；科室模板 3；医生个人模板 4）
+     * @param doctorId         医生编号
+     * @return 检查单模板列表，json 字符串
+     */
+    @GetMapping("/examination_template")
+    public ResultDTO<String> selectExaminationTemplate(
+            @RequestParam(value = "examinationScope") Integer examinationScope,
+            @RequestParam(value = "doctorId") Integer doctorId
+    ) {
+        String res = null;
+        try {
+            res = examinationService.selectExaminationTemplate(examinationScope, doctorId);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return new ResultDTO<>(res);
     }
