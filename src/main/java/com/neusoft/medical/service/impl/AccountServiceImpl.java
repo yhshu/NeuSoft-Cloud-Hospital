@@ -4,7 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.neusoft.medical.Util.Constant;
+import com.neusoft.medical.service.ConstantService;
 import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.AccountMapper;
 import com.neusoft.medical.dao.DepartmentMapper;
@@ -49,7 +49,7 @@ public class AccountServiceImpl implements AccountService {
         for (Account account : accountList) {
             JsonObject accountJsonObject = gson.toJsonTree(account).getAsJsonObject();
             accountJsonObject.remove("userPassword");
-            if (account.getAccountType().equals(Constant.TYPE_OUTPATIENT_DOCTOR) || account.getAccountType().equals(Constant.TYPE_TECH_DOCTOR)) {  // 该用户是医生
+            if (account.getAccountType().equals(ConstantService.TYPE_OUTPATIENT_DOCTOR) || account.getAccountType().equals(ConstantService.TYPE_TECH_DOCTOR)) {  // 该用户是医生
                 DoctorExample doctorExample = new DoctorExample();
                 DoctorExample.Criteria doctorCriteria = doctorExample.createCriteria();
                 doctorCriteria.andValidEqualTo(1);
@@ -108,7 +108,7 @@ public class AccountServiceImpl implements AccountService {
                 throw new Exception("accountId is still null after trying to insert the database.");
             }
 
-            if (accountType.equals(Constant.TYPE_OUTPATIENT_DOCTOR) || accountType.equals(Constant.TYPE_TECH_DOCTOR)) {
+            if (accountType.equals(ConstantService.TYPE_OUTPATIENT_DOCTOR) || accountType.equals(ConstantService.TYPE_TECH_DOCTOR)) {
                 // 如果是门诊医生或医技医生
                 doctorMapper.insert(new Doctor(null, realName, departmentId, jobTitle, account.getAccountId(), accountType, doctorScheduling, 1, null, null, null));
             } else {
@@ -130,7 +130,7 @@ public class AccountServiceImpl implements AccountService {
             accountMapper.updateByExampleSelective(new Account(accountId, userName, bCryptPasswordEncoder.encode(userPassword), null, 1, null, null, null), accountExample);
             String accountType = accountMapper.selectByPrimaryKey(accountId).getAccountType();
 
-            if (accountType.equals(Constant.TYPE_OUTPATIENT_DOCTOR) || accountType.equals(Constant.TYPE_TECH_DOCTOR)) {
+            if (accountType.equals(ConstantService.TYPE_OUTPATIENT_DOCTOR) || accountType.equals(ConstantService.TYPE_TECH_DOCTOR)) {
                 // 如果是门诊医生或医技医生
                 DoctorExample doctorExample = new DoctorExample();
                 doctorExample.or().andValidEqualTo(1).andAccountIdEqualTo(accountId);

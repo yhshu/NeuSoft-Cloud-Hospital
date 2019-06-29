@@ -6,6 +6,7 @@ import com.neusoft.medical.bean.ConstantType;
 import com.neusoft.medical.bean.ConstantTypeExample;
 import com.neusoft.medical.dao.ConstantItemMapper;
 import com.neusoft.medical.dao.ConstantTypeMapper;
+import com.neusoft.medical.service.ConstantService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,7 +15,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-public class ConstantConverter {
+public class ConstantServiceImpl implements ConstantService {
     @Resource
     private ConstantTypeMapper constantTypeMapper;
     @Resource
@@ -51,5 +52,17 @@ public class ConstantConverter {
         List<ConstantItem> constantItemList = getConstantItemList(constantTypeCode);
         return constantItemList.stream().collect(
                 Collectors.toMap(ConstantItem::getConstantName, ConstantItem::getConstantItemId));
+    }
+
+    @Override
+    public String getAccountTypeName(String str) {
+        if (str.equals(TYPE_OUTPATIENT_DOCTOR)) return "门诊医生";
+        if (str.equals(TYPE_TECH_DOCTOR)) return "医技医生";
+        if (str.equals(TYPE_COLLECTOR_STAFF)) return "医院管理员";
+        if (str.equals(TYPE_PHARMACY_STAFF)) return "药房操作员";
+        if (str.equals(TYPE_FINANCIAL_STAFF)) return "财务管理员";
+        if (str.equals(TYPE_REGISTRATION_STAFF)) return "挂号收费员";
+        if (str.equals(TYPE_SYSTEM_ADMIN)) return "系统管理员";
+        return null;
     }
 }

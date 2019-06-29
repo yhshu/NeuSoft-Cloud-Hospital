@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.neusoft.medical.Util.Constant;
+import com.neusoft.medical.service.ConstantService;
 import com.neusoft.medical.Util.converter.StringToDateConverter;
 import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.*;
@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import static com.neusoft.medical.Util.Constant.*;
+import static com.neusoft.medical.service.ConstantService.*;
 
 @Service
 public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalRecordService {
@@ -217,10 +217,10 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
             medicalRecordsExampleCriteria.andValidEqualTo(1);
             medicalRecordsExampleCriteria.andSaveStateEqualTo(templateScope);
 
-            if (templateScope == Constant.SAVE_DOCTOR_TEMPLATE) {
+            if (templateScope == ConstantService.SAVE_DOCTOR_TEMPLATE) {
                 // 查找医生本人可见的病历模板
                 medicalRecordsExampleCriteria.andDoctorIdEqualTo(doctorId);
-            } else if (templateScope == Constant.SAVE_DEPART_TEMPLATE) {
+            } else if (templateScope == ConstantService.SAVE_DEPART_TEMPLATE) {
                 // 查找医生所在科室的病历模板
                 DoctorExample doctorExample = new DoctorExample();
                 DoctorExample.Criteria doctorExampleCriteria = doctorExample.createCriteria();

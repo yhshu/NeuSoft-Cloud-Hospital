@@ -1,7 +1,7 @@
 package com.neusoft.medical.service.impl;
 
 import com.google.gson.*;
-import com.neusoft.medical.Util.Constant;
+import com.neusoft.medical.service.ConstantService;
 import com.neusoft.medical.Util.MathUtil;
 import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.ChargeEntryMapper;
@@ -16,8 +16,8 @@ import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
-import static com.neusoft.medical.Util.Constant.EXPENSE_CATEGORY_DISPOSAL;
-import static com.neusoft.medical.Util.Constant.SAVE_FORMAL;
+import static com.neusoft.medical.service.ConstantService.EXPENSE_CATEGORY_DISPOSAL;
+import static com.neusoft.medical.service.ConstantService.SAVE_FORMAL;
 
 @Service
 public class DisposalServiceImpl implements DisposalService {
@@ -45,7 +45,7 @@ public class DisposalServiceImpl implements DisposalService {
             JsonArray chargeEntryListJsonArray = disposalJsonObject.get("chargeEntryList").getAsJsonArray();
 
             Registration registration = registrationMapper.selectByPrimaryKey(registrationId);
-            ChargeForm chargeFormRecord = new ChargeForm(null, chargeFormName, registrationId, saveState, Constant.PAY_STATE_NOT_CHARGED, Constant.EXEC_NOT_DONE, 1, null, null, null);
+            ChargeForm chargeFormRecord = new ChargeForm(null, chargeFormName, registrationId, saveState, ConstantService.PAY_STATE_NOT_CHARGED, ConstantService.EXEC_NOT_DONE, 1, null, null, null);
             chargeFormMapper.insert(chargeFormRecord);
             int chargeFormId = chargeFormRecord.getChargeFormId();
 
@@ -58,7 +58,7 @@ public class DisposalServiceImpl implements DisposalService {
                 ChargeItem chargeItemRecord = chargeItemMapper.selectByPrimaryKey(chargeItemId);
                 double unitPrice = MathUtil.doubleSetScale(chargeItemRecord.getPrice(), 2);
                 double totalPrice = MathUtil.doubleSetScale(unitPrice, 2);
-                ChargeEntry chargeEntryRecord = new ChargeEntry(null, registrationId, chargeFormId, chargeItemId, null, unitPrice, totalPrice, nums, nums, nums, Constant.PAY_STATE_NOT_CHARGED, new Date(), registration.getDepartmentId(), registration.getDoctorId(), null, 1, doctorAdvice, null, null, null);
+                ChargeEntry chargeEntryRecord = new ChargeEntry(null, registrationId, chargeFormId, chargeItemId, null, unitPrice, totalPrice, nums, nums, nums, ConstantService.PAY_STATE_NOT_CHARGED, new Date(), registration.getDepartmentId(), registration.getDoctorId(), null, 1, doctorAdvice, null, null, null);
                 chargeEntryMapper.insert(chargeEntryRecord);
             }
         } catch (Exception e) {
@@ -142,7 +142,7 @@ public class DisposalServiceImpl implements DisposalService {
             List<ChargeForm> chargeFormList = chargeFormMapper.selectByExample(chargeFormExample);
 
             for (ChargeForm chargeForm : chargeFormList) {
-                if (chargeForm.getSaveState().equals(SAVE_FORMAL) && chargeForm.getExecutionState().equals(Constant.EXEC_DONE))
+                if (chargeForm.getSaveState().equals(SAVE_FORMAL) && chargeForm.getExecutionState().equals(ConstantService.EXEC_DONE))
                     continue;
 
                 ChargeEntryExample chargeEntryExample = new ChargeEntryExample();

@@ -1,7 +1,7 @@
 package com.neusoft.medical.service.impl;
 
 import com.google.gson.*;
-import com.neusoft.medical.Util.Constant;
+import com.neusoft.medical.service.ConstantService;
 import com.neusoft.medical.Util.MathUtil;
 import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.ChargeEntryMapper;
@@ -15,7 +15,7 @@ import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
-import static com.neusoft.medical.Util.Constant.*;
+import static com.neusoft.medical.service.ConstantService.*;
 
 @Service
 public class ExaminationServiceImpl implements ExaminationService {
@@ -58,7 +58,7 @@ public class ExaminationServiceImpl implements ExaminationService {
                 ChargeItem chargeItemRecord = chargeItemMapper.selectByPrimaryKey(chargeItemId);
                 double unitPrice = MathUtil.doubleSetScale(chargeItemRecord.getPrice(), 2);
                 double totalPrice = MathUtil.doubleSetScale(unitPrice, 2);
-                ChargeEntry chargeEntryRecord = new ChargeEntry(null, registrationId, null, chargeItemId, examinationId, unitPrice, totalPrice, nums, nums, nums, Constant.PAY_STATE_NOT_CHARGED, new Date(), registration.getDepartmentId(), registration.getDoctorId(), null, 1, doctorAdvice, null, null, null);
+                ChargeEntry chargeEntryRecord = new ChargeEntry(null, registrationId, null, chargeItemId, examinationId, unitPrice, totalPrice, nums, nums, nums, ConstantService.PAY_STATE_NOT_CHARGED, new Date(), registration.getDepartmentId(), registration.getDoctorId(), null, 1, doctorAdvice, null, null, null);
                 chargeEntryMapper.insert(chargeEntryRecord);
             }
         } catch (Exception e) {
@@ -158,7 +158,7 @@ public class ExaminationServiceImpl implements ExaminationService {
             List<Examination> examinationList = examinationMapper.selectByExample(examinationExample);
 
             for (Examination examination : examinationList) {
-                if (examination.getSaveState().equals(SAVE_FORMAL) && examination.getExecutionState().equals(Constant.EXEC_DONE))
+                if (examination.getSaveState().equals(SAVE_FORMAL) && examination.getExecutionState().equals(ConstantService.EXEC_DONE))
                     continue;
 
                 ChargeEntryExample chargeEntryExample = new ChargeEntryExample();

@@ -4,7 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.Department;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.basicInfo.DepartmentService;
-import com.neusoft.medical.service.impl.ConstantConverter;
+import com.neusoft.medical.service.impl.ConstantServiceImpl;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +24,7 @@ public class DepartmentController {
     private DepartmentService departmentService;
 
     @Resource
-    private ConstantConverter constantConverter;
+    private ConstantServiceImpl constantServiceImpl;
 
     /**
      * 按分类和分页查询科室信息
@@ -103,7 +103,7 @@ public class DepartmentController {
     @GetMapping(value = "/const")
     public ResultDTO<List> departmentConstMap(@RequestParam(value = "constant_type_code") String constantTypeCode) {
         System.out.println("departmentConstMap: " + "获取科室信息常量表");
-        return new ResultDTO<>(constantConverter.getConstantIdToNameList(constantTypeCode));
+        return new ResultDTO<>(constantServiceImpl.getConstantIdToNameList(constantTypeCode));
     }
 
     /**

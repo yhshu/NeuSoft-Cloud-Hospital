@@ -2,13 +2,11 @@ package com.neusoft.medical.service.impl;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.neusoft.medical.Util.Constant;
+import com.neusoft.medical.service.ConstantService;
 import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.AccountTypePermissionMapper;
 import com.neusoft.medical.dao.DepartmentMapper;
-import com.neusoft.medical.dao.DoctorMapper;
 import com.neusoft.medical.dao.PermissionMapper;
 import com.neusoft.medical.service.LoginService;
 import com.neusoft.medical.service.basicInfo.AccountService;
@@ -22,7 +20,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import static com.neusoft.medical.Util.Constant.*;
+import static com.neusoft.medical.service.ConstantService.*;
 
 @Service
 public class LoginServiceImpl implements LoginService {
@@ -40,6 +38,8 @@ public class LoginServiceImpl implements LoginService {
     private RedisTemplate redisTemplate;
     @Resource
     private DepartmentMapper departmentMapper;
+    @Resource
+    private ConstantService constantService;
 
     private Gson gson = new Gson();
 
@@ -48,7 +48,7 @@ public class LoginServiceImpl implements LoginService {
         // 找到数据库中加密的用户密码，与用户当前输入的密码进行比对
         Account account = accountService.selectAccountByUserName(userName);
         if (account == null)
-            return Constant.SIGNIN_MISMATCH;
+            return ConstantService.SIGNIN_MISMATCH;
 
         if (bCryptPasswordEncoder.matches(userPassword, account.getUserPassword())) {
             // 用户密码核对成功，签发 token；同一用户每次生成的 token 不同
@@ -64,7 +64,7 @@ public class LoginServiceImpl implements LoginService {
 
         } else {
             logger.info("password mismatch, username: " + userName + ", password: " + userPassword);
-            return Constant.SIGNIN_MISMATCH;
+            return ConstantService.SIGNIN_MISMATCH;
         }
     }
 
@@ -74,11 +74,11 @@ public class LoginServiceImpl implements LoginService {
         Date now = new Date();
         if (deadline == null) {
             // 客户端可能正在伪造 token
-            return Constant.SIGNIN_MISMATCH;
+            return ConstantService.SIGNIN_MISMATCH;
         }
         if (now.after(deadline)) {
             // token 不再可用
-            return Constant.SIGNIN_TOKEN_EXPIRED;
+            return ConstantService.SIGNIN_TOKEN_EXPIRED;
         }
 
         Account account = (Account) redisTemplate.opsForHash().get("accountInfo", token);
@@ -87,27 +87,23 @@ public class LoginServiceImpl implements LoginService {
 
         // 返回用户信息，包括用户真实姓名、用户类型、科室名称、系统权限等
         String accountType = account.getAccountType();
+        JsonObject accountDetailJsonObject;
         if (accountType.equals(TYPE_OUTPATIENT_DOCTOR) || accountType.equals(TYPE_TECH_DOCTOR)) {
-
             // 如果该用户是某种类型的医生
-            Doctor doctor = accountService.selectDoctorByAccountId(account.getAccountId());
-            JsonObject doctorJsonObject = gson.toJsonTree(doctor).getAsJsonObject();
-            doctorJsonObject.addProperty("departmentName", departmentMapper.selectByPrimaryKey(doctor.getDepartmentId()).getDepartmentName());  // 科室名称
-            // todo 用户类型
-            accountJsonObject.add("accountInfo", doctorJsonObject);
-        } else if (accountType.equals(TYPE_COLLECTOR_STAFF) || accountType.equals(TYPE_PHARMACY_STAFF) || accountType.equals(TYPE_FINANCIAL_STAFF) || accountType.equals(TYPE_REGISTRATION_STAFF)) {
-
-            // 如果该用户是某种类型的医院工作人员
-            Staff staff = accountService.selectStaffByAccountId(account.getAccountId());
-            accountJsonObject.add("staff", gson.toJsonTree(staff));
-        } else if (accountType.equals(TYPE_SYSTEM_ADMIN)) {
-
-            // 如果该用户是系统管理员
-            Staff staff = accountService.selectStaffByAccountId(account.getAccountId());
-            accountJsonObject.add("staff", gson.toJsonTree(staff));
+            Doctor accountDetail = accountService.selectDoctorByAccountId(account.getAccountId());  // 基本信息
+            accountDetailJsonObject = gson.toJsonTree(accountDetail).getAsJsonObject();
+            accountDetailJsonObject.addProperty("departmentName", departmentMapper.selectByPrimaryKey(accountDetail.getDepartmentId()).getDepartmentName());  // 加上科室名称
+            accountDetailJsonObject.addProperty("accountTypeName", constantService.getAccountTypeName(accountDetail.getAccountType()));  // 加上用户类型名称
+        } else {
+            // 如果该用户是某种类型的医院工作人员 或 系统管理员 等
+            Staff accountDetail = accountService.selectStaffByAccountId(account.getAccountId());  // 基本信息
+            accountDetailJsonObject = gson.toJsonTree(accountDetail).getAsJsonObject();
+            accountDetailJsonObject.addProperty("departmentName", departmentMapper.selectByPrimaryKey(accountDetail.getDepartmentId()).getDepartmentName());  // 加上科室名称
+            accountDetailJsonObject.addProperty("accountTypeName",constantService.getAccountTypeName(accountDetail.getAccountType()));  // 加上用户类型名称
         }
+        accountJsonObject.add("accountDetail", accountDetailJsonObject);
 
-        // 用户权限
+        // 加上用户权限
         AccountTypePermissionExample accountTypePermissionExample = new AccountTypePermissionExample();
         accountTypePermissionExample.or().andValidEqualTo(1).andAccountTypeEqualTo(accountType);
         List<AccountTypePermission> accountTypePermissionList = accountTypePermissionMapper.selectByExample(accountTypePermissionExample);

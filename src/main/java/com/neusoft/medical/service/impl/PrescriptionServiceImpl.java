@@ -1,7 +1,7 @@
 package com.neusoft.medical.service.impl;
 
 import com.google.gson.*;
-import com.neusoft.medical.Util.Constant;
+import com.neusoft.medical.service.ConstantService;
 import com.neusoft.medical.Util.MathUtil;
 import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.DoctorMapper;
@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import static com.neusoft.medical.Util.Constant.*;
+import static com.neusoft.medical.service.ConstantService.*;
 
 @Service
 public class PrescriptionServiceImpl implements PrescriptionService {
@@ -132,7 +132,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
                 String skinTestResult = medicineJsonObject.getAsJsonPrimitive("skinTestResult").getAsString();
                 String doctorAdvice = medicineJsonObject.getAsJsonPrimitive("doctorAdvice").getAsString();
 
-                prescriptionEntryMapper.insert(new PrescriptionEntry(null, medicineId, prescriptionId, unitPrice, totalPrice, nums, nums, medicineUsage, medicineDosage, medicineFrequency, medicineNumberDay, skinTest, skinTestResult, Constant.PAY_STATE_NOT_CHARGED, doctorAdvice, 1, null, null, null));
+                prescriptionEntryMapper.insert(new PrescriptionEntry(null, medicineId, prescriptionId, unitPrice, totalPrice, nums, nums, medicineUsage, medicineDosage, medicineFrequency, medicineNumberDay, skinTest, skinTestResult, ConstantService.PAY_STATE_NOT_CHARGED, doctorAdvice, 1, null, null, null));
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,6 +1,6 @@
-package com.neusoft.medical.Util;
+package com.neusoft.medical.service;
 
-public interface Constant {
+public interface ConstantService {
     /**
      * 开销种类 详见 expense_category 表
      */
@@ -76,10 +76,10 @@ public interface Constant {
      */
     String TYPE_OUTPATIENT_DOCTOR = "00";   // 门诊医生
     String TYPE_TECH_DOCTOR = "01";         // 医技医生
-    String TYPE_COLLECTOR_STAFF = "10";     // 医院收费员
+    String TYPE_COLLECTOR_STAFF = "10";     // 医院管理员
     String TYPE_PHARMACY_STAFF = "11";      // 药房操作员
     String TYPE_FINANCIAL_STAFF = "12";     // 财务管理员
-    String TYPE_REGISTRATION_STAFF = "13";  // 挂号管理员
+    String TYPE_REGISTRATION_STAFF = "13";  // 挂号收费员
     String TYPE_SYSTEM_ADMIN = "20";        // 系统管理员
 
     /**
@@ -90,4 +90,11 @@ public interface Constant {
     int INVOICE_REINVOICE = 3;              // 重打
 
     long TOKEN_AVAILABLE_TIME = 1000 * 60 * 30; // millisecond
+
+    /**
+     * 获取用户类别名称
+     * @param str 用户类别代码
+     * @return 用户类别名称
+     */
+    String getAccountTypeName(String str);
 }
