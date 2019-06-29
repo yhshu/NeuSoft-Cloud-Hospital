@@ -85,24 +85,18 @@ public class LoginServiceImpl implements LoginService {
         JsonObject accountJsonObject = gson.toJsonTree(account).getAsJsonObject();
         accountJsonObject.remove("userPassword"); // 移除数据库中的密码
 
-        // 返回用户信息，包括用户真实姓名、用户类型、科室名称、系统权限等
+        // 返回用户信息，包括用户真实姓名、用户类型、系统权限等
         String accountType = account.getAccountType();
         JsonObject accountDetailJsonObject;
         if (accountType.equals(TYPE_OUTPATIENT_DOCTOR) || accountType.equals(TYPE_TECH_DOCTOR)) {
             // 如果该用户是某种类型的医生
             Doctor accountDetail = accountService.selectDoctorByAccountId(account.getAccountId());  // 基本信息
             accountDetailJsonObject = gson.toJsonTree(accountDetail).getAsJsonObject();
-            String departmentName = departmentMapper.selectByPrimaryKey(accountDetail.getDepartmentId()).getDepartmentName();
-            if (departmentName != null)
-                accountDetailJsonObject.addProperty("departmentName", departmentName);  // 加上科室名称
             accountDetailJsonObject.addProperty("accountTypeName", constantService.getAccountTypeName(accountDetail.getAccountType()));  // 加上用户类型名称
         } else {
             // 如果该用户是某种类型的医院工作人员 或 系统管理员 等
             Staff accountDetail = accountService.selectStaffByAccountId(account.getAccountId());  // 基本信息
             accountDetailJsonObject = gson.toJsonTree(accountDetail).getAsJsonObject();
-            String departmentName = departmentMapper.selectByPrimaryKey(accountDetail.getDepartmentId()).getDepartmentName();
-            if (departmentName != null)
-                accountDetailJsonObject.addProperty("departmentName", departmentName);  // 加上科室名称
             accountDetailJsonObject.addProperty("accountTypeName", constantService.getAccountTypeName(accountDetail.getAccountType()));  // 加上用户类型名称
         }
         accountJsonObject.add("accountDetail", accountDetailJsonObject);

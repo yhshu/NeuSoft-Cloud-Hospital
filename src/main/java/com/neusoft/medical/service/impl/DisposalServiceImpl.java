@@ -202,8 +202,18 @@ public class DisposalServiceImpl implements DisposalService {
         return res;
     }
 
+    @Override
     public String chargeFormListToJson(List<ChargeForm> chargeFormList) {
         // todo
-        return null;
+        String res = null;
+        try {
+            JsonArray chargeEntryJsonArray = new JsonArray();
+            for (ChargeForm chargeForm : chargeFormList) {
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
     }
 }
