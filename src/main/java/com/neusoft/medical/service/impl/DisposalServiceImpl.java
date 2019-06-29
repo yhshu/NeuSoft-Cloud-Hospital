@@ -1,20 +1,18 @@
 package com.neusoft.medical.service.impl;
 
 import com.google.gson.*;
-import com.neusoft.medical.dao.*;
-import com.neusoft.medical.service.ConstantService;
 import com.neusoft.medical.Util.MathUtil;
 import com.neusoft.medical.bean.*;
+import com.neusoft.medical.dao.*;
+import com.neusoft.medical.service.ConstantService;
 import com.neusoft.medical.service.doctorWorkstation.DisposalService;
 import com.neusoft.medical.service.doctorWorkstation.ExaminationService;
 import org.apache.log4j.Logger;
-import org.springframework.messaging.simp.config.ChannelRegistration;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import static com.neusoft.medical.service.ConstantService.*;
 
@@ -65,7 +63,11 @@ public class DisposalServiceImpl implements DisposalService {
                 ChargeItem chargeItemRecord = chargeItemMapper.selectByPrimaryKey(chargeItemId);
                 double unitPrice = MathUtil.doubleSetScale(chargeItemRecord.getPrice(), 2);
                 double totalPrice = MathUtil.doubleSetScale(unitPrice, 2);
-                ChargeEntry chargeEntryRecord = new ChargeEntry(null, registrationId, chargeFormId, chargeItemId, null, unitPrice, totalPrice, nums, nums, nums, ConstantService.PAY_STATE_NOT_CHARGED, new Date(), registration.getDepartmentId(), registration.getDoctorId(), null, 1, doctorAdvice, null, null, null);
+                ChargeEntry chargeEntryRecord = new ChargeEntry(null, registrationId, chargeFormId, chargeItemId, null, unitPrice, totalPrice, nums, nums, nums, ConstantService.PAY_STATE_NOT_CHARGED, new Date(), null, null, null, 1, doctorAdvice, null, null, null);
+                if (registration != null) {
+                    chargeEntryRecord.setDepartmentId(registration.getDepartmentId());
+                    chargeEntryRecord.setDoctorId(registration.getDoctorId());
+                }
                 chargeEntryMapper.insert(chargeEntryRecord);
             }
         } catch (Exception e) {
