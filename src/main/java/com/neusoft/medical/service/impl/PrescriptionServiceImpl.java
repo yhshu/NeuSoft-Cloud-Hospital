@@ -233,6 +233,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
                 prescriptionMedicineJsonArray.add(prescriptionJsonObject);
             }
             res = prescriptionMedicineJsonArray.toString();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

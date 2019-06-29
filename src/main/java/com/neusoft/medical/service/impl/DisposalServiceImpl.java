@@ -207,10 +207,25 @@ public class DisposalServiceImpl implements DisposalService {
         // todo
         String res = null;
         try {
-            JsonArray chargeEntryJsonArray = new JsonArray();
+            JsonArray chargeFormWithEntryJsonArray = new JsonArray();
             for (ChargeForm chargeForm : chargeFormList) {
+                JsonObject chargeFormJsonObject = gson.toJsonTree(chargeForm).getAsJsonObject();
 
+                // 找到每张收费单对应的收费项目
+                ChargeEntryExample chargeEntryExample = new ChargeEntryExample();
+                chargeEntryExample.or().andValidEqualTo(1).andChargeFormIdEqualTo(chargeForm.getChargeFormId());
+                List<ChargeEntry> chargeEntryList = chargeEntryMapper.selectByExample(chargeEntryExample);
+                JsonArray chargeEntryListJsonArray = gson.toJsonTree(chargeEntryList).getAsJsonArray();
+                for (JsonElement chargeEntryJsonElement : chargeEntryListJsonArray) {
+                    JsonObject chargeEntryJsonObject = chargeEntryJsonElement.getAsJsonObject();
+                    chargeEntryJsonObject.add("chargeItem", gson.toJsonTree(chargeItemMapper.selectByPrimaryKey(chargeEntryJsonObject.get("chargeItemId").getAsInt())));
+                }
+
+                chargeFormJsonObject.add("chargeEntryList", chargeEntryListJsonArray);
+                chargeFormWithEntryJsonArray.add(chargeFormJsonObject);
             }
+            res = chargeFormWithEntryJsonArray.toString();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
