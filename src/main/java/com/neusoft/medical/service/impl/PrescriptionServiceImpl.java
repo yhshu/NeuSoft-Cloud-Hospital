@@ -10,6 +10,7 @@ import com.neusoft.medical.dao.PrescriptionEntryMapper;
 import com.neusoft.medical.dao.PrescriptionMapper;
 import com.neusoft.medical.service.doctorWorkstation.PrescriptionService;
 import com.neusoft.medical.service.registration.RegistrationService;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,6 +21,8 @@ import static com.neusoft.medical.service.ConstantService.*;
 
 @Service
 public class PrescriptionServiceImpl implements PrescriptionService {
+    private Logger logger = Logger.getLogger(PrescriptionServiceImpl.class);
+
     @Resource
     private MedicineMapper medicineMapper;
     @Resource
@@ -174,7 +177,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         String res = null;
         try {
             if (prescriptionScope != SAVE_HOSPITAL_TEMPLATE && prescriptionScope != SAVE_DEPART_TEMPLATE && prescriptionScope != SAVE_DOCTOR_TEMPLATE) {
-                System.out.println("关于模板搜索范围的参数非法");
+                logger.error("The search scope for templates is illegal");
                 return null;
             }
 

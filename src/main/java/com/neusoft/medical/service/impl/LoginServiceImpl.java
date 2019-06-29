@@ -92,14 +92,18 @@ public class LoginServiceImpl implements LoginService {
             // 如果该用户是某种类型的医生
             Doctor accountDetail = accountService.selectDoctorByAccountId(account.getAccountId());  // 基本信息
             accountDetailJsonObject = gson.toJsonTree(accountDetail).getAsJsonObject();
-            accountDetailJsonObject.addProperty("departmentName", departmentMapper.selectByPrimaryKey(accountDetail.getDepartmentId()).getDepartmentName());  // 加上科室名称
+            String departmentName = departmentMapper.selectByPrimaryKey(accountDetail.getDepartmentId()).getDepartmentName();
+            if (departmentName != null)
+                accountDetailJsonObject.addProperty("departmentName", departmentName);  // 加上科室名称
             accountDetailJsonObject.addProperty("accountTypeName", constantService.getAccountTypeName(accountDetail.getAccountType()));  // 加上用户类型名称
         } else {
             // 如果该用户是某种类型的医院工作人员 或 系统管理员 等
             Staff accountDetail = accountService.selectStaffByAccountId(account.getAccountId());  // 基本信息
             accountDetailJsonObject = gson.toJsonTree(accountDetail).getAsJsonObject();
-            accountDetailJsonObject.addProperty("departmentName", departmentMapper.selectByPrimaryKey(accountDetail.getDepartmentId()).getDepartmentName());  // 加上科室名称
-            accountDetailJsonObject.addProperty("accountTypeName",constantService.getAccountTypeName(accountDetail.getAccountType()));  // 加上用户类型名称
+            String departmentName = departmentMapper.selectByPrimaryKey(accountDetail.getDepartmentId()).getDepartmentName();
+            if (departmentName != null)
+                accountDetailJsonObject.addProperty("departmentName", departmentName);  // 加上科室名称
+            accountDetailJsonObject.addProperty("accountTypeName", constantService.getAccountTypeName(accountDetail.getAccountType()));  // 加上用户类型名称
         }
         accountJsonObject.add("accountDetail", accountDetailJsonObject);
 

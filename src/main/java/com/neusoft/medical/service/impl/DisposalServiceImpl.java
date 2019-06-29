@@ -1,26 +1,29 @@
 package com.neusoft.medical.service.impl;
 
 import com.google.gson.*;
+import com.neusoft.medical.dao.*;
 import com.neusoft.medical.service.ConstantService;
 import com.neusoft.medical.Util.MathUtil;
 import com.neusoft.medical.bean.*;
-import com.neusoft.medical.dao.ChargeEntryMapper;
-import com.neusoft.medical.dao.ChargeFormMapper;
-import com.neusoft.medical.dao.ChargeItemMapper;
-import com.neusoft.medical.dao.RegistrationMapper;
 import com.neusoft.medical.service.doctorWorkstation.DisposalService;
 import com.neusoft.medical.service.doctorWorkstation.ExaminationService;
+import org.apache.log4j.Logger;
+import org.springframework.messaging.simp.config.ChannelRegistration;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
-import static com.neusoft.medical.service.ConstantService.EXPENSE_CATEGORY_DISPOSAL;
-import static com.neusoft.medical.service.ConstantService.SAVE_FORMAL;
+import static com.neusoft.medical.service.ConstantService.*;
 
 @Service
 public class DisposalServiceImpl implements DisposalService {
+    private Logger logger = Logger.getLogger(DisposalService.class);
+
+    @Resource
+    private DoctorMapper doctorMapper;
     @Resource
     private ChargeItemMapper chargeItemMapper;
     @Resource
@@ -161,5 +164,46 @@ public class DisposalServiceImpl implements DisposalService {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String selectDisposalTemplate(Integer disposalScope, Integer doctorId) {
+        String res = null;
+        try {
+            if (disposalScope != SAVE_HOSPITAL_TEMPLATE && disposalScope != SAVE_DEPART_TEMPLATE && disposalScope != SAVE_DOCTOR_TEMPLATE) {
+                logger.error("The search scope for templates is illegal");
+                return null;
+            }
+
+            ChargeFormExample chargeFormExample = new ChargeFormExample();
+            ChargeFormExample.Criteria chargeFormExampleCriteria = chargeFormExample.createCriteria();
+            chargeFormExampleCriteria.andValidEqualTo(1).andSaveStateEqualTo(disposalScope);
+            if (disposalScope == SAVE_DEPART_TEMPLATE) {
+                // 科室模板
+                DoctorExample doctorExample = new DoctorExample();
+                doctorExample.or().andValidEqualTo(1).andDepartmentIdEqualTo(doctorMapper.selectByPrimaryKey(doctorId).getDepartmentId());
+                List<Doctor> doctorList = doctorMapper.selectByExample(doctorExample);
+                List<Integer> doctorIdList = new CopyOnWriteArrayList<>();
+                for (Doctor doctor : doctorList) {
+                    doctorIdList.add(doctor.getDoctorId());
+                }
+                // 找到由该医生所在科室的所有医生创建的模板
+            }
+//            else if (disposalScope == SAVE_DOCTOR_TEMPLATE) {
+//                // 医生个人模板
+//            }
+
+            List<ChargeForm> chargeFormList = chargeFormMapper.selectByExample(chargeFormExample);
+            res = chargeFormListToJson(chargeFormList);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    public String chargeFormListToJson(List<ChargeForm> chargeFormList) {
+        // todo
+        return null;
     }
 }
