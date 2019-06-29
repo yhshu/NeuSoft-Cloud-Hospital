@@ -42,7 +42,11 @@ public class DisposalServiceImpl implements DisposalService {
         try {
             // 首先获取 json 字符串中的属性值，然后将提交的信息加入到 charge_form 表和 charge_entry 表
             JsonObject disposalJsonObject = new JsonParser().parse(disposalJson).getAsJsonObject();
-            Integer registrationId = disposalJsonObject.get("registrationId").getAsInt();
+            Integer registrationId = null;
+            try {
+                registrationId = disposalJsonObject.get("registrationId").getAsInt();
+            } catch (Exception ignore) {
+            }
             String chargeFormName = disposalJsonObject.get("chargeFormName").getAsString();
             int saveState = disposalJsonObject.get("saveState").getAsInt();
             JsonArray chargeEntryListJsonArray = disposalJsonObject.get("chargeEntryList").getAsJsonArray();
@@ -85,7 +89,7 @@ public class DisposalServiceImpl implements DisposalService {
     @Override
     public String selectHistoryDisposal(Integer registrationId) {
         ChargeFormExample chargeFormExample = new ChargeFormExample();
-        chargeFormExample.or().andValidEqualTo(1).andRegistrationIdEqualTo(registrationId);
+        chargeFormExample.or().andValidEqualTo(1).andRegistrationIdEqualTo(registrationId);  // 本次挂号的收费单
 
         List<ChargeForm> chargeFormList = chargeFormMapper.selectByExample(chargeFormExample);
         JsonArray chargeFormJsonArray = gson.toJsonTree(chargeFormList).getAsJsonArray();

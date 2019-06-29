@@ -43,7 +43,11 @@ public class ExaminationServiceImpl implements ExaminationService {
         try {
             System.out.println("添加检查检验项目　Json 字符串: " + examinationJson);
             JsonObject examinationJsonObject = new JsonParser().parse(examinationJson).getAsJsonObject();
-            Integer registrationId = examinationJsonObject.get("registrationId").getAsInt();
+            Integer registrationId = null;
+            try {
+                registrationId = examinationJsonObject.get("registrationId").getAsInt();
+            } catch (Exception ignore) {
+            }
             int saveState = examinationJsonObject.get("saveState").getAsInt();
             String examName = examinationJsonObject.get("examName").getAsString();
             String clinicalImpression = examinationJsonObject.get("clinicalImpression").getAsString();
