@@ -42,7 +42,7 @@ public class DisposalServiceImpl implements DisposalService {
         try {
             // 首先获取 json 字符串中的属性值，然后将提交的信息加入到 charge_form 表和 charge_entry 表
             JsonObject disposalJsonObject = new JsonParser().parse(disposalJson).getAsJsonObject();
-            int registrationId = disposalJsonObject.get("registrationId").getAsInt();
+            Integer registrationId = disposalJsonObject.get("registrationId").getAsInt();
             String chargeFormName = disposalJsonObject.get("chargeFormName").getAsString();
             int saveState = disposalJsonObject.get("saveState").getAsInt();
             JsonArray chargeEntryListJsonArray = disposalJsonObject.get("chargeEntryList").getAsJsonArray();
