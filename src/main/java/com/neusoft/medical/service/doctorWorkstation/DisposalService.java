@@ -6,7 +6,7 @@ import com.neusoft.medical.bean.ChargeItem;
 import java.util.List;
 
 public interface DisposalService {
-    boolean addDisposal(String disposalJson);
+    boolean saveDisposal(String disposalJson);
 
     List<ChargeItem> selectDisposalItemListInChargeItemByDepartmentId(int departmentId);
 

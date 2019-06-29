@@ -36,23 +36,39 @@ public class DisposalServiceImpl implements DisposalService {
     private Gson gson = new Gson();
 
     @Override
-    public boolean addDisposal(String disposalJson) {
+    public boolean saveDisposal(String disposalJson) {
         try {
             // 首先获取 json 字符串中的属性值，然后将提交的信息加入到 charge_form 表和 charge_entry 表
             JsonObject disposalJsonObject = new JsonParser().parse(disposalJson).getAsJsonObject();
+            Integer chargeFormId = null;  // 新增时不填，更新时必填
             Integer registrationId = null;
             try {
+                chargeFormId = disposalJsonObject.get("chargeFormId").getAsInt();
                 registrationId = disposalJsonObject.get("registrationId").getAsInt();
             } catch (Exception ignore) {
             }
+
             String chargeFormName = disposalJsonObject.get("chargeFormName").getAsString();
             int saveState = disposalJsonObject.get("saveState").getAsInt();
             JsonArray chargeEntryListJsonArray = disposalJsonObject.get("chargeEntryList").getAsJsonArray();
 
             Registration registration = registrationMapper.selectByPrimaryKey(registrationId);
             ChargeForm chargeFormRecord = new ChargeForm(null, chargeFormName, registrationId, saveState, ConstantService.PAY_STATE_NOT_CHARGED, ConstantService.EXEC_NOT_DONE, 1, null, null, null);
-            chargeFormMapper.insert(chargeFormRecord);
-            int chargeFormId = chargeFormRecord.getChargeFormId();
+            if (chargeFormId == null) {
+                // 新增处置项目
+                chargeFormMapper.insert(chargeFormRecord);
+                chargeFormId = chargeFormRecord.getChargeFormId();
+
+            } else {
+                // 更新处置项目
+                chargeFormMapper.updateByPrimaryKey(chargeFormRecord);
+                // 使之前所有收费项目失效
+                ChargeEntryExample chargeEntryExample = new ChargeEntryExample();
+                chargeEntryExample.or().andValidEqualTo(1).andChargeFormIdEqualTo(chargeFormId);
+                ChargeEntry chargeEntryRecord = new ChargeEntry();
+                chargeEntryRecord.setValid(0);
+                chargeEntryMapper.updateByExampleSelective(chargeEntryRecord, chargeEntryExample);
+            }
 
             for (JsonElement chargeEntryJsonElement : chargeEntryListJsonArray) {
                 JsonObject chargeEntryJsonObject = chargeEntryJsonElement.getAsJsonObject();

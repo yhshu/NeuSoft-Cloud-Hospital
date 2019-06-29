@@ -16,11 +16,12 @@ public class DisposalController {
     private DisposalService disposalService;
 
     /**
-     * 新增处置申请
+     * 保存处置申请（新增或更新）
      *
      * @param disposalJson 处置项目信息，json 字符串
      * @return 操作结果
      * disposalJson 包含的属性：
+     * - chargeFormId 收费单编号（新增时不填，更新时必填）
      * - registrationId 挂号单编号
      * - chargeFormName 处置单名称
      * - saveState 保存状态（暂存 0；正式提交 1；全院模板 2；科室模板 3；医生个人模板 4）
@@ -30,13 +31,13 @@ public class DisposalController {
      * - nums 处置项目的数量
      * - doctorAdvice 医嘱
      */
-    @GetMapping("/add")
-    public ResultDTO<Boolean> addDisposal(
+    @GetMapping("/save")
+    public ResultDTO<Boolean> saveDisposal(
             @RequestParam(value = "disposalJson") String disposalJson
     ) {
         boolean res;
         try {
-            res = disposalService.addDisposal(disposalJson);
+            res = disposalService.saveDisposal(disposalJson);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultDTO<>(Boolean.FALSE);
