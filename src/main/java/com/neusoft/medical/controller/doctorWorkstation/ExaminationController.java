@@ -207,7 +207,7 @@ public class ExaminationController {
      * @param examinationJson 检查单基本信息，json 字符串
      * @return 操作结果
      */
-    @PutMapping("/update_exam_abstract")
+    @PostMapping("/update_exam_abstract")
     public ResultDTO<Boolean> updateExaminationAbstract(
             @RequestParam(value = "examinationJson") String examinationJson
     ) {

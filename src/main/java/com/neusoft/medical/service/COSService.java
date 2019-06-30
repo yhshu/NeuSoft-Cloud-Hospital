@@ -1,6 +1,5 @@
 package com.neusoft.medical.service;
 
-import com.qcloud.cos.model.Bucket;
 
 import java.util.List;
 
@@ -10,10 +9,4 @@ import java.util.List;
  */
 public interface COSService {
 
-    /**
-     * 获取存储桶列表
-     *
-     * @return
-     */
-    List<Bucket> queryBucketList();
 }
