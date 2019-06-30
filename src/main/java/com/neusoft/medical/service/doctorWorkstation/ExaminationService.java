@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface ExaminationService {
 
-
     /**
      * 新增检查检验项目
      *
@@ -103,4 +102,22 @@ public interface ExaminationService {
      * @return 包含检查项目信息的检查单信息，json 字符串
      */
     String examinationListToJson(List<Examination> examinationList);
+
+    /**
+     * 获取检查单的基本信息
+     * 不包含检查单上的检查项目
+     *
+     * @param examinationId 检查单编号
+     * @return 检查单基本信息
+     */
+    Examination selectExaminationAbstract(Integer examinationId);
+
+    /**
+     * 修改检查单基本信息
+     * 检查单上的检查项目保持不变
+     *
+     * @param examinationJson 检查单基本信息，json 字符串
+     * @return 操作结果
+     */
+    Boolean updateExaminationAbstract(String examinationJson);
 }

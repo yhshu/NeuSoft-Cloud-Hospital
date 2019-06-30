@@ -82,6 +82,7 @@ public class LoginServiceImpl implements LoginService {
         }
 
         Account account = (Account) redisTemplate.opsForHash().get("accountInfo", token);
+        assert account != null; // 已找到该帐户的 token，应能找到该帐户的信息
         JsonObject accountJsonObject = gson.toJsonTree(account).getAsJsonObject();
         accountJsonObject.remove("userPassword"); // 移除数据库中的密码
 

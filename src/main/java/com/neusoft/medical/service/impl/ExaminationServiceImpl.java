@@ -249,4 +249,40 @@ public class ExaminationServiceImpl implements ExaminationService {
         }
         return res;
     }
+
+    @Override
+    public Examination selectExaminationAbstract(Integer examinationId) {
+        Examination examination = null;
+        try {
+            examination = examinationMapper.selectByPrimaryKey(examinationId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return examination;
+    }
+
+    @Override
+    public Boolean updateExaminationAbstract(String examinationJson) {
+        try {
+            JsonObject examinationJsonObject = new JsonParser().parse(examinationJson).getAsJsonObject();
+            Integer examinationId = examinationJsonObject.get("examinationId").getAsInt();
+            Integer registrationId = examinationJsonObject.get("registrationId").getAsInt();
+            String patientName = examinationJsonObject.get("patientName").getAsString();
+            Integer doctorId = examinationJsonObject.get("doctorId").getAsInt();
+            Integer departmentId = examinationJsonObject.get("departmentId").getAsInt();
+            Integer saveState = examinationJsonObject.get("saveState").getAsInt();
+            Integer payState = examinationJsonObject.get("payState").getAsInt();
+            Integer executionState = examinationJsonObject.get("executionState").getAsInt();
+            String examName = examinationJsonObject.get("examName").getAsString();
+            String clinicalImpression = examinationJsonObject.get("clinicalImpression").getAsString();
+            String requirement = examinationJsonObject.get("requirement").getAsString();
+            String examResult = examinationJsonObject.get("examResult").getAsString();
+
+            examinationMapper.updateByPrimaryKeySelective(new Examination(examinationId, registrationId, patientName, doctorId, departmentId, saveState, payState, executionState, examName, clinicalImpression, requirement, examResult, 1, null, null, null));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
 }

@@ -1,6 +1,7 @@
 package com.neusoft.medical.controller.doctorWorkstation;
 
 import com.neusoft.medical.bean.ChargeItem;
+import com.neusoft.medical.bean.Examination;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.doctorWorkstation.ExaminationService;
 import org.springframework.web.bind.annotation.*;
@@ -173,6 +174,46 @@ public class ExaminationController {
         String res = null;
         try {
             res = examinationService.selectExaminationTemplate(examinationScope, doctorId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResultDTO<>(res);
+    }
+
+    /**
+     * 获取检查单的基本信息
+     * 不包含检查单上的检查项目
+     *
+     * @param examinationId 检查单编号
+     * @return 检查单基本信息
+     */
+    @GetMapping("/select_exam_abstract")
+    public ResultDTO<Examination> selectExaminationAbstract(
+            @RequestParam(value = "examinationId") Integer examinationId
+    ) {
+        Examination examination = null;
+        try {
+            examination = examinationService.selectExaminationAbstract(examinationId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResultDTO<>(examination);
+    }
+
+    /**
+     * 修改检查单基本信息
+     * 检查单上的检查项目保持不变
+     *
+     * @param examinationJson 检查单基本信息，json 字符串
+     * @return 操作结果
+     */
+    @PutMapping("/update_exam_abstract")
+    public ResultDTO<Boolean> updateExaminationAbstract(
+            @RequestParam(value = "examinationJson") String examinationJson
+    ) {
+        Boolean res = null;
+        try {
+            res = examinationService.updateExaminationAbstract(examinationJson);
         } catch (Exception e) {
             e.printStackTrace();
         }
