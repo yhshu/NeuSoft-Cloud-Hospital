@@ -22,7 +22,7 @@ public class RedisCacheManager {
      *
      * @param key  键
      * @param time 时间(秒)
-     * @return
+     * @return 操作结果
      */
     public boolean expire(String key, long time) {
         try {
@@ -134,7 +134,7 @@ public class RedisCacheManager {
      *
      * @param key   键
      * @param delta 要增加几(大于0)
-     * @return
+     * @return 递增结果
      */
     public long incr(String key, long delta) {
         if (delta < 0) {
@@ -148,7 +148,7 @@ public class RedisCacheManager {
      *
      * @param key   键
      * @param delta 要减少几(小于0)
-     * @return
+     * @return 递减结果
      */
     public long decr(String key, long delta) {
         if (delta < 0) {
@@ -285,7 +285,7 @@ public class RedisCacheManager {
      * @param key  键
      * @param item 项
      * @param by   要增加几(大于0)
-     * @return
+     * @return 递增结果
      */
     public double hincr(String key, String item, double by) {
         return redisTemplate.opsForHash().increment(key, item, by);
@@ -297,7 +297,7 @@ public class RedisCacheManager {
      * @param key  键
      * @param item 项
      * @param by   要减少记(小于0)
-     * @return
+     * @return 递减结果
      */
     public double hdecr(String key, String item, double by) {
         return redisTemplate.opsForHash().increment(key, item, -by);
@@ -309,7 +309,7 @@ public class RedisCacheManager {
      * 根据key获取Set中的所有值
      *
      * @param key 键
-     * @return
+     * @return 集合中的所有值
      */
     public Set<Object> sGet(String key) {
         try {
@@ -373,10 +373,10 @@ public class RedisCacheManager {
     }
 
     /**
-     * 获取set缓存的长度
+     * 获取set缓存的大小
      *
      * @param key 键
-     * @return
+     * @return 集合缓存的大小
      */
     public long sGetSetSize(String key) {
         try {
@@ -411,7 +411,7 @@ public class RedisCacheManager {
      * @param key   键
      * @param start 开始
      * @param end   结束 0 到 -1代表所有值
-     * @return
+     * @return list 缓存内容
      */
     public List<Object> lGet(String key, long start, long end) {
         try {
@@ -423,10 +423,10 @@ public class RedisCacheManager {
     }
 
     /**
-     * 获取list缓存的长度
+     * 获取list缓存的大小
      *
      * @param key 键
-     * @return
+     * @return list 缓存的大小
      */
     public long lGetListSize(String key) {
         try {
@@ -441,8 +441,8 @@ public class RedisCacheManager {
      * 通过索引 获取list中的值
      *
      * @param key   键
-     * @param index 索引 index>=0时， 0 表头，1 第二个元素，依次类推；index<0时，-1，表尾，-2倒数第二个元素，依次类推
-     * @return
+     * @param index 索引 index 大于等于时， 0 表头，1 第二个元素，依次类推；index 小于0时，-1，表尾，-2倒数第二个元素，依次类推
+     * @return list 中的值
      */
     public Object lGetIndex(String key, long index) {
         try {
@@ -458,7 +458,7 @@ public class RedisCacheManager {
      *
      * @param key   键
      * @param value 值
-     * @return
+     * @return 操作结果
      */
     public boolean lSet(String key, Object value) {
         try {
@@ -476,7 +476,7 @@ public class RedisCacheManager {
      * @param key   键
      * @param value 值
      * @param time  时间(秒)
-     * @return
+     * @return 操作结果
      */
     public boolean lSet(String key, Object value, long time) {
         try {
@@ -495,7 +495,7 @@ public class RedisCacheManager {
      *
      * @param key   键
      * @param value 值
-     * @return
+     * @return 操作结果
      */
     public boolean lSet(String key, List<Object> value) {
         try {
@@ -513,7 +513,7 @@ public class RedisCacheManager {
      * @param key   键
      * @param value 值
      * @param time  时间(秒)
-     * @return
+     * @return 操作结果
      */
     public boolean lSet(String key, List<Object> value, long time) {
         try {
@@ -533,7 +533,7 @@ public class RedisCacheManager {
      * @param key   键
      * @param index 索引
      * @param value 值
-     * @return
+     * @return 操作结果
      */
     public boolean lUpdateIndex(String key, long index, Object value) {
         try {

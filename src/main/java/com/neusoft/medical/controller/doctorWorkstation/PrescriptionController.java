@@ -40,7 +40,7 @@ public class PrescriptionController {
      *
      * @param resultNumber 最大结果数量
      * @param query        搜索关键词
-     * @return
+     * @return 药品信息列表
      */
     @GetMapping("/search_medicine")
     public ResultDTO<List<Medicine>> searchMedicine(

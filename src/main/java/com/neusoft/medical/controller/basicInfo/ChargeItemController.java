@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.Arrays;
 
+/**
+ * 收费项目控制器
+ */
 @RestController
 @RequestMapping("/charge_item")
 public class ChargeItemController {
