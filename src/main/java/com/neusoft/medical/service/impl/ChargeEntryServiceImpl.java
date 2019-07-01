@@ -2,7 +2,7 @@ package com.neusoft.medical.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.neusoft.medical.Util.Constant;
+import com.neusoft.medical.service.ConstantService;
 import com.neusoft.medical.Util.MathUtil;
 import com.neusoft.medical.bean.ChargeEntry;
 import com.neusoft.medical.bean.ChargeEntryExample;
@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
-import static com.neusoft.medical.Util.Constant.PAY_STATE_NOT_CHARGED;
+import static com.neusoft.medical.service.ConstantService.PAY_STATE_NOT_CHARGED;
 
 @Service
 public class ChargeEntryServiceImpl implements ChargeEntryService {
@@ -44,7 +44,7 @@ public class ChargeEntryServiceImpl implements ChargeEntryService {
 
         if (chargeEntryCategory == PAY_STATE_NOT_CHARGED)
             criteria.andUnchargedNumsNotEqualTo(0);
-        else if (chargeEntryCategory == Constant.PAY_STATE_CHARGED)
+        else if (chargeEntryCategory == ConstantService.PAY_STATE_CHARGED)
             criteria.andUnchargedNumsEqualTo(0);
 
         List<ChargeEntry> chargeEntryList = chargeEntryMapper.selectByExample(chargeEntryExample);

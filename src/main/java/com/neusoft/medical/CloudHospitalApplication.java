@@ -20,6 +20,7 @@ public class CloudHospitalApplication {
 
     /**
      * 允许传输特定字符
+     * @return 可配置 servlet web 服务器工厂
      */
     @Bean
     public ConfigurableServletWebServerFactory webServerFactory() {

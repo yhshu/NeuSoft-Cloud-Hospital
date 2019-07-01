@@ -1,6 +1,8 @@
 package com.neusoft.medical.bean;
 
-public class Staff {
+import java.io.Serializable;
+
+public class Staff implements Serializable {
     private Integer staffId;
 
     private String realName;
@@ -18,6 +20,8 @@ public class Staff {
     private String reserve2;
 
     private String reserve3;
+
+    private static final long serialVersionUID = 1L;
 
     public Staff(Integer staffId, String realName, Integer departmentId, Integer accountId, String accountType, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.staffId = staffId;

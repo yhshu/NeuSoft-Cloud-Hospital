@@ -1,8 +1,9 @@
 package com.neusoft.medical.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class DailySettlement {
+public class DailySettlement implements Serializable {
     private Integer dailySettlementId;
 
     private Integer collectorAccountId;
@@ -16,6 +17,8 @@ public class DailySettlement {
     private Integer checked;
 
     private Integer valid;
+
+    private static final long serialVersionUID = 1L;
 
     public DailySettlement(Integer dailySettlementId, Integer collectorAccountId, String collectorRealName, Date dailySettlementDate, Date previousDailySettlementDate, Integer checked, Integer valid) {
         this.dailySettlementId = dailySettlementId;

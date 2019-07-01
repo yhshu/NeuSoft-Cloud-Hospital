@@ -1,24 +1,29 @@
 package com.neusoft.medical.service.impl;
 
 import com.google.gson.*;
-import com.neusoft.medical.Util.Constant;
+import com.neusoft.medical.service.ConstantService;
 import com.neusoft.medical.Util.MathUtil;
 import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.ChargeEntryMapper;
 import com.neusoft.medical.dao.ChargeItemMapper;
 import com.neusoft.medical.dao.ExaminationMapper;
 import com.neusoft.medical.dao.RegistrationMapper;
+import com.neusoft.medical.service.basicInfo.DoctorService;
 import com.neusoft.medical.service.doctorWorkstation.ExaminationService;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
-import static com.neusoft.medical.Util.Constant.*;
+import static com.neusoft.medical.service.ConstantService.*;
 
 @Service
 public class ExaminationServiceImpl implements ExaminationService {
+    private Logger logger = Logger.getLogger(ExaminationService.class);
+
     @Resource
     private ChargeItemMapper chargeItemMapper;
     @Resource
@@ -27,6 +32,8 @@ public class ExaminationServiceImpl implements ExaminationService {
     private ChargeEntryMapper chargeEntryMapper;
     @Resource
     private RegistrationMapper registrationMapper;
+    @Resource
+    private DoctorService doctorService;
 
     private Gson gson = new Gson();
 
@@ -36,7 +43,11 @@ public class ExaminationServiceImpl implements ExaminationService {
         try {
             System.out.println("添加检查检验项目　Json 字符串: " + examinationJson);
             JsonObject examinationJsonObject = new JsonParser().parse(examinationJson).getAsJsonObject();
-            int registrationId = examinationJsonObject.get("registrationId").getAsInt();
+            Integer registrationId = null;
+            try {
+                registrationId = examinationJsonObject.get("registrationId").getAsInt();
+            } catch (Exception ignore) {
+            }
             int saveState = examinationJsonObject.get("saveState").getAsInt();
             String examName = examinationJsonObject.get("examName").getAsString();
             String clinicalImpression = examinationJsonObject.get("clinicalImpression").getAsString();
@@ -58,7 +69,7 @@ public class ExaminationServiceImpl implements ExaminationService {
                 ChargeItem chargeItemRecord = chargeItemMapper.selectByPrimaryKey(chargeItemId);
                 double unitPrice = MathUtil.doubleSetScale(chargeItemRecord.getPrice(), 2);
                 double totalPrice = MathUtil.doubleSetScale(unitPrice, 2);
-                ChargeEntry chargeEntryRecord = new ChargeEntry(null, registrationId, null, chargeItemId, examinationId, unitPrice, totalPrice, nums, nums, nums, Constant.PAY_STATE_NOT_CHARGED, new Date(), registration.getDepartmentId(), registration.getDoctorId(), null, 1, doctorAdvice, null, null, null);
+                ChargeEntry chargeEntryRecord = new ChargeEntry(null, registrationId, null, chargeItemId, examinationId, unitPrice, totalPrice, nums, nums, nums, ConstantService.PAY_STATE_NOT_CHARGED, new Date(), registration.getDepartmentId(), registration.getDoctorId(), null, 1, doctorAdvice, null, null, null);
                 chargeEntryMapper.insert(chargeEntryRecord);
             }
         } catch (Exception e) {
@@ -158,7 +169,7 @@ public class ExaminationServiceImpl implements ExaminationService {
             List<Examination> examinationList = examinationMapper.selectByExample(examinationExample);
 
             for (Examination examination : examinationList) {
-                if (examination.getSaveState().equals(SAVE_FORMAL) && examination.getExecutionState().equals(Constant.EXEC_DONE))
+                if (examination.getSaveState().equals(SAVE_FORMAL) && examination.getExecutionState().equals(ConstantService.EXEC_DONE))
                     continue;
 
                 ChargeEntryExample chargeEntryExample = new ChargeEntryExample();
@@ -171,6 +182,103 @@ public class ExaminationServiceImpl implements ExaminationService {
                 examination.setValid(0);
                 examinationMapper.updateByPrimaryKey(examination);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String selectExaminationTemplate(Integer examinationScope, Integer doctorId) {
+        String res = null;
+        try {
+            if (examinationScope != SAVE_HOSPITAL_TEMPLATE && examinationScope != SAVE_DEPART_TEMPLATE && examinationScope != SAVE_DOCTOR_TEMPLATE) {
+                // 模板范围 参数非法
+                logger.error("The search scope for templates is illegal");
+                return null;
+            }
+
+            ExaminationExample examinationExample = new ExaminationExample();
+            ExaminationExample.Criteria examinationExampleCriteria = examinationExample.createCriteria();
+            examinationExampleCriteria.andValidEqualTo(1).andSaveStateEqualTo(examinationScope);
+            if (examinationScope == SAVE_DEPART_TEMPLATE) {
+                // 科室模板
+                List<Integer> doctorIdList = doctorService.selectDepartmentDoctorIdListByDoctorId(doctorId);
+                examinationExampleCriteria.andDoctorIdIn(doctorIdList);
+            } else {
+                // 医生个人模板
+                examinationExampleCriteria.andDoctorIdEqualTo(doctorId);
+            }
+
+            List<Examination> examinationList = examinationMapper.selectByExample(examinationExample);
+            res = examinationListToJson(examinationList);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    @Override
+    public String examinationListToJson(List<Examination> examinationList) {
+        // todo
+        String res = null;
+        try {
+            JsonArray examinationWithEntryJsonArray = new JsonArray();
+            for (Examination examination : examinationList) {
+                JsonObject examinationJsonObject = gson.toJsonTree(examination).getAsJsonObject();
+
+                // 找到每张检查单对应的检查项目
+                ChargeEntryExample chargeEntryExample = new ChargeEntryExample();
+                chargeEntryExample.or().andValidEqualTo(1).andExaminationIdEqualTo(examination.getExaminationId());
+                List<ChargeEntry> chargeEntryList = chargeEntryMapper.selectByExample(chargeEntryExample);
+                JsonArray chargeEntryListJsonArray = gson.toJsonTree(chargeEntryList).getAsJsonArray();
+                for (JsonElement chargeEntryJsonElement : chargeEntryListJsonArray) {
+                    JsonObject chargeEntryJsonObject = chargeEntryJsonElement.getAsJsonObject();
+                    chargeEntryJsonObject.add("chargeItem", gson.toJsonTree(chargeItemMapper.selectByPrimaryKey(chargeEntryJsonObject.get("chargeItemId").getAsInt())));
+                }
+
+                examinationJsonObject.add("chargeEntryList", chargeEntryListJsonArray);
+                examinationWithEntryJsonArray.add(examinationJsonObject);
+            }
+            res = examinationWithEntryJsonArray.toString();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    @Override
+    public Examination selectExaminationAbstract(Integer examinationId) {
+        Examination examination = null;
+        try {
+            examination = examinationMapper.selectByPrimaryKey(examinationId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return examination;
+    }
+
+    @Override
+    public Boolean updateExaminationAbstract(String examinationJson) {
+        try {
+            JsonObject examinationJsonObject = new JsonParser().parse(examinationJson).getAsJsonObject();
+            Integer examinationId = examinationJsonObject.get("examinationId").getAsInt();
+            Integer registrationId = examinationJsonObject.get("registrationId").getAsInt();
+            String patientName = examinationJsonObject.get("patientName").getAsString();
+            Integer doctorId = examinationJsonObject.get("doctorId").getAsInt();
+            Integer departmentId = examinationJsonObject.get("departmentId").getAsInt();
+            Integer saveState = examinationJsonObject.get("saveState").getAsInt();
+            Integer payState = examinationJsonObject.get("payState").getAsInt();
+            Integer executionState = examinationJsonObject.get("executionState").getAsInt();
+            String examName = examinationJsonObject.get("examName").getAsString();
+            String clinicalImpression = examinationJsonObject.get("clinicalImpression").getAsString();
+            String requirement = examinationJsonObject.get("requirement").getAsString();
+            String examResult = examinationJsonObject.get("examResult").getAsString();
+
+            examinationMapper.updateByPrimaryKeySelective(new Examination(examinationId, registrationId, patientName, doctorId, departmentId, saveState, payState, executionState, examName, clinicalImpression, requirement, examResult, 1, null, null, null));
         } catch (Exception e) {
             e.printStackTrace();
             return false;

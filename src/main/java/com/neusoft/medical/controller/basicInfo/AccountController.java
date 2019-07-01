@@ -26,7 +26,7 @@ public class AccountController {
      * @param accountScope 查找的帐号范围，字符串数组
      *                     门诊医生 00
      *                     医技医生 01
-     *                     医院管理员 10
+     *                     医院收费员 10
      *                     药房操作员 11
      *                     财务管理员 12
      *                     挂号收费员 13
@@ -90,7 +90,7 @@ public class AccountController {
             @RequestParam(value = "userPassword") String userPassword,
             @RequestParam(value = "accountType") String accountType,
             @RequestParam(value = "realName") String realName,
-            @RequestParam(value = "departmentId") Integer departmentId,
+            @RequestParam(value = "departmentId", required = false) Integer departmentId,
             @RequestParam(value = "jobTitle", required = false) String jobTitle,
             @RequestParam(value = "doctorScheduling", required = false) Integer doctorScheduling
     ) {

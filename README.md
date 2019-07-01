@@ -91,6 +91,14 @@ docker images # 查看构建好的镜像
 docker ps     # 查看正在运行的镜像 
 ```
 
+Redis
+
+```
+docker run --name his-redis -p 6379:6379 -d --restart=always redis:3.2 redis-server --appendonly yes --requirepass "your password"
+
+docker exec -it 3c5687 redis-cli -a 'your password'
+```
+
 #### 开发工具
 
 - 建议使用 WebStorm 与 Intellij IDEA
@@ -151,5 +159,6 @@ docker ps     # 查看正在运行的镜像
 https://mingmliang.github.io/his-demo/#/home)
 - [Docker 部署 SpringBoot 项目](http://www.ityouknow.com/springboot/2018/03/19/spring-boot-docker.html)
 - [SpringBoot 文件上传功能](https://zhuanlan.zhihu.com/p/56110692)
+- [Docker Redis](https://www.jb51.net/article/157020.htm)
 
 :-) 

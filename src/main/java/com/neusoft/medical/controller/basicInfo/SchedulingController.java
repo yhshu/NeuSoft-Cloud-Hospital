@@ -97,8 +97,6 @@ public class SchedulingController {
         }
         return new ResultDTO<>(res);
     }
-
-
     /**
      * 生成排班计划
      * 只能生成未来的排班计划，生成的排班计划可以修改
@@ -140,7 +138,6 @@ public class SchedulingController {
         }
         return new ResultDTO<>(schedulingInfoPageInfo);
     }
-
     /**
      * 保存排班计划
      * 历史排班计划不能修改，只能新增或修改未来的排班计划

@@ -13,9 +13,8 @@ public interface LoginService {
     /**
      * 获取权限
      *
-     * @param userName 用户名
-     * @param token    登录验证成功后获得的 token
+     * @param token 登录验证成功后获得的 token
      * @return 用户权限
      */
-    String permissionRequest(String userName, String token);
+    String permissionRequest(String token);
 }

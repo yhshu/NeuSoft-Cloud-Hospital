@@ -51,12 +51,12 @@ public class LoginController {
      */
     @PostMapping("/permission")
     public ResultDTO<String> permission(
-            @RequestParam(value = "userName") String userName,
+            @RequestParam(value = "userName", required = false) String userName,
             @RequestParam(value = "token") String token
     ) {
         String res = null;
         try {
-            res = loginService.permissionRequest(userName, token);
+            res = loginService.permissionRequest(token);
         } catch (Exception e) {
             e.printStackTrace();
         }

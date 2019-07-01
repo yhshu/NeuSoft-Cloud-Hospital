@@ -16,6 +16,7 @@ public interface RegistrationService {
      *
      * @param record 挂号记录
      * @return 提交的挂号记录
+     * @throws Exception 操作异常
      */
     Registration addRegistration(Registration record) throws Exception;
 

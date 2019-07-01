@@ -4,12 +4,12 @@ import com.neusoft.medical.bean.MedicalRecords;
 import com.neusoft.medical.bean.Registration;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.doctorWorkstation.OutpatientMedicalRecordService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.apache.ibatis.annotations.Delete;
+import org.springframework.web.bind.annotation.*;
+import sun.util.locale.provider.FallbackLocaleProviderAdapter;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -174,6 +174,26 @@ public class MedicalRecordController {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+        return new ResultDTO<>(res);
+    }
+
+    /**
+     * 删除病历记录
+     *
+     * @param medicalRecordsIdList 病历编号列表
+     * @return 操作结果
+     */
+    @DeleteMapping("/delete")
+    public ResultDTO<Boolean> deleteMedicalRecord(
+            @RequestParam(value = "medicalRecordsIdList[]") Integer[] medicalRecordsIdList
+    ) {
+        boolean res;
+        try {
+            res = outpatientMedicalRecordService.deleteMedicalRecords(Arrays.asList(medicalRecordsIdList));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultDTO<>(Boolean.FALSE);
         }
         return new ResultDTO<>(res);
     }

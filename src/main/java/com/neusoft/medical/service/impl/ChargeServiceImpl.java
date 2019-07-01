@@ -1,7 +1,7 @@
 package com.neusoft.medical.service.impl;
 
 import com.google.gson.*;
-import com.neusoft.medical.Util.Constant;
+import com.neusoft.medical.service.ConstantService;
 import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.ChargeEntryMapper;
 import com.neusoft.medical.dao.InvoiceMapper;
@@ -57,20 +57,20 @@ public class ChargeServiceImpl implements ChargeService {
                 int entryId = entryJsonObject.get("entryId").getAsInt();
 
                 // 处理收费条目：chargeEntry 或 prescriptionEntry
-                if (entryType == Constant.ENTRY_TYPE_CHARGE_ENTRY) {
+                if (entryType == ConstantService.ENTRY_TYPE_CHARGE_ENTRY) {
                     ChargeEntry chargeEntryRecord = chargeEntryMapper.selectByPrimaryKey(entryId);
                     if (chargeEntryRecord.getChargeFormId() != null) {
                         disposalFee += chargeEntryRecord.getTotalPrice();
                     } else if (chargeEntryRecord.getExaminationId() != null) {
                         examinationFee += chargeEntryRecord.getTotalPrice();
                     }
-                    chargeEntryRecord.setPayState(Constant.PAY_STATE_CHARGED);
+                    chargeEntryRecord.setPayState(ConstantService.PAY_STATE_CHARGED);
                     chargeEntryRecord.setUnchargedNums(0);
                     chargeEntryMapper.updateByPrimaryKeySelective(chargeEntryRecord);
-                } else if (entryType == Constant.ENTRY_TYPE_PRESCRIPTION_ENTRY) {
+                } else if (entryType == ConstantService.ENTRY_TYPE_PRESCRIPTION_ENTRY) {
                     PrescriptionEntry prescriptionEntryRecord = prescriptionEntryMapper.selectByPrimaryKey(entryId);
                     prescriptionFee += prescriptionEntryRecord.getTotalPrice();
-                    prescriptionEntryRecord.setPayState(Constant.PAY_STATE_CHARGED);
+                    prescriptionEntryRecord.setPayState(ConstantService.PAY_STATE_CHARGED);
                     prescriptionEntryMapper.updateByPrimaryKeySelective(prescriptionEntryRecord);
                 } else {
                     throw new Exception("The value of entryType is null or wrong");
@@ -98,17 +98,17 @@ public class ChargeServiceImpl implements ChargeService {
                 int entryId = refundJsonObject.get("entryId").getAsInt();
                 int refundNums = refundJsonObject.get("refundNums").getAsInt();
 
-                if (entryType == Constant.ENTRY_TYPE_CHARGE_ENTRY) {
+                if (entryType == ConstantService.ENTRY_TYPE_CHARGE_ENTRY) {
                     ChargeEntry chargeEntryRecord = chargeEntryMapper.selectByPrimaryKey(entryId);
                     chargeEntryRecord.setNotGivenNums(max(chargeEntryRecord.getNotGivenNums() - refundNums, 0));
                     if (chargeEntryRecord.getNotGivenNums() == 0)
-                        chargeEntryRecord.setPayState(Constant.PAY_STATE_RETURNED);
+                        chargeEntryRecord.setPayState(ConstantService.PAY_STATE_RETURNED);
                     chargeEntryMapper.updateByPrimaryKeySelective(chargeEntryRecord);
-                } else if (entryType == Constant.ENTRY_TYPE_PRESCRIPTION_ENTRY) {
+                } else if (entryType == ConstantService.ENTRY_TYPE_PRESCRIPTION_ENTRY) {
                     PrescriptionEntry prescriptionEntryRecord = prescriptionEntryMapper.selectByPrimaryKey(entryId);
                     prescriptionEntryRecord.setNotGivenNums(max(prescriptionEntryRecord.getNotGivenNums() - refundNums, 0));
                     if (prescriptionEntryRecord.getNotGivenNums() == 0)
-                        prescriptionEntryRecord.setPayState(Constant.PAY_STATE_RETURNED);
+                        prescriptionEntryRecord.setPayState(ConstantService.PAY_STATE_RETURNED);
                     prescriptionEntryMapper.updateByPrimaryKeySelective(prescriptionEntryRecord);
                 } else {
                     throw new Exception("The value of entryType is null or wrong.");
@@ -125,12 +125,12 @@ public class ChargeServiceImpl implements ChargeService {
     public boolean withdrawRegistration(Integer registrationId) {
         try {
             RegistrationExample registrationExample = new RegistrationExample();
-            registrationExample.or().andValidEqualTo(1).andRegistrationIdEqualTo(registrationId).andIsVisitedEqualTo(Constant.REGIST_NOT_VISITED);
+            registrationExample.or().andValidEqualTo(1).andRegistrationIdEqualTo(registrationId).andIsVisitedEqualTo(ConstantService.REGIST_NOT_VISITED);
 
             List<Registration> registrationList = registrationMapper.selectByExample(registrationExample);
             assert registrationList != null && registrationList.size() <= 1;
             Registration registration = registrationList.get(0);
-            registration.setRegistrationStatus(Constant.REGIST_WITHDRAW);
+            registration.setRegistrationStatus(ConstantService.REGIST_WITHDRAW);
             registrationMapper.updateByPrimaryKeySelective(registration);
 
         } catch (Exception e) {

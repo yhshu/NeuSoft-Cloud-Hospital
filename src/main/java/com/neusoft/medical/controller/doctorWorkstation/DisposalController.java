@@ -16,27 +16,28 @@ public class DisposalController {
     private DisposalService disposalService;
 
     /**
-     * 新增处置申请
+     * 保存处置申请（新增或更新）
      *
      * @param disposalJson 处置项目信息，json 字符串
      * @return 操作结果
      * disposalJson 包含的属性：
+     * - chargeFormId 收费单编号（新增时不填，更新时必填）
      * - registrationId 挂号单编号
      * - chargeFormName 处置单名称
-     * - saveState 保存状态
+     * - saveState 保存状态（暂存 0；正式提交 1；全院模板 2；科室模板 3；医生个人模板 4）
      * - chargeEntryList 处置项目列表，json 数组
      * 在 chargeEntryList 数组中，每个元素的属性：
      * - chargeItemId 处置项目作为收费项目的编号
      * - nums 处置项目的数量
      * - doctorAdvice 医嘱
      */
-    @GetMapping("/add")
-    public ResultDTO<Boolean> addDisposal(
+    @GetMapping("/save")
+    public ResultDTO<Boolean> saveDisposal(
             @RequestParam(value = "disposalJson") String disposalJson
     ) {
         boolean res;
         try {
-            res = disposalService.addDisposal(disposalJson);
+            res = disposalService.saveDisposal(disposalJson);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultDTO<>(Boolean.FALSE);
@@ -130,6 +131,12 @@ public class DisposalController {
         return new ResultDTO<>(res);
     }
 
+    /**
+     * 删除处置项目
+     *
+     * @param chargeFormIdList 处置单编号列表
+     * @return 操作结果
+     */
     @DeleteMapping("/delete_disposal")
     public ResultDTO<Boolean> deleteDisposal(
             @RequestParam(value = "chargeFormIdList[]") Integer[] chargeFormIdList
@@ -140,6 +147,27 @@ public class DisposalController {
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultDTO<>(Boolean.FALSE);
+        }
+        return new ResultDTO<>(res);
+    }
+
+    /**
+     * 查询处置项目模板
+     *
+     * @param disposalScope 查询的处置项目模板范围（全院模板 2；科室模板 3；医生个人模板 4）
+     * @param doctorId      医生编号
+     * @return 处置项目模板列表，json 字符串
+     */
+    @GetMapping("/disposal_template")
+    public ResultDTO<String> selectDisposalTemplate(
+            @RequestParam(value = "disposalScope") Integer disposalScope,
+            @RequestParam(value = "doctorId") Integer doctorId
+    ) {
+        String res = null;
+        try {
+            res = disposalService.selectDisposalTemplate(disposalScope, doctorId);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return new ResultDTO<>(res);
     }

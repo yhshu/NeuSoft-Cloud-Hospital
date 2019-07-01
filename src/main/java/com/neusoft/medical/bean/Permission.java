@@ -1,6 +1,8 @@
 package com.neusoft.medical.bean;
 
-public class Permission {
+import java.io.Serializable;
+
+public class Permission implements Serializable {
     private Integer permissionId;
 
     private String permissionName;
@@ -8,6 +10,8 @@ public class Permission {
     private String permissionDescription;
 
     private Integer valid;
+
+    private static final long serialVersionUID = 1L;
 
     public Permission(Integer permissionId, String permissionName, String permissionDescription, Integer valid) {
         this.permissionId = permissionId;

@@ -1,6 +1,8 @@
 package com.neusoft.medical.bean;
 
-public class Account {
+import java.io.Serializable;
+
+public class Account implements Serializable {
     private Integer accountId;
 
     private String userName;
@@ -16,6 +18,8 @@ public class Account {
     private String reserve2;
 
     private String reserve3;
+
+    private static final long serialVersionUID = 1L;
 
     public Account(Integer accountId, String userName, String userPassword, String accountType, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.accountId = accountId;

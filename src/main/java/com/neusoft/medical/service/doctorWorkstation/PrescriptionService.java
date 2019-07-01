@@ -39,6 +39,7 @@ public interface PrescriptionService {
      * 保存处方（三种保存状态：暂存、提交、存为模板）
      *
      * @param prescriptionJson 表示处方信息的 json 字符串
+     * @return 操作结果
      */
     boolean savePrescription(String prescriptionJson);
 
@@ -64,7 +65,7 @@ public interface PrescriptionService {
      * 字符串中除处方基本信息外，还包含处方药品列表的信息
      *
      * @param prescriptionList 处方列表
-     * @return 包含处方药品信息的处方信息 json 字符串
+     * @return 包含处方药品信息的处方信息，json 字符串
      */
     String prescriptionListToJson(List<Prescription> prescriptionList);
 

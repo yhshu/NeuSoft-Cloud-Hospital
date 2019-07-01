@@ -1,6 +1,8 @@
 package com.neusoft.medical.bean;
 
-public class SettlementCategory {
+import java.io.Serializable;
+
+public class SettlementCategory implements Serializable {
     private Integer settlementCategoryId;
 
     private String settlementCategoryName;
@@ -12,6 +14,8 @@ public class SettlementCategory {
     private String reserve2;
 
     private String reserve3;
+
+    private static final long serialVersionUID = 1L;
 
     public SettlementCategory(Integer settlementCategoryId, String settlementCategoryName, Integer valid, String reserve1, String reserve2, String reserve3) {
         this.settlementCategoryId = settlementCategoryId;

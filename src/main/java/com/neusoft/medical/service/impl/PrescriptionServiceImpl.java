@@ -1,25 +1,29 @@
 package com.neusoft.medical.service.impl;
 
 import com.google.gson.*;
-import com.neusoft.medical.Util.Constant;
+import com.neusoft.medical.service.ConstantService;
 import com.neusoft.medical.Util.MathUtil;
 import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.DoctorMapper;
 import com.neusoft.medical.dao.MedicineMapper;
 import com.neusoft.medical.dao.PrescriptionEntryMapper;
 import com.neusoft.medical.dao.PrescriptionMapper;
+import com.neusoft.medical.service.basicInfo.DoctorService;
 import com.neusoft.medical.service.doctorWorkstation.PrescriptionService;
 import com.neusoft.medical.service.registration.RegistrationService;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import static com.neusoft.medical.Util.Constant.*;
+import static com.neusoft.medical.service.ConstantService.*;
 
 @Service
 public class PrescriptionServiceImpl implements PrescriptionService {
+    private Logger logger = Logger.getLogger(PrescriptionServiceImpl.class);
+
     @Resource
     private MedicineMapper medicineMapper;
     @Resource
@@ -30,6 +34,8 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     private DoctorMapper doctorMapper;
     @Resource
     private RegistrationService registrationService;
+    @Resource
+    private DoctorService doctorService;
 
     private Gson gson = new Gson();
 
@@ -132,7 +138,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
                 String skinTestResult = medicineJsonObject.getAsJsonPrimitive("skinTestResult").getAsString();
                 String doctorAdvice = medicineJsonObject.getAsJsonPrimitive("doctorAdvice").getAsString();
 
-                prescriptionEntryMapper.insert(new PrescriptionEntry(null, medicineId, prescriptionId, unitPrice, totalPrice, nums, nums, medicineUsage, medicineDosage, medicineFrequency, medicineNumberDay, skinTest, skinTestResult, Constant.PAY_STATE_NOT_CHARGED, doctorAdvice, 1, null, null, null));
+                prescriptionEntryMapper.insert(new PrescriptionEntry(null, medicineId, prescriptionId, unitPrice, totalPrice, nums, nums, medicineUsage, medicineDosage, medicineFrequency, medicineNumberDay, skinTest, skinTestResult, ConstantService.PAY_STATE_NOT_CHARGED, doctorAdvice, 1, null, null, null));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -174,7 +180,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
         String res = null;
         try {
             if (prescriptionScope != SAVE_HOSPITAL_TEMPLATE && prescriptionScope != SAVE_DEPART_TEMPLATE && prescriptionScope != SAVE_DOCTOR_TEMPLATE) {
-                System.out.println("关于模板搜索范围的参数非法");
+                logger.error("The search scope for templates is illegal");
                 return null;
             }
 
@@ -183,16 +189,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
             prescriptionExampleCriteria.andValidEqualTo(1).andSaveStateEqualTo(prescriptionScope);
             if (prescriptionScope == SAVE_DEPART_TEMPLATE) {
                 // 科室模板
-                DoctorExample doctorExample = new DoctorExample();
-                DoctorExample.Criteria doctorExampleCriteria = doctorExample.createCriteria();
-                doctorExampleCriteria.andValidEqualTo(1);
-                doctorExampleCriteria.andDepartmentIdEqualTo(doctorMapper.selectByPrimaryKey(doctorId).getDepartmentId());
-                List<Doctor> doctorList = doctorMapper.selectByExample(doctorExample);
-                List<Integer> doctorIdList = new CopyOnWriteArrayList<>();
-                for (Doctor doctor : doctorList) {
-                    doctorIdList.add(doctor.getDoctorId());
-                }
-
+                List<Integer> doctorIdList = doctorService.selectDepartmentDoctorIdListByDoctorId(doctorId);
                 prescriptionExampleCriteria.andDoctorIdIn(doctorIdList);
             } else if (prescriptionScope == SAVE_DOCTOR_TEMPLATE) {
                 // 医生个人模板
@@ -230,6 +227,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
                 prescriptionMedicineJsonArray.add(prescriptionJsonObject);
             }
             res = prescriptionMedicineJsonArray.toString();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

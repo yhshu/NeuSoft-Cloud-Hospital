@@ -1,8 +1,9 @@
 package com.neusoft.medical.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class SchedulingInfo {
+public class SchedulingInfo implements Serializable {
     private Integer schedulingInfoId;
 
     private Date schedulingTime;
@@ -22,6 +23,8 @@ public class SchedulingInfo {
     private Integer limitation;
 
     private Integer remainNums;
+
+    private static final long serialVersionUID = 1L;
 
     public SchedulingInfo(Integer schedulingInfoId, Date schedulingTime, Integer schedulingRuleId, Integer departmentId, Integer doctorId, Integer registrationCategoryId, Integer noon, Integer valid, Integer limitation, Integer remainNums) {
         this.schedulingInfoId = schedulingInfoId;

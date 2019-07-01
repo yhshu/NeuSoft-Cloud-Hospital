@@ -58,7 +58,7 @@ public interface AccountService {
      * @param doctorScheduling 医生是否参与排班
      * @return 操作结果
      */
-    boolean addAccount(String userName, String userPassword, String accountType, String realName, int departmentId, String jobTitle, int doctorScheduling);
+    boolean addAccount(String userName, String userPassword, String accountType, String realName, Integer departmentId, String jobTitle, Integer doctorScheduling);
 
     /**
      * 更新帐号
@@ -98,4 +98,12 @@ public interface AccountService {
      * @return 工作人员信息
      */
     Staff selectStaffByAccountId(Integer accountId);
+
+    /**
+     * 按帐户编号查找医生信息
+     * 
+     * @param accountId 帐户编号
+     * @return 医生信息
+     */
+    Doctor selectDoctorByAccountId(Integer accountId);
 }

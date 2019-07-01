@@ -53,6 +53,7 @@ public class RegistrationController {
     /**
      * 获取挂号医生列表
      *
+     * @param departmentId 科室编号
      * @return 可挂号的医生列表
      */
     @GetMapping("/list_doctor")
@@ -96,7 +97,7 @@ public class RegistrationController {
      * @param departmentId           挂号科室编号
      * @param doctorId               看诊医生编号
      * @param registrationSource     挂号来源
-     * @param settleAccountsCategory 结算类别
+     * @param settlementCategoryId   结算类别
      * @param familyAddress          家庭住址
      * @param collectorId            收费员编号
      * @return 挂号成功 true，挂号失败 false

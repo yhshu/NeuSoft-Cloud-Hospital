@@ -6,7 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.neusoft.medical.Util.Constant;
+import com.neusoft.medical.service.ConstantService;
 import com.neusoft.medical.Util.converter.DateTimeToStringConverter;
 import com.neusoft.medical.Util.converter.DoubleToUpperCaseConverter;
 import com.neusoft.medical.bean.*;
@@ -204,7 +204,7 @@ public class DailySettlementServiceImpl implements DailySettlementService {
             Integer dailySettlementId = dailySettlement.getDailySettlementId();
             for (Invoice invoice : invoiceList) {
                 Registration registration = registrationMapper.selectByPrimaryKey(invoice.getRegistrationId());
-                DailySettlementDetail dailySettlementDetail = new DailySettlementDetail(null, dailySettlementId, invoice.getInvoiceNums(), invoice.getRegistrationId(), invoice.getInvoiceTitle(), invoice.getInvoiceAmount(), invoice.getSelfPay(), invoice.getAccountPay(), invoice.getReimbursementPay(), invoice.getDiscounted(), Constant.INVOICE_VALID, registration.getSettlementCategoryId(), 1);
+                DailySettlementDetail dailySettlementDetail = new DailySettlementDetail(null, dailySettlementId, invoice.getInvoiceNums(), invoice.getRegistrationId(), invoice.getInvoiceTitle(), invoice.getInvoiceAmount(), invoice.getSelfPay(), invoice.getAccountPay(), invoice.getReimbursementPay(), invoice.getDiscounted(), ConstantService.INVOICE_VALID, registration.getSettlementCategoryId(), 1);
                 dailySettlementDetailMapper.insert(dailySettlementDetail);
             }
 

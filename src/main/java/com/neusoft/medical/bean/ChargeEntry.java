@@ -1,8 +1,9 @@
 package com.neusoft.medical.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ChargeEntry {
+public class ChargeEntry implements Serializable {
     private Integer chargeEntryId;
 
     private Integer registrationId;
@@ -42,6 +43,8 @@ public class ChargeEntry {
     private String reserve2;
 
     private String reserve3;
+
+    private static final long serialVersionUID = 1L;
 
     public ChargeEntry(Integer chargeEntryId, Integer registrationId, Integer chargeFormId, Integer chargeItemId, Integer examinationId, Double unitPrice, Double totalPrice, Integer nums, Integer unchargedNums, Integer notGivenNums, Integer payState, Date madeTime, Integer departmentId, Integer doctorId, Integer collectorId, Integer valid, String doctorAdvice, String reserve1, String reserve2, String reserve3) {
         this.chargeEntryId = chargeEntryId;
