@@ -60,7 +60,9 @@ public class AccountServiceImpl implements AccountService {
                     System.out.println("selectAccount: " + doctor.toString());
                     accountJsonObject.addProperty("realName", doctor.getDoctorName());
                     accountJsonObject.addProperty("departmentId", doctor.getDepartmentId());
-                    accountJsonObject.addProperty("departmentName", departmentMapper.selectByPrimaryKey(doctor.getDepartmentId()).getDepartmentName());
+                    Department department = departmentMapper.selectByPrimaryKey(doctor.getDepartmentId());
+                    if (department != null)
+                        accountJsonObject.addProperty("departmentName", department.getDepartmentName());
                     accountJsonObject.addProperty("jobTitle", doctor.getJobTitle());
                     accountJsonObject.addProperty("doctorScheduling", doctor.getDoctorScheduling());
                 }
@@ -75,7 +77,9 @@ public class AccountServiceImpl implements AccountService {
                     System.out.println("selectAccount: " + staff.toString());
                     accountJsonObject.addProperty("realName", staff.getRealName());
                     accountJsonObject.addProperty("departmentId", staff.getDepartmentId());
-                    accountJsonObject.addProperty("departmentName", departmentMapper.selectByPrimaryKey(staff.getDepartmentId()).getDepartmentName());
+                    Department department = departmentMapper.selectByPrimaryKey(staff.getDepartmentId());
+                    if (department != null)
+                        accountJsonObject.addProperty("departmentName", department.getDepartmentName());
                 }
             }
             accountJsonList.add(accountJsonObject.toString());  // 将该用户信息添加到列表中
