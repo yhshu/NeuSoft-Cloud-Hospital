@@ -127,12 +127,12 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
 
             // 存储病历信息到 medical_records 表
             // 如果病历记录已存在，则更新病历记录；如果病历记录尚不存在，则新增病历记录
-            // 首先根据挂号编号，判断是否存在病历记录
+            // 首先根据挂号单编号，判断是否存在病历记录
             MedicalRecordsExample medicalRecordsExample = new MedicalRecordsExample();
             MedicalRecordsExample.Criteria criteria = medicalRecordsExample.createCriteria();
             criteria.andValidEqualTo(1);
             criteria.andRegistrationIdEqualTo(registrationId);
-            List<MedicalRecords> medicalRecordsList = medicalRecordsMapper.selectByExample(medicalRecordsExample); // 获得指定挂号编号的病历记录
+            List<MedicalRecords> medicalRecordsList = medicalRecordsMapper.selectByExample(medicalRecordsExample); // 获得指定挂号单编号的病历记录
             MedicalRecords record = new MedicalRecords(null, registrationId, mainInfo, currentDisease, pastDisease, physicalExam, auxiliaryExam, opinion, 1, saveState, doctorId, null, null, null, null);
             int medicalRecordsId = -1;
 

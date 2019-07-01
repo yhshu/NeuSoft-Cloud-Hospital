@@ -164,11 +164,28 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
             // 找到每项挂号对应的历史处方
             PrescriptionExample prescriptionExample = new PrescriptionExample();
-            prescriptionExample.or().andValidEqualTo(1).andRegistrationIdIn(registrationIdList).andSaveStateEqualTo(SAVE_FORMAL);
-            prescriptionExample.or().andValidEqualTo(1).andRegistrationIdIn(registrationIdList).andSaveStateEqualTo(SAVE_TEMP);
+            prescriptionExample.or().andValidEqualTo(1).andRegistrationIdIn(registrationIdList).andSaveStateEqualTo(SAVE_FORMAL);  // 医生正式提交的处方
+            prescriptionExample.or().andValidEqualTo(1).andRegistrationIdIn(registrationIdList).andSaveStateEqualTo(SAVE_TEMP);  // 医生暂存的处方
             List<Prescription> prescriptionList = prescriptionMapper.selectByExample(prescriptionExample);
 
-            res = prescriptionListToJson(prescriptionList);
+            res = prescriptionListToJson(prescriptionList, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
+    @Override
+    public String selectUnpaidPrescription(Integer registrationId) {
+        String res = null;
+        try {
+            PrescriptionExample prescriptionExample = new PrescriptionExample();
+            prescriptionExample.or().andValidEqualTo(1).andRegistrationIdEqualTo(registrationId).andSaveStateEqualTo(SAVE_FORMAL); // 医生正式提交的处方
+            List<Prescription> prescriptionList = prescriptionMapper.selectByExample(prescriptionExample);  // 医生正式提交的处方列表
+
+            List<Integer> payStateList = new CopyOnWriteArrayList<>();
+            payStateList.add(PAY_STATE_NOT_CHARGED);
+            res = prescriptionListToJson(prescriptionList, payStateList);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -197,7 +214,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
             }
 
             List<Prescription> prescriptionList = prescriptionMapper.selectByExample(prescriptionExample);
-            res = prescriptionListToJson(prescriptionList);
+            res = prescriptionListToJson(prescriptionList, null);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -206,7 +223,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     }
 
     @Override
-    public String prescriptionListToJson(List<Prescription> prescriptionList) {
+    public String prescriptionListToJson(List<Prescription> prescriptionList, List<Integer> payStateList) {
         String res = null;
         try {
             JsonArray prescriptionMedicineJsonArray = new JsonArray();
@@ -215,7 +232,10 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
                 // 找到每项处方对应的药品信息
                 PrescriptionEntryExample prescriptionEntryExample = new PrescriptionEntryExample();
-                prescriptionEntryExample.or().andValidEqualTo(1).andPrescriptionIdEqualTo(prescription.getPrescriptionId());
+                PrescriptionEntryExample.Criteria prescriptionEntryCriteria = prescriptionEntryExample.createCriteria();
+                prescriptionEntryCriteria.andValidEqualTo(1).andPrescriptionIdEqualTo(prescription.getPrescriptionId());
+                if (payStateList != null && !payStateList.isEmpty())  // 指定了支付状态
+                    prescriptionEntryCriteria.andPayStateIn(payStateList);
                 List<PrescriptionEntry> prescriptionEntryList = prescriptionEntryMapper.selectByExample(prescriptionEntryExample);
                 JsonArray prescriptionEntryListJsonArray = gson.toJsonTree(prescriptionEntryList).getAsJsonArray();
                 for (JsonElement prescriptionEntryJsonElement : prescriptionEntryListJsonArray) {

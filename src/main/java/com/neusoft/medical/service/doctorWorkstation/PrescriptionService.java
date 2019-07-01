@@ -46,10 +46,19 @@ public interface PrescriptionService {
     /**
      * 获取历史处方（暂存 或 正式提交）
      *
-     * @param registrationId 挂号编号
+     * @param registrationId 挂号单编号
      * @return 历史处方列表，json 字符串列表
      */
     String selectHistoryPrescription(Integer registrationId);
+
+    /**
+     * 获取待支付处方
+     * 不包含已退费的处方
+     *
+     * @param registrationId 挂号单编号
+     * @return 待支付处方列表，json 字符串
+     */
+    String selectUnpaidPrescription(Integer registrationId);
 
     /**
      * 查询处方模板
@@ -65,9 +74,10 @@ public interface PrescriptionService {
      * 字符串中除处方基本信息外，还包含处方药品列表的信息
      *
      * @param prescriptionList 处方列表
+     * @param saveStateList
      * @return 包含处方药品信息的处方信息，json 字符串
      */
-    String prescriptionListToJson(List<Prescription> prescriptionList);
+    String prescriptionListToJson(List<Prescription> prescriptionList, List<Integer> saveStateList);
 
     /**
      * 删除处方记录
@@ -84,5 +94,4 @@ public interface PrescriptionService {
      * @return 医生的处方列表
      */
     List<Prescription> selectPrescriptionList(Integer doctorId);
-
 }

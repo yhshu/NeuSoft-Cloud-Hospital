@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface ChargeEntryService {
     /**
-     * 按挂号编号获取收费项目
+     * 按挂号单编号获取收费项目
      *
      * @param currentPage         当前页码
      * @param pageSize            页面大小
-     * @param registrationId      挂号编号
+     * @param registrationId      挂号单编号
      * @param startDate           开始日期（可选）
      * @param endDate             结束日期（可选）
      * @param chargeEntryCategory 收费项目类别（0: 未完成支付； 1: 已完成支付; 2: 所有收费项目）
@@ -24,7 +24,7 @@ public interface ChargeEntryService {
      * 添加收费项目到收费账单中
      *
      * @param chargeItemId   收费项目编号
-     * @param registrationId 挂号编号
+     * @param registrationId 挂号单编号
      * @param itemCount      收费项目计数
      * @param collectorId    收费员编号
      * @param doctorAdvice   医嘱

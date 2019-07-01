@@ -41,9 +41,26 @@ public interface ExaminationService {
      * 按挂号单编号获取历史检查项目（所有检查状态）
      *
      * @param registrationId 挂号单编号
-     * @return 操作结果
+     * @return 历史检查项目，json 数组
      */
-    String selectHistoryExam(int registrationId);
+    String selectHistoryExam(Integer registrationId);
+
+    /**
+     * 按挂号单编号获取待支付检查项目
+     *
+     * @param registrationId 挂号单编号
+     * @return 待支付检查项目，json 数组
+     */
+    String selectUnpaidExam(Integer registrationId);
+
+    /**
+     * 获取检查项目
+     *
+     * @param registrationId 挂号单编号
+     * @param payStateList   支付状态列表
+     * @return 检查项目，json 数组
+     */
+    String selectExam(Integer registrationId, List<Integer> payStateList);
 
     /**
      * 执行检查

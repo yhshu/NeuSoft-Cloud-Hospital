@@ -143,7 +143,7 @@ public class MedicalRecordController {
      * 诊断结束
      * 结束看诊之后，针对该患者不能再进行任何检查、检验的申请以及药品的开立、收费等
      *
-     * @param registrationId 挂号编号
+     * @param registrationId 挂号单编号
      * @return 操作结果
      */
     @GetMapping("/end_registration")

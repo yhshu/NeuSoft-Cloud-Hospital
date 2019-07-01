@@ -31,6 +31,6 @@ public class CloudHospitalApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(CloudHospitalApplication.class, args);
-        logger.info("SpringBoot main function has started");
+        logger.info("SpringBoot main function has started...");
     }
 }

@@ -152,9 +152,9 @@ public class RegistrationController {
     }
 
     /**
-     * 按挂号编号获取挂号信息
+     * 按挂号单编号获取挂号信息
      *
-     * @param registrationId 挂号编号
+     * @param registrationId 挂号单编号
      * @return 挂号信息
      */
     @GetMapping("/select_registration")

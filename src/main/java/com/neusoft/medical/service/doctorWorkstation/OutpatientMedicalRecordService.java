@@ -69,7 +69,7 @@ public interface OutpatientMedicalRecordService {
      * 诊断结束
      * 结束看诊之后，针对该患者不能再进行任何检查、检验的申请以及药品的开立、收费等
      *
-     * @param registrationId 挂号编号
+     * @param registrationId 挂号单编号
      * @return 操作结果
      */
     boolean endRegistration(int registrationId);
@@ -77,7 +77,7 @@ public interface OutpatientMedicalRecordService {
     /**
      * 获取患者历史病历
      *
-     * @param registrationId 患者的挂号编号
+     * @param registrationId 患者的挂号单编号
      * @return 患者的历史病历记录
      */
     String selectPatientHistoryMedicalRecords(Integer registrationId);
