@@ -4,6 +4,8 @@ NeuSoft hospital information system
 
 东软睿道 - Java 互联网架构 - 实训项目
 
+[在线浏览本项目 JavaDoc](https://apidoc.gitee.com/s429/NeuSoft-Cloud-Hospital/)
+
 ### 环境与工具
 
 本后端项目所使用的环境与工具如下：

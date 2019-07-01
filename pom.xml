@@ -173,7 +173,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>RELEASE</version>
+                <version>3.0.0</version>
             </plugin>
 
             <!-- 自动生成代码插件 -->
