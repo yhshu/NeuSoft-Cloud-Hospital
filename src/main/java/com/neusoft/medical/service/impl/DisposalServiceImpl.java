@@ -41,9 +41,13 @@ public class DisposalServiceImpl implements DisposalService {
             // 首先获取 json 字符串中的属性值，然后将提交的信息加入到 charge_form 表和 charge_entry 表
             JsonObject disposalJsonObject = new JsonParser().parse(disposalJson).getAsJsonObject();
             Integer chargeFormId = null;  // 新增时不填，更新时必填
-            Integer registrationId = null;
+            Integer registrationId = null;  // 新增模板时必填，暂存/正式提交时必填
+
             try {
                 chargeFormId = disposalJsonObject.get("chargeFormId").getAsInt();
+            } catch (Exception ignore) {
+            }
+            try {
                 registrationId = disposalJsonObject.get("registrationId").getAsInt();
             } catch (Exception ignore) {
             }

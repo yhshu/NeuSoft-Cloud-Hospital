@@ -25,9 +25,18 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public List<Doctor> selectDepartmentDoctorListByDoctorId(Integer doctorId) {
-        DoctorExample doctorExample = new DoctorExample();
-        doctorExample.or().andValidEqualTo(1).andDepartmentIdEqualTo(doctorMapper.selectByPrimaryKey(doctorId).getDepartmentId());
-        return doctorMapper.selectByExample(doctorExample);
+        Doctor doctor = doctorMapper.selectByPrimaryKey(doctorId);
+        if (doctor.getDepartmentId() == null) {
+            // 该医生没有所属科室，返回的医生列表仅包含该医生1人
+            List<Doctor> doctorList = new CopyOnWriteArrayList<>();
+            doctorList.add(doctor);
+            return doctorList;
+        } else {
+            // 该医生有所属科室，返回该科室所有医生的列表
+            DoctorExample doctorExample = new DoctorExample();
+            doctorExample.or().andValidEqualTo(1).andDepartmentIdEqualTo(doctorMapper.selectByPrimaryKey(doctorId).getDepartmentId());
+            return doctorMapper.selectByExample(doctorExample);
+        }
     }
 
     @Override
