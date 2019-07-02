@@ -36,7 +36,7 @@ public class ChargeEntryServiceImpl implements ChargeEntryService {
         ChargeEntryExample chargeEntryExample = new ChargeEntryExample();
         ChargeEntryExample.Criteria criteria = chargeEntryExample.createCriteria();
         criteria.andValidEqualTo(1); // 有效记录
-        criteria.andRegistrationIdEqualTo(registrationId); // 挂号编号
+        criteria.andRegistrationIdEqualTo(registrationId); // 挂号单编号
         if (startDate != null) // 起始时间
             criteria.andMadeTimeGreaterThan(startDate);
         if (endDate != null) // 结束时间

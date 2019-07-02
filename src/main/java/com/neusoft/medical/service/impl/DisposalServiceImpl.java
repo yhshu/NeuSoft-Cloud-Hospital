@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import static com.neusoft.medical.service.ConstantService.*;
 
@@ -110,6 +111,18 @@ public class DisposalServiceImpl implements DisposalService {
 
     @Override
     public String selectHistoryDisposal(Integer registrationId) {
+        return selectDisposal(registrationId, null);
+    }
+
+    @Override
+    public String selectUnpaidDisposal(Integer registrationId) {
+        List<Integer> payStateList = new CopyOnWriteArrayList<>();
+        payStateList.add(PAY_STATE_NOT_CHARGED);
+        return selectDisposal(registrationId, payStateList);
+    }
+
+    @Override
+    public String selectDisposal(Integer registrationId, List<Integer> payStateList) {
         ChargeFormExample chargeFormExample = new ChargeFormExample();
         chargeFormExample.or().andValidEqualTo(1).andRegistrationIdEqualTo(registrationId);  // 本次挂号的收费单
 
@@ -122,7 +135,11 @@ public class DisposalServiceImpl implements DisposalService {
 
             // 针对每项处置项目单，找到其处置项目列表
             ChargeEntryExample chargeEntryExample = new ChargeEntryExample();
-            chargeEntryExample.or().andValidEqualTo(1).andRegistrationIdEqualTo(registrationId).andChargeFormIdEqualTo(chargeFormId);
+            ChargeEntryExample.Criteria chargeEntryCriteria = chargeEntryExample.createCriteria();
+            chargeEntryCriteria.andValidEqualTo(1).andRegistrationIdEqualTo(registrationId).andChargeFormIdEqualTo(chargeFormId);
+            if (payStateList != null && !payStateList.isEmpty()) {  // 指定了支付状态
+                chargeEntryCriteria.andPayStateIn(payStateList);
+            }
             List<ChargeEntry> chargeEntryList = chargeEntryMapper.selectByExample(chargeEntryExample);
             JsonArray chargeEntryListJsonArray = gson.toJsonTree(chargeEntryList).getAsJsonArray();
             for (JsonElement chargeEntryJsonElement : chargeEntryListJsonArray) {
@@ -154,8 +171,9 @@ public class DisposalServiceImpl implements DisposalService {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
-        return false;
+        return true;
     }
 
     @Override

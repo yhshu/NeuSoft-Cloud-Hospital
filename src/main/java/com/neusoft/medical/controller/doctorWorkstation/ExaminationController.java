@@ -88,6 +88,25 @@ public class ExaminationController {
     }
 
     /**
+     * 按挂号单编号获取待支付检查项目
+     *
+     * @param registrationId 挂号单编号
+     * @return 待支付检查项目，json 数组
+     */
+    @GetMapping("/unpaid_exam")
+    public ResultDTO<String> selectUnpaidExam(
+            @RequestParam(value = "registrationId") Integer registrationId
+    ) {
+        String res = null;
+        try {
+            res = examinationService.selectUnpaidExam(registrationId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResultDTO<>(res);
+    }
+
+    /**
      * 执行检查
      * 更改检查状态，提交检查结果
      * <p>

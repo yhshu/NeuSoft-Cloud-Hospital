@@ -84,6 +84,25 @@ public class DisposalController {
     }
 
     /**
+     * 按挂号单编号获取待支付处置项目
+     *
+     * @param registrationId 挂号单编号
+     * @return 待支付处置项目，json 数组
+     */
+    @GetMapping("/unpaid_disposal")
+    public ResultDTO<String> selectUnpaidDisposal(
+            @RequestParam(value = "registrationId") Integer registrationId
+    ) {
+        String res = null;
+        try {
+            res = disposalService.selectUnpaidDisposal(registrationId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResultDTO<>(res);
+    }
+
+    /**
      * 执行处置
      * 更改处置状态，修改收费项目的尚未交付数量
      * 处置项目被全部执行完，修改 charge_form 的执行状态

@@ -91,7 +91,19 @@ public class ExaminationServiceImpl implements ExaminationService {
     }
 
     @Override
-    public String selectHistoryExam(int registrationId) {
+    public String selectHistoryExam(Integer registrationId) {
+        return selectExam(registrationId, null);
+    }
+
+    @Override
+    public String selectUnpaidExam(Integer registrationId) {
+        List<Integer> payStateList = new CopyOnWriteArrayList<>();
+        payStateList.add(PAY_STATE_NOT_CHARGED);
+        return selectExam(registrationId, payStateList);
+    }
+
+    @Override
+    public String selectExam(Integer registrationId, List<Integer> payStateList) {
         ExaminationExample examinationExample = new ExaminationExample();
         examinationExample.or().andValidEqualTo(1).andRegistrationIdEqualTo(registrationId);
 
@@ -103,7 +115,11 @@ public class ExaminationServiceImpl implements ExaminationService {
 
             // 针对每项检查，找到其收费项目列表
             ChargeEntryExample chargeEntryExample = new ChargeEntryExample();
-            chargeEntryExample.or().andValidEqualTo(1).andRegistrationIdEqualTo(registrationId).andExaminationIdEqualTo(examinationId);
+            ChargeEntryExample.Criteria criteria = chargeEntryExample.createCriteria();
+            criteria.andValidEqualTo(1).andRegistrationIdEqualTo(registrationId).andExaminationIdEqualTo(examinationId);
+            if (payStateList != null && !payStateList.isEmpty()) {  // 指定了支付状态
+                criteria.andPayStateIn(payStateList);
+            }
             List<ChargeEntry> chargeEntryList = chargeEntryMapper.selectByExample(chargeEntryExample);
             JsonArray chargeEntryListJsonArray = gson.toJsonTree(chargeEntryList).getAsJsonArray();
             for (JsonElement chargeEntryJsonElement : chargeEntryListJsonArray) {

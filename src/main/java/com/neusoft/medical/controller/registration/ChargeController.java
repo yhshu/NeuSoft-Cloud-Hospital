@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 /**
- * 收费 控制器
+ * 基础信息维护：收费、退费、退号 控制器
  */
 @RestController
 @RequestMapping("/charge")

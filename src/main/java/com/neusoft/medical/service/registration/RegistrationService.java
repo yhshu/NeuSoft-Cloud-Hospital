@@ -33,13 +33,13 @@ public interface RegistrationService {
     /**
      * 获取挂号信息
      *
-     * @param registrationId 挂号编号
+     * @param registrationId 挂号单编号
      * @return 挂号信息
      */
     Registration selectRegistrationByPrimaryKey(Integer registrationId);
 
     /**
-     * 按挂号编号获取患者的历史挂号列表
+     * 按挂号单编号获取患者的历史挂号列表
      *
      * @param registrationId 挂号单编号
      * @return 患者的历史挂号信息
@@ -47,10 +47,10 @@ public interface RegistrationService {
     List<Registration> historyRegistrationList(int registrationId);
 
     /**
-     * 按挂号编号获取患者的历史挂号编号列表
+     * 按挂号单编号获取患者的历史挂号单编号列表
      *
      * @param registrationId 挂号单编号
-     * @return 患者的历史挂号编号列表
+     * @return 患者的历史挂号单编号列表
      */
     List<Integer> historyRegistrationIdList(int registrationId);
 

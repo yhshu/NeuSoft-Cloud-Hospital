@@ -64,7 +64,7 @@ public class PrescriptionController {
      * 该 json 字符串包含的属性：
      * - prescriptionId 处方编号（新增时填 -1，更新时填被更新的编号）
      * - prescriptionName 处方名称
-     * - registrationId 挂号编号（暂存或正式提交 必填，模板 可空）
+     * - registrationId 挂号单编号（暂存或正式提交 必填，模板 可空）
      * - doctorId 创建模板的医生编号（暂存或正式提交 可空，模板 必填）
      * - saveState 保存状态（暂存 0；正式提交 1；全院模板 2；科室模板 3；医生个人模板 4）
      * - medicine 处方中包含的药物清单，json 数组
@@ -114,8 +114,8 @@ public class PrescriptionController {
     /**
      * 获取历史处方（暂存 或 正式提交）
      *
-     * @param registrationId 挂号编号
-     * @return 历史处方列表，json 字符串列表
+     * @param registrationId 挂号单编号
+     * @return 历史处方列表，json 字符串
      */
     @GetMapping("/history_prescription")
     public ResultDTO<String> selectHistoryPrescription(
@@ -128,6 +128,26 @@ public class PrescriptionController {
             e.printStackTrace();
         }
         return new ResultDTO<>(historyPrescriptionJsonList);
+    }
+
+    /**
+     * 获取待支付处方
+     * 不包含已退费的处方
+     *
+     * @param registrationId 挂号单编号
+     * @return 待支付处方列表，json 字符串
+     */
+    @GetMapping("/unpaid_prescription")
+    public ResultDTO<String> selectUnpaidPrescription(
+            @RequestParam(value = "registrationId") Integer registrationId
+    ) {
+        String unpaidPrescriptionJsonList = null;
+        try {
+            unpaidPrescriptionJsonList = prescriptionService.selectUnpaidPrescription(registrationId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResultDTO<>(unpaidPrescriptionJsonList);
     }
 
     /**

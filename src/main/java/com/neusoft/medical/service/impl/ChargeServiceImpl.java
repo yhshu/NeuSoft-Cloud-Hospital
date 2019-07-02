@@ -91,24 +91,25 @@ public class ChargeServiceImpl implements ChargeService {
     @Override
     public boolean refund(String refundJson) {
         try {
-            JsonArray refundJsonArray = new JsonParser().parse(refundJson).getAsJsonArray();
+            JsonArray refundJsonArray = new JsonParser().parse(refundJson).getAsJsonArray();  // 退费项目列表 json 数组
             for (JsonElement refundJsonElement : refundJsonArray) {
-                JsonObject refundJsonObject = refundJsonElement.getAsJsonObject();
-                int entryType = refundJsonObject.get("entryType").getAsInt();
-                int entryId = refundJsonObject.get("entryId").getAsInt();
-                int refundNums = refundJsonObject.get("refundNums").getAsInt();
+                JsonObject refundJsonObject = refundJsonElement.getAsJsonObject(); // 退费项目信息
+                int entryType = refundJsonObject.get("entryType").getAsInt();  // 退费项目的类型
+                int entryId = refundJsonObject.get("entryId").getAsInt();  // 退费项目的编号
+                int refundNums = refundJsonObject.get("refundNums").getAsInt();  // 退费项目的数量
 
-                if (entryType == ConstantService.ENTRY_TYPE_CHARGE_ENTRY) {
+                if (entryType == ConstantService.ENTRY_TYPE_CHARGE_ENTRY) { // 退费项目是检查/检验项目 或 处置项目
                     ChargeEntry chargeEntryRecord = chargeEntryMapper.selectByPrimaryKey(entryId);
-                    chargeEntryRecord.setNotGivenNums(max(chargeEntryRecord.getNotGivenNums() - refundNums, 0));
-                    if (chargeEntryRecord.getNotGivenNums() == 0)
-                        chargeEntryRecord.setPayState(ConstantService.PAY_STATE_RETURNED);
+                    chargeEntryRecord.setNotGivenNums(max(chargeEntryRecord.getNotGivenNums() - refundNums, 0));  // 退费后，尚未交付的项目数量减少
+                    if (chargeEntryRecord.getNotGivenNums() == 0)  // 如果尚未交付数量为零，即项目被完全退费
+                        chargeEntryRecord.setPayState(ConstantService.PAY_STATE_RETURNED);  // 支付状态设置为已退费
                     chargeEntryMapper.updateByPrimaryKeySelective(chargeEntryRecord);
-                } else if (entryType == ConstantService.ENTRY_TYPE_PRESCRIPTION_ENTRY) {
+
+                } else if (entryType == ConstantService.ENTRY_TYPE_PRESCRIPTION_ENTRY) { // 退费项目是药品
                     PrescriptionEntry prescriptionEntryRecord = prescriptionEntryMapper.selectByPrimaryKey(entryId);
                     prescriptionEntryRecord.setNotGivenNums(max(prescriptionEntryRecord.getNotGivenNums() - refundNums, 0));
                     if (prescriptionEntryRecord.getNotGivenNums() == 0)
-                        prescriptionEntryRecord.setPayState(ConstantService.PAY_STATE_RETURNED);
+                        prescriptionEntryRecord.setPayState(ConstantService.PAY_STATE_RETURNED);  // 支付状态设置为已退费
                     prescriptionEntryMapper.updateByPrimaryKeySelective(prescriptionEntryRecord);
                 } else {
                     throw new Exception("The value of entryType is null or wrong.");
