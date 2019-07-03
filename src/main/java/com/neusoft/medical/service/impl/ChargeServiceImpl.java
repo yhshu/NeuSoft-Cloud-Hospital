@@ -131,7 +131,7 @@ public class ChargeServiceImpl implements ChargeService {
                     throw new Exception("The value of entryType is null or wrong.");
                 }
 
-                Invoice invoiceRecord = new Invoice(null, invoiceTitle, invoiceNums, collectorId, registrationId, new Date(), refundAmount, null, null, null, null, ConstantService.PAY_STATE_RETURNED, null, null, null, null, 1);  // 生成退费记录
+                Invoice invoiceRecord = new Invoice(null, invoiceTitle, invoiceNums, collectorId, registrationId, new Date(), -refundAmount, -refundAmount, null, null, null, ConstantService.PAY_STATE_RETURNED, null, null, null, null, 1);  // 生成退费记录
                 invoiceMapper.insert(invoiceRecord); // 新增退费记录
             }
         } catch (Exception e) {
