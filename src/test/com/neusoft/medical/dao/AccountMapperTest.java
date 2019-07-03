@@ -46,8 +46,12 @@ public class AccountMapperTest {
 
     @Test
     public void selectByPrimaryKey() {
-        Account account = accountMapper.selectByPrimaryKey(10);
-        System.out.println(account.getAccountId() + account.getUserName());
+        for (int i = 0; i < 100; i++) {
+            Account account = accountMapper.selectByPrimaryKey(i);
+            if (account != null)
+                System.out.println(account.getAccountId() + account.getUserName());
+        }
+
     }
 
     @Test

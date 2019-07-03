@@ -1,4 +1,4 @@
-package com.neusoft.medical.Util;
+package com.neusoft.medical.Util.database;
 
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.CollectionUtils;

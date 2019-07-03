@@ -1,6 +1,7 @@
 package com.neusoft.medical.service.impl;
 
 import com.neusoft.medical.bean.Account;
+import com.neusoft.medical.dao.AccountMapper;
 import com.neusoft.medical.service.basicInfo.AccountService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,6 +17,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class AccountServiceImplTest {
     @Resource
     private AccountService accountService;
+    @Resource
+    private AccountMapper accountMapper;
 
     @Test
     public void selectAccount() {
@@ -29,7 +32,7 @@ public class AccountServiceImplTest {
     public void selectDoctor() {
         List<String> doctorScope = new CopyOnWriteArrayList<>();
         doctorScope.add("00");
-        accountService.selectAccount(1, 20, doctorScope);
+        accountService.selectDoctor(1, 20, doctorScope);
     }
 
     @Test
@@ -39,10 +42,19 @@ public class AccountServiceImplTest {
 
     @Test
     public void updateAccount() {
+        Account accountRecord = new Account(null, "test_username", "user_password", "00", 1, null, null, null);
+        accountMapper.insert(accountRecord);
+        Integer accountId = accountRecord.getAccountId();
+        accountService.updateAccount(accountId, "test_username1", "test_password", "realname", 13, "主治医师", 1);
     }
 
     @Test
     public void deleteAccount() {
+        Account accountRecord = new Account(null, "test_username", "user_password", "00", 1, null, null, null);
+        accountMapper.insert(accountRecord);
+        List<Integer> accountIdList = new CopyOnWriteArrayList<>();
+        accountIdList.add(accountRecord.getAccountId());
+        accountService.deleteAccount(accountIdList);
     }
 
     @Test
@@ -52,9 +64,15 @@ public class AccountServiceImplTest {
 
     @Test
     public void selectStaffByAccountId() {
+        for (int i = 0; i < 100; i++) {
+            accountService.selectStaffByAccountId(i);
+        }
     }
 
     @Test
     public void selectDoctorByAccountId() {
+        for (int i = 0; i < 100; i++) {
+            accountService.selectDoctorByAccountId(i);
+        }
     }
 }
