@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * 科室管理控制器
@@ -38,13 +39,13 @@ public class DepartmentController {
     public ResultDTO<PageInfo<Department>> selectDepartment(
             @RequestParam(value = "currentPage") Integer currentPage,
             @RequestParam(value = "pageSize") Integer pageSize,
-            @RequestParam(value = "departmentCategory[]", required = false) Integer[] departmentCategory) {
+            @RequestParam(value = "departmentCategory[]", required = false) Integer[] departmentCategory) throws ExecutionException, InterruptedException {
         System.out.println("selectDepartment: " + "查询科室列表");
         PageInfo<Department> departmentList;
         if (departmentCategory == null) {
-            departmentList = departmentService.selectDepartment(currentPage, pageSize, null);
+            departmentList = departmentService.selectDepartment(currentPage, pageSize, null).get();
         } else {
-            departmentList = departmentService.selectDepartment(currentPage, pageSize, Arrays.asList(departmentCategory));
+            departmentList = departmentService.selectDepartment(currentPage, pageSize, Arrays.asList(departmentCategory)).get();
         }
         return new ResultDTO<>(departmentList);
     }
@@ -123,7 +124,14 @@ public class DepartmentController {
     @GetMapping(value = "/list_all_department")
     public ResultDTO<List<Department>> findAllDepartment() {
         System.out.println("DepartmentController: " + "查询科室列表");
-        List<Department> departmentList = departmentService.findAllDepartment();
+        List<Department> departmentList = null;
+        try {
+            departmentList = departmentService.findAllDepartment().get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
         return new ResultDTO<>(departmentList);
     }
 }

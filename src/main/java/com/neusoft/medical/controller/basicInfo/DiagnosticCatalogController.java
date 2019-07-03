@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * 诊断目录控制器
@@ -30,9 +31,9 @@ public class DiagnosticCatalogController {
      * @return 所有疾病种类信息
      */
     @GetMapping(value = "/list_disease_category")
-    public ResultDTO<List<DiseaseCategory>> findAllDiseaseCategory() {
+    public ResultDTO<List<DiseaseCategory>> findAllDiseaseCategory() throws ExecutionException, InterruptedException {
         System.out.println("findAllDiseaseCategory: " + "查询疾病分类目录");
-        List<DiseaseCategory> diseaseCategoryList = diagnosticCatalogService.findAllDiseaseCategory();
+        List<DiseaseCategory> diseaseCategoryList = diagnosticCatalogService.findAllDiseaseCategory().get();
         return new ResultDTO<>(diseaseCategoryList);
     }
 

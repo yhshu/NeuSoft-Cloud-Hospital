@@ -5,10 +5,11 @@ import com.neusoft.medical.bean.Disease;
 import com.neusoft.medical.bean.DiseaseCategory;
 
 import java.util.List;
+import java.util.concurrent.Future;
 
 public interface DiagnosticCatalogService {
 
-    List<DiseaseCategory> findAllDiseaseCategory();
+    Future<List<DiseaseCategory>> findAllDiseaseCategory();
 
     PageInfo<Disease> selectDiseaseByPage(int currentPage, int pageSize, int diseaseCategoryId);
 

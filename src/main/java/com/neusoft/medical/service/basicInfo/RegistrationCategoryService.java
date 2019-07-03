@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.RegistrationCategory;
 
 import java.util.List;
+import java.util.concurrent.Future;
 
 public interface RegistrationCategoryService {
 
@@ -47,7 +48,7 @@ public interface RegistrationCategoryService {
      */
     boolean deleteRegistrationCategoryByPrimaryKey(List<Integer> registrationCategoryId);
 
-    List<RegistrationCategory> selectAllRegistrationCategory();
+    Future<List<RegistrationCategory>> selectAllRegistrationCategory();
 
     double registrationFee(Integer registrationCategoryId);
 }

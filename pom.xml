@@ -292,6 +292,13 @@
                         <artifactId>spring-jdbc</artifactId>
                         <version>5.1.7.RELEASE</version>
                     </dependency>
+
+                    <!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-coyote -->
+                    <dependency>
+                        <groupId>org.apache.tomcat</groupId>
+                        <artifactId>tomcat-coyote</artifactId>
+                        <version>9.0.20</version>
+                    </dependency>
                 </dependencies>
             </plugin>
 

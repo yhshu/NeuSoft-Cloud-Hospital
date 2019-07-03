@@ -10,12 +10,15 @@ import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.*;
 import com.neusoft.medical.service.doctorWorkstation.OutpatientMedicalRecordService;
 import com.neusoft.medical.service.registration.RegistrationService;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.Future;
 
 import static com.neusoft.medical.service.ConstantService.*;
 
@@ -41,7 +44,8 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
     private Gson gson = new Gson();
 
     @Override
-    public List<Registration> waitingRegistrationList(int registrationScope, int doctorId) {
+    @Async("asyncServiceExecutor")
+    public Future<List<Registration>> waitingRegistrationList(int registrationScope, int doctorId) {
         RegistrationExample registrationExample = new RegistrationExample();
         try {
             RegistrationExample.Criteria criteria = registrationExample.createCriteria();
@@ -56,7 +60,7 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return new CopyOnWriteArrayList<>();
+            return AsyncResult.forValue(new CopyOnWriteArrayList<>());
         }
         List<Registration> waitingRegistrationList = registrationMapper.selectByExample(registrationExample);
         for (Registration registration : waitingRegistrationList) {
@@ -65,10 +69,11 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
             registration.setReserve1(departmentMapper.selectByPrimaryKey(registration.getDepartmentId()).getDepartmentName());
             registration.setReserve2(doctorMapper.selectByPrimaryKey(registration.getDoctorId()).getDoctorName());
         }
-        return waitingRegistrationList;
+        return AsyncResult.forValue(waitingRegistrationList);
     }
 
     @Override
+    @Async("asyncServiceExecutor")
     public List<Registration> visitedRegistrationList(int registrationScope, int doctorId) {
         RegistrationExample registrationExample = new RegistrationExample();
         try {
@@ -210,6 +215,7 @@ public class OutpatientMedicalRecordServiceImpl implements OutpatientMedicalReco
     }
 
     @Override
+    @Async("asyncServiceExecutor")
     public List<MedicalRecords> selectMedicalRecordsTemplateList(int templateScope, int doctorId) {
         MedicalRecordsExample medicalRecordsExample = new MedicalRecordsExample();
         try {
