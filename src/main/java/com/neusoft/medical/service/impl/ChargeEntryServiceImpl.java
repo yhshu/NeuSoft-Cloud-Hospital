@@ -18,6 +18,9 @@ import java.util.List;
 
 import static com.neusoft.medical.service.ConstantService.PAY_STATE_NOT_CHARGED;
 
+/**
+ * 收费项目 服务接口实现
+ */
 @Service
 public class ChargeEntryServiceImpl implements ChargeEntryService {
     @Resource

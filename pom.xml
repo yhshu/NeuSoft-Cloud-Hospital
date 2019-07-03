@@ -172,6 +172,14 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>2.4.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.1.18</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
@@ -256,7 +264,7 @@
                     <dependency>
                         <groupId>com.webcohesion.enunciate</groupId>
                         <artifactId>enunciate-docs</artifactId>
-                        <version>${enunciate.version}-C</version>
+                        <version>RELEASE</version>
                     </dependency>
                     <!-- 对spring web项目文档生成的支持 -->
                     <!-- 如果是其他类型的web项目，替换对应的artifactId即可，所支持的项目类型具体参考官方项目的wiki -->
