@@ -162,5 +162,7 @@ https://mingmliang.github.io/his-demo/#/home)
 - [Docker 部署 SpringBoot 项目](http://www.ityouknow.com/springboot/2018/03/19/spring-boot-docker.html)
 - [SpringBoot 文件上传功能](https://zhuanlan.zhihu.com/p/56110692)
 - [Docker Redis](https://www.jb51.net/article/157020.htm)
+- [Druid 数据库连接池](
+https://juejin.im/post/5c40848151882533e05ee6dc)
 
 :-) 
