@@ -91,29 +91,48 @@ public class ChargeServiceImpl implements ChargeService {
     @Override
     public boolean refund(String refundJson) {
         try {
-            JsonArray refundJsonArray = new JsonParser().parse(refundJson).getAsJsonArray();  // 退费项目列表 json 数组
-            for (JsonElement refundJsonElement : refundJsonArray) {
-                JsonObject refundJsonObject = refundJsonElement.getAsJsonObject(); // 退费项目信息
-                int entryType = refundJsonObject.get("entryType").getAsInt();  // 退费项目的类型
-                int entryId = refundJsonObject.get("entryId").getAsInt();  // 退费项目的编号
-                int refundNums = refundJsonObject.get("refundNums").getAsInt();  // 退费项目的数量
+            JsonObject refundJsonObject = new JsonParser().parse(refundJson).getAsJsonObject();
+            String invoiceTitle = refundJsonObject.get("invoiceTitle").getAsString();
+            Integer collectorId = refundJsonObject.get("collectorId").getAsInt();
+            Integer invoiceNums = refundJsonObject.get("invoiceNums").getAsInt();
+            Integer registrationId = refundJsonObject.get("registrationId").getAsInt();
 
+            JsonArray refundJsonArray = refundJsonObject.getAsJsonArray("entryList");  // 退费项目列表 json 数组
+            for (JsonElement refundEntryJsonElement : refundJsonArray) {
+                JsonObject refundEntryJsonObject = refundEntryJsonElement.getAsJsonObject(); // 退费项目信息
+                int entryType = refundEntryJsonObject.get("entryType").getAsInt();  // 退费项目的类型
+                int entryId = refundEntryJsonObject.get("entryId").getAsInt();  // 退费项目的编号
+                int refundNums = refundEntryJsonObject.get("refundNums").getAsInt();  // 退费项目的数量
+
+                double refundAmount = 0.0;  // 退费数量
                 if (entryType == ConstantService.ENTRY_TYPE_CHARGE_ENTRY) { // 退费项目是检查/检验项目 或 处置项目
                     ChargeEntry chargeEntryRecord = chargeEntryMapper.selectByPrimaryKey(entryId);
-                    chargeEntryRecord.setNotGivenNums(max(chargeEntryRecord.getNotGivenNums() - refundNums, 0));  // 退费后，尚未交付的项目数量减少
+                    int notGivenNumsInit = chargeEntryRecord.getNotGivenNums();  // 退费之前的尚未交付数量
+                    int notGivenNumsNew = max(chargeEntryRecord.getNotGivenNums() - refundNums, 0); // 退费之后的尚未交付数量
+                    chargeEntryRecord.setNotGivenNums(notGivenNumsNew);  // 退费后，尚未交付的项目数量减少
+                    refundAmount = chargeEntryRecord.getUnitPrice() * (notGivenNumsInit - notGivenNumsNew);  // 退费金额（绝对值）
+
                     if (chargeEntryRecord.getNotGivenNums() == 0)  // 如果尚未交付数量为零，即项目被完全退费
                         chargeEntryRecord.setPayState(ConstantService.PAY_STATE_RETURNED);  // 支付状态设置为已退费
                     chargeEntryMapper.updateByPrimaryKeySelective(chargeEntryRecord);
 
                 } else if (entryType == ConstantService.ENTRY_TYPE_PRESCRIPTION_ENTRY) { // 退费项目是药品
                     PrescriptionEntry prescriptionEntryRecord = prescriptionEntryMapper.selectByPrimaryKey(entryId);
-                    prescriptionEntryRecord.setNotGivenNums(max(prescriptionEntryRecord.getNotGivenNums() - refundNums, 0));
+                    int notGivenNumsInit = prescriptionEntryRecord.getNotGivenNums();   // 退费之前的尚未交付数量
+                    int notGivenNumsNew = max(prescriptionEntryRecord.getNotGivenNums() - refundNums, 0);  // 退费之后的尚未交付数量
+                    prescriptionEntryRecord.setNotGivenNums(notGivenNumsNew);
+                    refundAmount = prescriptionEntryRecord.getUnitPrice() * (notGivenNumsInit - notGivenNumsNew);  // 退费金额（绝对值）
+
                     if (prescriptionEntryRecord.getNotGivenNums() == 0)
                         prescriptionEntryRecord.setPayState(ConstantService.PAY_STATE_RETURNED);  // 支付状态设置为已退费
                     prescriptionEntryMapper.updateByPrimaryKeySelective(prescriptionEntryRecord);
+
                 } else {
                     throw new Exception("The value of entryType is null or wrong.");
                 }
+
+                Invoice invoiceRecord = new Invoice(null, invoiceTitle, invoiceNums, collectorId, registrationId, new Date(), refundAmount, null, null, null, null, ConstantService.PAY_STATE_RETURNED, null, null, null, null, 1);  // 生成退费记录
+                invoiceMapper.insert(invoiceRecord); // 新增退费记录
             }
         } catch (Exception e) {
             e.printStackTrace();

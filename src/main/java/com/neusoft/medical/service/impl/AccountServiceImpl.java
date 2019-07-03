@@ -214,5 +214,4 @@ public class AccountServiceImpl implements AccountService {
         }
         return doctorList.get(0);
     }
-
 }

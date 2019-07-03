@@ -34,7 +34,14 @@ public interface ChargeService {
      *
      * @param refundJson 退费信息，json 数组
      * @return 操作结果
-     * refundJson 数组中每个元素的属性包括：
+     * refundJson 是一个 json 字符串，其属性包括：
+     * - invoiceTitle 退费者
+     * - collectorId 收银员编号
+     * - invoiceNums 发票数量
+     * - registrationId 挂号单编号
+     * - entryList 退费项目的列表，json 数组
+     * <p>
+     * 其中，entryList 数组中每个元素包含的属性：
      * - entryType: charge_entry: 0, prescription_entry: 1
      * - entryId    收费条目或处方条目的编号
      * - refundNums 退费数量
