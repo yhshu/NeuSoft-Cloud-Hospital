@@ -29,7 +29,7 @@ public class RegistrationCategoryController {
     public ResultDTO<List<RegistrationCategory>> selectAllRegistrationCategory() {
         List<RegistrationCategory> registrationCategoryList = null;
         try {
-            registrationCategoryList = registrationCategoryService.selectAllRegistrationCategory();
+            registrationCategoryList = registrationCategoryService.selectAllRegistrationCategory().get();
         } catch (Exception e) {
             e.printStackTrace();
         }
