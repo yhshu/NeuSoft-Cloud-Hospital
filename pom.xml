@@ -17,6 +17,7 @@
     <properties>
         <java.version>1.8</java.version>
         <docker.image.prefix>neusoft-cloud-hospital-be</docker.image.prefix>
+        <enunciate.version>2.10.0</enunciate.version>
     </properties>
 
     <dependencies>
@@ -230,6 +231,52 @@
                         </resource>
                     </resources>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.webcohesion.enunciate</groupId>
+                <artifactId>enunciate-slim-maven-plugin</artifactId>
+                <version>${enunciate.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>docs</goal>
+                        </goals>
+                        <configuration>
+                            <!-- enunciate配置文件路径 -->
+                            <configFile>${project.basedir}/enunciate.xml</configFile>
+                            <!-- 文档生成路径 -->
+                            <docsDir>${project.build.directory}/generated-resources/static/rest</docsDir>
+                            <source>1.8</source>
+                            <target>1.8</target>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.webcohesion.enunciate</groupId>
+                        <artifactId>enunciate-docs</artifactId>
+                        <version>${enunciate.version}-C</version>
+                    </dependency>
+                    <!-- 对spring web项目文档生成的支持 -->
+                    <!-- 如果是其他类型的web项目，替换对应的artifactId即可，所支持的项目类型具体参考官方项目的wiki -->
+                    <dependency>
+                        <groupId>com.webcohesion.enunciate</groupId>
+                        <artifactId>enunciate-spring-web</artifactId>
+                        <version>${enunciate.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.webcohesion.enunciate</groupId>
+                        <artifactId>enunciate-jackson</artifactId>
+                        <version>${enunciate.version}</version>
+                    </dependency>
+                    <!-- 同时生成swagger文档 -->
+                    <dependency>
+                        <groupId>com.webcohesion.enunciate</groupId>
+                        <artifactId>enunciate-swagger</artifactId>
+                        <version>${enunciate.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
 
         </plugins>

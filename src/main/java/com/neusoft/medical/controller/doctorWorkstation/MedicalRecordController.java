@@ -4,9 +4,7 @@ import com.neusoft.medical.bean.MedicalRecords;
 import com.neusoft.medical.bean.Registration;
 import com.neusoft.medical.dto.ResultDTO;
 import com.neusoft.medical.service.doctorWorkstation.OutpatientMedicalRecordService;
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.web.bind.annotation.*;
-import sun.util.locale.provider.FallbackLocaleProviderAdapter;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
