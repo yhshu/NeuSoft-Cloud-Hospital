@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * 挂号信息控制器
@@ -44,9 +45,9 @@ public class RegistrationController {
      * @return 可挂号的科室列表
      */
     @GetMapping("/list_department")
-    public ResultDTO<List<Department>> departmentList() {
+    public ResultDTO<List<Department>> departmentList() throws ExecutionException, InterruptedException {
         System.out.println("RegistrationInfoController 获取挂号科室列表");
-        List<Department> departmentList = departmentService.findAllDepartment();
+        List<Department> departmentList = departmentService.findAllDepartment().get();
         return new ResultDTO<>(departmentList);
     }
 

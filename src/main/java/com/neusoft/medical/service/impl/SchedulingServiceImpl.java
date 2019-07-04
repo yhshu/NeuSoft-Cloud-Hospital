@@ -10,6 +10,7 @@ import com.neusoft.medical.bean.*;
 import com.neusoft.medical.dao.*;
 import com.neusoft.medical.service.basicInfo.AccountService;
 import com.neusoft.medical.service.basicInfo.SchedulingService;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

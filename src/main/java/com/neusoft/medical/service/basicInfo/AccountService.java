@@ -6,6 +6,7 @@ import com.neusoft.medical.bean.Doctor;
 import com.neusoft.medical.bean.Staff;
 
 import java.util.List;
+import java.util.concurrent.Future;
 
 public interface AccountService {
 

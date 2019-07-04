@@ -4,6 +4,7 @@ import com.neusoft.medical.bean.Doctor;
 import com.neusoft.medical.bean.DoctorExample;
 import com.neusoft.medical.dao.DoctorMapper;
 import com.neusoft.medical.service.basicInfo.DoctorService;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -16,6 +17,7 @@ public class DoctorServiceImpl implements DoctorService {
     private DoctorMapper doctorMapper;
 
     @Override
+    @Async("asyncServiceExecutor")
     public List<Doctor> findAllDoctor() {
         DoctorExample doctorExample = new DoctorExample();
         DoctorExample.Criteria criteria = doctorExample.createCriteria();

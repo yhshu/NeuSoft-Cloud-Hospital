@@ -12,12 +12,15 @@ import com.neusoft.medical.dao.DoctorMapper;
 import com.neusoft.medical.dao.StaffMapper;
 import com.neusoft.medical.service.basicInfo.AccountService;
 import org.apache.log4j.Logger;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.Future;
 
 @Service
 public class AccountServiceImpl implements AccountService {

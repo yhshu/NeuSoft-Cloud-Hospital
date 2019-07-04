@@ -2,33 +2,35 @@ package com.neusoft.medical.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.google.gson.Gson;
 import com.neusoft.medical.bean.Department;
 import com.neusoft.medical.bean.DepartmentExample;
 import com.neusoft.medical.dao.DepartmentMapper;
 import com.neusoft.medical.service.basicInfo.DepartmentService;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.Future;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
     @Resource
     private DepartmentMapper departmentMapper;
 
-    private Gson gson = new Gson();
-
     @Override
-    public List<Department> findAllDepartment() {
+    @Async("asyncServiceExecutor")
+    public Future<List<Department>> findAllDepartment() {
         DepartmentExample departmentExample = new DepartmentExample();
         DepartmentExample.Criteria criteria = departmentExample.createCriteria();
         criteria.andValidEqualTo(1);
-        return departmentMapper.selectByExample(departmentExample);
+        return AsyncResult.forValue(departmentMapper.selectByExample(departmentExample));
     }
 
     @Override
-    public PageInfo<Department> selectDepartment(Integer currentPage, Integer pageSize, List<Integer> departmentCategory) {
+    @Async("asyncServiceExecutor")
+    public Future<PageInfo<Department>> selectDepartment(Integer currentPage, Integer pageSize, List<Integer> departmentCategory) {
         PageHelper.startPage(currentPage, pageSize);
 
         DepartmentExample departmentExample = new DepartmentExample();
@@ -40,7 +42,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
         List<Department> departmentList = departmentMapper.selectByExample(departmentExample);
 
-        return new PageInfo<>(departmentList);
+        return AsyncResult.forValue(new PageInfo<>(departmentList));
     }
 
     @Override

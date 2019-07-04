@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping("/doctor_work")
@@ -27,8 +28,8 @@ public class MedicalRecordController {
     public ResultDTO<List<Registration>> waitingRegistrationList(
             @RequestParam(value = "registrationScope") Integer registrationScope,
             @RequestParam(value = "doctorId") Integer doctorId
-    ) {
-        return new ResultDTO<>(outpatientMedicalRecordService.waitingRegistrationList(registrationScope, doctorId));
+    ) throws ExecutionException, InterruptedException {
+        return new ResultDTO<>(outpatientMedicalRecordService.waitingRegistrationList(registrationScope, doctorId).get());
     }
 
     /**

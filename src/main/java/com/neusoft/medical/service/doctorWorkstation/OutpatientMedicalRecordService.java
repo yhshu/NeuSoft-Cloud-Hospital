@@ -4,6 +4,7 @@ import com.neusoft.medical.bean.MedicalRecords;
 import com.neusoft.medical.bean.Registration;
 
 import java.util.List;
+import java.util.concurrent.Future;
 
 /**
  * 门诊医生工作站
@@ -18,7 +19,7 @@ public interface OutpatientMedicalRecordService {
      * @param doctorId          医生编号
      * @return 待诊患者列表
      */
-    List<Registration> waitingRegistrationList(int registrationScope, int doctorId);
+    Future<List<Registration>> waitingRegistrationList(int registrationScope, int doctorId);
 
     /**
      * 获取医生的已诊患者列表

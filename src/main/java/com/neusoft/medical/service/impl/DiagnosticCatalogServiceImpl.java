@@ -9,10 +9,13 @@ import com.neusoft.medical.bean.DiseaseExample;
 import com.neusoft.medical.dao.DiseaseCategoryMapper;
 import com.neusoft.medical.dao.DiseaseMapper;
 import com.neusoft.medical.service.basicInfo.DiagnosticCatalogService;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.Future;
 
 @Service
 public class DiagnosticCatalogServiceImpl implements DiagnosticCatalogService {
@@ -27,10 +30,11 @@ public class DiagnosticCatalogServiceImpl implements DiagnosticCatalogService {
      *
      * @return 疾病种类列表
      */
-    public List<DiseaseCategory> findAllDiseaseCategory() {
+    @Async("asyncServiceExecutor")
+    public Future<List<DiseaseCategory>> findAllDiseaseCategory() {
         DiseaseCategoryExample diseaseCategoryExample = new DiseaseCategoryExample();
         diseaseCategoryExample.or().andValidEqualTo(1);
-        return diseaseCategoryMapper.selectByExample(diseaseCategoryExample);
+        return AsyncResult.forValue(diseaseCategoryMapper.selectByExample(diseaseCategoryExample));
     }
 
     /**

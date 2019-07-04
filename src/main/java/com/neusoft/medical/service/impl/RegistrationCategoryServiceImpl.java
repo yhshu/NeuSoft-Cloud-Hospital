@@ -6,10 +6,13 @@ import com.neusoft.medical.bean.RegistrationCategory;
 import com.neusoft.medical.bean.RegistrationCategoryExample;
 import com.neusoft.medical.dao.RegistrationCategoryMapper;
 import com.neusoft.medical.service.basicInfo.RegistrationCategoryService;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.Future;
 
 @Service
 public class RegistrationCategoryServiceImpl implements RegistrationCategoryService {
@@ -78,7 +81,8 @@ public class RegistrationCategoryServiceImpl implements RegistrationCategoryServ
     }
 
     @Override
-    public List<RegistrationCategory> selectAllRegistrationCategory() {
+    @Async("asyncServiceExecutor")
+    public Future<List<RegistrationCategory>> selectAllRegistrationCategory() {
         List<RegistrationCategory> registrationCategoryList = null;
         try {
             RegistrationCategoryExample registrationCategoryExample = new RegistrationCategoryExample();
@@ -88,7 +92,7 @@ public class RegistrationCategoryServiceImpl implements RegistrationCategoryServ
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return registrationCategoryList;
+        return AsyncResult.forValue(registrationCategoryList);
     }
 
     @Override

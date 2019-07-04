@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.neusoft.medical.bean.Department;
 
 import java.util.List;
+import java.util.concurrent.Future;
 
 public interface DepartmentService {
     /**
@@ -11,7 +12,7 @@ public interface DepartmentService {
      *
      * @return 所有科室信息
      */
-    List<Department> findAllDepartment();
+    Future<List<Department>> findAllDepartment();
 
     /**
      * 分页、分类查找科室信息
@@ -21,7 +22,7 @@ public interface DepartmentService {
      * @param departmentCategory 科室类别，可为空，默认为所有科室类别
      * @return 指定范围的科室信息
      */
-    PageInfo<Department> selectDepartment(Integer currentPage, Integer pageSize, List<Integer> departmentCategory);
+    Future<PageInfo<Department>> selectDepartment(Integer currentPage, Integer pageSize, List<Integer> departmentCategory);
 
     /**
      * 新增一个科室

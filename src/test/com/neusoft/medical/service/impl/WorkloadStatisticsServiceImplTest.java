@@ -15,35 +15,30 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class WorkloadStatisticsServiceImplTest {
-
     @Resource
-    WorkloadStatisticsService workloadStatisticsService;
+    private WorkloadStatisticsService workloadStatisticsService;
 
     @Test
     public void outpatientDoctorWorkloadStatistics() {
-        Date today = new Date();
-        Date startDate = new Date(today.getTime() - 1000 * 60 * 60 * 24 * 30);  // 一个月之前
-        workloadStatisticsService.outpatientDoctorWorkloadStatistics(startDate,today,1);
+        Date now = new Date();
+        Date startDate = new Date(now.getTime() - 1000 * 60 * 60 * 24 * 7);
+        for (int i = 1; i < 50; i++)
+            workloadStatisticsService.outpatientDoctorWorkloadStatistics(startDate, now, i);
     }
 
     @Test
     public void techDoctorWorkloadStatistics() {
-        Date today = new Date();
-        Date startDate = new Date(today.getTime() - 1000 * 60 * 60 * 24 * 30);  // 一个月之前
-        workloadStatisticsService.techDoctorWorkloadStatistics(startDate,today,1);
+        Date now = new Date();
+        Date startDate = new Date(now.getTime() - 1000 * 60 * 60 * 24 * 7);
+        for (int i = 1; i < 50; i++)
+            workloadStatisticsService.techDoctorWorkloadStatistics(startDate, now, i);
     }
 
     @Test
     public void departmentWorkloadFinancialStatistics() {
-        Date today = new Date();
-        Date startDate = new Date(today.getTime() - 1000 * 60 * 60 * 24 * 30);  // 一个月之前
-        workloadStatisticsService.departmentWorkloadFinancialStatistics(startDate,today);
     }
 
     @Test
     public void doctorWorkloadFinancialStatistics() {
-        Date today = new Date();
-        Date startDate = new Date(today.getTime() - 1000 * 60 * 60 * 24 * 30);  // 一个月之前
-        workloadStatisticsService.doctorWorkloadFinancialStatistics(startDate,today);
     }
 }

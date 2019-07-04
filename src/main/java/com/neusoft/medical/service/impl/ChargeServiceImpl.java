@@ -27,8 +27,6 @@ public class ChargeServiceImpl implements ChargeService {
     @Resource
     private InvoiceMapper invoiceMapper;
 
-    private Gson gson = new Gson();
-
     @Override
     public boolean checkout(String checkoutJson) {
         try {
