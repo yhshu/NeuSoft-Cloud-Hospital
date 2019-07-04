@@ -28,12 +28,14 @@ public class DailySettlementServiceImplTest {
     public void selectDailySettlementList() {
         Date today = new Date();
         Date startDate = new Date(today.getTime() - 1000 * 60 * 60 * 24 * 30);  // 一个月之前
-        dailySettlementService.selectDailySettlementList(startDate,today,1,1,20);
+        for (int i=0 ;i<50;i++)
+            dailySettlementService.selectDailySettlementList(startDate,today,i,1,20);
     }
 
     @Test
     public void selectDailySettlementDetail() {
-        dailySettlementService.selectDailySettlementDetail(1,1,20);
+        for (int i=0 ;i<50;i++)
+            dailySettlementService.selectDailySettlementDetail(i,1,20);
     }
 
     @Test

@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import static org.junit.Assert.*;
@@ -20,16 +21,18 @@ public class RegistrationServiceImplTest {
 
     @Resource
     RegistrationService registrationService;
-    @Resource
-    RegistrationMapper registrationMapper;
 
     @Test
-    public void addRegistration() throws Exception {
-        Date birthday = new Date(1994 - 1 - 1);
-        Date visitDate = new Date(2019 - 1 - 1);
-        Date registrationDate = new Date(2019 - 6 - 30);
+    public void addRegistration(){
+        Date birthday = new Date(1994, Calendar.FEBRUARY,1);
+        Date visitDate = new Date(2019, Calendar.FEBRUARY,1);
+        Date registrationDate = new Date(2019, Calendar.JULY,30);
         Registration registration = new Registration(15,15,"name",15,"男",10,birthday,"medicalCategory","identityCardNo","registrationStatus",visitDate,registrationDate,1,1,"Sorce",1,"yes","dbdx0",4,1,1,null,null,null);
-        registrationService.addRegistration(registration);
+        try {
+            registrationService.addRegistration(registration);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -54,6 +57,6 @@ public class RegistrationServiceImplTest {
 
     @Test
     public void selectPatientByRegistrationId() {
-        registrationService.selectPatientByRegistrationId(4);
+        registrationService.selectPatientByRegistrationId(5);
     }
 }

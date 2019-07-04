@@ -22,6 +22,7 @@ public class LoginServiceImplTest {
 
     @Test
     public void signIn() {
+        loginService.signIn("蔡徐坤","123456");
         System.out.println(loginService.signIn("test", "test"));
     }
 
@@ -34,5 +35,6 @@ public class LoginServiceImplTest {
         redisTemplate.opsForHash().putAll("tokens", stringAccountMap);
         Map map = redisTemplate.opsForHash().entries("tokens");
         System.out.println("Map: " + map);
+        loginService.permissionRequest(stringAccountMap.toString());
     }
 }

@@ -1,5 +1,6 @@
 package com.neusoft.medical.service.impl;
 
+import com.neusoft.medical.bean.Medicine;
 import com.neusoft.medical.service.doctorWorkstation.OutpatientMedicalRecordService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -60,7 +61,9 @@ public class OutpatientMedicalRecordServiceImplTest {
 
     @Test
     public void deleteMedicalRecords() {
+        Medicine medicine = new Medicine();
         List<Integer> medicalRecordsIdList = new ArrayList<>();
+        medicalRecordsIdList.add(medicine.getMedicineId());
         outpatientMedicalRecordService.deleteMedicalRecords(medicalRecordsIdList);
     }
 }

@@ -19,6 +19,7 @@ public class InvoiceServiceImplTest {
 
     @Test
     public void getInvoiceState() {
-        invoiceService.getInvoiceState(1);
+        for (int i = 0; i<50; i++)
+        invoiceService.getInvoiceState(i);
     }
 }

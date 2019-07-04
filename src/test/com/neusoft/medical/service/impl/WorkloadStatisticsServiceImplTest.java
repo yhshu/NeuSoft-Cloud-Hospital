@@ -21,7 +21,7 @@ public class WorkloadStatisticsServiceImplTest {
     @Test
     public void outpatientDoctorWorkloadStatistics() {
         Date now = new Date();
-        Date startDate = new Date(now.getTime() - 1000 * 60 * 60 * 24 * 7);
+        Date startDate = new Date(now.getTime() - 1000 * 60 * 60 * 24 * 7);// 一周以前
         for (int i = 1; i < 50; i++)
             workloadStatisticsService.outpatientDoctorWorkloadStatistics(startDate, now, i);
     }
@@ -36,9 +36,16 @@ public class WorkloadStatisticsServiceImplTest {
 
     @Test
     public void departmentWorkloadFinancialStatistics() {
+        Date now = new Date();
+        Date startDate = new Date(now.getTime() - 1000 * 60 * 60 * 24 * 7);
+        for (int i = 1; i < 50; i++)
+        workloadStatisticsService.departmentWorkloadFinancialStatistics(startDate,now);
     }
 
     @Test
     public void doctorWorkloadFinancialStatistics() {
+        Date now = new Date();
+        Date startDate = new Date(now.getTime() - 1000 * 60 * 60 * 24 * 7);
+        workloadStatisticsService.doctorWorkloadFinancialStatistics(startDate,now);
     }
 }

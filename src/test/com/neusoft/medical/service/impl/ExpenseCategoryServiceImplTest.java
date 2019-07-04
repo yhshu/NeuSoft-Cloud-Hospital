@@ -1,5 +1,6 @@
 package com.neusoft.medical.service.impl;
 
+import com.google.gson.JsonObject;
 import com.neusoft.medical.bean.ExpenseCategory;
 import com.neusoft.medical.dao.ExpenseCategoryMapper;
 import com.neusoft.medical.service.finance.ExpenseCategoryService;
@@ -31,8 +32,22 @@ public class ExpenseCategoryServiceImplTest {
     }
 
     @Test
+    /**
+     * 保存费用科目
+     *
+     * @param expenseCategoryJson 费用科目信息，json 字符串
+     * @return 操作结果
+     * expenseCategoryJson 中的属性包括：
+     * - expenseCategoryId 费用科目编号（新增时不填，更新时必填）
+     * - expenseCategoryCode 费用代码
+     * - expenseCategoryName 费用名称
+     */
     public void saveExpenseCategory() {
-        expenseCategoryService.saveExpenseCategory("");
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("expenseCategoryId",10);
+        jsonObject.addProperty("expenseCategoryCode",10);
+        jsonObject.addProperty("expenseCategoryName","费用");
+        expenseCategoryService.saveExpenseCategory(jsonObject.toString());
     }
 
     @Test
