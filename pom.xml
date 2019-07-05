@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.neusoft</groupId>
     <artifactId>medical</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.3-SNAPSHOT</version>
     <name>Neusoft Cloud Hospital</name>
     <description>Neusoft Cloud Hospital Back-End</description>
 
@@ -181,6 +181,25 @@
             <version>1.1.10</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+            <version>1.1.3</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -299,9 +318,22 @@
                         <artifactId>tomcat-coyote</artifactId>
                         <version>9.0.20</version>
                     </dependency>
+
+                    <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-alibaba-sentinel -->
+                    <dependency>
+                        <groupId>org.springframework.cloud</groupId>
+                        <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+                        <version>0.9.0.RELEASE</version>
+                    </dependency>
                 </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
         </plugins>
     </build>
+
 </project>
